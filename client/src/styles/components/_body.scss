@@ -1,0 +1,95 @@
+::-webkit-scrollbar {
+	display: none;
+}
+
+html {
+	@media (max-width: 1000px) {
+		overflow-y: scroll;
+	}
+	overflow: scroll;
+}
+
+body {
+	font-family: $poppins;
+	font-size: 14px;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+	color: $warmgrey;
+  background: url(../images/rb-backdrop.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 110%;
+}
+
+.disabled {
+	cursor: not-allowed;
+}
+
+.default-font {
+	font-family: 'Roboto', sans-serif;
+}
+
+.fa {
+	margin-right: 5px;
+}
+
+.flex-wrap-center {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.fix-cursor {
+	cursor: pointer;
+}
+
+.large-icon {
+	font-size: 20px;
+}
+
+.m-b-20 {
+	margin-bottom: 20px;
+}
+
+.m-r-5 {
+	margin-right: 10px;
+}
+
+.no-link-focus {
+	text-decoration: none;
+	outline: 0 !important;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.separator {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(
+		to right,
+		$transparent,
+		$owhite,
+		$transparent
+	);
+}
+
+.small-icon {
+	font-size: 14px;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.t-a-c {
+	text-align: center;
+}
+
+.wrapper {
+	width: 100%;
+	max-width: 2000px;
+	overflow: scroll;
+}

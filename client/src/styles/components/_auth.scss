@@ -1,0 +1,59 @@
+.auth-container {
+  .auth-logo {
+    display: block;
+    padding: 30px 0px 10px 0px;
+    max-width: 275px;
+    margin: auto;
+  }
+
+  .auth-box-container {
+    background: $white;
+    margin: 0 auto;
+    width: 400px;
+
+    .auth-box {
+      padding: 25px;
+      outline: none !important;
+    }
+
+    .auth-title {
+      @extend .t-a-c;
+      margin: 0px 0px 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 16px;
+      line-height: 30px;
+      color: #2b2b2b;
+      font-family: $poppins;
+      font-weight: 500;
+    }
+
+    .auth-form {
+      @extend .m-b-20;
+
+      .auth-button {
+        margin-top: 20px;
+      }
+
+      .forgot-password {
+        margin-top: 15px;
+        a {
+          @extend .no-link-focus;
+          color: $warmgrey;
+        }
+      }
+    }
+
+
+    .auth-link {
+      @extend .t-a-c;
+      a {
+        @extend .no-link-focus;
+        color: $lightblue;
+        font-weight: 500;
+      }
+    }
+
+  }
+
+}

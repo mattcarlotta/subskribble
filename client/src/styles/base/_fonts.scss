@@ -1,0 +1,65 @@
+/// --FONTS-- ///
+@font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  src: url("~font-awesome/fonts/fontawesome-webfont.eot") format("eot"),
+  url("~font-awesome/fonts/fontawesome-webfont.woff2") format("woff2"),
+  url("~font-awesome/fonts/fontawesome-webfont.woff") format("woff"),
+  url("~font-awesome/fonts/fontawesome-webfont.ttf") format("truetype"),
+  url("~font-awesome/fonts/fontawesome-webfont.svg") format("svg");
+}
+
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 300;
+	src: url("assets/fonts/Poppins-Light.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	src: url("assets/fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 500;
+	src: url("assets/fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 600;
+	src: url("assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	src: url("assets/fonts/Poppins-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Raleway";
+	font-style: normal;
+	font-weight: 300;
+	src: url("assets/fonts/Raleway-Light.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Raleway";
+	font-style: normal;
+	font-weight: 400;
+	src: url("assets/fonts/Raleway-Regular.ttf") format("truetype");
+}
+
+$poppins: Poppins, sans-serif;
+$raleway: Raleway, Verdana, Helvetica, Arial, sans-serif;
+// $ralewaylight: 'Raleway Light', Verdana, Helvetica, Arial, sans-serif;
+/// END ///

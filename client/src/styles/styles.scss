@@ -1,0 +1,15 @@
+// Variables, animations and static css stylesheets
+@import 'base/animations';
+@import 'base/fonts';
+@import 'base/variables';
+@import "~font-awesome/css/font-awesome.css";
+// @import "~bootstrap/dist/css/bootstrap.css";
+// @import '~slick-carousel/slick/slick.css';
+// @import '~slick-carousel/slick/slick-theme.css';
+
+// Components
+@import 'components/auth';
+@import 'components/body';
+@import 'components/index';
+@import 'components/notfound';
+@import 'components/spinner';
