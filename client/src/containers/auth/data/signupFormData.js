@@ -1,13 +1,13 @@
 export default [
 	{
-		name: 'email',
+		name: 'company',
 		type: 'text',
 		label: 'Company or Organization Name'
 	},
 	{
-		name: 'username',
+		name: 'email',
 		type: 'text',
-		label: 'Username'
+		label: 'Email'
 	},
 	{
 		name: 'password',

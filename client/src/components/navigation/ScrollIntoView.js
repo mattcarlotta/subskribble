@@ -13,7 +13,6 @@ export default WrappedComponent => {
 		render() {
 			return (
 				<span ref={component => (this.component = component)}>
-					{/* <NavButtons /> */}
 					<WrappedComponent {...this.props} />
 				</span>
 			);

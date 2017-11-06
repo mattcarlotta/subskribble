@@ -1,12 +1,9 @@
-::-webkit-scrollbar {
-	display: none;
-}
+// ::-webkit-scrollbar {
+// 	display: none;
+// }
 
 html {
-	@media (max-width: 1000px) {
-		overflow-y: scroll;
-	}
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 body {
@@ -78,10 +75,9 @@ body {
 	);
 }
 
-.small-icon {
-	font-size: 14px;
-	margin-top: 10px;
-	padding-left: 10px;
+.s-i {
+	font-size: 10px;
+	padding-left: 5px;
 }
 
 .t-a-c {
@@ -91,5 +87,5 @@ body {
 .wrapper {
 	width: 100%;
 	max-width: 2000px;
-	overflow: scroll;
+	// overflow: scroll;
 }

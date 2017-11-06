@@ -6,9 +6,7 @@ import RenderNotifications from '../containers/app/renderNotifications';
 const App = ({ children }) => {
 	return (
 		<div className="wrapper">
-			<div className="col-xs-12 no-padding">
-				{children}
-			</div>
+			{children}
 			<RenderNotifications />
 		</div>
 	);

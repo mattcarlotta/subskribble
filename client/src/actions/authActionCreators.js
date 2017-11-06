@@ -68,6 +68,16 @@ export const resetNotifications = () => {
 	};
 };
 
+// Resets user password
+export const resetUserPassword = ({ password }) => async dispatch => {
+	try {
+		await app.post(`api/reset-password`, { password });
+		browserHistory.push('/login');
+	} catch (err) {
+		dispatchError(dispatch, err);
+	}
+};
+
 // Attempts to sign in user
 export const signinUser = ({ username, password }) => async dispatch => {
 	try {

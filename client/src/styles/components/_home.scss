@@ -1,0 +1,25 @@
+.home-container {
+		color: $owhite;
+		width: 100%;
+		max-width: 1200px;
+		height: 300px;
+		padding-top: 25px;
+		margin-top: 200px;
+		margin: auto;
+		text-align: center;
+
+	h1 {
+		font-family: $raleway;
+		font-weight: 400;
+		font-size: 37.5px;
+		line-height: 48px;
+		text-transform: uppercase;
+		letter-spacing: 10px;
+	}
+
+	h3 {
+		font-family: $raleway;
+		font-weight: 300;
+		font-size: 19.5px;
+	}
+}

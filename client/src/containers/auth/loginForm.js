@@ -61,4 +61,4 @@ const LoginForm = ({ handleSubmit, signinUser, submitting }) => {
 	);
 }
 
-export default reduxForm({ form: 'loginForm' })(connect(null, { signinUser })(LoginForm));
+export default reduxForm({ form: 'LoginForm' })(connect(null, { signinUser })(LoginForm));

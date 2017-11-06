@@ -15,13 +15,11 @@ import { signupUser } from '../../actions/authActionCreators';
 const validate = values => {
 	const errors = {};
 
+	if (!values.company) errors.company = 'Required';
+
 	if (!values.email) errors.email = 'Required';
 	else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-		errors.email = 'Invalid email address';
-
-	if (!values.username) errors.username = 'Required';
-	else if (values.username.length < 3)
-		errors.username = 'Username must be more than 3 characters!';
+	errors.email = 'Invalid email address';
 
 	if (!values.password) errors.password = 'Required';
 	else if (values.password.length < 5)
@@ -30,7 +28,7 @@ const validate = values => {
 	return errors;
 };
 
-const Signup = ({ handleSubmit, signupUser, submitting }) => {
+const SignupForm = ({ handleSubmit, signupUser, submitting }) => {
 	const handleFormSubmit = formProps => {
 		console.log(formProps);
 		// this.props.signupUser(formProps);
@@ -74,4 +72,4 @@ const Signup = ({ handleSubmit, signupUser, submitting }) => {
 	);
 }
 
-export default reduxForm({ form: 'signup', validate })(connect(null, { signupUser })(Signup));
+export default reduxForm({ form: 'SignupForm', validate })(connect(null, { signupUser })(SignupForm));
