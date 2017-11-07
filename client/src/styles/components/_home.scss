@@ -1,6 +1,6 @@
 .home-surround {
   height: 100%;
-  max-height: 800px;
+  max-height: 790px;
   width: 100%;
   background-image: url(../images/header/bg-preset5.jpg);
   background-size: cover;
@@ -9,13 +9,13 @@
 
 	.home-overlay {
 		@extend .bg-filter;
-		// height: 800px;
+    height: 790px;
 
 		.home-container {
 				color: $owhite;
 				width: 100%;
 				max-width: 1200px;
-				padding-top: 125px;
+				padding-top: 140px;
 				margin: auto;
 				text-align: center;
 
@@ -26,46 +26,67 @@
 				line-height: 48px;
 				text-transform: uppercase;
 				letter-spacing: 10px;
+        margin: 10px;
 			}
 
-			h3 {
-				color: $lightgrey;
-				font-family: $raleway;
-				font-weight: 300;
-				font-size: 19.5px;
-				word-wrap: break-word;
-				margin-bottom: 25px;
-			}
+      .title {
+        color: $lightgrey;
+        font-family: $raleway;
+        font-weight: 300;
+        font-size: 19.5px;
+        width: 60%;
+        margin: 12px auto;
+        line-height: 35px;
+
+        span {
+          word-wrap: break-word;
+        }
+      }
 
 			.img-container {
 				width: 100%;
     		float: none;
-    		margin-top: 50px;
+        margin-top: 50px;
+
+        img {
+          width: 100%;
+          max-width: 1150px;
+          width: auto;
+          height: auto;
+          vertical-align: middle;
+          border: 0;
+        }
 			}
 		}
 	}
 }
 
-.btn-sign-up {
-	border-radius: 5px !important;
-	margin: 15px 0;
- 	button {
-		border-radius: 5px !important;
-		& > div {
-			background-color: $orange;
-			border-radius: 5px !important;
-			& span { height: 50px !important; }
-			& > div {
-				padding: 7.5px 20px;
-				& span {
-					color: $offwhite !important;
-					font-size: 18px !important;
-					font-family: $raleway;
-					display: inline-block;
-					width: 150px;
-				}
-			}
+.link {
+  margin-bottom: 20px;
+  .btn-sign-up {
+    border-radius: 5px !important;
+    margin: 15px 0;
+    button {
+      border-radius: 5px !important;
+              border: 1px solid $orange;
+      & > div {
+        background-color: $orange;
+                border: 1px solid $orange;
+        border-radius: 4px !important;
+        & span { height: 50px !important; }
+        & > div {
+          padding: 7.5px 15px;
+          & span {
+            color: $offwhite !important;
+            font-size: 18px !important;
+            letter-spacing: 1px !important;
+            font-family: $raleway;
+            display: inline-block;
+            width: 150px;
+          }
+        }
 
-		}
-	}
+      }
+    }
+  }
 }

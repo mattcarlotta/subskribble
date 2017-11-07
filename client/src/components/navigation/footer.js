@@ -11,7 +11,7 @@ const Footer = () => {
 					<div className="footer-float-right">
 						<a href="http://www.facebook.com/rocketbiller">
 							<i className="fa fa-facebook" aria-hidden="true" />
-							FaceBook
+							Facebook
 						</a>
 						<a href="https://twitter.com/rocketbiller">
 							<i className="fa fa-twitter" aria-hidden="true" />

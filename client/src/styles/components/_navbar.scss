@@ -7,21 +7,8 @@
     padding-top: 8px;
     list-style-type: none;
     margin: 0 auto;
-    // overflow: hidden;
     max-width: 1200px;
-    // display: -webkit-box;
-    // display: -moz-box;
-    // display: -ms-flexbox;
-    // display: -webkit-flex;
-    // display: flex;
-    // flex-direction: row;
-    // align-items: center;
     text-transform: uppercase;
-    // -webkit-box-orient: horizontal;
-    // -webkit-box-direction: normal;
-    // -webkit-flex-direction: row;
-    // -webkit-box-align: center;
-    // -webkit-align-items: center;
 
     .nav-grid-3 {
       display: inline;
@@ -46,18 +33,16 @@
       .nav-float-right {
         float: right;
         margin-right: 20px;
-        margin-top: 20px;
+        margin-top: 17px;
 
         a {
-          @extend .no-link-focus;
           @extend .s-t;
           color: $lightcoolgrey;
-          font-size: 16px !important;
+          font-size: 15px;
           font-family: $raleway;
-          font-weight: 400;
-          font-size: 14px;
+          font-weight: 500;
           margin: 0 7.5px;
-          padding: 10px;
+          padding: 12px 10px;
           line-height: 24px;
           border: 1px solid transparent;
           border-radius: 5px;
@@ -66,6 +51,11 @@
             @extend .fix-cursor;
             color: $white;
             border: 1px solid $white;
+          }
+
+          i {
+            position: relative;
+            top: -2px;
           }
         }
       }

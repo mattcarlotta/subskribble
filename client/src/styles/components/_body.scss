@@ -10,7 +10,7 @@ body {
 	font-family: $poppins;
 	font-size: 14px;
 	font-weight: 300;
-	letter-spacing: 0.5px;
+	// letter-spacing: 0.5px;
 	color: $warmgrey;
 	margin: 0;
   background: url(../images/rb-backdrop.jpg) no-repeat center center fixed;
@@ -19,6 +19,10 @@ body {
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
+}
+
+a:link, a:visited, a:focus, a:hover, a:active {
+  @extend .no-link-focus;
 }
 
 .bg-filter {

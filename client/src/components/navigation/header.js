@@ -45,7 +45,11 @@ class Header extends Component {
 							<Link to="/">Home</Link>
 							<Link onClick={(e) => this.handleTouchTap(e, true, false)}>
 								Industries
-								<span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
+								{
+									this.state.industryTabOpen
+										? <span><i className="fa fa-chevron-up s-i" aria-hidden="true" /></span>
+										: <span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
+								}
 							</Link>
 							<Popover
 								open={this.state.industryTabOpen}
@@ -70,7 +74,11 @@ class Header extends Component {
 								<Link to="/pricing">Pricing</Link>
 								<Link onClick={(e) => this.handleTouchTap(e, false, true)}>
 									Tour
-									<span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
+								{
+									this.state.tourTabOpen
+										? <span><i className="fa fa-chevron-up s-i" aria-hidden="true" /></span>
+										: <span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
+								}
 								</Link>
 								<Popover
 									open={this.state.tourTabOpen}
@@ -80,15 +88,21 @@ class Header extends Component {
 									onRequestClose={this.handleRequestClose}
 									>
 										<Menu>
-											<MenuItem primaryText="Contact" />
-											<MenuItem primaryText="Privacy Policy" />
-											<MenuItem primaryText="Terms of Service" />
+											<Link to="/contact">
+												<MenuItem primaryText="Contact" />
+											</Link>
+											<Link to="/privacy-policy">
+												<MenuItem primaryText="Privacy Policy" />
+											</Link>
+											<Link to="/terms">
+												<MenuItem primaryText="Terms of Service" />
+											</Link>
 										</Menu>
 									</Popover>
 								</div>
-							</nav>
-						</div>
+						</nav>
 					</div>
+			</div>
 		);
 	}
 };
