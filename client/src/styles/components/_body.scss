@@ -13,12 +13,11 @@ body {
 	// letter-spacing: 0.5px;
 	color: $warmgrey;
 	margin: 0;
-  background: url(../images/rb-backdrop.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 100%;
+//   background: url(../images/rb-backdrop.jpg) no-repeat center center fixed;
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
 }
 
 a:link, a:visited, a:focus, a:hover, a:active {
@@ -122,5 +121,9 @@ a:link, a:visited, a:focus, a:hover, a:active {
 .wrapper {
 	width: 100%;
 	max-width: 2000px;
+  background-image: url(../images/header/bg-preset5.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 	// overflow: scroll;
 }

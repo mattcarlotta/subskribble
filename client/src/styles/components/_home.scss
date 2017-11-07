@@ -1,63 +1,50 @@
-.home-surround {
+.home-container {
+  color: $owhite;
   height: 100%;
-  max-height: 790px;
+  max-height: 650px;
   width: 100%;
-  background-image: url(../images/header/bg-preset5.jpg);
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
+  max-width: 1200px;
+	padding-top: 140px;
+	margin: auto;
+	text-align: center;
 
-	.home-overlay {
-		@extend .bg-filter;
-    height: 790px;
+	h1 {
+		font-family: $raleway;
+		font-weight: 400;
+		font-size: 37.5px;
+		line-height: 48px;
+		text-transform: uppercase;
+		letter-spacing: 10px;
+    margin: 10px;
+	}
 
-		.home-container {
-				color: $owhite;
-				width: 100%;
-				max-width: 1200px;
-				padding-top: 140px;
-				margin: auto;
-				text-align: center;
+  .title {
+    color: $lightgrey;
+    font-family: $raleway;
+    font-weight: 300;
+    font-size: 19.5px;
+    width: 60%;
+    margin: 12px auto;
+    line-height: 35px;
 
-			h1 {
-				font-family: $raleway;
-				font-weight: 400;
-				font-size: 37.5px;
-				line-height: 48px;
-				text-transform: uppercase;
-				letter-spacing: 10px;
-        margin: 10px;
-			}
+    span {
+      word-wrap: break-word;
+    }
+  }
 
-      .title {
-        color: $lightgrey;
-        font-family: $raleway;
-        font-weight: 300;
-        font-size: 19.5px;
-        width: 60%;
-        margin: 12px auto;
-        line-height: 35px;
+	.img-container {
+		width: 100%;
+		float: none;
+    margin-top: 50px;
 
-        span {
-          word-wrap: break-word;
-        }
-      }
-
-			.img-container {
-				width: 100%;
-    		float: none;
-        margin-top: 50px;
-
-        img {
-          width: 100%;
-          max-width: 1150px;
-          width: auto;
-          height: auto;
-          vertical-align: middle;
-          border: 0;
-        }
-			}
-		}
+    img {
+      width: 100%;
+      max-width: 1150px;
+      width: auto;
+      height: auto;
+      vertical-align: middle;
+      border: 0;
+    }
 	}
 }
 

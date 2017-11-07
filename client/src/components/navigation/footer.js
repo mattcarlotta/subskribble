@@ -1,4 +1,7 @@
+import { map } from 'lodash';
 import React from 'react';
+
+import LINKS from './links/footerLinks';
 
 const Footer = () => {
 	return (
@@ -9,22 +12,16 @@ const Footer = () => {
 				</div>
 				<nav className="footer-grid-8">
 					<div className="footer-float-right">
-						<a href="http://www.facebook.com/rocketbiller">
-							<i className="fa fa-facebook" aria-hidden="true" />
-							Facebook
-						</a>
-						<a href="https://twitter.com/rocketbiller">
-							<i className="fa fa-twitter" aria-hidden="true" />
-							Twitter
-						</a>
-						<a href="https://plus.google.com/">
-							<i className="fa fa-google-plus" aria-hidden="true" />
-							Google+
-						</a>
-						<a href="http://www.linkedin.com/in/rocketbiller">
-							<i className="fa fa-linkedin" aria-hidden="true" />
-							Linkedin
-						</a>
+						{
+							map(LINKS, ({ link, icon, title}, key) => {
+								return (
+									<a key={key} href={link}>
+										<i className={`fa fa-${icon}`} aria-hidden="true" />
+										{title}
+									</a>
+								);
+							})
+						}
 					</div>
 				</nav>
 			</div>
