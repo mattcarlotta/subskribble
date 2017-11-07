@@ -1,25 +1,71 @@
-.home-container {
-		color: $owhite;
-		width: 100%;
-		max-width: 1200px;
-		height: 300px;
-		padding-top: 25px;
-		margin-top: 200px;
-		margin: auto;
-		text-align: center;
+.home-surround {
+  height: 100%;
+  max-height: 800px;
+  width: 100%;
+  background-image: url(../images/header/bg-preset5.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 
-	h1 {
-		font-family: $raleway;
-		font-weight: 400;
-		font-size: 37.5px;
-		line-height: 48px;
-		text-transform: uppercase;
-		letter-spacing: 10px;
+	.home-overlay {
+		@extend .bg-filter;
+		// height: 800px;
+
+		.home-container {
+				color: $owhite;
+				width: 100%;
+				max-width: 1200px;
+				padding-top: 125px;
+				margin: auto;
+				text-align: center;
+
+			h1 {
+				font-family: $raleway;
+				font-weight: 400;
+				font-size: 37.5px;
+				line-height: 48px;
+				text-transform: uppercase;
+				letter-spacing: 10px;
+			}
+
+			h3 {
+				color: $lightgrey;
+				font-family: $raleway;
+				font-weight: 300;
+				font-size: 19.5px;
+				word-wrap: break-word;
+				margin-bottom: 25px;
+			}
+
+			.img-container {
+				width: 100%;
+    		float: none;
+    		margin-top: 50px;
+			}
+		}
 	}
+}
 
-	h3 {
-		font-family: $raleway;
-		font-weight: 300;
-		font-size: 19.5px;
+.btn-sign-up {
+	border-radius: 5px !important;
+	margin: 15px 0;
+ 	button {
+		border-radius: 5px !important;
+		& > div {
+			background-color: $orange;
+			border-radius: 5px !important;
+			& span { height: 50px !important; }
+			& > div {
+				padding: 7.5px 20px;
+				& span {
+					color: $offwhite !important;
+					font-size: 18px !important;
+					font-family: $raleway;
+					display: inline-block;
+					width: 150px;
+				}
+			}
+
+		}
 	}
 }

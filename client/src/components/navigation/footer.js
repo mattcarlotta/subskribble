@@ -1,32 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 const Footer = () => {
 	return (
-		<div className="footer-container">
-			<ul className="contact-nav">
-				<li>
-					<p>©2017 Matt Carlotta</p>
-				</li>
-				<li>
-					<Link>
-						<i className="fa fa-envelope" aria-hidden="true" />
-						{window.innerWidth < 650 ? '' : 'carlotta.matt@gmail.com'}
-					</Link>
-				</li>
-				<li>
-					<a href="https://github.com/mattcarlotta">
-						<i className="fa fa-github" aria-hidden="true" />
-						{window.innerWidth < 650 ? '' : 'Github'}
-					</a>
-				</li>
-				<li>
-					<a href="https://www.linkedin.com/in/mattcarlotta/">
-						<i className="fa fa-linkedin-square" aria-hidden="true" />
-						{window.innerWidth < 650 ? '' : 'Linkedin'}
-					</a>
-				</li>
-			</ul>
+		<div className="footer-head">
+			<div className="footer-container">
+				<div className="footer-grid-4">
+					<p>©2017 RocketBiller, LLC</p>
+				</div>
+				<nav className="footer-grid-8">
+					<div className="footer-float-right">
+						<a href="http://www.facebook.com/rocketbiller">
+							<i className="fa fa-facebook" aria-hidden="true" />
+							FaceBook
+						</a>
+						<a href="https://twitter.com/rocketbiller">
+							<i className="fa fa-twitter" aria-hidden="true" />
+							Twitter
+						</a>
+						<a href="https://plus.google.com/">
+							<i className="fa fa-google-plus" aria-hidden="true" />
+							Google+
+						</a>
+						<a href="http://www.linkedin.com/in/rocketbiller">
+							<i className="fa fa-linkedin" aria-hidden="true" />
+							Linkedin
+						</a>
+					</div>
+				</nav>
+			</div>
 		</div>
 	);
 };

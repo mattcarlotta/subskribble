@@ -5,7 +5,7 @@ import RenderNotifications from '../containers/app/renderNotifications';
 
 const App = ({ children }) => {
 	return (
-		<div className="wrapper">
+		<div>
 			{children}
 			<RenderNotifications />
 		</div>

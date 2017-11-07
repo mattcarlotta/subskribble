@@ -35,29 +35,28 @@ class Header extends Component {
 
 	render() {
 		return (
-			<div className="nav-overlay">
-				<div className='nav-header'>
-					<div className="nav-container">
-						<div className="nav-grid-3">
-							<Link to="/"><img className="nav-logo" src={rocketLogoText} alt="rocketLogoText.png" /></Link>
-						</div>
-						<nav className="nav-grid-9">
-							<div className="nav-float-right">
-								<Link to="/">Home</Link>
-								<Link onClick={(e) => this.handleTouchTap(e, true, false)}>
-									Industries
-									<span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
-								</Link>
-								 <Popover
-				          open={this.state.industryTabOpen}
-				          anchorEl={this.state.anchorEl}
-				          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-				          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-				          onRequestClose={this.handleRequestClose}
-				        >
-				          <Menu>
+			<div className='nav-header'>
+				<div className="nav-container">
+					<div className="nav-grid-3">
+						<Link to="/"><img className="nav-logo" src={rocketLogoText} alt="rocketLogoText.png" /></Link>
+					</div>
+					<nav className="nav-grid-9">
+						<div className="nav-float-right">
+							<Link to="/">Home</Link>
+							<Link onClick={(e) => this.handleTouchTap(e, true, false)}>
+								Industries
+								<span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
+							</Link>
+							<Popover
+								open={this.state.industryTabOpen}
+								anchorEl={this.state.anchorEl}
+								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+								targetOrigin={{horizontal: 'left', vertical: 'top'}}
+								onRequestClose={this.handleRequestClose}
+								>
+									<Menu>
 										<MenuItem primaryText="Education" />
-				            <MenuItem primaryText="Fitness" />
+										<MenuItem primaryText="Fitness" />
 										<MenuItem primaryText="Healthcare" />
 										<MenuItem primaryText="Marketing Agencies" />
 										<MenuItem primaryText="MSPs" />
@@ -66,31 +65,30 @@ class Header extends Component {
 										<MenuItem primaryText="Service Providers" />
 										<MenuItem primaryText="Software as a service" />
 										<MenuItem primaryText="Web Designers" />
-				          </Menu>
-				        </Popover>
+									</Menu>
+								</Popover>
 								<Link to="/pricing">Pricing</Link>
 								<Link onClick={(e) => this.handleTouchTap(e, false, true)}>
 									Tour
 									<span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
 								</Link>
-									<Popover
-									 open={this.state.tourTabOpen}
-									 anchorEl={this.state.anchorEl}
-									 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-									 targetOrigin={{horizontal: 'left', vertical: 'top'}}
-									 onRequestClose={this.handleRequestClose}
-								 >
-									 <Menu>
-										 <MenuItem primaryText="Contact" />
-										 <MenuItem primaryText="Privacy Policy" />
-										 <MenuItem primaryText="Terms of Service" />
-									 </Menu>
-								 </Popover>
-							</div>
-						</nav>
+								<Popover
+									open={this.state.tourTabOpen}
+									anchorEl={this.state.anchorEl}
+									anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+									targetOrigin={{horizontal: 'left', vertical: 'top'}}
+									onRequestClose={this.handleRequestClose}
+									>
+										<Menu>
+											<MenuItem primaryText="Contact" />
+											<MenuItem primaryText="Privacy Policy" />
+											<MenuItem primaryText="Terms of Service" />
+										</Menu>
+									</Popover>
+								</div>
+							</nav>
+						</div>
 					</div>
-				</div>
-			</div>
 		);
 	}
 };

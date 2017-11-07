@@ -2,32 +2,22 @@ import { map } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 
 import rocketLogo from '../../images/logos/rocketbiller_logo.png';
 
 import { TextField } from 'redux-form-material-ui';
-import FIELDS from '../auth/data/signinFormData';
-import { isRequired } from '../forms/validateFormFields';
 import RenderSubmitButton from '../forms/renderSubmitButton';
 
-import { signinUser } from '../../actions/authActionCreators';
-
-const LoginForm = ({ handleSubmit, signinUser, submitting }) => {
-	const handleFormSubmit = (formProps) => {
-		console.log(formProps);
-		// signinUser(formProps);
-	}
-
+const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) => {
 	return (
 		<div>
 			<img className="auth-logo" src={rocketLogo} alt="rocketLogo.png" />
 			<div className="auth-box-container">
 				<div className="auth-box">
-					<h3 className="auth-title">Sign In</h3>
+					<h3 className="auth-title">{formTitle}</h3>
 					<div className="auth-form">
-						<form onSubmit={handleSubmit(handleFormSubmit)}>
-							{map(FIELDS, ({ name, type, label }, key) => {
+						<form onSubmit={handleSubmit}>
+							{map(FIELDS, ({ name, type, label, validateFields }, key) => {
 								return (
 									<span key={key}>
 										<Field
@@ -37,28 +27,44 @@ const LoginForm = ({ handleSubmit, signinUser, submitting }) => {
 											floatingLabelText={label}
 											fullWidth={true}
 											style={{ fontSize: 15 }}
-											validate={[isRequired]}
+											validate={validateFields}
 										/>
 										<br />
 									</span>
 								);
 							})}
-							<div className="forgot-password">
-								<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
-							</div>
+							{
+								(formTitle === 'Sign In')
+									? <div className="forgot-password">
+											<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
+										</div>
+									: null
+							}
 							<div className="auth-button">
 								<RenderSubmitButton
-									label='Login'
+									label={submitLabel}
 									submitting={submitting}
 								/>
 							</div>
 						</form>
 					</div>
-					<p className="auth-link">Don't have an account? <Link to="/signup">Sign Up</Link></p>
+					<p className="auth-link">
+					{
+						(formTitle === 'Sign In')
+							? <span>
+									Don't have an account?
+									<Link className="m-l-5" to="/signup">Sign Up</Link>
+								</span>
+							:	<span>
+									Already have an account?
+									<Link className="m-l-5" to="/login">Sign In</Link>
+								</span>
+					}
+					</p>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default reduxForm({ form: 'LoginForm' })(connect(null, { signinUser })(LoginForm));
+export default reduxForm({ form: 'AuthForm' })(AuthForm);
