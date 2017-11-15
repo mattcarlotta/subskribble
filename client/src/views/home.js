@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import metrics from '../images/metrics.png';
 import InformationServices from '../components/home/services/informationServices';
+import InformationFeatures from '../components/home/features/informationFeatures';
 
 const Home = () => {
 	return (
@@ -27,6 +28,7 @@ const Home = () => {
 				</div>
 			</div>
 		<InformationServices />
+		<InformationFeatures />
 		</span>
 	);
 };
