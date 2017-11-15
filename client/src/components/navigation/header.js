@@ -71,84 +71,51 @@ class Header extends Component {
 								targetOrigin={{horizontal: 'left', vertical: 'top'}}
 								onRequestClose={this.handleRequestClose}
 								>
-									<Menu>
-										{
-											map(INDUSTRYTABS, ({tab, nestedTabs}) => {
-												return (
-													<MenuItem
-														key={tab}
-														primaryText={tab}
-														rightIcon={ (nestedTabs) ? <ArrowDropRight /> : null}
-														menuItems={ (nestedTabs) ? this.handleNestedTabs(nestedTabs) : null }
-													/>
-												)
-											})
-										}
-									</Menu>
-								</Popover>
-								<Link to="/pricing">Pricing</Link>
-								<Link onClick={e => this.handleTouchTap(e, false, true)}>
-									Tour
-									{ this.handleTabIcon(tourTabOpen) }
-								</Link>
-								<Popover
-									open={this.state.tourTabOpen}
-									anchorEl={this.state.anchorEl}
-									anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-									targetOrigin={{horizontal: 'left', vertical: 'top'}}
-									onRequestClose={this.handleRequestClose}
-									>
-										<Menu>
-											{
-												map(TOURTABS, ({ link, label }) => {
-													return (
-														<Link key={label} onClick={this.handleRequestClose} to={link}>
-															<MenuItem primaryText={label} />
-														</Link>
-													);
-												})
-											}
-										</Menu>
-									</Popover>
-								</div>
-						</nav>
-					</div>
+								<Menu>
+									{
+										map(INDUSTRYTABS, ({tab, nestedTabs}) => {
+											return (
+												<MenuItem
+													key={tab}
+													primaryText={tab}
+													rightIcon={ (nestedTabs) ? <ArrowDropRight /> : null}
+													menuItems={ (nestedTabs) ? this.handleNestedTabs(nestedTabs) : null }
+												/>
+											)
+										})
+									}
+								</Menu>
+							</Popover>
+							<Link to="/pricing">Pricing</Link>
+							<Link onClick={e => this.handleTouchTap(e, false, true)}>
+								Tour
+								{ this.handleTabIcon(tourTabOpen) }
+							</Link>
+							<Popover
+								open={this.state.tourTabOpen}
+								anchorEl={this.state.anchorEl}
+								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+								targetOrigin={{horizontal: 'left', vertical: 'top'}}
+								onRequestClose={this.handleRequestClose}
+								>
+								<Menu>
+									{
+										map(TOURTABS, ({ link, label }) => {
+											return (
+												<Link key={label} onClick={this.handleRequestClose} to={link}>
+													<MenuItem primaryText={label} />
+												</Link>
+											);
+										})
+									}
+								</Menu>
+							</Popover>
+						</div>
+					</nav>
+				</div>
 			</div>
 		);
 	}
 };
 
 export default Header;
-
-/*
-<div className={fixedNavBar ? 'fixed-nav' : null}>
-	<nav className="navigation-container">
-		<ul className="navigation-bar">
-			{map(NAVSCROLLITEMS, ({ pixel, icon, title }, key) => {
-				return (
-					<NavScrollTo key={key} pixel={pixel} icon={icon} title={title} />
-				);
-			})}
-			<li>
-				<Link
-					onClick={() =>
-						browserHistory.push({
-							pathname: `/blog/page`,
-							query: { pageId: 1 }
-						})}
-				>
-					<i className="fa fa-commenting-o" aria-hidden="true" />
-					{window.innerWidth < 650 ? '' : 'Blog'}
-				</Link>
-			</li>
-			<li>
-				<Link onClick={() => Nav.scrollToBottom()}>
-					<i className="fa fa-envelope-o" aria-hidden="true" />
-					{window.innerWidth < 650 ? '' : 'Contact'}
-				</Link>
-			</li>
-			<SignOut />
-		</ul>
-	</nav>
-</div>
-*/

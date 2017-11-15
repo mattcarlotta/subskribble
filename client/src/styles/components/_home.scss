@@ -1,7 +1,7 @@
-.background {
+.landing-background {
   @extend .bg;
 
-  .filter {
+  .landing-filter {
     @extend .bg-filter;
   }
 }
@@ -100,7 +100,7 @@
     .features-block {
       margin-bottom: 0;
       padding-bottom: 0;
-      margin: 35px 10px;
+      margin: 36px 10px;
       text-align: center;
       padding: 15px;
       position: relative;
@@ -133,10 +133,6 @@
 
         .spacer {
           margin: 15px;
-
-          .no-margin {
-            margin-bottom: 0 !important;
-          }
 
           img {
             max-width: 100%;
@@ -182,7 +178,7 @@
   background-color: $darkwarmgrey;
   color: $white;
 
-  .info-container {
+  .info-grid-container {
     width: 1200px;
     margin: 0 auto;
     position: relative;

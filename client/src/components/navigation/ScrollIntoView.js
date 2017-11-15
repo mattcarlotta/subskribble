@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 // import NavButtons from './NavButtons';
 import Header from './header';
-// import Footer from './footer'
+import Footer from './footer'
 
 export default WrappedComponent => {
 	class WindowScroll extends Component {
@@ -18,7 +18,7 @@ export default WrappedComponent => {
 					<div className="wrapper">
 						<Header />
 						<WrappedComponent {...this.props} />
-						{/* <Footer /> */}
+						<Footer />
 					</div>
 				</span>
 			);

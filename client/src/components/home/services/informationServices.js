@@ -7,7 +7,7 @@ import SERVICESGRIDTEXT from './servicesGridText';
 const InformationServices = () => {
   return (
     <div className="information-services-container">
-      <div className="info-container">
+      <div className="info-grid-container">
         {
           map(SERVICESGRIDTEXT, ({ title, description }) => {
             return (
