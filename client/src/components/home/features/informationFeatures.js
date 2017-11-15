@@ -23,7 +23,7 @@ const InformationFeatures = () => {
                   {
                     map(LEFTFEATURESTEXT, ({ title, description}) => {
                       return (
-                        <div className="item">
+                        <div key={title} className="item">
                           <h4>{title}</h4>
                           <p>{description}</p>
                         </div>
@@ -42,7 +42,7 @@ const InformationFeatures = () => {
                   {
                     map(RIGHTFEATURESTEXT, ({ title, description}) => {
                       return (
-                        <div className="item">
+                        <div key={title} className="item">
                           <h4>{title}</h4>
                           <p>{description}</p>
                         </div>
