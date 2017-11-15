@@ -4,8 +4,9 @@ import { Link } from 'react-router';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 
-import { INDUSTRYTABS, TOURTABS } from './links/headerLinks';
+import { INDUSTRYTABS, TOURTABS } from './links/headerTabs';
 import rocketLogoText from '../../images/logos/rocketbiller_logo_white.png';
 
 class Header extends Component {
@@ -39,6 +40,14 @@ class Header extends Component {
 		);
 	}
 
+	handleNestedTabs = (nestedTabs) => {
+		return map(nestedTabs, (tab) => {
+			return (
+				<MenuItem primaryText={tab} />
+			)
+		})
+	}
+
 	render() {
 		const { industryTabOpen, tourTabOpen } = this.state;
 
@@ -64,39 +73,46 @@ class Header extends Component {
 								>
 									<Menu>
 										{
-											map(INDUSTRYTABS, (tab) => {
-												return <MenuItem key={tab} primaryText={tab} />
-											})
-										}
-									</Menu>
-							</Popover>
-							<Link to="/pricing">Pricing</Link>
-							<Link onClick={e => this.handleTouchTap(e, false, true)}>
-								Tour
-								{ this.handleTabIcon(tourTabOpen) }
-							</Link>
-							<Popover
-								open={this.state.tourTabOpen}
-								anchorEl={this.state.anchorEl}
-								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-								targetOrigin={{horizontal: 'left', vertical: 'top'}}
-								onRequestClose={this.handleRequestClose}
-								>
-									<Menu>
-										{
-											map(TOURTABS, ({ link, label }) => {
+											map(INDUSTRYTABS, ({tab, nestedTabs}) => {
 												return (
-													<Link key={label} onClick={this.handleRequestClose} to={link}>
-														<MenuItem primaryText={label} />
-													</Link>
-												);
+													<MenuItem
+														key={tab}
+														primaryText={tab}
+														rightIcon={ (nestedTabs) ? <ArrowDropRight /> : null}
+														menuItems={ (nestedTabs) ? this.handleNestedTabs(nestedTabs) : null }
+													/>
+												)
 											})
 										}
 									</Menu>
-							</Popover>
-						</div>
-					</nav>
-				</div>
+								</Popover>
+								<Link to="/pricing">Pricing</Link>
+								<Link onClick={e => this.handleTouchTap(e, false, true)}>
+									Tour
+									{ this.handleTabIcon(tourTabOpen) }
+								</Link>
+								<Popover
+									open={this.state.tourTabOpen}
+									anchorEl={this.state.anchorEl}
+									anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+									targetOrigin={{horizontal: 'left', vertical: 'top'}}
+									onRequestClose={this.handleRequestClose}
+									>
+										<Menu>
+											{
+												map(TOURTABS, ({ link, label }) => {
+													return (
+														<Link key={label} onClick={this.handleRequestClose} to={link}>
+															<MenuItem primaryText={label} />
+														</Link>
+													);
+												})
+											}
+										</Menu>
+									</Popover>
+								</div>
+						</nav>
+					</div>
 			</div>
 		);
 	}

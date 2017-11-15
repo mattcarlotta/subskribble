@@ -13,15 +13,17 @@ body {
 	// letter-spacing: 0.5px;
 	color: $warmgrey;
 	margin: 0;
-//   background: url(../images/rb-backdrop.jpg) no-repeat center center fixed;
-//   -webkit-background-size: cover;
-//   -moz-background-size: cover;
-//   -o-background-size: cover;
-//   background-size: cover;
 }
 
 a:link, a:visited, a:focus, a:hover, a:active {
   @extend .no-link-focus;
+}
+
+.bg {
+  background-image: url(../images/header/bg-preset5.jpg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 }
 
 .bg-filter {
@@ -53,6 +55,14 @@ a:link, a:visited, a:focus, a:hover, a:active {
 
 .fa {
 	margin-right: 5px;
+}
+
+.f-l {
+	float: left;
+}
+
+.f-r {
+	float: right;
 }
 
 .flex-wrap-center {
@@ -119,11 +129,11 @@ a:link, a:visited, a:focus, a:hover, a:active {
 }
 
 .wrapper {
+	  background-image: url(../images/header/bg-preset5.jpg);
+	  background-size: cover;
+	  background-position: top center;
+	  background-repeat: no-repeat;
 	width: 100%;
 	max-width: 2000px;
-  background-image: url(../images/header/bg-preset5.jpg);
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
 	// overflow: scroll;
 }

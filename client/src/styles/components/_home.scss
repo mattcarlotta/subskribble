@@ -1,4 +1,12 @@
-.home-container {
+.background {
+  @extend .bg;
+
+  .filter {
+    @extend .bg-filter;
+  }
+}
+
+.landing-container {
   color: $owhite;
   height: 100%;
   max-height: 650px;
@@ -48,31 +56,112 @@
 	}
 }
 
+.information-services-container {
+  height: 332px;
+  width: 100%;
+  background-color: $darkwarmgrey;
+  color: $white;
+
+  .info-container {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    font-family: $raleway;
+    font-weight: normal !important;
+
+    .info-grid-4 {
+      float:left;
+      display: inline;
+      position: relative;
+      width: 400px;
+
+      .info-block {
+        padding: 15px;
+        margin: 50px 10px;
+        position: relative;
+        text-align: center;
+
+        h1 {
+          font-size: 180%;
+          line-height: 130%;
+          font-weight: 400;
+        }
+
+        p {
+          margin: 0 0 15px 0;
+          color: $lightwarmgrey;
+          font-size: 15px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+
 .link {
   margin-bottom: 20px;
-  .btn-sign-up {
+
+  .btn {
     border-radius: 5px !important;
     margin: 15px 0;
+
     button {
       border-radius: 5px !important;
-              border: 1px solid $orange;
+
+      & > div {
+        border-radius: 4px !important;
+
+        & > div > span {
+          letter-spacing: 1px !important;
+          font-family: $raleway;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .sign-up-btn {
+    button {
+      border: 1px solid $orange;
+
       & > div {
         background-color: $orange;
-                border: 1px solid $orange;
-        border-radius: 4px !important;
+        border: 1px solid $orange;
+
         & span { height: 50px !important; }
+
         & > div {
           padding: 7.5px 15px;
+
           & span {
             color: $offwhite !important;
             font-size: 18px !important;
-            letter-spacing: 1px !important;
-            font-family: $raleway;
-            display: inline-block;
             width: 150px;
           }
         }
+      }
+    }
+  }
 
+  .services-btn {
+    button {
+      border: 1px solid $darkwarmgrey;
+
+      & > div {
+        background-color: $darkwarmgrey;
+        border: 1px solid $lightwarmgrey;
+
+        & span { height: 50px !important; }
+
+        & > div {
+          padding: 3.5px 15px;
+
+          & span {
+            color: $offwhite !important;
+            font-size: 14px !important;
+            width: 100px;
+          }
+        }
       }
     }
   }
