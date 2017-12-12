@@ -1,0 +1,83 @@
+.notifications-header {
+  font-family: $poppinsmedium;
+  letter-spacing: .15px;
+  font-size: 13px;
+  height: 40px;
+  padding: 0px 10px;
+}
+
+.notifications-footer {
+  height: 30px;
+}
+
+.notifications-empty {
+  height: 250px;
+
+  .empty-notes {
+    @extend .d-b, .m-0-a, .p-r;
+    top: 65px;
+    opacity: 0.10;
+  }
+
+  .empty-title {
+    @extend .f-s-14, .p-r, .t-a-c;
+    top: 75px;
+    font-family: $poppinslight;
+    letter-spacing: .15px;
+  }
+}
+
+.notifications-body {
+  padding: 0px 20px;
+
+  .hidden {
+    display: none;
+  }
+
+  .date {
+    color: $darkwarmgrey;
+    font-size: 10px;
+  }
+
+  .note {
+    border-bottom: 1px solid #e2e4e6;
+    margin-top: 10px;
+  }
+
+  .link {
+    @extend .c-lb;
+  }
+
+  .title {
+    font-family: $poppinslight;
+    font-size: 12px;
+  }
+
+  p { margin: 0 0 10px 0 }
+}
+
+.note-10 {
+  @extend .d-ib;
+  width: 10%
+}
+
+.note-15 {
+  @extend .d-ib;
+  width: 15%;
+}
+
+.note-75 {
+  @extend .d-ib;
+  width: 75%
+}
+
+.note-90 {
+  @extend .d-ib;
+  width: 90%;
+}
+
+.divider {
+  height: 1px;
+  border: none;
+  background-color: $lightcoolgrey;
+}

@@ -1,0 +1,104 @@
+.table-container {
+  margin: 10px 0 10px 0;
+
+  .adjust-enddate-position {
+    padding-left: 30px !important;
+  }
+
+  .adjust-plans-position {
+    padding-left: 25px !important;
+  }
+
+  .adjust-subscriptions-position {
+    padding-left: 50px !important;
+  }
+
+  .adjust-subscribers-position {
+    padding-left: 40px !important;
+  }
+
+
+  .override-table-style {
+    th {
+      font-family: $poppinssemibold;
+      font-size: 14px !important;
+      color: $black !important;
+    }
+
+    td {
+      font-family: sans-serif;
+      font-size: 13px !important;
+      color: $black !important;
+      text-transform: none;
+    }
+  }
+}
+
+.label {
+  @extend .f-w-500, .t-a-c;
+  display: inline;
+  letter-spacing: 0.05em;
+  border-radius: 60px;
+  padding: 4px 16px 3px;
+}
+
+.active {
+  @extend .t-t-c;
+  color: $tealgreen;
+  border: 1px solid $tealgreen;
+  border-radius: 0px;
+  padding: 4px 34px;
+}
+
+.credit {
+  @extend .t-t-c;
+  color: $darkblue;
+  border: 1px solid $darkblue;
+  border-radius: 0px;
+  padding: 4px 38px;
+}
+
+.inactive {
+  @extend .t-t-c;
+  color: $lightcoolgrey;
+  border: 1px solid $lightcoolgrey;
+  border-radius: 0px;
+  padding: 4px 27px;
+}
+
+.late {
+  @extend .t-t-c;
+  color: $darkyellow;
+  border: 1px solid $darkyellow;
+  border-radius: 0px;
+  padding: 4px 41px;
+}
+
+.paid {
+  @extend .t-t-c;
+  color: $limegreen;
+  border: 1px solid $limegreen;
+  border-radius: 0px;
+  padding: 4px 41px;
+}
+
+.refund {
+  @extend .t-t-c;
+  color: $redorange;
+  border: 1px solid $redorange;
+  border-radius: 0px;
+  padding: 4px 34px;
+}
+
+.suspended {
+  @extend .t-t-c;
+  color: $firered;
+  border: 1px solid $firered;
+  border-radius: 0px;
+}
+
+.subscription-count {
+  @extend .c-w, .f-w-500, .label, .t-a-c;
+  background-color: $lightblue;
+  padding: 4px 16px 3px;
+}
