@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FroalaEditor from 'react-froala-wysiwyg';
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 import { Scrollbars } from 'react-custom-scrollbars';
+import $ from 'jquery';
 
 export default class FroalaEditorComponent extends Component {
   state = {
@@ -9,7 +10,13 @@ export default class FroalaEditorComponent extends Component {
     preview: ''
   };
 
+  componentDidMount = () => {
+    $(".fr-toolbar").css({ "background": "#03a9f3" })
+  }
+
   handleModelChange = (model) => this.setState({ content: model, preview: model })
+
+  handleScrollFrame = () => $(".fr-toolbar").css("top", `${this.refs.editorscrollbars.getScrollTop()}px`)
 
   render () {
     const { input } = this.props;
@@ -19,6 +26,7 @@ export default class FroalaEditorComponent extends Component {
         <h4>Template Editor:</h4>
         <div className="content">
           <Scrollbars
+            ref="editorscrollbars"
             style={{ width: '100%', zDepth: 1300 }}
             autoHeight
             autoHeightMin={50}
@@ -26,7 +34,8 @@ export default class FroalaEditorComponent extends Component {
             autoHide
             autoHideTimeout={500}
             autoHideDuration={200}
-            renderThumbVertical={props => <div {...props} className="scrollbar"/>}
+            renderThumbVertical={props => <div {...props} className="scrollbar dark"/>}
+            onUpdate={this.handleScrollFrame}
             >
               <FroalaEditor
                 model={content}
@@ -47,7 +56,7 @@ export default class FroalaEditorComponent extends Component {
             autoHide
             autoHideTimeout={500}
             autoHideDuration={200}
-            renderThumbVertical={props => <div {...props} className="scrollbar"/>}
+            renderThumbVertical={props => <div {...props} className="scrollbar dark"/>}
             >
               <div className="content-preview">
                 <FroalaEditorView model={preview} />

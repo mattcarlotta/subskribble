@@ -31,6 +31,27 @@
 
     .content {
       border: 1px solid $black;
+      position: relative;
+
+      .fr-toolbar {
+        border: none !important;
+      }
+
+      .fr-sticky-on {
+        position: relative !important;
+       }
+
+      .fr-sticky-dummy {
+        display: none !important;
+       }
+
+      button {
+        color: $white !important;
+
+        &:hover {
+          background-color: $tealblue !important;
+        }
+      }
     }
 
     .rendered-content {
