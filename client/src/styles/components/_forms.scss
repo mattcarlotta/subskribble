@@ -2,6 +2,21 @@
   @extend .container;
 }
 
+.customer-signup-bg {
+  // @extend .b-c-w;
+  // background-color: pink;
+
+  .customer-signup-container {
+    @extend .container-1200;
+    height: auto;
+
+    .signup-form {
+      padding-top: 100px;
+      // margin: 50px 0px;
+    }
+  }
+}
+
 .new-form-container {
   @extend .w-100;
   text-transform: none;
@@ -34,6 +49,7 @@
       position: relative;
 
       .fr-toolbar {
+        background-color: $lightblue;
         border: none !important;
       }
 

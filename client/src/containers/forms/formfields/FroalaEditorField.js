@@ -6,13 +6,9 @@ import $ from 'jquery';
 
 export default class FroalaEditorComponent extends Component {
   state = {
-    content: '<span>Type here to start creating a custom email template!</span>',
+    content: 'Type here to start creating a custom email template!',
     preview: ''
   };
-
-  componentDidMount = () => {
-    $(".fr-toolbar").css({ "background": "#03a9f3" })
-  }
 
   handleModelChange = (model) => this.setState({ content: model, preview: model })
 

@@ -2,6 +2,7 @@ import * as app from 'axios';
 // import { browserHistory } from 'react-router';
 //
 // import configAuth from './configAuth';
+import { SAVE_FORM_INFO } from './types';
 import dispatchError from './dispatchError';
 import dispatchSuccess from './dispatchSuccess';
 
@@ -43,6 +44,15 @@ export const registerToNewsletter = (email) => {
     })
   }
 }
+
+// Save form information for registering to a plan
+export const saveFormRegisterInfo = (formProps) => {
+  return {
+    type: SAVE_FORM_INFO,
+    payload: formProps
+  };
+}
+
 
 // Send email to support
 export const sendSupportEmail = ({name, email, message}) => {

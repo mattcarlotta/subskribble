@@ -2,6 +2,7 @@
   @extend .w-100;
   height: 75px;
   position: absolute;
+  z-index: 1000;
 
   .nav-container {
     @extend .l-s-t-n, .m-0-a, .t-t-u;

@@ -2,6 +2,7 @@
 import App from '../views/app/index';
 import ContactUs from '../views/rocketboard/contact';
 import Customers from '../views/rocketboard/customers';
+import CustomerSignup from '../views/website/customerSignup';
 import Dashboard from '../views/rocketboard/dashboard';
 import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
 import FAQs from '../views/rocketboard/faqs';
@@ -43,6 +44,7 @@ const routes = (
 	<div>
 		<Route path="/" component={NavWrapper(App)}>
 			<IndexRoute component={Home} />
+			<Route path="customer-signup/:gateway" component={CustomerSignup} />
 			<Route path="forgot-password" component={ForgotPassword} />
 			<Route path="login" component={LogIn} />
 			<Route path="pricing" component={Pricing} />

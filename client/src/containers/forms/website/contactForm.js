@@ -41,16 +41,14 @@ const ContactForm = ({ handleSubmit, sendSupportEmail, submitting }) => {
           rowsMax={4}
           validate={[isRequired, maxLength2000]}
         />
-        <div className="link">
-          <RenderSubmitButton
-            label="Send Message"
-            submitting={submitting}
-						backgroundColor={'#e04d2d'}
-						buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-						labelStyle={{ color: '#fbe2dd', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-						style={{ height: 50, marginTop: 15, borderRadius: 6 }}
-          />
-        </div>
+        <RenderSubmitButton
+          label="Send Message"
+          submitting={submitting}
+					backgroundColor={'#e04d2d'}
+					buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
+					labelStyle={{ color: '#fbe2dd', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
+					style={{ height: 50, marginTop: 15, borderRadius: 6 }}
+        />
       </form>
 		</div>
 	);
