@@ -3,16 +3,74 @@
 }
 
 .customer-signup-bg {
-  // @extend .b-c-w;
-  // background-color: pink;
+  height: 1000px;
+  background-color: $white;
 
   .customer-signup-container {
-    @extend .container-1200;
-    height: auto;
+    padding-top: 100px;
 
-    .signup-form {
-      padding-top: 100px;
-      // margin: 50px 0px;
+    .stepper-container {
+      @extend .container-1200;
+    }
+
+    .title {
+      @extend .t-a-c;
+      margin: 20px 0;
+    }
+
+    .form-container {
+      @extend .c-b, .p-r;
+      font-family: $poppinslight;
+      margin: 40px 50px 0px 50px;
+      min-height: 600px;
+
+      h3 {
+        line-height: 30px;
+        font-size: 21px;
+        font-weight: 300;
+      }
+
+      .left-form {
+        @extend .f-l, .pr-10, .w-50;
+        height: 500px;
+        margin-bottom: 20px;
+      }
+
+      .right-form {
+        @extend .f-r, .pl-10, .w-50;
+        height: 500px;
+        margin-bottom: 20px;
+      }
+      .input-16 {
+        @extend .w-16;
+        margin: 10px 0;
+        height: 72px;
+      }
+      .input-20 {
+        @extend .w-20;
+        margin: 10px 0;
+        height: 72px;
+      }
+      .input-25 {
+        @extend .w-25;
+        margin: 10px 0;
+        height: 72px;
+      }
+      .input-50 {
+        @extend .w-50;
+        margin: 10px 0;
+        height: 72px;
+      }
+      .input-66 {
+        @extend .w-66;
+        margin: 10px 0;
+        height: 72px;
+      }
+      .input-75 {
+        @extend .w-75;
+        margin: 10px 0;
+        height: 72px;
+      }
     }
   }
 }

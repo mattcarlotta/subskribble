@@ -2,6 +2,7 @@ export const allowedCharacters = value => (/[~`@#$%&*+=[\]\\/{}|\\":<>]/g.test(v
 export const isNotEmpty = value => value.length === 0 ? 'You must include at least one item' : undefined;
 export const isRequired = value => !value ? 'Required' : undefined;
 export const isValidEmail = value => (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) ? 'Invalid email address' : undefined;
+export const isValidZip = value => !/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ? 'Invalid zip code' : undefined;
 export const maxLength = max => value => value && value.length > max ? `Must be ${max} characters or less!` : undefined;
 export const maxLength30 = maxLength(30);
 export const maxLength50 = maxLength(50);

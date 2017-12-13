@@ -465,6 +465,10 @@ p {
 	width: 10%;
 }
 
+.w-16 {
+	width: 16.66666667%;
+}
+
 .w-20 {
 	width: 20%;
 }
@@ -489,6 +493,15 @@ p {
 	width: 60%;
 }
 
+.w-66 {
+	width: 66.66666667%;
+}
+
+.w-75 {
+	width: 75%;
+}
+
+
 .w-100 {
 	width: 100%;
 }
@@ -499,6 +512,10 @@ p {
 
 .w-1200 {
 	width: 1200px;
+}
+
+.wrapper-bg {
+	@extend .bg;
 }
 
 .wrapper-filter {

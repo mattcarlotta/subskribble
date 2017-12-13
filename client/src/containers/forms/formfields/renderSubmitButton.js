@@ -1,13 +1,13 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const RenderSubmitButton = ({ backgroundColor, buttonStyle, label, labelStyle, primary, submitting, style }) => {
+const RenderSubmitButton = ({ backgroundColor, buttonStyle, fullWidth, label, labelStyle, primary, submitting, style }) => {
 	return (
 		<RaisedButton
 			type="submit"
 			label={label}
 			primary={primary}
-			fullWidth={true}
+			fullWidth={fullWidth}
 			disabled={submitting}
 			backgroundColor={backgroundColor}
 			buttonStyle={buttonStyle}

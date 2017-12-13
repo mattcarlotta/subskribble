@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -43,11 +43,11 @@ class Header extends Component {
 
 	render() {
 		const { industryTabOpen, tourTabOpen } = this.state;
-		const { fixedNavBar } = this.props;
+		const { fixedNavBar, blueNav } = this.props;
 		const rbLogo = fixedNavBar ? rocketLogoBlack : rocketLogoWhite;
 
 		return (
-			<div className={fixedNavBar ? 'nav-header fixed' : 'nav-header'}>
+			<div id="navbar" className={fixedNavBar ? 'nav-header fixed' : `nav-header ${blueNav}`}>
 				<div className="nav-container">
 					<div className="nav-grid-3">
 						<Link to="/"><img className="nav-logo" src={rbLogo} alt="rocketBillerLogo.png" /></Link>
@@ -113,4 +113,4 @@ class Header extends Component {
 	}
 };
 
-export default Header;
+export default withRouter(Header);

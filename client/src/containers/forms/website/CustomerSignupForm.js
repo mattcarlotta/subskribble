@@ -5,6 +5,7 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import { saveFormRegisterInfo } from '../../../actions/formActionCreators';
 import CustomerContactInfo from './customerContactInfoForm';
+import CustomerPaymentInfo from './customerPaymentInfoForm';
 // import SubmitButton from '../formfields/renderSubmitButton';
 
 class RegisterPlanForm extends Component {
@@ -39,7 +40,7 @@ class RegisterPlanForm extends Component {
       case 0:
         return <CustomerContactInfo onSubmit={formProps => this.handleFormSave(formProps)} />;
       case 1:
-        return 'What is an ad group anyways?';
+        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={formProps => this.handleFormSave(formProps)} />;
       case 2:
         return 'This is the bit I really care about!';
       case 3:
@@ -54,7 +55,11 @@ class RegisterPlanForm extends Component {
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
-          <div className="signup-form">
+          <div className="stepper-container">
+            <div className="title">
+              <h1>Carlotta Corp</h1>
+              <h3>Carlotta Prime Plan Registration</h3>
+            </div>
             <Stepper activeStep={stepIndex}>
               <Step>
                 <StepLabel>Contact Information</StepLabel>
@@ -69,10 +74,8 @@ class RegisterPlanForm extends Component {
                 <StepLabel>Review</StepLabel>
               </Step>
             </Stepper>
-            <div>
-              {this.getStepContent(stepIndex)}
-            </div>
           </div>
+          {this.getStepContent(stepIndex)}
         </div>
       </div>
     );
