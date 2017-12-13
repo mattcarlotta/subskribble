@@ -17,15 +17,30 @@ class Header extends Component {
     e.preventDefault();
 
     this.setState({
+			adjustNavbg: '',
+			isLoaded: false,
 			industryTabOpen: industryTabOpen,
 			tourTabOpen: tourTabOpen,
       anchorEl: e.currentTarget
     });
   };
 
-  handleRequestClose = () => {
-    this.setState({ industryTabOpen: false, tourTabOpen: false });
-  };
+	componentDidMount = () => {
+		const { adjustBG } = this.state;
+		const pathname = this.props.location.pathname.indexOf('customer-signup') > 0;
+
+		if (!adjustBG && pathname) this.setState({ adjustBG : 'adjust-bg' })
+	}
+
+	componentWillUpdate = (nextProps) => {
+		const { adjustBG } = this.state;
+		const nextPathname = nextProps.location.pathname.indexOf('customer-signup') >= 1;
+
+		if (!adjustBG && nextPathname) this.setState({ adjustBG : 'adjust-bg' })
+		else if (adjustBG && !nextPathname) this.setState({ adjustBG: '' })
+	}
+
+  handleRequestClose = () => this.setState({ industryTabOpen: false, tourTabOpen: false })
 
 	handleTabIcon = (tab) => {
 		return (
@@ -42,12 +57,12 @@ class Header extends Component {
 	}
 
 	render() {
-		const { industryTabOpen, tourTabOpen } = this.state;
-		const { fixedNavBar, blueNav } = this.props;
+		const { adjustBG, anchorEl, industryTabOpen, tourTabOpen } = this.state;
+		const { fixedNavBar } = this.props;
 		const rbLogo = fixedNavBar ? rocketLogoBlack : rocketLogoWhite;
 
 		return (
-			<div id="navbar" className={fixedNavBar ? 'nav-header fixed' : `nav-header ${blueNav}`}>
+			<div className={fixedNavBar ? 'nav-header fixed' : `nav-header ${adjustBG}`}>
 				<div className="nav-container">
 					<div className="nav-grid-3">
 						<Link to="/"><img className="nav-logo" src={rbLogo} alt="rocketBillerLogo.png" /></Link>
@@ -60,8 +75,8 @@ class Header extends Component {
 								{ this.handleTabIcon(industryTabOpen) }
 							</Link>
 							<Popover
-								open={this.state.industryTabOpen}
-								anchorEl={this.state.anchorEl}
+								open={industryTabOpen}
+								anchorEl={anchorEl}
 								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 								targetOrigin={{horizontal: 'left', vertical: 'top'}}
 								onRequestClose={this.handleRequestClose}
@@ -87,8 +102,8 @@ class Header extends Component {
 								{ this.handleTabIcon(tourTabOpen) }
 							</Link>
 							<Popover
-								open={this.state.tourTabOpen}
-								anchorEl={this.state.anchorEl}
+								open={tourTabOpen}
+								anchorEl={anchorEl}
 								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 								targetOrigin={{horizontal: 'left', vertical: 'top'}}
 								onRequestClose={this.handleRequestClose}
