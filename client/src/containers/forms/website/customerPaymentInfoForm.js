@@ -1,95 +1,97 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-material-ui';
+import { TextField, SelectField } from 'redux-form-material-ui';
+import MenuItem from 'material-ui/MenuItem';
 
-import { isRequired, isValidZip } from '../formfields/validateFormFields';
+import { isRequired } from '../formfields/validateFormFields';
+import { formatCreditCard, formatCVC, formatYear } from '../formfields/formatFields';
+
+import { ADDRESSFIELDS } from '../formfields/customerSignupFields';
 import SubmitButton from '../formfields/renderSubmitButton';
 import BackButton from '../formfields/renderBackButton';
-
-const RIGHTFIELDS = [
-  { name: "creditCard", label: "Credit Card", validate: [isRequired] },
-  { name: "creditExpMonth", label: "Month", validate: [isRequired] },
-  { name: "creditExpYear", label: "Year", validate: [isRequired] },
-  { name: "creditCVC", label: "CVC", validate: [isRequired] },
-]
+const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 const CustomerPaymentInfoForm = ({ handleSubmit, onClickBackButton, onSubmit, submitting }) => {
   return (
         <div className="form-container">
           <form onSubmit={handleSubmit}>
-            <div className="right-form">
-              <h3>Address</h3>
-              <div className="input-75 f-l">
-                <Field
-                  name="address"
-                  type="text"
-                  component={TextField}
-                  floatingLabelText="Address"
-                  style={{ fontSize: 15, width: '95%' }}
-                  validate={[isRequired]}
-                />
-              </div>
-              <div className="input-25 f-r">
-                <Field
-                  name="unit"
-                  type="text"
-                  component={TextField}
-                  floatingLabelText="Unit, Apt, or Suite #"
-                  style={{ fontSize: 15, width: '100%' }}
-                />
-              </div>
-              <div className="input-50 f-l">
-                <Field
-                  name="city"
-                  type="text"
-                  component={TextField}
-                  floatingLabelText="City"
-                  style={{ fontSize: 15, width: '95%' }}
-                  validate={[isRequired]}
-                />
-              </div>
-              <div className="input-25 f-l">
-                <Field
-                  name="state"
-                  type="text"
-                  component={TextField}
-                  floatingLabelText="State"
-                  style={{ fontSize: 15, width: '90%' }}
-                  validate={[isRequired]}
-                />
-              </div>
-              <div className="input-25 f-r">
-                <Field
-                  name="zip"
-                  type="text"
-                  component={TextField}
-                  floatingLabelText="Zip"
-                  style={{ fontSize: 15, width: '100%' }}
-                  validate={[isRequired, isValidZip]}
-                />
+            <div className="left-form">
+              <h3>Billing Address</h3>
+              <div className="input-66">
+              {
+                map(ADDRESSFIELDS, ({ className, name, label, width, validate, normalize }, key) => {
+                  return (
+                    <div key={key} className={className}>
+                      <Field
+                        name={name}
+                        type="text"
+                        component={TextField}
+                        floatingLabelText={label}
+                        style={{ fontSize: 15, width: `${width}` }}
+                        validate={validate}
+                        normalize={normalize}
+                      />
+                    </div>
+                  )
+                })
+              }
               </div>
             </div>
             <div className="right-form">
               <h3>Credit Card Information</h3>
-              <div className="input-6">
-                {
-                  map(RIGHTFIELDS, ({ name, label, validate, normalize}, key) => {
-                    return (
-                      <div key={key} className="input-container">
-                        <Field
-                          name={name}
-                          type="text"
-                          component={TextField}
-                          floatingLabelText={label}
-                          style={{ fontSize: 15, width: '100%' }}
-                          validate={validate}
-                          normalize={normalize}
-                        />
-                      </div>
-                    )
-                  })
-                }
+              <div className="input-66">
+                <div className="input-50 f-l">
+                  <Field
+                    name="creditCard"
+                    type="text"
+                    component={TextField}
+                    floatingLabelText="Credit Card"
+                    style={{ fontSize: 15, width: '95%' }}
+                    validate={[isRequired]}
+                    normalize={formatCreditCard}
+                  />
+                </div>
+                <div className="input-16 f-l">
+                  <Field
+                    name="creditExpMonth"
+                    type="text"
+                    component={SelectField}
+                    floatingLabelText="Month"
+                    style={{ fontSize: 15, width: '90%' }}
+                    validate={[isRequired]}
+                  >
+                    {
+                      map(MENUITEMS, (value) => {
+                        return <MenuItem key={value} value={value} primaryText={value} />
+                      })
+                    }
+                  </Field>
+                </div>
+                <div className="input-16 f-l">
+                  <Field
+                    name="creditExpYear"
+                    type="text"
+                    component={TextField}
+                    floatingLabelText="Exp Year"
+                    hintText="YYYY"
+                    style={{ fontSize: 15, width: '90%' }}
+                    validate={[isRequired]}
+                    normalize={formatYear}
+                  />
+                </div>
+                <div className="input-16 f-l">
+                  <Field
+                    name="creditCVC"
+                    type="text"
+                    component={TextField}
+                    floatingLabelText="CVC"
+                    hintText="XXX"
+                    style={{ fontSize: 15, width: '90%' }}
+                    validate={[isRequired]}
+                    normalize={formatCVC}
+                  />
+                </div>
               </div>
             </div>
           <div className="clear-fix" />

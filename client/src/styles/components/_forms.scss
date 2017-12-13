@@ -21,7 +21,7 @@
     .form-container {
       @extend .c-b, .p-r;
       font-family: $poppinslight;
-      margin: 40px 50px 0px 50px;
+      margin: 100px 100px 0px 100px;
       min-height: 600px;
 
       h3 {
@@ -32,15 +32,20 @@
 
       .left-form {
         @extend .f-l, .pr-10, .w-50;
-        height: 500px;
-        margin-bottom: 20px;
+        height: 450px;
       }
 
       .right-form {
         @extend .f-r, .pl-10, .w-50;
-        height: 500px;
-        margin-bottom: 20px;
+        height: 450px;
       }
+
+      .input-10 {
+        @extend .w-10;
+        margin: 10px 0;
+        height: 72px;
+      }
+
       .input-16 {
         @extend .w-16;
         margin: 10px 0;
