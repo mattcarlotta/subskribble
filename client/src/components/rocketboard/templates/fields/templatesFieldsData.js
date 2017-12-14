@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 export const ACTIVETEMPLATES = [
   {
     name: 'Carlotta Prime',
@@ -15,5 +17,16 @@ export const ACTIVETEMPLATES = [
     from: 'Carlotta Corp LLC'
   }
 ];
+
+export const TEMPLATEBUTTONS = [
+  {
+    label: "Edit Template",
+    onClickAction: () => browserHistory.push('/rocketboard/templates/edit-template')
+  },
+  {
+    label: "Remove Template",
+    onClickAction: () => browserHistory.push('/rocketboard/templates/remove-template')
+  }
+]
 
 export const TABLEHEADERS = ['Template Name', 'Id', 'From'];

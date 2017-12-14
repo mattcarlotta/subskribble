@@ -15,10 +15,10 @@ export const Plans = () => {
           initiallyExpanded={true}
           >
           <CardHeader
-            style={{ borderBottom: '1px solid rgba(120, 130, 140, 0.13)', fontFamily: 'Poppins Semi-Bold, san-senif', backgroundColor: '#F56342' }}
-            title="Plans"
-            titleColor={'#eee'}
-            iconStyle={{ color: '#eee' }}
+            style={{ borderBottom: '1px solid rgba(120, 130, 140, 0.13)', fontFamily: 'Poppins Medium, sans-serif', backgroundColor: '#03a9f3' }}
+            title="Active Customers"
+            titleColor="#fff"
+            iconStyle={{ color: '#cbcbcb' }}
             actAsExpander={true}
             showExpandableButton={true}
           />

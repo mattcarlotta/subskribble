@@ -18,10 +18,10 @@ const TransactionsChargesPanel = () => {
           initiallyExpanded={true}
           >
             <CardHeader
-              style={{ borderBottom: '1px solid rgba(120, 130, 140, 0.13)', fontFamily: 'Poppins Semi-Bold, sans-serif', backgroundColor: '#F56342' }}
+              style={{ borderBottom: '1px solid rgba(120, 130, 140, 0.13)', fontFamily: 'Poppins Light, sans-serif', backgroundColor: '#03a9f3' }}
               title="Charges"
-              titleColor="#eee"
-              iconStyle={{ color: '#eee' }}
+              titleColor="#fff"
+              iconStyle={{ color: '#cbcbcb' }}
               actAsExpander={true}
               showExpandableButton={true}
             />

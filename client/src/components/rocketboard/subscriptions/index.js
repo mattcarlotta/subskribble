@@ -1,13 +1,11 @@
 import React from 'react';
 
-import ActiveSubscriptionsPanel from './panels/activeSubscriptionsPanel';
-import InactiveSubscriptionsPanel from './panels/inactiveSubscriptionsPanel';
+import SubscriptionsPanels from './panels/subscriptionsPanels';
 
 const Subscriptions = () => {
 	return (
 		<div className="subscriptions-container">
-			<ActiveSubscriptionsPanel />
-			<InactiveSubscriptionsPanel />
+			<SubscriptionsPanels />
 		</div>
 	);
 };

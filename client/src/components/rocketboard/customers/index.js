@@ -1,13 +1,11 @@
 import React from 'react';
 
-import ActiveCustomersPanel from './panels/activeCustomersPanel';
-import InactiveCustomersPanel from './panels/inactiveCustomersPanel';
+import CustomersPanels from './panels/customersPanels';
 
 const Customers = () => {
 	return (
 		<div className="customer-container">
-			<ActiveCustomersPanel />
-			<InactiveCustomersPanel />
+			<CustomersPanels />
 		</div>
 	);
 };

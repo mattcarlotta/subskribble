@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 export const ACTIVEFORMS = [
   {
     name: 'Carlotta Prime',
@@ -6,5 +8,12 @@ export const ACTIVEFORMS = [
     plans: '1'
   },
 ];
+
+export const FORMBUTTONS = [
+  {
+    label: "Add Form",
+    onClickAction: () => browserHistory.push('/rocketboard/forms/add-form')
+  }
+]
 
 export const TABLEHEADERS = ['Name', 'Gateway', 'Unique Id', 'Plans'];

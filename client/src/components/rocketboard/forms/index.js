@@ -1,14 +1,11 @@
 import React from 'react';
 
-import FormsPanel from './panels/formsPanel';
-import NewFormPanel from './panels/newFormPanel';
-
+import FormsPanels from './panels/formsPanels';
 
 const Forms = () => {
 	return (
 		<div className="forms-container">
-			<NewFormPanel />
-			<FormsPanel />
+			<FormsPanels />
 		</div>
 	);
 };

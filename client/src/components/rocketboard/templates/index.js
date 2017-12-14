@@ -1,13 +1,11 @@
 import React from 'react';
 
-import TemplatesPanel from './panels/templatesPanel';
-import NewTemplatesPanel from './panels/newTemplatesPanel';
+import TemplatesPanels from './panels/templatesPanels';
 
 const Templates = () => {
 	return (
 		<div className="dashboard-container">
-			<NewTemplatesPanel />
-			<TemplatesPanel />
+			<TemplatesPanels />
 		</div>
 	);
 };

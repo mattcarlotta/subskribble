@@ -1,13 +1,11 @@
 import React from 'react';
 
-import ActivePlansPanel from './panels/activePlansPanel';
-import InactivePlansPanel from './panels/inactivePlansPanel';
+import PlansPanels from './panels/plansPanels';
 
 const Plans = () => {
 	return (
 		<div className="plan-container">
-			<ActivePlansPanel />
-			<InactivePlansPanel />
+			<PlansPanels />
 		</div>
 	);
 };

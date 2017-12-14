@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 export const ACTIVESUBSCRIPTIONS = [
   {
     status: 'active',
@@ -98,6 +100,32 @@ export const INACTIVESUBSCRIPTIONS = [
     endDate: 'Jan 17, 2018',
     amount: '$29.99'
   },
+]
+
+export const ACTIVESUBSBUTTONS = [
+  {
+    label: "Add Subscription",
+    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/add-subscription')
+  },
+  {
+    label: "Suspend Subscription",
+    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/suspend-subscription')
+  },
+  {
+    label: "View Subscription",
+    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
+  }
+]
+
+export const INACTIVESUBSBUTTONS = [
+  {
+    label: "Remove Subscription",
+    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/remove-subscription')
+  },
+  {
+    label: "View Subscription",
+    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
+  }
 ]
 
 export const TABLEHEADERS = ['Status', 'Customer', 'Plan', 'Start Date', 'End Date', 'Amount'];

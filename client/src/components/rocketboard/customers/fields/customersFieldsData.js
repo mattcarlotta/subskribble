@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 export const ACTIVECUSTOMERS = [
   {
     status: 'active',
@@ -98,6 +100,32 @@ export const INACTIVECUSTOMERS = [
     phone: '(555) 555-5555',
     subs: '1'
   },
+]
+
+export const ACTIVECUSTOMERSBUTTONS = [
+  {
+    label: "Add Customer",
+    onClickAction: () => browserHistory.push('/rocketboard/customer/add-customer')
+  },
+  {
+    label: "Suspend Customer",
+    onClickAction: () => browserHistory.push('/rocketboard/customer/suspend-customer')
+  },
+  {
+    label: "View Customer",
+    onClickAction: () => browserHistory.push('/rocketboard/customer/view-customer')
+  }
+]
+
+export const INACTIVECUSTOMERSBUTTONS = [
+  {
+    label: "Remove Customer",
+    onClickAction: () => browserHistory.push('/rocketboard/customers/remove-customer')
+  },
+  {
+    label: "View Customer",
+    onClickAction: () => browserHistory.push('/rocketboard/customers/view-customer')
+  }
 ]
 
 export const TABLEHEADERS = ['Status', 'Gateway', 'Name', 'Email', 'Phone', 'Subscriptions'];

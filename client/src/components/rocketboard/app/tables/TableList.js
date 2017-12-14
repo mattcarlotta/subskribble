@@ -5,7 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 export default class TableList extends Component {
   render() {
-    const { TABLEBODYCONTENTS, TABLEHEADERS } = this.props;
+    const { TABLECONTENTS, TABLEHEADERS } = this.props;
     return (
       <div className="table-container">
         <Table
@@ -38,7 +38,7 @@ export default class TableList extends Component {
           autoHideDuration={200}
           renderThumbVertical={props => <div {...props} className="scrollbar"/>}
           >
-            <TABLEBODYCONTENTS />
+            <TABLECONTENTS />
         </Scrollbars>
       </div>
     );
