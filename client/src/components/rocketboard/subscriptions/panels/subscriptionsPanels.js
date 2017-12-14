@@ -13,7 +13,6 @@ const SubscriptionsPanels = () => {
         initiallyExpanded={true}
         title="Active Subscriptions"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVESUBSBUTTONS}
         filterFieldLabel="Filter Active Subscriptions"
@@ -27,7 +26,6 @@ const SubscriptionsPanels = () => {
         initiallyExpanded={true}
         title="Inactive Subscriptions"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVESUBSBUTTONS}
         filterFieldLabel="Filter Inactive Subscriptions"

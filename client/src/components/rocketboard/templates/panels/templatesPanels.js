@@ -19,7 +19,6 @@ const TemplatesPanels = () => {
         initiallyExpanded={true}
         title="Templates"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={TEMPLATEBUTTONS}
         filterFieldLabel="Filter Templates"

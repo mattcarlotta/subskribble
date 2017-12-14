@@ -22,7 +22,6 @@ const DashboardPanels = () => {
         initiallyExpanded={true}
         title="Customers"
         selectFieldClassName="panel-6"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['Current Month', 'Monthly', 'Yearly']}
         CUSTOMBUTTONS={CUSTOMERBUTTONS}
         GRAPH={() => GraphChart(customerData, customerOptions)}
@@ -30,9 +29,8 @@ const DashboardPanels = () => {
       <Panel
         containerClassName="dash-plans-panel"
         initiallyExpanded={true}
-        title="Refunds"
+        title="Plans"
         selectFieldClassName="panel-6"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['Carlotta Prime']}
         CUSTOMBUTTONS={PLANBUTTONS}
         GRAPH={() => GraphChart(planData, planOptions)}

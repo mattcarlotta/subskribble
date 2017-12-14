@@ -13,7 +13,6 @@ const PlansPanels = () => {
         initiallyExpanded={true}
         title="Active Plans"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVEPANELBUTTONS}
         filterFieldLabel="Filter Active Plans"
@@ -27,7 +26,6 @@ const PlansPanels = () => {
         initiallyExpanded={true}
         title="Inactive Plans"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVEPANELBUTTONS}
         filterFieldLabel="Filter Inactive Plans"

@@ -13,7 +13,6 @@ const CustomersPanels = () => {
         initiallyExpanded={true}
         title="Active Customers"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Active Customers"
@@ -27,7 +26,6 @@ const CustomersPanels = () => {
         initiallyExpanded={true}
         title="Inactive Customers"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Inactive Customers"

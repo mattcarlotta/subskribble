@@ -14,7 +14,6 @@ const CustomPanel = ({
   title,
   CUSTOMBUTTONS,
   selectFieldClassName,
-  selectFieldLabel,
   SELECTFIELDITEMS,
   FORM,
   CARDBODY,
@@ -43,14 +42,14 @@ const CustomPanel = ({
               showExpandableButton={true}
             />
             <CardText expandable={true}>
-              { FORM !== undefined ? <FORM /> : null }
-              { CARDBODY !== undefined ? <CARDBODY /> : null }
+              { FORM !== undefined && <FORM /> }
+              { CARDBODY !== undefined && <CARDBODY /> }
               <div className="panel-body">
                 { SELECTFIELDITEMS !== undefined
                   ? <SelectField
                       className={selectFieldClassName}
                       floatingLabelText="Sort By"
-                      MENUITEMS={['10', '20', '50', 'All']}
+                      MENUITEMS={SELECTFIELDITEMS}
                     />
                   : null
                 }
@@ -69,7 +68,7 @@ const CustomPanel = ({
                     : null
                   }
                 </div>
-                { GRAPH !== undefined ? <GRAPH /> : null }
+                { GRAPH !== undefined && <GRAPH /> }
                 {filterForm !== undefined
                   ? <FilterField
                       className="panel-4"

@@ -21,7 +21,6 @@ const TransactionsPanels = () => {
         initiallyExpanded={true}
         title="Charges"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={CHARGESBUTTONS}
         filterFieldLabel="Filter Charges"
@@ -35,7 +34,6 @@ const TransactionsPanels = () => {
         initiallyExpanded={true}
         title="Refunds"
         selectFieldClassName="panel-1"
-        selectFieldLabel="Sort By"
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={REFUNDSBUTTONS}
         filterFieldLabel="Filter Refunds"
