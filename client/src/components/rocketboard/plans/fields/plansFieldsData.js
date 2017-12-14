@@ -24,14 +24,17 @@ export const INACTIVEPLANS = [
 
 export const ACTIVEPANELBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Add Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/add-plan')
   },
   {
+    className: 'btn-reposition f-l',
     label: "Suspend Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/suspend-plan')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/view-plan')
   }
@@ -39,10 +42,12 @@ export const ACTIVEPANELBUTTONS = [
 
 export const INACTIVEPANELBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Remove Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/remove-plan')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/view-plan')
   }

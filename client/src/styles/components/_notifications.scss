@@ -56,6 +56,11 @@
   p { margin: 0 0 10px 0 }
 }
 
+.notification-root {
+  // This positions the popover way offscreen, which is then overridden (fixes flashing)
+  left: -69420px;
+}
+
 .note-10 {
   @extend .d-ib;
   width: 10%

@@ -13,7 +13,11 @@ const CustomPanel = ({
   initiallyExpanded,
   title,
   CUSTOMBUTTONS,
+  selectFieldClassName,
+  selectFieldLabel,
+  SELECTFIELDITEMS,
   FORM,
+  CARDBODY,
   GRAPH,
   filterFieldLabel,
   filterForm,
@@ -40,11 +44,11 @@ const CustomPanel = ({
             />
             <CardText expandable={true}>
               { FORM !== undefined ? <FORM /> : null }
-              { GRAPH !== undefined ? <GRAPH /> : null }
+              { CARDBODY !== undefined ? <CARDBODY /> : null }
               <div className="panel-body">
-                { FORM === undefined
+                { SELECTFIELDITEMS !== undefined
                   ? <SelectField
-                      className="panel-1"
+                      className={selectFieldClassName}
                       floatingLabelText="Sort By"
                       MENUITEMS={['10', '20', '50', 'All']}
                     />
@@ -52,13 +56,12 @@ const CustomPanel = ({
                 }
                 <div className="panel-6">
                   { CUSTOMBUTTONS !== undefined
-                    ? map(CUSTOMBUTTONS, ({ label, onClickAction }, key) =>{
+                    ? map(CUSTOMBUTTONS, ({ className, label, onClickAction }, key) =>{
                         return (
                           <CustomButton
                             key={key}
-                            innerClassName="btn-reposition"
+                            className={className}
                             label={label}
-                            floatStyle="left"
                             onClickAction={onClickAction}
                           />
                         )
@@ -66,6 +69,7 @@ const CustomPanel = ({
                     : null
                   }
                 </div>
+                { GRAPH !== undefined ? <GRAPH /> : null }
                 {filterForm !== undefined
                   ? <FilterField
                       className="panel-4"

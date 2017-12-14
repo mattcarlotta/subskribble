@@ -3,7 +3,7 @@
   margin-bottom: 30px;
 
   .btn-reposition {
-    @extend .f-l, .p-r;
+    @extend .p-r;
     top: 13px;
     padding-right: 10px;
     border-right: 0 !important;

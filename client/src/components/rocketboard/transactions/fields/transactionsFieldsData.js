@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 export const CHARGES = [
   {
     status: 'paid',
@@ -66,6 +68,27 @@ export const REFUNDS = [
     amount: '$29.99',
     refundDate: 'Dec 17, 2017',
   }
+]
+
+export const CHARGESBUTTONS = [
+  {
+    className: 'btn-reposition f-l',
+    label: "Apply Refund",
+    onClickAction: () => browserHistory.push('/rocketboard/transactions/apply-refund')
+  },
+  {
+    className: 'btn-reposition f-l',
+    label: "View Invoice",
+    onClickAction: () => browserHistory.push('/rocketboard/transactions/view-invoice')
+  }
+]
+
+export const REFUNDSBUTTONS = [
+  {
+    className: 'btn-reposition f-l',
+    label: "Remove",
+    onClickAction: () => browserHistory.push('/rocketboard/transactions/remove-transaction')
+  },
 ]
 
 export const CHARGESTABLEHEADERS = ['Status', 'Invoice#', 'Customer', 'Processor', 'Amount', 'Charge Date'];

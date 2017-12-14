@@ -1,14 +1,11 @@
 import React from 'react';
 
-import TransactionsChargesPanel from './panels/transactionsChargesPanel';
-import TranscationsRefundsPanel from './panels/transactionsRefundsPanel';
-
+import TransactionsPanels from './panels/transactionsPanels';
 
 const Transactions = () => {
 	return (
 		<div className="transactions-container">
-			<TransactionsChargesPanel />
-			<TranscationsRefundsPanel />
+			<TransactionsPanels />
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
-import { defaults } from 'react-chartjs-2'
+import { defaults } from 'react-chartjs-2';
 defaults.global.defaultFontFamily = "'Poppins Medium', sans-serif";
-export const data = {
+export const customerData = {
   labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
   datasets: [
     {
@@ -49,7 +49,7 @@ export const data = {
   ],
 };
 
-export const options = {
+export const customerOptions = {
   responsive: true,
   // legend: {
   //  position: 'bottom',
@@ -75,7 +75,7 @@ export const options = {
         beginAtZero: true,
         steps: 1,
         stepValue: 1,
-        max: Math.max(Math.max(...data.datasets[0].data) + 1, Math.max(...data.datasets[1].data) + 1)
+        max: Math.max(Math.max(...customerData.datasets[0].data) + 1, Math.max(...customerData.datasets[1].data) + 1)
       }
     }]
   },

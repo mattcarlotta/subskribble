@@ -104,14 +104,17 @@ export const INACTIVESUBSCRIPTIONS = [
 
 export const ACTIVESUBSBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Add Subscription",
     onClickAction: () => browserHistory.push('/rocketboard/subscriptions/add-subscription')
   },
   {
+    className: 'btn-reposition f-l',
     label: "Suspend Subscription",
     onClickAction: () => browserHistory.push('/rocketboard/subscriptions/suspend-subscription')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Subscription",
     onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
   }
@@ -119,10 +122,12 @@ export const ACTIVESUBSBUTTONS = [
 
 export const INACTIVESUBSBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Remove Subscription",
     onClickAction: () => browserHistory.push('/rocketboard/subscriptions/remove-subscription')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Subscription",
     onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
   }

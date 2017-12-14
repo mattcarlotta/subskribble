@@ -104,14 +104,17 @@ export const INACTIVECUSTOMERS = [
 
 export const ACTIVECUSTOMERSBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Add Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customer/add-customer')
   },
   {
+    className: 'btn-reposition f-l',
     label: "Suspend Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customer/suspend-customer')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customer/view-customer')
   }
@@ -119,10 +122,12 @@ export const ACTIVECUSTOMERSBUTTONS = [
 
 export const INACTIVECUSTOMERSBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Remove Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customers/remove-customer')
   },
   {
+    className: 'btn-reposition f-l',
     label: "View Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customers/view-customer')
   }

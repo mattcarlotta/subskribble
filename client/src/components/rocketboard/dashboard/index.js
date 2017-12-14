@@ -1,15 +1,11 @@
 import React from 'react';
 
-import CustomersPanel from './customers';
-import OverviewPanel from './overview';
-import PlansPanel from './plans';
+import DashboardPanels from './panels/dashboardPanels';
 
 const Dashboard = () => {
 	return (
 		<div className="dashboard-container">
-			<OverviewPanel />
-			<CustomersPanel />
-			<PlansPanel />
+			<DashboardPanels />
 		</div>
 	);
 };

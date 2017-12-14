@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { ACTIVECUSTOMERS, ACTIVECUSTOMERSBUTTONS, TABLEHEADERS } from '../fields/customersFieldsData';
-import { INACTIVECUSTOMERS, INACTIVECUSTOMERSBUTTONS } from '../fields/customersFieldsData';
+import { ACTIVECUSTOMERS, ACTIVECUSTOMERSBUTTONS, INACTIVECUSTOMERS, INACTIVECUSTOMERSBUTTONS, TABLEHEADERS } from '../fields/customersFieldsData';
 
 import Panel from '../../app/panels/customPanel';
 import CustomerTable from '../tables/customersTable';
@@ -13,6 +12,9 @@ const CustomersPanels = () => {
         containerClassName="active-panel"
         initiallyExpanded={true}
         title="Active Customers"
+        selectFieldClassName="panel-1"
+        selectFieldLabel="Sort By"
+        SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Active Customers"
         filterForm="FilterActiveCustomers"
@@ -24,6 +26,9 @@ const CustomersPanels = () => {
         containerClassName="inactive-panel"
         initiallyExpanded={true}
         title="Inactive Customers"
+        selectFieldClassName="panel-1"
+        selectFieldLabel="Sort By"
+        SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Inactive Customers"
         filterForm="FilterInactiveCustomers"

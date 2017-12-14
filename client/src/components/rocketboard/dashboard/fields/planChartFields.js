@@ -1,4 +1,4 @@
-export const data = {
+export const planData = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   datasets: [
     {
@@ -26,7 +26,7 @@ export const data = {
   ],
 };
 
-export const options = {
+export const planOptions = {
   responsive: true,
   // legend: {
   //  position: 'bottom',
@@ -52,7 +52,7 @@ export const options = {
         beginAtZero: true,
         callback: function (value) { if (Number.isInteger(value)) { return value; } },
         stepSize: 1,
-        max: Math.max(...data.datasets[0].data) + 1
+        max: Math.max(...planData.datasets[0].data) + 1
       }
     }]
   },

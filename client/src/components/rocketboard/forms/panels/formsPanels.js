@@ -19,6 +19,9 @@ const FormPanels = () => {
         containerClassName="active-panel"
         initiallyExpanded={true}
         title="Forms"
+        selectFieldClassName="panel-1"
+        selectFieldLabel="Sort By"
+        SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={FORMBUTTONS}
         filterFieldLabel="Filter Forms"
         filterForm="FilterForms"

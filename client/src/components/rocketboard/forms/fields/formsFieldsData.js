@@ -11,6 +11,7 @@ export const ACTIVEFORMS = [
 
 export const FORMBUTTONS = [
   {
+    className: "btn-reposition f-l",
     label: "Add Form",
     onClickAction: () => browserHistory.push('/rocketboard/forms/add-form')
   }

@@ -20,10 +20,12 @@ export const ACTIVETEMPLATES = [
 
 export const TEMPLATEBUTTONS = [
   {
+    className: 'btn-reposition f-l',
     label: "Edit Template",
     onClickAction: () => browserHistory.push('/rocketboard/templates/edit-template')
   },
   {
+    className: 'btn-reposition f-l',
     label: "Remove Template",
     onClickAction: () => browserHistory.push('/rocketboard/templates/remove-template')
   }
