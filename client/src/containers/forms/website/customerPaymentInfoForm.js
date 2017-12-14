@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import React, { Component } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { Checkbox, TextField, SelectField } from 'redux-form-material-ui';
+import { Toggle, TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 
 import { isRequired } from '../formfields/validateFormFields';
@@ -32,8 +32,9 @@ class CustomerPaymentInfoForm extends Component {
             <h3>Billing Address</h3>
             <Field
               name="sameAddress"
-              component={Checkbox}
+              component={Toggle}
               label="Same As Address"
+              labelPosition="right"
               onClick={!sameAddress ? this.initializeBillingForm : this.resetBillingForm }
             />
             <div className="input-66">
