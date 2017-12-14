@@ -15,7 +15,7 @@
 
     .title {
       @extend .t-a-c;
-      margin: 20px 0;
+      margin: 30px 0;
     }
 
     .form-container {
@@ -27,6 +27,11 @@
       h3 {
         line-height: 30px;
         font-size: 21px;
+        font-weight: 300;
+      }
+
+      h4 {
+        line-height: 30px;
         font-weight: 300;
       }
 
@@ -42,40 +47,15 @@
 
       .input-10 {
         @extend .w-10;
-        margin: 10px 0;
         height: 72px;
       }
 
-      .input-16 {
-        @extend .w-16;
-        margin: 10px 0;
-        height: 72px;
-      }
-      .input-20 {
-        @extend .w-20;
-        margin: 10px 0;
-        height: 72px;
-      }
-      .input-25 {
-        @extend .w-25;
-        margin: 10px 0;
-        height: 72px;
-      }
-      .input-50 {
-        @extend .w-50;
-        margin: 10px 0;
-        height: 72px;
-      }
-      .input-66 {
-        @extend .w-66;
-        margin: 10px 0;
-        height: 72px;
-      }
-      .input-75 {
-        @extend .w-75;
-        margin: 10px 0;
-        height: 72px;
-      }
+      .input-16 { @extend .h-72, .w-16; }
+      .input-20 { @extend .h-72, .w-20; }
+      .input-25 { @extend .h-72, .w-25; }
+      .input-50 { @extend .h-72, .w-50; }
+      .input-66 { @extend .h-72, .w-66; }
+      .input-75 { @extend .h-72, .w-75; }
     }
   }
 }

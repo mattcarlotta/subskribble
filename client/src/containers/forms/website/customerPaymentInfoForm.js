@@ -1,7 +1,8 @@
 import map from 'lodash/map';
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { TextField, SelectField } from 'redux-form-material-ui';
+import React, { Component } from 'react';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
+import { Checkbox, TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 
 import { isRequired } from '../formfields/validateFormFields';
@@ -12,19 +13,36 @@ import SubmitButton from '../formfields/renderSubmitButton';
 import BackButton from '../formfields/renderBackButton';
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-const CustomerPaymentInfoForm = ({ handleSubmit, onClickBackButton, onSubmit, submitting }) => {
-  return (
-        <div className="form-container">
-          <form onSubmit={handleSubmit}>
-            <div className="left-form">
-              <h3>Billing Address</h3>
-              <div className="input-66">
+class CustomerPaymentInfoForm extends Component {
+  initializeBillingForm = () => {
+    const { billingAddress, billingUnit, billingCity, billingState, billingZip } = this.props;
+    this.props.initialize({ billingAddress, billingUnit, billingCity, billingState, billingZip })
+  }
+
+  resetBillingForm = () => {
+    this.props.initialize({ billingAddress: '', billingUnit: '', billingCity: '', billingState: '', billingZip: '' })
+  }
+
+  render() {
+    const { handleSubmit, onClickBackButton, sameAddress, submitting } = this.props;
+    return (
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <div className="left-form">
+            <h3>Billing Address</h3>
+            <Field
+              name="sameAddress"
+              component={Checkbox}
+              label="Same As Address"
+              onClick={!sameAddress ? this.initializeBillingForm : this.resetBillingForm }
+            />
+            <div className="input-66">
               {
                 map(ADDRESSFIELDS, ({ className, name, label, width, validate, normalize }, key) => {
                   return (
                     <div key={key} className={className}>
                       <Field
-                        name={name}
+                        name={`billing${name.charAt(0).toUpperCase() + name.slice(1)}`}
                         type="text"
                         component={TextField}
                         floatingLabelText={label}
@@ -36,30 +54,30 @@ const CustomerPaymentInfoForm = ({ handleSubmit, onClickBackButton, onSubmit, su
                   )
                 })
               }
-              </div>
             </div>
-            <div className="right-form">
-              <h3>Credit Card Information</h3>
-              <div className="input-66">
-                <div className="input-50 f-l">
-                  <Field
-                    name="creditCard"
-                    type="text"
-                    component={TextField}
-                    floatingLabelText="Credit Card"
-                    style={{ fontSize: 15, width: '95%' }}
-                    validate={[isRequired]}
-                    normalize={formatCreditCard}
-                  />
-                </div>
-                <div className="input-16 f-l">
-                  <Field
-                    name="creditExpMonth"
-                    type="text"
-                    component={SelectField}
-                    floatingLabelText="Month"
-                    style={{ fontSize: 15, width: '90%' }}
-                    validate={[isRequired]}
+          </div>
+          <div className="right-form">
+            <h3>Credit Card Information</h3>
+            <div className="input-66">
+              <div className="input-50 f-l">
+                <Field
+                  name="creditCard"
+                  type="text"
+                  component={TextField}
+                  floatingLabelText="Credit Card"
+                  style={{ fontSize: 15, width: '95%' }}
+                  validate={[isRequired]}
+                  normalize={formatCreditCard}
+                />
+              </div>
+              <div className="input-16 f-l">
+                <Field
+                  name="creditExpMonth"
+                  type="text"
+                  component={SelectField}
+                  floatingLabelText="Month"
+                  style={{ fontSize: 15, width: '90%' }}
+                  validate={[isRequired]}
                   >
                     {
                       map(MENUITEMS, (value) => {
@@ -92,8 +110,8 @@ const CustomerPaymentInfoForm = ({ handleSubmit, onClickBackButton, onSubmit, su
                     normalize={formatCVC}
                   />
                 </div>
-              </div>
             </div>
+          </div>
           <div className="clear-fix" />
           <hr />
           <BackButton
@@ -115,7 +133,22 @@ const CustomerPaymentInfoForm = ({ handleSubmit, onClickBackButton, onSubmit, su
           />
         </form>
       </div>
-  );
+    );
+  }
 };
 
-export default reduxForm({ form: 'CustomerPaymentInfoForm', destroyOnUnmount: false })(CustomerPaymentInfoForm);
+const selector = formValueSelector('CustomerContactForm');
+const selector2 = formValueSelector('CustomerPaymentForm');
+
+const mapStateToProps = state => {
+	return {
+		billingAddress: selector(state, 'address'),
+		billingUnit: selector(state, 'unit'),
+		billingCity: selector(state, 'city'),
+    billingState: selector(state, 'state'),
+    billingZip: selector(state, 'zip'),
+    sameAddress: selector2(state, 'sameAddress')
+	};
+};
+
+export default reduxForm({form: 'CustomerPaymentForm', destroyOnUnmount: false, enableReinitialize: true })(connect(mapStateToProps)(CustomerPaymentInfoForm));

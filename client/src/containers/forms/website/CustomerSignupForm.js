@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
-import { saveFormRegisterInfo } from '../../../actions/formActionCreators';
+import { customerRegisterToPlan } from '../../../actions/formActionCreators';
 import CustomerContactInfo from './customerContactInfoForm';
 import CustomerPaymentInfo from './customerPaymentInfoForm';
 // import SubmitButton from '../formfields/renderSubmitButton';
@@ -16,8 +16,7 @@ class RegisterPlanForm extends Component {
 
   handleFormSave = (formProps) => {
     console.log(formProps);
-    this.handleNext();
-    // this.props.saveFormRegisterInfo(formProps);
+    // this.props.customerRegisterToPlan(formProps);
   }
 
   handleNext = () => {
@@ -38,9 +37,9 @@ class RegisterPlanForm extends Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return <CustomerContactInfo onSubmit={formProps => this.handleFormSave(formProps)} />;
+        return <CustomerContactInfo onSubmit={this.handleNext} />;
       case 1:
-        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={formProps => this.handleFormSave(formProps)} />;
+        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={this.handleNext} />;
       case 2:
         return 'This is the bit I really care about!';
       case 3:
@@ -82,4 +81,4 @@ class RegisterPlanForm extends Component {
   }
 }
 
-export default reduxForm({ form: 'RegisterPlanForm' })(connect(null, { saveFormRegisterInfo })(RegisterPlanForm));
+export default reduxForm({ form: 'RegisterPlanForm' })(connect(null, { customerRegisterToPlan })(RegisterPlanForm));

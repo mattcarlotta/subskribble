@@ -2,7 +2,6 @@ import * as app from 'axios';
 // import { browserHistory } from 'react-router';
 //
 // import configAuth from './configAuth';
-import { SAVE_FORM_INFO } from './types';
 import dispatchError from './dispatchError';
 import dispatchSuccess from './dispatchSuccess';
 
@@ -32,6 +31,19 @@ export const addNewTemplate = (formProps) => {
   }
 }
 
+// Form information for registering to a plan
+export const customerRegisterToPlan = (formProps) => {
+  return dispatch => {
+    app.post(`api/customer-signup`, { formProps })
+    .then(response => {
+      dispatchSuccess(dispatch, response.data.message);
+    })
+    .catch(({ response }) => {
+      dispatchError(dispatch, response.data.err);
+    })
+  }
+}
+
 // Register to newsletter
 export const registerToNewsletter = (email) => {
   return dispatch => {
@@ -43,14 +55,6 @@ export const registerToNewsletter = (email) => {
       dispatchError(dispatch, response.data.err);
     })
   }
-}
-
-// Save form information for registering to a plan
-export const saveFormRegisterInfo = (formProps) => {
-  return {
-    type: SAVE_FORM_INFO,
-    payload: formProps
-  };
 }
 
 

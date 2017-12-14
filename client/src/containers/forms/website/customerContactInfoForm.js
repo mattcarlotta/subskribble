@@ -70,4 +70,4 @@ const CustomerContactInfoForm = ({ handleSubmit, onSubmit, submitting }) => {
   );
 };
 
-export default reduxForm({ form: 'CustomerContactInfoForm', destroyOnUnmount: false })(CustomerContactInfoForm);
+export default reduxForm({ form: 'CustomerContactForm', destroyOnUnmount: false })(CustomerContactInfoForm);
