@@ -1,6 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+
+import Button from '../../app/buttons/customButton';
 
 import SERVICESGRIDTEXT from './servicesGridText';
 
@@ -17,12 +18,14 @@ const InformationServices = () => {
                   <p>{description}</p>
                   <div className="link">
                     {/* TODO Insert link for services */}
-                    <RaisedButton
+                    <Button
+                      backgroundColor="#665c5a"
+                      border="1px solid #aba4a2"
+                      fontSize={14}
+                      height={46}
                       label="Read More"
-                      backgroundColor={'#665c5a'}
-                      buttonStyle={{ border: '1px solid #ABA4A2', borderRadius: 5 }}
-                      labelStyle={{ color: '#eee', fontSize: 14, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-                      style={{ height: 45, width: 160, marginTop: 15, borderRadius: 6 }}
+                      // link="/signup"
+                      width={160}
                     />
                   </div>
                 </div>

@@ -41,7 +41,10 @@ const CustomPanel = ({
               actAsExpander={true}
               showExpandableButton={true}
             />
-            <CardText expandable={true}>
+            <CardText
+              expandable={true}
+              style={{ padding: "2px 16px" }}
+              >
               { FORM !== undefined && <FORM /> }
               { CARDBODY !== undefined && <CARDBODY /> }
               <div className="panel-body">

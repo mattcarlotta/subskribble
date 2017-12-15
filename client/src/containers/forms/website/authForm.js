@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 import rocketLogo from '../../../images/logos/rocketbiller_logo.png';
 
 import { TextField } from 'redux-form-material-ui';
-import RenderSubmitButton from '../formfields/renderSubmitButton';
+import Button from '../formfields/renderFormButton';
 
 const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) => {
 	return (
@@ -41,10 +41,15 @@ const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) 
 									: null
 							}
 							<div className="auth-button">
-								<RenderSubmitButton
+								<Button
+									backgroundColor="#03a9f3"
+									fontSize={18}
+									fullWidth={true}
+									height={45}
 									label={submitLabel}
-									submitting={submitting}
 									primary={true}
+									submitting={submitting}
+									type="submit"
 								/>
 							</div>
 						</form>

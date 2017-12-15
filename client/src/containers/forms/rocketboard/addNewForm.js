@@ -6,8 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import { addNewForm } from '../../../actions/formActionCreators';
 import { isNotEmpty, isRequired } from '../formfields/validateFormFields';
-import ClearButton from '../formfields/renderClearButton';
-import SubmitButton from '../formfields/renderSubmitButton';
+import Button from '../formfields/renderFormButton';
 import ChipInput from '../formfields/renderChipField'
 
 class AddNewForm extends Component {
@@ -72,25 +71,26 @@ class AddNewForm extends Component {
           </div>
           <div className="button-container">
               <div className="button">
-                <SubmitButton
+                <Button
+                  backgroundColor="#03a9f3"
+                  fullWidth="true"
+                  height={50}
                   label="Save Form"
                   submitting={submitting}
-                  backgroundColor={'#03a9f3'}
-                  buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-                  labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-                  style={{ display: 'inline block', height: 50, marginTop: 15, borderRadius: 6 }}
+                  type="submit"
                 />
               </div>
               <div className="button">
-                <ClearButton
+                <Button
+                  backgroundColor="#ffaa00"
+                  fontSize={15}
+                  fullWidth="true"
+    							height={50}
                   label="Clear Form"
-                  submitting={submitting}
                   pristine={pristine}
-                  reset={reset}
-                  backgroundColor={'#ffaa00'}
-                  buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-                  labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-                  style={{ display: 'inline block', height: 50, marginTop: 15, borderRadius: 6 }}
+                  onClick={reset}
+                  submitting={submitting}
+                  type="clear"
                 />
               </div>
             </div>

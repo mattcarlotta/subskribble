@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
-import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
+
+import Button from '../../app/buttons/customButton';
 
 import PRICINGFIELDS from './pricingTableFields';
 
@@ -28,15 +28,15 @@ const PricingTable = () => {
                       <span className="item"><strong>{analyticsType}</strong> {analytics}</span>
                     </div>
                     <div className="table-bottom">
-                    <Link to={buttonLink}>
-                      <RaisedButton
-                        label={buttonLabel}
-                        backgroundColor={'#e04d2d'}
-                        buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-                        labelStyle={{ color: '#fbe2dd', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-                        style={{ height: 50, width: 200, marginTop: 15, borderRadius: 6 }}
-                      />
-                    </Link>
+                    <Button
+                      backgroundColor="#e04d2d"
+                      border="none"
+                      fontSize={15}
+                      height={50}
+                      label={buttonLabel}
+                      link={buttonLink}
+                      width={200}
+                    />
                   </div>
                 </div>
               )

@@ -16,6 +16,7 @@ class RegisterPlanForm extends Component {
 
   handleFormSave = (formProps) => {
     console.log(formProps);
+    this.handleNext();
     // this.props.customerRegisterToPlan(formProps);
   }
 
@@ -37,9 +38,9 @@ class RegisterPlanForm extends Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return <CustomerContactInfo onSubmit={this.handleNext} />;
+        return <CustomerContactInfo onSubmit={this.handleFormSave} />;
       case 1:
-        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={this.handleNext} />;
+        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={this.handleFormSave} />;
       case 2:
         return 'This is the bit I really care about!';
       case 3:

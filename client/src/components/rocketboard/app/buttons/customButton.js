@@ -5,10 +5,10 @@ export default function({ className, floatStyle, label, onClickAction, outerClas
   return (
     <div className={className}>
       <RaisedButton
-        onClick={onClickAction}
-        label={label}
         buttonStyle={{ backgroundColor: '#03a9f3', fontFamily: 'Poppins Semi-Bold, sans-serif' }}
-        labelColor={'#eee'}
+        label={label}
+        labelColor="#eee"
+        onClick={onClickAction}
       />
     </div>
   )

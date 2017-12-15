@@ -9,33 +9,34 @@ import { isRequired } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVC, formatYear } from '../formfields/formatFields';
 
 import { ADDRESSFIELDS } from '../formfields/customerSignupFields';
-import SubmitButton from '../formfields/renderSubmitButton';
-import BackButton from '../formfields/renderBackButton';
+import Button from '../formfields/renderFormButton';
+
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 class CustomerPaymentInfoForm extends Component {
   initializeBillingForm = () => {
-    const { billingAddress, billingUnit, billingCity, billingState, billingZip } = this.props;
-    this.props.initialize({ billingAddress, billingUnit, billingCity, billingState, billingZip })
-  }
-
-  resetBillingForm = () => {
-    this.props.initialize({ billingAddress: '', billingUnit: '', billingCity: '', billingState: '', billingZip: '' })
+    this.props.initialize({
+      billingAddress: this.props.billingAddress,
+      billingUnit: this.props.billingUnit,
+      billingCity: this.props.billingCity,
+      billingState: this.props.billingState,
+      billingZip: this.props.billingZip
+    })
   }
 
   render() {
-    const { handleSubmit, onClickBackButton, sameAddress, submitting } = this.props;
+    const { handleSubmit, onClickBackButton, sameAddressToggle, submitting } = this.props;
     return (
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <div className="left-form">
             <h3>Billing Address</h3>
             <Field
-              name="sameAddress"
+              name="sameAddressToggle"
               component={Toggle}
               label="Same As Address"
               labelPosition="right"
-              onClick={!sameAddress ? this.initializeBillingForm : this.resetBillingForm }
+              onClick={!sameAddressToggle ? this.initializeBillingForm : () => this.props.destroy() }
             />
             <div className="input-66">
               {
@@ -62,7 +63,7 @@ class CustomerPaymentInfoForm extends Component {
             <div className="input-66">
               <div className="input-50 f-l">
                 <Field
-                  name="creditCard"
+                  name="cc"
                   type="text"
                   component={TextField}
                   floatingLabelText="Credit Card"
@@ -73,7 +74,7 @@ class CustomerPaymentInfoForm extends Component {
               </div>
               <div className="input-16 f-l">
                 <Field
-                  name="creditExpMonth"
+                  name="ccExpMonth"
                   type="text"
                   component={SelectField}
                   floatingLabelText="Month"
@@ -89,7 +90,7 @@ class CustomerPaymentInfoForm extends Component {
                 </div>
                 <div className="input-16 f-l">
                   <Field
-                    name="creditExpYear"
+                    name="ccExpYear"
                     type="text"
                     component={TextField}
                     floatingLabelText="Exp Year"
@@ -101,7 +102,7 @@ class CustomerPaymentInfoForm extends Component {
                 </div>
                 <div className="input-16 f-l">
                   <Field
-                    name="creditCVC"
+                    name="ccCVC"
                     type="text"
                     component={TextField}
                     floatingLabelText="CVC"
@@ -115,22 +116,21 @@ class CustomerPaymentInfoForm extends Component {
           </div>
           <div className="clear-fix" />
           <hr />
-          <BackButton
+          <Button
+            backgroundColor="#03a9f3"
+            floatStyle="left"
+            height={50}
             label="Back"
             onClick={onClickBackButton}
-            backgroundColor={'#03a9f3'}
-            buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-            labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-            style={{ height: 50, marginTop: 15, borderRadius: 6, float: 'left' }}
           />
-          <SubmitButton
+          <Button
+            backgroundColor="#03a9f3"
             label="Next"
-            submitting={submitting}
-            backgroundColor={'#03a9f3'}
             fullWidth={false}
-            buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-            labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-            style={{ height: 50, marginTop: 15, borderRadius: 6, float: 'right' }}
+            floatStyle="right"
+            height={50}
+            submitting={submitting}
+            type="submit"
           />
         </form>
       </div>
@@ -138,18 +138,18 @@ class CustomerPaymentInfoForm extends Component {
   }
 };
 
-const selector = formValueSelector('CustomerContactForm');
-const selector2 = formValueSelector('CustomerPaymentForm');
+const contactFormSelector = formValueSelector('CustomerContactForm');
+const paymentFormSelector = formValueSelector('CustomerPaymentForm');
 
 const mapStateToProps = state => {
 	return {
-		billingAddress: selector(state, 'address'),
-		billingUnit: selector(state, 'unit'),
-		billingCity: selector(state, 'city'),
-    billingState: selector(state, 'state'),
-    billingZip: selector(state, 'zip'),
-    sameAddress: selector2(state, 'sameAddress')
+		billingAddress: contactFormSelector(state, 'address'),
+		billingUnit: contactFormSelector(state, 'unit'),
+		billingCity: contactFormSelector(state, 'city'),
+    billingState: contactFormSelector(state, 'state'),
+    billingZip: contactFormSelector(state, 'zip'),
+    sameAddressToggle: paymentFormSelector(state, 'sameAddressToggle')
 	};
 };
 
-export default reduxForm({form: 'CustomerPaymentForm', destroyOnUnmount: false, enableReinitialize: true })(connect(mapStateToProps)(CustomerPaymentInfoForm));
+export default reduxForm({form: 'CustomerPaymentForm', destroyOnUnmount: false, enableReinitialize: true, keepDirtyOnReinitialize: true })(connect(mapStateToProps)(CustomerPaymentInfoForm));

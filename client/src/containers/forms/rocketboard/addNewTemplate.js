@@ -7,7 +7,7 @@ import { TextField } from 'redux-form-material-ui';
 import { addNewTemplate } from '../../../actions/formActionCreators';
 import { isRequired, isValidEmail } from '../formfields/validateFormFields';
 import FroalaEditor from '../formfields/FroalaEditorField';
-import SubmitButton from '../formfields/renderSubmitButton';
+import Button from '../formfields/renderFormButton';
 
 const TEMPLATEFIELDS = [
   { name: 'templateName', label: 'Template Name', hintText: 'Enter a unique template name', validate: [isRequired] },
@@ -47,13 +47,13 @@ const AddNewTemplate = ({ addNewTemplate, handleSubmit, submitting }) => {
         />
         <div className="button-container">
           <div className="button-center">
-            <SubmitButton
+            <Button
+              backgroundColor="#03a9f3"
+              fontSize={15}
+							height={50}
               label="Save Template"
               submitting={submitting}
-              backgroundColor={'#03a9f3'}
-              buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-              labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-              style={{ display: 'inline-block', height: 50, marginTop: 15, borderRadius: 6 }}
+              type="submit"
             />
           </div>
         </div>

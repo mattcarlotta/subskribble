@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '../../app/buttons/customButton';
 
 import metrics from '../../../../images/metrics.png';
 
@@ -13,15 +12,15 @@ const InformationHeader = () => {
 					<div className="title">
 						Rocketbiller is the easiest way to create and manage recurring subscription payments.
 					</div>
-					<Link to="/signup">
-					  <RaisedButton
-              label="SignUp"
-              backgroundColor={'#e04d2d'}
-              buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-              labelStyle={{ color: '#eee', fontSize: 18, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-              style={{ height: 50, width: 215, marginTop: 15, borderRadius: 6 }}
-            />
-				  </Link>
+          <Button
+            backgroundColor="#e04d2d"
+            border="none"
+            fontSize={18}
+            height={50}
+            label="Signup"
+            link="/signup"
+            width={215}
+          />
 					<div className="img-container">
 						<img src={metrics} alt="metrics.png" />
 					</div>

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { TextField } from 'redux-form-material-ui';
 
-import RenderSubmitButton from '../formfields/renderSubmitButton';
+import Button from '../formfields/renderFormButton';
 import { sendSupportEmail } from '../../../actions/formActionCreators';
 import { isValidEmail, isRequired, maxLength2000 } from '../formfields/validateFormFields';
 
@@ -41,13 +41,14 @@ const ContactForm = ({ handleSubmit, sendSupportEmail, submitting }) => {
           rowsMax={4}
           validate={[isRequired, maxLength2000]}
         />
-        <RenderSubmitButton
+        <Button
+					backgroundColor="#e04d2d"
           label="Send Message"
-          submitting={submitting}
-					backgroundColor={'#e04d2d'}
-					buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-					labelStyle={{ color: '#fbe2dd', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-					style={{ height: 50, marginTop: 15, borderRadius: 6 }}
+					fontSize={15}
+					height={50}
+					fullWidth={true}
+					submitting={submitting}
+					type="submit"
         />
       </form>
 		</div>

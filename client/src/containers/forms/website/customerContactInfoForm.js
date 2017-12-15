@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 
 import { ADDRESSFIELDS, CONTACTFIELDS } from '../formfields/customerSignupFields';
-import SubmitButton from '../formfields/renderSubmitButton';
+import Button from '../formfields/renderFormButton';
 
 const CustomerContactInfoForm = ({ handleSubmit, onSubmit, submitting }) => {
   return (
@@ -56,14 +56,14 @@ const CustomerContactInfoForm = ({ handleSubmit, onSubmit, submitting }) => {
           </div>
           <div className="clear-fix" />
           <hr />
-          <SubmitButton
+          <Button
+            backgroundColor="#03a9f3"
+            floatStyle="right"
+            height={50}
+            fullWidth={false}
             label="Next"
             submitting={submitting}
-            backgroundColor={'#03a9f3'}
-            fullWidth={false}
-            buttonStyle={{ border: '2px solid transparent', borderRadius: 5 }}
-            labelStyle={{ color: '#fff', fontSize: 15, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
-            style={{ height: 50, marginTop: 15, borderRadius: 6, float: 'right' }}
+            type="submit"
           />
         </form>
       </div>
