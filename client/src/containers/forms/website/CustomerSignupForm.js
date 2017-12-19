@@ -6,13 +6,9 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
 import CustomerContactInfo from './customerContactInfoForm';
 import CustomerPaymentInfo from './customerPaymentInfoForm';
-// import SubmitButton from '../formfields/renderSubmitButton';
 
 class RegisterPlanForm extends Component {
-  state = {
-    finished: false,
-    stepIndex: 0,
-  };
+  state = { stepIndex: 0 };
 
   handleFormSave = (formProps) => {
     console.log(formProps);
@@ -20,48 +16,11 @@ class RegisterPlanForm extends Component {
     // this.props.customerRegisterToPlan(formProps);
   }
 
-  handleNext = () => {
-    const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
-  };
+  handleNext = () => this.setState({ stepIndex: this.state.stepIndex + 1 });
 
-  handlePrev = () => {
-    const {stepIndex} = this.state;
-    if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
-    }
-  };
-
-  getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return <CustomerContactInfo onSubmit={this.handleFormSave} />;
-      case 1:
-        return (
-          <CustomerPaymentInfo
-            form="CustomerPaymentForm"
-            enableReinitialize={true}
-            keepDirtyOnReinitialize={true}
-            onClickBackButton={this.handlePrev}
-            onSubmit={this.handleFormSave}
-            setBillingFieldValues={this.props.setBillingFieldValues}
-            resetBillingFieldValues={this.props.resetBillingFieldValues}
-          />
-        )
-      case 2:
-        return 'This is the bit I really care about!';
-      case 3:
-        return 'This is the bit I really care about!';
-      default:
-        return 'You\'re a long way from home sonny jim!';
-    }
-  }
+  handlePrev = () => (this.state.stepIndex > 0) && this.setState({stepIndex: this.state.stepIndex - 1});
 
   render() {
-    const { stepIndex} = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -70,7 +29,7 @@ class RegisterPlanForm extends Component {
               <h1>Carlotta Corp</h1>
               <h3>Carlotta Prime Plan Registration</h3>
             </div>
-            <Stepper activeStep={stepIndex}>
+            <Stepper activeStep={this.state.stepIndex}>
               <Step>
                 <StepLabel>Contact Information</StepLabel>
               </Step>
@@ -85,7 +44,19 @@ class RegisterPlanForm extends Component {
               </Step>
             </Stepper>
           </div>
-          {this.getStepContent(stepIndex)}
+          {{0: <CustomerContactInfo onSubmit={this.handleFormSave} />,
+            1: <CustomerPaymentInfo
+                form="CustomerPaymentForm"
+                enableReinitialize={true}
+                keepDirtyOnReinitialize={true}
+                onClickBackButton={this.handlePrev}
+                onSubmit={this.handleFormSave}
+                setBillingFieldValues={this.props.setBillingFieldValues}
+                resetBillingFieldValues={this.props.resetBillingFieldValues}
+              />,
+            2: <p>Pick a Plan</p>,
+            3: <p>Review</p>,
+          }[this.state.stepIndex]}
         </div>
       </div>
     );

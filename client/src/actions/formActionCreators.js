@@ -73,35 +73,31 @@ export const sendSupportEmail = ({name, email, message}) => {
   }
 }
 
-// setting billing fields values from customer contact form
-export const setBillingFieldValues = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const selector = formValueSelector('CustomerContactForm');
-
-    dispatch({
-      type: SET_BILLING_FORM_VALUES,
-      payload: {
-        billingAddress: selector(state, 'address'),
-        billingUnit: selector(state, 'unit'),
-        billingCity: selector(state, 'city'),
-        billingState: selector(state, 'state'),
-        billingZip: selector(state, 'zip')
-      }
-    })
+const updateBillingFields = (state) => {
+  const selector = formValueSelector('CustomerContactForm');
+  return {
+    billingAddress: state ? selector(state, 'address') : undefined,
+    billingUnit: state ? selector(state, 'unit') : undefined,
+    billingCity: state ? selector(state, 'city') : undefined,
+    billingState: state ? selector(state, 'state'): undefined,
+    billingZip: state ? selector(state, 'zip') : undefined
   }
 }
 
 // setting billing fields values from customer contact form
+export const setBillingFieldValues = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SET_BILLING_FORM_VALUES,
+      payload: updateBillingFields(getState())
+    })
+  }
+}
+
+// resetting billing fields values from customer contact form
 export const resetBillingFieldValues = () => {
   return {
     type: SET_BILLING_FORM_VALUES,
-    payload: {
-      billingAddress: undefined,
-      billingUnit: undefined,
-      billingCity: undefined,
-      billingState: undefined,
-      billingZip: undefined
-    }
+    payload: updateBillingFields()
   }
 }
