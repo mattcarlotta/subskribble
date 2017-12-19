@@ -73,7 +73,7 @@ class AddNewForm extends Component {
               <div className="button">
                 <Button
                   backgroundColor="#03a9f3"
-                  fullWidth="true"
+                  fullWidth={true}
                   height={50}
                   label="Save Form"
                   submitting={submitting}
@@ -84,7 +84,7 @@ class AddNewForm extends Component {
                 <Button
                   backgroundColor="#ffaa00"
                   fontSize={15}
-                  fullWidth="true"
+                  fullWidth={true}
     							height={50}
                   label="Clear Form"
                   pristine={pristine}

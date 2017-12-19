@@ -7,6 +7,7 @@ import {
 	FETCHING_USER,
 	RESET_NOTIFICATIONS,
 	SET_SIGNEDIN_USER,
+	SET_BILLING_FORM_VALUES,
 	UNAUTH_USER
 } from '../actions/types';
 
@@ -33,9 +34,28 @@ const authReducer = (state = {}, action) => {
 	}
 };
 
+const formReducers = {
+  form: formReducer.plugin({
+    CustomerPaymentForm: (state, action) => {   // <----- 'CustomerPaymentForm' is name of form given to reduxForm()
+      switch(action.type) {
+        case SET_BILLING_FORM_VALUES: 	// <----- Action triggered by toggle from 'CustomerPaymentForm'
+          return {
+            ...state, 	// <----- spreads out any previous redux state
+            values: {
+              ...state.values, // <----- spreads out any previous redux form values
+							...action.payload // <----- initializes or resets billing${Name} fields from action creator
+            }
+          }
+        default:
+          return state
+      }
+    }
+  })
+}
+
 const rootReducer = combineReducers({
 	auth: authReducer,
-	form: formReducer,
+	...formReducers,
 	routing
 });
 

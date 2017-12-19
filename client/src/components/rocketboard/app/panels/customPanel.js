@@ -19,11 +19,22 @@ const CustomPanel = ({
   CARDBODY,
   GRAPH,
   filterFieldLabel,
-  filterForm,
-  CreateTableBody,
-  TABLEDATA,
+  FILTERFORM,
+  TABLECONTENTS,
   TABLEHEADERS
 }) => {
+  const renderCustomButtons = (CUSTOMBUTTONS) => {
+    return map(CUSTOMBUTTONS, ({ className, label, onClickAction }, key) =>{
+      return (
+        <CustomButton
+          key={key}
+          className={className}
+          label={label}
+          onClickAction={onClickAction}
+        />
+      )
+    })
+  }
   return (
     <div className={containerClassName}>
       <div className="panel-container">
@@ -45,45 +56,16 @@ const CustomPanel = ({
               expandable={true}
               style={{ padding: "2px 16px" }}
               >
-              { FORM !== undefined && <FORM /> }
-              { CARDBODY !== undefined && <CARDBODY /> }
+                { FORM && <FORM /> }
+                { CARDBODY && <CARDBODY /> }
               <div className="panel-body">
-                { SELECTFIELDITEMS !== undefined
-                  ? <SelectField
-                      className={selectFieldClassName}
-                      floatingLabelText="Sort By"
-                      MENUITEMS={SELECTFIELDITEMS}
-                    />
-                  : null
-                }
+                { SELECTFIELDITEMS && <SelectField className={selectFieldClassName} floatingLabelText="Sort By" MENUITEMS={SELECTFIELDITEMS} /> }
                 <div className="panel-6">
-                  { CUSTOMBUTTONS !== undefined
-                    ? map(CUSTOMBUTTONS, ({ className, label, onClickAction }, key) =>{
-                        return (
-                          <CustomButton
-                            key={key}
-                            className={className}
-                            label={label}
-                            onClickAction={onClickAction}
-                          />
-                        )
-                      })
-                    : null
-                  }
+                  { CUSTOMBUTTONS && renderCustomButtons(CUSTOMBUTTONS) }
                 </div>
-                { GRAPH !== undefined && <GRAPH /> }
-                {filterForm !== undefined
-                  ? <FilterField
-                      className="panel-4"
-                      floatingLabelText={filterFieldLabel}
-                      form={filterForm}
-                    />
-                  : null
-                }
-                { CreateTableBody !== undefined
-                  ? <TableList TABLECONTENTS={() => CreateTableBody(TABLEDATA)} TABLEHEADERS={TABLEHEADERS} />
-                  : null
-                }
+                { GRAPH && <GRAPH /> }
+                { FILTERFORM && <FilterField className="panel-4" floatingLabelText={filterFieldLabel} form={FILTERFORM} /> }
+                { TABLECONTENTS && <TableList TABLECONTENTS={TABLECONTENTS} TABLEHEADERS={TABLEHEADERS} /> }
               </div>
             </CardText>
           </Card>

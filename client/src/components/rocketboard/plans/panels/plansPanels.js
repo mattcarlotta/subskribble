@@ -16,9 +16,8 @@ const PlansPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVEPANELBUTTONS}
         filterFieldLabel="Filter Active Plans"
-        filterForm="FilterActivePlans"
-        CreateTableBody={PlansTable}
-        TABLEDATA={ACTIVEPLANS}
+        FILTERFORM="FilterActivePlans"
+        TABLECONTENTS={() => PlansTable(ACTIVEPLANS)}
         TABLEHEADERS={TABLEHEADERS}
       />
       <Panel
@@ -29,9 +28,8 @@ const PlansPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVEPANELBUTTONS}
         filterFieldLabel="Filter Inactive Plans"
-        filterForm="FilterInactivePlans"
-        CreateTableBody={PlansTable}
-        TABLEDATA={INACTIVEPLANS}
+        FILTERFORM="FilterInactivePlans"
+        TABLECONTENTS={() => PlansTable(INACTIVEPLANS)}
         TABLEHEADERS={TABLEHEADERS}
       />
     </span>

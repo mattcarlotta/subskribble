@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
-import { customerRegisterToPlan } from '../../../actions/formActionCreators';
+import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
 import CustomerContactInfo from './customerContactInfoForm';
 import CustomerPaymentInfo from './customerPaymentInfoForm';
 // import SubmitButton from '../formfields/renderSubmitButton';
@@ -40,7 +40,17 @@ class RegisterPlanForm extends Component {
       case 0:
         return <CustomerContactInfo onSubmit={this.handleFormSave} />;
       case 1:
-        return <CustomerPaymentInfo onClickBackButton={this.handlePrev} onSubmit={this.handleFormSave} />;
+        return (
+          <CustomerPaymentInfo
+            form="CustomerPaymentForm"
+            enableReinitialize={true}
+            keepDirtyOnReinitialize={true}
+            onClickBackButton={this.handlePrev}
+            onSubmit={this.handleFormSave}
+            setBillingFieldValues={this.props.setBillingFieldValues}
+            resetBillingFieldValues={this.props.resetBillingFieldValues}
+          />
+        )
       case 2:
         return 'This is the bit I really care about!';
       case 3:
@@ -82,4 +92,4 @@ class RegisterPlanForm extends Component {
   }
 }
 
-export default reduxForm({ form: 'RegisterPlanForm' })(connect(null, { customerRegisterToPlan })(RegisterPlanForm));
+export default reduxForm({ form: 'RegisterPlanForm' })(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(RegisterPlanForm));

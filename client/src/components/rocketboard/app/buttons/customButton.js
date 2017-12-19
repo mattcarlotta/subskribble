@@ -1,7 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default function({ className, floatStyle, label, onClickAction, outerClassName }) {
+export default function({ className, floatStyle, label, onClickAction }) {
   return (
     <div className={className}>
       <RaisedButton

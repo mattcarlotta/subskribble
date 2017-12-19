@@ -1,31 +1,18 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import { Toggle, TextField, SelectField } from 'redux-form-material-ui';
+import { Field, reduxForm } from 'redux-form';
+import { TextField, SelectField, Toggle } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 
 import { isRequired } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVC, formatYear } from '../formfields/formatFields';
-
 import { ADDRESSFIELDS } from '../formfields/customerSignupFields';
 import Button from '../formfields/renderFormButton';
-
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 class CustomerPaymentInfoForm extends Component {
-  initializeBillingForm = () => {
-    this.props.initialize({
-      billingAddress: this.props.billingAddress,
-      billingUnit: this.props.billingUnit,
-      billingCity: this.props.billingCity,
-      billingState: this.props.billingState,
-      billingZip: this.props.billingZip
-    })
-  }
-
   render() {
-    const { handleSubmit, onClickBackButton, sameAddressToggle, submitting } = this.props;
+    const { handleSubmit, onClickBackButton, submitting, resetBillingFieldValues, setBillingFieldValues } = this.props;
     return (
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -36,7 +23,7 @@ class CustomerPaymentInfoForm extends Component {
               component={Toggle}
               label="Same As Address"
               labelPosition="right"
-              onClick={!sameAddressToggle ? this.initializeBillingForm : () => this.props.destroy() }
+              onChange={(e, index, value ) => !value ? setBillingFieldValues() : resetBillingFieldValues()}
             />
             <div className="input-66">
               {
@@ -138,18 +125,4 @@ class CustomerPaymentInfoForm extends Component {
   }
 };
 
-const contactFormSelector = formValueSelector('CustomerContactForm');
-const paymentFormSelector = formValueSelector('CustomerPaymentForm');
-
-const mapStateToProps = state => {
-	return {
-		billingAddress: contactFormSelector(state, 'address'),
-		billingUnit: contactFormSelector(state, 'unit'),
-		billingCity: contactFormSelector(state, 'city'),
-    billingState: contactFormSelector(state, 'state'),
-    billingZip: contactFormSelector(state, 'zip'),
-    sameAddressToggle: paymentFormSelector(state, 'sameAddressToggle')
-	};
-};
-
-export default reduxForm({form: 'CustomerPaymentForm', destroyOnUnmount: false, enableReinitialize: true, keepDirtyOnReinitialize: true })(connect(mapStateToProps)(CustomerPaymentInfoForm));
+export default reduxForm({form: '', destroyOnUnmount: false, enableReinitialize: '', keepDirtyOnReinitialize: '' })(CustomerPaymentInfoForm);

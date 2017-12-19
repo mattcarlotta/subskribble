@@ -19,7 +19,7 @@ export default function({
         backgroundColor={backgroundColor}
         buttonStyle={{ border, borderRadius: 5 }}
         label={label}
-        labelStyle={{ fontSize: fontSize, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
+        labelStyle={{ fontSize: fontSize, fontFamily: "'Poppins Semi-Bold', sans-serif" }}
         labelColor="#eee"
         onClick={onClick}
         style={{ height, width, marginTop: 15, borderRadius: 6 }}

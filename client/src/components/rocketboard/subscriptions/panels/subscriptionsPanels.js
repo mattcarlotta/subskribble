@@ -16,9 +16,8 @@ const SubscriptionsPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVESUBSBUTTONS}
         filterFieldLabel="Filter Active Subscriptions"
-        filterForm="FilterActiveSubscriptions"
-        CreateTableBody={SubscriptionsTable}
-        TABLEDATA={ACTIVESUBSCRIPTIONS}
+        FILTERFORM="FilterActiveSubscriptions"
+        TABLECONTENTS={() => SubscriptionsTable(ACTIVESUBSCRIPTIONS)}
         TABLEHEADERS={TABLEHEADERS}
       />
       <Panel
@@ -29,9 +28,8 @@ const SubscriptionsPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVESUBSBUTTONS}
         filterFieldLabel="Filter Inactive Subscriptions"
-        filterForm="FilterInactiveSubscriptions"
-        CreateTableBody={SubscriptionsTable}
-        TABLEDATA={INACTIVESUBSCRIPTIONS}
+        FILTERFORM="FilterInactiveSubscriptions"
+        TABLECONTENTS={() => SubscriptionsTable(INACTIVESUBSCRIPTIONS)}
         TABLEHEADERS={TABLEHEADERS}
       />
     </span>

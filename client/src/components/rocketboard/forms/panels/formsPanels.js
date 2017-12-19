@@ -23,9 +23,8 @@ const FormPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={FORMBUTTONS}
         filterFieldLabel="Filter Forms"
-        filterForm="FilterForms"
-        CreateTableBody={FormTable}
-        TABLEDATA={ACTIVEFORMS}
+        FILTERFORM="FilterForms"
+        TABLECONTENTS={() => FormTable(ACTIVEFORMS)}
         TABLEHEADERS={TABLEHEADERS}
       />
     </span>

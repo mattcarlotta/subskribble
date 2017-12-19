@@ -33,10 +33,7 @@ export const formatPhone = (value, previousValue) => {
   return '(' + onlyNums.slice(0, 3) + ') ' + onlyNums.slice(3, 6) + '-' + onlyNums.slice(6, 10)
 }
 
-export const formatState = value =>{
-  console.log(value);
-  return (!value) ? value : value.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>(^\s+|\s+$)]/gi, '').trim().slice(0,2).toUpperCase();
-}
+export const formatState = value =>{ return (!value) ? value : value.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>(^\s+|\s+$)]/gi, '').trim().slice(0,2).toUpperCase(); }
 
 export const formatYear = value => { return (!value) ? value: returnMaxValue(value, 4); }
 

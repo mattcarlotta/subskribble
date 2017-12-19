@@ -24,9 +24,8 @@ const TransactionsPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={CHARGESBUTTONS}
         filterFieldLabel="Filter Charges"
-        filterForm="FilterCharges"
-        CreateTableBody={ChargesTable}
-        TABLEDATA={CHARGES}
+        FILTERFORM="FilterCharges"
+        TABLECONTENTS={() => ChargesTable(CHARGES) }
         TABLEHEADERS={CHARGESTABLEHEADERS}
       />
       <Panel
@@ -37,9 +36,8 @@ const TransactionsPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={REFUNDSBUTTONS}
         filterFieldLabel="Filter Refunds"
-        filterForm="FilterRefunds"
-        CreateTableBody={RefundsTable}
-        TABLEDATA={REFUNDS}
+        FILTERFORM="FilterRefunds"
+        TABLECONTENTS={() => RefundsTable(REFUNDS)}
         TABLEHEADERS={REFUNDSTABLEHEADERS}
       />
     </span>

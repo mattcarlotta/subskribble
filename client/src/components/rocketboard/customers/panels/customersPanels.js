@@ -16,9 +16,8 @@ const CustomersPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={ACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Active Customers"
-        filterForm="FilterActiveCustomers"
-        CreateTableBody={CustomerTable}
-        TABLEDATA={ACTIVECUSTOMERS}
+        FILTERFORM="FilterActiveCustomers"
+        TABLECONTENTS={() => CustomerTable(ACTIVECUSTOMERS)}
         TABLEHEADERS={TABLEHEADERS}
       />
       <Panel
@@ -29,9 +28,8 @@ const CustomersPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={INACTIVECUSTOMERSBUTTONS}
         filterFieldLabel="Filter Inactive Customers"
-        filterForm="FilterInactiveCustomers"
-        CreateTableBody={CustomerTable}
-        TABLEDATA={INACTIVECUSTOMERS}
+        FILTERFORM="FilterInactiveCustomers"
+        TABLECONTENTS={() => CustomerTable(INACTIVECUSTOMERS)}
         TABLEHEADERS={TABLEHEADERS}
       />
     </span>

@@ -27,7 +27,7 @@ const RenderSubmitButton = ({
 			primary={primary}
 			fullWidth={fullWidth}
 			labelColor="#fbe2dd"
-			labelStyle={{ fontSize, fontFamily: "'Raleway Regular', Verdana, Helvetica, Arial, sans-serif", letterSpacing: 1 }}
+			labelStyle={{ fontSize, fontFamily: "'Poppins Semi-Bold', sans-serif", letterSpacing: 0 }}
 			style={{ height, width, marginTop: 15, borderRadius: 6, float: floatStyle }}
 			type={type}
 		/>

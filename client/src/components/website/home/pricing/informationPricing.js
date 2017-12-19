@@ -15,7 +15,7 @@ const InformationPricing = () => {
               <Button
                 backgroundColor="#e04d2d"
                 border="none"
-                fontSize={18}
+                fontSize={16}
                 height={50}
                 label="Pricing"
                 link="/pricing"

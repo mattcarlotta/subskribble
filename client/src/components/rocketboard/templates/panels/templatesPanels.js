@@ -22,9 +22,8 @@ const TemplatesPanels = () => {
         SELECTFIELDITEMS={['10', '20', '50', 'All']}
         CUSTOMBUTTONS={TEMPLATEBUTTONS}
         filterFieldLabel="Filter Templates"
-        filterForm="FilterTemplates"
-        CreateTableBody={TemplateTable}
-        TABLEDATA={ACTIVETEMPLATES}
+        FILTERFORM="FilterTemplates"
+        TABLECONTENTS={() => TemplateTable(ACTIVETEMPLATES)}
         TABLEHEADERS={TABLEHEADERS}
       />
     </span>

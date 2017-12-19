@@ -28,7 +28,7 @@ const NewsletterForm = ({ handleSubmit, registerToNewsletter, submitting }) => {
           <div className="m-t-5">
             <Button
 							backgroundColor="#e04d2d"
-							fontSize={18}
+							fontSize={16}
 							height={45}
               label="Join"
               submitting={submitting}
