@@ -4,11 +4,14 @@ import { reduxForm } from 'redux-form';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
-import CustomerContactInfo from './customerContactInfoForm';
-import CustomerPaymentInfo from './customerPaymentInfoForm';
+import RegisterPlanForm from './RegisterPlanForm';
+import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS } from '../formfields/customerSignupFields';
 
-class RegisterPlanForm extends Component {
-  state = { stepIndex: 0 };
+class CustomerPlanSignup extends Component {
+  state = {
+    stepIndex: 0,
+    BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues)
+  };
 
   handleFormSave = (formProps) => {
     console.log(formProps);
@@ -21,6 +24,7 @@ class RegisterPlanForm extends Component {
   handlePrev = () => (this.state.stepIndex > 0) && this.setState({stepIndex: this.state.stepIndex - 1});
 
   render() {
+    const { BILLINGADDRESSFIELDS } = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -44,15 +48,21 @@ class RegisterPlanForm extends Component {
               </Step>
             </Stepper>
           </div>
-          {{0: <CustomerContactInfo onSubmit={this.handleFormSave} />,
-            1: <CustomerPaymentInfo
-                form="CustomerPaymentForm"
-                enableReinitialize={true}
-                keepDirtyOnReinitialize={true}
-                onClickBackButton={this.handlePrev}
+          {{0: <RegisterPlanForm
+                LEFTFIELDS={CONTACTFIELDS}
+                leftTitle="Contact Information"
+                onClickBack={this.handlePrev}
+                onSubmit={this.handleNext}
+                RIGHTFIELDS={ADDRESSFIELDS}
+                rightTitle="Address"
+              />,
+            1: <RegisterPlanForm
+                LEFTFIELDS={BILLINGADDRESSFIELDS}
+                leftTitle="Billing Address"
+                onClickBack={this.handlePrev}
                 onSubmit={this.handleFormSave}
-                setBillingFieldValues={this.props.setBillingFieldValues}
-                resetBillingFieldValues={this.props.resetBillingFieldValues}
+                RIGHTFIELDS={CREDITCARDFIELDS}
+                rightTitle="Credit Card Information"
               />,
             2: <p>Pick a Plan</p>,
             3: <p>Review</p>,
@@ -63,4 +73,4 @@ class RegisterPlanForm extends Component {
   }
 }
 
-export default reduxForm({ form: 'RegisterPlanForm' })(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(RegisterPlanForm));
+export default reduxForm({ form: 'CustomerPlanSignup' })(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));

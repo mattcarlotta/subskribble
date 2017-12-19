@@ -74,13 +74,13 @@ export const sendSupportEmail = ({name, email, message}) => {
 }
 
 const updateBillingFields = (state) => {
-  const selector = formValueSelector('CustomerContactForm');
+  const selector = formValueSelector('CustomerPlanSignup');
   return {
-    billingAddress: state ? selector(state, 'address') : undefined,
-    billingUnit: state ? selector(state, 'unit') : undefined,
-    billingCity: state ? selector(state, 'city') : undefined,
-    billingState: state ? selector(state, 'state'): undefined,
-    billingZip: state ? selector(state, 'zip') : undefined
+    billingAddress: state ? selector(state, 'contactAddress') : undefined,
+    billingUnit: state ? selector(state, 'contactUnit') : undefined,
+    billingCity: state ? selector(state, 'contactCity') : undefined,
+    billingState: state ? selector(state, 'contactState'): undefined,
+    billingZip: state ? selector(state, 'contactZip') : undefined
   }
 }
 

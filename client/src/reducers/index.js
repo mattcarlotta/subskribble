@@ -36,9 +36,9 @@ const authReducer = (state = {}, action) => {
 
 const formReducers = {
   form: formReducer.plugin({
-    CustomerPaymentForm: (state, action) => {   // <----- 'CustomerPaymentForm' is name of form given to reduxForm()
+    CustomerPlanSignup: (state, action) => {   // <----- 'CustomerPlanSignup' is name of form given to reduxForm()
       switch(action.type) {
-        case SET_BILLING_FORM_VALUES: 	// <----- Action triggered by toggle from 'CustomerPaymentForm'
+        case SET_BILLING_FORM_VALUES: 	// <----- Action triggered by toggle from 'CustomerPlanSignup'
           return {
             ...state, 	// <----- spreads out any previous redux state
             values: {
