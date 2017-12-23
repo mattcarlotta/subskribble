@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { browserHistory, withRouter } from 'react-router';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import IconButton from 'material-ui/IconButton';
@@ -32,15 +32,14 @@ class DashboardTabs extends Component {
     const { activeTab, displayTabs } = this.state;
     const showTabs = displayTabs ? 'block' : 'none'
     return (
-      <span>
+      <Fragment>
         <IconButton
           style={{ color: '#0585bf', display: 'block', position: 'absolute', top: '30px', right: '49%', margin: '0 auto', zIndex: 100 }}
           onClick={this.handleToggleTab}
           tooltip={ !displayTabs ? "Quick Tabs" : "Hide Tabs"}
           tooltipStyles={{ zIndex: 100, marginTop: '-10px' }}
           >
-            {
-              (displayTabs)
+            {displayTabs
                ? <i className="material-icons">keyboard_arrow_up</i>
                : <i className="material-icons">keyboard_arrow_down</i>
             }
@@ -51,8 +50,7 @@ class DashboardTabs extends Component {
           style={{ boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px', display: showTabs }}
           inkBarStyle={{ display:"none" }}
           >
-            {
-              map(TABLINKS, ({ icon, label }, key) => {
+            {map(TABLINKS, ({ icon, label }, key) => {
                 return (
                   <Tab
                     key={key}
@@ -63,10 +61,9 @@ class DashboardTabs extends Component {
                     label={label}
                   />
                 )
-              })
-            }
+            })}
           </Tabs>
-      </span>
+      </Fragment>
     )
   }
 }

@@ -22,6 +22,19 @@
   .left-nav {
     @extend .d-ib;
 
+    .user-header {
+      @extend .c-w;
+      margin-bottom: 5px;
+      background-color: $rbblue;
+      padding: 15px;
+      height: 150px;
+
+      p {
+        text-transform: none;
+        margin: 0;
+        line-height: 15px;
+      }
+    }
   }
 
   .right-nav {
@@ -43,7 +56,7 @@
 
     .settings-tab {
       @extend .d-ib, .fix-cursor, .no-link-focus, .p-r;
-      top: -10px;
+      margin-top: 10px;
       padding-right: 10px;
       padding-left: 3px;
     }

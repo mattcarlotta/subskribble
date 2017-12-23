@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -13,7 +13,7 @@ export default WrappedComponent => {
 
 		render() {
 			return (
-				<span>
+				<Fragment>
 					<Header />
 					<Scrollbars
 					ref="scrollbars"
@@ -28,7 +28,7 @@ export default WrappedComponent => {
 						<WrappedComponent {...this.props} />
 					</Scrollbars>
 					{/* <Footer /> */}
-				</span>
+				</Fragment>
 			);
 		}
 	}

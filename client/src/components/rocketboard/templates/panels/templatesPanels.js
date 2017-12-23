@@ -5,29 +5,27 @@ import AddNewTemplate from '../../../../containers/forms/rocketboard/addNewTempl
 import Panel from '../../app/panels/customPanel';
 import TemplateTable from '../tables/templatesForm';
 
-const TemplatesPanels = () => {
-  return (
-    <span>
-      <Panel
-        containerClassName="active-panel"
-        initiallyExpanded={false}
-        title="Create New Template"
-        FORM={AddNewTemplate}
-      />
-      <Panel
-        containerClassName="active-panel"
-        initiallyExpanded={true}
-        title="Templates"
-        selectFieldClassName="panel-1"
-        SELECTFIELDITEMS={['10', '20', '50', 'All']}
-        CUSTOMBUTTONS={TEMPLATEBUTTONS}
-        filterFieldLabel="Filter Templates"
-        FILTERFORM="FilterTemplates"
-        TABLECONTENTS={() => TemplateTable(ACTIVETEMPLATES)}
-        TABLEHEADERS={TABLEHEADERS}
-      />
-    </span>
-  )
-}
+const TemplatesPanels = () => [
+  <Panel
+    key="newtemplatepanel"
+    containerClassName="active-panel"
+    initiallyExpanded={false}
+    title="Create New Template"
+    FORM={AddNewTemplate}
+  />,
+  <Panel
+    key="templatepanel"
+    containerClassName="active-panel"
+    initiallyExpanded={true}
+    title="Templates"
+    selectFieldClassName="panel-1"
+    SELECTFIELDITEMS={['10', '20', '50', 'All']}
+    CUSTOMBUTTONS={TEMPLATEBUTTONS}
+    filterFieldLabel="Filter Templates"
+    FILTERFORM="FilterTemplates"
+    TABLECONTENTS={() => TemplateTable(ACTIVETEMPLATES)}
+    TABLEHEADERS={TABLEHEADERS}
+  />
+]
 
 export default TemplatesPanels;

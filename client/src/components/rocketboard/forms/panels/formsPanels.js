@@ -7,15 +7,16 @@ import FormTable from '../tables/formsTable';
 import Panel from '../../app/panels/customPanel';
 
 const FormPanels = () => {
-  return (
-    <span>
+  return [
       <Panel
+        key="createnewformpanel"
         containerClassName="active-panel"
         initiallyExpanded={false}
         title="Create New Form"
         FORM={AddNewForm}
-      />
+      />,
       <Panel
+        key="formpanel"
         containerClassName="active-panel"
         initiallyExpanded={true}
         title="Forms"
@@ -27,8 +28,7 @@ const FormPanels = () => {
         TABLECONTENTS={() => FormTable(ACTIVEFORMS)}
         TABLEHEADERS={TABLEHEADERS}
       />
-    </span>
-  )
+  ]
 }
 
 export default FormPanels;

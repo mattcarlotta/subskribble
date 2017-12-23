@@ -4,15 +4,18 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import IconButton from 'material-ui/IconButton';
-import Clear from 'material-ui/svg-icons/content/clear';
+import Clear from 'material-ui/svg-icons/content/remove-circle';
 
 class FilterField extends Component {
   constructor() {
     super();
+    this.state={ filterField: '' }
     this.logInput = debounce(this.logInput, 300);
   }
 
-  logInput = value => console.log(value);
+  logInput = value =>  this.setState({ filterField: value });
+
+  resetField = () => this.setState({ filterField: '' });
 
   handleFormChange = event => {
     this.logInput(event.target.value);
@@ -34,14 +37,19 @@ class FilterField extends Component {
             />
           </div>
           <div className="form-05">
-            <IconButton
-              iconStyle={{ width: 15, height: 15, color: '#0585bf' }}
-              style={{ width: 40, height: 40 }}
-              onClick={reset}
-              tooltip="Clear Filter"
-              >
-                <Clear />
-            </IconButton>
+            {this.state.filterField.length > 0 &&
+              <IconButton
+                iconStyle={{ width: 20, height: 20, color: '#0585bf' }}
+                style={{ width: 40, height: 40 }}
+                onClick={() => {
+                  reset();
+                  this.resetField();
+                }}
+                tooltip="Clear Filter"
+                >
+                  <Clear />
+              </IconButton>
+            }
           </div>
         </div>
       </form>

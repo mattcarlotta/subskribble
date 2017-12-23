@@ -1,10 +1,9 @@
-import map from 'lodash/map';
 import React from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon';
 
-import CustomButton from '../../app/buttons/customButton';
 import FilterField from '../../app/formFields/FilterField';
+import RenderPanelButtons from './renderPanelButtons';
 import SelectField from '../../app/formFields/selectField';
 import TableList from '../../app/tables/TableList';
 
@@ -23,18 +22,6 @@ const CustomPanel = ({
   TABLECONTENTS,
   TABLEHEADERS
 }) => {
-  const renderCustomButtons = (CUSTOMBUTTONS) => {
-    return map(CUSTOMBUTTONS, ({ className, label, onClickAction }, key) =>{
-      return (
-        <CustomButton
-          key={key}
-          className={className}
-          label={label}
-          onClickAction={onClickAction}
-        />
-      )
-    })
-  }
   return (
     <div className={containerClassName}>
       <div className="panel-container">
@@ -61,7 +48,7 @@ const CustomPanel = ({
               <div className="panel-body">
                 { SELECTFIELDITEMS && <SelectField className={selectFieldClassName} floatingLabelText="Sort By" MENUITEMS={SELECTFIELDITEMS} /> }
                 <div className="panel-6">
-                  { CUSTOMBUTTONS && renderCustomButtons(CUSTOMBUTTONS) }
+                  { CUSTOMBUTTONS && <RenderPanelButtons CUSTOMBUTTONS={CUSTOMBUTTONS}/> }
                 </div>
                 { GRAPH && <GRAPH /> }
                 { FILTERFORM && <FilterField className="panel-4" floatingLabelText={filterFieldLabel} form={FILTERFORM} /> }

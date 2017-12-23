@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -10,6 +11,7 @@ import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS } 
 class CustomerPlanSignup extends Component {
   state = {
     stepIndex: 0,
+    stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
     BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues)
   };
 
@@ -24,7 +26,6 @@ class CustomerPlanSignup extends Component {
   handlePrev = () => (this.state.stepIndex > 0) && this.setState({stepIndex: this.state.stepIndex - 1});
 
   render() {
-    const { BILLINGADDRESSFIELDS } = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -34,18 +35,13 @@ class CustomerPlanSignup extends Component {
               <h3>Carlotta Prime Plan Registration</h3>
             </div>
             <Stepper activeStep={this.state.stepIndex}>
-              <Step>
-                <StepLabel>Contact Information</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Payment</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Plan</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Review</StepLabel>
-              </Step>
+              {map(this.state.stepLabels, (label) => {
+                return (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                )
+              })}
             </Stepper>
           </div>
           {{0: <RegisterPlanForm
@@ -57,7 +53,7 @@ class CustomerPlanSignup extends Component {
                 rightTitle="Address"
               />,
             1: <RegisterPlanForm
-                LEFTFIELDS={BILLINGADDRESSFIELDS}
+                LEFTFIELDS={this.state.BILLINGADDRESSFIELDS}
                 leftTitle="Billing Address"
                 onClickBack={this.handlePrev}
                 onSubmit={this.handleFormSave}

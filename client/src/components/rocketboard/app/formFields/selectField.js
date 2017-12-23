@@ -19,11 +19,9 @@ export default class selectField extends Component {
           style={{ width: '100%', maxWidth: '200px' }}
           dropDownMenuProps={{anchorOrigin: {vertical:"center",horizontal:"left"}}}
           >
-            {
-              map(MENUITEMS, (primaryText, key) => {
+            {map(MENUITEMS, (primaryText, key) => {
                 return <MenuItem key={key} value={key} primaryText={primaryText} />
-              })
-            }
+            })}
           </SelectField>
       </div>
     );

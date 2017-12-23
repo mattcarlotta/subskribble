@@ -7,8 +7,9 @@ import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
+import Settings from 'material-ui/svg-icons/action/settings';
 
-import CustomerAvatar from '../avatar/customerAvatar';
+// import CustomerAvatar from '../avatar/customerAvatar';
 import RIGHTNAVLINKS from '../links/rightNavLinks';
 
 export default class SettingsButton extends Component {
@@ -40,13 +41,12 @@ export default class SettingsButton extends Component {
         <IconButton
           tooltip="My Account"
           tooltipPosition="bottom-center"
-          tooltipStyles={{ marginTop: '10px' }}
-          iconStyle={{ color: '#0585bf', }}
+          iconStyle={{  color: '#faf9fa', }}
           onClick={this.handleSettingsOpen}
-          style={{ height: 60, width: 60 }}
+          style={{ top: '-6px' }}
           disableTouchRipple={true}
           >
-            <CustomerAvatar />
+            <Settings />
         </IconButton>
         <Popover
           style={{ borderRadius: '2px', backgroundColor: '#faf9fa', boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px' }}

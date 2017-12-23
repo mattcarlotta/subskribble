@@ -9,8 +9,7 @@ const InformationServices = () => {
   return (
     <div className="services-bg">
       <div className="services-container">
-        {
-          map(SERVICESGRIDTEXT, ({ title, description }) => {
+        {map(SERVICESGRIDTEXT, ({ title, description }) => {
             return (
               <div key={title} className="services-grid-4">
                 <div className="services-block">
@@ -31,8 +30,7 @@ const InformationServices = () => {
                 </div>
               </div>
             )
-          })
-        }
+        })}
       </div>
     </div>
   )
