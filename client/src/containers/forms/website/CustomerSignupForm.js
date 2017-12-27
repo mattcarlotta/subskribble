@@ -6,7 +6,7 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
 import RegisterPlanForm from './RegisterPlanForm';
-import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS } from '../formfields/customerSignupFields';
+import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS, PLANSELECTIONFIELDS } from '../formfields/customerSignupFields';
 
 class CustomerPlanSignup extends Component {
   state = {
@@ -60,7 +60,11 @@ class CustomerPlanSignup extends Component {
                 RIGHTFIELDS={CREDITCARDFIELDS}
                 rightTitle="Credit Card Information"
               />,
-            2: <p>Pick a Plan</p>,
+            2: <RegisterPlanForm
+                onClickBack={this.handlePrev}
+                onSubmit={this.handleFormSave}
+                PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
+              />,
             3: <p>Review</p>,
           }[this.state.stepIndex]}
         </div>

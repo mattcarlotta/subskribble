@@ -45,11 +45,72 @@
         height: 450px;
       }
 
-      .input-10 {
-        @extend .w-10;
-        height: 72px;
+      .plan-container {
+        height: 355px;
+        @extend .f-l, .w-25;
+        border-radius: 0px;
+        border-top: 1px solid rgba(120, 130, 140, 0.13);
+        border-left: 1px solid rgba(120, 130, 140, 0.13);
+        border-right: 1px solid rgba(120, 130, 140, 0.13);
+        border-bottom: 5px solid rgba(120, 130, 140, 0.13);
+        padding: 30px 0;
+        margin-bottom: 20px;
+
+        .header {
+          @extend .t-a-c;
+
+          .price {
+            position: relative;
+            font-size: 46px;
+            margin: 20px 0 10px;
+            font-weight: bold;
+
+            .price-sign {
+              position: relative;
+              font-size: 15px;
+              top: -25px;
+              margin-left: -10px;
+            }
+          }
+
+          .plan-title {
+            line-height: 22px;
+            font-size: 18px;
+          }
+        }
+
+        .body {
+          @extend .t-a-c;
+          border-top: 1px solid rgba(120, 130, 140, 0.13);
+          border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+          padding: 20px 0;
+          margin-bottom: 20px;
+        }
+
+        .selection {
+          margin: auto;
+          width: 25px;
+          height: 50px;
+        }
       }
 
+      .selected {
+        border-top: 1px solid $lightblue;
+        border-right: 2px solid $lightblue;
+        border-left: 2px solid $lightblue;
+        border-bottom: 5px solid $lightblue;
+      }
+
+      .error-handlers {
+        @extend .t-a-c;
+        // font-size: 12px;
+        // line-height: 12px;
+        color: rgb(244, 67, 54);
+        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+      }
+
+
+      .input-10 { @extend .w-10; height: 72px;}
       .input-16 { @extend .h-72, .w-16; }
       .input-20 { @extend .h-72, .w-20; }
       .input-25 { @extend .h-72, .w-25; }

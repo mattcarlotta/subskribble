@@ -36,3 +36,12 @@ export const CREDITCARDFIELDS = [
   { className: "input-20 f-l", name: "creditCardExpYear", hintText: "YYYY", floatingLabelText: "Exp. Year", normalize: formatYear, validate: isRequired, width: "90%" },
   { className: "input-20 f-l", name: "creditCardCVC", hintText: "XXX", floatingLabelText: "CVC", normalize: formatCVC, validate: isRequired, width: "90%" },
 ]
+
+export const PLANSELECTIONFIELDS = [
+  { description: "Video subscription", price:"20.00", plan: "Carlotta Prime" },
+  { description: "CPA subscription", price:"49.99", plan: "Carlotta Tax Consultants" },
+  { description: "Twitch subscription", price:"4.99", plan: "Carlotta Twitch Prime" },
+  { description: "Youtube subscription", price:"9.99", plan: "Carlotta Youtube Red" },
+  { description: "Webdesign subscription", price:"19.99", plan: "Carlotta Webdesign Consultants" },
+  { description: "Omnipotent subscription", price:"99.99", plan: "Carlotta Corp" }
+]

@@ -2,24 +2,39 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 
 import RenderFields from '../formfields/renderFields'
+import RenderPlanSelection from '../formfields/renderPlanSelection';
 import Button from '../formfields/renderFormButton';
 
-const RegisterPlanForm = ({  handleSubmit, LEFTFIELDS, leftTitle, onClickBack, RIGHTFIELDS, rightTitle, submitting }) => {
+const RegisterPlanForm = ({
+  handleSubmit,
+  LEFTFIELDS,
+  leftTitle,
+  onClickBack,
+  PLANSELECTIONFIELDS,
+  RIGHTFIELDS,
+  rightTitle,
+  submitting
+}) => {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <div className="left-form">
-          <h3>{leftTitle}s</h3>
-          <div className="input-66">
-            { RenderFields(LEFTFIELDS) }
+        { LEFTFIELDS &&
+          <div className="left-form">
+            <h3>{leftTitle}s</h3>
+            <div className="input-66">
+              { RenderFields(LEFTFIELDS) }
+            </div>
           </div>
-        </div>
-        <div className="right-form">
-          <h3>{rightTitle}</h3>
-          <div className="input-66">
-            { RenderFields(RIGHTFIELDS) }
+        }
+        { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
+        { RIGHTFIELDS &&
+          <div className="right-form">
+            <h3>{rightTitle}</h3>
+            <div className="input-66">
+              { RenderFields(RIGHTFIELDS) }
+            </div>
           </div>
-        </div>
+        }
         <div className="clear-fix" />
         <hr />
         { onClickBack &&
