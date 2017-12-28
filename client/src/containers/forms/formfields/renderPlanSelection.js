@@ -1,63 +1,62 @@
 import map from 'lodash/map';
-import React, { Component } from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 import { RadioButton } from 'material-ui/RadioButton';
 import { RadioButtonGroup } from 'redux-form-material-ui';
-
+import { formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
 import { isSelected } from '../formfields/validateFormFields';
 
-class RenderPlanSelection extends Component {
-  state={ selectedPlan: null };
-
-  handleChange = (value) => this.setState({ selectedPlan: value });
-
-  planSelectionField = (field) => {
-    return map(this.props.PLANSELECTIONFIELDS, ({ description, plan, price }) => {
-      return (
-        <div key={plan} className={ (plan === this.state.selectedPlan) ? "plan-container selected" : "plan-container"}>
-          <div className="header">
-            <h3 className="plan-title">{plan}</h3>
-            <h2 className="price"><span className="price-sign">$</span>{price}</h2>
-            <p>per month</p>
-          </div>
-          <div className="body">
-            <div className="description">{description}</div>
-          </div>
-          <div className="selection">
-            <RadioButtonGroup
-              name="planSelection"
-              onChange={(event, value) => {
-                field.input.onChange(value)
-                this.handleChange(value);
-              }}
-              valueSelected={this.state.selectedPlan}
-              >
-                <RadioButton
-                  value={plan}
-                  name={plan} />
-            </RadioButtonGroup>
-          </div>
-          {field.meta.touched &&
-            field.meta.error &&
-            <div className="error-handlers">
-              {field.meta.error}
-            </div>
-          }
-        </div>
-
-      )
-    })
-  }
-
-  render() {
+const RenderPlanSelection = ({ PLANSELECTIONFIELDS, selectedPlan }) => {
+  const planSelectionField = (field) => {
     return (
-      <Field
-        name="planSelection"
-        component={this.planSelectionField}
-        validate={[isSelected]}
-      />
+      <div className="plan-selection-container">
+        {map(PLANSELECTIONFIELDS, ({ description, plan, price }) => {
+          return (
+            <div key={plan} className={ (plan === selectedPlan) ? "selection-container selected" : "selection-container"}>
+              <div className="header">
+                <h3 className="plan-title">{plan}</h3>
+                <h2 className="price"><span className="price-sign">$</span>{price}</h2>
+                <p>per month</p>
+              </div>
+              <div className="body">
+                <div className="description">{description}</div>
+              </div>
+              <div className="selection">
+                <RadioButtonGroup
+                  name="selectedPlan"
+                  onChange={(event, value) => field.input.onChange(value)}
+                  valueSelected={selectedPlan}
+                  >
+                    <RadioButton
+                      value={plan}
+                      name={plan} />
+                </RadioButtonGroup>
+              </div>
+              {field.meta.touched &&
+                field.meta.error &&
+                <div className="error-handlers">
+                  {field.meta.error}
+                </div>
+              }
+            </div>
+          )}
+        )}
+      </div>
     )
   }
+
+  return (
+    <Field
+      name="selectedPlan"
+      component={planSelectionField}
+      validate={[isSelected]}
+    />
+  )
 }
 
-export default RenderPlanSelection;
+export default connect(
+  state => ({
+    selectedPlan: formValueSelector('CustomerPlanSignup')(state, 'selectedPlan')
+  })
+)(RenderPlanSelection);

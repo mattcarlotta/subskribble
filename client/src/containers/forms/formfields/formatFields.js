@@ -15,7 +15,7 @@ export const formatCreditCard = (value, previousValue) => {
   return onlyNums.slice(0, 4) + '-' + onlyNums.slice(4, 8) + '-' + onlyNums.slice(8, 12) + '-' + onlyNums.slice(12, 16);
 }
 
-export const formatCVC = value => { return (!value) ? value: returnMaxValue(value, 3) }
+export const formatCVV = value => { return (!value) ? value: returnMaxValue(value, 3) }
 
 export const formatMonth = value => { return (!value) ? value: returnMaxValue(value, 2) }
 

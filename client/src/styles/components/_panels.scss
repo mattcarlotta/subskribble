@@ -27,7 +27,7 @@
 
   .panel-3 {
     @extend .col-3, .d-ib, .t-a-c;
-    margin: 0 -1px;
+    // margin: 0 -1px;
     border-right: 1px solid rgba(120, 130, 140, 0.13);
 
     .subtitle {

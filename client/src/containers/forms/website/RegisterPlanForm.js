@@ -21,7 +21,7 @@ const RegisterPlanForm = ({
         { LEFTFIELDS &&
           <div className="left-form">
             <h3>{leftTitle}s</h3>
-            <div className="input-66">
+            <div className="input-95">
               { RenderFields(LEFTFIELDS) }
             </div>
           </div>
@@ -30,7 +30,7 @@ const RegisterPlanForm = ({
         { RIGHTFIELDS &&
           <div className="right-form">
             <h3>{rightTitle}</h3>
-            <div className="input-66">
+            <div className="input-100">
               { RenderFields(RIGHTFIELDS) }
             </div>
           </div>
