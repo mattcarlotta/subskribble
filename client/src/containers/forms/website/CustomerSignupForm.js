@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { getFormValues, reduxForm } from 'redux-form';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
@@ -15,9 +15,9 @@ class CustomerPlanSignup extends Component {
     BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues)
   };
 
-  handleFormSave = (formProps) => {
-    console.log(formProps);
-    this.handleNext();
+  handleFormSave = () => {
+    console.log(this.props.finalValues);
+    // this.handleNext();
     // this.props.customerRegisterToPlan(formProps);
   }
 
@@ -56,16 +56,22 @@ class CustomerPlanSignup extends Component {
                 LEFTFIELDS={this.state.BILLINGADDRESSFIELDS}
                 leftTitle="Billing Address"
                 onClickBack={this.handlePrev}
-                onSubmit={this.handleFormSave}
+                onSubmit={this.handleNext}
                 RIGHTFIELDS={CREDITCARDFIELDS}
                 rightTitle="Credit Card Information"
               />,
             2: <RegisterPlanForm
                 onClickBack={this.handlePrev}
-                onSubmit={this.handleFormSave}
+                onSubmit={this.handleNext}
                 PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
               />,
-            3: <p>Review</p>,
+            3: <RegisterPlanForm
+                finished={true}
+                onClickBack={this.handlePrev}
+                onSubmit={this.handleFormSave}
+                FINALVALUES={this.props.finalValues}
+                PLANSELECTIONS={PLANSELECTIONFIELDS}
+              />
           }[this.state.stepIndex]}
         </div>
       </div>
@@ -73,4 +79,6 @@ class CustomerPlanSignup extends Component {
   }
 }
 
-export default reduxForm({ form: 'CustomerPlanSignup' })(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
+export default reduxForm({
+  form: 'CustomerPlanSignup'
+})(connect(state => ({ finalValues: getFormValues('CustomerPlanSignup')(state)}), { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));

@@ -4,7 +4,7 @@ import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, form
 
 export const ADDRESSFIELDS = [
   { className: "input-75 f-l", name: "contactAddress", floatingLabelText: "Address", width: "95%", validate: [isRequired, allowedCharacters] },
-  { className: "input-25 f-r", name: "contactunit", floatingLabelText: "Unit, Apt, or Suite #", width: "100%", },
+  { className: "input-25 f-r", name: "contactUnit", floatingLabelText: "Unit, Apt, or Suite #", width: "100%", },
   { className: "input-50 f-l", name: "contactCity", floatingLabelText: "City", width: "95%", validate: [isRequired, allowedCharacters] },
   { className: "input-25 f-l", name: "contactState", floatingLabelText: "State", normalize: formatState, width: "90%", validate: [isRequired, isValidState] },
   { className: "input-25 f-r", name: "contactZip", floatingLabelText: "Zip Code", normalize: formatZip, width: "100%", validate: [isRequired]},
