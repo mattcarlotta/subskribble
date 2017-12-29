@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFormValues, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
@@ -10,7 +10,7 @@ import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS, P
 
 class CustomerPlanSignup extends Component {
   state = {
-    stepIndex: 0,
+    stepIndex: 1,
     stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
     BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues)
   };
@@ -21,9 +21,11 @@ class CustomerPlanSignup extends Component {
     // this.props.customerRegisterToPlan(formProps);
   }
 
+  editStep = (number) => this.setState({ stepIndex: number });
+
   handleNext = () => this.setState({ stepIndex: this.state.stepIndex + 1 });
 
-  handlePrev = () => (this.state.stepIndex > 0) && this.setState({stepIndex: this.state.stepIndex - 1});
+  handlePrev = () => (this.state.stepIndex > 1) && this.setState({stepIndex: this.state.stepIndex - 1});
 
   render() {
     return (
@@ -44,15 +46,14 @@ class CustomerPlanSignup extends Component {
               })}
             </Stepper>
           </div>
-          {{0: <RegisterPlanForm
+          {{1: <RegisterPlanForm
                 LEFTFIELDS={CONTACTFIELDS}
                 leftTitle="Contact Information"
-                onClickBack={this.handlePrev}
                 onSubmit={this.handleNext}
                 RIGHTFIELDS={ADDRESSFIELDS}
                 rightTitle="Address"
               />,
-            1: <RegisterPlanForm
+            2: <RegisterPlanForm
                 LEFTFIELDS={this.state.BILLINGADDRESSFIELDS}
                 leftTitle="Billing Address"
                 onClickBack={this.handlePrev}
@@ -60,16 +61,17 @@ class CustomerPlanSignup extends Component {
                 RIGHTFIELDS={CREDITCARDFIELDS}
                 rightTitle="Credit Card Information"
               />,
-            2: <RegisterPlanForm
+            3: <RegisterPlanForm
                 onClickBack={this.handlePrev}
                 onSubmit={this.handleNext}
                 PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
               />,
-            3: <RegisterPlanForm
+            4: <RegisterPlanForm
+                editStep={this.editStep}
                 finished={true}
+                mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
                 onClickBack={this.handlePrev}
                 onSubmit={this.handleFormSave}
-                FINALVALUES={this.props.finalValues}
                 PLANSELECTIONS={PLANSELECTIONFIELDS}
               />
           }[this.state.stepIndex]}
@@ -81,4 +83,4 @@ class CustomerPlanSignup extends Component {
 
 export default reduxForm({
   form: 'CustomerPlanSignup'
-})(connect(state => ({ finalValues: getFormValues('CustomerPlanSignup')(state)}), { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
+})(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));

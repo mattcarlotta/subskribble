@@ -8,10 +8,11 @@ import Button from '../formfields/renderFormButton';
 
 const RegisterPlanForm = ({
   handleSubmit,
-  FINALVALUES,
+  editStep,
   finished,
   LEFTFIELDS,
   leftTitle,
+  mainTitle,
   onClickBack,
   onSubmit,
   PLANSELECTIONFIELDS,
@@ -22,17 +23,18 @@ const RegisterPlanForm = ({
 }) => {
   return (
     <div className="form-container">
+      <h1 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h1>
       <form onSubmit={handleSubmit}>
         { LEFTFIELDS &&
           <div className="left-form">
-            <h3>{leftTitle}s</h3>
+            <h3>{leftTitle}</h3>
             <div className="input-95">
               { RenderFields(LEFTFIELDS) }
             </div>
           </div>
         }
         { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
-        { FINALVALUES && <ReviewPlanForm FINALVALUES={FINALVALUES} PLANSELECTIONS={PLANSELECTIONS} /> }
+        { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
         { RIGHTFIELDS &&
           <div className="right-form">
             <h3>{rightTitle}</h3>

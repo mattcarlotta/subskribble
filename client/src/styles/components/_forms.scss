@@ -4,7 +4,8 @@
 
 .customer-signup-bg {
   height: 100%;
-  background-color: $white;
+  // background-color: $white;
+  background-color: $formgrey;
 
   .customer-signup-container {
     padding-top: 100px;
@@ -40,6 +41,12 @@
         height: 450px;
       }
 
+      .main-title {
+        @extend .t-a-c;
+        margin-bottom: 40px;
+        font-weight: 300;
+      }
+
       .right-form {
         @extend .f-r, .pl-10, .w-50;
         height: 450px;
@@ -64,13 +71,13 @@
             @extend .t-a-c;
 
             .price {
-              position: relative;
+              @extend .p-r;
               font-size: 46px;
               margin: 20px 0 10px;
               font-weight: bold;
 
               .price-sign {
-                position: relative;
+                @extend .p-r;
                 font-size: 15px;
                 top: -25px;
                 margin-left: -10px;
@@ -95,6 +102,113 @@
             margin: auto;
             width: 25px;
             height: 50px;
+          }
+        }
+      }
+
+      .review-signup-container {
+        min-height: 450px;
+
+        h1,h2,h3,p { font-family: $poppinslight; }
+        h2 { font-size: 24px; }
+
+        i {
+          @extend .c-lb;
+          font-size: 22px;
+        }
+
+        .head-title {
+          font-size: 26px;
+        }
+
+        .edit-link {
+          @extend .c-lb, .fix-cursor, .f-r;
+          font-size: 15px;
+          font-weight: normal;
+        }
+
+        .price {
+          font-size: 22px;
+
+          .month {
+            font-size: 12px;
+          }
+
+          .price-sign {
+            @extend .p-r;
+            font-size: 12px;
+            top: -5px;
+          }
+        }
+
+        .address {
+          @extend .t-t-c;
+          margin: 0;
+        }
+
+        .contact-info-container, .payment-info-container, .plan-info-container, .total-container {
+          @extend .f-l;
+          height: 380px;
+          width: 23.5%;
+          padding: 30px 0px;
+          margin-left: 15px;
+          margin-bottom: 20px;
+
+          .details-container {
+            @extend .b-c-w;
+            min-height: 205px;
+            padding: 16px;
+            margin-top: 2px;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+            -moz-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+
+          }
+        }
+      }
+
+      .contact-info-container {
+        .name {
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        .email, .phone { margin: 0;}
+      }
+
+      .payment-info-container {
+        .name, .address, .location { margin: 0 };
+
+        .details-container {
+          i {
+            color: $darkblue;
+            font-size: 30px;
+            margin-right: 10px;
+          }
+
+          .credit-billing {
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+          }
+
+          .creditcard {
+            font-size: 25px;
+
+            .experiation {
+              @extend .p-r;
+              top: -3px;
+              letter-spacing: 1px;
+              font-size: 12px;
+              margin-left: 10px;
+            }
+            .stars {
+              @extend .p-r;
+              font-size: 12px;
+              top: -2px;
+              margin-right: 1px;
+              // left: 1px;
+            }
           }
         }
       }
@@ -156,8 +270,8 @@
     h4 { color: $lightblue; }
 
     .content {
+      @extend .p-r;
       border: 1px solid $black;
-      position: relative;
 
       .fr-toolbar {
         background-color: $lightblue;
