@@ -15,8 +15,8 @@ class CustomerPlanSignup extends Component {
     BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues)
   };
 
-  handleFormSave = () => {
-    console.log(this.props.finalValues);
+  handleFormSave = (formProps) => {
+    console.log(formProps);
     // this.handleNext();
     // this.props.customerRegisterToPlan(formProps);
   }
@@ -34,7 +34,7 @@ class CustomerPlanSignup extends Component {
           <div className="stepper-container">
             <div className="title">
               <h1>Carlotta Corp</h1>
-              <h3>Carlotta Prime Plan Registration</h3>
+              <h3>Plan Registration</h3>
             </div>
             <Stepper activeStep={this.state.stepIndex}>
               {map(this.state.stepLabels, (label) => {
