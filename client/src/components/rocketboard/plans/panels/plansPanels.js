@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ACTIVEPLANS, ACTIVEPANELBUTTONS, INACTIVEPLANS, INACTIVEPANELBUTTONS, TABLEHEADERS } from '../fields/plansFieldsData';
-
 import PlansTable from '../tables/plansTable';
 import Panel from '../../app/panels/customPanel';
 

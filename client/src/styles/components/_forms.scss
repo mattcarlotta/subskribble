@@ -226,20 +226,22 @@
         border-left: 2px solid $lightblue !important;
         border-bottom: 5px solid $lightblue !important;
       }
-
-      .input-10 { @extend .w-10; height: 72px;}
-      .input-16 { @extend .h-72, .w-16; }
-      .input-20 { @extend .h-72, .w-20; }
-      .input-25 { @extend .h-72, .w-25; }
-      .input-40 { @extend .h-72, .w-40; }
-      .input-50 { @extend .h-72, .w-50; }
-      .input-66 { @extend .h-72, .w-66; }
-      .input-75 { @extend .h-72, .w-75; }
-      .input-95 { @extend .h-72; width: 95%; }
-      .input-100 { @extend .h-72, .w-100; }
     }
   }
 }
+
+.input-10 { @extend .h-72, .w-10; }
+.input-15 { @extend .h-72; width: 15%; }
+.input-16 { @extend .h-72, .w-16; }
+.input-20 { @extend .h-72, .w-20; }
+.input-25 { @extend .h-72, .w-25; }
+.input-40 { @extend .h-72, .w-40; }
+.input-50 { @extend .h-72, .w-50; }
+.input-66 { @extend .h-72, .w-66; }
+.input-75 { @extend .h-72, .w-75; }
+.input-85 { @extend .h-72; width: 85%; }
+.input-95 { @extend .h-72; width: 95%; }
+.input-100 { @extend .h-72, .w-100; }
 
 .new-form-container {
   @extend .w-100;

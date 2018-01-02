@@ -8,7 +8,6 @@ import {
   REFUNDSBUTTONS,
   REFUNDSTABLEHEADERS
 } from '../fields/transactionsFieldsData';
-
 import ChargesTable from '../tables/chargesTable';
 import RefundsTable from '../tables/refundsTable';
 import Panel from '../../app/panels/customPanel';

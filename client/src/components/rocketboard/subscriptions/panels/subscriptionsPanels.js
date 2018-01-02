@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ACTIVESUBSCRIPTIONS, ACTIVESUBSBUTTONS, INACTIVESUBSCRIPTIONS, INACTIVESUBSBUTTONS, TABLEHEADERS } from '../fields/subscriptionsFieldsData';
-
 import SubscriptionsTable from '../tables/subscriptionsTable';
 import Panel from '../../app/panels/customPanel';
 

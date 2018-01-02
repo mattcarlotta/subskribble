@@ -4,7 +4,7 @@ import SubscriptionsPanels from './panels/subscriptionsPanels';
 
 const Subscriptions = () => {
 	return (
-		<div className="subscriptions-container">
+		<div className="container">
 			<SubscriptionsPanels />
 		</div>
 	);

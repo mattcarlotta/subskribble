@@ -4,23 +4,19 @@
   margin: 40px 30px 0px 30px;
 }
 
-.dashboard-container {
-  @extend .container;
+.dash-overview-panel {
+  @extend .d-ib, .w-100;
+  margin-bottom: 10px;
+}
 
-  .dash-overview-panel {
-    @extend .d-ib, .w-100;
-    margin-bottom: 10px;
-  }
+.dash-customers-panel {
+  @extend .f-l, .pr-10, .w-50;
+  margin-bottom: 20px;
+}
 
-  .dash-customers-panel {
-    @extend .f-l, .pr-10, .w-50;
-    margin-bottom: 20px;
-  }
-
-  .dash-plans-panel {
-    @extend .f-r, .pl-10, .w-50;
-    margin-bottom: 20px;
-  }
+.dash-plans-panel {
+  @extend .f-r, .pl-10, .w-50;
+  margin-bottom: 20px;
 }
 
 .active-panel {

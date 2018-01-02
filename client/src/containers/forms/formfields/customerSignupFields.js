@@ -1,5 +1,5 @@
 import { SelectField, Toggle } from 'redux-form-material-ui';
-import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidState, isValidYear } from '../formfields/validateFormFields';
+import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 export const ADDRESSFIELDS = [
@@ -25,7 +25,7 @@ export const CONTACTFIELDS = [
   { className: "input-50 f-l", name: "contactFirstName", floatingLabelText: "First Name", width: '95%', validate: [isRequired, allowedCharacters] },
   { className: "input-50 f-r", name: "contactLastName", floatingLabelText: "Last Name", width: '95%', validate: [isRequired, allowedCharacters] },
   { className: "input-50 f-l", name: "contactEmail", floatingLabelText: "Email Address", width: '95%', validate: [isRequired, isValidEmail] },
-  { className: "input-50 f-r", name: "contactPhone", normalize: formatPhone, width: '95%', floatingLabelText: "Phone Number (optional)" },
+  { className: "input-50 f-r", name: "contactPhone", normalize: formatPhone, validate: isValidPhone, width: '95%', floatingLabelText: "Phone Number (optional)" },
 ]
 
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];

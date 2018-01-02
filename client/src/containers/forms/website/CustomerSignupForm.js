@@ -37,7 +37,7 @@ class CustomerPlanSignup extends Component {
   handlePrev = () => (this.state.stepIndex > 1) && this.setState({ stepIndex: this.state.stepIndex - 1 });
 
   render() {
-    const { stepIndex, visited, wasReviewed  } = this.state;
+    const { BILLINGADDRESSFIELDS, stepIndex, stepLabels, visited, wasReviewed } = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -47,7 +47,7 @@ class CustomerPlanSignup extends Component {
               <h3>Plan Registration</h3>
             </div>
             <Stepper>
-              {map(this.state.stepLabels, (label, key) => {
+              {map(stepLabels, (label, key) => {
                 return (
                   <Step key={label}>
                     <StepButton
@@ -72,7 +72,7 @@ class CustomerPlanSignup extends Component {
                 rightTitle="Address"
               />,
             2: <RegisterPlanForm
-                LEFTFIELDS={this.state.BILLINGADDRESSFIELDS}
+                LEFTFIELDS={BILLINGADDRESSFIELDS}
                 leftTitle="Billing Address"
                 onClickBack={this.handlePrev}
                 onSubmit={this.handleNext}
@@ -92,7 +92,7 @@ class CustomerPlanSignup extends Component {
                 onSubmit={this.handleFormSave}
                 PLANSELECTIONS={PLANSELECTIONFIELDS}
               />
-          }[this.state.stepIndex]}
+          }[stepIndex]}
         </div>
       </div>
     );

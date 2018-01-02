@@ -4,7 +4,7 @@ import TemplatesPanels from './panels/templatesPanels';
 
 const Templates = () => {
 	return (
-		<div className="dashboard-container">
+		<div className="container">
 			<TemplatesPanels />
 		</div>
 	);

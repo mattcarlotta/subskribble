@@ -4,7 +4,7 @@ import DashboardPanels from './panels/dashboardPanels';
 
 const Dashboard = () => {
 	return (
-		<div className="dashboard-container">
+		<div className="container">
 			<DashboardPanels />
 		</div>
 	);

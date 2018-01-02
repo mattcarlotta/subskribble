@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ACTIVECUSTOMERS, ACTIVECUSTOMERSBUTTONS, INACTIVECUSTOMERS, INACTIVECUSTOMERSBUTTONS, TABLEHEADERS } from '../fields/customersFieldsData';
-
 import Panel from '../../app/panels/customPanel';
 import CustomerTable from '../tables/customersTable';
 

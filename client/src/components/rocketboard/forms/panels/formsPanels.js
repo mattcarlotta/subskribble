@@ -3,7 +3,6 @@ import React from 'react';
 import { ACTIVEFORMS, FORMBUTTONS, TABLEHEADERS } from '../fields/formsFieldsData';
 import AddNewForm from '../../../../containers/forms/rocketboard/addNewForm';
 import FormTable from '../tables/formsTable';
-
 import Panel from '../../app/panels/customPanel';
 
 const FormPanels = () => {

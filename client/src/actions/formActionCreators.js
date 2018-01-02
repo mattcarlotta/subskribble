@@ -7,6 +7,21 @@ import dispatchSuccess from './dispatchSuccess';
 import { SET_BILLING_FORM_VALUES } from './types';
 import { formValueSelector } from 'redux-form';
 
+// Add new rocketboard promo code
+export const addNewPromoCode = (formProps) => {
+  return dispatch => {
+    app.post(`api/create-promo-code`, { formProps })
+    .then(response => {
+      dispatchSuccess(dispatch, response.data.message);
+    })
+    .catch(({ response }) => {
+      dispatchError(dispatch, response.data.err);
+    })
+  }
+}
+
+
+
 // Add new rocketboard form
 export const addNewForm = (formProps) => {
   return dispatch => {

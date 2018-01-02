@@ -4,7 +4,7 @@ import FormsPanels from './panels/formsPanels';
 
 const Forms = () => {
 	return (
-		<div className="forms-container">
+		<div className="container">
 			<FormsPanels />
 		</div>
 	);

@@ -4,7 +4,7 @@ import CustomersPanels from './panels/customersPanels';
 
 const Customers = () => {
 	return (
-		<div className="customer-container">
+		<div className="container">
 			<CustomersPanels />
 		</div>
 	);

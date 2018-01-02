@@ -4,7 +4,7 @@ import PlansPanels from './panels/plansPanels';
 
 const Plans = () => {
 	return (
-		<div className="plan-container">
+		<div className="container">
 			<PlansPanels />
 		</div>
 	);

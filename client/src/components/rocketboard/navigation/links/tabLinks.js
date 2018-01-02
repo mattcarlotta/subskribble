@@ -20,6 +20,10 @@ export default [
     label: 'transactions',
   },
   {
+    icon: 'new_releases',
+    label: 'campaigns',
+  },
+  {
     icon: 'assessment',
     label: 'invoices',
   },

@@ -1,5 +1,6 @@
 // APP VIEW IMPORTS
 import App from '../views/app/index';
+import Campaigns from '../views/rocketboard/campaigns';
 import ContactUs from '../views/rocketboard/contact';
 import Customers from '../views/rocketboard/customers';
 import CustomerSignup from '../views/website/customerSignup';
@@ -53,6 +54,7 @@ const routes = (
 
 		<Redirect from="/rocketboard" to="/rocketboard/dashboard" />
 		<Route path="/rocketboard" component={DashWrapper(App)}>
+			<Route path="campaigns" component={Campaigns} />
 			<Route path="contact-us" component={ContactUs} />
 			<Route path="customers" component={Customers} />
 			<Route path="dashboard" component={Dashboard} />
