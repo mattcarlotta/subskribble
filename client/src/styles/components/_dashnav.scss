@@ -84,3 +84,10 @@
     // background-color: #0c7eb1 !important;
   }
 }
+
+.selected-tab {
+  & div > div, & div > div > i {
+    color: $blue !important;
+    // background-color: #0c7eb1 !important;
+  }
+}

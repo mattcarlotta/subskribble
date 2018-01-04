@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DashboardPanels from './panels/dashboardPanels';
+import DashboardPanels from './panels/dashPanels';
 
 const Dashboard = () => {
 	return (
