@@ -16,7 +16,7 @@ import { CUSTOMERBUTTONS, PLANBUTTONS } from '../../dashboard/fields/dashboardFi
 import { customerData, customerOptions } from '../../dashboard/fields/customerChartFields';
 import { planData, planOptions } from '../../dashboard/fields/planChartFields';
 import OverviewLayout from '../../dashboard/layouts/overviewLayout';
-import GraphChart from '../../app/charts/graphChart';
+import LineChart from '../../app/charts/lineChart';
 
 const TABS=['Customers', 'Plans'];
 
@@ -70,13 +70,14 @@ class SliderPanel extends Component {
 	              <CardText
 	                index={0}
 	                expandable={false}
-	                style={{ padding: "2px 16px", height: '400px' }}
+	                style={{ padding: "2px 16px" }}
 	                >
 	                  <div className="panel-body">
 	                    <SelectField className="panel-6" floatingLabelText="Sort By" MENUITEMS={['Current Month', 'Monthly', 'Yearly']} />
 	                    <div className="panel-6">
 	                      <RenderPanelButtons CUSTOMBUTTONS={CUSTOMERBUTTONS}/>
 	                    </div>
+                      <LineChart data={customerData} options={customerOptions} />
 	                  </div>
 	              </CardText>
 	              <CardText
@@ -89,6 +90,7 @@ class SliderPanel extends Component {
 	                    <div className="panel-6">
 	                      <RenderPanelButtons CUSTOMBUTTONS={PLANBUTTONS}/>
 	                    </div>
+                      <LineChart data={planData} options={planOptions} />
 	                  </div>
 	              </CardText>
             </SwipeableViews>

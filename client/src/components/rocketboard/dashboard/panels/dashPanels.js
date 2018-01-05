@@ -4,7 +4,7 @@ import { CUSTOMERBUTTONS, PLANBUTTONS } from '../fields/dashboardFieldsData';
 import { customerData, customerOptions } from '../fields/customerChartFields';
 import { planData, planOptions } from '../fields/planChartFields';
 import OverviewLayout from '../layouts/overviewLayout';
-import GraphChart from '../../app/charts/graphChart';
+// import GraphChart from '../../app/charts/graphChart';
 import Panel from '../../app/panels/customPanel';
 import SliderPanel from '../../app/panels/SliderPanel';
 
