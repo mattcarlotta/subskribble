@@ -17,27 +17,22 @@ class Header extends Component {
     e.preventDefault();
 
     this.setState({
-			adjustNavbg: '',
-			isLoaded: false,
 			industryTabOpen: industryTabOpen,
 			tourTabOpen: tourTabOpen,
       anchorEl: e.currentTarget
     });
   };
 
-	componentDidMount = () => {
-		const { adjustBG } = this.state;
-		const pathname = this.props.location.pathname.indexOf('customer-signup') > 0;
+	componentWillMount = () => this.checkIfFormLoaded(this.props.location.pathname);
 
-		if (!adjustBG && pathname) this.setState({ adjustBG : 'adjust-bg' })
-	}
+	componentWillUpdate = (nextProps) => this.checkIfFormLoaded(nextProps.location.pathname);
 
-	componentWillUpdate = (nextProps) => {
-		const { adjustBG } = this.state;
-		const nextPathname = nextProps.location.pathname.indexOf('customer-signup') >= 1;
+	checkIfFormLoaded = url => {
+		const { adjustNavBG } = this.state;
+		const setNavBGToBlue = url.indexOf('customer-signup') > 0;
 
-		if (!adjustBG && nextPathname) this.setState({ adjustBG : 'adjust-bg' })
-		else if (adjustBG && !nextPathname) this.setState({ adjustBG: '' })
+		if (!adjustNavBG && setNavBGToBlue) this.setState({ adjustNavBG : 'adjust-bg' });
+		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: null });
 	}
 
   handleRequestClose = () => this.setState({ industryTabOpen: false, tourTabOpen: false })
@@ -57,12 +52,12 @@ class Header extends Component {
 	}
 
 	render() {
-		const { adjustBG, anchorEl, industryTabOpen, tourTabOpen } = this.state;
+		const { adjustNavBG, anchorEl, industryTabOpen, tourTabOpen } = this.state;
 		const { fixedNavBar } = this.props;
 		const rbLogo = fixedNavBar ? rocketLogoBlack : rocketLogoWhite;
 
 		return (
-			<div className={fixedNavBar ? 'nav-header fixed' : `nav-header ${adjustBG}`}>
+			<div className={fixedNavBar ? 'nav-header fixed' : `nav-header ${adjustNavBG}`}>
 				<div className="nav-container">
 					<div className="nav-grid-3">
 						<Link to="/"><img className="nav-logo" src={rbLogo} alt="rocketBillerLogo.png" /></Link>
@@ -109,15 +104,13 @@ class Header extends Component {
 								onRequestClose={this.handleRequestClose}
 								>
 								<Menu>
-									{
-										map(TOURTABS, ({ link, label }) => {
+									{map(TOURTABS, ({ link, label }) => {
 											return (
 												<Link key={label} onClick={this.handleRequestClose} to={link}>
 													<MenuItem primaryText={label} />
 												</Link>
 											);
-										})
-									}
+									})}
 								</Menu>
 							</Popover>
 						</div>

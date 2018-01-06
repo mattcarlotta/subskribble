@@ -26,11 +26,11 @@ class CustomerPlanSignup extends Component {
   editStep = (number) => this.setState({ stepIndex: number });
 
   handleNext = () => {
-    const { stepIndex, visited, wasReviewed } = this.state;
+    const { stepIndex, visited } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
       visited: visited.concat(stepIndex),
-      wasReviewed: stepIndex + 1 === 4 && !wasReviewed && true
+      wasReviewed: visited.length > 2 && true
     })
   }
 
