@@ -1,27 +1,13 @@
-import map from 'lodash/map';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
-import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 
+import CustomPopover from '../app/popovers/customPopover';
 import { INDUSTRYTABS, TOURTABS } from './links/headerTabs';
 import rocketLogoWhite from '../../../images/logos/rocketbiller_logo_white.png';
 import rocketLogoBlack from '../../../images/logos/rocketbiller_logo_black.png';
 
 class Header extends Component {
 	state = { industryTabOpen: false, tourTabOpen: false }
-
-	handleTouchTap = (e, industryTabOpen, tourTabOpen) => {
-    e.preventDefault();
-
-    this.setState({
-			industryTabOpen: industryTabOpen,
-			tourTabOpen: tourTabOpen,
-      anchorEl: e.currentTarget
-    });
-  };
 
 	componentWillMount = () => this.checkIfFormLoaded(this.props.location.pathname);
 
@@ -35,20 +21,21 @@ class Header extends Component {
 		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: null });
 	}
 
+	handleTouchTap = (e, tabKey) => {
+    e.preventDefault();
+
+    this.setState({
+			industryTabOpen: tabKey === 'Industry' ? true : false,
+			tourTabOpen: tabKey === 'Tour' ? true : false,
+      anchorEl: e.currentTarget
+    });
+  };
+
   handleRequestClose = () => this.setState({ industryTabOpen: false, tourTabOpen: false })
 
 	handleTabIcon = (tab) => {
-		return (
-			tab
-				? <span><i className="fa fa-chevron-up s-i" aria-hidden="true" /></span>
-				: <span><i className="fa fa-chevron-down s-i" aria-hidden="true" /></span>
-		);
-	}
-
-	handleNestedTabs = (nestedTabs) => {
-		return map(nestedTabs, (tab) => {
-			return <MenuItem primaryText={tab} />
-		});
+		const direction = tab ? 'up' : 'down';
+		return <span><i className={`fa fa-chevron-${direction} s-i`} aria-hidden="true" /></span>
 	}
 
 	render() {
@@ -60,59 +47,35 @@ class Header extends Component {
 			<div className={fixedNavBar ? 'nav-header fixed' : `nav-header ${adjustNavBG}`}>
 				<div className="nav-container">
 					<div className="nav-grid-3">
-						<Link to="/"><img className="nav-logo" src={rbLogo} alt="rocketBillerLogo.png" /></Link>
+						<Link to="/">
+							<img className="nav-logo" src={rbLogo} alt="rocketBillerLogo.png" />
+						</Link>
 					</div>
 					<nav className="nav-grid-9">
 						<div className="nav-float-right">
 							<Link to="/">Home</Link>
-							<Link onClick={e => this.handleTouchTap(e, true, false)}>
-								Industries
-								{ this.handleTabIcon(industryTabOpen) }
-							</Link>
-							<Popover
-								open={industryTabOpen}
+							<CustomPopover
 								anchorEl={anchorEl}
-								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-								targetOrigin={{horizontal: 'left', vertical: 'top'}}
-								onRequestClose={this.handleRequestClose}
-								>
-								<Menu>
-									{
-										map(INDUSTRYTABS, ({tab, nestedTabs}) => {
-											return (
-												<MenuItem
-													key={tab}
-													primaryText={tab}
-													rightIcon={ (nestedTabs) ? <ArrowDropRight /> : null}
-													menuItems={ (nestedTabs) ? this.handleNestedTabs(nestedTabs) : null }
-												/>
-											)
-										})
-									}
-								</Menu>
-							</Popover>
+								handleTabIcon={this.handleTabIcon}
+								handleTouchTap={this.handleTouchTap}
+								linkLabel="Industries"
+								handleRequestClose={this.handleRequestClose}
+								tabKey="Industry"
+								tabOpen={industryTabOpen}
+								TABS={INDUSTRYTABS}
+							/>
 							<Link to="/pricing">Pricing</Link>
-							<Link onClick={e => this.handleTouchTap(e, false, true)}>
-								Tour
-								{ this.handleTabIcon(tourTabOpen) }
-							</Link>
-							<Popover
-								open={tourTabOpen}
+							<CustomPopover
 								anchorEl={anchorEl}
-								anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-								targetOrigin={{horizontal: 'left', vertical: 'top'}}
-								onRequestClose={this.handleRequestClose}
-								>
-								<Menu>
-									{map(TOURTABS, ({ link, label }) => {
-											return (
-												<Link key={label} onClick={this.handleRequestClose} to={link}>
-													<MenuItem primaryText={label} />
-												</Link>
-											);
-									})}
-								</Menu>
-							</Popover>
+								handleTabIcon={this.handleTabIcon}
+								handleTouchTap={this.handleTouchTap}
+								linkLabel="Tour"
+								linkTabs={true}
+								handleRequestClose={this.handleRequestClose}
+								tabKey="Tour"
+								tabOpen={tourTabOpen}
+								TABS={TOURTABS}
+							/>
 						</div>
 					</nav>
 				</div>
