@@ -15,7 +15,7 @@ const PlansPanels = () => [
     CUSTOMBUTTONS={ACTIVEPANELBUTTONS}
     filterFieldLabel="Filter Active Plans"
     FILTERFORM="FilterActivePlans"
-    TABLECONTENTS={() => PlansTable(ACTIVEPLANS)}
+    TABLECONTENTS={PlansTable(ACTIVEPLANS)}
     TABLEHEADERS={TABLEHEADERS}
   />,
   <Panel
@@ -28,7 +28,7 @@ const PlansPanels = () => [
     CUSTOMBUTTONS={INACTIVEPANELBUTTONS}
     filterFieldLabel="Filter Inactive Plans"
     FILTERFORM="FilterInactivePlans"
-    TABLECONTENTS={() => PlansTable(INACTIVEPLANS)}
+    TABLECONTENTS={PlansTable(INACTIVEPLANS)}
     TABLEHEADERS={TABLEHEADERS}
   />
 ]

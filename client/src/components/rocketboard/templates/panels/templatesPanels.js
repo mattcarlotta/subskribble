@@ -23,7 +23,7 @@ const TemplatesPanels = () => [
     CUSTOMBUTTONS={TEMPLATEBUTTONS}
     filterFieldLabel="Filter Templates"
     FILTERFORM="FilterTemplates"
-    TABLECONTENTS={() => TemplateTable(ACTIVETEMPLATES)}
+    TABLECONTENTS={TemplateTable(ACTIVETEMPLATES)}
     TABLEHEADERS={TABLEHEADERS}
   />
 ]

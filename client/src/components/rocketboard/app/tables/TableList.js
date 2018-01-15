@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import React from 'react';
-import { Table, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 const TableList = ({TABLECONTENTS, TABLEHEADERS }) => {
@@ -18,11 +18,7 @@ const TableList = ({TABLECONTENTS, TABLEHEADERS }) => {
           enableSelectAll={true}
         >
           <TableRow>
-            {
-              map(TABLEHEADERS, (label, key) => {
-                return <TableHeaderColumn key={key}>{label}</TableHeaderColumn>
-              })
-            }
+            { map(TABLEHEADERS, label => (<TableHeaderColumn key={label}>{label}</TableHeaderColumn>)) }
           </TableRow>
         </TableHeader>
       </Table>
@@ -36,7 +32,19 @@ const TableList = ({TABLECONTENTS, TABLEHEADERS }) => {
         autoHideDuration={200}
         renderThumbVertical={props => <div {...props} className="scrollbar"/>}
         >
-          <TABLECONTENTS />
+          <Table
+            fixedHeader={false}
+            selectable={true}
+            multiSelectable={false}
+            >
+              <TableBody
+                displayRowCheckbox={true}
+                deselectOnClickaway={false}
+                showRowHover={true}
+              >
+                { TABLECONTENTS }
+          </TableBody>
+        </Table>
       </Scrollbars>
     </div>
   );

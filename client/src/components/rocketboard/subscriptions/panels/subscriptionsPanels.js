@@ -15,7 +15,7 @@ const SubscriptionsPanels = () => [
     CUSTOMBUTTONS={ACTIVESUBSBUTTONS}
     filterFieldLabel="Filter Active Subscriptions"
     FILTERFORM="FilterActiveSubscriptions"
-    TABLECONTENTS={() => SubscriptionsTable(ACTIVESUBSCRIPTIONS)}
+    TABLECONTENTS={SubscriptionsTable(ACTIVESUBSCRIPTIONS)}
     TABLEHEADERS={TABLEHEADERS}
   />,
   <Panel
@@ -28,7 +28,7 @@ const SubscriptionsPanels = () => [
     CUSTOMBUTTONS={INACTIVESUBSBUTTONS}
     filterFieldLabel="Filter Inactive Subscriptions"
     FILTERFORM="FilterInactiveSubscriptions"
-    TABLECONTENTS={() => SubscriptionsTable(INACTIVESUBSCRIPTIONS)}
+    TABLECONTENTS={SubscriptionsTable(INACTIVESUBSCRIPTIONS)}
     TABLEHEADERS={TABLEHEADERS}
   />
 ]

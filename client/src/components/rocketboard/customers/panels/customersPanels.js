@@ -15,7 +15,7 @@ const CustomersPanels = () => [
     CUSTOMBUTTONS={ACTIVECUSTOMERSBUTTONS}
     filterFieldLabel="Filter Active Customers"
     FILTERFORM="FilterActiveCustomers"
-    TABLECONTENTS={() => CustomerTable(ACTIVECUSTOMERS)}
+    TABLECONTENTS={CustomerTable(ACTIVECUSTOMERS)}
     TABLEHEADERS={TABLEHEADERS}
   />,
   <Panel
@@ -28,7 +28,7 @@ const CustomersPanels = () => [
     CUSTOMBUTTONS={INACTIVECUSTOMERSBUTTONS}
     filterFieldLabel="Filter Inactive Customers"
     FILTERFORM="FilterInactiveCustomers"
-    TABLECONTENTS={() => CustomerTable(INACTIVECUSTOMERS)}
+    TABLECONTENTS={CustomerTable(INACTIVECUSTOMERS)}
     TABLEHEADERS={TABLEHEADERS}
   />
 ]

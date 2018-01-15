@@ -24,7 +24,7 @@ const FormPanels = () => {
         CUSTOMBUTTONS={FORMBUTTONS}
         filterFieldLabel="Filter Forms"
         FILTERFORM="FilterForms"
-        TABLECONTENTS={() => FormTable(ACTIVEFORMS)}
+        TABLECONTENTS={FormTable(ACTIVEFORMS)}
         TABLEHEADERS={TABLEHEADERS}
       />
   ]

@@ -23,7 +23,7 @@ const TransactionsPanels = () => [
     CUSTOMBUTTONS={CHARGESBUTTONS}
     filterFieldLabel="Filter Charges"
     FILTERFORM="FilterCharges"
-    TABLECONTENTS={() => ChargesTable(CHARGES) }
+    TABLECONTENTS={ChargesTable(CHARGES) }
     TABLEHEADERS={CHARGESTABLEHEADERS}
   />,
   <Panel
@@ -36,7 +36,7 @@ const TransactionsPanels = () => [
     CUSTOMBUTTONS={REFUNDSBUTTONS}
     filterFieldLabel="Filter Refunds"
     FILTERFORM="FilterRefunds"
-    TABLECONTENTS={() => RefundsTable(REFUNDS)}
+    TABLECONTENTS={RefundsTable(REFUNDS)}
     TABLEHEADERS={REFUNDSTABLEHEADERS}
   />
 ]
