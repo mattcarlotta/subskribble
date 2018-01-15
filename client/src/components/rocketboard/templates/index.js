@@ -1,13 +1,5 @@
 import React from 'react';
-
 import TemplatesPanels from './panels/templatesPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Templates = () => {
-	return (
-		<div className="container">
-			<TemplatesPanels />
-		</div>
-	);
-};
-
-export default Templates;
+export default function() { return <PanelsContainer Panels={TemplatesPanels} /> }

@@ -1,13 +1,5 @@
 import React from 'react';
-
 import SubscriptionsPanels from './panels/subscriptionsPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Subscriptions = () => {
-	return (
-		<div className="container">
-			<SubscriptionsPanels />
-		</div>
-	);
-};
-
-export default Subscriptions;
+export default function() { return <PanelsContainer Panels={SubscriptionsPanels} /> }

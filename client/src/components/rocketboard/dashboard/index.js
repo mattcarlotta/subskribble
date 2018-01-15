@@ -1,13 +1,5 @@
 import React from 'react';
-
 import DashboardPanels from './panels/dashPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Dashboard = () => {
-	return (
-		<div className="container">
-			<DashboardPanels />
-		</div>
-	);
-};
-
-export default Dashboard;
+export default function() { return <PanelsContainer Panels={DashboardPanels} /> }

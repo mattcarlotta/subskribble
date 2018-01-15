@@ -1,13 +1,5 @@
 import React from 'react';
-
 import PlansPanels from './panels/plansPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Plans = () => {
-	return (
-		<div className="container">
-			<PlansPanels />
-		</div>
-	);
-};
-
-export default Plans;
+export default function() { return <PanelsContainer Panels={PlansPanels} /> }

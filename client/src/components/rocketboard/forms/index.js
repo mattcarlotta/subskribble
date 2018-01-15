@@ -1,13 +1,5 @@
 import React from 'react';
-
 import FormsPanels from './panels/formsPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Forms = () => {
-	return (
-		<div className="container">
-			<FormsPanels />
-		</div>
-	);
-};
-
-export default Forms;
+export default function() { return <PanelsContainer Panels={FormsPanels} /> }

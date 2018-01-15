@@ -1,11 +1,5 @@
 import React from 'react';
-
 import TransactionsPanels from './panels/transactionsPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Transactions = () => (
-	<div className="container">
-		<TransactionsPanels />
-	</div>
-);
-
-export default Transactions;
+export default function() { return <PanelsContainer Panels={TransactionsPanels} /> }

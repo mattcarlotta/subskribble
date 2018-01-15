@@ -1,13 +1,5 @@
 import React from 'react';
-
 import CustomersPanels from './panels/customersPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Customers = () => {
-	return (
-		<div className="container">
-			<CustomersPanels />
-		</div>
-	);
-};
-
-export default Customers;
+export default function() { return <PanelsContainer Panels={CustomersPanels} /> }

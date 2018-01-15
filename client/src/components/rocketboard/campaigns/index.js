@@ -1,13 +1,5 @@
 import React from 'react';
-
 import CampaignsPanels from './panels/campaignsPanels';
+import PanelsContainer from '../app/panels/panelsContainer';
 
-const Campaigns = () => {
-	return (
-		<div className="container">
-			<CampaignsPanels />
-		</div>
-	);
-};
-
-export default Campaigns;
+export default function() { return <PanelsContainer Panels={CampaignsPanels} /> }
