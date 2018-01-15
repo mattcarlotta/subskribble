@@ -13,16 +13,14 @@ const Footer = () => {
 					</div>
 					<nav className="footer-grid-8">
 						<div className="footer-float-right">
-							{
-								map(LINKS, ({ link, icon, title}, key) => {
-									return (
-										<a key={key} href={link}>
-											<i className={`fa fa-${icon}`} aria-hidden="true" />
-											{title}
-										</a>
-									);
-								})
-							}
+							{map(LINKS, ({ link, icon, title}, key) => {
+								return (
+									<a key={key} href={link}>
+										<i className={`fa fa-${icon}`} aria-hidden="true" />
+										{title}
+									</a>
+								);
+							})}
 						</div>
 					</nav>
 				</div>

@@ -7,19 +7,13 @@ import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/remove-circle';
 
 class FilterField extends Component {
-  constructor() {
-    super();
-    this.state={ filterField: '' }
-    this.logInput = debounce(this.logInput, 300);
-  }
+  state = { filterField: '' }
 
-  logInput = value =>  this.setState({ filterField: value });
+  logInput = debounce(value => { this.setState({ filterField: value }) }, 300)
 
   resetField = () => this.setState({ filterField: '' });
 
-  handleFormChange = event => {
-    this.logInput(event.target.value);
-  }
+  handleFormChange = event => this.logInput(event.target.value);
 
   render() {
     const { className, floatingLabelText, reset } = this.props;

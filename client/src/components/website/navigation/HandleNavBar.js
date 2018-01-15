@@ -4,23 +4,21 @@ import React, { Component } from 'react';
 import Header from './header';
 
 export default class HandleNavBar extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { scrollY: window.scrollY, fixedNavBar: false };
-		this.handleScroll = throttle(this.handleWindowScroll, 100);
-	}
+	state = { scrollY: window.scrollY, fixedNavBar: false };
 
 	componentDidMount() {
-		window.addEventListener('scroll', this.handleScroll);
+		window.addEventListener('scroll', this.handleWindowScroll);
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('scroll', this.handleWindowScroll);
 	}
 
-	handleWindowScroll = () => {
+	handleWindowScroll = throttle(() => {
 		this.setState({ scrollY: window.scrollY, fixedNavBar: window.scrollY >= 30 ? true : false });
-	};
+	}, 100);
 
-	render() { return <Header fixedNavBar={this.state.fixedNavBar} /> }
+	render() {
+		return <Header fixedNavBar={this.state.fixedNavBar} />
+	}
 }

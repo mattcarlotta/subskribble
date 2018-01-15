@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { isSelected } from '../formfields/validateFormFields';
 
 const RenderPlanSelection = ({ PLANSELECTIONFIELDS, selectedPlan }) => {
-  const planSelectionField = (field) => {
+  const planSelectionField = ({ input, label, type, meta: { touched, error } }) => {
     return (
       <div className="plan-selection-container">
         {map(PLANSELECTIONFIELDS, ({ description, plan, price }) => {
@@ -25,7 +25,7 @@ const RenderPlanSelection = ({ PLANSELECTIONFIELDS, selectedPlan }) => {
               <div className="selection">
                 <RadioButtonGroup
                   name="selectedPlan"
-                  onChange={(event, value) => field.input.onChange(value)}
+                  onChange={(event, value) => input.onChange(value)}
                   valueSelected={selectedPlan}
                   >
                     <RadioButton
@@ -33,10 +33,10 @@ const RenderPlanSelection = ({ PLANSELECTIONFIELDS, selectedPlan }) => {
                       name={plan} />
                 </RadioButtonGroup>
               </div>
-              {field.meta.touched &&
-                field.meta.error &&
+              {touched &&
+                error &&
                 <div className="error-handlers">
-                  {field.meta.error}
+                  {error}
                 </div>
               }
             </div>
