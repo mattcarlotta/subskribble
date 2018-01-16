@@ -1,17 +1,17 @@
 import React from 'react';
 
 import Footer from './footer'
-import HandleNavBar from './HandleNavBar';
+import Header from './Header';
 
 export default WrappedComponent => {
 	const Wrapper = (props) => {
 		return (
 			<div className="wrapper-bg">
 				<div className="wrapper-filter">
-					<HandleNavBar />
+					<Header />
 					<WrappedComponent {...props} />
 					<Footer />
-				</div>				
+				</div>
 			</div>
 		);
 	}

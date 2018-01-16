@@ -13,6 +13,7 @@ class AddNewForm extends Component {
   state = { selectGateway: 0, selectPlan: 0 };
 
   handleGatewayChange = (event, index, value) => this.setState({ selectGateway: value });
+  
   handlePlanChange = (event, index, value) => this.setState({ selectPlan: value });
 
 	handleFormSubmit = (formProps) => {

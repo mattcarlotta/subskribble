@@ -22,9 +22,7 @@ const AddNewTemplate = ({ addNewTemplate, handleSubmit, submitting }) => {
   return (
     <div className="new-form-container">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        {
-          map(TEMPLATEFIELDS, ({ name, label, hintText, validate }, key) => {
-            return (
+        {map(TEMPLATEFIELDS, ({ name, label, hintText, validate }, key) => (
               <div key={key} className="input-container">
                 <Field
                   name={name}
@@ -36,9 +34,7 @@ const AddNewTemplate = ({ addNewTemplate, handleSubmit, submitting }) => {
                   validate={validate}
                 />
               </div>
-            )
-          })
-        }
+        ))}
         <Field
           name="template"
           type="text"
