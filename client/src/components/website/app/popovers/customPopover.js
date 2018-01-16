@@ -9,7 +9,6 @@ import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 const CustomPopover = ({
   anchorEl,
   handleRequestClose,
-  handleTabIcon,
   handleTouchTap,
   linkLabel,
   linkTabs,
@@ -17,10 +16,11 @@ const CustomPopover = ({
   tabOpen,
   TABS
 }) => {
+  const direction = tabOpen ? 'up' : 'down';
   return [
     <Link key={`${tabKey} Tab`} onClick={e => handleTouchTap(e, tabKey)}>
       { linkLabel }
-      { handleTabIcon(tabOpen) }
+      <i className={`fa fa-chevron-${direction} s-i`} aria-hidden="true" />
     </Link>,
     <Popover
       key={`${tabKey} Items`}
@@ -31,16 +31,13 @@ const CustomPopover = ({
       onRequestClose={handleRequestClose}
       >
         <Menu>
-          { linkTabs
-            ? map(TABS, ({ link, label }) => {
-              return (
-                <Link key={label} onClick={handleRequestClose} to={link}>
-                  <MenuItem primaryText={label} />
-                </Link>
-              )
-            })
-            : map(TABS, ({tab, nestedTabs}) => {
-              return (
+          {linkTabs
+            ? map(TABS, ({ link, label }) => (
+                  <Link key={label} onClick={handleRequestClose} to={link}>
+                    <MenuItem primaryText={label} />
+                  </Link>
+              ))
+            : map(TABS, ({tab, nestedTabs}) => (
                 <MenuItem
                   key={tab}
                   primaryText={tab}
@@ -50,8 +47,7 @@ const CustomPopover = ({
                     : null
                   }
                 />
-              )
-            })
+              ))
           }
         </Menu>
       </Popover>

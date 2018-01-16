@@ -40,11 +40,6 @@ class Header extends Component {
 
   handleRequestClose = () => this.setState({ industryTabOpen: false, tourTabOpen: false })
 
-	handleTabIcon = (tab) => {
-		const direction = tab ? 'up' : 'down';
-		return <span><i className={`fa fa-chevron-${direction} s-i`} aria-hidden="true" /></span>
-	}
-
 	render() {
 		const { adjustNavBG, anchorEl, fixedNavBar, industryTabOpen, tourTabOpen } = this.state;
 		const rbLogo = fixedNavBar ? rocketLogoBlack : rocketLogoWhite;
@@ -62,7 +57,6 @@ class Header extends Component {
 							<Link to="/">Home</Link>
 							<CustomPopover
 								anchorEl={anchorEl}
-								handleTabIcon={this.handleTabIcon}
 								handleTouchTap={this.handleTouchTap}
 								linkLabel="Industries"
 								handleRequestClose={this.handleRequestClose}
@@ -73,7 +67,6 @@ class Header extends Component {
 							<Link to="/pricing">Pricing</Link>
 							<CustomPopover
 								anchorEl={anchorEl}
-								handleTabIcon={this.handleTabIcon}
 								handleTouchTap={this.handleTouchTap}
 								linkLabel="Tour"
 								linkTabs={true}
