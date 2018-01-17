@@ -2,7 +2,6 @@
 import React from 'react';
 import { browserHistory, Router } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -19,10 +18,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 // APP CONFIG'D WITH REDUX STORE, BROWSERHISTORY AND APP VIEWS
 export default function() {
 	return (
-		<MuiThemeProvider>
-			<Provider store={store}>
-				<Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={views} />
-			</Provider>
-		</MuiThemeProvider>
+		<Provider store={store}>
+			<Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={views} />
+		</Provider>
 	);
 };

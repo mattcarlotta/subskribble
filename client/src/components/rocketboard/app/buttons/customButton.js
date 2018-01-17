@@ -1,15 +1,15 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Button } from 'antd';
 
-export default function({ className, floatStyle, label, onClickAction }) {
+export default function({ className, label, onClickAction }) {
   return (
     <div className={className}>
-      <RaisedButton
-        buttonStyle={{ backgroundColor: '#03a9f3', fontFamily: 'Poppins Semi-Bold, sans-serif' }}
-        label={label}
-        labelColor="#eee"
+      <Button
+        className="btn-primary"
         onClick={onClickAction}
-      />
+      >
+        {label}
+      </Button>
     </div>
   )
 }

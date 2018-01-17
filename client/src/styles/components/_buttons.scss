@@ -1,0 +1,28 @@
+.btn {
+  @extend .t-t-u;
+  color: $white;
+  border-radius: 6px;
+  font-family: 'Poppins Semi-Bold, sans-serif';
+  margin-top: 15px;
+}
+
+.btn-primary {
+  background-color: $lightblue;
+}
+
+.btn-danger {
+  background-color: $orange;
+
+  &:hover {
+    background-color: $red;
+  }
+}
+
+.btn-tertiary {
+  background-color: $darkwarmgrey;
+
+  &:hover {
+    color: $white;
+    background-color: $warmgrey;
+  }
+}

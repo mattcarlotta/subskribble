@@ -13,9 +13,9 @@ const InformationPricing = () => {
                 Choose a plan that fits your business
               </h2>
               <Button
-                backgroundColor="#e04d2d"
+                btnClassName="btn-danger"
                 border="none"
-                fontSize={16}
+                fontSize={17}
                 height={50}
                 label="Pricing"
                 link="/pricing"

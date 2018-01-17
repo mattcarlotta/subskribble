@@ -2,17 +2,16 @@
 @import 'base/animations';
 @import 'base/fonts';
 @import 'base/variables';
+@import '~antd/dist/antd.min.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~font-awesome/css/font-awesome.css";
 @import '~froala-editor/css/froala_style.min.css';
 @import '~froala-editor/css/froala_editor.pkgd.min.css';
-// @import "assets/css/material-icons.css";
-// @import "~bootstrap/dist/css/bootstrap.css";
-// @import '~slick-carousel/slick/slick.css';
-// @import '~slick-carousel/slick/slick-theme.css';
 
 // Components
 @import 'components/auth';
 @import 'components/body';
+@import 'components/buttons';
 // @import 'components/campaigns';
 // @import 'components/customers';
 @import 'components/dashboard';

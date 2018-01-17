@@ -18,7 +18,7 @@ const InformationServices = () => {
                   <div className="link">
                     {/* TODO Insert link for services */}
                     <Button
-                      backgroundColor="#665c5a"
+                      btnClassName="btn-tertiary"
                       border="1px solid #aba4a2"
                       fontSize={14}
                       height={46}

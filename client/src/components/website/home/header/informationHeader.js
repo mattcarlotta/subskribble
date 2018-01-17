@@ -13,7 +13,7 @@ const InformationHeader = () => {
 						Rocketbiller is the easiest way to create and manage recurring subscription payments.
 					</div>
           <Button
-            backgroundColor="#e04d2d"
+            btnClassName="btn-danger"
             border="none"
             fontSize={18}
             height={50}

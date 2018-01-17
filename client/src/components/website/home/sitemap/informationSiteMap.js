@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import NewsletterForm from '../../../../containers/forms/website/newsletterForm';
+// import NewsletterForm from '../../../../containers/forms/website/newsletterForm';
 
 const InformationSiteMap = () => {
   return (
@@ -11,7 +11,7 @@ const InformationSiteMap = () => {
           <div className="sitemap-block">
             <h2 className="title">Join our newsletter</h2>
             <p className="subtitle">Updates, upcoming themes, and great deals!</p>
-            <NewsletterForm />
+            {/* <NewsletterForm /> */}
           </div>
         </div>
         <div className="sitemap-width-4">
