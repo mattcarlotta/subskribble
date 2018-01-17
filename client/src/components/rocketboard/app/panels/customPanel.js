@@ -26,6 +26,7 @@ const CustomPanel = ({
     <div className={containerClassName}>
       <div className="panel-container">
         <Card
+          containerStyle={{ paddingBottom: 0 }}
           style={{ boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px' }}
           initiallyExpanded={initiallyExpanded}
           >
@@ -41,7 +42,7 @@ const CustomPanel = ({
             />
             <CardText
               expandable={true}
-              style={{ padding: "2px 16px" }}
+              style={{ padding: "0px 16px" }}
               >
                 { FORM && <FORM /> }
                 { CARDBODY && <CARDBODY /> }
