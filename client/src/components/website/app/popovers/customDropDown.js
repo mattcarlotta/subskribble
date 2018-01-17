@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 import { Menu, Dropdown, Icon } from 'antd';
 const { Item: MenuItem, SubMenu } = Menu;
 
-const nestedMenuItems = (label, nestedItems) => {
+const nestedMenuItems = (key, label, nestedItems) => {
   return (
-    <SubMenu key={label} title={label}>
+    <SubMenu className={key !== 0 && "menu-item"} key={label} title={label}>
       {map(nestedItems, itemName => (
         <MenuItem key={itemName}>
           {itemName}
@@ -24,13 +24,14 @@ const CustomDropDown = ({
 }) => {
   return (
     <Dropdown
+      trigger={['click']}
       overlay={
         <Menu>
           {
             map(TABS, ({ link, label, nestedItems }, key) => {
               return nestedItems
-              ? nestedMenuItems(label, nestedItems)
-              : <MenuItem key={key}>
+              ? nestedMenuItems(key, label, nestedItems)
+              : <MenuItem className={key !== 0 && "menu-item"} key={key}>
                     <Link to={link}>
                       {label}
                     </Link>
@@ -39,7 +40,6 @@ const CustomDropDown = ({
           }
         </Menu>
       }
-      trigger={['click']}
       >
         <Link className="ant-dropdown-link">
           {dropDownLabel} <Icon type="down" />
