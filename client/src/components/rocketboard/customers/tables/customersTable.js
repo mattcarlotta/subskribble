@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import React from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 
-export default function(CUSTOMERLIST) {
+export default function({CUSTOMERLIST}) {
   return (
     map(CUSTOMERLIST, ({ status, gateway, name, email, phone, subs },key) => {
       return (

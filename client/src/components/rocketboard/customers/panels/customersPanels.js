@@ -1,36 +1,39 @@
 import React from 'react';
 
 import { ACTIVECUSTOMERS, ACTIVECUSTOMERSBUTTONS, INACTIVECUSTOMERS, INACTIVECUSTOMERSBUTTONS, TABLEHEADERS } from '../fields/customersFieldsData';
-import Panel from '../../app/panels/customPanel';
+// import Panel from '../../app/panels/customPanel';
 import CustomerTable from '../tables/customersTable';
+import SliderPanel from '../../app/panels/SliderPanel';
 
-const CustomersPanels = () => [
-  <Panel
-    key="activecustomerspanel"
-    containerClassName="active-panel"
-    initiallyExpanded={true}
-    title="Active Customers"
-    selectFieldClassName="panel-1"
-    SELECTFIELDITEMS={['10', '20', '50', 'All']}
-    CUSTOMBUTTONS={ACTIVECUSTOMERSBUTTONS}
-    filterFieldLabel="Filter Active Customers"
-    FILTERFORM="FilterActiveCustomers"
-    TABLECONTENTS={CustomerTable(ACTIVECUSTOMERS)}
-    TABLEHEADERS={TABLEHEADERS}
-  />,
-  <Panel
-    key="inactivecustomerspanel"
-    containerClassName="inactive-panel"
-    initiallyExpanded={true}
-    title="Inactive Customers"
-    selectFieldClassName="panel-1"
-    SELECTFIELDITEMS={['10', '20', '50', 'All']}
-    CUSTOMBUTTONS={INACTIVECUSTOMERSBUTTONS}
-    filterFieldLabel="Filter Inactive Customers"
-    FILTERFORM="FilterInactiveCustomers"
-    TABLECONTENTS={CustomerTable(INACTIVECUSTOMERS)}
-    TABLEHEADERS={TABLEHEADERS}
-  />
+const SELECTFIELDITEMS = ['10', '20', '50', 'All']
+
+const CARDS = [
+  {
+    CUSTOMBUTTONS: ACTIVECUSTOMERSBUTTONS,
+    FILTERFIELDLABEL: "Filter Active Customers",
+    FILTERFORM: "FilterActiveCustomers",
+    SELECTFIELDITEMS,
+    TABLECONTENTS: <CustomerTable CUSTOMERLIST={ACTIVECUSTOMERS} />,
+    TABLEHEADERS
+  },
+  {
+    CUSTOMBUTTONS: INACTIVECUSTOMERSBUTTONS,
+    FILTERFIELDLABEL: "Filter Active Customers",
+    FILTERFORM: "FilterActiveCustomers",
+    SELECTFIELDITEMS,
+    TABLECONTENTS: <CustomerTable CUSTOMERLIST={INACTIVECUSTOMERS} />,
+    TABLEHEADERS
+  }
 ]
+
+const CustomersPanels = () => (
+  <SliderPanel
+    key="customers-panel"
+    CARDS={CARDS}
+    selectFieldClassName="panel-1"
+    TABS={["Active Customers", "Inactive Customers"]}
+  />
+)
+
 
 export default CustomersPanels;
