@@ -4,7 +4,6 @@
 #Client files and folders
 client/build
 client/etc
-client/public
 client/src/styles/assets
 client/src/styles/styles.css
 client/scripts
