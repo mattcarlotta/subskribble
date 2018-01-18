@@ -19,12 +19,9 @@ const InformationServices = () => {
                     {/* TODO Insert link for services */}
                     <Button
                       btnClassName="btn-tertiary"
-                      border="1px solid #aba4a2"
-                      fontSize={14}
-                      height={46}
                       label="Read More"
                       // link="/signup"
-                      width={160}
+                      style= {{ border: '1px solid #aba4a2', fontSize: 14, height: 50, width: 160 }}
                     />
                   </div>
                 </div>

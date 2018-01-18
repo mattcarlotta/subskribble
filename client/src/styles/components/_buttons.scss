@@ -1,19 +1,25 @@
 .btn {
   @extend .t-t-u;
-  color: $white;
+  color: $white !important;
   border-radius: 6px;
   font-family: 'Poppins Semi-Bold, sans-serif';
-  margin-top: 15px;
+  border: 0;
 }
 
 .btn-primary {
-  background-color: $lightblue;
+  background-color: $lightblue !important;
+
+  &:hover, &:focus {
+    @extend .no-link-focus;
+    background-color: $skyblue !important;
+  }
 }
 
 .btn-danger {
   background-color: $orange;
 
-  &:hover {
+  &:hover, &:focus {
+    @extend .no-link-focus;
     background-color: $red;
   }
 }

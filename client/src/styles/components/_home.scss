@@ -278,30 +278,17 @@
 }
 
 .newsletter-container {
-  margin-top: -15px;
+  margin-top: -10px;
 
-  .newsletter-width-50 {
-    @extend .f-l, .w-50;
-
-    & > div {
-      label {
-        color: $lightwarmgrey !important;
-        font-size: 16px !important;
-        font-family: $ralewayregular !important;
-      }
-      input {
-        color: $white !important;
-        font-family: $ralewayregular !important;
-      }
-
-      & > div {
-        color: $palered !important;
-      }
-    }
+  .newsletter-input {
+    @extend .f-l, .p-r;
+    top: 2px;
+    width: 205px;
   }
 
-  .newsletter-width-35 {
-    @extend .f-l, .w-35;
+  .newsletter-button {
+    @extend .f-l;
+    width: 20px;
     margin: 0 5px;
   }
 }

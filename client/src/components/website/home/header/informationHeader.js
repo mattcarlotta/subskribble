@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../../app/buttons/customButton';
-
 import metrics from '../../../../images/metrics.png';
 
 const InformationHeader = () => {
@@ -14,12 +13,9 @@ const InformationHeader = () => {
 					</div>
           <Button
             btnClassName="btn-danger"
-            border="none"
-            fontSize={18}
-            height={50}
             label="Signup"
             link="/signup"
-            width={215}
+            style= {{ fontSize: 18, height: 50, width: 215 }}
           />
 					<div className="img-container">
 						<img src={metrics} alt="metrics.png" />

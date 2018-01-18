@@ -1,16 +1,18 @@
 import React from 'react';
 import { Button } from 'antd';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
-export default function({ btnClassName, border, className, fontSize, height, label, onClickAction, width }) {
+export default function({ btnClassName, className, label, link, onClickAction, style }) {
   return (
     <div className={className}>
       <Button
         className={`btn ${btnClassName}`}
         onClick={onClickAction}
-        style={{ border, fontSize, height, width }}
+        style={{ ...style }}
       >
-        {label}
+        <Link to={link}>
+          {label}
+        </Link>
       </Button>
     </div>
   )

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Button from '../../app/buttons/customButton';
 
 const InformationPricing = () => {
@@ -14,12 +13,9 @@ const InformationPricing = () => {
               </h2>
               <Button
                 btnClassName="btn-danger"
-                border="none"
-                fontSize={17}
-                height={50}
+                style= {{ fontSize: 17, height: 50, width: 215 }}
                 label="Pricing"
                 link="/pricing"
-                width={215}
               />
             </div>
           </div>
