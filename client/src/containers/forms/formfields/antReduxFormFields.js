@@ -5,12 +5,12 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const { TextArea } = Input;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+export const { Option } = Select;
 
 const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, label, ...rest }) => {
   const hasError = touched && invalid;
   return (
     <FormItem
-      // {...formItemLayout}
       label={label}
       validateStatus={hasError ? 'error' : 'success'}
       help={hasError && error}
@@ -19,8 +19,6 @@ const CreateAntReduxField = Component => ({ children, input, meta: { invalid, to
     </FormItem>
   );
 };
-
-export const { Option } = Select;
 
 const AntSubmitButton = ({ label, pristine, submitting, style }) => (
   <Button

@@ -2,13 +2,10 @@ import map from 'lodash/map';
 import React from 'react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-
+import { AntFormSubmit, AntInput } from '../formfields/antReduxFormFields';
 import rocketLogo from '../../../images/logos/rocketbiller_logo.png';
 
-import { TextField } from 'redux-form-material-ui';
-import Button from '../formfields/renderFormButton';
-
-const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) => {
+const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, submitting }) => {
 	return (
 		<div>
 			<img className="auth-logo" src={rocketLogo} alt="rocketLogo.png" />
@@ -17,54 +14,42 @@ const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) 
 					<h3 className="auth-title">{formTitle}</h3>
 					<div className="auth-form">
 						<form onSubmit={handleSubmit}>
-							{map(FIELDS, ({ name, type, label, validateFields }, key) => {
-								return (
-									<span key={key}>
-										<Field
-											name={name}
-											type={type}
-											component={TextField}
-											floatingLabelText={label}
-											fullWidth={true}
-											style={{ fontSize: 15 }}
-											validate={validateFields}
-										/>
-										<br />
-									</span>
-								);
-							})}
-							{
-								(formTitle === 'Sign In')
-									? <div className="forgot-password">
-											<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
-										</div>
-									: null
+							{map(FIELDS, ({ name, type, label, validateFields }, key) => (
+								<Field
+									key={key}
+									name={name}
+									type={type}
+									component={AntInput}
+									placeholder={label}
+									style={{ fontSize: 15, width: '100%' }}
+									validate={validateFields}
+								/>
+							))}
+							{formTitle === 'Sign In' &&
+								<div className="forgot-password">
+									<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
+								</div>
 							}
 							<div className="auth-button">
-								<Button
-									backgroundColor="#03a9f3"
-									fontSize={18}
-									fullWidth={true}
-									height={45}
+								<AntFormSubmit
 									label={submitLabel}
-									primary={true}
+									pristine={pristine}
 									submitting={submitting}
-									type="submit"
+									style={{ fontSize: 18, height: 45, width: '100%' }}
 								/>
 							</div>
 						</form>
 					</div>
 					<p className="auth-link">
-					{
-						(formTitle === 'Sign In')
-							? <span>
-									Don't have an account?
-									<Link className="m-l-5" to="/signup">Sign Up</Link>
-								</span>
-							:	<span>
-									Already have an account?
-									<Link className="m-l-5" to="/login">Sign In</Link>
-								</span>
+					{formTitle === 'Sign In'
+						? <span>
+								Don't have an account?
+								<Link className="m-l-5" to="/signup">Sign Up</Link>
+							</span>
+						:	<span>
+								Already have an account?
+								<Link className="m-l-5" to="/login">Sign In</Link>
+							</span>
 					}
 					</p>
 				</div>

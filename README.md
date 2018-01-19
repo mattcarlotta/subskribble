@@ -1,6 +1,31 @@
 # Rocketbiller
 Rocketbiller - the easiest way to create and manage recurring subscription payments.
 
+## Quickstart Linux:
+
+### 1. Install NodeJS
+
+`curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
+`sudo apt-get install -y nodejs`
+
+### 2. Install MongoDB 3.4
+
+`sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6`
+`echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list`
+`sudo apt-get update && install -y mongodb-org`
+`sudo mkdir /data/db && chown -R $USER /data/db`
+`sudo systemctl start mongod`
+`sudo systemctl enable mongod`
+
+### 3. Install App Dependencies
+
+`npm i && cd client && npm i`
+
+### 4. Run Node Server
+
+`npm run dev`
+
+
 ## Quickstart OSX:
 
 ### 1. Install NodeJS
@@ -8,27 +33,24 @@ Rocketbiller - the easiest way to create and manage recurring subscription payme
 `$ brew update`
 `$ brew install node `
 
-### 2. MongoDB 3.0
-`brew install mongodb`
+### 2. Install MongoDB 3.4
 
-### 3. App
-`npm install`
+`brew install mongodb@3.4`
+`sudo systemctl start mongod`
+`sudo systemctl enable mongod`
 
-### 4. Bower
-`npm install -g bower`
+### 3. Install App Dependencies
 
-### 5. Frontend
-`bower install`
+`npm i && cd client && npm i`
 
-### 6. Make sure redis is installed & running
-
-`redis-server --daemonize yes`
-
-### 7. Boot up node server
+### 4. Run Node Server
 
 `npm run dev`
 
-# Compile Less
+
+## Compile for production
+
+`cd client && npm run build`
 
 
 # Day to Day Development Workflow
@@ -59,7 +81,9 @@ Install with:
 `npm install -g flightplan`
 
 Deploy to staging:
+
 `fly staging`
 
 Deploy to production:
+
 `fly production`

@@ -1,17 +1,27 @@
+.ant-btn:focus, .ant-btn:hover, .ant-btn.disabled, .ant-btn.disabled.active, .ant-btn.disabled:active, .ant-btn.disabled:focus, .ant-btn.disabled:hover, .ant-btn[disabled], .ant-btn[disabled].active, .ant-btn[disabled]:active, .ant-btn[disabled]:focus, .ant-btn[disabled]:hover {
+  color: $white;
+  background-color: $lightblue;
+}
+
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  color: $white;
+  background-color: $rbblue;
+  border-color: $deepblue;
+}
+
 .btn {
   @extend .t-t-u;
-  color: $white !important;
   border-radius: 6px;
   font-family: 'Poppins Semi-Bold, sans-serif';
   border: 0;
 }
 
 .btn-primary {
-  background-color: $lightblue !important;
+  background-color: $lightblue;
 
   &:hover, &:focus {
     @extend .no-link-focus;
-    background-color: $skyblue !important;
+    background-color: $skyblue;
   }
 }
 

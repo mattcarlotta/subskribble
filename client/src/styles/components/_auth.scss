@@ -30,11 +30,11 @@
       @extend .m-b-20;
 
       .auth-button {
-        @extend .m-t-20;
+        margin-top: 5px;
       }
 
       .forgot-password {
-        margin-top: 15px;
+        margin-top: 10px;
         a { @extend .c-wg; }
       }
     }

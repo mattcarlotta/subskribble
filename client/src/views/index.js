@@ -10,10 +10,10 @@ import App from '../components/app';
 // import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
 // import FAQs from '../components/rocketboard/faqs';
 // import Forms from '../components/rocketboard/forms';
-// import ForgotPassword from '../containers/forms/website/resetpasswordForm';
+import ForgotPassword from '../containers/forms/website/resetpasswordForm';
 import Home from '../components/website/home';
 // import Invoices from '../components/rocketboard/invoices';
-// import LogIn from '../containers/forms/website/loginForm';
+import LogIn from '../containers/forms/website/loginForm';
 import NotFound from '../components/app/notfound/404';
 // import Plans from '../components/rocketboard/plans';
 // import Pricing from '../components/website/pricing';
@@ -23,7 +23,7 @@ import NotFound from '../components/app/notfound/404';
 // import Messages from '../components/rocketboard/messages';
 import NavWrapper from '../components/website/navigation/NavWrapper';
 // import Settings from '../components/rocketboard/settings';
-// import SignUp from '../containers/forms/website/signupForm';
+import SignUp from '../containers/forms/website/signupForm';
 // import Subscriptions from '../components/rocketboard/subscriptions';
 // import Templates from '../components/rocketboard/templates';
 // import Transactions from '../components/rocketboard/transactions';
@@ -34,11 +34,11 @@ export const views = (
 	<div>
 		<Route path="/" component={NavWrapper(App)}>
 			<IndexRoute component={Home} />
-			{/* <Route path="customer-signup/:gateway" component={CustomerSignup} />
+			{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
 			<Route path="forgot-password" component={ForgotPassword} />
 			<Route path="login" component={LogIn} />
-			<Route path="pricing" component={Pricing} />
-			<Route path="signup" component={SignUp} /> */}
+			{/* <Route path="pricing" component={Pricing} /> */}
+			<Route path="signup" component={SignUp} />
 		</Route>
 
 		<Redirect from="/rocketboard" to="/rocketboard/dashboard" />
