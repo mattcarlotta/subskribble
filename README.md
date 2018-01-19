@@ -28,27 +28,31 @@ Rocketbiller - the easiest way to create and manage recurring subscription payme
 
 ## Quickstart OSX:
 
-### 1. Install NodeJS
+### 1. Install Brew
 
-- `$ brew update`
-- `$ brew install node `
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-### 2. Install MongoDB 3.4
+### 2. Install NodeJS
+
+- `brew update`
+- `brew install node `
+
+### 3. Install MongoDB 3.4
 
 - `brew install mongodb@3.4`
 - `sudo systemctl start mongod`
 - `sudo systemctl enable mongod`
 
-### 3. Install App Dependencies
+### 4. Install App Dependencies
 
 - `npm i && cd client && npm i`
 
-### 4. Run Node Server
+### 5. Run Node Server
 
 - `npm run dev`
 
 
-## Compile for production
+# Compile for production
 
 - `cd client && npm run build`
 
