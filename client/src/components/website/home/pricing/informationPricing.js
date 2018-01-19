@@ -13,7 +13,7 @@ const InformationPricing = () => {
               </h2>
               <Button
                 btnClassName="btn-danger"
-                style= {{ fontSize: 17, height: 50, width: 215 }}
+                style= {{ fontSize: 17, height: 50, marginTop: 15, width: 215 }}
                 label="Pricing"
                 link="/pricing"
               />

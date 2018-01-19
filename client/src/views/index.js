@@ -16,7 +16,7 @@ import Home from '../components/website/home';
 import LogIn from '../containers/forms/website/loginForm';
 import NotFound from '../components/app/notfound/404';
 // import Plans from '../components/rocketboard/plans';
-// import Pricing from '../components/website/pricing';
+import Pricing from '../components/website/pricing';
 // import Profile from '../components/rocketboard/profile';
 // import OnLoadAuth from '../containers/app/OnLoadAuth';
 // import RequireAuth from '../containers/auth/RequireAuth';
@@ -37,7 +37,7 @@ export const views = (
 			{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
 			<Route path="forgot-password" component={ForgotPassword} />
 			<Route path="login" component={LogIn} />
-			{/* <Route path="pricing" component={Pricing} /> */}
+			<Route path="pricing" component={Pricing} />
 			<Route path="signup" component={SignUp} />
 		</Route>
 

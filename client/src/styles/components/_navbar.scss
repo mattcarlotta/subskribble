@@ -1,6 +1,9 @@
 .adjust-bg {
-  // @extend .bg;
   background-color: $rbblue;
+}
+
+.ant-dropdown-menu-submenu:first-child {
+  z-index: 2000;
 }
 
 .nav-header {
@@ -60,7 +63,7 @@
   @extend .w-100;
 	position: fixed;
 	z-index: 1000;
-	background-color: $owhite;
+	background-color: $formgrey;
   border-bottom: 1.5px solid $black;
   -webkit-animation-name: fadeIn;
 	-webkit-animation-duration: 0.5s;

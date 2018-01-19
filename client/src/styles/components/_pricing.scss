@@ -208,11 +208,10 @@
   		font-family: $ralewayextralight;
   		font-size: 37.5px;
       margin: 10px;
+    }
 
-      .subtitle {
-        @extend .c-w, .rt-title-tag;
-        word-wrap: break-word;
-      }
+    .subtitle {
+      @extend .c-w, .rt-title-tag;
     }
   }
 
@@ -220,7 +219,7 @@
     @extend .m-a, .w-100;
     height: 500px;
     max-width: 1200px;
-    padding-top: 30px;
+    padding-top: 50px;
 
     .pricing-contact-grid-12 {
       @extend .w-1200;
@@ -230,21 +229,7 @@
         width: 600px;
 
         .contact-form {
-          & > form > div {
-            label {
-              color: $lightwarmgrey !important;
-              font-size: 16px !important;
-              font-family: $ralewayregular !important;
-            }
-            input, textarea {
-              color: $white !important;
-              font-family: $ralewayregular !important;
-            }
-
-            & > div {
-              color: $palered !important;
-            }
-          }
+          margin-top: 20px;
         }
       }
     }

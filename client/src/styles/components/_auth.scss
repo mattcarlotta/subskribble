@@ -29,10 +29,6 @@
     .auth-form {
       @extend .m-b-20;
 
-      .auth-button {
-        margin-top: 5px;
-      }
-
       .forgot-password {
         margin-top: 10px;
         a { @extend .c-wg; }

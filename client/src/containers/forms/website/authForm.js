@@ -1,11 +1,10 @@
-import map from 'lodash/map';
 import React from 'react';
 import { Link } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
-import { AntFormSubmit, AntInput } from '../formfields/antReduxFormFields';
+import { reduxForm } from 'redux-form';
+import { AntFormFields, AntFormSubmit } from '../formfields/antReduxFormFields';
 import rocketLogo from '../../../images/logos/rocketbiller_logo.png';
 
-const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, submitting }) => {
+const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting }) => {
 	return (
 		<div>
 			<img className="auth-logo" src={rocketLogo} alt="rocketLogo.png" />
@@ -14,30 +13,18 @@ const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, subm
 					<h3 className="auth-title">{formTitle}</h3>
 					<div className="auth-form">
 						<form onSubmit={handleSubmit}>
-							{map(FIELDS, ({ name, type, label, validateFields }, key) => (
-								<Field
-									key={key}
-									name={name}
-									type={type}
-									component={AntInput}
-									placeholder={label}
-									style={{ fontSize: 15, width: '100%' }}
-									validate={validateFields}
-								/>
-							))}
-							{formTitle === 'Sign In' &&
+							<AntFormFields FIELDS={FIELDS} />
+							{showForgotPassword &&
 								<div className="forgot-password">
 									<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
 								</div>
 							}
-							<div className="auth-button">
-								<AntFormSubmit
-									label={submitLabel}
-									pristine={pristine}
-									submitting={submitting}
-									style={{ fontSize: 18, height: 45, width: '100%' }}
-								/>
-							</div>
+							<AntFormSubmit
+								label={submitLabel}
+								pristine={pristine}
+								submitting={submitting}
+								style={{ fontSize: 18, height: 45, marginTop: 5, width: '100%' }}
+							/>
 						</form>
 					</div>
 					<p className="auth-link">

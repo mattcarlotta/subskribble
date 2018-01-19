@@ -1,4 +1,6 @@
+import map from 'lodash/map';
 import React from 'react';
+import { Field } from 'redux-form';
 import { Button, Checkbox, DatePicker, Form, Input, Radio, Select, Switch } from "antd";
 
 const FormItem = Form.Item;
@@ -57,6 +59,20 @@ export const AntFormButtons = ({ label, pristine, reset, submitting }) => (
     </Button>
   </FormItem>
 )
+
+export const AntFormFields = ({ FIELDS }) => {
+  return map(FIELDS, ({ name, type, component, label, style, validateFields }, key) => (
+    <Field
+      key={key}
+      name={name}
+      type={type}
+      component={component}
+      placeholder={label}
+      style={{ fontSize: 15, width: '100%', ...style }}
+      validate={validateFields}
+    />
+  ))
+}
 
 export const AntCheckbox = CreateAntReduxField(Checkbox);
 export const AntInput = CreateAntReduxField(Input);

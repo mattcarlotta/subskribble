@@ -8,8 +8,8 @@ const PricingContact = () => {
 			<div className="pricing-contact-title-container">
 				<h2 className="title">
           Still have some questions?
-          <span className="subtitle">Send us a message</span>
         </h2>
+        <p className="subtitle">Send us a message</p>
 			</div>
       <div className="pricing-contact-container">
         <div className="pricing-contact-grid-12">

@@ -1,8 +1,6 @@
 import map from 'lodash/map';
 import React from 'react';
-
 import Button from '../../app/buttons/customButton';
-
 import PRICINGFIELDS from './pricingTableFields';
 
 const PricingTable = () => {
@@ -29,13 +27,10 @@ const PricingTable = () => {
                     </div>
                     <div className="table-bottom">
                     <Button
-                      backgroundColor="#e04d2d"
-                      border="none"
-                      fontSize={15}
-                      height={50}
+                      btnClassName="btn-danger"
                       label={buttonLabel}
                       link={buttonLink}
-                      width={200}
+                      style= {{ fontSize: 15, height: 50, width: 200 }}
                     />
                   </div>
                 </div>
