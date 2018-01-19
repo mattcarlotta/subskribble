@@ -1,40 +1,40 @@
-import { SelectField, Toggle } from 'redux-form-material-ui';
+import { AntInput, AntSelect, AntSwitch } from './antReduxFormFields';
 import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 export const ADDRESSFIELDS = [
-  { className: "input-75 f-l", name: "contactAddress", floatingLabelText: "Address", width: "95%", validate: [isRequired, allowedCharacters] },
-  { className: "input-25 f-r", name: "contactUnit", floatingLabelText: "Unit, Apt, or Suite #", width: "100%", },
-  { className: "input-50 f-l", name: "contactCity", floatingLabelText: "City", width: "95%", validate: [isRequired, allowedCharacters] },
-  { className: "input-25 f-l", name: "contactState", floatingLabelText: "State", normalize: formatState, width: "90%", validate: [isRequired, isValidState] },
-  { className: "input-25 f-r", name: "contactZip", floatingLabelText: "Zip Code", normalize: formatZip, width: "100%", validate: [isRequired]},
+  { className: "input-75 f-l", component: AntInput, name: "contactAddress", label: "Address", style:{ width: "95%" }, validateFields: [isRequired, allowedCharacters] },
+  { className: "input-25 f-r", component: AntInput, name: "contactUnit", label: "Unit, Apt, or Suite #", style:{ width: "100%" }, },
+  { className: "input-50 f-l", component: AntInput, name: "contactCity", label: "City", style:{ width: "95%" }, validateFields: [isRequired, allowedCharacters] },
+  { className: "input-25 f-l", component: AntInput, name: "contactState", label: "State", normalize: formatState, style:{ width: "90%" }, validateFields: [isRequired, isValidState] },
+  { className: "input-25 f-r", component: AntInput, name: "contactZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, validateFields: [isRequired]},
 ]
 
 export const billingAddressFields = (setField, resetField) => {
   return [
-    { component: Toggle, name: "sameBillingAddress", label: "Same As Address", labelPosition: "right", onChange: (e, index, value ) => !value ? setField() : resetField(),  width: "95%", validate: [isRequired, allowedCharacters] },
-    { className: "input-75 f-l", name: "billingAddress", floatingLabelText: "Address", width: "95%", validate: [isRequired, allowedCharacters] },
-    { className: "input-25 f-r", name: "billingUnit", floatingLabelText: "Unit, Apt, or Suite #", width: "100%", },
-    { className: "input-50 f-l", name: "billingCity", floatingLabelText: "City", width: "95%", validate: [isRequired, allowedCharacters] },
-    { className: "input-25 f-l", name: "billingState", floatingLabelText: "State", width: "90%", validate: [isRequired, isValidState], normalize: formatState },
-    { className: "input-25 f-r", name: "billingZip", floatingLabelText: "Zip Code", width: "100%", validate: [isRequired], normalize: formatZip},
+    { className: "", component: AntSwitch, name: "sameBillingAddress", onChange: (e, index, value ) => !value ? setField() : resetField(),  style:{ width: "20" } },
+    { className: "input-75 f-l", component: AntInput, name: "billingAddress", label: "Address", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
+    { className: "input-25 f-r", component: AntInput, name: "billingUnit", label: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
+    { className: "input-50 f-l", component: AntInput, name: "billingCity", label: "City", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
+    { className: "input-25 f-l", component: AntInput, name: "billingState", label: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidState] },
+    { className: "input-25 f-r", component: AntInput, name: "billingZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validateFields: [isRequired]},
   ]
 }
 
 export const CONTACTFIELDS = [
-  { className: "input-50 f-l", name: "contactFirstName", floatingLabelText: "First Name", width: '95%', validate: [isRequired, allowedCharacters] },
-  { className: "input-50 f-r", name: "contactLastName", floatingLabelText: "Last Name", width: '95%', validate: [isRequired, allowedCharacters] },
-  { className: "input-50 f-l", name: "contactEmail", floatingLabelText: "Email Address", width: '95%', validate: [isRequired, isValidEmail] },
-  { className: "input-50 f-r", name: "contactPhone", normalize: formatPhone, validate: isValidPhone, width: '95%', floatingLabelText: "Phone Number (optional)" },
+  { className: "input-50 f-l", component: AntInput, name: "contactFirstName", label: "First Name", style:{ width: '95%' }, type: "text", validateFields: [isRequired, allowedCharacters] },
+  { className: "input-50 f-r", component: AntInput, name: "contactLastName", label: "Last Name", style:{ width: '95%' }, type: "text", validateFields: [isRequired, allowedCharacters] },
+  { className: "input-50 f-l", component: AntInput, name: "contactEmail", label: "Email Address", style:{ width: '95%' }, type: "text", validateFields: [isRequired, isValidEmail] },
+  { className: "input-50 f-r", component: AntInput, name: "contactPhone", label: "Phone Number (optional)", normalize: formatPhone, style:{ width: '95%' }, type: "text", validateFields: isValidPhone },
 ]
 
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 export const CREDITCARDFIELDS = [
-  { className: "input-40 f-l", name: "creditCard", floatingLabelText: "Credit Card", normalize: formatCreditCard, validate: [isRequired, isValidCC], width: "95%" },
-  { className: "input-20 f-l", name: "creditCardExpMonth", component: SelectField, floatingLabelText: "Exp. Month", validate: isRequired, width: "90%", MENUITEMS },
-  { className: "input-20 f-l", name: "creditCardExpYear", hintText: "YYYY", floatingLabelText: "Exp. Year", normalize: formatYear, validate: [isRequired, isValidYear], width: "90%" },
-  { className: "input-20 f-l", name: "creditCardCVV", hintText: "XXX", floatingLabelText: "CVV", normalize: formatCVV, validate: [isRequired, isValidCVV], width: "90%" },
+  { className: "input-40 f-l", component: AntInput, name: "creditCard", label: "Credit Card", normalize: formatCreditCard, style:{ width: "95%" }, type: "text", validateFields: [isRequired, isValidCC] },
+  { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", label: "Exp. Month", selectOptions: MENUITEMS, style:{ width: "90%" }, type: "text", validateFields: isRequired },
+  { className: "input-20 f-l", component: AntInput, name: "creditCardExpYear", hintText: "YYYY", label: "Exp. Year", normalize: formatYear, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidYear] },
+  { className: "input-20 f-l", component: AntInput, name: "creditCardCVV", hintText: "XXX", label: "CVV", normalize: formatCVV, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidCVV] },
 ]
 
 export const PLANSELECTIONFIELDS = [

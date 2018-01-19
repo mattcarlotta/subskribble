@@ -26,19 +26,20 @@
 }
 
 .btn-danger {
-  background-color: $orange;
+  background-color: $orange !important;
 
   &:hover, &:focus {
     @extend .no-link-focus;
-    background-color: $red;
+    background-color: $red !important;
   }
 }
 
 .btn-tertiary {
-  background-color: $darkwarmgrey;
+  background-color: $darkwarmgrey !important;
 
-  &:hover {
+  &:hover, &:focus {
+    @extend .no-link-focus;
     color: $white;
-    background-color: $warmgrey;
+    background-color: $warmgrey !important;
   }
 }

@@ -21,7 +21,7 @@ const InformationServices = () => {
                       btnClassName="btn-tertiary"
                       label="Read More"
                       // link="/signup"
-                      style= {{ border: '1px solid #aba4a2', fontSize: 14, height: 50, width: 160 }}
+                      style= {{ border: '1px solid #aba4a2', color: '#ffffff', fontSize: 14, height: 50, width: 160 }}
                     />
                   </div>
                 </div>

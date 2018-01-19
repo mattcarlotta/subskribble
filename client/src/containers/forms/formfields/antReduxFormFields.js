@@ -17,29 +17,32 @@ const CreateAntReduxField = Component => ({ children, input, meta: { invalid, to
       validateStatus={hasError ? 'error' : 'success'}
       help={hasError && error}
     >
-      <Component {...input} {...rest} children={children} />
+      <Component {...input} {...rest} children={children}  />
     </FormItem>
   );
 };
 
-const AntSubmitButton = ({ label, pristine, submitting, style }) => (
+
+const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) => (
   <Button
     className="btn btn-primary"
     disabled={pristine || submitting}
-    htmlType="submit"
+    htmlType={type}
+    onClick={onClick}
     style={{ ...style }}
   >
     { label }
   </Button>
 )
 
-export const AntFormSubmit = ({ label, pristine, submitting, style }) => (
+export const AntFormSubmit = ({ label, pristine, submitting, style, type }) => (
   <FormItem>
     <AntSubmitButton
       label={label}
       pristine={pristine}
       submitting={submitting}
       style={style}
+      type="submit"
     />
   </FormItem>
 )
@@ -50,6 +53,7 @@ export const AntFormButtons = ({ label, pristine, reset, submitting }) => (
       label={label}
       pristine={pristine}
       submitting={submitting}
+      type="submit"
     />
     <Button
       disabled={pristine || submitting}
@@ -60,17 +64,41 @@ export const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   </FormItem>
 )
 
-export const AntFormFields = ({ FIELDS }) => {
-  return map(FIELDS, ({ name, type, component, label, style, validateFields }, key) => (
-    <Field
-      key={key}
-      name={name}
-      type={type}
-      component={component}
-      placeholder={label}
-      style={{ fontSize: 15, width: '100%', ...style }}
-      validate={validateFields}
+export const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+  <FormItem>
+    <AntSubmitButton
+      label={backLabel}
+      onClick={onClickBack}
+      style={backStyle}
     />
+    <AntSubmitButton
+      label={submitLabel}
+      pristine={pristine}
+      style={submitStyle}
+      submitting={submitting}
+      type="submit"
+    />
+  </FormItem>
+)
+
+export const AntFormFields = ({ FIELDS }) => {
+  return map(FIELDS, ({ className, component, name, label, normalize, onChange, selectOptions, style, type, validateFields }, key) => (
+    <div key={key} className={className}>
+      <Field
+        name={name}
+        component={component}
+        normalize={normalize}
+        onChange={onChange}
+        placeholder={label}
+        style={{ fontSize: 15, ...style }}
+        type={type}
+        validate={validateFields}
+      >
+        {selectOptions && map(selectOptions, value => (
+          <Option key={value} value={value}>{value}</Option>
+        ))}
+      </Field>
+    </div>
   ))
 }
 

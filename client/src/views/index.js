@@ -5,7 +5,7 @@ import App from '../components/app';
 // import Campaigns from '../components/rocketboard/campaigns';
 // import ContactUs from '../components/rocketboard/contact';
 // import Customers from '../components/rocketboard/customers';
-// import CustomerSignup from '../containers/forms/website/CustomerSignupForm';
+import CustomerSignup from '../containers/forms/website/CustomerSignupForm';
 // import Dashboard from '../components/rocketboard/dashboard';
 // import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
 // import FAQs from '../components/rocketboard/faqs';
@@ -34,7 +34,7 @@ export const views = (
 	<div>
 		<Route path="/" component={NavWrapper(App)}>
 			<IndexRoute component={Home} />
-			{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
+			<Route path="customer-signup/:gateway" component={CustomerSignup} />
 			<Route path="forgot-password" component={ForgotPassword} />
 			<Route path="login" component={LogIn} />
 			<Route path="pricing" component={Pricing} />

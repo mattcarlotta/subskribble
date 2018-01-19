@@ -1,10 +1,11 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 
-import RenderFields from '../formfields/renderFields'
-import RenderPlanSelection from '../formfields/renderPlanSelection';
-import ReviewPlanForm from '../formfields/reviewPlanForm';
-import Button from '../formfields/renderFormButton';
+// import RenderFields from '../formfields/renderFields'
+import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
+// import RenderPlanSelection from '../formfields/renderPlanSelection';
+// import ReviewPlanForm from '../formfields/reviewPlanForm';
+// import Button from '../formfields/renderFormButton';
 
 const RegisterPlanForm = ({
   handleSubmit,
@@ -15,6 +16,7 @@ const RegisterPlanForm = ({
   mainTitle,
   onClickBack,
   onSubmit,
+  pristine,
   PLANSELECTIONFIELDS,
   PLANSELECTIONS,
   RIGHTFIELDS,
@@ -29,39 +31,30 @@ const RegisterPlanForm = ({
           <div className="left-form">
             <h3>{leftTitle}</h3>
             <div className="input-95">
-              { RenderFields(LEFTFIELDS) }
+              <AntFormFields FIELDS={LEFTFIELDS} />
             </div>
           </div>
         }
-        { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
-        { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
+        {/* { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> } */}
+        {/* { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> } */}
         { RIGHTFIELDS &&
           <div className="right-form">
             <h3>{rightTitle}</h3>
             <div className="input-100">
-              { RenderFields(RIGHTFIELDS) }
+              <AntFormFields FIELDS={RIGHTFIELDS} />
             </div>
           </div>
         }
         <div className="clear-fix" />
         <hr />
-        { onClickBack &&
-          <Button
-            backgroundColor="#03a9f3"
-            floatStyle="left"
-            height={50}
-            label="Back"
-            onClick={onClickBack}
-          />
-        }
-        <Button
-          backgroundColor="#03a9f3"
-          label={ finished ? "Subscribe" : "Next"}
-          fullWidth={false}
-          floatStyle="right"
-          height={50}
+        <AntStepFormButtons
+          backLabel="Back"
+          backStyle={{ height: 50, float: 'left' }}
+          onClickBack={onClickBack}
+          pristine={pristine}
+          submitLabel={ finished ? "Subscribe" : "Next" }
+          submitStyle= {{ height: 50, float: 'right' }}
           submitting={submitting}
-          type="submit"
         />
       </form>
     </div>
