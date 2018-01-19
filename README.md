@@ -30,7 +30,7 @@ Rocketbiller - the easiest way to create and manage recurring subscription payme
 
 ### 1. Install Brew
 
-`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+- `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 ### 2. Install NodeJS
 
@@ -52,20 +52,20 @@ Rocketbiller - the easiest way to create and manage recurring subscription payme
 - `npm run dev`
 
 
-# Compile for production
+# Compile Front-End For Production
 
 - `cd client && npm run build`
 
 
 # Day to Day Development Workflow
 
-Since we've got multiple features going on at any given time we need to make sure that master is in reasonable shape at any given time to be deployed to production. As a general rule of thumb, this should be the workflow for development of new features / bug fixes:
+Since we have multiple features going on at any given time, we need to make sure that the master branch is in reasonable shape to be deployed to production. As a general rule of thumb, this should be the workflow for development of new features / bug fixes:
 
 1. Create a branch with your name followed by a feature description. For eg. 'fred/document-day-to-day-workflow'
 2. Add your feature / squish that bug.
 3. Open a Pull Request for another developer to review
 
-# Enabling a user an admin in mongo db
+# Enabling An Admin in Mongodb
 
 Make sure that you have a development user setup in your db
 
