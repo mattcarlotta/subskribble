@@ -8,6 +8,7 @@ client/src/styles/assets
 client/src/styles/styles.css
 client/scripts
 client/src/images
+client/node_modules
 
 #Server files and folders
 uploads/
