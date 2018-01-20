@@ -10,7 +10,7 @@
 .customer-signup-bg {
   height: 100%;
   // background-color: $white;
-  background-color: $formgrey;
+  background-color: $whiteblue;
 
   .customer-signup-container {
     padding-top: 100px;
@@ -64,6 +64,8 @@
           @extend .f-l;
           height: 380px;
           width: 23.5%;
+          max-width: 300px;
+          min-width: 200px;
           border-top: 1px solid rgba(120, 130, 140, 0.23);
           border-left: 1px solid rgba(120, 130, 140, 0.23);
           border-right: 1px solid rgba(120, 130, 140, 0.23);

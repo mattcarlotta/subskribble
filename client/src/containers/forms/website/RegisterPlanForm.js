@@ -1,13 +1,14 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux'
 
 // import RenderFields from '../formfields/renderFields'
 import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
-// import RenderPlanSelection from '../formfields/renderPlanSelection';
-// import ReviewPlanForm from '../formfields/reviewPlanForm';
+import RenderPlanSelection from '../formfields/renderPlanSelection';
+import ReviewPlanForm from '../formfields/reviewPlanForm';
 // import Button from '../formfields/renderFormButton';
 
-const RegisterPlanForm = ({
+let RegisterPlanForm = ({
   handleSubmit,
   editStep,
   finished,
@@ -35,8 +36,8 @@ const RegisterPlanForm = ({
             </div>
           </div>
         }
-        {/* { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> } */}
-        {/* { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> } */}
+        { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
+        { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
         { RIGHTFIELDS &&
           <div className="right-form">
             <h3>{rightTitle}</h3>
@@ -61,4 +62,13 @@ const RegisterPlanForm = ({
   );
 };
 
-export default reduxForm({ form: 'CustomerPlanSignup', destroyOnUnmount: false, enableReinitialize: true, keepDirtyOnReinitialize: true })(RegisterPlanForm);
+RegisterPlanForm = reduxForm({
+  form: 'CustomerPlanSignup',
+  destroyOnUnmount: false,
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true
+})(RegisterPlanForm)
+
+export default RegisterPlanForm = connect(
+  state => ({ initialValues: { creditCardExpMonth: '01' } })
+)(RegisterPlanForm)

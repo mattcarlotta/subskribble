@@ -20,18 +20,17 @@ class CustomerPlanSignup extends Component {
 
   handleFormSave = (formProps) => {
     console.log(formProps);
-    this.handleNext();
     // this.props.customerRegisterToPlan(formProps);
   }
 
-  editStep = (number) => this.setState({ stepIndex: number });
+  editStep = (number) => this.setState({ stepIndex: number - 1 });
 
   handleNext = () => {
     const { stepIndex, visited } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
       visited: visited.concat(stepIndex),
-      wasReviewed: visited.length > 2 && true
+      wasReviewed: visited.length > 1 && true
     })
   }
 
@@ -40,7 +39,7 @@ class CustomerPlanSignup extends Component {
   }
 
   render() {
-    const { BILLINGADDRESSFIELDS, stepIndex, stepLabels, visited, wasReviewed } = this.state;
+    const { BILLINGADDRESSFIELDS, stepIndex, stepLabels, wasReviewed } = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -52,27 +51,42 @@ class CustomerPlanSignup extends Component {
             <Steps current={stepIndex}>
               {map(stepLabels, (label, key) => (
                 <Step
+                  className={wasReviewed ? "fix-cursor" : "" }
                   key={label}
+                  onClick={wasReviewed ? () => this.editStep(key+1) : undefined}
                   title={label}
                 />
               ))}
             </Steps>
           </div>
           {{0: <RegisterPlanForm
-                LEFTFIELDS={CONTACTFIELDS}
-                leftTitle="Contact Information"
-                onSubmit={this.handleNext}
-                RIGHTFIELDS={ADDRESSFIELDS}
-                rightTitle="Address"
-              />,
+                  LEFTFIELDS={CONTACTFIELDS}
+                  leftTitle="Contact Information"
+                  onSubmit={this.handleNext}
+                  RIGHTFIELDS={ADDRESSFIELDS}
+                  rightTitle="Address"
+                />,
             1: <RegisterPlanForm
-                LEFTFIELDS={BILLINGADDRESSFIELDS}
-                leftTitle="Billing Address"
+                  LEFTFIELDS={BILLINGADDRESSFIELDS}
+                  leftTitle="Billing Address"
+                  onClickBack={this.handlePrev}
+                  onSubmit={this.handleNext}
+                  RIGHTFIELDS={CREDITCARDFIELDS}
+                  rightTitle="Credit Card Information"
+                />,
+            2: <RegisterPlanForm
+                  onClickBack={this.handlePrev}
+                  onSubmit={this.handleNext}
+                  PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
+                />,
+            3: <RegisterPlanForm
+                editStep={this.editStep}
+                finished={true}
+                mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
                 onClickBack={this.handlePrev}
-                onSubmit={this.handleNext}
-                RIGHTFIELDS={CREDITCARDFIELDS}
-                rightTitle="Credit Card Information"
-              />,
+                onSubmit={this.handleFormSave}
+                PLANSELECTIONS={PLANSELECTIONFIELDS}
+              />
           }[stepIndex]}
         </div>
       </div>
@@ -83,19 +97,3 @@ class CustomerPlanSignup extends Component {
 export default reduxForm({
   form: 'CustomerPlanSignup'
 })(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
-
-/*
-2: <RegisterPlanForm
-    onClickBack={this.handlePrev}
-    onSubmit={this.handleNext}
-    PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
-  />,
-3: <RegisterPlanForm
-    editStep={this.editStep}
-    finished={true}
-    mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
-    onClickBack={this.handlePrev}
-    onSubmit={this.handleFormSave}
-    PLANSELECTIONS={PLANSELECTIONFIELDS}
-  />
-*/

@@ -7,13 +7,12 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const { TextArea } = Input;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-export const { Option } = Select;
+const { Option } = Select;
 
-const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, label, ...rest }) => {
+const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, ...rest }) => {
   const hasError = touched && invalid;
   return (
     <FormItem
-      label={label}
       validateStatus={hasError ? 'error' : 'success'}
       help={hasError && error}
     >
@@ -21,6 +20,16 @@ const CreateAntReduxField = Component => ({ children, input, meta: { invalid, to
     </FormItem>
   );
 };
+
+const AntCheckbox = CreateAntReduxField(Checkbox);
+const AntInput = CreateAntReduxField(Input);
+const AntMonthPicker = CreateAntReduxField(MonthPicker);
+const AntRadioGroup = CreateAntReduxField(RadioGroup);
+const AntRangePicker = CreateAntReduxField(RangePicker);
+const AntSelect = CreateAntReduxField(Select);
+const AntSwitch = CreateAntReduxField(Switch);
+const AntTextArea = CreateAntReduxField(TextArea);
+const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
 
 const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) => (
@@ -35,7 +44,7 @@ const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) 
   </Button>
 )
 
-export const AntFormSubmit = ({ label, pristine, submitting, style, type }) => (
+const AntFormSubmit = ({ label, pristine, submitting, style, type }) => (
   <FormItem>
     <AntSubmitButton
       label={label}
@@ -47,7 +56,7 @@ export const AntFormSubmit = ({ label, pristine, submitting, style, type }) => (
   </FormItem>
 )
 
-export const AntFormButtons = ({ label, pristine, reset, submitting }) => (
+const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   <FormItem>
     <AntSubmitButton
       label={label}
@@ -64,7 +73,7 @@ export const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   </FormItem>
 )
 
-export const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
   <FormItem>
     <AntSubmitButton
       label={backLabel}
@@ -81,8 +90,8 @@ export const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine
   </FormItem>
 )
 
-export const AntFormFields = ({ FIELDS }) => {
-  return map(FIELDS, ({ className, component, name, label, normalize, onChange, selectOptions, style, type, validateFields }, key) => (
+const AntFormFields = ({ FIELDS }) => (
+  map(FIELDS, ({ className, component, name, label, normalize, onChange, radioOptions, selectOptions, style, type, validateFields, value }, key) => (
     <div key={key} className={className}>
       <Field
         name={name}
@@ -93,6 +102,7 @@ export const AntFormFields = ({ FIELDS }) => {
         style={{ fontSize: 15, ...style }}
         type={type}
         validate={validateFields}
+        value={value}
       >
         {selectOptions && map(selectOptions, value => (
           <Option key={value} value={value}>{value}</Option>
@@ -100,14 +110,48 @@ export const AntFormFields = ({ FIELDS }) => {
       </Field>
     </div>
   ))
-}
+)
 
-export const AntCheckbox = CreateAntReduxField(Checkbox);
-export const AntInput = CreateAntReduxField(Input);
-export const AntMonthPicker = CreateAntReduxField(MonthPicker);
-export const AntRadioGroup = CreateAntReduxField(RadioGroup);
-export const AntRangePicker = CreateAntReduxField(RangePicker);
-export const AntSelect = CreateAntReduxField(Select);
-export const AntSwitch = CreateAntReduxField(Switch);
-export const AntTextArea = CreateAntReduxField(TextArea);
-export const AntWeekPicker = CreateAntReduxField(WeekPicker);
+const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
+  <div className="plan-selection-container">
+    <Field
+      name="selectedPlan"
+      component={AntRadioGroup}
+      style={{ fontSize: 15, width: '100%' }}
+      validate={validateFields}
+      value={value}
+    >
+     {map(FIELDS, ({ description, plan, price }, key) => (
+        <div key={key} className={ (plan === value) ? "selection-container selected" : "selection-container"}>
+          <div className="header">
+            <h3 className="plan-title">{plan}</h3>
+            <h2 className="price"><span className="price-sign">$</span>{price}</h2>
+            <p>per month</p>
+          </div>
+          <div className="body">
+            <div className="description">{description}</div>
+          </div>
+          <div className="selection">
+            <Radio value={plan} />
+          </div>
+        </div>
+      ))}
+    </Field>
+  </div>
+)
+
+export {
+  AntCheckbox,
+  AntInput,
+  AntFormButtons,
+  AntFormSubmit,
+  AntFormFields,
+  AntMonthPicker,
+  AntRadioGroupField,
+  AntRangePicker,
+  AntSelect,
+  AntStepFormButtons,
+  AntSwitch,
+  AntTextArea,
+  AntWeekPicker
+}
