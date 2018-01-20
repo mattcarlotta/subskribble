@@ -91,10 +91,11 @@ const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submi
 )
 
 const AntFormFields = ({ FIELDS }) => (
-  map(FIELDS, ({ className, component, name, label, normalize, onChange, radioOptions, selectOptions, style, type, validateFields, value }, key) => (
+  map(FIELDS, ({ className, checked, component, name, label, normalize, onChange, radioOptions, selectOptions, style, type, validateFields, value }, key) => (
     <div key={key} className={className}>
       <Field
         name={name}
+        checked={checked}
         component={component}
         normalize={normalize}
         onChange={onChange}

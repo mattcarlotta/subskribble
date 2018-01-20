@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { Steps } from 'antd';
 import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
 import RegisterPlanForm from './RegisterPlanForm';
@@ -13,7 +13,6 @@ class CustomerPlanSignup extends Component {
   state = {
     stepIndex: 0,
     stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
-    BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues),
     visited: [],
     wasReviewed: false
   };
@@ -39,7 +38,8 @@ class CustomerPlanSignup extends Component {
   }
 
   render() {
-    const { BILLINGADDRESSFIELDS, stepIndex, stepLabels, wasReviewed } = this.state;
+    const { stepIndex, stepLabels, wasReviewed } = this.state;
+    const BILLINGADDRESSFIELDS = billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues, this.props.sameBillingAddress);
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -96,4 +96,6 @@ class CustomerPlanSignup extends Component {
 
 export default reduxForm({
   form: 'CustomerPlanSignup'
-})(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
+})(connect(state => ({
+    sameBillingAddress: formValueSelector('CustomerPlanSignup')(state, 'sameBillingAddress')
+  }), { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));

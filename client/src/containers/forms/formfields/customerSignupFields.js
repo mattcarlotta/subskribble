@@ -10,9 +10,9 @@ export const ADDRESSFIELDS = [
   { className: "input-25 f-r", component: AntInput, name: "contactZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, validateFields: [isRequired]},
 ]
 
-export const billingAddressFields = (setField, resetField) => {
+export const billingAddressFields = (setField, resetField, sameBillingAddress) => {
   return [
-    { className: "", component: AntSwitch, name: "sameBillingAddress", onChange: (e, index, value ) => !value ? setField() : resetField(),  style:{ width: "20" } },
+    { className: "", checked: sameBillingAddress, component: AntSwitch, name: "sameBillingAddress", onChange: (e, index, value ) => !value ? setField() : resetField(),  style:{ width: "20" }, value: sameBillingAddress },
     { className: "input-75 f-l", component: AntInput, name: "billingAddress", label: "Address", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
     { className: "input-25 f-r", component: AntInput, name: "billingUnit", label: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
     { className: "input-50 f-l", component: AntInput, name: "billingCity", label: "City", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
