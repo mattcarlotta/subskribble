@@ -32,7 +32,6 @@ const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
-
 const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) => (
   <Button
     className="btn btn-primary"

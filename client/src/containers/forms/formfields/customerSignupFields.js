@@ -1,5 +1,5 @@
 import { AntInput, AntSelect } from './antReduxFormFields';
-import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
+import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidExpMonth, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 export const ADDRESSFIELDS = [
@@ -30,7 +30,7 @@ const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '
 
 export const CREDITCARDFIELDS = [
   { className: "input-40 f-l", component: AntInput, name: "creditCard", label: "Credit Card", normalize: formatCreditCard, style:{ width: "95%" }, type: "text", validateFields: [isRequired, isValidCC] },
-  { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", label: "Exp. Month", selectOptions: MENUITEMS, style:{ width: "90%" }, type: "text", validateFields: isRequired },
+  { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", label: "Exp. Month", selectOptions: MENUITEMS, style:{ width: "90%" }, type: "text", validateFields: isValidExpMonth },
   { className: "input-20 f-l", component: AntInput, name: "creditCardExpYear", hintText: "YYYY", label: "Exp. Year", normalize: formatYear, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidYear] },
   { className: "input-20 f-l", component: AntInput, name: "creditCardCVV", hintText: "XXX", label: "CVV", normalize: formatCVV, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidCVV] },
 ]

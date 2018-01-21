@@ -7,6 +7,18 @@ import BillingSwitchField from '../formfields/renderBillingSwitchField';
 import RenderPlanSelection from '../formfields/renderPlanSelection';
 import ReviewPlanForm from '../formfields/reviewPlanForm';
 
+const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => (
+  FIELDS
+  ? <div className={`${position}-form`}>
+      <h3>{title}</h3>
+      { billingSwitch && <BillingSwitchField /> }
+      <div className={`input-${width}`}>
+        <AntFormFields FIELDS={FIELDS} />
+      </div>
+    </div>
+  : null
+)
+
 let RegisterPlanForm = ({
   billingSwitch,
   handleSubmit,
@@ -28,25 +40,10 @@ let RegisterPlanForm = ({
     <div className="form-container">
       <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
       <form onSubmit={handleSubmit}>
-        { LEFTFIELDS &&
-          <div className="left-form">
-            <h3>{leftTitle}</h3>
-            { billingSwitch && <BillingSwitchField /> }
-            <div className="input-95">
-              <AntFormFields FIELDS={LEFTFIELDS} />
-            </div>
-          </div>
-        }
+        <RenderFormFields billingSwitch={billingSwitch} FIELDS={LEFTFIELDS} title={leftTitle} position="left" width="95" />
         { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
         { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
-        { RIGHTFIELDS &&
-          <div className="right-form">
-            <h3>{rightTitle}</h3>
-            <div className="input-100">
-              <AntFormFields FIELDS={RIGHTFIELDS} />
-            </div>
-          </div>
-        }
+        <RenderFormFields FIELDS={RIGHTFIELDS} title={rightTitle} position="right" width="100" />
         <div className="clear-fix" />
         <hr />
         <AntStepFormButtons
@@ -71,5 +68,5 @@ RegisterPlanForm = reduxForm({
 })(RegisterPlanForm)
 
 export default RegisterPlanForm = connect(
-  state => ({ initialValues: { creditCardExpMonth: '01' } })
+  state => ({ initialValues: { creditCardExpMonth: 'Exp. Month' } })
 )(RegisterPlanForm)

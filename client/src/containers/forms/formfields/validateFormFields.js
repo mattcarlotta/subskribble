@@ -5,6 +5,7 @@ export const isSelected = value => !value ? 'Please select a plan' : undefined;
 export const isValidCC = value => value.length < 19 ? 'Invalid Credit Card' : undefined;
 export const isValidCVV = value => value.length < 3 ? 'Invalid CVV' : undefined;
 export const isValidEmail = value => (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) ? 'Invalid email address' : undefined;
+export const isValidExpMonth = value => value === 'Exp. Month' ? 'Required' : undefined;
 export const isValidPhone = value => value && value.length >= 1 && value.length !== 14 ? "Invalid phone number" : undefined;
 export const isValidState = value =>
 (!/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/i.test(value)) ? 'Invalid state' : undefined;

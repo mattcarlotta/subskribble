@@ -3,11 +3,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Steps } from 'antd';
-import { customerRegisterToPlan } from '../../../actions/formActionCreators';
 import RegisterPlanForm from './RegisterPlanForm';
-import { ADDRESSFIELDS, BILLINGADDRESSFIELDS, CONTACTFIELDS, CREDITCARDFIELDS, PLANSELECTIONFIELDS } from '../formfields/customerSignupFields';
+import { customerRegisterToPlan } from '../../../actions/formActionCreators';
+import {
+  ADDRESSFIELDS,
+  BILLINGADDRESSFIELDS,
+  CONTACTFIELDS,
+  CREDITCARDFIELDS,
+  PLANSELECTIONFIELDS
+} from '../formfields/customerSignupFields';
 const { Step } = Steps;
-
 
 class CustomerPlanSignup extends Component {
   state = {
@@ -17,12 +22,12 @@ class CustomerPlanSignup extends Component {
     wasReviewed: false
   };
 
+  editStep = (number) => this.setState({ stepIndex: number - 1 });
+
   handleFormSave = (formProps) => {
     console.log(formProps);
     // this.props.customerRegisterToPlan(formProps);
   }
-
-  editStep = (number) => this.setState({ stepIndex: number - 1 });
 
   handleNext = () => {
     const { stepIndex, visited } = this.state;
@@ -33,9 +38,7 @@ class CustomerPlanSignup extends Component {
     })
   }
 
-  handlePrev = () => {
-    this.setState({ stepIndex: this.state.stepIndex - 1 });
-  }
+  handlePrev = () => this.setState({ stepIndex: this.state.stepIndex - 1 });
 
   render() {
     const { stepIndex, stepLabels, wasReviewed } = this.state;
@@ -80,13 +83,13 @@ class CustomerPlanSignup extends Component {
                   PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
                 />,
             3: <RegisterPlanForm
-                editStep={this.editStep}
-                finished={true}
-                mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
-                onClickBack={this.handlePrev}
-                onSubmit={this.handleFormSave}
-                PLANSELECTIONS={PLANSELECTIONFIELDS}
-              />
+                  editStep={this.editStep}
+                  finished={true}
+                  mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
+                  onClickBack={this.handlePrev}
+                  onSubmit={this.handleFormSave}
+                  PLANSELECTIONS={PLANSELECTIONFIELDS}
+                />
           }[stepIndex]}
         </div>
       </div>
