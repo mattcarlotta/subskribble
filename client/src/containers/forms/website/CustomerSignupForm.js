@@ -1,7 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { Steps } from 'antd';
 import RegisterPlanForm from './RegisterPlanForm';
 import { customerRegisterToPlan } from '../../../actions/formActionCreators';
@@ -97,6 +96,4 @@ class CustomerPlanSignup extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'CustomerPlanSignup'
-})(connect(null, { customerRegisterToPlan })(CustomerPlanSignup));
+export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);
