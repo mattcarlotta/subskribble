@@ -1,11 +1,11 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Steps } from 'antd';
-import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
+import { customerRegisterToPlan } from '../../../actions/formActionCreators';
 import RegisterPlanForm from './RegisterPlanForm';
-import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS, PLANSELECTIONFIELDS } from '../formfields/customerSignupFields';
+import { ADDRESSFIELDS, BILLINGADDRESSFIELDS, CONTACTFIELDS, CREDITCARDFIELDS, PLANSELECTIONFIELDS } from '../formfields/customerSignupFields';
 const { Step } = Steps;
 
 
@@ -39,7 +39,6 @@ class CustomerPlanSignup extends Component {
 
   render() {
     const { stepIndex, stepLabels, wasReviewed } = this.state;
-    const BILLINGADDRESSFIELDS = billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues, this.props.sameBillingAddress);
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -67,6 +66,7 @@ class CustomerPlanSignup extends Component {
                   rightTitle="Address"
                 />,
             1: <RegisterPlanForm
+                  billingSwitch={true}
                   LEFTFIELDS={BILLINGADDRESSFIELDS}
                   leftTitle="Billing Address"
                   onClickBack={this.handlePrev}
@@ -96,6 +96,4 @@ class CustomerPlanSignup extends Component {
 
 export default reduxForm({
   form: 'CustomerPlanSignup'
-})(connect(state => ({
-    sameBillingAddress: formValueSelector('CustomerPlanSignup')(state, 'sameBillingAddress')
-  }), { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
+})(connect(null, { customerRegisterToPlan })(CustomerPlanSignup));

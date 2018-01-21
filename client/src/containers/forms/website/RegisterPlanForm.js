@@ -2,13 +2,13 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 
-// import RenderFields from '../formfields/renderFields'
 import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
+import BillingSwitchField from '../formfields/renderBillingSwitchField';
 import RenderPlanSelection from '../formfields/renderPlanSelection';
 import ReviewPlanForm from '../formfields/reviewPlanForm';
-// import Button from '../formfields/renderFormButton';
 
 let RegisterPlanForm = ({
+  billingSwitch,
   handleSubmit,
   editStep,
   finished,
@@ -22,7 +22,7 @@ let RegisterPlanForm = ({
   PLANSELECTIONS,
   RIGHTFIELDS,
   rightTitle,
-  submitting
+  submitting,
 }) => {
   return (
     <div className="form-container">
@@ -31,6 +31,7 @@ let RegisterPlanForm = ({
         { LEFTFIELDS &&
           <div className="left-form">
             <h3>{leftTitle}</h3>
+            { billingSwitch && <BillingSwitchField /> }
             <div className="input-95">
               <AntFormFields FIELDS={LEFTFIELDS} />
             </div>

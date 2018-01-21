@@ -1,22 +1,23 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Field } from 'redux-form';
-import { Button, Checkbox, DatePicker, Form, Input, Radio, Select, Switch } from "antd";
+import { Button, Checkbox, DatePicker, Form, Icon, Input, Radio, Select, Switch } from "antd";
 
 const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
+const { Button: RadioButton, Group: RadioGroup } = Radio;
 const { TextArea } = Input;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const { Option } = Select;
 
-const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, ...rest }) => {
+const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, hasFeedback, ...props }) => {
   const hasError = touched && invalid;
   return (
     <FormItem
-      validateStatus={hasError ? 'error' : 'success'}
+      hasFeedback={hasFeedback && hasError}
       help={hasError && error}
+      validateStatus={hasError ? 'error' : 'success'}
     >
-      <Component {...input} {...rest} children={children}  />
+      <Component {...input} {...props} children={children}  />
     </FormItem>
   );
 };
@@ -91,12 +92,12 @@ const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submi
 )
 
 const AntFormFields = ({ FIELDS }) => (
-  map(FIELDS, ({ className, checked, component, name, label, normalize, onChange, radioOptions, selectOptions, style, type, validateFields, value }, key) => (
+  map(FIELDS, ({ className, checked, component, name, label, normalize, onChange, selectOptions, style, type, validateFields, value }, key) => (
     <div key={key} className={className}>
       <Field
-        name={name}
         checked={checked}
         component={component}
+        name={name}
         normalize={normalize}
         onChange={onChange}
         placeholder={label}
@@ -123,7 +124,11 @@ const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
       value={value}
     >
      {map(FIELDS, ({ description, plan, price }, key) => (
-        <div key={key} className={ (plan === value) ? "selection-container selected" : "selection-container"}>
+        <RadioButton
+          className={(plan === value) ? "selection-container selected" : "selection-container"}
+          key={key}
+          value={plan}
+        >
           <div className="header">
             <h3 className="plan-title">{plan}</h3>
             <h2 className="price"><span className="price-sign">$</span>{price}</h2>
@@ -132,13 +137,22 @@ const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
           <div className="body">
             <div className="description">{description}</div>
           </div>
-          <div className="selection">
-            <Radio value={plan} />
-          </div>
-        </div>
+        </RadioButton>
       ))}
     </Field>
   </div>
+)
+
+const AntSwitchField = ({ checked, name, onChange, value }) => (
+  <Field
+    checked={checked}
+    checkedChildren={<Icon type="check" />}
+    component={AntSwitch}
+    name={name}
+    onChange={onChange}
+    unCheckedChildren={<Icon type="cross" />}
+    value={value}
+  />
 )
 
 export {
@@ -153,6 +167,7 @@ export {
   AntSelect,
   AntStepFormButtons,
   AntSwitch,
+  AntSwitchField,
   AntTextArea,
   AntWeekPicker
 }

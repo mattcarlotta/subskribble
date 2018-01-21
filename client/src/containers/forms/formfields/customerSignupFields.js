@@ -1,25 +1,23 @@
-import { AntInput, AntSelect, AntSwitch } from './antReduxFormFields';
+import { AntInput, AntSelect } from './antReduxFormFields';
 import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 export const ADDRESSFIELDS = [
-  { className: "input-75 f-l", component: AntInput, name: "contactAddress", label: "Address", style:{ width: "95%" }, validateFields: [isRequired, allowedCharacters] },
+  { className: "input-75 f-l", component: AntInput, name: "contactAddress", label: "Address", style:{ width: "97%" }, validateFields: [isRequired, allowedCharacters] },
   { className: "input-25 f-r", component: AntInput, name: "contactUnit", label: "Unit, Apt, or Suite #", style:{ width: "100%" }, },
   { className: "input-50 f-l", component: AntInput, name: "contactCity", label: "City", style:{ width: "95%" }, validateFields: [isRequired, allowedCharacters] },
   { className: "input-25 f-l", component: AntInput, name: "contactState", label: "State", normalize: formatState, style:{ width: "90%" }, validateFields: [isRequired, isValidState] },
-  { className: "input-25 f-r", component: AntInput, name: "contactZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, validateFields: [isRequired]},
+  { className: "input-25 f-r", component: AntInput, name: "contactZip", label: "Zip Code", normalize: formatZip, style:{ width: "90%" }, validateFields: [isRequired]},
 ]
 
-export const billingAddressFields = (setField, resetField, sameBillingAddress) => {
-  return [
-    { className: "", checked: sameBillingAddress, component: AntSwitch, name: "sameBillingAddress", onChange: (e, index, value ) => !value ? setField() : resetField(),  style:{ width: "20" }, value: sameBillingAddress },
-    { className: "input-75 f-l", component: AntInput, name: "billingAddress", label: "Address", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
-    { className: "input-25 f-r", component: AntInput, name: "billingUnit", label: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
-    { className: "input-50 f-l", component: AntInput, name: "billingCity", label: "City", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
-    { className: "input-25 f-l", component: AntInput, name: "billingState", label: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidState] },
-    { className: "input-25 f-r", component: AntInput, name: "billingZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validateFields: [isRequired]},
-  ]
-}
+export const BILLINGADDRESSFIELDS = [
+  { className: "input-75 f-l", component: AntInput, name: "billingAddress", label: "Address", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
+  { className: "input-25 f-r", component: AntInput, name: "billingUnit", label: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
+  { className: "input-50 f-l", component: AntInput, name: "billingCity", label: "City", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
+  { className: "input-25 f-l", component: AntInput, name: "billingState", label: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidState] },
+  { className: "input-25 f-r", component: AntInput, name: "billingZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validateFields: [isRequired]},
+]
+
 
 export const CONTACTFIELDS = [
   { className: "input-50 f-l", component: AntInput, name: "contactFirstName", label: "First Name", style:{ width: '95%' }, type: "text", validateFields: [isRequired, allowedCharacters] },
