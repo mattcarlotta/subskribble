@@ -14,6 +14,6 @@ export default function() {
 		<InformationFeatures key="InformationFeatures" />,
 		<InformationAutomation key="InformationAutomation" />,
 		<InformationPricing key="InformationPricing" />,
-		<InformationSiteMap key="" />
+		<InformationSiteMap key="InformationSiteMap" />
 	]
 };

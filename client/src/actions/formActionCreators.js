@@ -7,23 +7,8 @@ import dispatchSuccess from './dispatchSuccess';
 import { SET_BILLING_FORM_VALUES } from './types';
 import { formValueSelector } from 'redux-form';
 
-// Add new rocketboard promo code
-export const addNewPromoCode = (formProps) => {
-  return dispatch => {
-    app.post(`api/create-promo-code`, { formProps })
-    .then(response => {
-      dispatchSuccess(dispatch, response.data.message);
-    })
-    .catch(({ response }) => {
-      dispatchError(dispatch, response.data.err);
-    })
-  }
-}
-
-
-
 // Add new rocketboard form
-export const addNewForm = (formProps) => {
+const addNewForm = (formProps) => {
   return dispatch => {
     app.post(`api/add-new-form`, { formProps })
     .then(response => {
@@ -35,8 +20,21 @@ export const addNewForm = (formProps) => {
   }
 }
 
+// Add new rocketboard promo code
+const addNewPromoCode = (formProps) => {
+  return dispatch => {
+    app.post(`api/create-promo-code`, { formProps })
+    .then(response => {
+      dispatchSuccess(dispatch, response.data.message);
+    })
+    .catch(({ response }) => {
+      dispatchError(dispatch, response.data.err);
+    })
+  }
+}
+
 // Add new rocketboard template
-export const addNewTemplate = (formProps) => {
+const addNewTemplate = (formProps) => {
   return dispatch => {
     app.post(`api/add-new-template`, { formProps })
     .then(response => {
@@ -49,7 +47,7 @@ export const addNewTemplate = (formProps) => {
 }
 
 // Form information for registering to a plan
-export const customerRegisterToPlan = (formProps) => {
+const customerRegisterToPlan = (formProps) => {
   return dispatch => {
     app.post(`api/customer-signup`, { formProps })
     .then(response => {
@@ -62,7 +60,7 @@ export const customerRegisterToPlan = (formProps) => {
 }
 
 // Register to newsletter
-export const registerToNewsletter = (email) => {
+const registerToNewsletter = (email) => {
   return dispatch => {
     app.post(`api/register-to-newsletter`, { email })
     .then(response => {
@@ -74,9 +72,26 @@ export const registerToNewsletter = (email) => {
   }
 }
 
+// resetting billing fields values from customer contact form
+const resetBillingFieldValues = () => {
+  return {
+    type: SET_BILLING_FORM_VALUES,
+    payload: updateBillingFields()
+  }
+}
+
+// setting billing fields values from customer contact form
+const setBillingFieldValues = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SET_BILLING_FORM_VALUES,
+      payload: updateBillingFields(getState())
+    })
+  }
+}
 
 // Send email to support
-export const sendSupportEmail = ({name, email, message}) => {
+const sendSupportEmail = ({name, email, message}) => {
   return dispatch => {
     app.post(`api/send-support-email`, { name, email, message })
     .then(response => {
@@ -88,6 +103,7 @@ export const sendSupportEmail = ({name, email, message}) => {
   }
 }
 
+// Updates billing fields
 const updateBillingFields = (state) => {
   const selector = formValueSelector('CustomerPlanSignup');
   return {
@@ -99,20 +115,14 @@ const updateBillingFields = (state) => {
   }
 }
 
-// setting billing fields values from customer contact form
-export const setBillingFieldValues = () => {
-  return (dispatch, getState) => {
-    dispatch({
-      type: SET_BILLING_FORM_VALUES,
-      payload: updateBillingFields(getState())
-    })
-  }
-}
 
-// resetting billing fields values from customer contact form
-export const resetBillingFieldValues = () => {
-  return {
-    type: SET_BILLING_FORM_VALUES,
-    payload: updateBillingFields()
-  }
+export {
+  addNewForm,
+  addNewPromoCode,
+  addNewTemplate,
+  customerRegisterToPlan,
+  registerToNewsletter,
+  resetBillingFieldValues,
+  setBillingFieldValues,
+  sendSupportEmail
 }

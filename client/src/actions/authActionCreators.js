@@ -17,7 +17,7 @@ import dispatchError from './dispatchError';
 //==========================================================================
 
 // Displays error messages
-export const authError = error => {
+const authError = error => {
 	return {
 		type: AUTH_ERROR,
 		payload: error
@@ -25,7 +25,7 @@ export const authError = error => {
 };
 
 // Displays success messages
-export const authSuccess = message => {
+const authSuccess = message => {
 	return {
 		type: AUTH_SUCCESS,
 		payload: message
@@ -33,7 +33,7 @@ export const authSuccess = message => {
 };
 
 // Attempts to auth a previously signed in user
-export const authenticateUser = id => async dispatch => {
+const authenticateUser = id => async dispatch => {
 	try {
 		const config = configAuth();
 
@@ -54,7 +54,7 @@ export const authenticateUser = id => async dispatch => {
 };
 
 // Allows AJAX time to fetch a user on refresh before loading app
-export const fetchingUser = bool => {
+const fetchingUser = bool => {
 	return {
 		type: FETCHING_USER,
 		payload: bool
@@ -62,14 +62,14 @@ export const fetchingUser = bool => {
 };
 
 // Resets auth notifications
-export const resetNotifications = () => {
+const resetNotifications = () => {
 	return {
 		type: RESET_NOTIFICATIONS
 	};
 };
 
 // Resets user password
-export const resetUserPassword = ({ password }) => async dispatch => {
+const resetUserPassword = ({ password }) => async dispatch => {
 	try {
 		await app.post(`api/reset-password`, { password });
 		browserHistory.push('/login');
@@ -79,7 +79,7 @@ export const resetUserPassword = ({ password }) => async dispatch => {
 };
 
 // Attempts to sign in user
-export const signinUser = ({ username, password }) => async dispatch => {
+const signinUser = ({ username, password }) => async dispatch => {
 	try {
 		const { data } = await app.post(`api/signin`, { username, password });
 		localStorage.setItem('token', data.token);
@@ -92,7 +92,7 @@ export const signinUser = ({ username, password }) => async dispatch => {
 };
 
 // Atempts to sign up user
-export const signupUser = ({ email, username, password }) => async dispatch => {
+const signupUser = ({ email, username, password }) => async dispatch => {
 	try {
 		const { data } = await app.post(`api/signup`, {
 			email,
@@ -110,10 +110,22 @@ export const signupUser = ({ email, username, password }) => async dispatch => {
 };
 
 // Signs user out
-export const signoutUser = () => {
+const signoutUser = () => {
 	localStorage.removeItem('token');
 
 	return {
 		type: UNAUTH_USER
 	};
 };
+
+export {
+	authError,
+	authSuccess,
+	authenticateUser,
+	fetchingUser,
+	resetNotifications,
+	resetUserPassword,
+	signinUser,
+	signupUser,
+	signoutUser
+}

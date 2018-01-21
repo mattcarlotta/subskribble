@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -6,10 +6,8 @@ import Header from './header';
 // import Footer from './footer';
 
 export default WrappedComponent => {
-	class DashboardWrapper extends Component {
-		componentDidUpdate(prevProps) {
-			(this.props.location !== prevProps.location) && this.refs.scrollbars.scrollTop(0);
-		}
+	class DashboardWrapper extends PureComponent {
+		componentDidUpdate = (prevProps) => this.props.location !== prevProps.location && this.refs.scrollbars.scrollTop(0);
 
 		render() {
 			return (

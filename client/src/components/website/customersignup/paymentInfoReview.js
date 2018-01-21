@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { GetCreditCardType } from './getCreditCardType';
 
 const PaymentInfoReview = ({

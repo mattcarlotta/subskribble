@@ -13,7 +13,7 @@ export const GetCreditCardType = (accountNumber) => {
   const cardKeys = Object.keys(cardTypes);
 
   each(cardKeys, name => {
-    if(cardTypes[name].test(accountNumber)) {
+    if (cardTypes[name].test(accountNumber)) {
       cardName = (name === "diners") ? "diners-club" : name;
     }
   })
