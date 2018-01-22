@@ -1,7 +1,5 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux'
-
 import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
 import BillingSwitchField from '../formfields/renderBillingSwitchField';
 import RenderPlanSelection from '../formfields/renderPlanSelection';
@@ -19,7 +17,7 @@ const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => 
   : null
 )
 
-let RegisterPlanForm = ({
+const RegisterPlanForm = ({
   billingSwitch,
   handleSubmit,
   editStep,
@@ -60,13 +58,11 @@ let RegisterPlanForm = ({
   );
 };
 
-RegisterPlanForm = reduxForm({
+export default reduxForm({
   form: 'CustomerPlanSignup',
   destroyOnUnmount: false,
   enableReinitialize: true,
-  keepDirtyOnReinitialize: true
+  keepDirtyOnReinitialize: true,
+  pure: true,
+  initialValues: { creditCardExpMonth: 'Exp. Month' }
 })(RegisterPlanForm)
-
-export default RegisterPlanForm = connect(
-  state => ({ initialValues: { creditCardExpMonth: 'Exp. Month' } })
-)(RegisterPlanForm)

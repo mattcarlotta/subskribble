@@ -1,19 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { AntSwitchField } from './antReduxFormFields';
 import { resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
 
 const CustomerSwitchField = ({ resetBillingFieldValues, sameBillingAddress, setBillingFieldValues }) => (
-  <Fragment>
-    <p style={{ margin: 0 }}>Same As Address</p>
-    <AntSwitchField
-      checked={sameBillingAddress}
-      name="sameBillingAddress"
-      onChange={(e, index, value ) => !value ? setBillingFieldValues() : resetBillingFieldValues()}
-      value={sameBillingAddress}
-    />
-  </Fragment>
+  <AntSwitchField
+    checked={sameBillingAddress}
+    label="Same As Address"
+    formItemClassName="billing-switch-field"
+    name="sameBillingAddress"
+    onChange={(e, index, value ) => !value ? setBillingFieldValues() : resetBillingFieldValues()}
+    value={sameBillingAddress}
+  />
 )
 
 export default connect(state => ({

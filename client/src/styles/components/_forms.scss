@@ -3,6 +3,17 @@
   height: 60px;
 }
 
+.billing-switch-field {
+  height: 50px;
+  width: 100%;
+  .ant-form-item-label {
+    float: left;
+    line-height: 39.9999px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
 .forms-container {
   @extend .container;
 }

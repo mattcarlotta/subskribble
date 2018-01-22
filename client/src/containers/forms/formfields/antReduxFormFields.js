@@ -9,10 +9,19 @@ const { TextArea } = Input;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const { Option } = Select;
 
-const CreateAntReduxField = Component => ({ children, input, meta: { invalid, touched, error }, hasFeedback, ...props }) => {
+const CreateAntReduxField = Component => ({
+  children,
+  input, meta: { invalid, touched, error },
+  label,
+  formItemClassName,
+  hasFeedback,
+  ...props
+}) => {
   const hasError = touched && invalid;
   return (
     <FormItem
+      className={formItemClassName}
+      label={label}
       hasFeedback={hasFeedback && hasError}
       help={hasError && error}
       validateStatus={hasError ? 'error' : 'success'}
@@ -142,11 +151,13 @@ const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
   </div>
 )
 
-const AntSwitchField = ({ checked, name, onChange, value }) => (
+const AntSwitchField = ({ checked, formItemClassName, label, name, onChange, value }) => (
   <Field
     checked={checked}
     checkedChildren={<Icon type="check" />}
     component={AntSwitch}
+    formItemClassName={formItemClassName}
+    label={label}
     name={name}
     onChange={onChange}
     unCheckedChildren={<Icon type="cross" />}
