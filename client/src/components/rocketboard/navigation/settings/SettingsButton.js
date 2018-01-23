@@ -1,32 +1,39 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Popover } from 'antd';
 import RIGHTNAVLINKS from '../links/rightNavLinks';
 const { Item: MenuItem } = Menu;
 
 class SettingsButton extends Component {
+  state = { visibleSettings: false }
+
+  handleVisibleChange = (visible) => this.setState({ visibleSettings: visible });
+
   render() {
     return (
       <div className="settings-tab">
-        <Dropdown
-          placement="bottomRight"
-          overlay={
-            <Menu style={{ width: 150 }}>
+        <Popover
+          arrowPointAtCenter
+          content={
+            <Menu className="settings-tab-container">
               {map(RIGHTNAVLINKS, ({ icon, label, link }, key) => (
                 <MenuItem key={key} >
                   <Link to={link}>
-                    <i className="material-icons m-r-15">{icon}</i>
-                    <span style={{ position: 'relative', top: '-5px' }}>{label}</span>
+                    <i className="material-icons settings-icon">{icon}</i>
+                    <span className="settings-label">{label}</span>
                   </Link>
                 </MenuItem>
               ))}
-              </Menu>
-            }
-            trigger={['click']}
-            >
-              <i className="material-icons settings-icon">settings</i>
-          </Dropdown>
+            </Menu>
+          }
+          onVisibleChange={this.handleVisibleChange}
+          placement="bottomRight"
+          trigger="click"
+          visible={this.state.visibleSettings}
+        >
+            <i className="material-icons settings-icon">settings</i>
+        </Popover>
       </div>
     )
   }

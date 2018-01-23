@@ -17,7 +17,7 @@ export default WrappedComponent => {
 					ref="scrollbars"
 					style={{ width: '100%', top: '70px' }}
 					autoHeight
-					autoHeightMin={`calc(100vh - 70px)`}
+					autoHeightMin={`calc(100vh - 75px)`}
 					autoHide
 					autoHideTimeout={500}
 					autoHideDuration={200}

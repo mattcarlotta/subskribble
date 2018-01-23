@@ -7,14 +7,11 @@ import NOTIFICATIONS from './notificationData';
 // import NotificationEmpty from './notificationEmpty';
 
 class Notifications extends Component {
-  state={ notifications: NOTIFICATIONS, notificationCount: NOTIFICATIONS.length, visibleNotifications: false };
+  state = { notifications: NOTIFICATIONS, notificationCount: NOTIFICATIONS.length, visibleNotifications: false };
 
+  handleVisibleChange = visible => this.setState({ visibleNotifications: visible });
 
-  hideNotifications = () => this.setState({ visibleNotifications: false });
-
-  handleVisibleChange = (visible) => this.setState({ visibleNotifications: visible });
-
-  handleActiveNote = (activeNote) => this.setState({ activeNote })
+  handleActiveNote = activeNote => this.setState({ activeNote })
 
   removeNotification = (deletedNote) => {
     let { notifications } = this.state;

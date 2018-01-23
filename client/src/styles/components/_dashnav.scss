@@ -78,6 +78,10 @@
         }
       }
 
+      // .settings-label {
+      //   position: 'relative', top: '-5px' }}
+      // }
+
       .menu-label {
         @extend .p-r;
         top: -5px;
@@ -114,5 +118,43 @@
   & div > div, & div > div > i {
     color: $blue !important;
     // background-color: #0c7eb1 !important;
+  }
+}
+
+.ant-popover-inner-content {
+  padding: 0;
+  width: 160px;
+  margin: 0;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  // color: rgba(0,0,0,.65);
+}
+
+.settings-tab-container {
+  // padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+
+  .settings-icon {
+    @extend .p-r;
+    top: 6px;
+    margin: 0 15px;
+  }
+
+  .ant-menu-item {
+    padding: 0;
+    margin: 0 !important;
+
+    a {
+      -o-transition:.5s;
+      -ms-transition:.5s;
+      -moz-transition:.5s;
+      -webkit-transition:.5s;
+      /* ...and now for the proper property */
+      transition:.5s;
+      &:hover {
+        color: rgba(0,0,0,.65);
+        background-color: $formgrey;
+      }
+    }
   }
 }
