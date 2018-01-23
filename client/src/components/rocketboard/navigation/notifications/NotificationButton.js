@@ -1,30 +1,18 @@
 import filter from 'lodash/filter';
 import React, { Component } from 'react';
-import Badge from 'material-ui/Badge';
-import IconButton from 'material-ui/IconButton';
-import Menu from 'material-ui/Menu';
-import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
-import ClosePopover from 'material-ui/svg-icons/navigation/close';
-import Popover from 'material-ui/Popover';
+import { Badge, Popover } from 'antd';
 
 import NOTIFICATIONS from './notificationData';
-import NotificationBody from './notificationBody';
-import NotificationEmpty from './notificationEmpty';
+// import NotificationBody from './notificationBody';
+// import NotificationEmpty from './notificationEmpty';
 
 class Notifications extends Component {
-  state={ notifications: NOTIFICATIONS, notificationCount: NOTIFICATIONS.length, notificationTab: false };
+  state={ notifications: NOTIFICATIONS, notificationCount: NOTIFICATIONS.length, visibleNotifications: false };
 
-  handleOpenNotifications = e => {
-    e.preventDefault();
 
-    this.setState({
-      notificationCount: 0,
-      notificationTab: true,
-      anchorEl: e.currentTarget
-    });
-  }
+  hideNotifications = () => this.setState({ visibleNotifications: false });
 
-  handlePopoverClose = () => this.setState({ activeNote: '', notificationTab: false })
+  handleVisibleChange = (visible) => this.setState({ visibleNotifications: visible });
 
   handleActiveNote = (activeNote) => this.setState({ activeNote })
 
@@ -35,25 +23,30 @@ class Notifications extends Component {
   }
 
   render() {
-    const { anchorEl, activeNote, notifications, notificationCount, notificationTab } = this.state;
-    const showNotificationDot = notificationCount > 0 ? 'flex' : 'none';
+    // const { activeNote, notifications, notificationCount, notificationTab } = this.state;
+    // const showNotificationDot = notificationCount > 0 ? 'flex' : 'none';
+
+    const { visibleNotifications } = this.state;
 
     return(
-      <div className="notifications-icon">
+      <div className="notifications-container">
         <Badge
-          badgeContent={notificationCount}
-          secondary={true}
-          badgeStyle={{top: -2, right: -2, backgroundColor: '#F56342', display: showNotificationDot }}
+          count={this.state.notificationCount}
+          offset={[-3,3]}
+          showZero={false}
+          overflowCount={99}
           >
-            <IconButton
-              tooltip="Notifications"
-              tooltipStyles={{ marginTop: '-7px' }}
-              onClick={this.handleOpenNotifications}
-              iconStyle={{ color: '#fff' }}
-              >
-              <NotificationsIcon />
-            </IconButton>
             <Popover
+              arrowPointAtCenter
+              content={<a onClick={this.hide}>Close</a>}
+              placement="bottomRight"
+              trigger="click"
+              visible={visibleNotifications}
+              onVisibleChange={this.handleVisibleChange}
+            >
+              <i className="material-icons notifications-icon">notifications</i>
+            </Popover>
+            {/* <Popover
               className="notification-root"
               style={{ borderRadius: '2px', backgroundColor: '#faf9fa', boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px', padding: 0 }}
               open={notificationTab}
@@ -93,7 +86,7 @@ class Notifications extends Component {
                   <hr className="divider" />
                   <div className="notifications-footer"/>
               </Menu>
-            </Popover>
+            </Popover> */}
           </Badge>
       </div>
     )

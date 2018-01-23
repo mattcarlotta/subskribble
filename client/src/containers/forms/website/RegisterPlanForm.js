@@ -63,6 +63,5 @@ export default reduxForm({
   destroyOnUnmount: false,
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
-  pure: true,
   initialValues: { creditCardExpMonth: 'Exp. Month' }
 })(RegisterPlanForm)

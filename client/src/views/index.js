@@ -6,8 +6,8 @@ import App from '../components/app';
 // import ContactUs from '../components/rocketboard/contact';
 // import Customers from '../components/rocketboard/customers';
 import CustomerSignup from '../containers/forms/website/CustomerSignupForm';
-// import Dashboard from '../components/rocketboard/dashboard';
-// import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
+import Dashboard from '../components/rocketboard/dashboard';
+import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
 // import FAQs from '../components/rocketboard/faqs';
 // import Forms from '../components/rocketboard/forms';
 import ForgotPassword from '../containers/forms/website/resetpasswordForm';
@@ -42,12 +42,12 @@ export const views = (
 		</Route>
 
 		<Redirect from="/rocketboard" to="/rocketboard/dashboard" />
-		{/* <Route path="/rocketboard" component={DashWrapper(App)}>
-			<Route path="campaigns" component={Campaigns} />
+		<Route path="/rocketboard" component={DashWrapper(App)}>
+			{/* <Route path="campaigns" component={Campaigns} />
 			<Route path="contact-us" component={ContactUs} />
-			<Route path="customers" component={Customers} />
+			<Route path="customers" component={Customers} /> */}
 			<Route path="dashboard" component={Dashboard} />
-			<Route path="faqs" component={FAQs} />
+			{/* <Route path="faqs" component={FAQs} />
 			<Route path="forms" component={Forms}/>
 			<Route path="invoices" component={Invoices} />
 			<Route path="messages" component={Messages} />
@@ -57,8 +57,8 @@ export const views = (
 			<Route path="subscriptions" component={Subscriptions} />
 			<Route path="templates" component={Templates} />
 			<Route path="transactions" component={Transactions} />
-			<Route path="tutorials" component={Tutorials} />
-		</Route> */}
+			<Route path="tutorials" component={Tutorials} /> */}
+		</Route>
 
 		<Route path="*" component={NotFound} />
 	</div>
