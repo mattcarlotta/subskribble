@@ -17,7 +17,7 @@ const ContactInfoReview = ({
     <div className="details-container">
       <p className="name">
         {contactFirstName} {contactLastName}
-        <span className="edit-link" onClick={() => editStep(1)}>Edit</span>
+        <span className="edit-link" onClick={() => editStep(0)}>Edit</span>
       </p>
       <p className="address">{contactAddress}</p>
       <p className="address">{contactUnit}</p>

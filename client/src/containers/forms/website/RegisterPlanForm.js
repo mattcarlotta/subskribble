@@ -60,7 +60,6 @@ const RegisterPlanForm = ({
 
 export default reduxForm({
   form: 'CustomerPlanSignup',
-  destroyOnUnmount: false,
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   initialValues: { creditCardExpMonth: 'Exp. Month' }

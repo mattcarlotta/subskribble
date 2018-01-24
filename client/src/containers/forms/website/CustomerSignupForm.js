@@ -1,28 +1,22 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { Steps } from 'antd';
 import RegisterPlanForm from './RegisterPlanForm';
 import { customerRegisterToPlan } from '../../../actions/formActionCreators';
-import {
-  ADDRESSFIELDS,
-  BILLINGADDRESSFIELDS,
-  CONTACTFIELDS,
-  CREDITCARDFIELDS,
-  PLANSELECTIONFIELDS
-} from '../formfields/customerSignupFields';
+import { getCustomerFormFields } from '../formfields/customerSignupFields';
 const { Step } = Steps;
 
 class CustomerPlanSignup extends Component {
   state = {
+    ...getCustomerFormFields(),
     stepIndex: 0,
     stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
     visited: [],
     wasReviewed: false
   };
 
-  editStep = (number) => this.setState({ stepIndex: number - 1 });
+  editStep = number => this.setState({ ...getCustomerFormFields(number), stepIndex: number })
 
   handleFormSave = (formProps) => {
     console.log(formProps);
@@ -31,17 +25,37 @@ class CustomerPlanSignup extends Component {
 
   handleNext = () => {
     const { stepIndex, visited } = this.state;
+    const formKey = stepIndex + 1;
+
     this.setState({
-      stepIndex: stepIndex + 1,
+      ...getCustomerFormFields(formKey),
+      stepIndex: formKey,
       visited: visited.concat(stepIndex),
       wasReviewed: visited.length > 1 && true
     })
   }
 
-  handlePrev = () => this.setState({ stepIndex: this.state.stepIndex - 1 });
+  handlePrev = () => {
+    const formKey = this.state.stepIndex - 1;
+
+    this.setState({ ...getCustomerFormFields(formKey), stepIndex: formKey })
+  }
 
   render() {
-    const { stepIndex, stepLabels, wasReviewed } = this.state;
+    const {
+      billingSwitch,
+      finished,
+      LEFTFIELDS,
+      leftTitle,
+      mainTitle,
+      RIGHTFIELDS,
+      rightTitle,
+      PLANSELECTIONS,
+      PLANSELECTIONFIELDS,
+      stepIndex,
+      wasReviewed,
+      stepLabels
+    } = this.state;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -55,48 +69,30 @@ class CustomerPlanSignup extends Component {
                 <Step
                   className={wasReviewed ? "fix-cursor" : "" }
                   key={label}
-                  onClick={wasReviewed ? () => this.editStep(key+1) : undefined}
+                  onClick={wasReviewed ? () => this.editStep(key) : undefined}
                   title={label}
                 />
               ))}
             </Steps>
           </div>
-          {{0: <RegisterPlanForm
-                  LEFTFIELDS={CONTACTFIELDS}
-                  leftTitle="Contact Information"
-                  onSubmit={this.handleNext}
-                  RIGHTFIELDS={ADDRESSFIELDS}
-                  rightTitle="Address"
-                />,
-            1: <RegisterPlanForm
-                  billingSwitch={true}
-                  LEFTFIELDS={BILLINGADDRESSFIELDS}
-                  leftTitle="Billing Address"
-                  onClickBack={this.handlePrev}
-                  onSubmit={this.handleNext}
-                  RIGHTFIELDS={CREDITCARDFIELDS}
-                  rightTitle="Credit Card Information"
-                />,
-            2: <RegisterPlanForm
-                  onClickBack={this.handlePrev}
-                  onSubmit={this.handleNext}
-                  PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
-                />,
-            3: <RegisterPlanForm
-                  editStep={this.editStep}
-                  finished={true}
-                  mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
-                  onClickBack={this.handlePrev}
-                  onSubmit={this.handleFormSave}
-                  PLANSELECTIONS={PLANSELECTIONFIELDS}
-                />
-          }[stepIndex]}
+          <RegisterPlanForm
+            billingSwitch={billingSwitch}
+            editStep={ finished ? this.editStep : null }
+            finished={finished}
+            LEFTFIELDS={LEFTFIELDS}
+            leftTitle={leftTitle}
+            mainTitle={mainTitle}
+            onClickBack={ stepIndex > 0 ? this.handlePrev : null }
+            onSubmit={ finished ? this.handleFormSave : this.handleNext }
+            PLANSELECTIONS={PLANSELECTIONS}
+            PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
+            RIGHTFIELDS={RIGHTFIELDS}
+            rightTitle={rightTitle}
+          />
         </div>
       </div>
     );
   }
 }
 
-export default reduxForm({
-  form: 'CustomerPlanSignup'
-})(connect(null, { customerRegisterToPlan })(CustomerPlanSignup));
+export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);
