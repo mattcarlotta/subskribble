@@ -9,14 +9,18 @@ const { Step } = Steps;
 
 class CustomerPlanSignup extends Component {
   state = {
-    ...getCustomerFormFields(),
+    formFields: getCustomerFormFields(),
     stepIndex: 0,
     stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
     visited: [],
     wasReviewed: false
   };
 
-  editStep = number => this.setState({ ...getCustomerFormFields(number), stepIndex: number })
+  componentDidUpdate = (prevProps, prevState) => {
+    this.state.stepIndex !== prevState.stepIndex && window.scrollTo(0, 0)
+  }
+
+  editStep = number => this.setState({ formFields: getCustomerFormFields(number), stepIndex: number })
 
   handleFormSave = (formProps) => {
     console.log(formProps);
@@ -26,36 +30,27 @@ class CustomerPlanSignup extends Component {
   handleNext = () => {
     const { stepIndex, visited } = this.state;
     const formKey = stepIndex + 1;
-
     this.setState({
-      ...getCustomerFormFields(formKey),
+      formFields: getCustomerFormFields(formKey),
       stepIndex: formKey,
-      visited: visited.concat(stepIndex),
+      visited: visited.concat(stepIndex).filter((val, idx, arr) => (arr.indexOf(val) === idx)),
       wasReviewed: visited.length > 1 && true
     })
   }
 
   handlePrev = () => {
     const formKey = this.state.stepIndex - 1;
-
-    this.setState({ ...getCustomerFormFields(formKey), stepIndex: formKey })
+    this.setState({ formFields: getCustomerFormFields(formKey), stepIndex: formKey })
   }
 
   render() {
     const {
-      billingSwitch,
-      finished,
-      LEFTFIELDS,
-      leftTitle,
-      mainTitle,
-      RIGHTFIELDS,
-      rightTitle,
-      PLANSELECTIONS,
-      PLANSELECTIONFIELDS,
+      formFields,
       stepIndex,
       wasReviewed,
       stepLabels
     } = this.state;
+    const finished = stepIndex === 3;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -76,18 +71,11 @@ class CustomerPlanSignup extends Component {
             </Steps>
           </div>
           <RegisterPlanForm
-            billingSwitch={billingSwitch}
-            editStep={ finished ? this.editStep : null }
+            {...formFields}
             finished={finished}
-            LEFTFIELDS={LEFTFIELDS}
-            leftTitle={leftTitle}
-            mainTitle={mainTitle}
+            editStep={this.editStep}
             onClickBack={ stepIndex > 0 ? this.handlePrev : null }
             onSubmit={ finished ? this.handleFormSave : this.handleNext }
-            PLANSELECTIONS={PLANSELECTIONS}
-            PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
-            RIGHTFIELDS={RIGHTFIELDS}
-            rightTitle={rightTitle}
           />
         </div>
       </div>

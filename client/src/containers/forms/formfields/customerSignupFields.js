@@ -47,7 +47,6 @@ const PLANSELECTIONFIELDS = [
 const CustomerFormFields = [
   {
     billingSwitch: false,
-    finished: false,
     LEFTFIELDS: CONTACTFIELDS,
     leftTitle: "Contact Information",
     PLANSELECTIONS: null,
@@ -58,7 +57,6 @@ const CustomerFormFields = [
   },
   {
     billingSwitch: true,
-    finished: false,
     LEFTFIELDS: BILLINGADDRESSFIELDS,
     leftTitle: "Billing Address",
     PLANSELECTIONS: null,
@@ -69,7 +67,6 @@ const CustomerFormFields = [
   },
   {
     billingSwitch: false,
-    finished: false,
     LEFTFIELDS: null,
     leftTitle: null,
     PLANSELECTIONS: null,
@@ -80,7 +77,6 @@ const CustomerFormFields = [
   },
   {
     billingSwitch: false,
-    finished: true,
     LEFTFIELDS: null,
     leftTitle: null,
     PLANSELECTIONS: PLANSELECTIONFIELDS,
@@ -94,14 +90,6 @@ const CustomerFormFields = [
 export const getCustomerFormFields = (key) => {
   const formKey = key ? key : 0
   return {
-    billingSwitch: CustomerFormFields[formKey].billingSwitch,
-    finished: CustomerFormFields[formKey].finished,
-    LEFTFIELDS: CustomerFormFields[formKey].LEFTFIELDS,
-    leftTitle: CustomerFormFields[formKey].leftTitle,
-    mainTitle: CustomerFormFields[formKey].mainTitle,
-    RIGHTFIELDS: CustomerFormFields[formKey].RIGHTFIELDS,
-    rightTitle: CustomerFormFields[formKey].rightTitle,
-    PLANSELECTIONS: CustomerFormFields[formKey].PLANSELECTIONS,
-    PLANSELECTIONFIELDS: CustomerFormFields[formKey].PLANSELECTIONFIELDS
+    ...CustomerFormFields[formKey]
   }
 }
