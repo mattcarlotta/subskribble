@@ -1,9 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Link } from 'react-router';
-import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
-import RemoveNotification from 'material-ui/svg-icons/action/delete';
+import { Avatar } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 const NotificationBody = ({ activeNote, handleActiveNote, notifications, removeNotification }) => {
@@ -28,6 +26,7 @@ const NotificationBody = ({ activeNote, handleActiveNote, notifications, removeN
                   <div className="note-15">
                     <Avatar
                      src={src}
+                     shape="circle"
                      size={36}
                      style={{ position: 'relative', top: -18 }}
                    />
@@ -37,17 +36,15 @@ const NotificationBody = ({ activeNote, handleActiveNote, notifications, removeN
                     <span className="title">
                       <Link className="link" to={`/rocketboard/customers/${link}`}><strong>{name}</strong></Link> {note}
                     </span>
-                    <p><span className="date">{date}</span></p>
+                    <p className="data">{date}</p>
                   </div>
                   <div className={ key === activeNote ? "note-10" : "hidden"}>
-                    <IconButton
-                      tooltipPosition="bottom-center"
+                    <i
+                      className="material-icons delete-notication"
                       onClick={() => removeNotification(id)}
-                      iconStyle={{ width: 20, height: 20, color: '#03a9f3' }}
-                      style={{ width: 44, height: 44, position: 'relative', top: -10 }}
-                      >
-                      <RemoveNotification />
-                    </IconButton>
+                    >
+                      delete
+                    </i>
                   </div>
               </div>
             )
