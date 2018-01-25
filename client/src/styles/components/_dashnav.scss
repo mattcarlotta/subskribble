@@ -5,30 +5,24 @@
   background-color: $lightblue;
   height: 75px;
 
-  .hamburger {
-    @extend .c-w;
-    font-size: 36px;
-  }
-
   .logo-container {
+    @extend .d-ib;
     padding-top: 7px;
+
+    .text-logo {
+      @extend .p-r;
+      left: -10px;
+    }
   }
 
-  .left-nav {
-    @extend .d-ib;
+  .menu-toggle {
+    @extend .c-w, .d-ib, .fix-cursor, .p-r;
+    top: 10px;
+    font-size: 24px;
+    margin: 0 20px;
 
-    .user-header {
-      @extend .c-w;
-      margin-bottom: 5px;
-      background-color: $rbblue;
-      padding: 15px;
-      height: 150px;
-
-      p {
-        text-transform: none;
-        margin: 0;
-        line-height: 15px;
-      }
+    &:hover {
+      color: $lightgrey;
     }
   }
 
@@ -95,6 +89,55 @@
   -webkit-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
   -moz-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
   box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
+}
+
+.drawer.drawer-open .drawer-bg {
+    opacity: 0.5;
+}
+
+.user-header {
+  @extend .c-w;
+  // margin-bottom: 5px;
+  background-color: $rbblue;
+  padding: 15px;
+  height: 150px;
+
+  .user-name, .user-email, p { font-family: $ralewaylight; }
+
+  .user-name {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+  p {
+    text-transform: none;
+    margin: 0;
+    line-height: 15px;
+  }
+}
+
+.drawer-menu-container {
+  width: 240px;
+
+  .ant-menu-item {
+    padding-left: 15px !important;
+
+    &:hover {
+      color: $black;
+      background-color: $lightgrey;
+    }
+  }
+
+    .menu-icon {
+      @extend .p-r;
+      top: 6px;
+      margin-right: 15px;
+    }
+
+    .menu-label {
+      @extend .l-h-24;
+      font-family: $ralewayregular;
+    }
 }
 
 .tabs-container {

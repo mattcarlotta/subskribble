@@ -4,7 +4,7 @@ import { IndexRoute, Route, Redirect } from 'react-router';
 import App from '../components/app';
 // import Campaigns from '../components/rocketboard/campaigns';
 // import ContactUs from '../components/rocketboard/contact';
-// import Customers from '../components/rocketboard/customers';
+import Customers from '../components/rocketboard/customers';
 import CustomerSignup from '../containers/forms/website/CustomerSignupForm';
 import Dashboard from '../components/rocketboard/dashboard';
 import DashWrapper from '../components/rocketboard/navigation/dashWrapper';
@@ -15,7 +15,7 @@ import Home from '../components/website/home';
 // import Invoices from '../components/rocketboard/invoices';
 import LogIn from '../containers/forms/website/loginForm';
 import NotFound from '../components/app/notfound/404';
-// import Plans from '../components/rocketboard/plans';
+import Plans from '../components/rocketboard/plans';
 import Pricing from '../components/website/pricing';
 // import Profile from '../components/rocketboard/profile';
 // import OnLoadAuth from '../containers/app/OnLoadAuth';
@@ -44,15 +44,15 @@ export const views = (
 		<Redirect from="/rocketboard" to="/rocketboard/dashboard" />
 		<Route path="/rocketboard" component={DashWrapper(App)}>
 			{/* <Route path="campaigns" component={Campaigns} />
-			<Route path="contact-us" component={ContactUs} />
-			<Route path="customers" component={Customers} /> */}
+			<Route path="contact-us" component={ContactUs} /> */}
+			<Route path="customers" component={Customers} />
 			<Route path="dashboard" component={Dashboard} />
 			{/* <Route path="faqs" component={FAQs} />
 			<Route path="forms" component={Forms}/>
 			<Route path="invoices" component={Invoices} />
-			<Route path="messages" component={Messages} />
+			<Route path="messages" component={Messages} /> */}
 			<Route path="plans" component={Plans} />
-			<Route path="profile" component={Profile} />
+			{/* <Route path="profile" component={Profile} />
 			<Route path="settings" component={Settings} />
 			<Route path="subscriptions" component={Subscriptions} />
 			<Route path="templates" component={Templates} />

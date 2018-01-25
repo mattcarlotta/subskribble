@@ -3,12 +3,12 @@ import { Row, Col } from 'antd';
 // import DashboardTabs from './Tabs';
 import LeftNav from './leftNav';
 import RightNav from './rightNav';
-// import Sidebar from './Sidebar';
+import SideBar from './sidebar/SideBar';
 
 const DashboardHeader = () => (
   <Row className="dash-nav-container">
     <Col span={12}>
-      {/* <Sidebar /> */}
+      <SideBar />
       <LeftNav />
     </Col>
     <Col span={12}>
