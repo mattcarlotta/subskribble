@@ -8,7 +8,7 @@ import rocketLogoWhite from '../../../images/logos/rocketbiller_logo_white.png';
 import rocketLogoBlack from '../../../images/logos/rocketbiller_logo_black.png';
 
 class Header extends Component {
-	state = { fixedNavBar: false }
+	state = { adjustNavBG: '', fixedNavBar: false }
 
 	componentWillMount = () => this.checkIfFormLoaded(this.props.location.pathname);
 
@@ -25,7 +25,7 @@ class Header extends Component {
 		const setNavBGToBlue = url.indexOf('customer-signup') > 0;
 
 		if (!adjustNavBG && setNavBGToBlue) this.setState({ adjustNavBG : 'adjust-bg' });
-		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: null });
+		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: '' });
 	}
 
 	render() {

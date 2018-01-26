@@ -5,21 +5,18 @@
     @extend .bg-filter;
 
     .pricing-header-container {
-      @extend .t-a-c, .m-a, .w-100;
-      color: $owhite;
+      @extend %c-ow, %m-a, %t-a-c, %w-100;
       height: 330px;
       max-width: 1200px;
     	padding-top: 140px;
 
       .title {
-        @extend .f-w-400, .l-h-48, .t-a-c, .t-t-u;
-    		font-family: $ralewayregular;
+        @extend %f-f-ralereg, %f-w-400, %l-h-48, %t-a-c, %t-t-u;
     		font-size: 37.5px;
         margin: 10px;
 
         .subtitle {
-          @extend .c-w, .rt-title-tag;
-          word-wrap: break-word;
+          @extend %brk-ww, %c-w, %rt-title-tag;
         }
       }
     }
@@ -30,56 +27,49 @@
   background-color: $bloodred;
 
   .pricing-faqs-title-container {
-    @extend .t-a-c, .m-a, .w-100;
+    @extend %m-a, %t-a-c, %w-100;
     height: 85px;
     max-width: 1200px;
     padding-top: 30px;
 
     .title {
-      @extend .f-w-200, .l-h-48, .t-a-c, .t-t-u;
+      @extend %f-f-ralexlght, %f-w-200, %l-h-48, %t-a-c, %t-t-u;
       color: $darkwhite;
-  		font-family: $ralewayextralight;
   		font-size: 37.5px;
       margin: 10px;
     }
   }
 
   .pricing-faqs-container {
-    @extend .m-a, .w-100;
+    @extend %m-a, %w-100;
     color: $darkwhite;
     height: 1100px;
     max-width: 1200px;
 
     .pricing-faqs-grid-6 {
-      @extend .rt-grid-6;
+      @extend %rt-grid-6;
 
       .pricing-block {
-        @extend .rt-block;
+        @extend %rt-block;
         margin-top: 0;
 
         h3 {
-          @extend .f-w-300, .l-h-24;
-          font-family: $ralewayregular;
+          @extend %f-f-ralereg, %f-w-300, %l-h-24;
           font-size: 130%;
           line-height: 130%;
         }
 
         a {
-          @extend .f-w-200, .l-h-24;
-          font-family: $ralewaylight;
-          color: $lightblue;
+          @extend %c-lb, %f-f-ralelght, %f-w-200, %l-h-24;
 
           &:hover {
-            color: $black;
+            @extend %c-b;
           }
         }
 
         ul, li {
-          @extend .f-w-200, .l-h-24;
-          font-family: $ralewaylight;
+          @extend %brk-ww, %f-f-ralelght, %f-s-15, %f-w-200, %l-h-24;
           margin: 0 0 15px 0;
-          font-size: 15px;
-          word-wrap: break-word;
         }
       }
     }
@@ -87,55 +77,49 @@
 }
 
 .pricing-title-bg {
-  @extend .b-c-w;
+  @extend %b-c-w;
 
   .pricing-title-container {
-    @extend .t-a-c, .m-a, .w-100;
+    @extend %m-a, %t-a-c, %w-100;
     height: 160px;
     max-width: 1200px;
     padding-top: 60px;
 
     .title {
-      @extend .f-w-400, .l-h-48, .t-a-c, .t-t-u;
-  		font-family: $ralewayregular;
+      @extend %f-f-ralereg, %f-w-400, %l-h-48, %t-a-c, %t-t-u;
   		font-size: 37.5px;
       margin: 10px;
 
       .subtitle {
-        @extend .c-b, .rt-title-tag;
-        word-wrap: break-word;
+        @extend %brk-ww, %c-b, %rt-title-tag;
       }
     }
   }
 }
 
 .pricing-table-bg {
-  @extend .b-c-lw;
+  @extend %b-c-lw;
 
   .pricing-table-container {
-    @extend .t-a-c, .m-0-a, .w-100;
+    @extend %m-0-a, %t-a-c, %w-100;
     height: 663px;
     width: 1200px;
     padding-top: 40px;
 
     .pricing-table {
-      @extend .b-c-w, .t-a-c;
+      @extend %b-c-w, %t-a-c;
       clear: both;
       border: 1px solid $darkwhite;
       border-radius: 4px;
       margin-top: 50px;
 
       .table-col-25 {
-        @extend .b-c-w, .d-b, .f-l, .l-h-24, .p-25, .t-a-c, .w-25;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+        @extend %bs-bb, %b-c-w, %d-b, .f-l, %l-h-24, %p-25, %t-a-c, %w-25;
         border-right: 1px solid $darkwhite;
 
         .table-header {
-          @extend .b-c-lb, .c-c2, .f-s-18, .p-25, .t-t-u;
+          @extend %b-c-lb, %c-c2, %f-f-ralereg, %f-s-18, %p-25, %t-t-u;
           border-radius: 4px 0 0 0;
-          font-family: $ralewayregular;
           margin: -25px -25px 15px -25px;
         }
 
@@ -148,7 +132,7 @@
         }
 
         .table-top {
-          @extend .b-c-db, .c-c2, .t-a-c;
+          @extend %b-c-db, %c-c2, %t-a-c;
           margin: -15px -25px 15px -25px;
           padding: 40px 0 25px 0;
           border-bottom: 1px solid $darkwhite;
@@ -164,7 +148,7 @@
           }
 
           .plan-length {
-            @extend .d-b;
+            @extend %d-b;
             margin-top: 15px;
           }
         }
@@ -175,16 +159,16 @@
         }
 
         .table-content {
-          @extend .b-c-w, .d-b, .t-a-c;
+          @extend %b-c-w, %d-b, %t-a-c;
 
           .item {
-            @extend .d-b;
+            @extend %d-b;
             margin: 15px 0;
           }
         }
 
         .table-bottom {
-          @extend .d-b;
+          @extend %d-b;
           margin-top: 35px;
         }
 
@@ -195,41 +179,40 @@
 }
 
 .pricing-contact-bg {
-  @extend .b-c-dwg;
+  @extend %b-c-dwg;
 
   .pricing-contact-title-container {
-    @extend .t-a-c, .m-a, .w-100;
+    @extend %t-a-c, %m-a, %w-100;
     height: 85px;
     max-width: 1200px;
     padding-top: 30px;
 
     .title {
-      @extend .c-lwg, .f-w-300, .l-h-48, .t-a-c, .t-t-u;
-  		font-family: $ralewayextralight;
+      @extend %c-lwg, %f-f-ralexlght, %f-w-300, %l-h-48, %t-a-c, %t-t-u;
   		font-size: 37.5px;
       margin: 10px;
     }
 
     .subtitle {
-      @extend .c-w, .rt-title-tag;
+      @extend %c-w, %rt-title-tag;
     }
   }
 
   .pricing-contact-container {
-    @extend .m-a, .w-100;
+    @extend %m-a, %w-100;
     height: 500px;
     max-width: 1200px;
     padding-top: 50px;
 
     .pricing-contact-grid-12 {
-      @extend .w-1200;
+      @extend %w-1200;
 
       .pricing-block {
-        @extend .m-0-a;
+        @extend %m-0-a;
         width: 600px;
 
         .contact-form {
-          margin-top: 20px;
+          @extend %m-t-20;
         }
       }
     }

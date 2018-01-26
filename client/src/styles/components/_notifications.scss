@@ -3,7 +3,7 @@
 }
 
 .notifications-header {
-  font-family: $poppinsmedium;
+  @extend %f-f-poppmed;
   letter-spacing: .15px;
   font-size: 13px;
   height: 35px;
@@ -18,15 +18,14 @@
   height: 250px;
 
   .empty-notes {
-    @extend .d-b, .m-0-a, .p-r;
+    @extend %d-b, %m-0-a, %p-r;
     top: 65px;
     opacity: 0.10;
   }
 
   .empty-title {
-    @extend .f-s-14, .p-r, .t-a-c;
+    @extend %f-f-popplght, %f-s-14, %p-r, %t-a-c;
     top: 75px;
-    font-family: $poppinslight;
     letter-spacing: .15px;
   }
 }
@@ -35,8 +34,7 @@
   padding: 0px 20px;
 
   .delete-notication {
-    @extend .fix-cursor;
-    color: $lightblue;
+    @extend %c-lb, .fix-cursor;
     height: 20px;
     width: 20px;
   }
@@ -46,21 +44,21 @@
   }
 
   .date {
-    color: $darkwarmgrey;
+    @extend %c-dwg;
     font-size: 10px;
   }
 
   .note {
+    @extend %m-t-10;
     border-bottom: 1px solid #e2e4e6;
-    margin-top: 10px;
   }
 
   .link {
-    @extend .c-lb;
+    @extend %c-lb;
   }
 
   .title {
-    font-family: $poppinslight;
+    @extend %f-f-popplght;
     font-size: 12px;
   }
 
@@ -68,29 +66,24 @@
 }
 
 .note-10 {
-  @extend .d-ib, .p-r;
+  @extend %d-ib, %p-r, %w-10;
   top: -10px;
-  width: 10%;
 }
 
 .note-15 {
-  @extend .d-ib;
-  width: 15%;
+  @extend %d-ib, %w-15;
 }
 
 .note-75 {
-  @extend .d-ib;
-  width: 75%
+  @extend %d-ib, %w-75;
 }
 
 .note-100 {
-  @extend .d-ib;
-  width: 100%;
+  @extend %d-ib, %w-100;
 }
 
 .divider {
+  @extend %b-c-lcg, %m-0;
   height: 1px;
   border: none;
-  background-color: $lightcoolgrey;
-  margin: 0;
 }

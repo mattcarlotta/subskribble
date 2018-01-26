@@ -1,6 +1,4 @@
 .notfound-container {
-	@extend .c-w, .b-c-dwg;
+	@extend %c-w, %b-c-dwg, %h-100vh, %t-a-c;
 	padding-top: 15%;
-	height: 100vh;
-	text-align: center;
 }

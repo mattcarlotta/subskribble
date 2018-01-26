@@ -10,9 +10,8 @@
 }
 
 .btn {
-  @extend .t-t-u;
+  @extend %f-f-poppsemi, %t-t-u;
   border-radius: 6px;
-  font-family: 'Poppins Semi-Bold, sans-serif';
   border: 0;
 }
 
@@ -20,7 +19,7 @@
   background-color: $lightblue;
 
   &:hover, &:focus {
-    @extend .no-link-focus;
+    @extend %no-link-focus;
     background-color: $skyblue;
   }
 }
@@ -29,7 +28,7 @@
   background-color: $orange !important;
 
   &:hover, &:focus {
-    @extend .no-link-focus;
+    @extend %no-link-focus;
     background-color: $red !important;
   }
 }
@@ -38,8 +37,7 @@
   background-color: $darkwarmgrey !important;
 
   &:hover, &:focus {
-    @extend .no-link-focus;
-    color: $white;
+    @extend %c-w, %no-link-focus;
     background-color: $warmgrey !important;
   }
 }

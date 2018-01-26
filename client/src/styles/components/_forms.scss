@@ -1,13 +1,13 @@
 .ant-form-item {
-  margin-bottom: 0;
+  @extend %m-b-0;
   height: 60px;
 }
 
 .billing-switch-field {
+  @extend %w-100;
   height: 50px;
-  width: 100%;
   .ant-form-item-label {
-    float: left;
+    @extend .f-l;
     line-height: 39.9999px;
     overflow: hidden;
     white-space: nowrap;
@@ -19,51 +19,45 @@
 }
 
 .customer-signup-bg {
-  height: 100%;
-  // background-color: $white;
+  @extend %h-100;
   background-color: $whiteblue;
 
   .customer-signup-container {
     padding-top: 100px;
 
     .stepper-container {
-      @extend .container-1200;
+      @extend %container-1200;
     }
 
     .title {
-      @extend .t-a-c;
+      @extend %t-a-c;
       margin: 30px 0;
     }
 
     .form-container {
-      @extend .c-b, .p-r;
-      font-family: $poppinslight;
+      @extend %c-b, %f-f-popplght, %p-r;
       margin: 50px 50px 100px 50px;
       min-height: 600px;
 
       h3 {
-        line-height: 30px;
+        @extend %f-w-300, %l-h-30;
         font-size: 21px;
-        font-weight: 300;
       }
 
-      h4 {
-        line-height: 30px;
-        font-weight: 300;
-      }
+      h4 { @extend %f-w-300, %l-h-30; }
 
       .left-form {
-        @extend .f-l, .pr-10, .w-50;
+        @extend .f-l, %pr-10, %w-50;
         height: 450px;
       }
 
       .main-title {
-        @extend .t-a-c;
+        @extend %t-a-c;
         margin-bottom: 40px;
       }
 
       .right-form {
-        @extend .f-r, .pl-10, .w-50;
+        @extend .f-r, %pl-10, %w-50;
         height: 450px;
       }
 
@@ -71,9 +65,8 @@
         height: 850px;
 
         .selection-container {
-          @extend .f-l;
+          @extend .f-l, %m-b-20, %w-100;
           height: 380px;
-          width: 100%;
           max-width: 300px;
           min-width: 200px;
           border-top: 1px solid rgba(120, 130, 140, 0.23);
@@ -82,41 +75,38 @@
           border-bottom: 5px solid rgba(120, 130, 140, 0.23);
           padding: 30px 0px;
           margin-left: 15px;
-          margin-bottom: 20px;
 
           .header {
-            @extend .t-a-c;
+            @extend %t-a-c;
 
             .price {
-              @extend .p-r;
+              @extend %p-r;
               font-size: 46px;
               margin: 20px 0 10px;
               font-weight: bold;
 
               .price-sign {
-                @extend .p-r;
-                font-size: 15px;
+                @extend %f-s-15, %p-r;
                 top: -25px;
                 margin-left: -10px;
               }
             }
 
             .plan-title {
+              @extend %f-s-18;
               line-height: 22px;
-              font-size: 18px;
             }
           }
 
           .body {
-            @extend .t-a-c;
+            @extend %m-b-20, %t-a-c;
             border-top: 1px solid rgba(120, 130, 140, 0.13);
             border-bottom: 1px solid rgba(120, 130, 140, 0.13);
             padding: 20px 0;
-            margin-bottom: 20px;
           }
 
           .selection {
-            margin: auto;
+            @extend %m-a;
             width: 25px;
             height: 50px;
           }
@@ -126,11 +116,11 @@
       .review-signup-container {
         min-height: 450px;
 
-        h1,h2,h3,p { font-family: $poppinslight; }
+        h1,h2,h3,p { @extend %f-f-popplght; }
         h2 { font-size: 24px; }
 
         i {
-          @extend .c-lb;
+          @extend %c-lb;
           font-size: 22px;
         }
 
@@ -139,8 +129,7 @@
         }
 
         .edit-link {
-          @extend .c-lb, .fix-cursor, .f-r;
-          font-size: 15px;
+          @extend %c-lb, .fix-cursor, .f-r, %f-s-15;
           font-weight: normal;
         }
 
@@ -152,27 +141,25 @@
           }
 
           .price-sign {
-            @extend .p-r;
+            @extend %p-r;
             font-size: 12px;
             top: -5px;
           }
         }
 
         .address {
-          @extend .t-t-c;
-          margin: 0;
+          @extend %m-0, %t-t-c;
         }
 
         .contact-info-container, .payment-info-container, .plan-info-container, .total-container {
-          @extend .f-l;
+          @extend .f-l, %m-b-20;
           height: 380px;
           width: 23.5%;
           padding: 30px 0px;
           margin-left: 15px;
-          margin-bottom: 20px;
 
           .details-container {
-            @extend .b-c-w;
+            @extend %b-c-w;
             min-height: 205px;
             padding: 16px;
             margin-top: 2px;
@@ -185,25 +172,25 @@
 
       .contact-info-container {
         .name {
-          font-size: 16px;
+          @extend %f-s-16;
           font-weight: bold;
         }
 
-        .email, .phone { margin: 0;}
+        .email, .phone { @extend %m-0;}
       }
 
       .payment-info-container {
-        .name, .address, .location { margin: 0 };
+        .name, .address, .location { @extend %m-0; };
 
         .details-container {
           i {
+            @extend %m-r-10;
             color: $darkblue;
             font-size: 30px;
-            margin-right: 10px;
           }
 
           .credit-billing {
-            margin: 0;
+            @extend %m-0;
             font-weight: 600;
             letter-spacing: 1px;
           }
@@ -212,14 +199,14 @@
             font-size: 25px;
 
             .experiation {
-              @extend .p-r;
+              @extend %m-l-10, %p-r;
               top: -3px;
               letter-spacing: 1px;
               font-size: 12px;
-              margin-left: 10px;
             }
+
             .stars {
-              @extend .p-r;
+              @extend %p-r;
               font-size: 12px;
               top: -2px;
               margin-right: 1px;
@@ -230,7 +217,7 @@
       }
 
       .error-handlers {
-        @extend .t-a-c;
+        @extend %t-a-c;
         // font-size: 12px;
         // line-height: 12px;
         color: rgb(244, 67, 54);
@@ -247,22 +234,21 @@
   }
 }
 
-.input-10 { @extend .h-72, .w-10; }
-.input-15 { @extend .h-72; width: 15%; }
-.input-16 { @extend .h-72, .w-16; }
-.input-20 { @extend .h-72, .w-20; }
-.input-25 { @extend .h-72, .w-25; }
-.input-40 { @extend .h-72, .w-40; }
-.input-50 { @extend .h-72, .w-50; }
-.input-66 { @extend .h-72, .w-66; }
-.input-75 { @extend .h-72, .w-75; }
-.input-85 { @extend .h-72; width: 85%; }
-.input-95 { @extend .h-72; width: 95%; }
-.input-100 { @extend .h-72, .w-100; }
+.input-10 { @extend %h-72, %w-10; }
+.input-15 { @extend %h-72, %w-15;  }
+.input-16 { @extend %h-72, %w-16; }
+.input-20 { @extend %h-72, %w-20; }
+.input-25 { @extend %h-72, %w-25; }
+.input-40 { @extend %h-72, %w-40; }
+.input-50 { @extend %h-72, %w-50; }
+.input-66 { @extend %h-72, %w-66; }
+.input-75 { @extend %h-72, %w-75; }
+.input-85 { @extend %h-72, %w-85; }
+.input-95 { @extend %h-72, %w-95; }
+.input-100 { @extend %h-72, %w-100; }
 
 .new-form-container {
-  @extend .w-100;
-  text-transform: none;
+  @extend %t-t-n, %w-100;
   max-width: 800px;
   padding: 16px;
 
@@ -282,17 +268,17 @@
   }
 
   .editor-container {
-    @extend .w-100;
+    @extend %w-100;
     margin-top: 30px;
 
     h4 { color: $lightblue; }
 
     .content {
-      @extend .p-r;
+      @extend %p-r;
       border: 1px solid $black;
 
       .fr-toolbar {
-        background-color: $lightblue;
+        @extend %b-c-lb;
         border: none !important;
       }
 
@@ -324,16 +310,16 @@
   }
 
   .button-container {
-    @extend .m-t-20;
+    @extend %m-t-20;
 
     .button {
-      @extend .d-ib, .w-50;
+      @extend %d-ib, %w-50;
       padding: 6px 12px;
       margin-bottom: 30px;
     }
 
     .button-center {
-      @extend .d-b, .m-0-a, .w-100;
+      @extend %d-b, %m-0-a, %w-100;
       max-width: 250px;
     }
   }
