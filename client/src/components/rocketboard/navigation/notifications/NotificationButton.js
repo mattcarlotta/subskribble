@@ -47,8 +47,6 @@ class Notifications extends Component {
                       removeNotification={this.removeNotification}
                     />
                   }
-                  <hr className="divider" />
-                  <div className="notifications-footer"/>
                 </div>
               }
               placement="bottomRight"

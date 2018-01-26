@@ -1,38 +1,38 @@
 export default [
   {
     icon: 'home',
-    label: 'Dashboard',
+    label: 'dashboard',
   },
   {
     icon: 'people_outline',
-    label: 'Customers',
+    label: 'customers',
   },
   {
     icon: 'content_paste',
-    label: 'Plans',
+    label: 'plans',
   },
   {
     icon: 'note_add',
-    label: 'Subscriptions',
+    label: 'subscriptions',
   },
   {
     icon: 'payment',
-    label: 'Transactions',
+    label: 'transactions',
   },
   {
     icon: 'new_releases',
-    label: 'Campaigns',
+    label: 'campaigns',
   },
   {
     icon: 'assessment',
-    label: 'Invoices',
+    label: 'invoices',
   },
   {
     icon: 'content_copy',
-    label: 'Forms',
+    label: 'forms',
   },
   {
     icon: 'view_quilt',
-    label: 'Templates',
+    label: 'templates',
   }
 ]

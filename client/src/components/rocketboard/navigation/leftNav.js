@@ -8,10 +8,8 @@ export default function() {
   return (
     <div className="logo-container">
       <Link to='/rocketboard/dashboard'>
-        <span>
-          <img src={rbSymbolLogo} alt="rocketbiller_logo_60x60.png" />
-          <img className="text-logo" src={rbTextLogo} alt="rocketbiller_logo_text.png" />
-        </span>
+        <img src={rbSymbolLogo} alt="rocketbiller_logo_60x60.png" />
+        <img className="text-logo" src={rbTextLogo} alt="rocketbiller_logo_text.png" />
       </Link>
     </div>
   )
