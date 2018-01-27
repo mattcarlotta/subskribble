@@ -1,26 +1,27 @@
 .ant-btn:focus, .ant-btn:hover, .ant-btn.disabled, .ant-btn.disabled.active, .ant-btn.disabled:active, .ant-btn.disabled:focus, .ant-btn.disabled:hover, .ant-btn[disabled], .ant-btn[disabled].active, .ant-btn[disabled]:active, .ant-btn[disabled]:focus, .ant-btn[disabled]:hover {
-  color: $white;
-  background-color: $lightblue;
+  @include b-c($lightblue);
+  @include c($white);
 }
 
 .btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-  color: $white;
-  background-color: $rbblue;
+  @include b-c($rbblue);
+  @include c($white);
   border-color: $deepblue;
 }
 
 .btn {
-  @extend %f-f-poppsemi, %t-t-u;
+  @extend %t-t-u;
+  @include f-f($poppinsmedium);
   border-radius: 6px;
   border: 0;
 }
 
 .btn-primary {
-  background-color: $lightblue;
+  @include b-c($lightblue);
 
   &:hover, &:focus {
     @extend %no-link-focus;
-    background-color: $skyblue;
+    @include b-c($skyblue);
   }
 }
 
@@ -37,7 +38,8 @@
   background-color: $darkwarmgrey !important;
 
   &:hover, &:focus {
-    @extend %c-w, %no-link-focus;
+    @extend %no-link-focus;
+    @include c($white);
     background-color: $warmgrey !important;
   }
 }

@@ -1,21 +1,21 @@
 .notifications-popover {
-  width: 380px;
+  @include w(380px);
 }
 
 .notifications-header {
-  @extend %f-f-poppmed;
+  @include f-f($poppinsmedium);
+  @include f-s(13px);
+  @include h(35px);
   letter-spacing: .15px;
-  font-size: 13px;
-  height: 35px;
   padding: 7px 10px;
 }
 
 .notifications-footer {
-  height: 30px;
+  @include h(30px);
 }
 
 .notifications-empty {
-  height: 250px;
+  @include h(250px);
 
   .empty-notes {
     @extend %d-b, %m-0-a, %p-r;
@@ -24,7 +24,9 @@
   }
 
   .empty-title {
-    @extend %f-f-popplght, %f-s-14, %p-r, %t-a-c;
+    @extend %p-r, %t-a-c;
+    @include f-f($poppinslight);
+    @include f-s(14px);
     top: 75px;
     letter-spacing: .15px;
   }
@@ -34,18 +36,17 @@
   padding: 0px 20px;
 
   .delete-notication {
-    @extend %c-lb, .fix-cursor;
-    height: 20px;
-    width: 20px;
+    @extend .fix-cursor;
+    @include c($lightblue);
+    @include h(20px);
+    @include w(20px);
   }
 
-  .hidden {
-    display: none;
-  }
+  .hidden { display: none; }
 
   .date {
-    @extend %c-dwg;
-    font-size: 10px;
+    @include c($darkwarmgrey);
+    @include f-s(10px);
   }
 
   .note {
@@ -53,37 +54,40 @@
     border-bottom: 1px solid #e2e4e6;
   }
 
-  .link {
-    @extend %c-lb;
-  }
+  .link { @include c($lightblue); }
 
   .title {
-    @extend %f-f-popplght;
-    font-size: 12px;
+    @include f-f($poppinslight);
+    @include f-s(12px);
   }
 
   p { margin: 0 0 10px 0 }
 }
 
 .note-10 {
-  @extend %d-ib, %p-r, %w-10;
+  @extend %d-ib, %p-r;
+  @include w(10%);
   top: -10px;
 }
 
 .note-15 {
-  @extend %d-ib, %w-15;
+  @extend %d-ib;
+  @include w(15%);
 }
 
 .note-75 {
-  @extend %d-ib, %w-75;
+  @extend %d-ib;
+  @include w(75%);
 }
 
 .note-100 {
-  @extend %d-ib, %w-100;
+  @extend %d-ib;
+  @include w(100%);
 }
 
 .divider {
-  @extend %b-c-lcg, %m-0;
+  @extend %m-0;
+  @include b-c($lightcoolgrey);
   height: 1px;
   border: none;
 }

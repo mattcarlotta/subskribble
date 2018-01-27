@@ -20,22 +20,23 @@
 
   .override-table-style {
     th {
-      font-family: $poppinssemibold;
-      font-size: 14px !important;
-      color: $black !important;
+      // @include c($black !important);
+      @include f-f($poppinssemibold);
+      @include f-s(14px !important);
     }
 
     td {
-      font-family: sans-serif;
-      font-size: 13px !important;
-      color: $black !important;
-      text-transform: none;
+      @extend %t-t-n;
+      @include c($black !important);
+      @include f-f(sans-serif);
+      @include f-s(13px !important);
     }
   }
 }
 
 .label {
-  @extend .f-w-500, .t-a-c;
+  @extend %t-a-c;
+  @include f-w(500);
   display: inline;
   letter-spacing: 0.05em;
   border-radius: 60px;
@@ -43,62 +44,64 @@
 }
 
 .active {
-  @extend .t-t-c;
-  color: $tealgreen;
+  @extend %t-t-c;
+  @include c($tealgreen);
   border: 1px solid $tealgreen;
   border-radius: 0px;
   padding: 4px 34px;
 }
 
 .credit {
-  @extend .t-t-c;
-  color: $darkblue;
+  @extend %t-t-c;
+  @include c($darkblue);
   border: 1px solid $darkblue;
   border-radius: 0px;
   padding: 4px 38px;
 }
 
 .inactive {
-  @extend .t-t-c;
-  color: $lightcoolgrey;
+  @extend %t-t-c;
+  @include c($lightcoolgrey);
   border: 1px solid $lightcoolgrey;
   border-radius: 0px;
   padding: 4px 27px;
 }
 
 .late {
-  @extend .t-t-c;
-  color: $darkyellow;
+  @extend %t-t-c;
+  @include c($darkyellow);
   border: 1px solid $darkyellow;
   border-radius: 0px;
   padding: 4px 41px;
 }
 
 .paid {
-  @extend .t-t-c;
-  color: $limegreen;
+  @extend %t-t-c;
+  @include c($limegreen);
   border: 1px solid $limegreen;
   border-radius: 0px;
   padding: 4px 41px;
 }
 
 .refund {
-  @extend .t-t-c;
-  color: $redorange;
+  @extend %t-t-c;
+  @include c($redorange);
   border: 1px solid $redorange;
   border-radius: 0px;
   padding: 4px 34px;
 }
 
 .suspended {
-  @extend .t-t-c;
-  color: $firered;
+  @extend %t-t-c;
+  @include c($firered);
   border: 1px solid $firered;
   border-radius: 0px;
 }
 
 .subscription-count {
-  @extend .c-w, .f-w-500, .label, .t-a-c;
-  background-color: $lightblue;
+  @extend .label, %t-a-c;
+  @include c($white);
+  @include b-c($lightblue);
+  @include f-w(500);
   padding: 4px 16px 3px;
 }

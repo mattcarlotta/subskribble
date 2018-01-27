@@ -1,14 +1,15 @@
 .ant-form-item {
   @extend %m-b-0;
-  height: 60px;
+  @include h(60px);
 }
 
 .billing-switch-field {
-  @extend %w-100;
-  height: 50px;
+  @include h(50px);
+  @include w(100%);
+
   .ant-form-item-label {
     @extend .f-l;
-    line-height: 39.9999px;
+    @include l-h(39.9999px)
     overflow: hidden;
     white-space: nowrap;
   }
@@ -19,8 +20,8 @@
 }
 
 .customer-signup-bg {
-  @extend %h-100;
-  background-color: $whiteblue;
+  @include b-c($whiteblue);
+  @include h(100%);
 
   .customer-signup-container {
     padding-top: 100px;
@@ -31,24 +32,29 @@
 
     .title {
       @extend %t-a-c;
+      @include c($black);
       margin: 30px 0;
     }
 
     .form-container {
-      @extend %c-b, %f-f-popplght, %p-r;
+      @extend %p-r;
+      @include c($black);
+      @include f-f($poppinslight);
       margin: 50px 50px 100px 50px;
       min-height: 600px;
 
       h3 {
-        @extend %f-w-300, %l-h-30;
-        font-size: 21px;
+        @include f-s(21px);
+        @include f-w(300);
+        @include l-h(30px);
       }
 
-      h4 { @extend %f-w-300, %l-h-30; }
+      h4 { @include f-w(300); @include l-h(30px); }
 
       .left-form {
-        @extend .f-l, %pr-10, %w-50;
-        height: 450px;
+        @extend .f-l, %pr-10;
+        @include h(450px);
+        @include w(50%);
       }
 
       .main-title {
@@ -57,16 +63,18 @@
       }
 
       .right-form {
-        @extend .f-r, %pl-10, %w-50;
-        height: 450px;
+        @extend .f-r, %pl-10;
+        @include h(450px);
+        @include w(50%);
       }
 
       .plan-selection-container {
-        height: 850px;
+        @include h(850px);
 
         .selection-container {
-          @extend .f-l, %m-b-20, %w-100;
-          height: 380px;
+          @extend .f-l, %m-b-20;
+          @include h(380px);
+          @include w(100%);
           max-width: 300px;
           min-width: 200px;
           border-top: 1px solid rgba(120, 130, 140, 0.23);
@@ -81,19 +89,20 @@
 
             .price {
               @extend %p-r;
-              font-size: 46px;
+              @include f-s(46px);
+              @include f-w(bold);
               margin: 20px 0 10px;
-              font-weight: bold;
 
               .price-sign {
-                @extend %f-s-15, %p-r;
+                @extend %p-r;
+                @include f-s(15px);
                 top: -25px;
                 margin-left: -10px;
               }
             }
 
             .plan-title {
-              @extend %f-s-18;
+              @include f-s(18px);
               line-height: 22px;
             }
           }
@@ -116,33 +125,28 @@
       .review-signup-container {
         min-height: 450px;
 
-        h1,h2,h3,p { @extend %f-f-popplght; }
-        h2 { font-size: 24px; }
+        h1,h2,h3,p { @include f-f(poppinslight);}
+        h2 { @include f-s(24px); }
+        i { @include c($lightblue); @include f-s(22px); }
 
-        i {
-          @extend %c-lb;
-          font-size: 22px;
-        }
-
-        .head-title {
-          font-size: 26px;
-        }
+        .head-title { @include f-s(26px); }
 
         .edit-link {
-          @extend %c-lb, .fix-cursor, .f-r, %f-s-15;
-          font-weight: normal;
+          @extend .fix-cursor, .f-r;
+          @include c($lightblue);
+          @include f-s(15px);
+          @include f-w(normal);
         }
 
         .price {
-          font-size: 22px;
+          @include f-s(22px);
 
           .month {
-            font-size: 12px;
+            @include f-s(12px);
           }
 
           .price-sign {
-            @extend %p-r;
-            font-size: 12px;
+            @extend .month, %p-r;
             top: -5px;
           }
         }
@@ -153,29 +157,24 @@
 
         .contact-info-container, .payment-info-container, .plan-info-container, .total-container {
           @extend .f-l, %m-b-20;
-          height: 380px;
-          width: 23.5%;
+          @include h(380px);
+          @include w(23.5%);
           padding: 30px 0px;
           margin-left: 15px;
 
           .details-container {
-            @extend %b-c-w;
+            @include b-c($white);
+            @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+            @include f-f($poppinsmedium);
             min-height: 205px;
             padding: 16px;
             margin-top: 2px;
-            -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-            -moz-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-            box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 6px, rgba(0, 0, 0, 0.08) 0px 1px 4px;
           }
         }
       }
 
       .contact-info-container {
-        .name {
-          @extend %f-s-16;
-          font-weight: bold;
-        }
-
+        .name { @include f-s(16px); @include f-w(bold);}
         .email, .phone { @extend %m-0;}
       }
 
@@ -185,32 +184,31 @@
         .details-container {
           i {
             @extend %m-r-10;
-            color: $darkblue;
-            font-size: 30px;
+            @include c($darkblue);
+            @include f-s(30px);
           }
 
           .credit-billing {
             @extend %m-0;
-            font-weight: 600;
+            @include f-w(600);
             letter-spacing: 1px;
           }
 
           .creditcard {
-            font-size: 25px;
+            @include f-s(25px);
 
             .experiation {
               @extend %m-l-10, %p-r;
+              @include f-s(12px);
               top: -3px;
               letter-spacing: 1px;
-              font-size: 12px;
             }
 
             .stars {
               @extend %p-r;
-              font-size: 12px;
+              @include f-s(12px);
               top: -2px;
               margin-right: 1px;
-              // left: 1px;
             }
           }
         }
@@ -218,10 +216,8 @@
 
       .error-handlers {
         @extend %t-a-c;
-        // font-size: 12px;
-        // line-height: 12px;
-        color: rgb(244, 67, 54);
-        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        @include c($error);
+        @include trans(all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms);
       }
 
       .selected {
@@ -234,27 +230,28 @@
   }
 }
 
-.input-10 { @extend %h-72, %w-10; }
-.input-15 { @extend %h-72, %w-15;  }
-.input-16 { @extend %h-72, %w-16; }
-.input-20 { @extend %h-72, %w-20; }
-.input-25 { @extend %h-72, %w-25; }
-.input-40 { @extend %h-72, %w-40; }
-.input-50 { @extend %h-72, %w-50; }
-.input-66 { @extend %h-72, %w-66; }
-.input-75 { @extend %h-72, %w-75; }
-.input-85 { @extend %h-72, %w-85; }
-.input-95 { @extend %h-72, %w-95; }
-.input-100 { @extend %h-72, %w-100; }
+.input-10 { @include h(72px); @include w(10%); }
+.input-15 { @include h(72px); @include w(15%); }
+.input-16 { @include h(72px); @include w(16%); }
+.input-20 { @include h(72px); @include w(20%); }
+.input-25 { @include h(72px); @include w(25%); }
+.input-40 { @include h(72px); @include w(40%); }
+.input-50 { @include h(72px); @include w(50%); }
+.input-66 { @include h(72px); @include w(66%); }
+.input-75 { @include h(72px); @include w(75%); }
+.input-85 { @include h(72px); @include w(85%); }
+.input-95 { @include h(72px); @include w(95%); }
+.input-100 { @include h(72px); @include w(100%); }
 
 .new-form-container {
-  @extend %t-t-n, %w-100;
+  @extend %t-t-n;
+  @include w(100%);
   max-width: 800px;
   padding: 16px;
 
   .input-container {
     margin: 10px 0px;
-    height: 72px;
+    @include h(72px);
 
     .override-chip-style {
       & div > div > div {
@@ -268,18 +265,18 @@
   }
 
   .editor-container {
-    @extend %w-100;
+    @include w(100%);
     margin-top: 30px;
 
-    h4 { color: $lightblue; }
+    h4 { @include c($lightblue); }
 
     .content {
       @extend %p-r;
       border: 1px solid $black;
 
       .fr-toolbar {
-        @extend %b-c-lb;
-        border: none !important;
+        @extend %bb-none;
+        @include b-c($lightblue);
       }
 
       .fr-sticky-on {
@@ -313,13 +310,15 @@
     @extend %m-t-20;
 
     .button {
-      @extend %d-ib, %w-50;
+      @extend %d-ib;
+      @include w(50%);
       padding: 6px 12px;
       margin-bottom: 30px;
     }
 
     .button-center {
-      @extend %d-b, %m-0-a, %w-100;
+      @extend %d-b, %m-0-a;
+      @include w(100%);
       max-width: 250px;
     }
   }

@@ -1,9 +1,9 @@
 .automation-bg {
-  @extend %b-c-w;
+  @include b-c($cream2);
 
   .automation-container {
     @extend %container-1200;
-    height: 500px;
+    @include h(500px);
 
     .automation-grid-12 {
       @extend %rt-grid-12;
@@ -20,7 +20,8 @@
           margin: 15px;
 
           .title {
-            @extend %c-b, %rt-big-title, %t-t-u;
+            @extend %rt-big-title, %t-t-u;
+            @include c($black);
           }
 
           .description {
@@ -48,23 +49,32 @@
 }
 
 .header-container {
-  @extend %c-ow, %h-100, %t-a-c, %m-a, %w-100;
+  @extend %t-a-c, %m-a;
+  @include c($owhite);
+  @include h(100%);
+  @include w(100%);
   max-height: 800px;
   max-width: 1200px;
 	padding-top: 140px;
 
 	h1 {
-    @extend %f-f-ralereg, %f-w-400, %l-h-48, %t-a-c, %t-t-u;
-		font-size: 37.5px;
+    @extend %t-a-c, %t-t-u;
+    @include f-f($ralewayregular);
+    @include f-s(37.5px);
+    @include f-w(400);
+    @include l-h(48px);
 		letter-spacing: 10px;
     margin: 10px;
 	}
 
   .title {
-    @extend %f-f-ralelght, %c-lg, %f-w-300, %w-60;
-    font-size: 19.5px;
+    @include c($lightgrey);
+    @include f-f($ralewaylight);
+    @include f-s(19.5px);
+    @include f-w(300);
+    @include l-h(35px);
+    @include w(60%);
     margin: 12px auto;
-    line-height: 35px;
 
     span {
       @extend %brk-ww;
@@ -72,22 +82,22 @@
   }
 
 	.img-container {
-    @extend %w-100;
+    @include w(100%);
 		float: none;
     margin-top: 50px;
 
     img {
-      @extend %w-100;
+      @extend %bb-none;
+      @include h(auto);
+      @include w(100%);
       max-width: 1150px;
-      height: auto;
       vertical-align: middle;
-      border: 0;
     }
 	}
 }
 
 .features-bg {
-  @extend %w-100;
+  @include w(100%);
   background-image: url(../images/rb-features-bg.jpg);
   background-size: cover;
   background-position: top center;
@@ -115,28 +125,32 @@
 
 .features-container {
   @extend %container-1200;
-  height: 862px;
+  @include h(862px);
 
   .features-grid-12 {
     @extend %rt-grid-12;
 
     .features-block {
-      @extend %p-r, %t-a-c, %w-100;
-      margin-bottom: 0;
-      padding-bottom: 0;
+      @extend %m-b-0, %pb-0, %p-r, %t-a-c;
+      @include w(100%);
       margin: 50px 10px;
       padding: 15px;
 
       .title-container {
-        @extend %c-b, %t-a-c;
+        @extend %t-a-c;
+        @include c($black);
 
         .title {
-          @extend %f-f-ralexlght, %l-h-48, %t-t-u;
-          font-size: 37.5px;
+          @extend %t-t-u;
+          @include f-f($ralewayextralight);
+          @include f-s(37.5px);
+          @include l-h(48px);
           margin-bottom: 25px;
 
           .subtitle {
-            @extend %d-b, %f-s-18, %l-h-48, %t-t-c;
+            @extend %d-b, %t-t-c;
+            @include f-s(18px);
+            @include l-h(48px);
             opacity: 0.5;
           }
         }
@@ -146,25 +160,28 @@
         @extend %gantry-33;
 
           img {
-            @extend %h-100;
+            @extend %bb-none;
+            @include h(100%);
             max-height: 675px;
             vertical-align: middle;
-            border: 0;
           }
 
         .spacer {
           margin: 10px;
 
           .item {
+            @include c($warmgrey);
             h4 {
-              @extend %f-f-ralelght, %t-t-u;
-              font-size: 120%;
-              line-height: 120%;
+              @extend %t-t-u;
+              @include f-f($ralewayextralight);
+              @include f-s(120%);
+              @include l-h(120%);
               margin: 10px 0;
             }
 
             p {
-              @extend %f-s-15, %l-h-24;
+              @include f-s(15px);
+              @include l-h(24px);
             }
 
             @extend %p-r;
@@ -173,10 +190,8 @@
             border-radius: 4px;
 
             &:hover {
-              @extend %b-c-w;
-              -webkit-box-shadow: 3px 0px 23px 4px rgba(40,40,40,0.25);
-              -moz-box-shadow: 3px 0px 23px 4px rgba(40,40,40,0.25);
-              box-shadow: 3px 0px 23px 4px rgba(40,40,40,0.25);
+              @include b-c($white);
+              @include b-s(3px 0px 23px 4px rgba(40,40,40,0.25));
 
               & .tooltip:before {
                 visibility: visible;
@@ -184,9 +199,9 @@
             }
 
             .tooltip {
-              @extend %c-w;
-              font-family: FontAwesome;
-              font-size: 40px;
+              @include c($white);
+              @include f-f(FontAwesome);
+              @include f-s(40px);
               position: absolute;
               visibility: hidden;
               top: 50%;
@@ -212,12 +227,14 @@
 }
 
 .services-bg {
-  @extend %c-w, %b-c-dwg;
+  @include c($white);
+  @include b-c($darkwarmgrey);
 
   .services-container {
-    @extend %container-1200, %f-f-ralereg;
-    height: 332px;
-    font-weight: normal !important;
+    @extend %container-1200;
+    @include f-f($ralewayregular);
+    @include f-s(normal !important);
+    @include h(332px);
 
     .services-grid-4 {
       @extend %rt-grid-4;
@@ -228,13 +245,15 @@
         margin: 32px 10px;
 
         h1 {
-          @extend %f-w-400;
-          font-size: 180%;
-          line-height: 130%;
+          @include f-s(180%);
+          @include f-w(400);
+          @include l-h(130%);
         }
 
         p {
-          @extend %c-lwg, %f-s-15, %l-h-24;
+          @include c($lightwarmgrey);
+          @include f-s(15px);
+          @include l-h(24px);
           margin: 0 0 15px 0;
         }
       }
@@ -244,12 +263,12 @@
 
 
 .pricing-bg {
-  @extend %c-w;
-  background-color: $bloodred;
+  @include c($white);
+  @include b-c($bloodred);
 
   .pricing-container {
     @extend %container-1200;
-    height: 260px;
+    @include h(260px);
 
     .pricing-grid-12 {
       @extend %rt-grid-12;
@@ -259,8 +278,9 @@
         @extend %t-a-c;
 
         .title {
-          @extend %f-w-400, %t-t-u;
-          font-size: 28px;
+          @extend %t-t-u;
+          @include f-s(28px);
+          @include f-w(400px);
         }
       }
     }
@@ -272,8 +292,8 @@
 
   .newsletter-input {
     @extend .f-l, %p-r;
+    @include w(205px);
     top: 2px;
-    width: 205px;
   }
 
   .newsletter-button {
@@ -283,14 +303,16 @@
 }
 
 .sitemap-bg {
-  @extend %b-c-dwg, %c-lwg;
+  @include c($lightwarmgrey);
+  @include b-c($darkwarmgrey);
 
   .sitemap-container {
     @extend %container-1200;
-    height: 250px;
+    @include h(280px);
 
     .sitemap-width-4 {
       @extend %rt-grid-4;
+      margin-top: 10px;
 
       .sitemap-block {
         @extend %rt-block;
@@ -300,16 +322,17 @@
           @extend %gantry-50;
 
           a {
-            @extend %c-lwg;
+              @include c($lightwarmgrey);
 
             &:hover {
-              @extend %c-lb;
+              @include c($lightblue);
             }
           }
         }
 
         .title {
-          @extend %c-w, %rt-title, %t-t-u;
+          @extend %rt-title, %t-t-u;
+          @include c($white);
         }
 
       }

@@ -1,15 +1,17 @@
 .auth-container {
-  @extend %h-100vh;
+  @include h(100vh);
   padding-top: 75px;
 
   .auth-logo {
     @extend %d-b, %m-a;
+    @include w(275px);
     padding: 20px 0px 10px 0px;
-    width: 275px;
   }
 
   .auth-box-container {
-    @extend %b-c-w, %m-0-a, %w-400;
+    @extend %m-0-a;
+    @include b-c($white);
+    @include w(400px);
 
     .auth-box {
       @extend %outline-none, %m-t-20;
@@ -17,7 +19,12 @@
     }
 
     .auth-title {
-      @extend %c-b, %f-f-poppmed, %f-s-16, %f-w-500, %l-h-30, %t-a-c, %t-t-u;
+      @extend %t-a-c, %t-t-u;
+      @include c($black);
+      @include f-f($poppinsmedium);
+      @include f-s(16px);
+      @include f-w(500);
+      @include l-h(30px)
       margin: 0px 0px 12px;
     }
 
@@ -26,18 +33,20 @@
 
       .forgot-password {
         @extend %m-t-20;
-        a { @extend %c-wg; }
+        a { @include c($warmgrey); }
       }
     }
 
 
     .auth-link {
       @extend %t-a-c;
+      @include c($warmgrey);
       a {
-        @extend %c-lb, %f-w-500;
+        @include c($lightblue);
+        @include f-w(500);
 
         &:hover {
-          color: $darkblue;
+          @include c($darkblue);
         }
       }
     }

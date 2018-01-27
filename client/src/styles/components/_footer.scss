@@ -1,9 +1,12 @@
 .footer-head {
-  @extend %b-c-dwg, %f-f-ralereg, %w-100;
-  height: 60px;
+  @include b-c($darkwarmgrey);
+  @include f-f($ralewayregular);
+  @include h(60px);
+  @include w(100%);
 
   .footer-container {
-    @extend %l-s-t-n, %m-0-a, %w-1200;
+    @extend %l-s-t-n, %m-0-a;
+    @include w(1200px);
 
     &:before {
       @extend %d-b;
@@ -16,7 +19,8 @@
       padding: 15px 75px;
 
       .footer-grid-4 {
-        @extend %c-lwg, %rt-grid-4;
+        @extend %rt-grid-4;
+        @include c($lightwarmgrey)
 
         .nav-logo {
           @extend %d-b;
@@ -32,12 +36,14 @@
           margin: 0 10px;
 
           a {
-            @extend %c-lwg, %l-h-24, %m-t-10, %s-t;
-            font-size: 12px;
+            @extend %m-t-10, %s-t;
+            @include c($lightwarmgrey);
+            @include f-s(12px);
+            @include l-h(24px);
             padding: 10px;
 
             &:hover {
-              @extend %c-lb;
+              @include c($lightblue);
             }
           }
         }

@@ -3,43 +3,45 @@
 }
 
 .dash-nav-container {
-  @extend %w-100;
-  background-color: $lightblue;
+  @include b-c($lightblue);
+  @include h(55px);
+  @include w(100%);
   position: fixed;
   z-index: 1000;
   top: 0;
-  height: 55px;
 
   .right-nav {
     @extend .f-r;
 
     .loggedin-user {
-      @extend %c-w, %f-f-poppsemi, %f-s-15;
+      @include c($white);
+      @include f-f($poppinsmedium);
+      @include f-s(15px);
     }
 
     .notifications-container {
-      @extend %c-w, %d-ib, .fix-cursor, %p-r;
+      @extend %d-ib, .fix-cursor, %p-r;
+      @include c($white);
       top: -11px;
       left: 3px;
       padding-right: 20px;
 
       .ant-badge-count {
-        @extend %c-w;
-        -webkit-box-shadow: 0 0 0 1px $lightblue;
-        box-shadow: 0 0 0 1px $lightblue;
+        @include c($white);
+        @include b-s(0 0 0 1px $lightblue);
       }
 
       .ant-scroll-number-only>p {
-        font-family: sans-serif;
-        font-size: 12px;
-        line-height: 20px;
+        @include f-f(sans-serif);
+        @include f-s(12px);
+        @include l-h(20px);
       }
 
       .notifications-icon {
-        @extend %c-w;
+        @include c($white);
 
         &:hover {
-          @extend %c-lg;
+          @include c($lightgrey);
         }
       }
     }
@@ -51,11 +53,12 @@
       padding-left: 3px;
 
       .settings-icon {
-        @extend %c-w, %p-r;
+        @extend %p-r;
+        @include c($white);
         top: -4px;
 
         &:hover {
-          @extend %c-lg;
+          @include c($lightgrey);
         }
       }
 
@@ -68,9 +71,7 @@
 }
 
 .dash-footer-container {
-  -webkit-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
-  -moz-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
-  box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
+  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
 .drawer.drawer-open .drawer-bg {
@@ -78,7 +79,7 @@
 }
 
 .drawer-content-wrapper {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
+  @include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
 }
 
 .drawer-menu-container {
@@ -88,8 +89,8 @@
     padding-left: 20px !important;
 
     &:hover {
-      @extend %b-c-lg;
-      color: rgba(0,0,0,.65);
+      @include b-c($lightgrey);
+      @include c($tblack);
     }
   }
 
@@ -99,7 +100,8 @@
     }
 
     .menu-label {
-      @extend %f-f-ralereg, %l-h-24;
+      @include f-f($ralewayregular);
+      @include l-h(24px);
     }
 }
 
@@ -114,46 +116,50 @@
 }
 
 .logo-header {
-  @extend .logo-container, %w-100;
-  background-color: $lightblue;
-  height: 57px;
+  @extend .logo-container;
+  @include b-c($lightblue);
+  @include h(57px);
+  @include w(100%);
 }
 
 .menu-toggle {
-  @extend %c-w, %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
+  @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
+  @include c($white);
+  @include f-s(24px);
   top: 10px;
-  font-size: 24px;
 
   &:hover {
-    @extend %c-lg;
+    @include c($lightgrey);
   }
 }
 
 .user-header {
-  @extend %b-c-rb, %c-w;
+  @include c($white);
+  @include b-c($rbblue);
   padding: 5px 15px;
 
-  .user-name, .user-email, p { @extend %f-f-ralelght; }
+  .user-name, .user-email, p { @include f-f($ralewaylight); }
 
   .user-name {
-    font-weight: bold;
+    @include f-w(500);
     margin-top: 15px;
   }
 
   p {
     @extend %m-0;
-    line-height: 15px;
+    @include l-h(15px);
   }
 }
 
 .ant-popover-inner-content {
-  @extend %m-0, %p-0, %w-100;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  @extend %m-0, %p-0;
+  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+  @include w(100%);
 }
 
 .settings-tab-container {
-  width: 150px;
-  border: none;
+  @extend %bb-none;
+  @include w(150px);
   border-radius: 10px;
 
   .settings-icon {
@@ -166,14 +172,10 @@
     @extend %p-0, %no-margin;
 
     a {
-      -o-transition:.5s;
-      -ms-transition:.5s;
-      -moz-transition:.5s;
-      -webkit-transition:.5s;
-      transition:.5s;
+      @include trans(.5s);
       &:hover {
-        @extend %b-c-fg;
-        color: rgba(0,0,0,.65);
+        @include c($tblack);
+        @include b-c($lightgrey);
       }
     }
   }

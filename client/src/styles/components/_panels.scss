@@ -1,10 +1,11 @@
 .panel-container {
-  @extend %h-100;
+  @include h(100%)
   margin-bottom: 30px;
 
   .btn-reposition {
-    @extend %p-10, %p-r;
+    @extend %p-r;
     top: 13px;
+    padding: 10px;
     border-right: 0 !important;
   }
 
@@ -29,30 +30,38 @@
     border-right: 1px solid rgba(120, 130, 140, 0.13);
 
     .subtitle {
-      @extend %f-f-poppsemi, %f-s-14, %l-h-30;
+      @include f-f($poppinssemibold);
+      @include f-s(14px);
+      @include l-h(30px);
       letter-spacing: 2px;
       margin-top: 0px;
     }
 
     .amount {
-      @extend %c-lb, %f-f-poppsemi, %f-s-36, %f-w-300, %l-h-48;
+      @include c($lightblue);
+      @include f-f($poppinssemibold);
+      @include f-s(36px);
+      @include f-w(300);
+      @include l-h(48px);
       letter-spacing: 2px;
     }
   }
 
   .panel-4 {
-    @extend %col-4, %d-ib, %f-r;
+    @extend %col-4, %d-ib, .f-r;
 
     .filter-container {
-      @extend %d-b, %f-r, %w-100;
+      @extend %d-b, .f-r;
+      @include w(100%);
 
       .form-95 {
-        @extend %d-ib, %w-95;
-        width: 95%;
+        @extend %d-ib;
+        @include w(95%);
       }
 
       .form-05 {
-        @extend %d-ib, %w-95;
+        @extend %d-ib;
+        @include w(95%);
       }
     }
   }
@@ -63,7 +72,7 @@
 
   .panel-7 {
     @extend %d-ib;
-    width: 58.33333333%;
+    @include w(58.33333333%);
   }
 
   .no-b-r {
