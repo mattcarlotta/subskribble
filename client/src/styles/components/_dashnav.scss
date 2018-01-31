@@ -22,7 +22,7 @@
     .notifications-container {
       @extend %d-ib, .fix-cursor, %p-r;
       @include c($white);
-      top: -11px;
+      top: -13px;
       left: 3px;
       padding-right: 20px;
 
@@ -55,7 +55,7 @@
       .settings-icon {
         @extend %p-r;
         @include c($white);
-        top: -4px;
+        top: -6px;
 
         &:hover {
           @include c($lightgrey);
@@ -72,10 +72,6 @@
 
 .dash-footer-container {
   @include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
-}
-
-.drawer.drawer-open .drawer-bg {
-  opacity: 0.5;
 }
 
 .drawer-content-wrapper {
@@ -109,10 +105,17 @@
   @extend %d-ib;
   margin-top: -2px;
 
-  .text-logo {
-    @extend %p-r;
-    left: -10px;
+  // .logo {
+  //   padding-top: 15px;
+  // }
+  //
+  .icon-logo {
+   @extend %p-r;
+   @include c($white);
+   @include f-s(36px);
+   top: 12px;
   }
+
 }
 
 .logo-header {
@@ -126,7 +129,8 @@
   @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
   @include c($white);
   @include f-s(24px);
-  top: 10px;
+  top: 7px;
+  margin-right: 25px;
 
   &:hover {
     @include c($lightgrey);
@@ -180,6 +184,3 @@
     }
   }
 }
-
-.wrapper-bg {@extend .bg;}
-.wrapper-filter {@extend .bg-filter;}

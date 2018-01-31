@@ -6,7 +6,7 @@ html, body {
 }
 body {
   @extend %m-0;
-  @include c($lightwhite);
+  @include c($darkwarmgrey);
   @include f-f($ralewayregular);
   @include f-s(14px);
   @include f-w(300);

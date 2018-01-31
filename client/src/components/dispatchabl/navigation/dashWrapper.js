@@ -7,7 +7,7 @@ import Header from './header';
 
 export default WrappedComponent => {
 	class DashboardWrapper extends PureComponent {
-		componentDidUpdate = (prevProps) => this.props.location !== prevProps.location && this.refs.scrollbars.scrollTop(0);
+		componentDidUpdate = prevProps => this.props.location !== prevProps.location && this.refs.scrollbars.scrollTop(0);
 
 		render() {
 			return (

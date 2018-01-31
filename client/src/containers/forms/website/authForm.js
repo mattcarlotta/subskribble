@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { AntFormFields, AntFormSubmit } from '../formfields/antReduxFormFields';
-import rocketLogo from '../../../images/logos/rocketbiller_logo.png';
+import DispatchableLogo from '../../../images/logos/dispatchabl_text_logo.png';
 
 const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting }) => (
 	<div>
-		<img className="auth-logo" src={rocketLogo} alt="rocketLogo.png" />
+		<img className="auth-logo" src={DispatchableLogo} alt="dispatchabl_text_logo.png" />
 		<div className="auth-box-container">
 			<div className="auth-box">
 				<h3 className="auth-title">{formTitle}</h3>

@@ -8,7 +8,7 @@ const { Item: MenuItem } = Menu;
 class SettingsButton extends Component {
   state = { visibleSettings: false }
 
-  handleVisibleChange = (visible) => this.setState({ visibleSettings: visible });
+  handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
   render() {
     return (
