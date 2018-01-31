@@ -13,15 +13,11 @@ export default [
   },
   {
     icon: 'note_add',
-    label: 'subscriptions',
+    label: 'subscribers',
   },
   {
     icon: 'payment',
     label: 'transactions',
-  },
-  {
-    icon: 'new_releases',
-    label: 'campaigns',
   },
   {
     icon: 'assessment',

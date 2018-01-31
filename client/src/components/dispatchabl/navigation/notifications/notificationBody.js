@@ -36,7 +36,7 @@ const NotificationBody = ({ activeNote, handleActiveNote, notifications, removeN
                     <span className="title">
                       <Link className="link" to={`/rocketboard/customers/${link}`}><strong>{name}</strong></Link> {note}
                     </span>
-                    <p className="data">{date}</p>
+                    <p className="date">{date}</p>
                   </div>
                   <div className={ key === activeNote ? "note-10" : "hidden"}>
                     <i

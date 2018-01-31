@@ -105,15 +105,21 @@
   @extend %d-ib;
   margin-top: -2px;
 
-  // .logo {
-  //   padding-top: 15px;
-  // }
-  //
   .icon-logo {
    @extend %p-r;
    @include c($white);
    @include f-s(36px);
    top: 12px;
+   margin-right: 3px;
+  }
+
+  .text-logo {
+    @extend %p-r;
+    @include c($white);
+    @include f-f($harabara)
+    @include f-s(28px);
+    letter-spacing: 1.5px;
+    top: 4px;
   }
 
 }

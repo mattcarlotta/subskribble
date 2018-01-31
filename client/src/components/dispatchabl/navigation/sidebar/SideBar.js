@@ -31,7 +31,7 @@ export default class SideBar extends Component {
           open={this.state.openNav}
           onMaskClick={this.handleMenuToggle}
           iconChild={false}
-          width="245px"
+          width="265px"
         >
           <div className="logo-header">
             <i

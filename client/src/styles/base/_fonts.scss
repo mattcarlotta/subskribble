@@ -47,6 +47,13 @@
 }
 
 @font-face {
+	font-family: "Harabara";
+	font-style: normal;
+	font-weight: 300;
+	src: url("assets/fonts/Harabara.ttf") format("truetype");
+}
+
+@font-face {
 	font-family: "Poppins Light";
 	font-style: normal;
 	font-weight: 300;
@@ -101,6 +108,8 @@
 	font-weight: 400;
 	src: url("assets/fonts/Raleway-Regular.ttf") format("truetype");
 }
+
+$harabara: "Harabara", sans-serif;
 
 $poppinslight: "Poppins Light", sans-serif;
 $poppinsregular: "Poppins Regular", sans-serif;

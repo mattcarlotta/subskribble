@@ -29,7 +29,7 @@
 }
 
 .scrollbar {
-  @include b-c($tblue);
+  @include b-c($lightblue);
   border-radius: 3px;
   z-index: 1700;
 }

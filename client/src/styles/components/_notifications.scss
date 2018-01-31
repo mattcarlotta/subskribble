@@ -59,6 +59,11 @@
   .title {
     @include f-f($poppinslight);
     @include f-s(12px);
+
+    .date {
+      @include f-f($poppinslight);
+      @include f-s(10px);
+    }
   }
 
   p { margin: 0 0 10px 0 }
