@@ -1,5 +1,5 @@
-# Dispatchabl
-Dispatchabl - an experimental app to create and manage clients' lists of subscription based payments.
+# subskribble
+subskribble - an experimental app to create and manage clients' lists of subscription based payments.
 
 ## Quickstart Linux:
 

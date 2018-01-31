@@ -6,7 +6,7 @@ export default function() {
     <div className="logo-container">
       <Link to='/rocketboard/dashboard'>
         <i className="material-icons icon-logo">wifi_tethering</i>
-        <span className="text-logo">dispatchabl</span>
+        <span className="text-logo">subskribble</span>
       </Link>
     </div>
   )

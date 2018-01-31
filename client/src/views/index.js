@@ -2,36 +2,36 @@ import React from 'react';
 import { Route, Redirect } from 'react-router';
 
 import App from '../components/app';
-// import Campaigns from '../components/dispatchabl/campaigns';
-// import ContactUs from '../components/dispatchabl/contact';
-import Customers from '../components/dispatchabl/customers';
+// import Campaigns from '../components/subskribble/campaigns';
+// import ContactUs from '../components/subskribble/contact';
+import Customers from '../components/subskribble/customers';
 import CustomerSignup from '../containers/forms/website/CustomerSignupForm';
-import Dashboard from '../components/dispatchabl/dashboard';
-import DashWrapper from '../components/dispatchabl/navigation/dashWrapper';
-// import FAQs from '../components/dispatchabl/faqs';
-// import Forms from '../components/dispatchabl/forms';
+import Dashboard from '../components/subskribble/dashboard';
+import DashWrapper from '../components/subskribble/navigation/dashWrapper';
+// import FAQs from '../components/subskribble/faqs';
+// import Forms from '../components/subskribble/forms';
 import ForgotPassword from '../containers/forms/website/resetpasswordForm';
 // import Home from '../components/website/home';
-// import Invoices from '../components/dispatchabl/invoices';
+// import Invoices from '../components/subskribble/invoices';
 import LogIn from '../containers/forms/website/loginForm';
 import NotFound from '../components/app/notfound/404';
-import Plans from '../components/dispatchabl/plans';
-// import Profile from '../components/dispatchabl/profile';
+import Plans from '../components/subskribble/plans';
+// import Profile from '../components/subskribble/profile';
 // import OnLoadAuth from '../containers/app/OnLoadAuth';
 // import RequireAuth from '../containers/auth/RequireAuth';
-// import Messages from '../components/dispatchabl/messages';
-// import Settings from '../components/dispatchabl/settings';
+// import Messages from '../components/subskribble/messages';
+// import Settings from '../components/subskribble/settings';
 import SignUp from '../containers/forms/website/signupForm';
-// import Subscriptions from '../components/dispatchabl/subscriptions';
-// import Templates from '../components/dispatchabl/templates';
-// import Transactions from '../components/dispatchabl/transactions';
-// import Tutorials from '../components/dispatchabl/tutorials';
+// import Subscriptions from '../components/subskribble/subscriptions';
+// import Templates from '../components/subskribble/templates';
+// import Transactions from '../components/subskribble/transactions';
+// import Tutorials from '../components/subskribble/tutorials';
 
 // CONFIG APP ROUTE VIEWS
 export const views = (
 	<div>
-		<Redirect from="/" to="/dispatchabl/dashboard" />
-		<Route path="/dispatchabl" component={DashWrapper(App)}>
+		<Redirect from="/" to="/subskribble/dashboard" />
+		<Route path="/subskribble" component={DashWrapper(App)}>
 			<Route path="dashboard" component={Dashboard} />
 			<Route path="customers" component={Customers} />
 			<Route path="customer-signup/:gateway" component={CustomerSignup} />
