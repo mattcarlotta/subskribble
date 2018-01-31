@@ -1,5 +1,5 @@
 # subskribble
-subskribble - an experimental app to create and manage clients' lists of subscription based payments.
+subskribble - an experimental app to create, manage, and send personalized updates to a client's lists of subscribers.
 
 ## Quickstart Linux:
 
