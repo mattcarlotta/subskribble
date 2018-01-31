@@ -1,76 +1,46 @@
-import map from 'lodash/map';
 import React from 'react';
 import { Link } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
+import { AntFormFields, AntFormSubmit } from '../formfields/antReduxFormFields';
+import DispatchableLogo from '../../../images/logos/dispatchabl_text_logo.png';
 
-import rocketLogo from '../../../images/logos/rocketbiller_logo.png';
-
-import { TextField } from 'redux-form-material-ui';
-import Button from '../formfields/renderFormButton';
-
-const AuthForm = ({ handleSubmit, FIELDS, formTitle, submitLabel, submitting }) => {
-	return (
-		<div>
-			<img className="auth-logo" src={rocketLogo} alt="rocketLogo.png" />
-			<div className="auth-box-container">
-				<div className="auth-box">
-					<h3 className="auth-title">{formTitle}</h3>
-					<div className="auth-form">
-						<form onSubmit={handleSubmit}>
-							{map(FIELDS, ({ name, type, label, validateFields }, key) => {
-								return (
-									<span key={key}>
-										<Field
-											name={name}
-											type={type}
-											component={TextField}
-											floatingLabelText={label}
-											fullWidth={true}
-											style={{ fontSize: 15 }}
-											validate={validateFields}
-										/>
-										<br />
-									</span>
-								);
-							})}
-							{
-								(formTitle === 'Sign In')
-									? <div className="forgot-password">
-											<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
-										</div>
-									: null
-							}
-							<div className="auth-button">
-								<Button
-									backgroundColor="#03a9f3"
-									fontSize={18}
-									fullWidth={true}
-									height={45}
-									label={submitLabel}
-									primary={true}
-									submitting={submitting}
-									type="submit"
-								/>
+const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting }) => (
+	<div>
+		<img className="auth-logo" src={DispatchableLogo} alt="dispatchabl_text_logo.png" />
+		<div className="auth-box-container">
+			<div className="auth-box">
+				<h3 className="auth-title">{formTitle}</h3>
+				<div className="auth-form">
+					<form onSubmit={handleSubmit}>
+						<AntFormFields FIELDS={FIELDS} />
+						{showForgotPassword &&
+							<div className="forgot-password">
+								<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
 							</div>
-						</form>
-					</div>
-					<p className="auth-link">
-					{
-						(formTitle === 'Sign In')
-							? <span>
-									Don't have an account?
-									<Link className="m-l-5" to="/signup">Sign Up</Link>
-								</span>
-							:	<span>
-									Already have an account?
-									<Link className="m-l-5" to="/login">Sign In</Link>
-								</span>
-					}
-					</p>
+						}
+						<AntFormSubmit
+							label={submitLabel}
+							pristine={pristine}
+							submitting={submitting}
+							style={{ fontSize: 18, height: 45, marginTop: 5, width: '100%' }}
+						/>
+					</form>
 				</div>
+				<p className="auth-link">
+				{formTitle === 'Sign In'
+					? <span>
+							Don't have an account?
+							<Link className="m-l-5" to="/signup">Sign Up</Link>
+						</span>
+					:	<span>
+							Already have an account?
+							<Link className="m-l-5" to="/login">Sign In</Link>
+						</span>
+				}
+				</p>
 			</div>
 		</div>
-	);
-}
+	</div>
+);
 
 export default reduxForm({ form: 'AuthForm' })(AuthForm);

@@ -1,93 +1,186 @@
+.ant-popover-arrow, .ant-popover-inner {
+  margin-top: -4px;
+}
+
 .dash-nav-container {
-  @extend .p-f, .w-100;
-  z-index: 2000;
+  @include b-c($lightblue);
+  @include h(55px);
+  @include w(100%);
+  position: fixed;
+  z-index: 1000;
   top: 0;
 
-  .hamburger {
-    @extend .c-w;
-    font-size: 36px;
-  }
-
-  .logo-container {
-    padding-top: 7px;
-
-    .text-logo{
-      @extend .p-r;
-      top: -20px;
-      left: -7px;
-    }
-  }
-
-  .left-nav {
-    @extend .d-ib;
-
-    .user-header {
-      @extend .c-w;
-      margin-bottom: 5px;
-      background-color: $rbblue;
-      padding: 15px;
-      height: 150px;
-
-      p {
-        text-transform: none;
-        margin: 0;
-        line-height: 15px;
-      }
-    }
-  }
-
   .right-nav {
+    @extend .f-r;
+
     .loggedin-user {
-      @extend .c-w, .f-s-15;
-      font-family: $poppinssemibold;
+      @include c($white);
+      @include f-f($poppinsmedium);
+      @include f-s(15px);
     }
 
-    .notifications-icon {
-      @extend .c-w, .d-ib, .p-r;
-      top: -6px;
+    .notifications-container {
+      @extend %d-ib, .fix-cursor, %p-r;
+      @include c($white);
+      top: -13px;
       left: 3px;
-      // padding-right: 10px;
+      padding-right: 20px;
 
-      & div {
-        padding: 0 !important;
+      .ant-badge-count {
+        @include c($white);
+        @include b-s(0 0 0 1px $lightblue);
+      }
+
+      .ant-scroll-number-only>p {
+        @include f-f(sans-serif);
+        @include f-s(12px);
+        @include l-h(20px);
+      }
+
+      .notifications-icon {
+        @include c($white);
+
+        &:hover {
+          @include c($lightgrey);
+        }
       }
     }
 
     .settings-tab {
-      @extend .d-ib, .fix-cursor, .no-link-focus, .p-r;
-      margin-top: 10px;
-      padding-right: 10px;
+      @extend %d-ib, .fix-cursor, %no-link-focus;
+      margin-top: 23px;
+      padding-right: 25px;
       padding-left: 3px;
+
+      .settings-icon {
+        @extend %p-r;
+        @include c($white);
+        top: -6px;
+
+        &:hover {
+          @include c($lightgrey);
+        }
+      }
+
+      .menu-label {
+        @extend %pl-10, %p-r;
+        top: -5px;
+      }
     }
   }
 }
 
 .dash-footer-container {
-  -webkit-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
-  -moz-box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
-  box-shadow: 0px -1px 4px 1px rgba(0,0,0,0.08);
+  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
-.tabs-container {
-  & div {
-    background-color: $tealblue;
+.drawer-content-wrapper {
+  @include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
+}
 
-    & div, i {
-      color: $softwarmgrey !important;
+.drawer-menu-container {
+  // margin-top: 10px;
+
+  .ant-menu-item {
+    padding-left: 20px !important;
+
+    &:hover {
+      @include b-c($lightgrey);
+      @include c($tblack);
     }
   }
+
+    .menu-icon {
+      @extend %m-r-15, %p-r;
+      top: 6px;
+    }
+
+    .menu-label {
+      @include f-f($ralewayregular);
+      @include l-h(24px);
+    }
 }
 
-.active-tab {
-  & div > div, & div > div > i {
-    color: $white !important;
-    // background-color: #0c7eb1 !important;
+.logo-container {
+  @extend %d-ib;
+  margin-top: -2px;
+
+  // .logo {
+  //   padding-top: 15px;
+  // }
+  //
+  .icon-logo {
+   @extend %p-r;
+   @include c($white);
+   @include f-s(36px);
+   top: 12px;
+  }
+
+}
+
+.logo-header {
+  @extend .logo-container;
+  @include b-c($lightblue);
+  @include h(57px);
+  @include w(100%);
+}
+
+.menu-toggle {
+  @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
+  @include c($white);
+  @include f-s(24px);
+  top: 7px;
+  margin-right: 25px;
+
+  &:hover {
+    @include c($lightgrey);
   }
 }
 
-.selected-tab {
-  & div > div, & div > div > i {
-    color: $blue !important;
-    // background-color: #0c7eb1 !important;
+.user-header {
+  @include c($white);
+  @include b-c($rbblue);
+  padding: 5px 15px;
+
+  .user-name, .user-email, p { @include f-f($ralewaylight); }
+
+  .user-name {
+    @include f-w(500);
+    margin-top: 15px;
+  }
+
+  p {
+    @extend %m-0;
+    @include l-h(15px);
+  }
+}
+
+.ant-popover-inner-content {
+  @extend %m-0, %p-0;
+  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+  @include w(100%);
+}
+
+.settings-tab-container {
+  @extend %bb-none;
+  @include w(150px);
+  border-radius: 10px;
+
+  .settings-icon {
+    @extend %p-r;
+    top: 6px;
+    margin: 0 15px;
+  }
+
+  .ant-menu-item {
+    @extend %p-0, %no-margin;
+
+    a {
+      @include trans(.5s);
+      &:hover {
+        @include c($tblack);
+        @include b-c($lightgrey);
+      }
+    }
   }
 }

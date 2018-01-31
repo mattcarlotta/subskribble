@@ -1,12 +1,24 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-
-import RenderFields from '../formfields/renderFields'
+import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
+import BillingSwitchField from '../formfields/renderBillingSwitchField';
 import RenderPlanSelection from '../formfields/renderPlanSelection';
 import ReviewPlanForm from '../formfields/reviewPlanForm';
-import Button from '../formfields/renderFormButton';
+
+const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => (
+  FIELDS
+  ? <div className={`${position}-form`}>
+      <h3>{title}</h3>
+      { billingSwitch && <BillingSwitchField /> }
+      <div className={`input-${width}`}>
+        <AntFormFields FIELDS={FIELDS} />
+      </div>
+    </div>
+  : null
+)
 
 const RegisterPlanForm = ({
+  billingSwitch,
   handleSubmit,
   editStep,
   finished,
@@ -15,57 +27,40 @@ const RegisterPlanForm = ({
   mainTitle,
   onClickBack,
   onSubmit,
+  pristine,
   PLANSELECTIONFIELDS,
   PLANSELECTIONS,
   RIGHTFIELDS,
   rightTitle,
-  submitting
+  submitting,
 }) => {
   return (
     <div className="form-container">
       <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
       <form onSubmit={handleSubmit}>
-        { LEFTFIELDS &&
-          <div className="left-form">
-            <h3>{leftTitle}</h3>
-            <div className="input-95">
-              { RenderFields(LEFTFIELDS) }
-            </div>
-          </div>
-        }
+        <RenderFormFields billingSwitch={billingSwitch} FIELDS={LEFTFIELDS} title={leftTitle} position="left" width="95" />
         { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
         { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
-        { RIGHTFIELDS &&
-          <div className="right-form">
-            <h3>{rightTitle}</h3>
-            <div className="input-100">
-              { RenderFields(RIGHTFIELDS) }
-            </div>
-          </div>
-        }
+        <RenderFormFields FIELDS={RIGHTFIELDS} title={rightTitle} position="right" width="100" />
         <div className="clear-fix" />
         <hr />
-        { onClickBack &&
-          <Button
-            backgroundColor="#03a9f3"
-            floatStyle="left"
-            height={50}
-            label="Back"
-            onClick={onClickBack}
-          />
-        }
-        <Button
-          backgroundColor="#03a9f3"
-          label={ finished ? "Subscribe" : "Next"}
-          fullWidth={false}
-          floatStyle="right"
-          height={50}
+        <AntStepFormButtons
+          backLabel="Back"
+          backStyle={{ height: 50, float: 'left' }}
+          onClickBack={onClickBack}
+          pristine={pristine}
+          submitLabel={ finished ? "Subscribe" : "Next" }
+          submitStyle= {{ height: 50, float: 'right' }}
           submitting={submitting}
-          type="submit"
         />
       </form>
     </div>
   );
 };
 
-export default reduxForm({ form: 'CustomerPlanSignup', destroyOnUnmount: false, enableReinitialize: true, keepDirtyOnReinitialize: true })(RegisterPlanForm);
+export default reduxForm({
+  form: 'CustomerPlanSignup',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { creditCardExpMonth: 'Exp. Month' }
+})(RegisterPlanForm)

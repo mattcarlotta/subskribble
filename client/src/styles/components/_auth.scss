@@ -1,52 +1,52 @@
 .auth-container {
-  // height: 850px;
-  height: 100vh;
+  @include h(100vh);
   padding-top: 75px;
 
   .auth-logo {
-    @extend .d-b, .m-a;
+    @extend %d-b, %m-a;
+    @include w(275px);
     padding: 20px 0px 10px 0px;
-    width: 275px;
   }
 
   .auth-box-container {
-    @extend .b-c-w, .m-0-a, .w-400;
+    @extend %m-0-a;
+    @include b-c($white);
+    @include w(400px);
 
     .auth-box {
-      margin-top: 20px;
+      @extend %outline-none, %m-t-20;
       padding: 25px;
-      outline: none !important;
     }
 
     .auth-title {
-      @extend .c-b, .f-w-500, .t-a-c, .t-t-u;
+      @extend %t-a-c, %t-t-u;
+      @include c($black);
+      @include f-f($poppinsmedium);
+      @include f-s(16px);
+      @include f-w(500);
+      @include l-h(30px)
       margin: 0px 0px 12px;
-      font-size: 16px;
-      line-height: 30px;
-      font-family: $poppinsmedium;
     }
 
     .auth-form {
-      @extend .m-b-20;
-
-      .auth-button {
-        @extend .m-t-20;
-      }
+      @extend %m-b-20;
 
       .forgot-password {
-        margin-top: 15px;
-        a { @extend .c-wg; }
+        @extend %m-t-20;
+        a { @include c($warmgrey); }
       }
     }
 
 
     .auth-link {
-      @extend .t-a-c;
+      @extend %t-a-c;
+      @include c($warmgrey);
       a {
-        @extend .c-lb, .f-w-500;
+        @include c($lightblue);
+        @include f-w(500);
 
         &:hover {
-          color: $darkblue;
+          @include c($darkblue);
         }
       }
     }

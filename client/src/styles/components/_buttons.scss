@@ -1,0 +1,45 @@
+.ant-btn:focus, .ant-btn:hover, .ant-btn.disabled, .ant-btn.disabled.active, .ant-btn.disabled:active, .ant-btn.disabled:focus, .ant-btn.disabled:hover, .ant-btn[disabled], .ant-btn[disabled].active, .ant-btn[disabled]:active, .ant-btn[disabled]:focus, .ant-btn[disabled]:hover {
+  @include b-c($lightblue);
+  @include c($white);
+}
+
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  @include b-c($rbblue);
+  @include c($white);
+  border-color: $deepblue;
+}
+
+.btn {
+  @extend %t-t-u;
+  @include f-f($poppinsmedium);
+  border-radius: 6px;
+  border: 0;
+}
+
+.btn-primary {
+  @include b-c($lightblue);
+
+  &:hover, &:focus {
+    @extend %no-link-focus;
+    @include b-c($skyblue);
+  }
+}
+
+.btn-danger {
+  background-color: $orange !important;
+
+  &:hover, &:focus {
+    @extend %no-link-focus;
+    background-color: $red !important;
+  }
+}
+
+.btn-tertiary {
+  background-color: $darkwarmgrey !important;
+
+  &:hover, &:focus {
+    @extend %no-link-focus;
+    @include c($white);
+    background-color: $warmgrey !important;
+  }
+}

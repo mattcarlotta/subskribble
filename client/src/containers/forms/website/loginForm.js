@@ -16,6 +16,7 @@ const LoginForm = ({ signinUser }) => {
 				onSubmit={values => handleFormSubmit(values)}
 				FIELDS={FIELDS}
 				formTitle='Sign In'
+				showForgotPassword={true}
 				submitLabel='Login'
 			/>
 		</div>

@@ -4,7 +4,7 @@ import Footer from './footer'
 import Header from './Header';
 
 export default WrappedComponent => {
-	const Wrapper = (props) => {
+	const Wrapper = props => {
 		return (
 			<div className="wrapper-bg">
 				<div className="wrapper-filter">

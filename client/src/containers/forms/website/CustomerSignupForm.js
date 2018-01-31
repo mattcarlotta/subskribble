@@ -1,43 +1,56 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import { Step, Stepper, StepButton } from 'material-ui/Stepper';
-
-import { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues } from '../../../actions/formActionCreators';
+import { Steps } from 'antd';
 import RegisterPlanForm from './RegisterPlanForm';
-import { ADDRESSFIELDS, billingAddressFields, CONTACTFIELDS, CREDITCARDFIELDS, PLANSELECTIONFIELDS } from '../formfields/customerSignupFields';
+import { customerRegisterToPlan } from '../../../actions/formActionCreators';
+import { getCustomerFormFields } from '../formfields/customerSignupFields';
+const { Step } = Steps;
 
 class CustomerPlanSignup extends Component {
   state = {
-    stepIndex: 1,
+    formFields: getCustomerFormFields(),
+    stepIndex: 0,
     stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
-    BILLINGADDRESSFIELDS: billingAddressFields(this.props.setBillingFieldValues, this.props.resetBillingFieldValues),
     visited: [],
     wasReviewed: false
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    this.state.stepIndex !== prevState.stepIndex && window.scrollTo(0, 0)
+  }
+
+  editStep = number => this.setState({ formFields: getCustomerFormFields(number), stepIndex: number })
+
   handleFormSave = (formProps) => {
     console.log(formProps);
-    // this.handleNext();
     // this.props.customerRegisterToPlan(formProps);
   }
 
-  editStep = (number) => this.setState({ stepIndex: number });
-
   handleNext = () => {
     const { stepIndex, visited } = this.state;
+    const formKey = stepIndex + 1;
     this.setState({
-      stepIndex: stepIndex + 1,
-      visited: visited.concat(stepIndex),
-      wasReviewed: visited.length > 2 && true
+      formFields: getCustomerFormFields(formKey),
+      stepIndex: formKey,
+      visited: visited.concat(stepIndex).filter((val, idx, arr) => (arr.indexOf(val) === idx)),
+      wasReviewed: visited.length > 1 && true
     })
   }
 
-  handlePrev = () => (this.state.stepIndex > 1) && this.setState({ stepIndex: this.state.stepIndex - 1 });
+  handlePrev = () => {
+    const formKey = this.state.stepIndex - 1;
+    this.setState({ formFields: getCustomerFormFields(formKey), stepIndex: formKey })
+  }
 
   render() {
-    const { BILLINGADDRESSFIELDS, stepIndex, stepLabels, visited, wasReviewed } = this.state;
+    const {
+      formFields,
+      stepIndex,
+      wasReviewed,
+      stepLabels
+    } = this.state;
+    const finished = stepIndex === 3;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
@@ -46,59 +59,28 @@ class CustomerPlanSignup extends Component {
               <h1>Carlotta Corp</h1>
               <h3>Plan Registration</h3>
             </div>
-            <Stepper>
-              {map(stepLabels, (label, key) => {
-                return (
-                  <Step key={label}>
-                    <StepButton
-                      completed={visited.indexOf(key+1) !== -1 }
-                      active={wasReviewed ? true : stepIndex === (key+1)}
-                      disableTouchRipple={!wasReviewed}
-                      className={wasReviewed ? "fix-cursor" : "" }
-                      onClick={wasReviewed ? () => this.editStep(key+1) : undefined}
-                      >
-                        {label}
-                    </StepButton>
-                  </Step>
-                )
-              })}
-            </Stepper>
+            <Steps current={stepIndex}>
+              {map(stepLabels, (label, key) => (
+                <Step
+                  className={wasReviewed ? "fix-cursor" : "" }
+                  key={label}
+                  onClick={wasReviewed ? () => this.editStep(key) : undefined}
+                  title={label}
+                />
+              ))}
+            </Steps>
           </div>
-          {{1: <RegisterPlanForm
-                LEFTFIELDS={CONTACTFIELDS}
-                leftTitle="Contact Information"
-                onSubmit={this.handleNext}
-                RIGHTFIELDS={ADDRESSFIELDS}
-                rightTitle="Address"
-              />,
-            2: <RegisterPlanForm
-                LEFTFIELDS={BILLINGADDRESSFIELDS}
-                leftTitle="Billing Address"
-                onClickBack={this.handlePrev}
-                onSubmit={this.handleNext}
-                RIGHTFIELDS={CREDITCARDFIELDS}
-                rightTitle="Credit Card Information"
-              />,
-            3: <RegisterPlanForm
-                onClickBack={this.handlePrev}
-                onSubmit={this.handleNext}
-                PLANSELECTIONFIELDS={PLANSELECTIONFIELDS}
-              />,
-            4: <RegisterPlanForm
-                editStep={this.editStep}
-                finished={true}
-                mainTitle="<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>"
-                onClickBack={this.handlePrev}
-                onSubmit={this.handleFormSave}
-                PLANSELECTIONS={PLANSELECTIONFIELDS}
-              />
-          }[stepIndex]}
+          <RegisterPlanForm
+            {...formFields}
+            finished={finished}
+            editStep={this.editStep}
+            onClickBack={ stepIndex > 0 ? this.handlePrev : null }
+            onSubmit={ finished ? this.handleFormSave : this.handleNext }
+          />
         </div>
       </div>
     );
   }
 }
 
-export default reduxForm({
-  form: 'CustomerPlanSignup'
-})(connect(null, { customerRegisterToPlan, resetBillingFieldValues, setBillingFieldValues })(CustomerPlanSignup));
+export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);

@@ -1,36 +1,36 @@
 export const INDUSTRYTABS = [
   {
-    tab: 'Education',
-    nestedTabs: ['Primary and Secondary Schools', 'Universities']
+    label: 'Education',
+    nestedItems: ['Primary and Secondary Schools', 'Universities']
   },
   {
-    tab: 'Fitness',
-    nestedTabs: ['Body Building', 'Crossfit', 'Yoga']
+    label: 'Fitness',
+    nestedItems: ['Body Building', 'Crossfit', 'Yoga']
   },
   {
-    tab: 'Healthcare',
-    nestedTabs: ['Doctors']
+    label: 'Healthcare',
+    nestedItems: ['Doctors']
   },
   {
-    tab: 'Marketing Agencies'
+    label: 'Marketing Agencies'
   },
   {
-    tab: 'MSPs'
+    label: 'MSPs'
   },
   {
-    tab: 'Non-Profit'
+    label: 'Non-Profit'
   },
   {
-    tab: 'Self-Storage'
+    label: 'Self-Storage'
   },
   {
-    tab: 'Service Providers'
+    label: 'Service Providers'
   },
   {
-    tab: 'Software as a Service'
+    label: 'Software as a Service'
   },
   {
-    tab: 'Web Designers'
+    label: 'Web Designers'
   }
 ];
 

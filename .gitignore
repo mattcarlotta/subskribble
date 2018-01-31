@@ -4,11 +4,11 @@
 #Client files and folders
 client/build
 client/etc
-client/public
 client/src/styles/assets
 client/src/styles/styles.css
 client/scripts
 client/src/images
+client/node_modules
 
 #Server files and folders
 uploads/
@@ -49,6 +49,7 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules/
+*/node_modules/
 
 # Public assets directory
 app/public/assets

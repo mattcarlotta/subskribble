@@ -2,13 +2,13 @@ import throttle from 'lodash/throttle';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router';
 
-import CustomPopover from '../app/popovers/customPopover';
+import CustomDropDown from '../app/popovers/customDropDown';
 import { INDUSTRYTABS, TOURTABS } from './links/headerTabs';
 import rocketLogoWhite from '../../../images/logos/rocketbiller_logo_white.png';
 import rocketLogoBlack from '../../../images/logos/rocketbiller_logo_black.png';
 
 class Header extends Component {
-	state = { fixedNavBar: false, industryTabOpen: false, tourTabOpen: false }
+	state = { adjustNavBG: '', fixedNavBar: false }
 
 	componentWillMount = () => this.checkIfFormLoaded(this.props.location.pathname);
 
@@ -25,23 +25,11 @@ class Header extends Component {
 		const setNavBGToBlue = url.indexOf('customer-signup') > 0;
 
 		if (!adjustNavBG && setNavBGToBlue) this.setState({ adjustNavBG : 'adjust-bg' });
-		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: null });
+		else if (adjustNavBG && !setNavBGToBlue) this.setState({ adjustNavBG: '' });
 	}
 
-	handleTouchTap = (e, tabKey) => {
-    e.preventDefault();
-
-    this.setState({
-			industryTabOpen: tabKey === 'Industry' ? true : false,
-			tourTabOpen: tabKey === 'Tour' ? true : false,
-      anchorEl: e.currentTarget
-    });
-  };
-
-  handleRequestClose = () => this.setState({ industryTabOpen: false, tourTabOpen: false })
-
 	render() {
-		const { adjustNavBG, anchorEl, fixedNavBar, industryTabOpen, tourTabOpen } = this.state;
+		const { adjustNavBG, fixedNavBar } = this.state;
 		const rbLogo = fixedNavBar ? rocketLogoBlack : rocketLogoWhite;
 
 		return (
@@ -55,24 +43,13 @@ class Header extends Component {
 					<nav className="nav-grid-9">
 						<div className="nav-float-right">
 							<Link to="/">Home</Link>
-							<CustomPopover
-								anchorEl={anchorEl}
-								handleTouchTap={this.handleTouchTap}
-								linkLabel="Industries"
-								handleRequestClose={this.handleRequestClose}
-								tabKey="Industry"
-								tabOpen={industryTabOpen}
+							<CustomDropDown
+								dropDownLabel="Industries"
 								TABS={INDUSTRYTABS}
 							/>
 							<Link to="/pricing">Pricing</Link>
-							<CustomPopover
-								anchorEl={anchorEl}
-								handleTouchTap={this.handleTouchTap}
-								linkLabel="Tour"
-								linkTabs={true}
-								handleRequestClose={this.handleRequestClose}
-								tabKey="Tour"
-								tabOpen={tourTabOpen}
+							<CustomDropDown
+								dropDownLabel="Tour"
 								TABS={TOURTABS}
 							/>
 						</div>

@@ -1,105 +1,121 @@
+.ant-form-item {
+  @extend %m-b-0;
+  @include h(60px);
+}
+
+.billing-switch-field {
+  @include h(50px);
+  @include w(100%);
+
+  .ant-form-item-label {
+    @extend .f-l;
+    @include l-h(39.9999px)
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
 .forms-container {
   @extend .container;
 }
 
 .customer-signup-bg {
-  height: 100%;
-  // background-color: $white;
-  background-color: $formgrey;
+  @include b-c($whiteblue);
+  @include h(100%);
 
   .customer-signup-container {
     padding-top: 100px;
 
     .stepper-container {
-      @extend .container-1200;
+      @extend %container-1200;
     }
 
     .title {
-      @extend .t-a-c;
+      @extend %t-a-c;
+      @include c($black);
       margin: 30px 0;
     }
 
     .form-container {
-      @extend .c-b, .p-r;
-      font-family: $poppinslight;
+      @extend %p-r;
+      @include c($black);
+      @include f-f($poppinslight);
       margin: 50px 50px 100px 50px;
       min-height: 600px;
 
       h3 {
-        line-height: 30px;
-        font-size: 21px;
-        font-weight: 300;
+        @include f-s(21px);
+        @include f-w(300);
+        @include l-h(30px);
       }
 
-      h4 {
-        line-height: 30px;
-        font-weight: 300;
-      }
+      h4 { @include f-w(300); @include l-h(30px); }
 
       .left-form {
-        @extend .f-l, .pr-10, .w-50;
-        height: 450px;
+        @extend .f-l, %pr-10;
+        @include h(450px);
+        @include w(50%);
       }
 
       .main-title {
-        @extend .t-a-c;
+        @extend %t-a-c;
         margin-bottom: 40px;
-        font-weight: 300;
       }
 
       .right-form {
-        @extend .f-r, .pl-10, .w-50;
-        height: 450px;
+        @extend .f-r, %pl-10;
+        @include h(450px);
+        @include w(50%);
       }
 
       .plan-selection-container {
-        height: 850px;
+        @include h(850px);
 
         .selection-container {
-          @extend .f-l;
-          height: 380px;
-          width: 23.5%;
+          @extend .f-l, %m-b-20;
+          @include h(380px);
+          @include w(100%);
+          max-width: 300px;
+          min-width: 200px;
           border-top: 1px solid rgba(120, 130, 140, 0.23);
           border-left: 1px solid rgba(120, 130, 140, 0.23);
           border-right: 1px solid rgba(120, 130, 140, 0.23);
           border-bottom: 5px solid rgba(120, 130, 140, 0.23);
           padding: 30px 0px;
           margin-left: 15px;
-          margin-bottom: 20px;
 
           .header {
-            @extend .t-a-c;
+            @extend %t-a-c;
 
             .price {
-              @extend .p-r;
-              font-size: 46px;
+              @extend %p-r;
+              @include f-s(46px);
+              @include f-w(bold);
               margin: 20px 0 10px;
-              font-weight: bold;
 
               .price-sign {
-                @extend .p-r;
-                font-size: 15px;
+                @extend %p-r;
+                @include f-s(15px);
                 top: -25px;
                 margin-left: -10px;
               }
             }
 
             .plan-title {
+              @include f-s(18px);
               line-height: 22px;
-              font-size: 18px;
             }
           }
 
           .body {
-            @extend .t-a-c;
+            @extend %m-b-20, %t-a-c;
             border-top: 1px solid rgba(120, 130, 140, 0.13);
             border-bottom: 1px solid rgba(120, 130, 140, 0.13);
             padding: 20px 0;
-            margin-bottom: 20px;
           }
 
           .selection {
-            margin: auto;
+            @extend %m-a;
             width: 25px;
             height: 50px;
           }
@@ -109,115 +125,99 @@
       .review-signup-container {
         min-height: 450px;
 
-        h1,h2,h3,p { font-family: $poppinslight; }
-        h2 { font-size: 24px; }
+        h1,h2,h3,p { @include f-f(poppinslight);}
+        h2 { @include f-s(24px); }
+        i { @include c($lightblue); @include f-s(22px); }
 
-        i {
-          @extend .c-lb;
-          font-size: 22px;
-        }
-
-        .head-title {
-          font-size: 26px;
-        }
+        .head-title { @include f-s(26px); }
 
         .edit-link {
-          @extend .c-lb, .fix-cursor, .f-r;
-          font-size: 15px;
-          font-weight: normal;
+          @extend .fix-cursor, .f-r;
+          @include c($lightblue);
+          @include f-s(15px);
+          @include f-w(normal);
         }
 
         .price {
-          font-size: 22px;
+          @include f-s(22px);
 
           .month {
-            font-size: 12px;
+            @include f-s(12px);
           }
 
           .price-sign {
-            @extend .p-r;
-            font-size: 12px;
+            @extend .month, %p-r;
             top: -5px;
           }
         }
 
         .address {
-          @extend .t-t-c;
-          margin: 0;
+          @extend %m-0, %t-t-c;
         }
 
         .contact-info-container, .payment-info-container, .plan-info-container, .total-container {
-          @extend .f-l;
-          height: 380px;
-          width: 23.5%;
+          @extend .f-l, %m-b-20;
+          @include h(380px);
+          @include w(23.5%);
           padding: 30px 0px;
           margin-left: 15px;
-          margin-bottom: 20px;
 
           .details-container {
-            @extend .b-c-w;
+            @include b-c($white);
+            @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+            @include f-f($poppinsmedium);
             min-height: 205px;
             padding: 16px;
             margin-top: 2px;
-            -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-            -moz-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-            box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 6px, rgba(0, 0, 0, 0.08) 0px 1px 4px;
           }
         }
       }
 
       .contact-info-container {
-        .name {
-          font-size: 16px;
-          font-weight: bold;
-        }
-
-        .email, .phone { margin: 0;}
+        .name { @include f-s(16px); @include f-w(bold);}
+        .email, .phone { @extend %m-0;}
       }
 
       .payment-info-container {
-        .name, .address, .location { margin: 0 };
+        .name, .address, .location { @extend %m-0; };
 
         .details-container {
           i {
-            color: $darkblue;
-            font-size: 30px;
-            margin-right: 10px;
+            @extend %m-r-10;
+            @include c($darkblue);
+            @include f-s(30px);
           }
 
           .credit-billing {
-            margin: 0;
-            font-weight: 600;
+            @extend %m-0;
+            @include f-w(600);
             letter-spacing: 1px;
           }
 
           .creditcard {
-            font-size: 25px;
+            @include f-s(25px);
 
             .experiation {
-              @extend .p-r;
+              @extend %m-l-10, %p-r;
+              @include f-s(12px);
               top: -3px;
               letter-spacing: 1px;
-              font-size: 12px;
-              margin-left: 10px;
             }
+
             .stars {
-              @extend .p-r;
-              font-size: 12px;
+              @extend %p-r;
+              @include f-s(12px);
               top: -2px;
               margin-right: 1px;
-              // left: 1px;
             }
           }
         }
       }
 
       .error-handlers {
-        @extend .t-a-c;
-        // font-size: 12px;
-        // line-height: 12px;
-        color: rgb(244, 67, 54);
-        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        @extend %t-a-c;
+        @include c($error);
+        @include trans(all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms);
       }
 
       .selected {
@@ -230,28 +230,28 @@
   }
 }
 
-.input-10 { @extend .h-72, .w-10; }
-.input-15 { @extend .h-72; width: 15%; }
-.input-16 { @extend .h-72, .w-16; }
-.input-20 { @extend .h-72, .w-20; }
-.input-25 { @extend .h-72, .w-25; }
-.input-40 { @extend .h-72, .w-40; }
-.input-50 { @extend .h-72, .w-50; }
-.input-66 { @extend .h-72, .w-66; }
-.input-75 { @extend .h-72, .w-75; }
-.input-85 { @extend .h-72; width: 85%; }
-.input-95 { @extend .h-72; width: 95%; }
-.input-100 { @extend .h-72, .w-100; }
+.input-10 { @include h(72px); @include w(10%); }
+.input-15 { @include h(72px); @include w(15%); }
+.input-16 { @include h(72px); @include w(16%); }
+.input-20 { @include h(72px); @include w(20%); }
+.input-25 { @include h(72px); @include w(25%); }
+.input-40 { @include h(72px); @include w(40%); }
+.input-50 { @include h(72px); @include w(50%); }
+.input-66 { @include h(72px); @include w(66%); }
+.input-75 { @include h(72px); @include w(75%); }
+.input-85 { @include h(72px); @include w(85%); }
+.input-95 { @include h(72px); @include w(95%); }
+.input-100 { @include h(72px); @include w(100%); }
 
 .new-form-container {
-  @extend .w-100;
-  text-transform: none;
+  @extend %t-t-n;
+  @include w(100%);
   max-width: 800px;
   padding: 16px;
 
   .input-container {
     margin: 10px 0px;
-    height: 72px;
+    @include h(72px);
 
     .override-chip-style {
       & div > div > div {
@@ -265,18 +265,18 @@
   }
 
   .editor-container {
-    @extend .w-100;
+    @include w(100%);
     margin-top: 30px;
 
-    h4 { color: $lightblue; }
+    h4 { @include c($lightblue); }
 
     .content {
-      @extend .p-r;
+      @extend %p-r;
       border: 1px solid $black;
 
       .fr-toolbar {
-        background-color: $lightblue;
-        border: none !important;
+        @extend %bb-none;
+        @include b-c($lightblue);
       }
 
       .fr-sticky-on {
@@ -307,16 +307,18 @@
   }
 
   .button-container {
-    @extend .m-t-20;
+    @extend %m-t-20;
 
     .button {
-      @extend .d-ib, .w-50;
+      @extend %d-ib;
+      @include w(50%);
       padding: 6px 12px;
       margin-bottom: 30px;
     }
 
     .button-center {
-      @extend .d-b, .m-0-a, .w-100;
+      @extend %d-b, %m-0-a;
+      @include w(100%);
       max-width: 250px;
     }
   }

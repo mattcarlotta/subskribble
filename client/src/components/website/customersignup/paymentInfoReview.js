@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { GetCreditCardType } from './getCreditCardType';
 
 const PaymentInfoReview = ({
@@ -25,7 +24,7 @@ const PaymentInfoReview = ({
           <i className={ cardType ? `fa fa-cc-${cardType}` : "fa fa-credit-card-alt"} aria-hidden="true" />
           <span className="stars">****</span>{creditCard.slice(-4)}
           <span className="experiation">Exp: {creditCardExpMonth}/{creditCardExpYear}</span>
-          <span className="edit-link" onClick={() => editStep(2)}>Edit</span>
+          <span className="edit-link" onClick={() => editStep(1)}>Edit</span>
         </p>
         <p className="credit-billing">Billing Address:</p>
         { sameBillingAddress
