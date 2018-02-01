@@ -13,7 +13,7 @@ export default class SideBar extends Component {
   handleMenuToggle = () => this.setState({ openNav: !this.state.openNav });
 
   handleTabClick = (requestedTab) => {
-    browserHistory.push(`/sparhckboard/${requestedTab}`);
+    browserHistory.push(`/subskribble/${requestedTab}`);
     this.handleMenuToggle();
   }
 

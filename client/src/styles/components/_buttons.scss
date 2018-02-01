@@ -43,3 +43,18 @@
     background-color: $warmgrey !important;
   }
 }
+
+.panel-button {
+  @include c($darkwarmgrey);
+  border: 0;
+  margin-top: 5px;
+  margin-right: 5px;
+
+
+  &:hover, &:focus {
+    // @extend %bs-none;
+    @extend %no-link-focus;
+    @include c($lightblue);
+    @include b-c($transparent);
+  }
+}

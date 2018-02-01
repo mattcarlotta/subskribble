@@ -1,12 +1,27 @@
 .panel-container {
-  @include h(100%)
-  margin-bottom: 30px;
+  @include h(100%);
+  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+  margin: 30px 0;
 
   .btn-reposition {
     @extend %p-r;
     top: 13px;
     padding: 10px;
     border-right: 0 !important;
+  }
+
+  .tabs-container {
+    @include b-c($white);
+
+    .ant-tabs-bar {
+      margin: 0;
+    }
+  }
+
+  .panel-body-container {
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border-radius: 2px;
   }
 
   .panel-body {
