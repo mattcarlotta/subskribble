@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import { Menu } from 'antd';
 import TABLINKS from '../links/tabLinks';
 import LeftNav from '../leftNav';
+import NavButton from '../navButton';
 const { Item: MenuItem } = Menu;
 
 export default class SideBar extends Component {
@@ -17,15 +18,18 @@ export default class SideBar extends Component {
     this.handleMenuToggle();
   }
 
+  handleMenuButton = (icon, tooltip) => (
+    <NavButton
+      icon={icon}
+      onClickAction={this.handleMenuToggle}
+      tooltip={tooltip}
+    />
+  )
+
   render() {
     return (
       <Fragment>
-        <i
-          className="material-icons menu-toggle"
-          onClick={this.handleMenuToggle}
-        >
-          menu
-        </i>
+        {this.handleMenuButton("menu", "Menu")}
         <Drawer
           level={null}
           open={this.state.openNav}
@@ -34,13 +38,8 @@ export default class SideBar extends Component {
           width="265px"
         >
           <div className="logo-header">
-            <i
-              className="material-icons menu-toggle"
-              onClick={this.handleMenuToggle}
-            >
-              menu
-            </i>
             <LeftNav />
+            {this.handleMenuButton("close")}
           </div>
           <Menu
             className="drawer-menu-container"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router';
+import { IndexRoute, Route } from 'react-router'; //Redirect
 
 import App from '../components/app';
 // import Campaigns from '../components/subskribble/campaigns';
@@ -13,6 +13,7 @@ import DashWrapper from '../components/subskribble/navigation/dashWrapper';
 import ForgotPassword from '../containers/forms/website/resetpasswordForm';
 // import Home from '../components/website/home';
 // import Invoices from '../components/subskribble/invoices';
+import Landing from '../components/subskribble/app';
 import LogIn from '../containers/forms/website/loginForm';
 import NotFound from '../components/app/notfound/404';
 import Plans from '../components/subskribble/plans';
@@ -30,8 +31,8 @@ import SignUp from '../containers/forms/website/signupForm';
 // CONFIG APP ROUTE VIEWS
 export const views = (
 	<div>
-		<Redirect from="/" to="/subskribble/dashboard" />
 		<Route path="/subskribble" component={DashWrapper(App)}>
+			<IndexRoute component={Landing} />
 			<Route path="dashboard" component={Dashboard} />
 			<Route path="customers" component={Customers} />
 			<Route path="customer-signup/:gateway" component={CustomerSignup} />

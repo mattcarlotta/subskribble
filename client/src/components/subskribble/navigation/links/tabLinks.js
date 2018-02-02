@@ -1,6 +1,6 @@
 export default [
   {
-    icon: 'home',
+    icon: 'dashboard',
     label: 'dashboard',
   },
   {

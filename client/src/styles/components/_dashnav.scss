@@ -103,14 +103,14 @@
 
 .logo-container {
   @extend %d-ib;
-  margin-top: -2px;
 
   .icon-logo {
    @extend %p-r;
    @include c($white);
    @include f-s(36px);
-   top: 12px;
+   margin-top: 8px;
    margin-right: 5px;
+   margin-left: 10px;
   }
 
   .text-logo {
@@ -119,9 +119,9 @@
     @include f-f($harabara)
     @include f-s(28px);
     letter-spacing: 1.5px;
-    top: 4px;
+    top: -7px;
+    margin-right: 10px;
   }
-
 }
 
 .logo-header {
@@ -131,16 +131,12 @@
   @include w(100%);
 }
 
-.menu-toggle {
+.nav-button-icon {
   @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
-  @include c($white);
-  @include f-s(24px);
-  top: 7px;
-  margin-right: 25px;
-
-  &:hover {
-    @include c($lightgrey);
-  }
+  @include c($lightgrey);
+  @include f-s(22px);
+  top: 4px;
+  right: 26.5px;
 }
 
 .user-header {
