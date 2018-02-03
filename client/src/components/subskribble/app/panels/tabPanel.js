@@ -1,43 +1,47 @@
 import map from 'lodash/map';
-import React, { Component } from 'react';
-import { Tabs, Button } from 'antd';
+import React from 'react';
+import { Tabs } from 'antd';
+// import FilterField from '../../app/formFields/FilterField';
+import RenderPanelButtons from './renderPanelButtons';
+// import SelectField from '../../app/formFields/selectField';
+// import TableList from '../../app/tables/TableList';
 const { TabPane } = Tabs;
 
-class TabPanel extends Component {
-  state = { visible: true };
-
-  changePanelVisibility = () => this.setState({ visible: !this.state.visible })
-
-  buttonPanel = (visible) => (
-    <Button className="panel-button" onClick={this.changePanelVisibility}>
-    { visible
-      ? <i className="material-icons">remove</i>
-      : <i className="material-icons">add</i>
-    }
-    </Button>
-  )
-
-  render() {
-    const { TABS } = this.props; // CARDS, selectFieldClassName,
-    const { visible } = this.state;
-    const display = visible ? "" : "none";
-    const border = display ? 0 : null;
-    return (
-      <div className="panel-container">
-        <Tabs className="tabs-container" tabBarStyle={{ border }} tabBarExtraContent={this.buttonPanel(visible)}>
-          {map(TABS, title => (
-            <TabPane tab={title} key={title}>
-              <div className="panel-body-container">
-                <div className="panel-body" style={{ display }}>
-                  Content of {title}
+const TabPanel = ({buttonPanel, CARDS, selectFieldClassName, TABS, visible }) => {
+  const display = visible ? "" : "none";
+  const border = display ? 0 : null;
+  return (
+    <div className="panel-container">
+      <Tabs className="tabs-container" tabBarStyle={{ border }} tabBarExtraContent={buttonPanel(visible)}>
+        {map(CARDS, ({
+          CARDBODY,
+          CUSTOMBUTTONS,
+          FILTERFORM,
+          FILTERFIELDLABEL,
+          GRAPH,
+          SELECTFIELDITEMS,
+          TABLECONTENTS,
+          TAB,
+          TABLEHEADERS
+          }, key) => (
+            <TabPane tab={TAB} key={TAB}>
+              <div style={{ display, border }} className="panel-body-container">
+                { CARDBODY && <CARDBODY /> }
+                <div className="panel-body">
+                  {/* { SELECTFIELDITEMS && <SelectField className={selectFieldClassName} floatingLabelText="Sort By" MENUITEMS={SELECTFIELDITEMS} /> } */}
+                  <div className="panel-6">
+                    { CUSTOMBUTTONS && <RenderPanelButtons CUSTOMBUTTONS={CUSTOMBUTTONS}/> }
+                  </div>
+                  { GRAPH && GRAPH }
+                  {/* { FILTERFORM && <FilterField className="panel-4" floatingLabelText={FILTERFIELDLABEL} form={FILTERFORM} /> } */}
+                  {/* { TABLECONTENTS && <TableList TABLECONTENTS={TABLECONTENTS} TABLEHEADERS={TABLEHEADERS} /> } */}
                 </div>
               </div>
             </TabPane>
-          ))}
-        </Tabs>
-      </div>
-    )
-  }
+        ))}
+      </Tabs>
+    </div>
+  )
 }
 
 export default TabPanel;

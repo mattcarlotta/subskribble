@@ -1,59 +1,48 @@
-import React, { Component } from 'react';
-// import { Card, CardHeader, CardText } from 'material-ui/Card';
-// import FontIcon from 'material-ui/FontIcon';
-import { Button, Card } from 'antd';
+import React from 'react';
+import { Card } from 'antd';
 
 // import FilterField from '../../app/formFields/FilterField';
 // import RenderPanelButtons from './renderPanelButtons';
 // import SelectField from '../../app/formFields/selectField';
 // import TableList from '../../app/tables/TableList';
 
-class BasicPanel extends Component {
-  state = { visible: true };
-
-  changePanelVisibility = () => this.setState({ visible: !this.state.visible })
-
-  buttonPanel = (visible) => (
-    <Button className="panel-button" onClick={this.changePanelVisibility}>
-    { visible
-      ? <i className="material-icons">remove</i>
-      : <i className="material-icons">add</i>
-    }
-    </Button>
-  )
-
-  render() {
-    const {
-        containerClassName,
-        title,
-        // CUSTOMBUTTONS,
-        // selectFieldClassName,
-        // SELECTFIELDITEMS,
-        // FORM,
-        CARDBODY,
-        // GRAPH,
-        // filterFieldLabel,
-        // FILTERFORM,
-        // TABLECONTENTS,
-        // TABLEHEADERS
-    } = this.props;
-    const { visible } = this.state;
-    const display = visible ? "" : "none";
-    return (
-      <div className={containerClassName}>
-        <div className="panel-container">
-          <Card title={title} extra={this.buttonPanel(visible)}>
-           <div className="panel-body-container">
-             <div className="panel-body" style={{ display }}>
-                { CARDBODY && <CARDBODY /> }
-             </div>
+const BasicPanel = ({
+  buttonPanel,
+  containerClassName,
+  CARDBODY,
+  title,
+  visible
+}) => {
+  const display = visible ? "" : "none";
+  return (
+    <div className={containerClassName}>
+      <div className="panel-container">
+        <Card title={title} extra={buttonPanel(visible)}>
+         <div className="panel-body-container">
+           <div className="panel-body" style={{ display }}>
+              { CARDBODY && <CARDBODY /> }
            </div>
-          </Card>
-        </div>
+         </div>
+        </Card>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+/*
+containerClassName,
+title,
+CUSTOMBUTTONS,
+selectFieldClassName,
+SELECTFIELDITEMS,
+FORM,
+CARDBODY,
+GRAPH,
+filterFieldLabel,
+FILTERFORM,
+TABLECONTENTS,
+TABLEHEADERS
+*/
 
 // const CustomPanel = ({
 //   containerClassName,
