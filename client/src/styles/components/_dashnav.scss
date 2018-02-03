@@ -158,9 +158,19 @@
     @include b-c($transparent);
   }
 
+  .nav-button {
+    @include b-c($transparent);
+    i { @include c($inactiveblue); }
+
+    &:hover {
+      i {@include c($blue);}
+    }
+  }
+
   .icon-logo, .text-logo {
     @include c($blue);
   }
+
 }
 
 .nav-button-icon {

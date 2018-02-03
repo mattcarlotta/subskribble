@@ -22,25 +22,26 @@ class SideBar extends Component {
   handleMenuToggle = () => this.setState({ openNav: !this.state.openNav });
 
   handleTabClick = (requestedTab) => {
-    this.setState({ selectedKey: [requestedTab] }, () => {
-      browserHistory.push(`/subskribble/${requestedTab}`);
-      this.handleMenuToggle();
-    })
+    browserHistory.push(`/subskribble/${requestedTab}`);
+    this.handleMenuToggle();
   }
 
-  handleMenuButton = (icon, tooltip) => (
-    <NavButton
-      icon={icon}
-      onClickAction={this.handleMenuToggle}
-      tooltip={tooltip}
-    />
-  )
+  handleMenuButton = (icon) => {
+    const tooltip = (icon === "menu") ? "Menu" : "";
+    return (
+      <NavButton
+        icon={icon}
+        onClickAction={this.handleMenuToggle}
+        tooltip={tooltip}
+      />
+    )
+  }
 
   render() {
     const { selectedKey } = this.state;
     return (
       <Fragment>
-        {this.handleMenuButton("menu", "Menu")}
+        {this.handleMenuButton("menu")}
         <Drawer
           level={null}
           open={this.state.openNav}
