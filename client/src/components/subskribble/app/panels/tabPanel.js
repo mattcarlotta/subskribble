@@ -1,4 +1,4 @@
-// import map from 'lodash/map';
+import map from 'lodash/map';
 import React, { Component } from 'react';
 import { Tabs, Button } from 'antd';
 const { TabPane } = Tabs;
@@ -18,20 +18,22 @@ class TabPanel extends Component {
   )
 
   render() {
+    const { TABS } = this.props; // CARDS, selectFieldClassName,
     const { visible } = this.state;
     const display = visible ? "" : "none";
+    const border = display ? 0 : null;
     return (
       <div className="panel-container">
-        <Tabs className="tabs-container" tabBarExtraContent={this.buttonPanel(visible)}>
-          <TabPane tab="Tab 1" key="1">
-            <div className="panel-body-container">
-              <div className="panel-body" style={{ display }}>
-                Content of tab 1
+        <Tabs className="tabs-container" tabBarStyle={{ border }} tabBarExtraContent={this.buttonPanel(visible)}>
+          {map(TABS, title => (
+            <TabPane tab={title} key={title}>
+              <div className="panel-body-container">
+                <div className="panel-body" style={{ display }}>
+                  Content of {title}
+                </div>
               </div>
-            </div>
-          </TabPane>
-          <TabPane tab="Tab 2" key="2">Content of tab 2</TabPane>
-          <TabPane tab="Tab 3" key="3">Content of tab 3</TabPane>
+            </TabPane>
+          ))}
         </Tabs>
       </div>
     )

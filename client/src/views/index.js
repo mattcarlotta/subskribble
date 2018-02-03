@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router'; //Redirect
+import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/app';
 // import Campaigns from '../components/subskribble/campaigns';
@@ -31,6 +31,7 @@ import SignUp from '../containers/forms/website/signupForm';
 // CONFIG APP ROUTE VIEWS
 export const views = (
 	<div>
+		<Redirect from="/" to="/subskribble" />
 		<Route path="/subskribble" component={DashWrapper(App)}>
 			<IndexRoute component={Landing} />
 			<Route path="dashboard" component={Dashboard} />

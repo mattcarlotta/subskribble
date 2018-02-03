@@ -1,20 +1,18 @@
 html, body {
   @extend %m-0, %p-0;
-  @include b-c($lightwhite);
+  @include b-c($background);
   @include h(100vh);
   @include w(100%);
 }
 body {
   @extend %m-0;
   @include c($darkwarmgrey);
-  @include f-f($ralewayregular);
   @include f-s(14px);
   @include f-w(300);
 }
 a:link, a:visited, a:focus, a:hover, a:active { @extend %no-link-focus; }
 p {
   @extend %brk-ww, %m-r-15;
-  @include f-f($ralewayregular);
   @include f-w(200);
   @include f-s(15px);
   @include l-h(24px);

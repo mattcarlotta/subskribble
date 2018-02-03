@@ -3,7 +3,7 @@
 }
 
 .dash-nav-container {
-  @include b-c($lightblue);
+  @include b-c($blackblue);
   @include h(55px);
   @include w(100%);
   position: fixed;
@@ -28,7 +28,7 @@
 
       .ant-badge-count {
         @include c($white);
-        @include b-s(0 0 0 1px $lightblue);
+        @include b-s(0 0 0 1px $blackblue);
       }
 
       .ant-scroll-number-only>p {
@@ -74,19 +74,32 @@
   @include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
+.drawer-content, .drawer-menu-container {
+  @include b-c($blackblue);
+}
+
 .drawer-content-wrapper {
   @include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
 }
 
 .drawer-menu-container {
-  // margin-top: 10px;
+  @extend %b-0;
+  @include c($twhite);
 
   .ant-menu-item {
     padding-left: 20px !important;
 
     &:hover {
-      @include b-c($lightgrey);
-      @include c($tblack);
+      @include c($lightwhite);
+      @include b-c($hoverblue);
+    }
+  }
+
+  .ant-menu-item-selected {
+    @include b-c($transparent !important);
+
+    &:hover {
+      @include c($blue);
     }
   }
 
@@ -96,13 +109,19 @@
     }
 
     .menu-label {
-      @include f-f($ralewayregular);
+      @include f-s(16px);
       @include l-h(24px);
     }
 }
 
 .logo-container {
   @extend %d-ib;
+  @include h(55px);
+
+  &:hover {
+    @extend .fix-cursor;
+    @include b-c($hoverblue);
+  }
 
   .icon-logo {
    @extend %p-r;
@@ -126,9 +145,22 @@
 
 .logo-header {
   @extend .logo-container;
-  @include b-c($lightblue);
-  @include h(57px);
+  @include b-c($blackblue);
+  @include h(55px);
   @include w(100%);
+}
+
+.drawer-menu-header {
+  @include b-c($white);
+  border-bottom: 1px solid $tblue;
+
+  .logo-container:hover {
+    @include b-c($transparent);
+  }
+
+  .icon-logo, .text-logo {
+    @include c($blue);
+  }
 }
 
 .nav-button-icon {

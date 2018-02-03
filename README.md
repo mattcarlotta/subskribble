@@ -1,5 +1,5 @@
 # subskribble
-subskribble - an experimental app to create, manage, and send personalized updates to a client's lists of subscribers.
+subskribble - an experimental app to create, manage, and send personalized updates to a lists of subscribers.
 
 ## Quickstart Linux:
 

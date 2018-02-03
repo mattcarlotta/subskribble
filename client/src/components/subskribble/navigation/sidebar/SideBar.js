@@ -1,21 +1,31 @@
 import map from 'lodash/map';
 import Drawer from 'rc-drawer-menu';
 import React, { Component, Fragment } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, withRouter } from 'react-router';
 import { Menu } from 'antd';
 import TABLINKS from '../links/tabLinks';
 import LeftNav from '../leftNav';
 import NavButton from '../navButton';
 const { Item: MenuItem } = Menu;
 
-export default class SideBar extends Component {
-  state = { openNav: false }
+class SideBar extends Component {
+  state = { openNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
+
+  componentDidUpdate = (prevProps) => {
+    const pathname = this.props.location.pathname.replace(/\/subskribble\//g,'');
+    const selectedTab = this.state.selectedKey[0];
+    if (this.props.location !== prevProps.location && pathname !== selectedTab)  {
+      this.setState({ selectedKey: [pathname] })
+    }
+  }
 
   handleMenuToggle = () => this.setState({ openNav: !this.state.openNav });
 
   handleTabClick = (requestedTab) => {
-    browserHistory.push(`/subskribble/${requestedTab}`);
-    this.handleMenuToggle();
+    this.setState({ selectedKey: [requestedTab] }, () => {
+      browserHistory.push(`/subskribble/${requestedTab}`);
+      this.handleMenuToggle();
+    })
   }
 
   handleMenuButton = (icon, tooltip) => (
@@ -27,6 +37,7 @@ export default class SideBar extends Component {
   )
 
   render() {
+    const { selectedKey } = this.state;
     return (
       <Fragment>
         {this.handleMenuButton("menu", "Menu")}
@@ -37,13 +48,14 @@ export default class SideBar extends Component {
           iconChild={false}
           width="265px"
         >
-          <div className="logo-header">
+          <div className="drawer-menu-header">
             <LeftNav />
             {this.handleMenuButton("close")}
           </div>
           <Menu
             className="drawer-menu-container"
             mode="inline"
+            selectedKeys={selectedKey}
             onSelect={ ({key}) => this.handleTabClick(key) }
           >
             {map(TABLINKS, ({ icon, label }) => (
@@ -60,3 +72,5 @@ export default class SideBar extends Component {
     );
   }
 }
+
+export default withRouter(SideBar);

@@ -2,12 +2,12 @@ import { browserHistory } from 'react-router';
 
 export const OVERVIEWROWS = [
   {
-    subtitle: 'MRR',
-    amount: '$2,054.11'
+    subtitle: 'Current Month',
+    amount: '$568.13'
   },
   {
-    subtitle: 'Payments Received',
-    amount: '$568.13'
+    subtitle: 'Current Quarter',
+    amount: '$2,054.11'
   },
   {
     subtitle: 'Unpaid Invoices',

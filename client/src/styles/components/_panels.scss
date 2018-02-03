@@ -3,6 +3,17 @@
   @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
   margin: 30px 0;
 
+  .ant-card-wider-padding .ant-card-head, .ant-card-head, .ant-card-extra, .ant-card-head-title, .ant-card-wider-padding .ant-card-body {
+    @extend %p-0;
+  }
+
+  .ant-card-head-title {
+    @include f-s(14px);
+    @include f-w(500);
+    padding-top: 15px;
+    margin-left: 48px;
+  }
+
   .btn-reposition {
     @extend %p-r;
     top: 13px;
@@ -14,7 +25,7 @@
     @include b-c($white);
 
     .ant-tabs-bar {
-      margin: 0;
+      @extend %m-0;
     }
   }
 
@@ -25,8 +36,8 @@
   }
 
   .panel-body {
-    @extend %m-b-10, %t-t-c;
-    padding: 5px 10px;
+    @extend %m-b-10, %m-t-10, %t-t-c;
+    padding: 5px 30px;
 
   }
 
@@ -40,8 +51,8 @@
   }
 
   .panel-3 {
-    @extend %col-3, %d-ib, %t-a-c;
-    margin-top: 30px;
+    @extend %d-ib, %t-a-c;
+    @include w(25%);
     border-right: 1px solid rgba(120, 130, 140, 0.13);
 
     .subtitle {
