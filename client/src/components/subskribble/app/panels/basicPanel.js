@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-
+import TogglePanelVisibility from './TogglePanelVisibility';
 // import FilterField from '../../app/formFields/FilterField';
 // import RenderPanelButtons from './renderPanelButtons';
 // import SelectField from '../../app/formFields/selectField';
@@ -12,22 +12,22 @@ const BasicPanel = ({
   CARDBODY,
   title,
   visible
-}) => {
-  const display = visible ? "" : "none";
-  return (
-    <div className={containerClassName}>
-      <div className="panel-container">
-        <Card title={title} extra={buttonPanel(visible)}>
-         <div className="panel-body-container">
-           <div className="panel-body" style={{ display }}>
-              { CARDBODY && <CARDBODY /> }
-           </div>
+}) => (
+  <div className={containerClassName}>
+    <div className="panel-container">
+      <Card title={title} extra={buttonPanel(visible)}>
+       <div className="panel-body-container">
+         <div className="panel-body" style={{ display: visible ? "" : "none" }}>
+            { CARDBODY && <CARDBODY /> }
          </div>
-        </Card>
-      </div>
+       </div>
+      </Card>
     </div>
-  )
-}
+  </div>
+)
+
+
+export default TogglePanelVisibility(BasicPanel);
 
 /*
 containerClassName,
@@ -98,5 +98,3 @@ TABLEHEADERS
 //     </div>
 //   )
 // }
-
-export default BasicPanel;

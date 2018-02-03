@@ -15,6 +15,7 @@ export default WrappedComponent => {
       }
       </Button>
     )
+    
     render() {
       return (
         <WrappedComponent
