@@ -9,7 +9,7 @@ import NavButton from '../navButton';
 const { Item: MenuItem } = Menu;
 
 class SideBar extends Component {
-  state = { openNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
+  state = { openSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
 
   componentDidUpdate = (prevProps) => {
     const pathname = this.props.location.pathname.replace(/\/subskribble\//g,'');
@@ -19,7 +19,11 @@ class SideBar extends Component {
     }
   }
 
-  handleMenuToggle = () => this.setState({ openNav: !this.state.openNav });
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return nextProps.location !== this.props.location || nextState.openSideNav !== this.state.openSideNav;
+  }
+
+  handleMenuToggle = () => this.setState({ openSideNav: !this.state.openSideNav });
 
   handleTabClick = (requestedTab) => {
     browserHistory.push(`/subskribble/${requestedTab}`);
@@ -38,13 +42,13 @@ class SideBar extends Component {
   }
 
   render() {
-    const { selectedKey } = this.state;
+    const { openSideNav, selectedKey } = this.state;
     return (
       <Fragment>
         {this.handleMenuButton("menu")}
         <Drawer
           level={null}
-          open={this.state.openNav}
+          open={openSideNav}
           onMaskClick={this.handleMenuToggle}
           iconChild={false}
           width="265px"
