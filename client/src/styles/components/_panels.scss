@@ -37,11 +37,6 @@
   .panel-body {
     @extend %m-b-10, %m-t-10, %t-t-c;
     padding: 5px 30px;
-
-    .ant-row {
-      @extend %m-b-20;
-    }
-
   }
 
   .panel-1 {

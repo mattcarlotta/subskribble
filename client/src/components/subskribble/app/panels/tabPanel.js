@@ -36,7 +36,7 @@ const TabPanel = ({buttonPanel, CARDS, selectFieldClassName, visible }) => (
                   </div>
                   <div className="ant-col-6 f-r">
                     { CUSTOMBUTTONS && <RenderPanelButtons CUSTOMBUTTONS={CUSTOMBUTTONS}/> }
-                    { FILTERFORM && <FilterField className="panel-4" placeholder={FILTERFIELDLABEL} form={FILTERFORM} /> }
+                    { FILTERFORM && <FilterField placeholder={FILTERFIELDLABEL} form={FILTERFORM} /> }
                   </div>
                 </div>
                 { GRAPH && GRAPH }

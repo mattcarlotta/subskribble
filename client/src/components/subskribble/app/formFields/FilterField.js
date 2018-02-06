@@ -15,10 +15,10 @@ class FilterField extends Component {
   handleFormChange = event => this.logInput(event.target.value);
 
   render() {
-    const { className, placeholder, reset } = this.props;
+    const { placeholder, reset } = this.props;
     return (
-      <form className={className} onChange={this.handleFormChange}>
-        <div className="filter-container">
+      <form className="filter-container" onChange={this.handleFormChange}>
+        <div>
           <div className='form-95'>
             <Field
               name="filter"

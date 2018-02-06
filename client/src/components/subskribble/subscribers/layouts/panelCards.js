@@ -2,7 +2,7 @@ import { ACTIVESUBSCRIPTIONS, INACTIVESUBSCRIPTIONS, TABLEHEADERS } from '../fie
 
 export default [
   {
-    filterFieldLabel: "Filter Active Subscriptions",
+    FILTERFIELDLABEL: "Filter Active Subscriptions",
     FILTERFORM: "FilterActiveSubscriptions",
     SELECTFIELDITEMS: ['10', '20', '50', 'All'],
     TAB: "Active Subscribers",
@@ -10,7 +10,7 @@ export default [
     TABLEHEADERS: TABLEHEADERS
   },
   {
-    filterFieldLabel: "Filter Inactive Subscriptions",
+    FILTERFIELDLABEL: "Filter Inactive Subscriptions",
     FILTERFORM: "FilterInactiveSubscriptions",
     SELECTFIELDITEMS: ['10', '20', '50', 'All'],
     TAB: "Inactive Subscribers",
