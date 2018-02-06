@@ -173,14 +173,6 @@
 
 }
 
-.nav-button-icon {
-  @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
-  @include c($lightgrey);
-  @include f-s(22px);
-  top: 4px;
-  right: 26.5px;
-}
-
 .user-header {
   @include c($white);
   @include b-c($rbblue);
