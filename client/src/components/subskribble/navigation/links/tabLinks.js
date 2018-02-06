@@ -5,15 +5,11 @@ export default [
   },
   {
     icon: 'people_outline',
-    label: 'customers',
+    label: 'subscribers',
   },
   {
     icon: 'content_paste',
     label: 'plans',
-  },
-  {
-    icon: 'note_add',
-    label: 'subscribers',
   },
   {
     icon: 'payment',

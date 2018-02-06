@@ -34,6 +34,10 @@
   }
 }
 
+.editable-row-operations a {
+  margin-right: 8px;
+}
+
 .label {
   @extend %t-a-c;
   @include f-w(500);

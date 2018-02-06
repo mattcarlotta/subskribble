@@ -1,49 +1,53 @@
-import { browserHistory } from 'react-router';
-
 export const ACTIVESUBSCRIPTIONS = [
   {
+    key: '1',
     status: 'active',
-    customer: 'Sherry Waters',
+    subscriber: 'Sherry Waters',
     plan: 'Carlotta Prime',
     startDate: 'Dec 2, 2017',
     endDate: '-',
     amount: '$29.99'
   },
   {
+    key: '2',
     status: 'active',
-    customer: 'Bob Aronssen',
+    subscriber: 'Bob Aronssen',
     plan: 'Carlotta Prime',
     startDate: 'Dec 9, 2017',
     endDate: '-',
     amount: '$29.99'
   },
   {
+    key: '3',
     status: 'active',
-    customer: 'Shaniqua Smith',
+    subscriber: 'Shaniqua Smith',
     plan: 'Carlotta Prime',
     startDate: 'Dec 10, 2017',
     endDate: '-',
     amount: '$29.99'
   },
   {
+    key: '4',
     status: 'active',
-    customer: 'Tanya Ballschin',
+    subscriber: 'Tanya Ballschin',
     plan: 'Carlotta Prime',
     startDate: 'Dec 11, 2017',
     endDate: '-',
     amount: '$29.99'
   },
   {
+    key: '5',
     status: 'active',
-    customer: 'Siemen Walker',
+    subscriber: 'Siemen Walker',
     plan: 'Carlotta Prime',
     startDate: 'Dec 16, 2017',
     endDate: '-',
     amount: '$29.99'
   },
   {
+    key: '6',
     status: 'active',
-    customer: 'Jerry Lamar',
+    subscriber: 'Jerry Lamar',
     plan: 'Carlotta Prime',
     startDate: 'Dec 22, 2017',
     endDate: '-',
@@ -53,48 +57,54 @@ export const ACTIVESUBSCRIPTIONS = [
 
 export const INACTIVESUBSCRIPTIONS = [
   {
+    key: '1',
     status: 'inactive',
-    customer: 'Carl Sagan',
+    subscriber: 'Carl Sagan',
     plan: 'Carlotta Prime',
     startDate: 'Dec 3, 2017',
     endDate: 'Jan 3, 2018',
     amount: '$29.99'
   },
   {
+    key: '2',
     status: 'inactive',
-    customer: 'Mark Canelo',
+    subscriber: 'Mark Canelo',
     plan: 'Carlotta Prime',
     startDate: 'Dec 12, 2017',
     endDate: 'Jan 12, 2018',
     amount: '$29.99'
   },
   {
+    key: '3',
     status: 'suspended',
-    customer: 'Axle Root',
+    subscriber: 'Axle Root',
     plan: 'Carlotta Prime',
     startDate: 'Dec 16, 2017',
     endDate: 'Jan 16, 2018',
     amount: '$29.99'
   },
   {
+    key: '4',
     status: 'inactive',
-    customer: 'Adamn Vicks',
+    subscriber: 'Adamn Vicks',
     plan: 'Carlotta Prime',
     startDate: 'Dec 17, 2017',
     endDate: 'Jan 17, 2018',
     amount: '$29.99'
   },
   {
+    key: '5',
     status: 'suspended',
-    customer: 'Wes Walls',
+    subscriber: 'Wes Walls',
     plan: 'Carlotta Prime',
     startDate: 'Dec 17, 2017',
     endDate: 'Jan 17, 2018',
     amount: '$29.99'
   },
   {
+    key: '6',
     status: 'suspended',
-    customer: 'Alisha Tallis',
+    subscriber: 'Alisha Tallis',
     plan: 'Carlotta Prime',
     startDate: 'Dec 17, 2017',
     endDate: 'Jan 17, 2018',
@@ -102,35 +112,29 @@ export const INACTIVESUBSCRIPTIONS = [
   },
 ]
 
-export const ACTIVESUBSBUTTONS = [
+export const TABLEHEADERS = [
   {
-    className: 'btn-reposition f-l',
-    label: "Add Subscription",
-    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/add-subscription')
+    title: 'Status',
+    dataIndex: 'status'
   },
   {
-    className: 'btn-reposition f-l',
-    label: "Suspend Subscription",
-    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/suspend-subscription')
+    title: 'Subscriber',
+    dataIndex: 'subscriber'
   },
   {
-    className: 'btn-reposition f-l',
-    label: "View Subscription",
-    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
+    title: 'Plan',
+    dataIndex: 'plan'
+  },
+  {
+    title: 'Start Date',
+    dataIndex: 'startDate'
+  },
+  {
+    title: 'End Date',
+    dataIndex: 'endDate'
+  },
+  {
+    title: 'Amount',
+    dataIndex: 'amount'
   }
-]
-
-export const INACTIVESUBSBUTTONS = [
-  {
-    className: 'btn-reposition f-l',
-    label: "Remove Subscription",
-    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/remove-subscription')
-  },
-  {
-    className: 'btn-reposition f-l',
-    label: "View Subscription",
-    onClickAction: () => browserHistory.push('/rocketboard/subscriptions/view-subscription')
-  }
-]
-
-export const TABLEHEADERS = ['Status', 'Customer', 'Plan', 'Start Date', 'End Date', 'Amount'];
+];

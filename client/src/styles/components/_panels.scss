@@ -30,7 +30,6 @@
   }
 
   .panel-body-container {
-
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     border-radius: 2px;
   }
@@ -38,6 +37,10 @@
   .panel-body {
     @extend %m-b-10, %m-t-10, %t-t-c;
     padding: 5px 30px;
+
+    .ant-row {
+      @extend %m-b-20;
+    }
 
   }
 
@@ -93,7 +96,7 @@
   }
 
   .panel-6 {
-    @extend %col-6, %d-ib, %m-b-20, %p-0;
+    @extend %col-6, %m-b-20, %p-0;
   }
 
   .panel-7 {

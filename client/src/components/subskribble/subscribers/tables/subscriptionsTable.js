@@ -14,7 +14,7 @@ export default function(SUBLIST) {
           </TableRowColumn>
           <TableRowColumn>{customer}</TableRowColumn>
           <TableRowColumn>{plan}</TableRowColumn>
-          <TableRowColumn>{startDate}</TableRowColumn>
+          <TableRowColumn>{startDate}{endDate}</TableRowColumn>
           <TableRowColumn>
             <span className={ status === 'active' || status === 'late' ? 'adjust-enddate-position': ''}>
               {endDate}
