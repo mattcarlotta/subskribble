@@ -84,15 +84,31 @@
 
 .drawer-menu-container {
   @extend %b-0;
-  @include c($twhite);
+  @include c(#676b70);
 
-  .ant-menu-item {
-    padding-left: 20px !important;
-
-    &:hover {
-      @include c($lightwhite);
-      @include b-c($hoverblue);
+  .ant-menu-item-group {
+    & > .ant-menu-item-group-title > .divider-title {
+      @extend %t-t-u;
+      @include c(#647897);
+      @include f-s(14px);
+      @include f-w(600);
+      margin-top: 10px;
+      padding-top: 20px;
+      padding-left: 20px;
+      border-top: 1px solid $tlightgrey;
     }
+    .ant-menu-item {
+      padding-left: 20px !important;
+
+      &:hover {
+        @include c($lightwhite);
+        @include b-c($hoverblue);
+      }
+    }
+  }
+
+  .ant-menu-item-group-title {
+    @extend %p-0;
   }
 
   .ant-menu-item-selected {
@@ -152,7 +168,7 @@
 
 .drawer-menu-header {
   @include b-c($white);
-  border-bottom: 1px solid $tblue;
+  margin-bottom: 10px;
 
   .logo-container:hover {
     @include b-c($transparent);

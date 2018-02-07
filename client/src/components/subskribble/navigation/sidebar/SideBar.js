@@ -6,7 +6,7 @@ import { Menu } from 'antd';
 import TABLINKS from '../links/tabLinks';
 import LeftNav from '../leftNav';
 import NavButton from '../navButton';
-const { Item: MenuItem } = Menu;
+const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;
 
 class SideBar extends Component {
   state = { openSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
@@ -54,7 +54,7 @@ class SideBar extends Component {
           width="265px"
         >
           <div className="drawer-menu-header">
-            <LeftNav />
+            <LeftNav onClickAction={this.handleMenuToggle} />
             {this.handleMenuButton("close")}
           </div>
           <Menu
@@ -63,14 +63,21 @@ class SideBar extends Component {
             selectedKeys={selectedKey}
             onSelect={ ({key}) => this.handleTabClick(key) }
           >
-            {map(TABLINKS, ({ icon, label }) => (
-              <MenuItem style={{ margin: 0 }} key={label}>
-                <i className="material-icons menu-icon">{icon}</i>
-                <span className="menu-label">
-                  {label.charAt(0).toUpperCase()+label.slice(1)}
-                </span>
-              </MenuItem>
-            ))}
+            {map(TABLINKS, ({ dividerLabel, icon, label }) => {
+              return (
+                <MenuItemGroup
+                  key={label}
+                  title={ dividerLabel && <h6 className="divider-title">{dividerLabel}</h6> }
+                >
+                  <MenuItem style={{ margin: 0 }} key={label}>
+                    <i className="material-icons menu-icon">{icon}</i>
+                    <span className="menu-label">
+                      {label.charAt(0).toUpperCase()+label.slice(1)}
+                    </span>
+                  </MenuItem>
+                </MenuItemGroup>
+              )
+            })}
           </Menu>
         </Drawer>
       </Fragment>

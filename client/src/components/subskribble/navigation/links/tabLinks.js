@@ -12,12 +12,22 @@ export default [
     label: 'plans',
   },
   {
+    dividerLabel: 'Accounting',
+    icon: 'assessment',
+    label: 'invoices',
+  },
+  {
+    icon: 'new_releases',
+    label: 'promos',
+  },  
+  {
     icon: 'payment',
     label: 'transactions',
   },
   {
-    icon: 'assessment',
-    label: 'invoices',
+    dividerLabel: 'Networking',
+    icon: 'mail_outline',
+    label: 'Messages',
   },
   {
     icon: 'content_copy',

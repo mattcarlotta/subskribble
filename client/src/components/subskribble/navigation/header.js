@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Col, Row } from 'antd';
 // import DashboardTabs from './Tabs';
 import LeftNav from './leftNav';
 import NavButton from './navButton';

@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Button, Divider, Dropdown, Icon, Menu } from 'antd';
 const { Item: MenuItem } = Menu;
 const OPTIONS = ["Refund", "Message", "Report"]
@@ -31,24 +31,34 @@ export default class TableActions extends PureComponent {
   )
 
   render() {
-    const { id, status } = this.props.record;
+    const { id, status, type } = this.props.record;
     return (
-      <span>
+      <Fragment>
         { status
           ? status === "inactive" || status === "suspended"
-            ? <Button data-userid={id} onClick={this.handleStatusUpdate}>Activate</Button>
-            : <Button data-userid={id} onClick={this.handleStatusUpdate}>Suspend</Button>
+            ? [
+              <Button key="activate-button" data-userid={id} onClick={this.handleStatusUpdate}>Activate</Button>,
+              <Divider key="divider1" type="vertical" />
+            ]
+            : [
+              <Button key="suspend-button" data-userid={id} onClick={this.handleStatusUpdate}>Suspend</Button>,
+              <Divider key="divider1" type="vertical" />
+            ]
           : null
         }
-        <Divider type="vertical" />
         <Button data-userid={id} onClick={this.handleDelete}>Delete</Button>
-        <Divider type="vertical" />
-        <Dropdown overlay={this.renderMoreActions(id)} trigger={['click']}>
-          <Button>
-            More Actions <Icon type="down" />
-          </Button>
-        </Dropdown>
-      </span>
+        { !type
+          ? [
+              <Divider key="divider2" type="vertical" />,
+              <Dropdown key="more-actions" overlay={this.renderMoreActions(id)} trigger={['click']}>
+                <Button>
+                  More Actions <Icon type="down" />
+                </Button>
+              </Dropdown>
+            ]
+          : null
+        }
+      </Fragment>
     )
   }
 }

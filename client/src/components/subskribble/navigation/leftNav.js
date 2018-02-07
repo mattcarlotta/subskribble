@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default function() {
+export default function({onClickAction}) {
   return (
-    <div className="logo-container">
+    <div onClick={onClickAction} className="logo-container">
       <Link to='/subskribble'>
         <i className="material-icons icon-logo">wifi_tethering</i>
         <span className="text-logo">subskribble</span>
