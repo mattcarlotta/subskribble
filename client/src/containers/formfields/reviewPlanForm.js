@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import ContactInfoReview from '../../../components/website/customersignup/contactInfoReview';
-import PaymentInfoReview from '../../../components/website/customersignup/paymentInfoReview';
-import PlanInfoReview from '../../../components/website/customersignup/planInfoReview';
-import CartTotalReview from '../../../components/website/customersignup/cartTotalReview';
+import ContactInfoReview from '../../components/website/customersignup/contactInfoReview';
+import PaymentInfoReview from '../../components/website/customersignup/paymentInfoReview';
+import PlanInfoReview from '../../components/website/customersignup/planInfoReview';
+import CartTotalReview from '../../components/website/customersignup/cartTotalReview';
 
 const ReviewPlanForm = ({
   finalValues: {

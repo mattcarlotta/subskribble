@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../formfields/passwordResetFormFields';
+import FIELDS from '../../formfields/passwordResetFormFields';
 import { resetUserPassword } from '../../../actions/authActionCreators';
 
 const ResetPasswordForm = ({ resetUserPassword }) => {

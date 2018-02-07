@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Steps } from 'antd';
 import RegisterPlanForm from './RegisterPlanForm';
 import { customerRegisterToPlan } from '../../../actions/formActionCreators';
-import { getCustomerFormFields } from '../formfields/customerSignupFields';
+import { getCustomerFormFields } from '../../formfields/customerSignupFields';
 const { Step } = Steps;
 
 class CustomerPlanSignup extends Component {

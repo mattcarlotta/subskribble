@@ -1,9 +1,9 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { AntFormFields, AntStepFormButtons } from '../formfields/antReduxFormFields';
-import BillingSwitchField from '../formfields/renderBillingSwitchField';
-import RenderPlanSelection from '../formfields/renderPlanSelection';
-import ReviewPlanForm from '../formfields/reviewPlanForm';
+import { AntFormFields, AntStepFormButtons } from '../../formfields/antReduxFormFields';
+import BillingSwitchField from '../../formfields/renderBillingSwitchField';
+import RenderPlanSelection from '../../formfields/renderPlanSelection';
+import ReviewPlanForm from '../../formfields/reviewPlanForm';
 
 const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => (
   FIELDS

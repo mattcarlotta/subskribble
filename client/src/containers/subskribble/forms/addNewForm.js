@@ -5,15 +5,15 @@ import { TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 
 import { addNewForm } from '../../../actions/formActionCreators';
-import { isNotEmpty, isRequired } from '../formfields/validateFormFields';
-import Button from '../formfields/renderFormButton';
-import ChipInput from '../formfields/renderChipField'
+import { isNotEmpty, isRequired } from '../../formfields/validateFormFields';
+import Button from '../../formfields/renderFormButton';
+import ChipInput from '../../formfields/renderChipField'
 
 class AddNewForm extends Component {
   state = { selectGateway: 0, selectPlan: 0 };
 
   handleGatewayChange = (event, index, value) => this.setState({ selectGateway: value });
-  
+
   handlePlanChange = (event, index, value) => this.setState({ selectPlan: value });
 
 	handleFormSubmit = (formProps) => {

@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { TextField } from 'redux-form-material-ui';
 
 import { addNewTemplate } from '../../../actions/formActionCreators';
-import { isRequired, isValidEmail } from '../formfields/validateFormFields';
-import FroalaEditor from '../formfields/FroalaEditorField';
-import Button from '../formfields/renderFormButton';
+import { isRequired, isValidEmail } from '../../formfields/validateFormFields';
+import FroalaEditor from '../../formfields/FroalaEditorField';
+import Button from '../../formfields/renderFormButton';
 
 const TEMPLATEFIELDS = [
   { name: 'templateName', label: 'Template Name', hintText: 'Enter a unique template name', validate: [isRequired] },

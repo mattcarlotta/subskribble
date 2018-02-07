@@ -3,10 +3,10 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../formfields/signupFormFields';
-import { signupUser } from '../../../actions/authActionCreators';
+import FIELDS from '../../formfields/signinFormFields';
+import { signinUser } from '../../../actions/authActionCreators';
 
-const SignupForm = ({ signupUser }) => {
+const LoginForm = ({ signinUser }) => {
 	const handleFormSubmit = (formProps) => {
 		console.log(formProps);
 	}
@@ -15,11 +15,12 @@ const SignupForm = ({ signupUser }) => {
 			<AuthForm
 				onSubmit={values => handleFormSubmit(values)}
 				FIELDS={FIELDS}
-				formTitle='Sign Up'
-				submitLabel='Register'
+				formTitle='Sign In'
+				showForgotPassword={true}
+				submitLabel='Login'
 			/>
 		</div>
 	);
 };
 
-export default reduxForm({ form: 'SignupForm' })(connect(null, { signupUser })(SignupForm));
+export default reduxForm({ form: 'LoginForm' })(connect(null, { signinUser })(LoginForm));

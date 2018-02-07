@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-import { AntFormFields, AntFormSubmit } from '../formfields/antReduxFormFields';
+import { AntFormFields, AntFormSubmit } from '../../formfields/antReduxFormFields';
 import DispatchableLogo from '../../../images/logos/dispatchabl_text_logo.png';
 
 const AuthForm = ({ handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting }) => (

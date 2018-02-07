@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import FilterField from '../formFields/FilterField';
 import RenderPanelButtons from './renderPanelButtons';
 import SelectField from '../formFields/selectField';
-import TableList from '../../app/tables/TableList';
+import TableList from '../../../../containers/subskribble/tables/TableList';
 import TogglePanelVisibility from './TogglePanelVisibility';
 const { TabPane } = Tabs;
 

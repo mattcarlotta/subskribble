@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { AntFormFields, AntFormSubmit } from '../formfields/antReduxFormFields';
+import { AntFormFields, AntFormSubmit } from '../../formfields/antReduxFormFields';
 import { sendSupportEmail } from '../../../actions/formActionCreators';
 import FIELDS from '../formfields/contactFormFields';
 

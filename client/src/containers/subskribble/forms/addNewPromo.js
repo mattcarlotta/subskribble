@@ -5,8 +5,8 @@ import { TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 
 import { addNewPromoCode } from '../../../actions/formActionCreators';
-import { isRequired } from '../formfields/validateFormFields';
-import Button from '../formfields/renderFormButton';
+import { isRequired } from '../../formfields/validateFormFields';
+import Button from '../../formfields/renderFormButton';
 
 class CreatePromoCode extends Component {
   state = { selectDiscountType: "$" };

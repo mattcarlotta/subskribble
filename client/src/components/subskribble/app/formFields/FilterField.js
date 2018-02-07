@@ -2,7 +2,7 @@ import debounce from 'lodash/debounce'
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { AntInput } from '../../../../containers/forms/formfields/antReduxFormFields';
+import { AntInput } from '../../../../containers/formfields/antReduxFormFields';
 import IconButton from '../buttons/iconButton';
 
 class FilterField extends Component {
