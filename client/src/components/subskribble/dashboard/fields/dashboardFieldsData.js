@@ -22,7 +22,7 @@ export const OVERVIEWROWS = [
 
 export const CUSTOMERBUTTONS = [
   {
-    className: 'btn-reposition f-r',
+    className: 'f-r',
     label: "Add Customer",
     onClickAction: () => browserHistory.push('/rocketboard/customers/add-customer')
   },
@@ -30,7 +30,7 @@ export const CUSTOMERBUTTONS = [
 
 export const PLANBUTTONS = [
   {
-    className: 'btn-reposition f-r',
+    className: 'f-r',
     label: "Add Plan",
     onClickAction: () => browserHistory.push('/rocketboard/plans/add-plan')
   },

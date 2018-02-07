@@ -6,7 +6,7 @@ export default [
   },
   {
     icon: "people_outline",
-    link: "customers",
+    link: "subscribers",
     tooltip: "Subscribers"
   },
   {

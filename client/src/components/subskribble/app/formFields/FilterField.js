@@ -2,47 +2,43 @@ import debounce from 'lodash/debounce'
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-material-ui';
-import IconButton from 'material-ui/IconButton';
-import Clear from 'material-ui/svg-icons/content/remove-circle';
+import { AntInput } from '../../../../containers/formfields/antReduxFormFields';
+import IconButton from '../buttons/iconButton';
 
 class FilterField extends Component {
   state = { filterField: '' }
 
   logInput = debounce(value => { this.setState({ filterField: value }) }, 300)
 
-  resetField = () => this.setState({ filterField: '' });
+  handleResetField = () => {
+    this.props.reset();
+    this.setState({ filterField: '' });
+  }
 
   handleFormChange = event => this.logInput(event.target.value);
 
   render() {
-    const { className, floatingLabelText, reset } = this.props;
+    const { placeholder } = this.props;
     return (
-      <form className={className} onChange={this.handleFormChange}>
-        <div className="filter-container">
-          <div className='form-95'>
+      <form className="filter-container" onChange={this.handleFormChange}>
+        <div>
+          <div className='form-90'>
             <Field
               name="filter"
-              component={TextField}
-              floatingLabelText={floatingLabelText}
+              component={AntInput}
+              placeholder={placeholder}
               ref="filter"
-              withRef
-              style={{ width: '100%' }}
             />
           </div>
           <div className="form-05">
             {this.state.filterField.length > 0 &&
               <IconButton
-                iconStyle={{ width: 20, height: 20, color: '#0585bf' }}
-                style={{ width: 40, height: 40 }}
-                onClick={() => {
-                  reset();
-                  this.resetField();
-                }}
-                tooltip="Clear Filter"
-                >
-                  <Clear />
-              </IconButton>
+                className="reset-field"
+                icon="clear"
+                iconClassName="reset-field-icon"
+                onClickAction={this.handleResetField}
+                tooltip="Reset Filter"
+              />
             }
           </div>
         </div>

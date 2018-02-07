@@ -66,6 +66,14 @@
   }
 }
 
+.nav-button-icon {
+  @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
+  @include c($lightgrey);
+  @include f-s(22px);
+  top: 4px;
+  right: 26.5px;
+}
+
 .panel-button {
   @include c($darkwarmgrey);
   @include h(25px);
@@ -85,4 +93,43 @@
     @include c($lightblue);
     @include b-c($transparent);
   }
+}
+
+.reset-field {
+  @extend %p-r;
+  @include c($darkwarmgrey);
+  @include h(32px);
+  @include w(32px);
+  top: 3px;
+  border: 0;
+
+  i {
+    @extend %p-r;
+    right: 12px;
+  }
+
+  &:hover {
+    i { @include c($lightblue); }
+    @include b-c($transparent);
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    @include b-c($transparent);
+  }
+
+  // &:hover, &:focus {
+  //   // @extend %bs-none;
+  //   @extend %no-link-focus;
+  //
+  //
+  // }
+}
+
+.reset-field-icon {
+  @extend %d-ib, .fix-cursor, %p-r;
+  @include c($lightgrey);
+  @include f-s(22px);
+  top: 2px;
+  padding-left: 1px;
 }

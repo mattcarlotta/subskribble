@@ -5,12 +5,12 @@
 %brk-ww {word-wrap: break-word;}
 %bs-bb {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
 %bs-none {box-shadow: none !important}
-%col-1{@extend %m-h-1, %p-r; @include w(8);}
-%col-2 {@extend %m-h-1, %p-r; @include w(10);}
-%col-3 {@extend %m-h-1, %p-r; @include w(25);}
-%col-4 {@extend %m-h-1, %p-r; @include w(33);}
-%col-6 {@extend %m-h-1, %p-r; @include w(50);}
-%col-12 {@extend %m-h-1, %p-r; @include w(100);}
+%col-1{@extend %m-h-1, %p-r; @include w(8%);}
+%col-2 {@extend %m-h-1, %p-r; @include w(10%);}
+%col-3 {@extend %m-h-1, %p-r; @include w(25%);}
+%col-4 {@extend %m-h-1, %p-r; @include w(33%);}
+%col-6 {@extend %m-h-1, %p-r; @include w(50%);}
+%col-12 {@extend %m-h-1, %p-r; @include w(100%);}
 %container-1200 {@extend %m-0-a, %p-r; @include w(1200px);}
 %d-b {display: block;}
 %d-i {display: inline;}

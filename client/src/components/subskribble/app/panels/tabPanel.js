@@ -1,14 +1,14 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Tabs } from 'antd';
-// import FilterField from '../../app/formFields/FilterField';
+import FilterField from '../formFields/FilterField';
 import RenderPanelButtons from './renderPanelButtons';
-// import SelectField from '../../app/formFields/selectField';
-// import TableList from '../../app/tables/TableList';
+import SelectField from '../formFields/selectField';
+import TableList from '../../../../containers/subskribble/tables/TableList';
 import TogglePanelVisibility from './TogglePanelVisibility';
 const { TabPane } = Tabs;
 
-const TabPanel = ({buttonPanel, CARDS, selectFieldClassName, TABS, visible }) => (
+const TabPanel = ({buttonPanel, CARDS, selectFieldClassName, visible }) => (
   <div className="panel-container">
     <Tabs
       className="tabs-container"
@@ -25,18 +25,22 @@ const TabPanel = ({buttonPanel, CARDS, selectFieldClassName, TABS, visible }) =>
         TABLECONTENTS,
         TAB,
         TABLEHEADERS
-        }, key) => (
+        }) => (
           <TabPane tab={TAB} key={TAB}>
             <div style={{ display: visible ? "" : "none" }} className="panel-body-container">
               { CARDBODY && <CARDBODY /> }
               <div className="panel-body">
-                {/* { SELECTFIELDITEMS && <SelectField className={selectFieldClassName} floatingLabelText="Sort By" MENUITEMS={SELECTFIELDITEMS} /> } */}
-                <div className="panel-6">
-                  { CUSTOMBUTTONS && <RenderPanelButtons CUSTOMBUTTONS={CUSTOMBUTTONS}/> }
+                <div className="ant-row">
+                  <div className="ant-col-6">
+                    { SELECTFIELDITEMS && <SelectField placeholder="Sort By" OPTIONS={SELECTFIELDITEMS} /> }
+                  </div>
+                  <div className="ant-col-6 f-r">
+                    { CUSTOMBUTTONS && <RenderPanelButtons CUSTOMBUTTONS={CUSTOMBUTTONS}/> }
+                    { FILTERFORM && <FilterField placeholder={FILTERFIELDLABEL} form={FILTERFORM} /> }
+                  </div>
                 </div>
                 { GRAPH && GRAPH }
-                {/* { FILTERFORM && <FilterField className="panel-4" floatingLabelText={FILTERFIELDLABEL} form={FILTERFORM} /> } */}
-                {/* { TABLECONTENTS && <TableList TABLECONTENTS={TABLECONTENTS} TABLEHEADERS={TABLEHEADERS} /> } */}
+                { TABLECONTENTS && <TableList TABLECONTENTS={TABLECONTENTS} TABLEHEADERS={TABLEHEADERS} /> }
               </div>
             </div>
           </TabPane>
