@@ -1,50 +1,49 @@
+import map from 'lodash/map';
 import React, { PureComponent } from 'react';
 import { Button, Divider, Dropdown, Icon, Menu } from 'antd';
 const { Item: MenuItem } = Menu;
+const OPTIONS = ["Refund", "Message", "Report"]
 
 export default class TableActions extends PureComponent {
-  handleDelete = record => {
-    console.log('delete this record', record);
+  handleDelete = e => {
+    const { userid } = e.target.dataset;
+    console.log(`requested to delete this record: ${userid}`);
   }
 
-  handleSelectOption = (key, record) => {
-    console.log(`handle this ${key}`, record);
+  handleSelectOption = ({key, item: {props}}) => {
+    const { id } = props;
+    console.log(`requested a ${key} to ${id}`);
   }
 
-  handleStatusUpdate = record => {
-    const { status, subscriber } = record;
-    const newStatus = (status === "inactive" || status === "suspended") ? "active" : "suspended"
-    console.log(`update ${subscriber}'s status from ${status} to ${newStatus}`, record);
+  handleStatusUpdate = e => {
+    const { userid } = e.target.dataset;
+    console.log(`requested update to ${userid}'s status`);
   }
 
-  renderMoreActions = record => (
-    <Menu onClick={({key}) => this.handleSelectOption(key, record) }>
-      <MenuItem key="Refund">
-        Refund
-      </MenuItem>
-      <MenuItem key="Message">
-        Message
-      </MenuItem>
-      <MenuItem key="Report">
-        Report
-      </MenuItem>
+  renderMoreActions = id => (
+    <Menu onClick={elem => this.handleSelectOption(elem) }>
+      {map(OPTIONS, option => (
+        <MenuItem id={id} key={option}>
+          {option}
+        </MenuItem>
+      ))}
     </Menu>
   )
 
   render() {
-    const { record } = this.props;
+    const { id, status } = this.props.record;
     return (
       <span>
-        { record.status
-          ? record.status === "inactive" || record.status === "suspended"
-            ? <Button onClick={() => this.handleStatusUpdate(record)}>Activate</Button>
-            : <Button onClick={() => this.handleStatusUpdate(record)}>Suspend</Button>
+        { status
+          ? status === "inactive" || status === "suspended"
+            ? <Button data-userid={id} onClick={this.handleStatusUpdate}>Activate</Button>
+            : <Button data-userid={id} onClick={this.handleStatusUpdate}>Suspend</Button>
           : null
         }
         <Divider type="vertical" />
-        <Button onClick={() => this.handleDelete(record)}>Delete</Button>
+        <Button data-userid={id} onClick={this.handleDelete}>Delete</Button>
         <Divider type="vertical" />
-        <Dropdown overlay={this.renderMoreActions(record)} trigger={['click']}>
+        <Dropdown overlay={this.renderMoreActions(id)} trigger={['click']}>
           <Button>
             More Actions <Icon type="down" />
           </Button>

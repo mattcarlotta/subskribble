@@ -15,7 +15,7 @@ class TableList extends Component {
               title: 'Actions',
               key: 'action',
               width: 365,
-              render: (record) => <TableActions record={record} />
+              render: record => <TableActions record={record} />
             }
           ]}
           dataSource={TABLECONTENTS}
