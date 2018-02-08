@@ -4,7 +4,7 @@ import TabPanel from '../../app/panels/tabPanel';
 import CARDS from '../layouts/panelCards';
 import OverviewLayout from '../layouts/overviewLayout';
 
-const DashboardPanels = () => [
+export default () => [
   <BasicPanel
     key="overviewpanel"
     containerClassName="active-panel"
@@ -16,6 +16,4 @@ const DashboardPanels = () => [
     CARDS={CARDS}
     selectFieldClassName="panel-6"
   />
-]
-
-export default DashboardPanels;
+];

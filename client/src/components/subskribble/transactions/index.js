@@ -1,5 +1,4 @@
-import React from 'react';
 import TransactionsPanels from './panels/transactionsPanels';
-import PanelsContainer from '../app/panels/panelsContainer';
+import PageContainer from '../app/panels/pageContainer';
 
-export default function() { return <PanelsContainer Panels={TransactionsPanels} /> }
+export default PageContainer(TransactionsPanels);

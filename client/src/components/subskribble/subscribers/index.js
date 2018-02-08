@@ -1,5 +1,4 @@
-import React from 'react';
 import SubscriptionsPanels from './panels/subscriptionsPanels';
-import PanelsContainer from '../app/panels/panelsContainer';
+import PageContainer from '../app/panels/pageContainer';
 
-export default function() { return <PanelsContainer Panels={SubscriptionsPanels} />  }
+export default PageContainer(SubscriptionsPanels);
