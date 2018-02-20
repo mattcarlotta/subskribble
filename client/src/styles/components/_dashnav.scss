@@ -76,6 +76,7 @@
 
 .drawer-content, .drawer-menu-container {
   @include b-c($blackblue);
+  overflow: hidden;
 }
 
 .drawer-content-wrapper {

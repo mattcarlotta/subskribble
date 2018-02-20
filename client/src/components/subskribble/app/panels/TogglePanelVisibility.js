@@ -9,22 +9,17 @@ export default WrappedComponent => {
 
     buttonPanel = (visible) => (
       <Button className="panel-button" onClick={this.switchVisibility}>
-      { visible
-        ? <i className="material-icons">remove</i>
-        : <i className="material-icons">add</i>
-      }
+        <i className="material-icons">{ visible ? "remove" : "add" }</i>
       </Button>
     )
-    
-    render() {
-      return (
-        <WrappedComponent
-          {...this.props}
-          buttonPanel={this.buttonPanel}
-          visible={this.state.visible}
-        />
-      )
-    }
+
+    render = () => (
+      <WrappedComponent
+        {...this.props}
+        buttonPanel={this.buttonPanel}
+        visible={this.state.visible}
+      />
+    )
   }
   return TogglePanelVisibility;
 }

@@ -20,7 +20,7 @@ class AddNewForm extends Component {
 		console.log(formProps);
 	}
 
-  render() {
+  render = () => {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <div className="new-form-container">

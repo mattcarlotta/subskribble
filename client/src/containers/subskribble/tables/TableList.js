@@ -4,7 +4,7 @@ import TableActions from '../../../components/subskribble/app/tables/TableAction
 
 class TableList extends Component {
   //TODO: AJAX request to retrieve TABLECONTENTS
-  render() {
+  render = () => {
     const { TABLECONTENTS, TABLEHEADERS } = this.props;
     return (
       <div className="table-container">

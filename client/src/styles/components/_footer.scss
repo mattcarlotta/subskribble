@@ -19,8 +19,9 @@
       padding: 15px 75px;
 
       .footer-grid-4 {
-        @extend %rt-grid-4;
-        @include c($lightwarmgrey)
+        @include c($lightwarmgrey);
+        @include h(100%);
+        @include w(400px);
 
         .nav-logo {
           @extend %d-b;
@@ -29,7 +30,8 @@
       }
 
       .footer-grid-8 {
-        @extend %rt-grid-8;
+        @extend %d-i, %m-0, %p-r;
+        @include w(800px);
 
         .footer-float-right {
           @extend .f-r;

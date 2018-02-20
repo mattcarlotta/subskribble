@@ -18,12 +18,10 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 const history = syncHistoryWithStore(browserHistory, store);
 
 // APP CONFIG'D WITH REDUX STORE, BROWSERHISTORY AND APP VIEWS
-export default function() {
-	return (
-		<LocaleProvider locale={enUS}>
-			<Provider store={store}>
-				<Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={views} />
-			</Provider>
-		</LocaleProvider>
-	);
-};
+export default () => (
+	<LocaleProvider locale={enUS}>
+		<Provider store={store}>
+			<Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={views} />
+		</Provider>
+	</LocaleProvider>
+)
