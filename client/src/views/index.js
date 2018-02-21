@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/app';
@@ -29,7 +29,7 @@ import Tutorials from '../components/subskribble/tutorials';
 
 // CONFIG APP ROUTE VIEWS
 export const views = (
-	<div>
+	<Fragment>
 		<Redirect from="/" to="/subskribble" />
 		<Route path="/subskribble" component={DashWrapper(App)}>
 			<IndexRoute component={Landing} />
@@ -49,24 +49,6 @@ export const views = (
 			<Route path="transactions" component={Transactions} />
 			<Route path="tutorials" component={Tutorials} />
 		</Route>
-
-
-		{/*<Route path="/rocketboard" component={DashWrapper(App)}>
-			 <Route path="campaigns" component={Campaigns} />
-
-
-			<Route path="dashboard" component={Dashboard} />
-
-
-
-			<Route path="messages" component={Messages} />
-
-			<Route path="profile" component={Profile} />
-			<Route path="settings" component={Settings} />
-			<Route path="subscriptions" component={Subscriptions} />
-
-		</Route>*/}
-
 		<Route path="*" component={NotFound} />
-	</div>
+	</Fragment>
 );

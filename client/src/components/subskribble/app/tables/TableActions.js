@@ -30,32 +30,28 @@ export default class TableActions extends PureComponent {
     </Menu>
   )
 
-  render() {
+  render = () => {
     const { id, status, type } = this.props.record;
+    const statusButton = (status === "inactive" || status === "suspended") ? "Activate" : "Suspend";
     return (
       <Fragment>
         { status
-          ? status === "inactive" || status === "suspended"
-            ? [
-              <Button key="activate-button" data-userid={id} onClick={this.handleStatusUpdate}>Activate</Button>,
-              <Divider key="divider1" type="vertical" />
-            ]
-            : [
-              <Button key="suspend-button" data-userid={id} onClick={this.handleStatusUpdate}>Suspend</Button>,
-              <Divider key="divider1" type="vertical" />
-            ]
+          ? <Fragment>
+              <Button data-userid={id} onClick={this.handleStatusUpdate}>{statusButton}</Button>
+              <Divider type="vertical" />
+            </Fragment>
           : null
         }
         <Button data-userid={id} onClick={this.handleDelete}>Delete</Button>
         { !type
-          ? [
-              <Divider key="divider2" type="vertical" />,
-              <Dropdown key="more-actions" overlay={this.renderMoreActions(id)} trigger={['click']}>
+          ? <Fragment>
+              <Divider type="vertical" />
+              <Dropdown overlay={this.renderMoreActions(id)} trigger={['click']}>
                 <Button>
                   More Actions <Icon type="down" />
                 </Button>
               </Dropdown>
-            ]
+            </Fragment>
           : null
         }
       </Fragment>

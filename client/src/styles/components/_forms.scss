@@ -125,7 +125,7 @@
       .review-signup-container {
         min-height: 450px;
 
-        h1,h2,h3,p { @include f-f(poppinslight);}
+        h1,h2,h3,p { @include f-f($poppinsregular);}
         h2 { @include f-s(24px); }
         i { @include c($lightblue); @include f-s(22px); }
 

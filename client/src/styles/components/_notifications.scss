@@ -42,7 +42,7 @@
     @include w(20px);
   }
 
-  .hidden { display: none; }
+  .hidden { @extend %d-n; }
 
   .date {
     @include c($darkwarmgrey);

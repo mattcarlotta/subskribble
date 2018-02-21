@@ -17,34 +17,31 @@ class FilterField extends Component {
 
   handleFormChange = event => this.logInput(event.target.value);
 
-  render() {
-    const { placeholder } = this.props;
-    return (
-      <form className="filter-container" onChange={this.handleFormChange}>
-        <div>
-          <div className='form-90'>
-            <Field
-              name="filter"
-              component={AntInput}
-              placeholder={placeholder}
-              ref="filter"
-            />
-          </div>
-          <div className="form-05">
-            {this.state.filterField.length > 0 &&
-              <IconButton
-                className="reset-field"
-                icon="clear"
-                iconClassName="reset-field-icon"
-                onClickAction={this.handleResetField}
-                tooltip="Reset Filter"
-              />
-            }
-          </div>
+  render = () => (
+    <form className="filter-container" onChange={this.handleFormChange}>
+      <div>
+        <div className='form-90'>
+          <Field
+            name="filter"
+            component={AntInput}
+            placeholder={this.props.placeholder}
+            ref="filter"
+          />
         </div>
-      </form>
-    );
-  }
+        <div className="form-05">
+          {this.state.filterField.length > 0 &&
+            <IconButton
+              className="reset-field"
+              icon="clear"
+              iconClassName="reset-field-icon"
+              onClickAction={this.handleResetField}
+              tooltip="Reset Filter"
+            />
+          }
+        </div>
+      </div>
+    </form>
+  )
 }
 
 export default FilterField = reduxForm({})(FilterField);

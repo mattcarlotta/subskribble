@@ -30,16 +30,13 @@ class SideBar extends Component {
     this.handleMenuToggle();
   }
 
-  handleMenuButton = (icon) => {
-    const tooltip = (icon === "menu") ? "Menu" : "";
-    return (
-      <NavButton
-        icon={icon}
-        onClickAction={this.handleMenuToggle}
-        tooltip={tooltip}
-      />
-    )
-  }
+  handleMenuButton = (icon) => (
+    <NavButton
+      icon={icon}
+      onClickAction={this.handleMenuToggle}
+      tooltip={(icon === "menu") ? "Menu" : ""}
+    />
+  )
 
   render() {
     const { openSideNav, selectedKey } = this.state;
@@ -51,7 +48,7 @@ class SideBar extends Component {
           open={openSideNav}
           onMaskClick={this.handleMenuToggle}
           iconChild={false}
-          width="265px"
+          width="270px"
         >
           <div className="drawer-menu-header">
             <LeftNav onClickAction={this.handleMenuToggle} />
