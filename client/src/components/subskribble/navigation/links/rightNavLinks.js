@@ -2,16 +2,16 @@ export default [
   {
     icon: 'person_outline',
     label: 'My Profile',
-    link: '/rocketboard/profile'
+    link: '/subskribble/profile'
   },
   {
     icon: 'mail_outline',
     label: 'Messages',
-    link: '/rocketboard/messages'
+    link: '/subskribble/messages'
   },
   {
     icon: 'settings',
     label: 'Settings',
-    link: '/rocketboard/settings'
+    link: '/subskribble/settings'
   },
 ]
