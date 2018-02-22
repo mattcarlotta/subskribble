@@ -10,7 +10,6 @@ import FAQs from '../components/subskribble/faqs';
 import Forms from '../components/subskribble/forms';
 import ForgotPassword from '../containers/website/forms/resetpasswordForm';
 // import Home from '../components/website/home';
-import Invoices from '../components/subskribble/invoices';
 import Landing from '../components/subskribble/app';
 import LogIn from '../containers/website/forms/loginForm';
 import NotFound from '../components/app/notfound/404';
@@ -39,10 +38,9 @@ export const views = (
 			<Route path="faqs" component={FAQs} />
 			<Route path="forgot-password" component={ForgotPassword} />
 			<Route path="forms" component={Forms}/>
-			<Route path="invoices" component={Invoices} />
 			<Route path="login" component={LogIn} />
 			<Route path="plans" component={Plans} />
-			<Route path="promos" component={Promos} />
+			<Route path="promotionals" component={Promos} />
 			<Route path="signup" component={SignUp} />
 			<Route path="subscribers" component={Subscribers} />
 			<Route path="templates" component={Templates} />

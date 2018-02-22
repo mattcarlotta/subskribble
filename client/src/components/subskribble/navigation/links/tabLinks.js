@@ -13,12 +13,8 @@ export default [
   },
   {
     dividerLabel: 'Accounting',
-    icon: 'assessment',
-    label: 'invoices',
-  },
-  {
     icon: 'new_releases',
-    label: 'promos',
+    label: 'promotionals',
   },
   {
     icon: 'payment',

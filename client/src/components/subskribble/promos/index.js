@@ -1,7 +1,4 @@
-import React from 'react';
-// import CampaignsPanels from './panels/campaignsPanels';
-// import PanelsContainer from '../app/panels/panelsContainer';
+import PromosPanels from './panels/promosPanels';
+import PageContainer from '../app/panels/pageContainer';
 
-export default function() { return <div>Promos</div> }
-
-//<PanelsContainer Panels={CampaignsPanels} />
+export default PageContainer(PromosPanels);

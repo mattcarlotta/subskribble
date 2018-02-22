@@ -75,6 +75,15 @@
   padding: 4px 41px;
 }
 
+.max-usage {
+  @extend .label, %t-a-c;
+  @include c($white);
+  @include b-c($darkyellow);
+  @include f-w(500);
+  padding: 4px 10px 3px;
+  margin-left: 12px;
+}
+
 .paid {
   @extend %t-t-c;
   @include c($limegreen);
@@ -109,4 +118,13 @@
 
 .table-status-action {
   @extend %t-t-c;
+}
+
+.total-usage {
+  @extend .label, %t-a-c;
+  @include c($white);
+  @include b-c($lightblue);
+  @include f-w(500);
+  padding: 4px 10px 3px;
+  margin-left: 18px;
 }

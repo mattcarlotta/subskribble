@@ -3,7 +3,7 @@ import { Button, Popconfirm } from 'antd';
 
 export default class DeleteItem extends Component {
   handleDelete = () => {
-    console.log(`requested to delete this record: ${this.props.userid}`);
+    console.log(`requested to delete this record: ${this.props.id}`);
   }
 
   render = () => (

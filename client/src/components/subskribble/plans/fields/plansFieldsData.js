@@ -4,7 +4,7 @@ export const ACTIVEPLANS = [
   {
     key: '1',
     id: 'EvJdcd234534dsdf322f2',
-    name: 'Carlotta Prime',
+    planName: 'Carlotta Prime',
     amount: '$29.99',
     setupFee: '$0.00',
     billEvery: '30 days',
@@ -17,7 +17,7 @@ export const INACTIVEPLANS = [
   {
     key: '1',
     id: 'FDedfsdf158sfd255sdf1',
-    name: 'Carlotta Digital Advertisements',
+    planName: 'Carlotta Digital Advertisements',
     amount: '$79.99',
     setupFee: '$9.99',
     billEvery: '30 days',
@@ -27,7 +27,7 @@ export const INACTIVEPLANS = [
 ]
 
 export const TABLEHEADERS = [
-  {title: 'Name', dataIndex: 'name'},
+  {title: 'Name', dataIndex: 'planName'},
   {title: 'Amount', dataIndex: 'amount'},
   {title: 'Setup Fee', dataIndex: 'setupFee'},
   {title: 'Bill Every', dataIndex: 'billEvery'},

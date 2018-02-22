@@ -1,7 +1,4 @@
-import React from 'react';
-// import TemplatesPanels from './panels/templatesPanels';
-// import PanelsContainer from '../app/panels/panelsContainer';
+import TemplatesPanels from './panels/templatesPanels';
+import PageContainer from '../app/panels/pageContainer';
 
-export default function() { return <div>Templates</div> }
-
-//<PanelsContainer Panels={TemplatesPanels} />
+export default PageContainer(TemplatesPanels);
