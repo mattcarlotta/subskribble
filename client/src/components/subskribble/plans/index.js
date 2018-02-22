@@ -1,7 +1,4 @@
-import React from 'react';
-// import PlansPanels from './panels/plansPanels';
-// import PanelsContainer from '../app/panels/panelsContainer';
+import PlansPanels from './panels/plansPanels';
+import PageContainer from '../app/panels/pageContainer';
 
-export default function() { return <div>Plans</div> }
-
-// export default function() { return <PanelsContainer Panels={PlansPanels} /> }
+export default PageContainer(PlansPanels);

@@ -1,23 +1,15 @@
 import map from 'lodash/map';
 import React, { PureComponent, Fragment } from 'react';
 import { Button, Divider, Dropdown, Icon, Menu } from 'antd';
+import DeleteItem from './DeleteItem';
+import UpdateSubscriberStatus from './UpdateSubscriberStatus'
 const { Item: MenuItem } = Menu;
 const OPTIONS = ["Refund", "Message", "Report"]
 
 export default class TableActions extends PureComponent {
-  handleDelete = e => {
-    const { userid } = e.target.dataset;
-    console.log(`requested to delete this record: ${userid}`);
-  }
-
   handleSelectOption = ({key, item: {props}}) => {
     const { id } = props;
     console.log(`requested a ${key} to ${id}`);
-  }
-
-  handleStatusUpdate = e => {
-    const { userid } = e.target.dataset;
-    console.log(`requested update to ${userid}'s status`);
   }
 
   renderMoreActions = id => (
@@ -31,19 +23,16 @@ export default class TableActions extends PureComponent {
   )
 
   render = () => {
-    const { id, status, type } = this.props.record;
-    const statusButton = (status === "inactive" || status === "suspended") ? "Activate" : "Suspend";
+    const { billEvery, id, invoice, status, type } = this.props.record;
+    const statusButton = (status === "inactive" || status === "suspended") ? "activate" : "suspend";
     return (
       <Fragment>
-        { status
-          ? <Fragment>
-              <Button data-userid={id} onClick={this.handleStatusUpdate}>{statusButton}</Button>
-              <Divider type="vertical" />
-            </Fragment>
+        { status && !invoice
+          ? <UpdateSubscriberStatus userid={id} statusButton={statusButton} />
           : null
         }
-        <Button data-userid={id} onClick={this.handleDelete}>Delete</Button>
-        { !type
+        <DeleteItem userid={id} />
+        { !type && !billEvery
           ? <Fragment>
               <Divider type="vertical" />
               <Dropdown overlay={this.renderMoreActions(id)} trigger={['click']}>

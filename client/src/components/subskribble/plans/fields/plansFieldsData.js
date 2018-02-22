@@ -1,56 +1,36 @@
-import { browserHistory } from 'react-router';
+import React from 'react';
 
 export const ACTIVEPLANS = [
   {
+    key: '1',
+    id: 'EvJdcd234534dsdf322f2',
     name: 'Carlotta Prime',
     amount: '$29.99',
     setupFee: '$0.00',
-    billEvery: '30 day(s)',
-    trialPeriod: '7 day(s)',
-    subs: '92'
+    billEvery: '30 days',
+    trialPeriod: '7 days',
+    subscribers: '92'
   }
 ];
 
 export const INACTIVEPLANS = [
   {
+    key: '1',
+    id: 'FDedfsdf158sfd255sdf1',
     name: 'Carlotta Digital Advertisements',
     amount: '$79.99',
     setupFee: '$9.99',
-    billEvery: '30 day(s)',
-    trialPeriod: '30 day(s)',
-    subs: '30'
+    billEvery: '30 days',
+    trialPeriod: '30 days',
+    subscribers: '30'
   }
 ]
 
-export const ACTIVEPANELBUTTONS = [
-  {
-    className: 'btn-reposition f-l',
-    label: "Add Plan",
-    onClickAction: () => browserHistory.push('/rocketboard/plans/add-plan')
-  },
-  {
-    className: 'btn-reposition f-l',
-    label: "Suspend Plan",
-    onClickAction: () => browserHistory.push('/rocketboard/plans/suspend-plan')
-  },
-  {
-    className: 'btn-reposition f-l',
-    label: "View Plan",
-    onClickAction: () => browserHistory.push('/rocketboard/plans/view-plan')
-  }
-]
-
-export const INACTIVEPANELBUTTONS = [
-  {
-    className: 'btn-reposition f-l',
-    label: "Remove Plan",
-    onClickAction: () => browserHistory.push('/rocketboard/plans/remove-plan')
-  },
-  {
-    className: 'btn-reposition f-l',
-    label: "View Plan",
-    onClickAction: () => browserHistory.push('/rocketboard/plans/view-plan')
-  }
-]
-
-export const TABLEHEADERS = ['Name', 'Amount', 'Setup Fee', 'Bill Every', 'Trial Period', 'Subscribers'];
+export const TABLEHEADERS = [
+  {title: 'Name', dataIndex: 'name'},
+  {title: 'Amount', dataIndex: 'amount'},
+  {title: 'Setup Fee', dataIndex: 'setupFee'},
+  {title: 'Bill Every', dataIndex: 'billEvery'},
+  {title: 'Trial Period', dataIndex: 'trialPeriod'},
+  {title: 'Subscribers', dataIndex: 'subscribers', render: subscribers => <span className="subscription-count">{subscribers}</span>}
+];

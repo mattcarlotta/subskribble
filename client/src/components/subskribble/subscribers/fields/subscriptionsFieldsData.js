@@ -127,29 +127,10 @@ export const INACTIVESUBSCRIPTIONS = [
 ]
 
 export const TABLEHEADERS = [
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: status => <span className={`label ${status}`}> {status}</span>
-  },
-  {
-    title: 'Subscriber',
-    dataIndex: 'subscriber'
-  },
-  {
-    title: 'Plan',
-    dataIndex: 'plan'
-  },
-  {
-    title: 'Start Date',
-    dataIndex: 'startDate'
-  },
-  {
-    title: 'End Date',
-    dataIndex: 'endDate'
-  },
-  {
-    title: 'Amount',
-    dataIndex: 'amount'
-  }
+  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
+  { title: 'Subscriber', dataIndex: 'subscriber' },
+  { title: 'Plan', dataIndex: 'plan' },
+  { title: 'Start Date', dataIndex: 'startDate' },
+  { title: 'End Date', dataIndex: 'endDate' },
+  { title: 'Amount', dataIndex: 'amount' }
 ];

@@ -19,7 +19,7 @@ export default [
   {
     icon: 'new_releases',
     label: 'promos',
-  },  
+  },
   {
     icon: 'payment',
     label: 'transactions',

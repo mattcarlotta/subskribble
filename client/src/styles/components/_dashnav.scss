@@ -1,6 +1,6 @@
-.ant-popover-arrow, .ant-popover-inner {
-  margin-top: -4px;
-}
+.ant-menu-inline .ant-menu-item-selected:after { right: 268px; }
+
+.ant-popover-arrow, .ant-popover-inner { margin-top: -4px; }
 
 .dash-nav-container {
   @include b-c($blackblue);
@@ -102,7 +102,7 @@
       padding-left: 20px !important;
 
       &:hover {
-        @include c($lightwhite);
+        @include c($white);
         @include b-c($hoverblue);
       }
     }
@@ -113,10 +113,10 @@
   }
 
   .ant-menu-item-selected {
-    @include b-c($transparent !important);
+    @include b-c($thoverblue !important);
 
     &:hover {
-      @include c($blue);
+      @include c($blue !important);
     }
   }
 
@@ -168,26 +168,20 @@
 }
 
 .drawer-menu-header {
-  @include b-c($white);
+  @include b-c($blackblue);
+  border-bottom: 1px solid $tlightgrey;
   margin-bottom: 10px;
 
-  .logo-container:hover {
-    @include b-c($transparent);
-  }
+  .logo-container:hover { @include b-c($transparent); }
 
   .nav-button {
-    @include b-c($transparent);
-    i { @include c($inactiveblue); }
+    @include b-c($blackblue);
+    i { @include c($white); }
 
-    &:hover {
-      i {@include c($blue);}
-    }
+    &:hover { i {@include c($blue);} }
   }
 
-  .icon-logo, .text-logo {
-    @include c($blue);
-  }
-
+  .icon-logo, .text-logo { @include c($white); }
 }
 
 .user-header {
