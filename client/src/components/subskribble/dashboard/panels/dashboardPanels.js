@@ -1,19 +1,19 @@
 import React from 'react';
 import BasicPanel from '../../app/panels/basicPanel';
 import TabPanel from '../../app/panels/tabPanel';
-import CARDS from '../layouts/panelCards';
-import OverviewLayout from '../layouts/overviewLayout';
+import { DashboardTabPanels, DashboardOverview } from '../layouts/panelCards';
+
 
 export default () => [
   <BasicPanel
     key="overviewpanel"
     containerClassName="active-panel"
     title="Overview"
-    CARDBODY={OverviewLayout}
+    CARDS={DashboardOverview}
   />,
   <TabPanel
     key="customers-plans-panel"
-    CARDS={CARDS}
+    CARDS={DashboardTabPanels}
     selectFieldClassName="panel-6"
   />
 ];
