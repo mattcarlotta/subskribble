@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import { Button, Checkbox, DatePicker, Form, Icon, Input, Radio, Select, Switch } from "antd";
 
@@ -41,16 +41,23 @@ const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
-const AntSubmitButton = ({ confirmLoading, label, onClick, pristine, submitting, style, type }) => (
+const AntSubmitButton = ({ confirmLoading, icon, label, onClick, pristine, submitting, style, type }) => (
   <Button
-    className="btn btn-primary"
+    type="primary"
     disabled={pristine || submitting}
     htmlType={type}
     loading={confirmLoading}
     onClick={onClick}
     style={{ ...style }}
   >
-    { label }
+    { icon === "left"
+      ? <Fragment>
+          <Icon type={icon} /> { label }
+        </Fragment>
+      : <Fragment>
+          { label } <Icon type={icon} />
+        </Fragment>
+    }
   </Button>
 )
 
@@ -86,12 +93,14 @@ const AntFormButtons = ({ label, pristine, reset, submitting }) => (
 const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
   <FormItem>
     <AntSubmitButton
+      icon="left"
       label={backLabel}
       onClick={onClickBack}
       style={backStyle}
     />
     <AntSubmitButton
       confirmLoading={confirmLoading}
+      icon={submitLabel === "Next" ? "right" : ""}
       label={submitLabel}
       pristine={pristine}
       style={submitStyle}
