@@ -19,6 +19,7 @@ const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => 
 
 const RegisterPlanForm = ({
   billingSwitch,
+  confirmLoading,
   handleSubmit,
   editStep,
   finished,
@@ -47,6 +48,7 @@ const RegisterPlanForm = ({
         <AntStepFormButtons
           backLabel="Back"
           backStyle={{ height: 50, float: 'left' }}
+          confirmLoading={confirmLoading}
           onClickBack={onClickBack}
           pristine={pristine}
           submitLabel={ finished ? "Subscribe" : "Next" }

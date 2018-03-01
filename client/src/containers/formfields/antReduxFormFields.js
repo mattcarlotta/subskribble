@@ -41,11 +41,12 @@ const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
-const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) => (
+const AntSubmitButton = ({ confirmLoading, label, onClick, pristine, submitting, style, type }) => (
   <Button
     className="btn btn-primary"
     disabled={pristine || submitting}
     htmlType={type}
+    loading={confirmLoading}
     onClick={onClick}
     style={{ ...style }}
   >
@@ -82,7 +83,7 @@ const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   </FormItem>
 )
 
-const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
   <FormItem>
     <AntSubmitButton
       label={backLabel}
@@ -90,6 +91,7 @@ const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submi
       style={backStyle}
     />
     <AntSubmitButton
+      confirmLoading={confirmLoading}
       label={submitLabel}
       pristine={pristine}
       style={submitStyle}

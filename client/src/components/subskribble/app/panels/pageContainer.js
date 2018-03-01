@@ -1,9 +1,3 @@
 import React from 'react';
 
-export default WrappedComponent => (
-  () => (
-    <div className="page-container">
-      <WrappedComponent />
-    </div>
-  )
-)
+export default Page => (() => (<div className="page-container"><Page /></div>))

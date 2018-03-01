@@ -24,6 +24,7 @@ class CustomerPlanSignup extends Component {
 
   handleFormSave = (formProps) => {
     console.log(formProps);
+    this.props.onFormSubmit();
     // this.props.customerRegisterToPlan(formProps);
   }
 
@@ -44,12 +45,8 @@ class CustomerPlanSignup extends Component {
   }
 
   render() {
-    const {
-      formFields,
-      stepIndex,
-      wasReviewed,
-      stepLabels
-    } = this.state;
+    const { formFields, stepIndex, wasReviewed, stepLabels } = this.state;
+    const { confirmLoading } = this.props;
     const finished = stepIndex === 3;
     return (
       <div className="customer-signup-bg">
@@ -72,6 +69,7 @@ class CustomerPlanSignup extends Component {
           </div>
           <RegisterPlanForm
             {...formFields}
+            confirmLoading={confirmLoading}
             finished={finished}
             editStep={this.editStep}
             onClickBack={ stepIndex > 0 ? this.handlePrev : null }
