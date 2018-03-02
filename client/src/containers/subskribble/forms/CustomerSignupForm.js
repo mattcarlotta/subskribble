@@ -39,6 +39,10 @@ class CustomerPlanSignup extends Component {
     })
   }
 
+  handleStepClick = key => {
+
+  }
+
   handlePrev = () => {
     const formKey = this.state.stepIndex - 1;
     this.setState({ formFields: getCustomerFormFields(formKey), stepIndex: formKey })
@@ -61,7 +65,7 @@ class CustomerPlanSignup extends Component {
                 <Step
                   className={wasReviewed ? "fix-cursor" : "" }
                   key={label}
-                  onClick={wasReviewed ? () => this.editStep(key) : undefined}
+                  onClick={wasReviewed && !confirmLoading ? () => this.editStep(key) : undefined}
                   title={label}
                 />
               ))}
@@ -71,7 +75,7 @@ class CustomerPlanSignup extends Component {
             {...formFields}
             confirmLoading={confirmLoading}
             finished={finished}
-            editStep={this.editStep}
+            editStep={!confirmLoading ? this.editStep : null}
             onClickBack={ stepIndex > 0 ? this.handlePrev : null }
             onSubmit={ finished ? this.handleFormSave : this.handleNext }
           />
