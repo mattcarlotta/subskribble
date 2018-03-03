@@ -9,10 +9,7 @@ class RenderPanelButtons extends Component {
   showModal = () => this.setState({ visible: true });
 
   handleOk = () => {
-    this.setState({
-      ModalText: 'The modal will be closed after two seconds',
-      confirmLoading: true,
-    });
+    this.setState({ confirmLoading: true });
     setTimeout(() => {
       this.setState({
         visible: false,
@@ -30,7 +27,6 @@ class RenderPanelButtons extends Component {
     return (
       <Fragment>
         <AsyncModal
-          bodyStyle={{ backgroundColor: '#F9F9FB' }}
           confirmLoading={confirmLoading}
           destroyOnClose={true}
           footer={null}
@@ -42,11 +38,10 @@ class RenderPanelButtons extends Component {
           visible={visible}
           width="90%"
         />
-        {map(CUSTOMBUTTONS, ({ className, label }, key) => (
+        {map(CUSTOMBUTTONS, (props, key) => (
           <CustomButton
+            {...props}
             key={key}
-            className={className}
-            label={label}
             onClickAction={this.showModal}
           />
         ))}

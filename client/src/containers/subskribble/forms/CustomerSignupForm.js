@@ -7,16 +7,17 @@ import RegisterPlanForm from './RegisterPlanForm';
 import { customerRegisterToPlan } from '../../../actions/formActionCreators';
 import { getCustomerFormFields } from '../../formfields/customerSignupFields';
 
+const stepLabels = [
+  { title: 'Contact Information', icon: 'mail_outline' },
+  { title: 'Payment', icon: 'payment' },
+  { title: 'Plan', icon: 'content_paste' },
+  { title: 'Review', icon: 'shopping_cart' }
+];
+
 class CustomerPlanSignup extends Component {
   state = {
     formFields: getCustomerFormFields(),
     stepIndex: 0,
-    stepLabels: [
-      { title: 'Contact Information', icon: 'mail_outline' },
-      { title: 'Payment', icon: 'payment' },
-      { title: 'Plan', icon: 'content_paste' },
-      { title: 'Review', icon: 'shopping_cart' }
-    ],
     visited: [],
     wasReviewed: false
   };
@@ -50,7 +51,7 @@ class CustomerPlanSignup extends Component {
   }
 
   render() {
-    const { formFields, stepIndex, wasReviewed, stepLabels } = this.state;
+    const { formFields, stepIndex, wasReviewed } = this.state;
     const { confirmLoading } = this.props;
     const finished = stepIndex === 3;
     return (
@@ -90,13 +91,3 @@ class CustomerPlanSignup extends Component {
 }
 
 export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);
-
-/*
-<Step
-  icon={<i className="material-icons">{icon}</i>}
-  className={wasReviewed ? "fix-cursor" : "" }
-  key={title}
-  onClick={wasReviewed && !confirmLoading ? () => this.editStep(key) : undefined}
-  title={title}
-/>
-*/

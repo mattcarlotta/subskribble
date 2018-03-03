@@ -3,36 +3,36 @@ import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isV
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 const ADDRESSFIELDS = [
-  { className: "input-75 f-l", component: AntInput, name: "contactAddress", label: "Address", style:{ width: "97%" }, validateFields: [isRequired, allowedCharacters] },
-  { className: "input-25 f-r", component: AntInput, name: "contactUnit", label: "Unit, Apt, or Suite #", style:{ width: "100%" }, },
-  { className: "input-50 f-l", component: AntInput, name: "contactCity", label: "City", style:{ width: "95%" }, validateFields: [isRequired, allowedCharacters] },
-  { className: "input-25 f-l", component: AntInput, name: "contactState", label: "State", normalize: formatState, style:{ width: "90%" }, validateFields: [isRequired, isValidState] },
-  { className: "input-25 f-r", component: AntInput, name: "contactZip", label: "Zip Code", normalize: formatZip, style:{ width: "90%" }, validateFields: [isRequired]},
+  { className: "input-75 f-l", component: AntInput, name: "contactAddress", placeholder: "Address", style:{ width: "97%" }, validate: [isRequired, allowedCharacters] },
+  { className: "input-25 f-r", component: AntInput, name: "contactUnit", placeholder: "Unit, Apt, or Suite #", style:{ width: "100%" }, },
+  { className: "input-50 f-l", component: AntInput, name: "contactCity", placeholder: "City", style:{ width: "95%" }, validate: [isRequired, allowedCharacters] },
+  { className: "input-25 f-l", component: AntInput, name: "contactState", placeholder: "State", normalize: formatState, style:{ width: "90%" }, validate: [isRequired, isValidState] },
+  { className: "input-25 f-r", component: AntInput, name: "contactZip", placeholder: "Zip Code", normalize: formatZip, style:{ width: "90%" }, validate: [isRequired]},
 ]
 
 const BILLINGADDRESSFIELDS = [
-  { className: "input-75 f-l", component: AntInput, name: "billingAddress", label: "Address", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
-  { className: "input-25 f-r", component: AntInput, name: "billingUnit", label: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
-  { className: "input-50 f-l", component: AntInput, name: "billingCity", label: "City", style:{ width: "95%" }, type: "text", validateFields: [isRequired, allowedCharacters] },
-  { className: "input-25 f-l", component: AntInput, name: "billingState", label: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidState] },
-  { className: "input-25 f-r", component: AntInput, name: "billingZip", label: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validateFields: [isRequired]},
+  { className: "input-75 f-l", component: AntInput, name: "billingAddress", placeholder: "Address", style:{ width: "95%" }, type: "text", validate: [isRequired, allowedCharacters] },
+  { className: "input-25 f-r", component: AntInput, name: "billingUnit", placeholder: "Unit, Apt, or Suite #", type: "text", style:{ width: "100%" }, },
+  { className: "input-50 f-l", component: AntInput, name: "billingCity", placeholder: "City", style:{ width: "95%" }, type: "text", validate: [isRequired, allowedCharacters] },
+  { className: "input-25 f-l", component: AntInput, name: "billingState", placeholder: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validate: [isRequired, isValidState] },
+  { className: "input-25 f-r", component: AntInput, name: "billingZip", placeholder: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validate: [isRequired]},
 ]
 
 
 const CONTACTFIELDS = [
-  { className: "input-50 f-l", component: AntInput, name: "contactFirstName", label: "First Name", style:{ width: '95%' }, type: "text", validateFields: [isRequired, allowedCharacters] },
-  { className: "input-50 f-r", component: AntInput, name: "contactLastName", label: "Last Name", style:{ width: '95%' }, type: "text", validateFields: [isRequired, allowedCharacters] },
-  { className: "input-50 f-l", component: AntInput, name: "contactEmail", label: "Email Address", style:{ width: '95%' }, type: "text", validateFields: [isRequired, isValidEmail] },
-  { className: "input-50 f-r", component: AntInput, name: "contactPhone", label: "Phone Number (optional)", normalize: formatPhone, style:{ width: '95%' }, type: "text", validateFields: isValidPhone },
+  { className: "input-50 f-l", component: AntInput, name: "contactFirstName", placeholder: "First Name", style:{ width: '95%' }, type: "text", validate: [isRequired, allowedCharacters] },
+  { className: "input-50 f-r", component: AntInput, name: "contactLastName", placeholder: "Last Name", style:{ width: '95%' }, type: "text", validate: [isRequired, allowedCharacters] },
+  { className: "input-50 f-l", component: AntInput, name: "contactEmail", placeholder: "Email Address", style:{ width: '95%' }, type: "text", validate: [isRequired, isValidEmail] },
+  { className: "input-50 f-r", component: AntInput, name: "contactPhone", placeholder: "Phone Number (optional)", normalize: formatPhone, style:{ width: '95%' }, type: "text", validate: isValidPhone },
 ]
 
 const MENUITEMS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 const CREDITCARDFIELDS = [
-  { className: "input-40 f-l", component: AntInput, name: "creditCard", label: "Credit Card", normalize: formatCreditCard, style:{ width: "95%" }, type: "text", validateFields: [isRequired, isValidCC] },
-  { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", label: "Exp. Month", selectOptions: MENUITEMS, style:{ width: "90%" }, type: "text", validateFields: isValidExpMonth },
-  { className: "input-20 f-l", component: AntInput, name: "creditCardExpYear", hintText: "YYYY", label: "Exp. Year", normalize: formatYear, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidYear] },
-  { className: "input-20 f-l", component: AntInput, name: "creditCardCVV", hintText: "XXX", label: "CVV", normalize: formatCVV, style:{ width: "90%" }, type: "text", validateFields: [isRequired, isValidCVV] },
+  { className: "input-40 f-l", component: AntInput, name: "creditCard", placeholder: "Credit Card", normalize: formatCreditCard, style:{ width: "95%" }, type: "text", validate: [isRequired, isValidCC] },
+  { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", placeholder: "Exp. Month", selectOptions: MENUITEMS, style:{ width: "90%" }, type: "text", validate: isValidExpMonth },
+  { className: "input-20 f-l", component: AntInput, name: "creditCardExpYear", placeholder: "Exp. Year", normalize: formatYear, style:{ width: "90%" }, type: "text", validate: [isRequired, isValidYear] },
+  { className: "input-20 f-l", component: AntInput, name: "creditCardCVV", placeholder: "CVV", normalize: formatCVV, style:{ width: "90%" }, type: "text", validate: [isRequired, isValidCVV] },
 ]
 
 const PLANSELECTIONFIELDS = [

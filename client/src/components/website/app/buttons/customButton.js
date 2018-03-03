@@ -2,21 +2,20 @@ import React from 'react';
 import { Button } from 'antd';
 import { Link } from 'react-router';
 
-export default function({ btnClassName, className, label, link, onClickAction, style }) {
-  return (
-    <div className={className}>
-      <Button
-        className={`btn ${btnClassName}`}
-        onClick={onClickAction}
-        style={{ ...style }}
-      >
-        <Link to={link}>
-          {label}
-        </Link>
-      </Button>
-    </div>
-  )
-}
+export default ({ btnClassName, className, label, link, onClickAction, style }) => (
+  <div className={className}>
+    <Button
+      className={`btn ${btnClassName}`}
+      onClick={onClickAction}
+      style={{ ...style }}
+    >
+      <Link to={link}>
+        {label}
+      </Link>
+    </Button>
+  </div>
+)
+
 
 // export default function({
 //   backgroundColor,
