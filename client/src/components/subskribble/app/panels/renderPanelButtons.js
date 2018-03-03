@@ -13,12 +13,12 @@ class RenderPanelButtons extends Component {
       ModalText: 'The modal will be closed after two seconds',
       confirmLoading: true,
     });
-    // setTimeout(() => {
-    //   this.setState({
-    //     visible: false,
-    //     confirmLoading: false,
-    //   });
-    // }, 2000);
+    setTimeout(() => {
+      this.setState({
+        visible: false,
+        confirmLoading: false,
+      });
+    }, 3000);
   }
 
   handleCancel = () => this.setState({ visible: false, confirmLoading: false });

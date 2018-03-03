@@ -2,16 +2,21 @@ import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Steps } from 'antd';
+import Stepper from './Stepper';
 import RegisterPlanForm from './RegisterPlanForm';
 import { customerRegisterToPlan } from '../../../actions/formActionCreators';
 import { getCustomerFormFields } from '../../formfields/customerSignupFields';
-const { Step } = Steps;
 
 class CustomerPlanSignup extends Component {
   state = {
     formFields: getCustomerFormFields(),
     stepIndex: 0,
-    stepLabels: ['Contact Information', 'Payment', 'Plan', 'Review'],
+    stepLabels: [
+      { title: 'Contact Information', icon: 'mail_outline' },
+      { title: 'Payment', icon: 'payment' },
+      { title: 'Plan', icon: 'content_paste' },
+      { title: 'Review', icon: 'shopping_cart' }
+    ],
     visited: [],
     wasReviewed: false
   };
@@ -39,10 +44,6 @@ class CustomerPlanSignup extends Component {
     })
   }
 
-  handleStepClick = key => {
-
-  }
-
   handlePrev = () => {
     const formKey = this.state.stepIndex - 1;
     this.setState({ formFields: getCustomerFormFields(formKey), stepIndex: formKey })
@@ -61,12 +62,15 @@ class CustomerPlanSignup extends Component {
               <h3>Plan Registration</h3>
             </div>
             <Steps current={stepIndex}>
-              {map(stepLabels, (label, key) => (
-                <Step
-                  className={wasReviewed ? "fix-cursor" : "" }
-                  key={label}
-                  onClick={wasReviewed && !confirmLoading ? () => this.editStep(key) : undefined}
-                  title={label}
+              {map(stepLabels, ({ title, icon }, key) => (
+                <Stepper
+                  confirmLoading={confirmLoading}
+                  icon={icon}
+                  key={title}
+                  onClick={this.editStep}
+                  stepKey={key}
+                  title={title}
+                  wasReviewed={wasReviewed}
                 />
               ))}
             </Steps>
@@ -86,3 +90,13 @@ class CustomerPlanSignup extends Component {
 }
 
 export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);
+
+/*
+<Step
+  icon={<i className="material-icons">{icon}</i>}
+  className={wasReviewed ? "fix-cursor" : "" }
+  key={title}
+  onClick={wasReviewed && !confirmLoading ? () => this.editStep(key) : undefined}
+  title={title}
+/>
+*/
