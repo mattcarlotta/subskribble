@@ -24,17 +24,15 @@ export default ({
     trigger={['click']}
     overlay={
       <Menu>
-        {
-          map(TABS, ({ link, label, nestedItems }, key) => {
-            return nestedItems
-            ? nestedMenuItems(key, label, nestedItems)
-            : <MenuItem className={key !== 0 && "menu-item"} key={key}>
-                  <Link to={link}>
-                    {label}
-                  </Link>
-                </MenuItem>
-          })
-        }
+        {map(TABS, ({ link, label, nestedItems }, key) => (
+          nestedItems
+         ? nestedMenuItems(key, label, nestedItems)
+         : <MenuItem className={key !== 0 && "menu-item"} key={key}>
+               <Link to={link}>
+                 {label}
+               </Link>
+             </MenuItem>
+        ))}
       </Menu>
     }
     >
