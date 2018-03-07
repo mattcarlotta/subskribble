@@ -1,7 +1,12 @@
-require('./config/vars');
 const express = require('express');
 const app = express();
+const consign = require('consign');
 
-require('./libs/expressMiddlewares')(app); // Hook up express middlewares (morgan/bodyParser)
-// require('./libs/expressRoutes')(app); // Hook up express routes
-require('./libs/expressServerSetup')(app, express); // Tell express to server client
+consign({ locale: 'en-us', verbose: false})
+	.include('libs/middlewares.js') // express middlewares
+  // .then("services")
+  // .then("config/passport.js")
+  .then("controllers")
+  .then("routes")
+	.then('libs/server.js')
+  .into(app);

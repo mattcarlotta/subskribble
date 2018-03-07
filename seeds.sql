@@ -3,9 +3,9 @@ CREATE DATABASE subskribble-demo;
 
 \c subskribble-demo;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS subscribers;
 
-CREATE TABLE users (
+CREATE TABLE subscribers (
   id UUID DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
   status VARCHAR(20) DEFAULT 'inactive',
@@ -20,7 +20,7 @@ CREATE TABLE users (
   isGod BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO users (status, email, subscriber, password, phone, plan, amount)
+INSERT INTO subscribers (status, email, subscriber, password, phone, plan, amount)
   VALUES
   ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', 29.99),
   ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', 29.99),

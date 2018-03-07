@@ -1,5 +1,7 @@
 const promise = require('bluebird');
 const monitor = require('pg-monitor');
+const vars = require('../config/vars');
+
 const initOptions = {
   error(err, e) {
     if (e.cn) {
@@ -11,18 +13,21 @@ const initOptions = {
   },
   promiseLib: promise // intialize bluebird as promise handler
 }
+
 const pgp = require('pg-promise')(initOptions) // initialize pg-promise w/options
+
+const env = process.env.NODE_ENV;
 
 // Database connection details;
 const db = pgp({
-  host: process.env.HOST, // 'localhost' is the default;
-  password: process.env.DBPASSWORD,
-  port: process.env.DBPORT, // 5432 is the default;
-  user: process.env.DBOWNER,
-  database: process.env.DB,
-}); // database instance;
+  host: vars[env].host, // 'localhost' is the default;
+  password: vars[env].dbpassword,
+  port: vars[env].dbport, // 5432 is the default;
+  user: vars[env].dbowner,
+  database: vars[env].database,
+});
 
-if (process.env.NODE_ENV !== 'production') monitor.attach(initOptions); // database connection logger
+if (env !== 'production') monitor.attach(initOptions); // database connection logger
 
 // if process is terminated, terminate database connection
 process.on('SIGINT', () => {

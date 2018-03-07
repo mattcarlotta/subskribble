@@ -1,10 +1,12 @@
 const path = require('path');
+const express = require('express');
 
-module.exports = (app, express) => {
+module.exports = app => {
+  const env = app.get("env");
 	//============================================================//
 	/* PRODUCTION CONFIGS */
 	//============================================================//
-	if (process.env.NODE_ENV === 'production') {
+	if (env === 'production') {
 		// Express will serve up production assets
 		app.use(express.static('client/build'));
 
@@ -15,7 +17,7 @@ module.exports = (app, express) => {
 	//============================================================//
 	/* CREATE EXPRESS SERVER */
 	//============================================================//
-	const port = process.env.PORT;
+	const port = app.get("port");
 
 	app.listen(port, () => {
 		console.log('Server is now listening on port ' + port);

@@ -1,7 +1,7 @@
 require('./config/vars');
 const db = require('./db/config');
 
-const userTableOptions = `(
+const subTableOptions = `(
   id UUID DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
   status VARCHAR(20) DEFAULT 'inactive',
@@ -16,9 +16,9 @@ const userTableOptions = `(
   isGod BOOLEAN DEFAULT FALSE
 )`;
 
-const userProperties = `(status, email, subscriber, password, phone, plan, amount)`
+const subProperties = `(status, email, subscriber, password, phone, plan, amount)`
 
-const userOptions = `
+const subOptions = `
 ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', 29.99),
 ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', 29.99),
 ('active', 'bob-eh@sap.com', 'Bob Aronssen', 'password', '(555) 555-5555', 'Carlotta Prime', 29.99),
@@ -32,9 +32,9 @@ const userOptions = `
   try {
     await db.none(`
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      DROP TABLE IF EXISTS users;
-      CREATE TABLE users ${userTableOptions};
-      INSERT INTO users ${userProperties} VALUES ${userOptions}
+      DROP TABLE IF EXISTS subscribers;
+      CREATE TABLE subscribers ${subTableOptions};
+      INSERT INTO subscribers ${subProperties} VALUES ${subOptions}
     `);
     console.log('Seeded database!');
     process.exit(0);
