@@ -70,15 +70,15 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm run dev`
 
 
-*Note*: In order to run this app, you must create and load an .env configuration similar to this:
+*Note*: In order to run this app, you must create and load an env configuration similar to this:
 ```
-DB=subskribble-demo
-DBPORT=5432
-DBPASSWORD=<password>
-DBOWNER=<dbOwner>
-HOST=localhost
-PORT=4000
-URL=http://localhost:4000/
+database: "subskribble-demo",
+dbport: 5432,
+dbpassword: <dbpassword>,
+dbowner: <dbowner>,
+host: "localhost",
+port: 5000,
+url: "http://localhost:5000/",
 ```
 
 
