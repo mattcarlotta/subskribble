@@ -29,8 +29,9 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 6. Seed DB and Run Node Server
-- `psql -U {username} -f seeds.sql` (only required on first run, otherwise `npm run seed`)
+- `psql -U <username> -f seeds.sql` (only required on first run, otherwise `npm run seed`)
 - `npm run dev`
+
 
 
 ## Quickstart OSX:
@@ -68,6 +69,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `psql -U <username> -f seeds.sql` (only required on first run, otherwise `npm run seed`)
 - `npm run dev`
 
+
 *Note*: In order to run this app, you must create and load an .env configuration similar to this:
 ```
 DB=subskribble-demo
@@ -78,6 +80,7 @@ HOST=localhost
 PORT=4000
 URL=http://localhost:4000/
 ```
+
 
 † If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
 
