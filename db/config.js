@@ -18,7 +18,7 @@ const db = pgp({
   host: process.env.HOST, // 'localhost' is the default;
   password: process.env.DBPASSWORD,
   port: process.env.DBPORT, // 5432 is the default;
-  user: process.env.DBUSER,
+  user: process.env.DBOWNER,
   database: process.env.DB,
 }); // database instance;
 
