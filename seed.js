@@ -10,8 +10,8 @@ const subTableOptions = `(
   password VARCHAR,
   phone VARCHAR,
   plan VARCHAR,
-  startDate DATE DEFAULT NOW(),
-  endDate DATE,
+  startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+  endDate TEXT,
   amount DECIMAL(12,2),
   isGod BOOLEAN DEFAULT FALSE
 )`;

@@ -1,6 +1,7 @@
 const promise = require('bluebird');
 const monitor = require('pg-monitor');
-const vars = require('../config/vars');
+const vars    = require('../config/vars');
+const env     = process.env.NODE_ENV;
 
 const initOptions = {
   error(err, e) {
@@ -15,8 +16,6 @@ const initOptions = {
 }
 
 const pgp = require('pg-promise')(initOptions) // initialize pg-promise w/options
-
-const env = process.env.NODE_ENV;
 
 // Database connection details;
 const db = pgp({

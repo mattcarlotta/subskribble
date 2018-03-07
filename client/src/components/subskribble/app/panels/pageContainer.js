@@ -1,3 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-export default Page => (() => (<div className="page-container"><Page /></div>))
+export default class PageContainer extends PureComponent {
+  render = () => (
+    <div className="page-container">
+      {this.props.children}
+    </div>
+  )
+}

@@ -1,6 +1,6 @@
-module.exports = app => {
-  const db = app.db;
+const db = require('../db/config');
 
+module.exports = app => {
   const controller = {
     // APP methos
     index: (req, res) => _index(req,res)
@@ -12,9 +12,9 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const query = "SELECT * subscribers ORDER BY key DESC FETCH FIRST 10 ROWS ONLY"
-      const data = db.none(query);
-      res.status(201).json({ data });
+      const query = "SELECT * FROM subscribers"
+      const subscribers = await db.any(query);
+      res.status(201).json({ subscribers });
     } catch (err) {
       return res.status(500).json({ err })
     }

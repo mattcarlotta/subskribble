@@ -1,5 +1,5 @@
-module.exports = (app) => {
-  const controller = app.controllers.subscribers
+module.exports = app => {
+  const controller = app.controllers.subscribers;
 
   app.get('/api/subscribers', controller.index)
   // app.post('/v1/customers', auth.checkSudo, auth.isActiveUser, controller.create)

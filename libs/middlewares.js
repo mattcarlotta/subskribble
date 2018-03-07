@@ -1,6 +1,6 @@
 const morgan 				= require('morgan');
 const bodyParser 		= require('body-parser');
-const vars        = require('../config/vars.js');
+const vars        	= require('../config/vars.js');
 
 const env = process.env.NODE_ENV;
 console.log(`[${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
