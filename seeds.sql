@@ -1,5 +1,5 @@
--- DROP DATABASE IF EXISTS subskribble-demo;
--- CREATE DATABASE subskribble-demo;
+DROP DATABASE IF EXISTS subskribble-demo;
+CREATE DATABASE subskribble-demo;
 
 \c subskribble-demo;
 
