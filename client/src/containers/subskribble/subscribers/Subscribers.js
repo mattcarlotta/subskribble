@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import { fetchSubscribers } from '../../../actions/subscriberActionCreators';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
@@ -13,7 +12,7 @@ class Subscribers extends Component {
   }
 
   fetchAllSubscribers = () => {
-    this.props.fetchSubscribers()
+    fetchSubscribers()
     .then(({data: {subscribers}}) => this.setState({ subscribers }))
     .catch(err => this.setState({ serverError: err }))
   }
@@ -37,4 +36,4 @@ class Subscribers extends Component {
   }
 }
 
-export default connect(null, { fetchSubscribers })(Subscribers);
+export default Subscribers;

@@ -7,4 +7,4 @@ import $ from 'jquery';
 window.$ = $;
 
 
-render(<App />, document.getElementById('subskribble'));
+render(<App />, document.getElementById('root'));
