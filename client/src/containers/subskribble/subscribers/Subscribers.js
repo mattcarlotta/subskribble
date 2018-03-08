@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchSubscribers } from '../../../actions/subscriberActionCreators';
+import { fetchSubscribers } from '../../../actions/subscriberActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 
@@ -11,11 +12,11 @@ class Subscribers extends Component {
     this.fetchAllSubscribers();
   }
 
-  fetchAllSubscribers = () => {
+  fetchAllSubscribers = () => (
     fetchSubscribers()
     .then(({data: {subscribers}}) => this.setState({ subscribers }))
     .catch(err => this.setState({ serverError: err }))
-  }
+  )
 
   // componentDidUpdate = (nextProps, nextState) => {
 	// 	const currentLoadedPage = parseInt(this.props.location.query.pageId, 10);
