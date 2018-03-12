@@ -19,6 +19,7 @@ class TableList extends Component {
             }
           ]}
           dataSource={TABLECONTENTS}
+          pagination={{ defaultCurrent: 1, total: 500 }}
         />
       </div>
     )

@@ -1,21 +1,19 @@
+import map from 'lodash/map';
 import React from 'react';
 import { Card } from 'antd';
-import RenderCards from './renderCards';
+import PanelBody from './panelBody';
 import TogglePanelVisibility from './TogglePanelVisibility';
 
 const BasicPanel = ({
   buttonPanel,
-  containerClassName,
   CARDS,
   title,
   visible
 }) => (
-  <div className={containerClassName}>
-    <div className="panel-container">
-      <Card title={title} extra={buttonPanel(visible)}>
-        { RenderCards(CARDS, visible) }
-      </Card>
-    </div>
+  <div className="panel-container">
+    <Card title={title} extra={buttonPanel()}>
+      {map(CARDS, (props, key) => <PanelBody key={key} visible={visible} {...props} />)}
+    </Card>
   </div>
 )
 

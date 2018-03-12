@@ -6,21 +6,21 @@ export default [
 		name: 'company',
 		type: 'text',
 		component: AntInput,
-		label: 'Company or Organization Name',
-		validateFields: [isRequired]
+		placeholder: 'Company or Organization Name',
+		validate: [isRequired]
 	},
 	{
 		name: 'email',
 		type: 'email',
 		component: AntInput,
-		label: 'Email',
-		validateFields: [isRequired, isValidEmail]
+		placeholder: 'Email',
+		validate: [isRequired, isValidEmail]
 	},
 	{
 		name: 'password',
 		type: 'password',
 		component: AntInput,
-		label: 'Password',
-		validateFields: [isRequired, minPassword]
+		placeholder: 'Password',
+		validate: [isRequired, minPassword]
 	}
 ];

@@ -24,7 +24,7 @@
   @include h(100%);
 
   .customer-signup-container {
-    padding-top: 100px;
+    padding-top: 10px;
 
     .stepper-container {
       @extend %container-1200;
@@ -40,7 +40,7 @@
       @extend %p-r;
       @include c($black);
       @include f-f($poppinslight);
-      margin: 50px 50px 100px 50px;
+      margin: 50px 50px 0 50px;
       min-height: 600px;
 
       h3 {
@@ -73,7 +73,7 @@
 
         .selection-container {
           @extend .f-l, %m-b-20;
-          @include h(380px);
+          @include h(250px);
           @include w(100%);
           max-width: 300px;
           min-width: 200px;

@@ -10,6 +10,9 @@ client/scripts
 client/src/images
 client/node_modules
 
+#env
+*.env
+
 #Server files and folders
 uploads/
 scrap/

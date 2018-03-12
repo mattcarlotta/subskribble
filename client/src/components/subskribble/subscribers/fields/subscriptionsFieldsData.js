@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const ACTIVESUBSCRIPTIONS = [
   {
     key: '1',
@@ -125,12 +123,3 @@ export const INACTIVESUBSCRIPTIONS = [
     amount: '$29.99'
   },
 ]
-
-export const TABLEHEADERS = [
-  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
-  { title: 'Subscriber', dataIndex: 'subscriber' },
-  { title: 'Plan', dataIndex: 'plan' },
-  { title: 'Start Date', dataIndex: 'startDate' },
-  { title: 'End Date', dataIndex: 'endDate' },
-  { title: 'Amount', dataIndex: 'amount' }
-];

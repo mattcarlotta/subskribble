@@ -6,14 +6,14 @@ export default [
 		name: 'email',
 		type: 'email',
 		component: AntInput,
-		label: 'Email',
-		validateFields: [isRequired, isValidEmail]
+		placeholder: 'Email',
+		validate: [isRequired, isValidEmail]
 	},
 	{
 		name: 'password',
 		type: 'password',
 		component: AntInput,
-		label: 'Password',
-		validateFields: [isRequired]
+		placeholder: 'Password',
+		validate: [isRequired]
 	}
 ];

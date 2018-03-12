@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import { Button, Checkbox, DatePicker, Form, Icon, Input, Radio, Select, Switch } from "antd";
 
@@ -41,55 +41,53 @@ const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
-const AntSubmitButton = ({ label, onClick, pristine, submitting, style, type }) => (
+const AntSubmitButton = ({ confirmLoading, disabled, icon, label, onClick, style, type }) => (
   <Button
-    className="btn btn-primary"
-    disabled={pristine || submitting}
+    type="primary"
+    disabled={disabled}
     htmlType={type}
+    loading={confirmLoading}
     onClick={onClick}
     style={{ ...style }}
   >
-    { label }
+    {icon === "left"
+      ? <Fragment>
+          <Icon type={icon} /> { label }
+        </Fragment>
+      : <Fragment>
+          { label } <Icon type={icon} />
+        </Fragment>
+    }
   </Button>
 )
 
-const AntFormSubmit = ({ label, pristine, submitting, style, type }) => (
+const AntFormSubmit = (props) => (
   <FormItem>
-    <AntSubmitButton
-      label={label}
-      pristine={pristine}
-      submitting={submitting}
-      style={style}
-      type="submit"
-    />
+    <AntSubmitButton {...props} type="submit"/>
   </FormItem>
 )
 
 const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   <FormItem>
-    <AntSubmitButton
-      label={label}
-      pristine={pristine}
-      submitting={submitting}
-      type="submit"
-    />
-    <Button
-      disabled={pristine || submitting}
-      onClick={reset}
-    >
+    <AntSubmitButton label={label} type="submit" />
+    <Button disabled={pristine || submitting} onClick={reset}>
       Clear Values
     </Button>
   </FormItem>
 )
 
-const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
   <FormItem>
     <AntSubmitButton
+      icon="left"
+      disabled={confirmLoading}
       label={backLabel}
       onClick={onClickBack}
       style={backStyle}
     />
     <AntSubmitButton
+      confirmLoading={confirmLoading}
+      icon={submitLabel === "Next" ? "right" : ""}
       label={submitLabel}
       pristine={pristine}
       style={submitStyle}
@@ -100,40 +98,28 @@ const AntStepFormButtons = ({ backStyle, backLabel, onClickBack, pristine, submi
 )
 
 const AntFormFields = ({ FIELDS }) => (
-  map(FIELDS, ({ className, checked, component, name, label, normalize, onChange, selectOptions, style, type, validateFields, value }, key) => (
+  map(FIELDS, ({ className, selectOptions, style, ...props}, key) => (
     <div key={key} className={className}>
       <Field
-        checked={checked}
-        component={component}
-        name={name}
-        normalize={normalize}
-        onChange={onChange}
-        placeholder={label}
+        {...props}
         style={{ fontSize: 15, ...style }}
-        type={type}
-        validate={validateFields}
-        value={value}
       >
-        {selectOptions && map(selectOptions, value => (
-          <Option key={value} value={value}>{value}</Option>
-        ))}
+        {selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
       </Field>
     </div>
   ))
 )
 
-const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
+const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
   <div className="plan-selection-container">
     <Field
-      name="selectedPlan"
-      component={AntRadioGroup}
-      style={{ fontSize: 15, width: '100%' }}
-      validate={validateFields}
+      {...props}
       value={value}
+      component={AntRadioGroup}
     >
      {map(FIELDS, ({ description, plan, price }, key) => (
         <RadioButton
-          className={(plan === value) ? "selection-container selected" : "selection-container"}
+          className={`selection-container ${(plan === value) ? "selected" : ""}`}
           key={key}
           value={plan}
         >
@@ -151,17 +137,12 @@ const AntRadioGroupField = ({ name, FIELDS, value, validateFields }) => (
   </div>
 )
 
-const AntSwitchField = ({ checked, formItemClassName, label, name, onChange, value }) => (
+const AntSwitchField = (props) => (
   <Field
-    checked={checked}
+    {...props}
     checkedChildren={<Icon type="check" />}
     component={AntSwitch}
-    formItemClassName={formItemClassName}
-    label={label}
-    name={name}
-    onChange={onChange}
     unCheckedChildren={<Icon type="cross" />}
-    value={value}
   />
 )
 

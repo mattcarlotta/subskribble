@@ -7,9 +7,9 @@ export default WrappedComponent => {
 
     switchVisibility = () => this.setState({ visible: !this.state.visible })
 
-    buttonPanel = (visible) => (
+    buttonPanel = () => (
       <Button className="panel-button" onClick={this.switchVisibility}>
-        <i className="material-icons">{ visible ? "remove" : "add" }</i>
+        <i className="material-icons">{ this.state.visible ? "remove" : "add" }</i>
       </Button>
     )
 

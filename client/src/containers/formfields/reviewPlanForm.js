@@ -8,66 +8,18 @@ import PaymentInfoReview from '../../components/website/customersignup/paymentIn
 import PlanInfoReview from '../../components/website/customersignup/planInfoReview';
 import CartTotalReview from '../../components/website/customersignup/cartTotalReview';
 
-const ReviewPlanForm = ({
-  finalValues: {
-    billingAddress,
-    billingCity,
-    billingState,
-    billingUnit,
-    billingZip,
-    contactAddress,
-    contactCity,
-    contactEmail,
-    contactFirstName,
-    contactLastName,
-    contactPhone,
-    contactUnit,
-    contactState,
-    contactZip,
-    creditCard,
-    creditCardExpMonth,
-    creditCardExpYear,
-    sameBillingAddress,
-    selectedPlan
-  },
-  editStep,
-  PLANSELECTIONS
-}) => {
-  let { price, description } = filter(PLANSELECTIONS, ({ plan }) => { return plan === selectedPlan })[0];
+const ReviewPlanForm = ({ finalValues, editStep, PLANSELECTIONS }) => {
+  let { price, description } = filter(PLANSELECTIONS, ({ plan }) => (plan === finalValues.selectedPlan))[0];
   price = parseFloat(price);
   const displayPrice = price.toFixed(2);
   return(
     <div className="review-signup-container">
-      <ContactInfoReview
-        contactAddress={contactAddress}
-        contactCity={contactCity}
-        contactEmail={contactEmail}
-        contactFirstName={contactFirstName}
-        contactLastName={contactLastName}
-        contactPhone={contactPhone}
-        contactUnit={contactUnit}
-        contactState={contactState}
-        contactZip={contactZip}
-        editStep={editStep}
-      />
-      <PaymentInfoReview
-        contactFirstName={contactFirstName}
-        contactLastName={contactLastName}
-        billingAddress={billingAddress}
-        billingCity={billingCity}
-        billingState={billingState}
-        billingUnit={billingUnit}
-        billingZip={billingZip}
-        creditCard={creditCard}
-        creditCardExpMonth={creditCardExpMonth}
-        creditCardExpYear={creditCardExpYear}
-        editStep={editStep}
-        sameBillingAddress={sameBillingAddress}
-      />
-      <PlanInfoReview displayPrice={displayPrice} description={description} editStep={editStep} selectedPlan={selectedPlan} />
+      <ContactInfoReview {...finalValues} editStep={editStep} />
+      <PaymentInfoReview {...finalValues} editStep={editStep}/>
+      <PlanInfoReview {...finalValues} displayPrice={displayPrice} description={description} editStep={editStep} />
       <CartTotalReview displayPrice={displayPrice} price={price} />
     </div>
-  )
+  );
 }
 
 export default connect(state => ({ finalValues: getFormValues('CustomerPlanSignup')(state)}))(ReviewPlanForm);

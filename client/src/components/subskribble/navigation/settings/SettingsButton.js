@@ -1,42 +1,26 @@
-import map from 'lodash/map';
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { Menu, Popover } from 'antd';
-import RIGHTNAVLINKS from '../links/rightNavLinks';
-const { Item: MenuItem } = Menu;
+import React, { PureComponent } from 'react';
+import { Popover } from 'antd';
+import SettingsMenu from './settingsMenu';
 
-class SettingsButton extends Component {
+class SettingsButton extends PureComponent {
   state = { visibleSettings: false }
 
   handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
-  render() {
-    return (
-      <div className="settings-tab">
-        <Popover
-          arrowPointAtCenter
-          content={
-            <Menu className="settings-tab-container">
-              {map(RIGHTNAVLINKS, ({ icon, label, link }, key) => (
-                <MenuItem key={key} >
-                  <Link to={link}>
-                    <i className="material-icons settings-icon">{icon}</i>
-                    <span className="settings-label">{label}</span>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          }
-          onVisibleChange={this.handleVisibleChange}
-          placement="bottomRight"
-          trigger="click"
-          visible={this.state.visibleSettings}
-        >
-            <i className="material-icons settings-icon">settings</i>
-        </Popover>
-      </div>
-    )
-  }
+  render = () => (
+    <div className="settings-tab">
+      <Popover
+        arrowPointAtCenter
+        content={<SettingsMenu />}
+        onVisibleChange={this.handleVisibleChange}
+        placement="bottomRight"
+        trigger="click"
+        visible={this.state.visibleSettings}
+      >
+          <i className="material-icons settings-icon">settings</i>
+      </Popover>
+    </div>
+  )
 }
 
 export default SettingsButton;

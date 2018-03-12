@@ -1,10 +1,8 @@
 import React from 'react';
-import CircularProgress from 'material-ui/CircularProgress';
+import Loading from '../../../images/logos/loading-blocks.gif'
 
-const Spinner = () => (
-  <div>
-    <CircularProgress size={80} thickness={5} />
+export default () => (
+  <div className="spinner-container">
+    <img src={Loading} alt="loading-block.gif" height="128px" />
   </div>
 );
-
-export default Spinner;
