@@ -12,9 +12,13 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const query = "SELECT * FROM subscribers"
-      const subscribers = await db.any(query);
-      res.status(201).json({ subscribers });
+      const activesubscribers = await db.any(
+        "SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers WHERE status = 'active' GROUP BY key"
+      );
+      const inactivesubscribers = await db.any(
+        "SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers WHERE status = 'inactive' OR status = 'suspended' GROUP BY key"
+      );
+      res.status(201).json({ activesubscribers, inactivesubscribers });
     } catch (err) {
       return res.status(500).json({ err })
     }

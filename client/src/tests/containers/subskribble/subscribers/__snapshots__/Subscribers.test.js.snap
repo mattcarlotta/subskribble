@@ -1,47 +1,235 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[SUBSCRIBERS] should render Subscribers component 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Subscribers />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": "Loading...",
-    },
-    "ref": null,
-    "rendered": "Loading...",
-    "type": "p",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "Loading...",
+exports[`[SUBSCRIBERS] should load Subscribers component 1`] = `<Component />`;
+
+exports[`[SUBSCRIBERS] should update Subscriber's local state and render the TableList 1`] = `
+<Component
+  CARDS={
+    Array [
+      Object {
+        "FILTERFIELDLABEL": "Filter Active Subscriptions",
+        "FILTERFORM": "FilterActiveSubscriptions",
+        "SELECTFIELDITEMS": Array [
+          "10",
+          "20",
+          "50",
+          "All",
+        ],
+        "TAB": "Active Subscribers",
+        "TABLECONTENTS": Array [
+          Object {
+            "amount": "29.99",
+            "email": "lukeskywalker@rebelforce.com",
+            "enddate": null,
+            "id": "280e5e69-23cc-11e8-9ee2-87c4367aefbc",
+            "key": 6,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Siemen Walker",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "bob-eh@sap.com",
+            "enddate": null,
+            "id": "280e5e66-23cc-11e8-9ee2-df58ddf546ce",
+            "key": 3,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Bob Aronssen",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "shani.smith@hotmail.com",
+            "enddate": null,
+            "id": "280e5e67-23cc-11e8-9ee2-f3fe7042465f",
+            "key": 4,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Shaniqua Smith",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "jLamar@gmail.com",
+            "enddate": null,
+            "id": "280e5e6a-23cc-11e8-9ee2-d78220c1be75",
+            "key": 7,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Jerry Lamar",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "tanyaballschin@gmail.com",
+            "enddate": null,
+            "id": "280e5e68-23cc-11e8-9ee2-8bf0d337d932",
+            "key": 5,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Tanya Ballschin",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "admin@admin.com",
+            "enddate": null,
+            "id": "280e5e64-23cc-11e8-9ee2-039e1dd23d0e",
+            "key": 1,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Admin",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "squatters@gmail.com",
+            "enddate": null,
+            "id": "280e5e65-23cc-11e8-9ee2-874a79b185c0",
+            "key": 2,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "active",
+            "subscriber": "Sherry Waters",
+          },
+        ],
+        "TABLEHEADERS": Array [
+          Object {
+            "dataIndex": "status",
+            "render": [Function],
+            "title": "Status",
+          },
+          Object {
+            "dataIndex": "subscriber",
+            "title": "Subscriber",
+          },
+          Object {
+            "dataIndex": "plan",
+            "title": "Plan",
+          },
+          Object {
+            "dataIndex": "startdate",
+            "title": "Start Date",
+          },
+          Object {
+            "dataIndex": "enddate",
+            "title": "End Date",
+          },
+          Object {
+            "dataIndex": "amount",
+            "title": "Amount",
+          },
+        ],
       },
-      "ref": null,
-      "rendered": "Loading...",
-      "type": "p",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
+      Object {
+        "FILTERFIELDLABEL": "Filter Inactive Subscriptions",
+        "FILTERFORM": "FilterInactiveSubscriptions",
+        "SELECTFIELDITEMS": Array [
+          "10",
+          "20",
+          "50",
+          "All",
+        ],
+        "TAB": "Inactive Subscribers",
+        "TABLECONTENTS": Array [
+          Object {
+            "amount": "29.99",
+            "email": "carlsagan42@yahoo.com",
+            "enddate": "Jan 3, 2018",
+            "id": "280e5e6b-23cc-11e8-9ee2-4bb5be2cf2fd",
+            "key": 8,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "inactive",
+            "subscriber": "Carl Sagan",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "seamark@outlook.com",
+            "enddate": "Jan 12, 2018",
+            "id": "280e5e6c-23cc-11e8-9ee2-67c5e7700f99",
+            "key": 9,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "inactive",
+            "subscriber": "Mark Canelo",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "axxll@manjaro.com",
+            "enddate": "Jan 16, 2018",
+            "id": "280e5e6d-23cc-11e8-9ee2-572a31e0fc7f",
+            "key": 10,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "suspended",
+            "subscriber": "Axle Root",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "vicksAdam@sap.com",
+            "enddate": "Jan 17, 2018",
+            "id": "280e5e6e-23cc-11e8-9ee2-53bd93663073",
+            "key": 11,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "inactive",
+            "subscriber": "Adamn Vicks",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "wallyworld@manjaro.com",
+            "enddate": "Jan 17, 2018",
+            "id": "280e5e6f-23cc-11e8-9ee2-fb171b00c1fa",
+            "key": 12,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "suspended",
+            "subscriber": "Wes Walls",
+          },
+          Object {
+            "amount": "29.99",
+            "email": "aleashtrails@gmail.com",
+            "enddate": "Jan 17, 2018",
+            "id": "280e5e70-23cc-11e8-9ee2-13fe281b583d",
+            "key": 13,
+            "plan": "Carlotta Prime",
+            "startdate": "Mar 09, 2018",
+            "status": "suspended",
+            "subscriber": "Alisha Tallis",
+          },
+        ],
+        "TABLEHEADERS": Array [
+          Object {
+            "dataIndex": "status",
+            "render": [Function],
+            "title": "Status",
+          },
+          Object {
+            "dataIndex": "subscriber",
+            "title": "Subscriber",
+          },
+          Object {
+            "dataIndex": "plan",
+            "title": "Plan",
+          },
+          Object {
+            "dataIndex": "startdate",
+            "title": "Start Date",
+          },
+          Object {
+            "dataIndex": "enddate",
+            "title": "End Date",
+          },
+          Object {
+            "dataIndex": "amount",
+            "title": "Amount",
+          },
+        ],
       },
-    },
-  },
-}
+    ]
+  }
+/>
 `;

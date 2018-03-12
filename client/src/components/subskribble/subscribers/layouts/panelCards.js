@@ -1,13 +1,22 @@
-import { TABLEHEADERS } from '../fields/subscriptionsFieldsData';
+import React from 'react';
 
-export default (subscribers) => {
+const TABLEHEADERS = [
+  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
+  { title: 'Subscriber', dataIndex: 'subscriber' },
+  { title: 'Plan', dataIndex: 'plan' },
+  { title: 'Start Date', dataIndex: 'startdate' },
+  { title: 'End Date', dataIndex: 'enddate' },
+  { title: 'Amount', dataIndex: 'amount' }
+];
+
+export default (activesubscribers, inactivesubscribers) => {
   return [
     {
       FILTERFIELDLABEL: "Filter Active Subscriptions",
       FILTERFORM: "FilterActiveSubscriptions",
       SELECTFIELDITEMS: ['10', '20', '50', 'All'],
       TAB: "Active Subscribers",
-      TABLECONTENTS: subscribers,
+      TABLECONTENTS: activesubscribers,
       TABLEHEADERS: TABLEHEADERS
     },
     {
@@ -15,7 +24,7 @@ export default (subscribers) => {
       FILTERFORM: "FilterInactiveSubscriptions",
       SELECTFIELDITEMS: ['10', '20', '50', 'All'],
       TAB: "Inactive Subscribers",
-      TABLECONTENTS: subscribers,
+      TABLECONTENTS: inactivesubscribers,
       TABLEHEADERS: TABLEHEADERS
     }
   ]

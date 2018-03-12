@@ -25,8 +25,22 @@
 
   .empty-title {
     @extend %p-r, %t-a-c;
+
+    .icon-logo {
+      @include c(#EDECED);
+      // @include f-s(72px);
+    }
+
+    .text-logo {
+      @extend %p-r;
+      @include c(#EDECED);
+      @include f-f($harabara)
+      @include f-s(28px);
+      letter-spacing: 1.5px;
+      top: -2px;
+    }
     @include f-f($poppinslight);
-    @include f-s(14px);
+    @include f-s(12px);
     top: 75px;
     letter-spacing: .15px;
   }

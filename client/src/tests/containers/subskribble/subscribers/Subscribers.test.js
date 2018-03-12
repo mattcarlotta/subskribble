@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
+import toJSON from 'enzyme-to-json';
 import Subscribers from '../../../../containers/subskribble/subscribers/Subscribers';
-import { ACTIVESUBSCRIBERS } from '../../../fixtures/activeSubscribers';
-import { fetchSubscribers } from '../../../../actions/subscriberActions';
+import { ACTIVESUBSCRIBERS, INACTIVESUBSCRIBERS } from '../../../fixtures/subscribers';
 
 let wrapper;
 
@@ -11,17 +11,16 @@ describe('[SUBSCRIBERS]', () => {
     wrapper = shallow(<Subscribers />);
   })
 
-  it('should render Subscribers component', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('should load Subscribers component', () => {
+    expect(toJSON(wrapper)).toMatchSnapshot();
   })
 
-  it('should render Subscriber list', async () => {
+  it('should update Subscriber\'s local state and render the TableList', async () => {
     await wrapper.instance().fetchAllSubscribers();
-    expect(wrapper.state().subscribers).toEqual(ACTIVESUBSCRIBERS);
-  })
-
-  it('should fetchAllSubscribers', () => {
-    return fetchSubscribers().then(({data: {subscribers}}) => expect(subscribers).not.toEqual(undefined))
+    expect(wrapper.state().activesubscribers).toEqual(ACTIVESUBSCRIBERS);
+    expect(wrapper.state().inactivesubscribers).toEqual(INACTIVESUBSCRIBERS);
+    wrapper.update();
+    expect(toJSON(wrapper)).toMatchSnapshot();
   })
 
 })
