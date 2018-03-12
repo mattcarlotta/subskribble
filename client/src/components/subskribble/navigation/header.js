@@ -4,7 +4,7 @@ import { Col, Row } from 'antd';
 // import DashboardTabs from './Tabs';
 import LeftNav from './leftNav';
 import NavButton from './navButton';
-import NabButtonLinks from './links/navButtonsLinks';
+import NavButtonLinks from './links/navButtonsLinks';
 import RightNav from './rightNav';
 import SideBar from './sidebar/SideBar';
 
@@ -12,9 +12,7 @@ const DashboardHeader = () => (
   <Row className="dash-nav-container">
     <Col span={12}>
       <LeftNav />
-      {map(NabButtonLinks, (props, key) => (
-        <NavButton key={key} {...props} />
-      ))}
+      {map(NavButtonLinks, (props, key) => (<NavButton key={key} {...props} />))}
       <SideBar />
     </Col>
     <Col span={12}>

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // import RenderNotifications from '../../containers/app/renderNotifications';
 
 export default ({ children }) => (
-	<div>
+	<Fragment>
 		{ children }
 		{/* <RenderNotifications /> */}
-	</div>
+	</Fragment>
 )

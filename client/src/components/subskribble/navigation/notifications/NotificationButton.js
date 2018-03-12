@@ -14,8 +14,7 @@ class Notifications extends Component {
   handleActiveNote = activeNote => this.setState({ activeNote })
 
   removeNotification = deletedNote => {
-    const notifications = filter(this.state.notifications, (notification) => { return notification.id !== deletedNote });
-    this.setState({ notifications });
+    this.setState({ notifications: filter(this.state.notifications, (notification) => (notification.id !== deletedNote)) });
   }
 
   render() {

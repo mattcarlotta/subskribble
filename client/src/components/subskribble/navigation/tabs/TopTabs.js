@@ -22,8 +22,7 @@ class DashboardTabs extends Component {
   }
 
   handleActiveTab = (activeTab) => {
-    browserHistory.push(`/subskribble/${activeTab}`);
-    this.setState({ activeTab, displayTabs: false })
+    this.setState({ activeTab, displayTabs: false }, () => browserHistory.push(`/subskribble/${activeTab}`))
   }
 
   handleToggleTab = () => this.setState({ displayTabs: !this.state.displayTabs })

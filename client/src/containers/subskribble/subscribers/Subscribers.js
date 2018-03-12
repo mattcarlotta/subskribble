@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-import { fetchSubscribers } from '../../../actions/subscriberActionCreators';
+import { fetchSubscribers } from '../../../actions/subscriberActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
+import Spinner from '../../../components/app/loading/spinner';
 
-class Subscribers extends Component {
-  state = { subscribers: '', serverError: '' };
+export default class Subscribers extends Component {
+  state = { activesubscribers: '', inactivesubscribers: '', serverError: '' };
 
-  componentDidMount = () => {
-    this.fetchAllSubscribers();
-  }
+  componentDidMount = () => this.fetchAllSubscribers();
 
-  fetchAllSubscribers = () => {
+  fetchAllSubscribers = () => (
     fetchSubscribers()
-    .then(({data: {subscribers}}) => this.setState({ subscribers }))
+    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers, inactivesubscribers}))
     .catch(err => this.setState({ serverError: err }))
-  }
+  )
 
   // componentDidUpdate = (nextProps, nextState) => {
 	// 	const currentLoadedPage = parseInt(this.props.location.query.pageId, 10);
@@ -28,12 +27,13 @@ class Subscribers extends Component {
 
 
   render = () => {
-    const { subscribers, serverError } = this.state;
+    const { activesubscribers, inactivesubscribers, serverError } = this.state;
 
-    if (!subscribers) return <p>Loading...</p>
-    if (serverError) return <p>Error!</p>
-    return <SubscriptionsPanel CARDS={CARDS(subscribers)} />;
+    if (!activesubscribers || !inactivesubscribers) {
+      if (serverError) return <p>Error!</p>
+      return <Spinner />
+    }
+
+    return <SubscriptionsPanel CARDS={CARDS(activesubscribers, inactivesubscribers)} />;
   }
 }
-
-export default Subscribers;
