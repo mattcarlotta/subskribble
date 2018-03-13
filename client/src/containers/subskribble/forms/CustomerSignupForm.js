@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Steps } from 'antd';
 import Stepper from './Stepper';
 import RegisterPlanForm from './RegisterPlanForm';
-import { customerRegisterToPlan } from '../../../actions/formActionCreators';
+import { customerRegisterToPlan } from '../../../actions/formActions';
 import { getCustomerFormFields } from '../../formfields/customerSignupFields';
 
 const stepLabels = [

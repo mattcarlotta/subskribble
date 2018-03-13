@@ -37,6 +37,17 @@
   .panel-body {
     @extend %m-b-10, %m-t-10, %t-t-c;
     padding: 5px 30px;
+
+    .no-data {
+      @include c($nodata);
+      text-align: center;
+      padding-top: 100px;
+
+      .anticon {
+        @include c($nodata);
+        @include f-s(148px);
+      }
+    }
   }
 
   .panel-1 {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
-import App from '../components/app';
+import App from '../components/subskribble';
 // import ContactUs from '../components/subskribble/contact';
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
@@ -12,7 +12,7 @@ import DashWrapper from '../components/subskribble/navigation/dashWrapper';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app';
 // import LogIn from '../containers/website/forms/loginForm';
-import NotFound from '../components/app/notfound/404';
+import NotFound from '../components/subskribble/app/notfound/404';
 // import Plans from '../components/subskribble/plans';
 // import Profile from '../components/subskribble/profile';
 // import Promos from '../components/subskribble/promos';

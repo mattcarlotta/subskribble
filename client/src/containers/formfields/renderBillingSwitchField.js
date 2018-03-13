@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { AntSwitchField } from './antReduxFormFields';
-import { resetBillingFieldValues, setBillingFieldValues } from '../../actions/formActionCreators';
+import { resetBillingFieldValues, setBillingFieldValues } from '../../actions/formActions';
 
 const CustomerSwitchField = ({ resetBillingFieldValues, sameBillingAddress, setBillingFieldValues }) => (
   <AntSwitchField

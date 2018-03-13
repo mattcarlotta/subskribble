@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { fetchSubscribers } from '../../../actions/subscriberActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
-import Spinner from '../../../components/app/loading/spinner';
+import Loader from '../../../components/subskribble/app/loading/Loader';
+import NoSubscribers from '../../../components/subskribble/app/notfound/noSubscribers';
 
 export default class Subscribers extends Component {
   state = { activesubscribers: '', inactivesubscribers: '', serverError: '' };
@@ -12,7 +13,7 @@ export default class Subscribers extends Component {
 
   fetchAllSubscribers = () => (
     fetchSubscribers()
-    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers, inactivesubscribers}))
+    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers1: activesubscribers , inactivesubscribers1: inactivesubscribers }))
     .catch(err => this.setState({ serverError: err }))
   )
 
@@ -30,8 +31,7 @@ export default class Subscribers extends Component {
     const { activesubscribers, inactivesubscribers, serverError } = this.state;
 
     if (!activesubscribers || !inactivesubscribers) {
-      if (serverError) return <p>Error!</p>
-      return <Spinner />
+      return <Loader Component={NoSubscribers} serverError={serverError} />
     }
 
     return <SubscriptionsPanel CARDS={CARDS(activesubscribers, inactivesubscribers)} />;
