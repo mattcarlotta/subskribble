@@ -13,7 +13,7 @@ export default class Subscribers extends Component {
 
   fetchAllSubscribers = () => (
     fetchSubscribers()
-    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers1: activesubscribers , inactivesubscribers1: inactivesubscribers }))
+    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers, inactivesubscribers }))
     .catch(err => this.setState({ serverError: err }))
   )
 

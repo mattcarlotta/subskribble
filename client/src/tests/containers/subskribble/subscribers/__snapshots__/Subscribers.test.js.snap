@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[SUBSCRIBERS] should load Subscribers component 1`] = `<Component />`;
+exports[`[SUBSCRIBERS] should load Subscribers component 1`] = `
+<Loader
+  Component={[Function]}
+  serverError=""
+/>
+`;
 
 exports[`[SUBSCRIBERS] should update Subscriber's local state and render the TableList 1`] = `
 <Component
