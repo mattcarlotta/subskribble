@@ -5,7 +5,11 @@ import RenderPanelButtons from '../panels/renderPanelButtons';
 import TogglePanelVisibility from '../panels/TogglePanelVisibility';
 import CustomerSignupForm from '../../../../containers/subskribble/forms/CustomerSignupForm';
 
-const NoSubscribers = ({ buttonPanel, visible }) => (
+const forms = [CustomerSignupForm];
+const formTitle = ["Customer Signup"];
+const submitFormTitle = ["Subscribe"]
+
+const noDataToDisplay = ({ buttonLabel, buttonPanel, formNum, visible }) => (
   <PageContainer>
     <div className="panel-container">
       <Card title="Subscribers" extra={buttonPanel()}>
@@ -13,14 +17,15 @@ const NoSubscribers = ({ buttonPanel, visible }) => (
           <div className="panel-body">
             <div className="ant-row">
               <RenderPanelButtons
-                CUSTOMBUTTONS={[{ className: 'f-r', label: "Add Subscriber" }]}
-                FORM={CustomerSignupForm}
-                FORMTITLE="Customer Signup"
-                SUBMITFORMTITLE="Subscribe"
+                CUSTOMBUTTONS={[{ className: 'f-r', label: buttonLabel }]}
+                FORM={forms[formNum]}
+                FORMTITLE={formTitle[formNum]}
+                SUBMITFORMTITLE={submitFormTitle[formNum]}
               />
               <div className="no-data">
-                <Icon type="line-chart" style={{ fontSize: 48 }} />
-                <p>No data Available</p>
+                <Icon type="line-chart" />
+                <h2>No data to display.</h2>
+                <p>You may not have any entries or the search filter does not match any of our current records.</p>
               </div>
             </div>
           </div>
@@ -30,4 +35,4 @@ const NoSubscribers = ({ buttonPanel, visible }) => (
   </PageContainer>
 )
 
-export default TogglePanelVisibility(NoSubscribers)
+export default TogglePanelVisibility(noDataToDisplay)

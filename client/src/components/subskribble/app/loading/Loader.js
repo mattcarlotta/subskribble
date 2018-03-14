@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from '../../../../images/logos/loading-blocks.gif'
+import NoDataToDisplay from '../notfound/noDataToDisplay';
 
 export default class Loader extends Component {
   state = { requestTimeout: false };
@@ -12,13 +13,13 @@ export default class Loader extends Component {
 
   timer = () => this.setState({ requestTimeout: true }, () => this.clearTimer())
 
-  setTimer = () => this.timeout = setTimeout(this.timer, 5000)
+  setTimer = () => this.timeout = setTimeout(this.timer, 3000)
 
   render = () => {
     const { requestTimeout } = this.state;
-		const { Component, serverError } = this.props;
+		const { serverError } = this.props;
 
-		if (serverError || requestTimeout) return <Component />
+		if (serverError || requestTimeout) return <NoDataToDisplay {...this.props} />
 
     return (
       <div className="spinner-container">

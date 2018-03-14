@@ -1,39 +1,32 @@
 import React, { Component } from 'react';
-
-import { fetchSubscribers } from '../../../actions/subscriberActions';
+import { connect } from 'react-redux';
+import { fetchSubscribers } from '../../../actions/tableActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 import Loader from '../../../components/subskribble/app/loading/Loader';
-import NoSubscribers from '../../../components/subskribble/app/notfound/noSubscribers';
 
-export default class Subscribers extends Component {
-  state = { activesubscribers: '', inactivesubscribers: '', serverError: '' };
+class Subscribers extends Component {
+  componentDidMount = () => this.props.fetchSubscribers();
 
-  componentDidMount = () => this.fetchAllSubscribers();
-
-  fetchAllSubscribers = () => (
-    fetchSubscribers()
-    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers, inactivesubscribers }))
-    .catch(err => this.setState({ serverError: err }))
-  )
-
-  // componentDidUpdate = (nextProps, nextState) => {
-	// 	const currentLoadedPage = parseInt(this.props.location.query.pageId, 10);
-	// 	if (this.state.currentPage !== currentLoadedPage) {
-	// 		this.setState({ currentPage: currentLoadedPage, isLoading: true }, () => {
-	// 			this.fetchBlogPosts(this.state.currentPage - 1);
-	// 		});
-	// 	}
-	// }
-
+  shouldComponentUpdate = (nextProps) => {
+    return nextProps !== this.props;
+  }
 
   render = () => {
-    const { activesubscribers, inactivesubscribers, serverError } = this.state;
+    const { activesubs, activesubcount, inactivesubs, inactivesubcount, serverError } = this.props;
 
-    if (!activesubscribers || !inactivesubscribers) {
-      return <Loader Component={NoSubscribers} serverError={serverError} />
+    if (!activesubs || !inactivesubs) {
+      return <Loader buttonLabel="Add Subscriber" formNum={0} serverError={serverError} />
     }
 
-    return <SubscriptionsPanel CARDS={CARDS(activesubscribers, inactivesubscribers)} />;
+    return <SubscriptionsPanel CARDS={CARDS(activesubs, activesubcount, inactivesubs, inactivesubcount)} />;
   }
 }
+
+export default connect(state => ({
+  activesubs: state.fields.activesubs,
+  activesubcount: state.fields.activesubcount,
+  inactivesubs: state.fields.inactivesubs,
+  inactivesubcount: state.fields.inactivesubcount,
+  serverError: state.server.error
+}), {fetchSubscribers})(Subscribers)

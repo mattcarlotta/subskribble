@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Table } from 'antd';
-import TableActions from '../../../components/subskribble/app/tables/TableActions'
+import TableActions from '../../../components/subskribble/app/tables/TableActions';
+import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
 
-class TableList extends Component {
-  //TODO: AJAX request to retrieve TABLECONTENTS
+class TableList extends PureComponent {
+  handlePageChange = (pagination) => {
+    let { TAB, sortByNum } = this.props;
+    let { current: page } = pagination;
+    TAB = TAB.toLowerCase().replace(/\s/g, '')
+    sortByNum = sortByNum ? sortByNum : 10;
+    page = page - 1;
+    this.props.fetchNextActiveSubscribers(TAB, page, sortByNum);
+  }
+
   render = () => {
-    const { TABLECONTENTS, TABLEHEADERS } = this.props;
+    const { sortByNum, TABLECONTENTS, TABLEHEADERS, TABLERECORDS } = this.props;
     return (
       <div className="table-container">
         <Table
@@ -19,11 +29,12 @@ class TableList extends Component {
             }
           ]}
           dataSource={TABLECONTENTS}
-          pagination={{ defaultCurrent: 1, total: 500 }}
+          pagination={{ defaultCurrent: 1, pageSize: sortByNum, total: TABLERECORDS }}
+          onChange={this.handlePageChange}
         />
       </div>
     )
   }
 }
 
-export default TableList;
+export default connect(state => ({ sortByNum: state.fields.sortByNum }), { fetchNextActiveSubscribers })(TableList);

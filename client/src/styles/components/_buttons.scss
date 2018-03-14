@@ -106,8 +106,6 @@
 .reset-field {
   @extend %p-r;
   @include c($darkwarmgrey);
-  @include h(32px);
-  @include w(32px);
   top: 3px;
   border: 0;
 

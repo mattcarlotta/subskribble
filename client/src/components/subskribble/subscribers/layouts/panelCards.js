@@ -9,22 +9,24 @@ const TABLEHEADERS = [
   { title: 'Amount', dataIndex: 'amount' }
 ];
 
-export default (activesubscribers, inactivesubscribers) => {
+export default (activesubs, activesubcount, inactivesubs, inactivesubcount) => {
   return [
     {
       FILTERFIELDLABEL: "Filter Active Subscriptions",
       FILTERFORM: "FilterActiveSubscriptions",
-      SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+      SELECTFIELD: true,
       TAB: "Active Subscribers",
-      TABLECONTENTS: activesubscribers,
+      TABLECONTENTS: activesubs,
+      TABLERECORDS: activesubcount,
       TABLEHEADERS: TABLEHEADERS
     },
     {
       FILTERFIELDLABEL: "Filter Inactive Subscriptions",
       FILTERFORM: "FilterInactiveSubscriptions",
-      SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+      SELECTFIELD: true,
       TAB: "Inactive Subscribers",
-      TABLECONTENTS: inactivesubscribers,
+      TABLECONTENTS: inactivesubs,
+      TABLERECORDS: inactivesubcount,
       TABLEHEADERS: TABLEHEADERS
     }
   ]

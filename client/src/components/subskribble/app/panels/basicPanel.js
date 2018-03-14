@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Card } from 'antd';
-import PanelBody from './panelBody';
+import PanelBody from '../../../../containers/subskribble/panels/panelBody';
 import TogglePanelVisibility from './TogglePanelVisibility';
 
 const BasicPanel = ({

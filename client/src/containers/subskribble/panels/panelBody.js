@@ -1,10 +1,10 @@
 import React from 'react';
 import FilterField from '../formFields/FilterField';
-import RenderPanelButtons from './renderPanelButtons';
+import RenderPanelButtons from '../../../components/subskribble/app/panels/renderPanelButtons';
 import SelectField from '../formFields/selectField';
-import TableList from '../../../../containers/subskribble/tables/TableList';
+import TableList from '../tables/TableList';
 
-export default ({
+const Panel = ({
   BUTTONFORM,
   BUTTONFORMTITLE,
   CARDBODY,
@@ -12,10 +12,13 @@ export default ({
   FILTERFORM,
   FILTERFIELDLABEL,
   GRAPH,
-  SELECTFIELDITEMS,
+  SELECTFIELD,
   SUBMITFORMTITLE,
+  TAB,
   TABLECONTENTS,
   TABLEHEADERS,
+  TABLERECORDS,
+  sortByNum,
   visible
 }) => (
   <div style={{ display: visible ? "block" : "none" }} className="panel-body-container">
@@ -23,7 +26,14 @@ export default ({
     <div className="panel-body">
       <div className="ant-row">
         <div className="ant-col-6">
-          { SELECTFIELDITEMS && <SelectField placeholder="Sort By" OPTIONS={SELECTFIELDITEMS} /> }
+          { SELECTFIELD &&
+            <SelectField
+              handleSortDataBy={this.handleSortDataBy}
+              OPTIONS={[10, 20, 50, 100]}
+              placeholder="Sort By"
+              TAB={TAB}
+            />
+          }
         </div>
         <div className="ant-col-6 f-r">
           { CUSTOMBUTTONS &&
@@ -34,11 +44,21 @@ export default ({
               SUBMITFORMTITLE={SUBMITFORMTITLE}
             />
           }
-          { FILTERFORM && <FilterField placeholder={FILTERFIELDLABEL} form={FILTERFORM} /> }
+          { FILTERFORM && <FilterField form={FILTERFORM} placeholder={FILTERFIELDLABEL} /> }
         </div>
       </div>
       { GRAPH && GRAPH }
-      { TABLECONTENTS && <TableList TABLECONTENTS={TABLECONTENTS} TABLEHEADERS={TABLEHEADERS} /> }
+      { TABLECONTENTS &&
+        <TableList
+          TAB={TAB}
+          TABLECONTENTS={TABLECONTENTS}
+          TABLEHEADERS={TABLEHEADERS}
+          TABLERECORDS={TABLERECORDS}
+        />
+      }
     </div>
   </div>
 )
+
+
+export default Panel;

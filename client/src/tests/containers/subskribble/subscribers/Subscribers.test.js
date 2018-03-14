@@ -17,8 +17,8 @@ describe('[SUBSCRIBERS]', () => {
 
   it('should update Subscriber\'s local state and render the TableList', async () => {
     await wrapper.instance().fetchAllSubscribers();
-    expect(wrapper.state().activesubscribers).toEqual(ACTIVESUBSCRIBERS);
-    expect(wrapper.state().inactivesubscribers).toEqual(INACTIVESUBSCRIBERS);
+    expect(wrapper.props().activesubscribers).toEqual(ACTIVESUBSCRIBERS);
+    expect(wrapper.props().inactivesubscribers).toEqual(INACTIVESUBSCRIBERS);
     wrapper.update();
     expect(toJSON(wrapper)).toMatchSnapshot();
   })

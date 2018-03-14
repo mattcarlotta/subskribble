@@ -6,8 +6,15 @@ import {
 	AUTH_SUCCESS,
 	FETCHING_USER,
 	RESET_NOTIFICATIONS,
+	SERVER_ERROR,
+	SET_ACTIVE_SUBS,
+	// SET_ACTIVE_SUBS_COUNT,
+	SET_INACTIVE_SUBS,
+	// SET_INACTIVE_SUBS_COUNT,
+	SET_INTIAL_SUBS,
 	SET_SIGNEDIN_USER,
 	SET_BILLING_FORM_VALUES,
+	SET_SORT_BY_NUM,
 	UNAUTH_USER
 } from '../actions/types';
 
@@ -34,6 +41,40 @@ const authReducer = (state = {}, action) => {
 	}
 };
 
+const tableReducer = (state={}, action) => {
+	switch (action.type) {
+		case SET_ACTIVE_SUBS:
+			return { ...state, activesubs: action.payload };
+		// case SET_ACTIVE_SUBS_COUNT:
+		// 	return { ...state, activesubcount: action.payload }
+		case SET_INACTIVE_SUBS:
+			return { ...state, inactivesubs: action.payload };
+		// case SET_INACTIVE_SUBS_COUNT:
+		// 	return { ...state, inactivesubcount: action.payload };
+		case SET_INTIAL_SUBS:
+			return {
+				...state,
+				activesubs: action.payload.activesubscribers,
+				activesubcount: action.payload.activesubscriberscount,
+				inactivesubs: action.payload.inactivesubscribers,
+				inactivesubcount: action.payload.inactivesubscriberscount
+			}
+		case SET_SORT_BY_NUM:
+			return { ...state, sortByNum: action.payload };
+		default:
+			return state;
+	}
+}
+
+const serverReducer = (state={}, action) => {
+	switch (action.type) {
+		case SERVER_ERROR:
+			return { ...state, error: action.payload }
+		default:
+			return state;
+	}
+}
+
 const formReducers = {
   form: formReducer.plugin({
     CustomerPlanSignup: (state, action) => {   // <----- 'CustomerPlanSignup' is name of form given to reduxForm()
@@ -55,6 +96,8 @@ const formReducers = {
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	fields: tableReducer,
+	server: serverReducer,
 	...formReducers,
 	routing
 });
