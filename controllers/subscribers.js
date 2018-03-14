@@ -1,9 +1,10 @@
 const db = require('../db/config');
 
 const query = {
-  subs: (database) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM ${database} LIMIT 10`),
-  subcount: (database) => (`SELECT COUNT(*) FROM ${database}`)
+  subs: (table) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM ${table} LIMIT 10;`),
+  subcount: (table) => (`ANALYZE ${table}; SELECT reltuples AS estimate FROM pg_class WHERE relname = '${table}';`)
 }
+
 
 module.exports = app => {
   const controller = {
@@ -21,11 +22,15 @@ module.exports = app => {
     const table2 = 'inactivesubscribers';
     try {
       const activesubscribers = await db.any(query.subs(table1));
+
       let activesubscriberscount = await db.any(query.subcount(table1));
-      activesubscriberscount = parseInt(activesubscriberscount[0].count, 10);
+      activesubscriberscount = activesubscriberscount[0].estimate;
+
       const inactivesubscribers = await db.any(query.subs(table2));
+
       let inactivesubscriberscount = await db.any(query.subcount(table2))
-      inactivesubscriberscount = parseInt(inactivesubscriberscount[0].count, 10);
+      inactivesubscriberscount =  inactivesubscriberscount[0].estimate;
+
       res.status(201).json({ activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount });
     } catch (err) {
       console.log('server err', err)

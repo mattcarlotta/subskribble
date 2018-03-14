@@ -52,6 +52,10 @@
   }
 }
 
+.centered {
+  @extend %d-b, %m-0-a;
+}
+
 .nav-button {
   @extend %p-r;
   @include b-c($transparent);

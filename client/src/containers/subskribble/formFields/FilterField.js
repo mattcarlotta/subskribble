@@ -20,13 +20,11 @@ class FilterField extends Component {
 
   render = () => (
     <form className="filter-container" onSubmit={this.handleFormSubmit} onChange={this.handleFormChange}>
-      <div className='form-90'>
-        <Input
-          name="filter"
-          placeholder={this.props.placeholder}
-          value={this.state.filterField}
-        />
-      </div>
+      <Input
+        name="filter"
+        placeholder={this.props.placeholder}
+        value={this.state.filterField}
+      />
     </form>
   )
 }

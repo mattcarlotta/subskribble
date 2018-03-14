@@ -1,5 +1,5 @@
 import map from 'lodash/map';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
@@ -17,14 +17,13 @@ class SelectField extends PureComponent {
 
   render = () => {
     const {
-      className,
       OPTIONS,
       placeholder,
     } = this.props;
 
     return (
-      <div className={className}>
-        <span style={{ textTransform: 'none' }}>Items per page: </span>
+      <Fragment>
+        <span style={{ textTransform: 'none' }}>It per page: </span>
         <Select
           defaultValue={10}
           placeholder={placeholder}
@@ -37,7 +36,7 @@ class SelectField extends PureComponent {
               <Option key={value} value={value}>{value}</Option>
             ))}
         </Select>
-      </div>
+      </Fragment>
     )
   }
 

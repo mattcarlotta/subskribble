@@ -1,4 +1,7 @@
 import React from 'react';
+import CustomerSignupForm from '../../../../containers/subskribble/forms/CustomerSignupForm';
+
+const CUSTOMERBUTTONS = [{ className: 'centered', label: "Add Subscriber" }];
 
 const TABLEHEADERS = [
   { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
@@ -12,7 +15,10 @@ const TABLEHEADERS = [
 export default (activesubs, activesubcount, inactivesubs, inactivesubcount) => {
   return [
     {
-      FILTERFIELDLABEL: "Filter Active Subscriptions",
+      BUTTONFORM: CustomerSignupForm,
+      BUTTONFORMTITLE: 'Customer Signup',
+      CUSTOMBUTTONS: CUSTOMERBUTTONS,
+      FILTERFIELDLABEL: "Filter Active Subscribers",
       FILTERFORM: "FilterActiveSubscriptions",
       SELECTFIELD: true,
       TAB: "Active Subscribers",
@@ -21,7 +27,7 @@ export default (activesubs, activesubcount, inactivesubs, inactivesubcount) => {
       TABLEHEADERS: TABLEHEADERS
     },
     {
-      FILTERFIELDLABEL: "Filter Inactive Subscriptions",
+      FILTERFIELDLABEL: "Filter Inactive Subscribers",
       FILTERFORM: "FilterInactiveSubscriptions",
       SELECTFIELD: true,
       TAB: "Inactive Subscribers",

@@ -35,7 +35,7 @@ export default class PanelBody extends Component {
         { CARDBODY && <CARDBODY /> }
         <div className="panel-body">
           <div className="ant-row">
-            <div className="ant-col-6">
+            <div className="ant-col-8">
               { SELECTFIELD &&
                 <SelectField
                   OPTIONS={[10, 20, 50, 100]}
@@ -46,7 +46,7 @@ export default class PanelBody extends Component {
                 />
               }
             </div>
-            <div className="ant-col-6 f-r">
+            <div className="ant-col-8">
               { CUSTOMBUTTONS &&
                 <RenderPanelButtons
                   CUSTOMBUTTONS={CUSTOMBUTTONS}
@@ -55,6 +55,8 @@ export default class PanelBody extends Component {
                   SUBMITFORMTITLE={SUBMITFORMTITLE}
                 />
               }
+            </div>
+            <div className="ant-col-8 f-r">
               { FILTERFORM && <FilterField form={FILTERFORM} placeholder={FILTERFIELDLABEL} /> }
             </div>
           </div>
