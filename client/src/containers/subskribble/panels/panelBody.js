@@ -42,7 +42,7 @@ export default class PanelBody extends Component {
                   placeholder="Sort By"
                   setSortByNum={this.setSortByNum}
                   selectCurrentPage={this.selectCurrentPage}
-                  TAB={TAB}
+                  TAB={TAB.toLowerCase().replace(/\s/g, '')}
                 />
               }
             </div>
@@ -64,7 +64,7 @@ export default class PanelBody extends Component {
               current={current}
               sortByNum={sortByNum}
               selectCurrentPage={this.selectCurrentPage}
-              TAB={TAB}
+              TAB={TAB.toLowerCase().replace(/\s/g, '')}
               TABLECONTENTS={TABLECONTENTS}
               TABLEHEADERS={TABLEHEADERS}
               TABLERECORDS={TABLERECORDS}

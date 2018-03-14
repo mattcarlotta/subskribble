@@ -1,10 +1,52 @@
 import map from 'lodash/map';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
 const { Option } = Select;
 
+class SelectField extends PureComponent {
+  handleSortDataBy = nextRecords => {
+    const { fetchNextActiveSubscribers, TAB, setSortByNum, selectCurrentPage } = this.props;
+    setSortByNum(nextRecords);
+    selectCurrentPage(1);
+    fetchNextActiveSubscribers(TAB, 0, nextRecords);
+  };
+
+  handleBlur = () => this._select.blur();
+
+  render = () => {
+    const {
+      className,
+      OPTIONS,
+      placeholder,
+    } = this.props;
+
+    return (
+      <div className={className}>
+        <span style={{ textTransform: 'none' }}>Items per page: </span>
+        <Select
+          defaultValue={10}
+          placeholder={placeholder}
+          onSelect={this.handleSortDataBy}
+          style={{ width: '100%', maxWidth: '68px' }}
+          onChange={this.handleBlur}
+          ref={node => this._select = node}
+          >
+            {map(OPTIONS, value => (
+              <Option key={value} value={value}>{value}</Option>
+            ))}
+        </Select>
+      </div>
+    )
+  }
+
+
+}
+
+export default connect(null, { fetchNextActiveSubscribers })(SelectField);
+
+/*
 const SelectField = ({
   className,
   fetchNextActiveSubscribers,
@@ -39,3 +81,4 @@ const SelectField = ({
 }
 
 export default connect(null, { fetchNextActiveSubscribers })(SelectField);
+*/

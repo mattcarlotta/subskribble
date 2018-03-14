@@ -1,5 +1,10 @@
 const db = require('../db/config');
 
+const query = {
+  subs: (database) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM ${database} LIMIT 10`),
+  subcount: (database) => (`SELECT COUNT(*) FROM ${database}`)
+}
+
 module.exports = app => {
   const controller = {
     // APP methos
@@ -12,23 +17,18 @@ module.exports = app => {
   }
 
   const _index = async (req, res) => {
+    const table1 = 'activesubscribers';
+    const table2 = 'inactivesubscribers';
     try {
-      const activesubscribers = await db.any(
-        "SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM activesubscribers LIMIT 10"
-      );
-      let activesubscriberscount = await db.any(
-        "SELECT COUNT(*) FROM activesubscribers"
-      )
+      const activesubscribers = await db.any(query.subs(table1));
+      let activesubscriberscount = await db.any(query.subcount(table1));
       activesubscriberscount = parseInt(activesubscriberscount[0].count, 10);
-      const inactivesubscribers = await db.any(
-        "SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM inactivesubscribers LIMIT 10"
-      );
-      let inactivesubscriberscount = await db.any(
-        "SELECT COUNT(*) FROM inactivesubscribers"
-      )
+      const inactivesubscribers = await db.any(query.subs(table2));
+      let inactivesubscriberscount = await db.any(query.subcount(table2))
       inactivesubscriberscount = parseInt(inactivesubscriberscount[0].count, 10);
       res.status(201).json({ activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount });
     } catch (err) {
+      console.log('server err', err)
       return res.status(500).json({ err })
     }
   }

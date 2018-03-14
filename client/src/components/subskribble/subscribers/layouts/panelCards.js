@@ -5,8 +5,8 @@ const TABLEHEADERS = [
   { title: 'Subscriber', dataIndex: 'subscriber' },
   { title: 'Plan', dataIndex: 'plan' },
   { title: 'Start Date', dataIndex: 'startdate' },
-  { title: 'End Date', dataIndex: 'enddate' },
-  { title: 'Amount', dataIndex: 'amount' }
+  { title: 'End Date', dataIndex: 'enddate', render: enddate => enddate ? <span>{enddate}</span> : <span style={{ marginLeft: 25 }}>-</span> },
+  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
 export default (activesubs, activesubcount, inactivesubs, inactivesubcount) => {

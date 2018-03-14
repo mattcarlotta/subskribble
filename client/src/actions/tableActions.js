@@ -15,7 +15,7 @@ const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
     activesubscribers && dispatch({ type: SET_ACTIVE_SUBS, payload: activesubscribers })
     inactivesubscribers && dispatch({ type: SET_INACTIVE_SUBS, payload: inactivesubscribers })
   })
-  .catch(err => dispatch({ SERVER_ERROR, payload: err }))
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 
@@ -25,7 +25,7 @@ const fetchSubscribers = () => dispatch => (
   .then(({data: {activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount}}) => {
     dispatch({ type: SET_INTIAL_SUBS, payload: {activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount}})
   })
-  .catch(err => dispatch({ SERVER_ERROR, payload: err }))
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 export {
