@@ -6,16 +6,16 @@ import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
 
 class TableList extends PureComponent {
   handlePageChange = (pagination) => {
-    let { TAB, sortByNum } = this.props;
-    let { current: page } = pagination;
+    let { TAB, sortByNum: nextRecords } = this.props;
+    let { current: limitCount } = pagination;
     TAB = TAB.toLowerCase().replace(/\s/g, '')
-    sortByNum = sortByNum ? sortByNum : 10;
-    page = page - 1;
-    this.props.fetchNextActiveSubscribers(TAB, page, sortByNum);
+    this.props.selectCurrentPage(limitCount)
+    limitCount = limitCount - 1;
+    this.props.fetchNextActiveSubscribers(TAB, limitCount, nextRecords);
   }
 
   render = () => {
-    const { sortByNum, TABLECONTENTS, TABLEHEADERS, TABLERECORDS } = this.props;
+    const { current, sortByNum, TABLECONTENTS, TABLEHEADERS, TABLERECORDS } = this.props;
     return (
       <div className="table-container">
         <Table
@@ -29,7 +29,7 @@ class TableList extends PureComponent {
             }
           ]}
           dataSource={TABLECONTENTS}
-          pagination={{ defaultCurrent: 1, pageSize: sortByNum, total: TABLERECORDS }}
+          pagination={{ defaultCurrent: 1, current, pageSize: sortByNum, total: TABLERECORDS }}
           onChange={this.handlePageChange}
         />
       </div>
@@ -37,4 +37,4 @@ class TableList extends PureComponent {
   }
 }
 
-export default connect(state => ({ sortByNum: state.fields.sortByNum }), { fetchNextActiveSubscribers })(TableList);
+export default connect(null, { fetchNextActiveSubscribers })(TableList);

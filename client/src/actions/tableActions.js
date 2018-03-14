@@ -6,7 +6,6 @@ import {
   // SET_ACTIVE_SUBS_COUNT,
   SET_INACTIVE_SUBS,
   // SET_INACTIVE_SUBS_COUNT,
-  SET_SORT_BY_NUM
 } from './types';
 
 // Fetches next/prev via sortByNum active subs from DB
@@ -29,11 +28,7 @@ const fetchSubscribers = () => dispatch => (
   .catch(err => dispatch({ SERVER_ERROR, payload: err }))
 )
 
-// Sets table sortby
-const setSortByNum = (num) => ({ type: SET_SORT_BY_NUM, payload: num })
-
 export {
   fetchNextActiveSubscribers,
   fetchSubscribers,
-  setSortByNum
 }

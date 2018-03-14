@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { fetchSubscribers } from '../../../actions/tableActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 import Loader from '../../../components/subskribble/app/loading/Loader';
 
-class Subscribers extends Component {
+class Subscribers extends PureComponent {
   componentDidMount = () => this.props.fetchSubscribers();
-
-  shouldComponentUpdate = (nextProps) => {
-    return nextProps !== this.props;
-  }
 
   render = () => {
     const { activesubs, activesubcount, inactivesubs, inactivesubcount, serverError } = this.props;

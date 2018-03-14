@@ -2,24 +2,33 @@ import map from 'lodash/map';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
-import { fetchNextActiveSubscribers, setSortByNum } from '../../../actions/tableActions';
+import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
 const { Option } = Select;
 
-const SelectField = ({ className, fetchNextActiveSubscribers, OPTIONS, placeholder, setSortByNum, TAB }) => {
-  const handleSortDataBy = num => {
-    setSortByNum(num);
+const SelectField = ({
+  className,
+  fetchNextActiveSubscribers,
+  OPTIONS,
+  placeholder,
+  selectCurrentPage,
+  setSortByNum,
+  TAB
+}) => {
+  const handleSortDataBy = nextRecords => {
+    setSortByNum(nextRecords);
     TAB = TAB.toLowerCase().replace(/\s/g, '')
-    const limitCount = 0;
-    const nextRecords = num;
-    fetchNextActiveSubscribers(TAB, limitCount, nextRecords);
+    selectCurrentPage(1);
+    fetchNextActiveSubscribers(TAB, 0, nextRecords);
   };
 
   return (
     <div className={className}>
+      <span>Sort: </span>
       <Select
+        defaultValue={10}
         placeholder={placeholder}
         onSelect={handleSortDataBy}
-        style={{ width: '100%', maxWidth: '150px' }}
+        style={{ width: '100%', maxWidth: '100px' }}
         >
           {map(OPTIONS, value => (
             <Option key={value} value={value}>{value}</Option>
@@ -29,4 +38,4 @@ const SelectField = ({ className, fetchNextActiveSubscribers, OPTIONS, placehold
   )
 }
 
-export default connect(null, { fetchNextActiveSubscribers, setSortByNum })(SelectField);
+export default connect(null, { fetchNextActiveSubscribers })(SelectField);

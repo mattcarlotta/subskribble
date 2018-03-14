@@ -14,7 +14,6 @@ import {
 	SET_INTIAL_SUBS,
 	SET_SIGNEDIN_USER,
 	SET_BILLING_FORM_VALUES,
-	SET_SORT_BY_NUM,
 	UNAUTH_USER
 } from '../actions/types';
 
@@ -59,8 +58,6 @@ const tableReducer = (state={}, action) => {
 				inactivesubs: action.payload.inactivesubscribers,
 				inactivesubcount: action.payload.inactivesubscriberscount
 			}
-		case SET_SORT_BY_NUM:
-			return { ...state, sortByNum: action.payload };
 		default:
 			return state;
 	}
