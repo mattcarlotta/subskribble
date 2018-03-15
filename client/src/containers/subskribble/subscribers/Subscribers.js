@@ -1,22 +1,22 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { fetchSubscribers } from '../../../actions/tableActions';
+import { fetchSubscribers, fetchSubscriberCounts } from '../../../actions/tableActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
 import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 import Loader from '../../../components/subskribble/app/loading/Loader';
 
 class Subscribers extends PureComponent {
-  componentDidMount = () => this.props.fetchSubscribers();
-
-  render = () => {
-    const { activesubs, activesubcount, inactivesubs, inactivesubcount, serverError } = this.props;
-
-    if (!activesubs || !inactivesubs) {
-      return <Loader buttonLabel="Add Subscriber" formNum={0} serverError={serverError} />
-    }
-
-    return <SubscriptionsPanel CARDS={CARDS(activesubs, activesubcount, inactivesubs, inactivesubcount)} />;
+  componentDidMount = () => {
+    const { activesubcount, inactivesubcount, fetchSubscriberCounts, fetchSubscribers } = this.props;
+    (!activesubcount || !inactivesubcount) && fetchSubscriberCounts();
+    fetchSubscribers();
   }
+
+  render = () => (
+    (!this.props.activesubs || !this.props.inactivesubs || !this.props.activesubcount || !this.props.inactivesubcount)
+      ? <Loader buttonLabel="Add Subscriber" formNum={0} serverError={this.props.serverError} />
+      : <SubscriptionsPanel CARDS={CARDS({...this.props})} />
+  )
 }
 
 export default connect(state => ({
@@ -25,4 +25,4 @@ export default connect(state => ({
   inactivesubs: state.fields.inactivesubs,
   inactivesubcount: state.fields.inactivesubcount,
   serverError: state.server.error
-}), {fetchSubscribers})(Subscribers)
+}), { fetchSubscribers, fetchSubscriberCounts })(Subscribers)

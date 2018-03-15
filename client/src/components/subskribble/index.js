@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-// import RenderNotifications from '../../containers/app/renderNotifications';
+import RenderErrors from '../../containers/subskribble/app/renderErrors';
 
 export default ({ children }) => (
 	<Fragment>
 		{ children }
-		{/* <RenderNotifications /> */}
+		<RenderErrors />
 	</Fragment>
 )

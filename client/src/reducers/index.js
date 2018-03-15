@@ -6,12 +6,14 @@ import {
 	AUTH_SUCCESS,
 	FETCHING_USER,
 	RESET_NOTIFICATIONS,
+	RESET_SERVER_ERROR,
 	SERVER_ERROR,
 	SET_ACTIVE_SUBS,
 	// SET_ACTIVE_SUBS_COUNT,
 	SET_INACTIVE_SUBS,
 	// SET_INACTIVE_SUBS_COUNT,
-	SET_INTIAL_SUBS,
+	SET_INITIAL_SUBS,
+	SET_INITIAL_SUBCOUNTS,
 	SET_SIGNEDIN_USER,
 	SET_BILLING_FORM_VALUES,
 	UNAUTH_USER
@@ -50,12 +52,16 @@ const tableReducer = (state={}, action) => {
 			return { ...state, inactivesubs: action.payload };
 		// case SET_INACTIVE_SUBS_COUNT:
 		// 	return { ...state, inactivesubcount: action.payload };
-		case SET_INTIAL_SUBS:
+		case SET_INITIAL_SUBS:
 			return {
 				...state,
 				activesubs: action.payload.activesubscribers,
+				inactivesubs: action.payload.inactivesubscribers
+			}
+		case SET_INITIAL_SUBCOUNTS:
+			return {
+				...state,
 				activesubcount: action.payload.activesubscriberscount,
-				inactivesubs: action.payload.inactivesubscribers,
 				inactivesubcount: action.payload.inactivesubscriberscount
 			}
 		default:
@@ -65,8 +71,11 @@ const tableReducer = (state={}, action) => {
 
 const serverReducer = (state={}, action) => {
 	switch (action.type) {
+		case RESET_SERVER_ERROR:
+			console.log('triggered');
+			return { ...state, error: '' };
 		case SERVER_ERROR:
-			return { ...state, error: action.payload }
+			return { ...state, error: action.payload };
 		default:
 			return state;
 	}

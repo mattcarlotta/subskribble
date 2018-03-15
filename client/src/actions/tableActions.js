@@ -1,12 +1,15 @@
 import app from './axiosConfig';
 import {
   SERVER_ERROR,
-  SET_INTIAL_SUBS,
+  SET_INITIAL_SUBS,
+  SET_INITIAL_SUBCOUNTS,
   SET_ACTIVE_SUBS,
   // SET_ACTIVE_SUBS_COUNT,
   SET_INACTIVE_SUBS,
   // SET_INACTIVE_SUBS_COUNT,
 } from './types';
+
+app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 
 // Fetches next/prev via sortByNum active subs from DB
 const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
@@ -19,11 +22,20 @@ const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
 )
 
 
-// Fetches initial 10 active/inactive subscribers and counts and from DB
+// Fetches initial 10 active/inactive subscribers from DB
 const fetchSubscribers = () => dispatch => (
   app.get('subscribers')
-  .then(({data: {activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount}}) => {
-    dispatch({ type: SET_INTIAL_SUBS, payload: {activesubscribers, activesubscriberscount, inactivesubscribers, inactivesubscriberscount}})
+  .then(({data: {activesubscribers, inactivesubscribers}}) => {
+    dispatch({ type: SET_INITIAL_SUBS, payload: {activesubscribers, inactivesubscribers}})
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
+
+// Fetches initial subscribers counts from DB
+const fetchSubscriberCounts = () => dispatch => (
+  app.get('subscribercounts')
+  .then(({data: {activesubscriberscount, inactivesubscriberscount}}) => {
+    dispatch({ type: SET_INITIAL_SUBCOUNTS, payload: { activesubscriberscount, inactivesubscriberscount }})
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
@@ -31,4 +43,5 @@ const fetchSubscribers = () => dispatch => (
 export {
   fetchNextActiveSubscribers,
   fetchSubscribers,
+  fetchSubscriberCounts
 }

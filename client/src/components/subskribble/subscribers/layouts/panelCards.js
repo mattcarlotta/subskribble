@@ -12,7 +12,7 @@ const TABLEHEADERS = [
   { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
-export default (activesubs, activesubcount, inactivesubs, inactivesubcount) => {
+export default ({ activesubs, activesubcount, inactivesubs, inactivesubcount }) => {
   return [
     {
       BUTTONFORM: CustomerSignupForm,
