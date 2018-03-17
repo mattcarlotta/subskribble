@@ -18,7 +18,7 @@ module.exports = app => {
     fetchCounts: (req, res) => _fetchCounts(req, res),
     // create: (req, res) => _create(req,res)
     // show: (req, res) => _show(req,res)
-    update: (req, res) => _update(req,res)
+    update: (req, res) => _update(req, res)
     // delete: (req, res) => _delete(req, res)
   }
 

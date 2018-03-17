@@ -20,11 +20,11 @@ const pgp = require('pg-promise')(initOptions) // initialize pg-promise w/option
 module.exports = app => {
   // Database connection details;
   const db = pgp({
-    host: vars[env].host, // 'localhost' is the default;
-    password: vars[env].dbpassword,
-    port: vars[env].dbport, // 5432 is the default;
-    user: vars[env].dbowner,
-    database: vars[env].database,
+    host: app.get("host"),
+    password: app.get("dbpassword"),
+    port: app.get("dbport"),
+    user:  app.get("dbowner"),
+    database: app.get('database'),
   });
 
   if (env !== 'production') monitor.attach(initOptions); // database connection logger

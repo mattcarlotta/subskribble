@@ -20,21 +20,21 @@ import {
 	UNAUTH_USER
 } from '../actions/types';
 
-const authReducer = (state = {}, action) => {
-	switch (action.type) {
+const authReducer = (state = {}, { payload, type }) => {
+	switch (type) {
 		case AUTH_ERROR:
-			return { ...state, error: action.payload };
+			return { ...state, error: payload };
 		case AUTH_SUCCESS:
-			return { ...state, success: action.payload };
+			return { ...state, success: payload };
 		case FETCHING_USER:
-			return { ...state, fetchingUser: action.payload };
+			return { ...state, fetchingUser: payload };
 		case RESET_NOTIFICATIONS:
 			return { ...state, error: '', success: '' };
 		case SET_SIGNEDIN_USER:
 			return {
 				...state,
-				username: action.payload.user,
-				isGod: action.payload.isGod
+				username: payload.user,
+				isGod: payload.isGod
 			};
 		case UNAUTH_USER:
 			return { ...state, username: null, isGod: null };
@@ -43,41 +43,41 @@ const authReducer = (state = {}, action) => {
 	}
 };
 
-const tableReducer = (state={}, action) => {
-	switch (action.type) {
+const tableReducer = (state={}, { payload, type }) => {
+	switch (type) {
 		case SET_ACTIVE_SUBS:
-			return { ...state, activesubs: action.payload };
+			return { ...state, activesubs: payload };
 		// case SET_ACTIVE_SUBS_COUNT:
 		// 	return { ...state, activesubcount: action.payload }
 		case SET_INACTIVE_SUBS:
-			return { ...state, inactivesubs: action.payload };
+			return { ...state, inactivesubs: payload };
 		// case SET_INACTIVE_SUBS_COUNT:
 		// 	return { ...state, inactivesubcount: action.payload };
 		case SET_INITIAL_SUBS:
 			return {
 				...state,
-				activesubs: action.payload.activesubscribers,
-				inactivesubs: action.payload.inactivesubscribers
+				activesubs: payload.activesubscribers,
+				inactivesubs: payload.inactivesubscribers
 			}
 		case SET_INITIAL_SUBCOUNTS:
 			return {
 				...state,
-				activesubcount: action.payload.activesubscriberscount,
-				inactivesubcount: action.payload.inactivesubscriberscount
+				activesubcount: payload.activesubscriberscount,
+				inactivesubcount: payload.inactivesubscriberscount
 			}
 		default:
 			return state;
 	}
 }
 
-const serverReducer = (state={}, action) => {
-	switch (action.type) {
+const serverReducer = (state={}, { payload, type }) => {
+	switch (type) {
 		case RESET_SERVER_MESSAGES:
 			return { ...state, error: '', message: '' };
 		case SERVER_ERROR:
-			return { ...state, error: action.payload };
+			return { ...state, error: payload };
 		case SERVER_MESSAGE:
-			return { ...state, message: action.payload };
+			return { ...state, message: payload };
 		default:
 			return state;
 	}

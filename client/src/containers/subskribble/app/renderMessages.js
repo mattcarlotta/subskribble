@@ -7,7 +7,7 @@ import { resetServerMessages } from '../../../actions/appActions';
 notification.config({
   placement: 'topRight',
   top: 50,
-  duration: 3,
+  duration: 7,
 });
 
 class RenderMessages extends Component {

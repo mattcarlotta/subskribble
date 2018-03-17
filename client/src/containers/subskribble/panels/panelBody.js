@@ -10,7 +10,8 @@ class PanelBody extends Component {
 
   componentDidUpdate = (prevProps) => {
     const { activesubcount, inactivesubcount } = this.props;
-    if (prevProps.activesubcount !== activesubcount || prevProps.inactivesubcount !== inactivesubcount) this.setState({ current: 1, sortByNum: 10 })
+    const { activesubcount: prevActiveSubcount, inactivesubcount: prevInactiveSubcount } = prevProps;
+    if (prevActiveSubcount !== activesubcount || prevInactiveSubcount !== inactivesubcount) this.setState({ current: 1, sortByNum: 10 })
   }
 
   setSortByNum = num => this.setState({ sortByNum: num })

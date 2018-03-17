@@ -12,6 +12,10 @@ console.log(`[${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
 module.exports = app => {
 	app.set('env', env); // sets current env mode (development, production or test)
 	app.set('host', vars[env].host); // sets localhost or remote host
+	app.set('dbpassword', vars[env].dbpassword);
+	app.set('dbport', vars[env].dbport);
+	app.set('dbowner', vars[env].dbowner);
+	app.set('database', vars[env].database);
  	app.set("port", vars[env].port);
 	app.set("moment", moment);
 	app.use(cors()); // allows cross origin calls
