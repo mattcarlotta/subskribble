@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Loading from '../../../../images/logos/loading-blocks.gif'
-import NoDataToDisplay from '../notfound/noDataToDisplay';
+import NoDataToDisplay from '../../../../components/subskribble/app/notfound/noDataToDisplay';
 
-export default class Loader extends Component {
+class Loader extends Component {
   state = { requestTimeout: false };
 
 	componentDidMount = () => this.setTimer();
+
+  shouldComponentUpdate = (nextProps) => (
+    nextProps.serverError !== ''
+  )
 
 	componentWillUnmount = () => this.clearTimer();
 
@@ -28,3 +33,5 @@ export default class Loader extends Component {
     );
   }
 }
+
+export default connect( state => ({ serverError: state.server.error }))(Loader);

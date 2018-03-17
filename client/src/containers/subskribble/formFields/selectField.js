@@ -19,18 +19,19 @@ class SelectField extends PureComponent {
     const {
       OPTIONS,
       placeholder,
+      sortByNum
     } = this.props;
 
     return (
       <Fragment>
-        <span style={{ textTransform: 'none' }}>It per page: </span>
+        <span style={{ textTransform: 'none' }}>Items per page: </span>
         <Select
-          defaultValue={10}
           placeholder={placeholder}
           onSelect={this.handleSortDataBy}
           style={{ width: '100%', maxWidth: '68px' }}
           onChange={this.handleBlur}
           ref={node => this._select = node}
+          value={sortByNum}
           >
             {map(OPTIONS, value => (
               <Option key={value} value={value}>{value}</Option>
@@ -39,45 +40,6 @@ class SelectField extends PureComponent {
       </Fragment>
     )
   }
-
-
 }
 
 export default connect(null, { fetchNextActiveSubscribers })(SelectField);
-
-/*
-const SelectField = ({
-  className,
-  fetchNextActiveSubscribers,
-  OPTIONS,
-  placeholder,
-  selectCurrentPage,
-  setSortByNum,
-  TAB
-}) => {
-  const handleSortDataBy = nextRecords => {
-    setSortByNum(nextRecords);
-    TAB = TAB.toLowerCase().replace(/\s/g, '')
-    selectCurrentPage(1);
-    fetchNextActiveSubscribers(TAB, 0, nextRecords);
-  };
-
-  return (
-    <div className={className}>
-      <span>Sort: </span>
-      <Select
-        defaultValue={10}
-        placeholder={placeholder}
-        onSelect={handleSortDataBy}
-        style={{ width: '100%', maxWidth: '100px' }}
-        >
-          {map(OPTIONS, value => (
-            <Option key={value} value={value}>{value}</Option>
-          ))}
-      </Select>
-    </div>
-  )
-}
-
-export default connect(null, { fetchNextActiveSubscribers })(SelectField);
-*/

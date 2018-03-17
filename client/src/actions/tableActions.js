@@ -1,6 +1,7 @@
 import app from './axiosConfig';
 import {
   SERVER_ERROR,
+  SERVER_MESSAGE,
   SET_INITIAL_SUBS,
   SET_INITIAL_SUBCOUNTS,
   SET_ACTIVE_SUBS,
@@ -13,14 +14,13 @@ app.interceptors.response.use(response => (response), error => (Promise.reject(e
 
 // Fetches next/prev via sortByNum active subs from DB
 const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
-  app.get(`subscribers/records?table=${table}&page=${page}&sortByNum=${sortByNum}`)
+  app.get(`subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`)
   .then(({data: {activesubscribers, inactivesubscribers }}) => {
     activesubscribers && dispatch({ type: SET_ACTIVE_SUBS, payload: activesubscribers })
     inactivesubscribers && dispatch({ type: SET_INACTIVE_SUBS, payload: inactivesubscribers })
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
-
 
 // Fetches initial 10 active/inactive subscribers from DB
 const fetchSubscribers = () => dispatch => (
@@ -40,8 +40,19 @@ const fetchSubscriberCounts = () => dispatch => (
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
+const suspendSubscriber = (updateType, statusType, userid) => dispatch => (
+  app.put(`subscribers/update/${userid}`, { statusType, updateType })
+  .then(({data: {message}}) => {
+    dispatch(fetchSubscriberCounts())
+    dispatch(fetchSubscribers())
+    dispatch({ type: SERVER_MESSAGE, payload: message })
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
+
 export {
   fetchNextActiveSubscribers,
   fetchSubscribers,
-  fetchSubscriberCounts
+  fetchSubscriberCounts,
+  suspendSubscriber
 }

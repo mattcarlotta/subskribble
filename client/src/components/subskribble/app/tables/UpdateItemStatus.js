@@ -1,9 +1,15 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Button, Divider, Popconfirm } from 'antd';
+import { suspendSubscriber } from '../../../../actions/tableActions';
 
-export default class UpdateItemStatus extends PureComponent {
+class UpdateItemStatus extends PureComponent {
   handleStatusUpdate = () => {
-    console.log(`requested update to ${this.props.userid}'s status`);
+    const { suspendSubscriber, statusButton, userid } = this.props;
+    console.log(`requested ${statusButton} to ${userid}'s status`);
+    const updateType = statusButton === "activate" ? "activated" : "suspended";
+    const statusType = statusButton === "activate" ? ['inactive', 'suspended'] : ['active'];
+    suspendSubscriber(updateType, statusType, userid);
   }
 
   render = () => (
@@ -20,3 +26,5 @@ export default class UpdateItemStatus extends PureComponent {
     </Popconfirm>
   )
 }
+
+export default connect(null, { suspendSubscriber })(UpdateItemStatus)

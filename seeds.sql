@@ -4,11 +4,10 @@ CREATE DATABASE "subskribble-demo";
 \c subskribble-demo;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-DROP TABLE IF EXISTS activesubscribers;
-DROP TABLE IF EXISTS inactivesubscribers;
+DROP TABLE IF EXISTS subscribers;
 
-CREATE TABLE activesubscribers (
-  id UUID DEFAULT uuid_generate_v1mc(),
+CREATE TABLE subscribers (
+  id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
   status VARCHAR(20) DEFAULT 'inactive',
   email VARCHAR,
@@ -22,22 +21,7 @@ CREATE TABLE activesubscribers (
   isGod BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE inactivesubscribers (
-  id UUID DEFAULT uuid_generate_v1mc(),
-  key SERIAL PRIMARY KEY,
-  status VARCHAR(20) DEFAULT 'inactive',
-  email VARCHAR,
-  subscriber VARCHAR NOT NULL,
-  password VARCHAR,
-  phone VARCHAR,
-  plan VARCHAR,
-  startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
-  endDate TEXT,
-  amount DECIMAL(12,2),
-  isGod BOOLEAN DEFAULT FALSE
-);
-
-INSERT INTO activesubscribers (status, email, subscriber, password, phone, plan, endDate, amount)
+INSERT INTO subscribers (status, email, subscriber, password, phone, plan, endDate, amount)
   VALUES
   ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
@@ -50,11 +34,7 @@ INSERT INTO activesubscribers (status, email, subscriber, password, phone, plan,
   ('active', 'kylebTeegue@gmail.com', 'Kyle Teegue', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   ('active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   ('active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'adaDamn@photonmail.com', 'Adam Johnson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99);
-
-
-INSERT INTO inactivesubscribers (status, email, subscriber, password, phone, plan, endDate, amount)
-  VALUES
+  ('active', 'adaDamn@photonmail.com', 'Adam Johnson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   ('inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 3, 2018', 29.99),
   ('inactive', 'seamark@outlook.com', 'Mark Canelo', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 12, 2018', 29.99),
   ('suspended', 'axxll@manjaro.com', 'Axle Root', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 16, 2018', 29.99),

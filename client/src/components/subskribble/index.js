@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-import RenderErrors from '../../containers/subskribble/app/renderErrors';
+import RenderMessages from '../../containers/subskribble/app/renderMessages';
 
 export default ({ children }) => (
 	<Fragment>
 		{ children }
-		<RenderErrors />
+		<RenderMessages />
 	</Fragment>
 )

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FilterField from '../formFields/FilterField';
 import RenderPanelButtons from '../../../components/subskribble/app/panels/renderPanelButtons';
 import SelectField from '../formFields/selectField';
 import TableList from '../tables/TableList';
 
-export default class PanelBody extends Component {
+class PanelBody extends Component {
   state = { current: 1, sortByNum: 10 }
+
+  componentDidUpdate = (prevProps) => {
+    const { activesubcount, inactivesubcount } = this.props;
+    if (prevProps.activesubcount !== activesubcount || prevProps.inactivesubcount !== inactivesubcount) this.setState({ current: 1, sortByNum: 10 })
+  }
 
   setSortByNum = num => this.setState({ sortByNum: num })
 
@@ -41,6 +47,7 @@ export default class PanelBody extends Component {
                   OPTIONS={[10, 20, 50, 100]}
                   placeholder="Sort By"
                   setSortByNum={this.setSortByNum}
+                  sortByNum={sortByNum}
                   selectCurrentPage={this.selectCurrentPage}
                   TAB={TAB.toLowerCase().replace(/\s/g, '')}
                 />
@@ -77,3 +84,8 @@ export default class PanelBody extends Component {
     )
   }
 }
+
+export default connect(state => ({
+  activesubcount: state.fields.activesubcount,
+  inactivesubcount: state.fields.inactivesubcount
+}))(PanelBody)

@@ -29,7 +29,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 6. Seed DB and Run Node Server
-- `psql -U <username> -f seeds.sql` (only required on first run, otherwise `npm run seed`)
+- `psql -U <username> -f seeds.sql` (only required to initially create a DB, otherwise `npm run seeds`)
 - `npm run dev`
 
 
@@ -66,7 +66,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 7. Seed DB and Run Node Server
-- `psql -U <username> -f seeds.sql` (only required on first run, otherwise `npm run seed`)
+- `psql -U <username> -f seeds.sql` (only required to initially create a DB, otherwise `npm run seeds`)
 - `npm run dev`
 
 

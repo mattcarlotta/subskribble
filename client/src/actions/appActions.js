@@ -1,7 +1,7 @@
-import { RESET_SERVER_ERROR } from './types';
+import { RESET_SERVER_MESSAGES } from './types';
 
-const resetServerError = () => ({ type: RESET_SERVER_ERROR })
+const resetServerMessages = () => ({ type: RESET_SERVER_MESSAGES })
 
 export {
-  resetServerError
+  resetServerMessages
 }

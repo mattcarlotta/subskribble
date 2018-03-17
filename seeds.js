@@ -1,5 +1,6 @@
 require('./config/vars');
-const db = require('./db/config');
+const dbConifg = require('./database/db');
+const db = dbConifg();
 
 const subTableOptions = `(
   id UUID DEFAULT uuid_generate_v1mc(),
@@ -18,7 +19,7 @@ const subTableOptions = `(
 
 const subProperties = `(status, email, subscriber, password, phone, plan, endDate, amount)`
 
-const activeValues = `
+const subValues = `
 ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
 ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
 ('active', 'bob-eh@sap.com', 'Bob Aronssen', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
@@ -30,10 +31,7 @@ const activeValues = `
 ('active', 'kylebTeegue@gmail.com', 'Kyle Teegue', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
 ('active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
 ('active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-('active', 'adaDamn@photonmail.com', 'Adam Johnson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99);
-`;
-
-const inactiveValues = `
+('active', 'adaDamn@photonmail.com', 'Adam Johnson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
 ('inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 3, 2018', 29.99),
 ('inactive', 'seamark@outlook.com', 'Mark Canelo', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 12, 2018', 29.99),
 ('suspended', 'axxll@manjaro.com', 'Axle Root', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 16, 2018', 29.99),
@@ -52,12 +50,9 @@ const inactiveValues = `
   try {
     await db.none(`
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      DROP TABLE IF EXISTS activesubscribers;
-      DROP TABLE IF EXISTS inactivesubscribers;
-      CREATE TABLE activesubscribers ${subTableOptions};
-      CREATE TABLE inactivesubscribers ${subTableOptions};
-      INSERT INTO activesubscribers ${subProperties} VALUES ${activeValues}
-      INSERT INTO inactivesubscribers ${subProperties} VALUES ${inactiveValues}
+      DROP TABLE IF EXISTS subscribers;
+      CREATE TABLE subscribers ${subTableOptions};
+      INSERT INTO subscribers ${subProperties} VALUES ${subValues}
     `);
     console.log('Seeded database!');
     process.exit(0);

@@ -6,6 +6,7 @@ consign({ locale: 'en-us', verbose: false})
 	.include('libs/middlewares.js') // express middlewares
   // .then("services")
   // .then("config/passport.js")
+	.then("database/db.js")
   .then("controllers")
   .then("routes")
 	.then('libs/server.js')

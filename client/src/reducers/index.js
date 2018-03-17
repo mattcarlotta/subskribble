@@ -6,8 +6,9 @@ import {
 	AUTH_SUCCESS,
 	FETCHING_USER,
 	RESET_NOTIFICATIONS,
-	RESET_SERVER_ERROR,
+	RESET_SERVER_MESSAGES,
 	SERVER_ERROR,
+	SERVER_MESSAGE,
 	SET_ACTIVE_SUBS,
 	// SET_ACTIVE_SUBS_COUNT,
 	SET_INACTIVE_SUBS,
@@ -71,11 +72,12 @@ const tableReducer = (state={}, action) => {
 
 const serverReducer = (state={}, action) => {
 	switch (action.type) {
-		case RESET_SERVER_ERROR:
-			console.log('triggered');
-			return { ...state, error: '' };
+		case RESET_SERVER_MESSAGES:
+			return { ...state, error: '', message: '' };
 		case SERVER_ERROR:
 			return { ...state, error: action.payload };
+		case SERVER_MESSAGE:
+			return { ...state, message: action.payload };
 		default:
 			return state;
 	}
