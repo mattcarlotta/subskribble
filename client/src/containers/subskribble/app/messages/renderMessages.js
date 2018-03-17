@@ -2,12 +2,12 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
 
-import { resetServerMessages } from '../../../actions/appActions';
+import { resetServerMessages } from '../../../../actions/appActions';
 
 notification.config({
   placement: 'topRight',
   top: 50,
-  duration: 7,
+  duration: 4,
 });
 
 class RenderMessages extends Component {
@@ -15,7 +15,7 @@ class RenderMessages extends Component {
     const { resetServerMessages, serverError, serverMessage } = this.props;
     if (serverError) {
       notification['error']({
-        message: 'Server Error',
+        message: 'Error',
         description: serverError,
       });
       resetServerMessages();
@@ -23,7 +23,7 @@ class RenderMessages extends Component {
 
     if (serverMessage) {
       notification['success']({
-        message: 'Server Message',
+        message: 'Message',
         description: serverMessage,
       });
       resetServerMessages();

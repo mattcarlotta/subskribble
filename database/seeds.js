@@ -51,7 +51,7 @@ module.exports = app => {
         CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
         DROP TABLE IF EXISTS subscribers;
         CREATE TABLE subscribers ${subTableOptions};
-        INSERT INTO subscribers ${subProperties} VALUES ${subValues}
+        INSERT INTO subscribers ${subProperties} VALUES ${subValues};
       `);
       console.log('Seeded database!');
       process.exit(0);

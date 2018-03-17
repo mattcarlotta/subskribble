@@ -3,12 +3,12 @@ const parseStringToNum = str => (parseInt(str, 10));
 const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
 const query = {
-  deleteSub: () => ("DELETE FROM subscribers WHERE id=$1"),
+  deleteSub: () => ("DELETE FROM subscribers WHERE id=$1 RETURNING *"),
   getSubs: (limit, offset, status) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers ${statusType(status)} LIMIT ${limit} OFFSET ${offset};`),
   getSubcount: () => (
     `SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;`
   ),
-  updateSub: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3")
+  updateSub: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 RETURNING subscriber")
 }
 
 module.exports = app => {
@@ -39,8 +39,9 @@ module.exports = app => {
   const _delete = async (req, res) => {
     const { id } = req.params;
     try {
-      await db.result(query.deleteSub(), id)
-      res.status(201).json({ message: `Succesfully deleted the subscriber!` });
+      const name = await db.result(query.deleteSub(), id)
+      console.log('name', );
+      res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber}.` });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })
     }
@@ -83,8 +84,9 @@ module.exports = app => {
     const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : "-";
 
     try {
-      await db.none(query.updateSub(), [statusType, endDate, id])
-      res.status(201).json({ message: `Succesfully ${updateType} the subscriber!` });
+      const name = await db.one(query.updateSub(), [statusType, endDate, id])
+
+      res.status(201).json({ message: `Succesfully ${updateType} ${name.subscriber}.` });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })
     }
