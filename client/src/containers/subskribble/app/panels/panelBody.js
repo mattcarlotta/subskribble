@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FilterField from '../formFields/FilterField';
-import RenderPanelButtons from '../../../components/subskribble/app/panels/renderPanelButtons';
-import SelectField from '../formFields/selectField';
+import FilterField from '../../formFields/FilterField';
+import RenderPanelButtons from '../../../../components/subskribble/app/panels/renderPanelButtons';
+import SelectField from '../../formFields/selectField';
 import TableList from '../tables/TableList';
 
 class PanelBody extends Component {

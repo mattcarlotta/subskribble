@@ -12,6 +12,17 @@ import {
 
 app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 
+// Deletes requested subscriber from DB
+const deleteSubscriber = userid => dispatch => (
+  app.delete(`subscribers/delete/${userid}`)
+  .then(({data: {message}}) => {
+    dispatch(fetchSubscriberCounts())
+    dispatch(fetchSubscribers())
+    dispatch({ type: SERVER_MESSAGE, payload: message })
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
+
 // Fetches next/prev via sortByNum active subs from DB
 const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
   app.get(`subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`)
@@ -40,7 +51,8 @@ const fetchSubscriberCounts = () => dispatch => (
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
-const suspendSubscriber = (updateType, statusType, userid) => dispatch => (
+// Sets subscribers status to active or suspended
+const updateSubscriber = (updateType, statusType, userid) => dispatch => (
   app.put(`subscribers/update/${userid}`, { statusType, updateType })
   .then(({data: {message}}) => {
     dispatch(fetchSubscriberCounts())
@@ -51,8 +63,9 @@ const suspendSubscriber = (updateType, statusType, userid) => dispatch => (
 )
 
 export {
+  deleteSubscriber,
   fetchNextActiveSubscribers,
   fetchSubscribers,
   fetchSubscriberCounts,
-  suspendSubscriber
+  updateSubscriber
 }

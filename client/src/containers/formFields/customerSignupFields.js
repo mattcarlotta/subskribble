@@ -1,5 +1,5 @@
 import { AntInput, AntSelect } from './antReduxFormFields';
-import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidExpMonth, isValidPhone, isValidState, isValidYear } from '../formfields/validateFormFields';
+import { allowedCharacters, isRequired, isValidCC, isValidCVV, isValidEmail, isValidExpMonth, isValidPhone, isValidState, isValidYear } from './validateFormFields';
 import { formatCreditCard, formatCVV, formatPhone, formatState, formatYear, formatZip } from './formatFields';
 
 const ADDRESSFIELDS = [
@@ -17,7 +17,6 @@ const BILLINGADDRESSFIELDS = [
   { className: "input-25 f-l", component: AntInput, name: "billingState", placeholder: "State", normalize: formatState, style:{ width: "90%" }, type: "text", validate: [isRequired, isValidState] },
   { className: "input-25 f-r", component: AntInput, name: "billingZip", placeholder: "Zip Code", normalize: formatZip, style:{ width: "100%" }, type: "text", validate: [isRequired]},
 ]
-
 
 const CONTACTFIELDS = [
   { className: "input-50 f-l", component: AntInput, name: "contactFirstName", placeholder: "First Name", style:{ width: '95%' }, type: "text", validate: [isRequired, allowedCharacters] },
@@ -87,9 +86,4 @@ const CustomerFormFields = [
   }
 ]
 
-export const getCustomerFormFields = (key) => {
-  const formKey = key ? key : 0
-  return {
-    ...CustomerFormFields[formKey]
-  }
-}
+export const getCustomerFormFields = key => ({...CustomerFormFields[key ? key : 0]})

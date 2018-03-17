@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'antd';
-import TableActions from '../../../components/subskribble/app/tables/TableActions';
-import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
+import TableActions from '../../../../components/subskribble/app/tables/TableActions';
+import { fetchNextActiveSubscribers } from '../../../../actions/tableActions';
 
 class TableList extends PureComponent {
   handlePageChange = (pagination) => {
     const { TAB, sortByNum } = this.props;
     let { current: limitCount } = pagination;
-    this.props.selectCurrentPage(limitCount)
+    this.props.selectCurrentPage(limitCount);
     limitCount = limitCount - 1;
     this.props.fetchNextActiveSubscribers(TAB, limitCount, sortByNum);
   }

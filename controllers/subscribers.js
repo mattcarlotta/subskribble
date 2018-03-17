@@ -3,8 +3,12 @@ const parseStringToNum = str => (parseInt(str, 10));
 const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
 const query = {
-  subs: (limit, offset, status) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers ${statusType(status)} LIMIT ${limit} OFFSET ${offset};`),
-  subcount: (status) => (`SELECT count(*) AS estimate FROM subscribers ${statusType(status)};`)
+  deleteSub: () => ("DELETE FROM subscribers WHERE id=$1"),
+  getSubs: (limit, offset, status) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers ${statusType(status)} LIMIT ${limit} OFFSET ${offset};`),
+  getSubcount: () => (
+    `SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;`
+  ),
+  updateSub: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3")
 }
 
 module.exports = app => {
@@ -12,21 +16,31 @@ module.exports = app => {
   const moment = app.get("moment");
 
   const controller = {
-    // APP methos
+    // subscribers methods
     index: (req, res) => _index(req,res),
     fetchRecords: (req, res) => _fetchRecords(req, res),
     fetchCounts: (req, res) => _fetchCounts(req, res),
     // create: (req, res) => _create(req,res)
     // show: (req, res) => _show(req,res)
-    update: (req, res) => _update(req, res)
-    // delete: (req, res) => _delete(req, res)
+    update: (req, res) => _update(req, res),
+    delete: (req, res) => _delete(req, res)
   }
 
   const _index = async (req, res) => {
     try {
-      const activesubscribers = await db.any(query.subs(10, 0, ['active']));
-      const inactivesubscribers = await db.any(query.subs(10, 0, ['inactive', 'suspended']));
+      const activesubscribers = await db.any(query.getSubs(10, 0, ['active']));
+      const inactivesubscribers = await db.any(query.getSubs(10, 0, ['inactive', 'suspended']));
       res.status(201).json({ activesubscribers, inactivesubscribers });
+    } catch (err) {
+      return res.status(500).json({ err: err.toString() })
+    }
+  }
+
+  const _delete = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await db.result(query.deleteSub(), id)
+      res.status(201).json({ message: `Succesfully deleted the subscriber!` });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })
     }
@@ -40,7 +54,7 @@ module.exports = app => {
 
     try {
       let activesubscribers, inactivesubscribers;
-      const subscribers = await db.any(query.subs(limit, offset, status));
+      const subscribers = await db.any(query.getSubs(limit, offset, status));
 
       (table === "activesubscribers") ? activesubscribers = subscribers : inactivesubscribers = subscribers;
 
@@ -52,12 +66,11 @@ module.exports = app => {
 
   const _fetchCounts = async (req, res) => {
     try {
-      const activesubscriberscount = await db.any(query.subcount(['active']));
-      const inactivesubscriberscount = await db.any(query.subcount(['inactive', 'suspended']));
+      const subscribers = await db.any(query.getSubcount());
 
       res.status(201).json({
-        activesubscriberscount: parseStringToNum(activesubscriberscount[0].estimate),
-        inactivesubscriberscount: parseStringToNum(inactivesubscriberscount[0].estimate)
+        activesubscriberscount: parseStringToNum(subscribers[0].active),
+        inactivesubscriberscount: parseStringToNum(subscribers[0].inactive)
       });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })
@@ -66,27 +79,15 @@ module.exports = app => {
 
   const _update = async (req, res) => {
     const { id } = req.params;
-    const { updateType } = req.body;
-    const endDate = moment().format("MMM DD, YYYY");
+    const { updateType, statusType } = req.body;
+    const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : "-";
+
     try {
-      await db.none(`UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3`, [updateType, endDate, id])
+      await db.none(query.updateSub(), [statusType, endDate, id])
       res.status(201).json({ message: `Succesfully ${updateType} the subscriber!` });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })
     }
-
-    // const table1 = 'activesubscribers';
-    // const table2 = 'inactivesubscribers';
-    // try {
-    //   const activesubscriberscount = await db.any(query.subcount(table1));
-    //   const inactivesubscriberscount = await db.any(query.subcount(table2));
-    //   res.status(201).json({
-    //     activesubscriberscount: activesubscriberscount[0].estimate,
-    //     inactivesubscriberscount: inactivesubscriberscount[0].estimate
-    //   });
-    // } catch (err) {
-    //
-    // }
   }
 
   return controller;

@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Tabs } from 'antd';
-import PanelBody from '../../../../containers/subskribble/panels/panelBody';
+import PanelBody from '../../../../containers/subskribble/app/panels/panelBody';
 import TogglePanelVisibility from './TogglePanelVisibility';
 const { TabPane } = Tabs;
 
