@@ -1,40 +1,25 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { deleteSubscriber, fetchNextSubscribers, fetchSubscribers, fetchSubscriberCounts, updateSubscriber } from '../../../actions/subscriberActions';
+import { deleteAction, fetchAction, fetchItems, fetchItemCounts, updateAction } from '../../../actions/subscriberActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
-import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
-import Loader from '../../../containers/subskribble/app/loading/Loader';
-
-class Subscribers extends PureComponent {
-  state = { isLoading: true };
-
-  componentDidMount = () => {
-    const { activesubcount, inactivesubcount, fetchSubscriberCounts, fetchSubscribers } = this.props;
-    (!activesubcount || !inactivesubcount) && fetchSubscriberCounts();
-    fetchSubscribers();
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    const { activesubs, activesubcount, inactivesubs, inactivesubcount  } = this.props;
-    if ((activesubs && activesubcount) || (inactivesubs && inactivesubcount)) this.setState({ isLoading: false })
-  }
-
-  render = () => (
-    (this.state.isLoading)
-      ? <Loader buttonLabel="Add Subscriber" title="Subscribers" formNum={0} />
-      : <SubscriptionsPanel CARDS={CARDS({...this.props})} />
-  )
-}
+import PanelLoader from '../../../components/subskribble/app/panels/PanelLoader';
+import SubsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 
 export default connect(state => ({
-  activesubs: state.subs.activesubs,
-  activesubcount: state.subs.activesubcount,
-  inactivesubs: state.subs.inactivesubs,
-  inactivesubcount: state.subs.inactivesubcount
+  activeitems: state.subs.activeitems,
+  activeitemcount: state.subs.activeitemcount,
+  inactiveitems: state.subs.inactiveitems,
+  inactiveitemcount: state.subs.inactiveitemcount
 }), {
-  deleteSubscriber,
-  fetchNextSubscribers,
-  fetchSubscribers,
-  fetchSubscriberCounts,
-  updateSubscriber
-})(Subscribers)
+  deleteAction,
+  fetchAction,
+  fetchItems,
+  fetchItemCounts,
+  updateAction
+})(props => (
+  <PanelLoader
+    CARDS={CARDS}
+    Panel={SubsPanel}
+    {...props}
+  />
+))

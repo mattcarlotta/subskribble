@@ -29,20 +29,20 @@ const authReducer = (state = {}, { payload, type }) => {
 const planReducer = (state={}, { payload, type}) => {
 	switch (type) {
 		case types.SET_ACTIVE_PLANS:
-			return { ...state, activeplans: payload };
+			return { ...state, activeitems: payload };
 		case types.SET_INACTIVE_PLANS:
-			return { ...state, inactiveplans: payload };
+			return { ...state, inactiveitems: payload };
 		case types.SET_INITIAL_PLANS:
 			return {
 				...state,
-				activeplans: payload.activeplans,
-				inactiveplans: payload.inactiveplans
+				activeitems: payload.activeplans,
+				inactiveitems: payload.inactiveplans
 			}
 		case types.SET_INITIAL_PLANCOUNTS:
 			return {
 				...state,
-				activeplancount: payload.activeplancount,
-				inactiveplancount: payload.inactiveplancount
+				activeitemcount: payload.activeplancount,
+				inactiveitemcount: payload.inactiveplancount
 			}
 		default:
 			return state;
@@ -65,24 +65,24 @@ const serverReducer = (state={}, { payload, type }) => {
 const subscriberReducer = (state={}, { payload, type }) => {
 	switch (type) {
 		case types.SET_ACTIVE_SUBS:
-			return { ...state, activesubs: payload };
+			return { ...state, activeitems: payload };
 		// case SET_ACTIVE_SUBS_COUNT:
 		// 	return { ...state, activesubcount: action.payload }
 		case types.SET_INACTIVE_SUBS:
-			return { ...state, inactivesubs: payload };
+			return { ...state, inactiveitems: payload };
 		// case SET_INACTIVE_SUBS_COUNT:
 		// 	return { ...state, inactivesubcount: action.payload };
 		case types.SET_INITIAL_SUBS:
 			return {
 				...state,
-				activesubs: payload.activesubscribers,
-				inactivesubs: payload.inactivesubscribers
+				activeitems: payload.activesubscribers,
+				inactiveitems: payload.inactivesubscribers
 			}
 		case types.SET_INITIAL_SUBCOUNTS:
 			return {
 				...state,
-				activesubcount: payload.activesubscriberscount,
-				inactivesubcount: payload.inactivesubscriberscount
+				activeitemcount: payload.activesubscriberscount,
+				inactiveitemcount: payload.inactivesubscriberscount
 			}
 		default:
 			return state;

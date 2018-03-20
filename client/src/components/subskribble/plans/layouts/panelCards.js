@@ -13,36 +13,36 @@ export const TABLEHEADERS = [
 ];
 
 export default ({
-  activeplans,
-  activeplancount,
-  deletePlan,
-  fetchNextPlans,
-  inactiveplans,
-  inactiveplancount,
-  updatePlan
+  activeitems,
+  activeitemcount,
+  deleteAction,
+  fetchAction,
+  inactiveitems,
+  inactiveitemcount,
+  updateAction
 }) => [
   {
-    deleteAction: deletePlan,
-    fetchAction: fetchNextPlans,
+    deleteAction,
+    fetchAction,
     FILTERFIELDLABEL: "Filter Active Plans",
     FILTERFORM: "FilterActivePlans",
     SELECTFIELD: true,
     TAB: "Active Plans",
-    TABLECONTENTS: activeplans,
+    TABLECONTENTS: activeitems,
     TABLEHEADERS: TABLEHEADERS,
-    TABLERECORDS: activeplancount,
-    updateAction: updatePlan
+    TABLERECORDS: activeitemcount,
+    updateAction
   },
   {
-    deleteAction: deletePlan,
-    fetchAction: fetchNextPlans,
+    deleteAction,
+    fetchAction,
     FILTERFIELDLABEL: "Filter Inactive Plans",
     FILTERFORM: "FilterInactivePlans",
     SELECTFIELD: true,
     TAB: "Inactive Plans",
-    TABLECONTENTS: inactiveplans,
+    TABLECONTENTS: inactiveitems,
     TABLEHEADERS: TABLEHEADERS,
-    TABLERECORDS: inactiveplancount,
-    updateAction: updatePlan
+    TABLERECORDS: inactiveitemcount,
+    updateAction
   }
 ]

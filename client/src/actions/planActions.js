@@ -9,18 +9,18 @@ import {
 } from './types';
 
 // Deletes requested plan from DB
-const deletePlan = id => dispatch => (
+const deleteAction = id => dispatch => (
   app.delete(`plans/delete/${id}`)
   .then(({data: {message}}) => {
-    dispatch(fetchPlanCounts())
-    dispatch(fetchPlans())
+    dispatch(fetchItemCounts())
+    dispatch(fetchItems())
     dispatch({ type: SERVER_MESSAGE, payload: message })
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 // Fetches next/prev via sortByNum active/inactive plans from DB
-const fetchNextPlans = (table, page, sortByNum) => dispatch => (
+const fetchAction = (table, page, sortByNum) => dispatch => (
   app.get(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
   .then(({data: {activeplans, inactiveplans }}) => {
     activeplans && dispatch({ type: SET_ACTIVE_PLANS, payload: activeplans })
@@ -30,7 +30,7 @@ const fetchNextPlans = (table, page, sortByNum) => dispatch => (
 )
 
 // Fetches initial 10 active/inactive plans from DB
-const fetchPlans = () => dispatch => (
+const fetchItems = () => dispatch => (
   app.get('plans')
   .then(({data: {activeplans, inactiveplans}}) => {
     dispatch({ type: SET_INITIAL_PLANS, payload: {activeplans, inactiveplans}})
@@ -39,7 +39,7 @@ const fetchPlans = () => dispatch => (
 )
 
 // Fetches initial subscribers counts from DB
-const fetchPlanCounts = () => dispatch => (
+const fetchItemCounts = () => dispatch => (
   app.get('plancounts')
   .then(({data: {activeplancount, inactiveplancount}}) => {
     dispatch({ type: SET_INITIAL_PLANCOUNTS, payload: { activeplancount, inactiveplancount }})
@@ -48,20 +48,20 @@ const fetchPlanCounts = () => dispatch => (
 )
 
 // Sets plan status to active or suspended
-const updatePlan = (updateType, statusType, id) => dispatch => (
+const updateAction = (updateType, statusType, id) => dispatch => (
   app.put(`plans/update/${id}`, { statusType, updateType })
   .then(({data: {message}}) => {
-    dispatch(fetchPlanCounts())
-    dispatch(fetchPlans())
+    dispatch(fetchItemCounts())
+    dispatch(fetchItems())
     dispatch({ type: SERVER_MESSAGE, payload: message })
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 export {
-  deletePlan,
-  fetchNextPlans,
-  fetchPlans,
-  fetchPlanCounts,
-  updatePlan
+  deleteAction,
+  fetchAction,
+  fetchItems,
+  fetchItemCounts,
+  updateAction
 }

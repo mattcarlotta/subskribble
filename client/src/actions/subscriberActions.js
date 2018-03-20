@@ -11,20 +11,20 @@ import {
 app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 
 // Deletes requested subscriber from DB
-const deleteSubscriber = userid => dispatch => (
+const deleteAction = userid => dispatch => (
   app.delete(`subscribers/delete/${userid}`)
   .then(({data: {message}}) => {
-    dispatch(fetchSubscriberCounts())
-    dispatch(fetchSubscribers())
+    dispatch(fetchItemCounts())
+    dispatch(fetchItems())
     dispatch({ type: SERVER_MESSAGE, payload: message })
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 // Fetches next/prev via sortByNum active/inactive subs from DB
-const fetchNextSubscribers = (table, page, sortByNum) => dispatch => (
+const fetchAction = (table, page, sortByNum) => dispatch => (
   app.get(`subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`)
-  .then(({data: {activesubscribers, inactivesubscribers }}) => {
+  .then(({data: {activesubscribers, inactivesubscribers}}) => {
     activesubscribers && dispatch({ type: SET_ACTIVE_SUBS, payload: activesubscribers })
     inactivesubscribers && dispatch({ type: SET_INACTIVE_SUBS, payload: inactivesubscribers })
   })
@@ -32,7 +32,7 @@ const fetchNextSubscribers = (table, page, sortByNum) => dispatch => (
 )
 
 // Fetches initial 10 active/inactive subscribers from DB
-const fetchSubscribers = () => dispatch => (
+const fetchItems = () => dispatch => (
   app.get('subscribers')
   .then(({data: {activesubscribers, inactivesubscribers}}) => {
     dispatch({ type: SET_INITIAL_SUBS, payload: {activesubscribers, inactivesubscribers}})
@@ -41,7 +41,7 @@ const fetchSubscribers = () => dispatch => (
 )
 
 // Fetches initial subscribers counts from DB
-const fetchSubscriberCounts = () => dispatch => (
+const fetchItemCounts = () => dispatch => (
   app.get('subscribercounts')
   .then(({data: {activesubscriberscount, inactivesubscriberscount}}) => {
     dispatch({ type: SET_INITIAL_SUBCOUNTS, payload: { activesubscriberscount, inactivesubscriberscount }})
@@ -50,20 +50,20 @@ const fetchSubscriberCounts = () => dispatch => (
 )
 
 // Sets subscribers status to active or suspended
-const updateSubscriber = (updateType, statusType, userid) => dispatch => (
+const updateAction = (updateType, statusType, userid) => dispatch => (
   app.put(`subscribers/update/${userid}`, { statusType, updateType })
   .then(({data: {message}}) => {
-    dispatch(fetchSubscriberCounts())
-    dispatch(fetchSubscribers())
+    dispatch(fetchItemCounts())
+    dispatch(fetchItems())
     dispatch({ type: SERVER_MESSAGE, payload: message })
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
 export {
-  deleteSubscriber,
-  fetchNextSubscribers,
-  fetchSubscribers,
-  fetchSubscriberCounts,
-  updateSubscriber
+  deleteAction,
+  fetchAction,
+  fetchItems,
+  fetchItemCounts,
+  updateAction
 }

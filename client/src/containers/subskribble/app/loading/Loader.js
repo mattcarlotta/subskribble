@@ -8,9 +8,7 @@ class Loader extends Component {
 
 	componentDidMount = () => this.setTimer();
 
-  shouldComponentUpdate = (nextProps) => (
-    nextProps.serverError !== ''
-  )
+  shouldComponentUpdate = nextProps => (nextProps.serverError !== '')
 
 	componentWillUnmount = () => this.clearTimer();
 
@@ -20,18 +18,13 @@ class Loader extends Component {
 
   setTimer = () => this.timeout = setTimeout(this.timer, 3000)
 
-  render = () => {
-    const { requestTimeout } = this.state;
-		const { serverError } = this.props;
-
-		if (serverError || requestTimeout) return <NoDataToDisplay {...this.props} />
-
-    return (
-      <div className="spinner-container">
-        <img src={Loading} alt="loading-block.gif" height="128px" />
-      </div>
-    );
-  }
+  render = () => (
+		(this.props.serverError || this.state.requestTimeout)
+      ? <NoDataToDisplay {...this.props} />
+      : <div className="spinner-container">
+          <img src={Loading} alt="loading-block.gif" height="128px" />
+        </div>
+  )
 }
 
-export default connect( state => ({ serverError: state.server.error }))(Loader);
+export default connect(state => ({ serverError: state.server.error }))(Loader);
