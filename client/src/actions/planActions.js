@@ -1,32 +1,34 @@
 import app from './axiosConfig';
 import {
   SERVER_ERROR,
-  // SERVER_MESSAGE,
+  SERVER_MESSAGE,
+  SET_ACTIVE_PLANS,
+  SET_INACTIVE_PLANS,
   SET_INITIAL_PLANS,
-  SET_INITIAL_PLANCOUNTS
+  SET_INITIAL_PLANCOUNTS,
 } from './types';
 
-// Deletes requested subscriber from DB
-// const deletePlan = id => dispatch => (
-//   app.delete(`plan/delete/${id}`)
-//   .then(({data: {message}}) => {
-//     dispatch(fetchPlanCounts())
-//     dispatch(fetchPlans())
-//     dispatch({ type: SERVER_MESSAGE, payload: message })
-//   })
-//   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
-// )
+// Deletes requested plan from DB
+const deletePlan = id => dispatch => (
+  app.delete(`plans/delete/${id}`)
+  .then(({data: {message}}) => {
+    dispatch(fetchPlanCounts())
+    dispatch(fetchPlans())
+    dispatch({ type: SERVER_MESSAGE, payload: message })
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
 
-// Fetches next/prev via sortByNum active subs from DB
-// const fetchNextPlans = (table, page, sortByNum) => dispatch => (
-//   app.get(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
-//   .then(({data: {activesubscribers, inactivesubscribers }}) => {
-//     activesubscribers && dispatch({ type: SET_ACTIVE_SUBS, payload: activesubscribers })
-//     inactivesubscribers && dispatch({ type: SET_INACTIVE_SUBS, payload: inactivesubscribers })
-//   })
-//   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
-// )
-//
+// Fetches next/prev via sortByNum active/inactive plans from DB
+const fetchNextPlans = (table, page, sortByNum) => dispatch => (
+  app.get(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
+  .then(({data: {activeplans, inactiveplans }}) => {
+    activeplans && dispatch({ type: SET_ACTIVE_PLANS, payload: activeplans })
+    inactiveplans && dispatch({ type: SET_INACTIVE_PLANS, payload: inactiveplans })
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
+
 // Fetches initial 10 active/inactive plans from DB
 const fetchPlans = () => dispatch => (
   app.get('plans')
@@ -35,7 +37,7 @@ const fetchPlans = () => dispatch => (
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
-//
+
 // Fetches initial subscribers counts from DB
 const fetchPlanCounts = () => dispatch => (
   app.get('plancounts')
@@ -44,22 +46,22 @@ const fetchPlanCounts = () => dispatch => (
   })
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
-//
-// // Sets subscribers status to active or suspended
-// const updateSubscriber = (updateType, statusType, userid) => dispatch => (
-//   app.put(`subscribers/update/${userid}`, { statusType, updateType })
-//   .then(({data: {message}}) => {
-//     dispatch(fetchSubscriberCounts())
-//     dispatch(fetchSubscribers())
-//     dispatch({ type: SERVER_MESSAGE, payload: message })
-//   })
-//   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
-// )
+
+// Sets plan status to active or suspended
+const updatePlan = (updateType, statusType, id) => dispatch => (
+  app.put(`plans/update/${id}`, { statusType, updateType })
+  .then(({data: {message}}) => {
+    dispatch(fetchPlanCounts())
+    dispatch(fetchPlans())
+    dispatch({ type: SERVER_MESSAGE, payload: message })
+  })
+  .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
+)
 
 export {
-  // deleteSubscriber,
-  // fetchNextSubscribers,
+  deletePlan,
+  fetchNextPlans,
   fetchPlans,
   fetchPlanCounts,
-  // updateSubscriber
+  updatePlan
 }

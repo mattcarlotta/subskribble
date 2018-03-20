@@ -13,14 +13,14 @@ export const DashboardTabPanels = [
     BUTTONFORM: CustomerSignupForm,
     BUTTONFORMTITLE: 'Customer Signup',
     CUSTOMBUTTONS: CUSTOMERBUTTONS,
-    GRAPH: <LineChart data={customerData} options={customerOptions}/>,
+    GRAPH: LineChart(customerData, customerOptions),
     SELECTFIELDITEMS: ['Current Month', 'Monthly', 'Yearly'],
     SUBMITFORMTITLE: 'Subscribe',
     TAB: "Subscribers"
   },
   {
     CUSTOMBUTTONS: PLANBUTTONS,
-    GRAPH: <LineChart data={planData} options={planOptions}/>,
+    GRAPH: LineChart(data, planOptions),
     SELECTFIELDITEMS: ['Carlotta Prime'],
     TAB: "Plans"
   }

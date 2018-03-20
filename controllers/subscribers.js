@@ -1,5 +1,3 @@
-const parseStringToNum = str => (parseInt(str, 10));
-
 const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
 const query = {
@@ -13,6 +11,7 @@ const query = {
 
 module.exports = app => {
   const { db } = app.database;
+  const { parseStringToNum } = app.shared.helpers;
   const moment = app.get("moment");
 
   const controller = {
@@ -30,7 +29,7 @@ module.exports = app => {
     try {
       const activesubscribers = await db.any(query.getSubs(10, 0, ['active']));
       const inactivesubscribers = await db.any(query.getSubs(10, 0, ['inactive', 'suspended']));
-      
+
       res.status(201).json({ activesubscribers, inactivesubscribers });
     } catch (err) {
       return res.status(500).json({ err: err.toString() })

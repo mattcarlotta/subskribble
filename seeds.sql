@@ -19,7 +19,7 @@ CREATE TABLE subscribers (
   startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   endDate TEXT,
   amount DECIMAL(12,2),
-  isGod BOOLEAN DEFAULT FALSE
+  isGod BOOLEAN DEFAULT FALSE8
 );
 
 CREATE TABLE plans (

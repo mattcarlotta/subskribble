@@ -8,9 +8,7 @@ export default class PanelBody extends Component {
   state = { current: 1, sortByNum: 10 }
 
   componentDidUpdate = (prevProps) => {
-    const { TABLERECORDS } = this.props;
-    const { TABLERECORDS: NEXTRECORDS } = prevProps;
-    if (TABLERECORDS !== NEXTRECORDS) this.setState({ current: 1, sortByNum: 10 })
+    if (this.props.TABLERECORDS !== prevProps.TABLERECORDS) this.setState({ current: 1, sortByNum: 10 })
   }
 
   setSortByNum = num => this.setState({ sortByNum: num })
@@ -71,7 +69,7 @@ export default class PanelBody extends Component {
               { FILTERFORM && <FilterField form={FILTERFORM} placeholder={FILTERFIELDLABEL} /> }
             </div>
           </div>
-          { GRAPH && GRAPH }
+          { GRAPH && <GRAPH /> }
           { TABLECONTENTS &&
             <TableList
               current={current}

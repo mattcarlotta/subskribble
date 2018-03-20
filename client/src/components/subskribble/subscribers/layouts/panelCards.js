@@ -20,34 +20,32 @@ export default ({
   inactivesubcount,
   deleteSubscriber,
   updateSubscriber
-}) => {
-  return [
-    {
-      BUTTONFORM: CustomerSignupForm,
-      BUTTONFORMTITLE: 'Customer Signup',
-      CUSTOMBUTTONS: CUSTOMERBUTTONS,
-      deleteAction: deleteSubscriber,
-      fetchAction: fetchNextSubscribers,
-      FILTERFIELDLABEL: "Filter Active Subscribers",
-      FILTERFORM: "FilterActiveSubscriptions",
-      SELECTFIELD: true,
-      TAB: "Active Subscribers",
-      TABLECONTENTS: activesubs,
-      TABLERECORDS: activesubcount,
-      TABLEHEADERS: TABLEHEADERS,
-      updateAction: updateSubscriber
-    },
-    {
-      FILTERFIELDLABEL: "Filter Inactive Subscribers",
-      FILTERFORM: "FilterInactiveSubscriptions",
-      deleteAction: deleteSubscriber,
-      fetchAction: fetchNextSubscribers,
-      SELECTFIELD: true,
-      TAB: "Inactive Subscribers",
-      TABLECONTENTS: inactivesubs,
-      TABLERECORDS: inactivesubcount,
-      TABLEHEADERS: TABLEHEADERS,
-      updateAction: updateSubscriber
-    }
-  ]
-}
+}) => [
+  {
+    BUTTONFORM: CustomerSignupForm,
+    BUTTONFORMTITLE: 'Customer Signup',
+    CUSTOMBUTTONS: CUSTOMERBUTTONS,
+    deleteAction: deleteSubscriber,
+    fetchAction: fetchNextSubscribers,
+    FILTERFIELDLABEL: "Filter Active Subscribers",
+    FILTERFORM: "FilterActiveSubscriptions",
+    SELECTFIELD: true,
+    TAB: "Active Subscribers",
+    TABLECONTENTS: activesubs,
+    TABLERECORDS: activesubcount,
+    TABLEHEADERS: TABLEHEADERS,
+    updateAction: updateSubscriber
+  },
+  {
+    FILTERFIELDLABEL: "Filter Inactive Subscribers",
+    FILTERFORM: "FilterInactiveSubscriptions",
+    deleteAction: deleteSubscriber,
+    fetchAction: fetchNextSubscribers,
+    SELECTFIELD: true,
+    TAB: "Inactive Subscribers",
+    TABLECONTENTS: inactivesubs,
+    TABLERECORDS: inactivesubcount,
+    TABLEHEADERS: TABLEHEADERS,
+    updateAction: updateSubscriber
+  }
+]

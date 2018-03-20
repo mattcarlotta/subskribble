@@ -28,10 +28,10 @@ const authReducer = (state = {}, { payload, type }) => {
 
 const planReducer = (state={}, { payload, type}) => {
 	switch (type) {
-		// case SET_ACTIVE_PLANS:
-		// 	return { ...state, activeplans: payload };
-		// case SET_INACTIVE_PLANS:
-		// 	return { ...state, inactiveplans: payload };
+		case types.SET_ACTIVE_PLANS:
+			return { ...state, activeplans: payload };
+		case types.SET_INACTIVE_PLANS:
+			return { ...state, inactiveplans: payload };
 		case types.SET_INITIAL_PLANS:
 			return {
 				...state,

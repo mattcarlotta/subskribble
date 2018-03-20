@@ -5,9 +5,7 @@ import {
   SET_INITIAL_SUBS,
   SET_INITIAL_SUBCOUNTS,
   SET_ACTIVE_SUBS,
-  // SET_ACTIVE_SUBS_COUNT,
   SET_INACTIVE_SUBS,
-  // SET_INACTIVE_SUBS_COUNT,
 } from './types';
 
 app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
@@ -23,7 +21,7 @@ const deleteSubscriber = userid => dispatch => (
   .catch(err => dispatch({ type: SERVER_ERROR, payload: err }))
 )
 
-// Fetches next/prev via sortByNum active subs from DB
+// Fetches next/prev via sortByNum active/inactive subs from DB
 const fetchNextSubscribers = (table, page, sortByNum) => dispatch => (
   app.get(`subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`)
   .then(({data: {activesubscribers, inactivesubscribers }}) => {

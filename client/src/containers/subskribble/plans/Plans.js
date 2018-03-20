@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlans, fetchPlanCounts } from '../../../actions/planActions';
+import { deletePlan, fetchNextPlans, fetchPlans, fetchPlanCounts, updatePlan } from '../../../actions/planActions';
 import CARDS from '../../../components/subskribble/plans/layouts/panelCards';
 import PlansPanel from '../../../components/subskribble/plans/panels/plansPanel';
 import Loader from '../../../containers/subskribble/app/loading/Loader';
@@ -25,6 +25,9 @@ export default connect(state => ({
   inactiveplans: state.plans.inactiveplans,
   inactiveplancount: state.plans.inactiveplancount
 }), {
+  deletePlan,
+  fetchNextPlans,
   fetchPlans,
-  fetchPlanCounts
+  fetchPlanCounts,
+  updatePlan
 })(Plans)
