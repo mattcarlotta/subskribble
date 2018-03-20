@@ -1,20 +1,18 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { Table } from 'antd';
-import TableActions from '../../../../components/subskribble/app/tables/TableActions';
-import { fetchNextActiveSubscribers } from '../../../../actions/tableActions';
+import TableActions from './TableActions';
 
-class TableList extends PureComponent {
+export default class TableList extends PureComponent {
   handlePageChange = (pagination) => {
-    const { TAB, sortByNum } = this.props;
+    const { fetchAction, TAB, sortByNum } = this.props;
     let { current: limitCount } = pagination;
     this.props.selectCurrentPage(limitCount);
     limitCount = limitCount - 1;
-    this.props.fetchNextActiveSubscribers(TAB, limitCount, sortByNum);
+    fetchAction(TAB, limitCount, sortByNum);
   }
 
   render = () => {
-    const { current, sortByNum, TABLECONTENTS, TABLEHEADERS, TABLERECORDS } = this.props;
+    const { current, deleteAction, sortByNum, TABLECONTENTS, TABLEHEADERS, TABLERECORDS, updateAction } = this.props;
     return (
       <div className="table-container">
         <Table
@@ -24,7 +22,7 @@ class TableList extends PureComponent {
               title: 'Actions',
               key: 'action',
               width: 370,
-              render: record => <TableActions record={record} />
+              render: record => <TableActions deleteAction={deleteAction} record={record} updateAction={updateAction} />
             }
           ]}
           dataSource={TABLECONTENTS}
@@ -35,5 +33,3 @@ class TableList extends PureComponent {
     )
   }
 }
-
-export default connect(null, { fetchNextActiveSubscribers })(TableList);

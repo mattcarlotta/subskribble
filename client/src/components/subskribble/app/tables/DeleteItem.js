@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { Button, Popconfirm } from 'antd';
-import { deleteSubscriber } from '../../../../actions/tableActions';
 
 class DeleteItem extends PureComponent {
   handleDelete = () => {
-    const { deleteSubscriber, userid  } = this.props;
-    console.log(`requested to delete this record: ${userid}`);
-    deleteSubscriber(userid);
+    const { deleteAction, id  } = this.props;
+    console.log(`requested to delete this record: ${id}`);
+    deleteAction(id);
   }
 
   render = () => (
@@ -24,4 +22,4 @@ class DeleteItem extends PureComponent {
   )
 }
 
-export default connect(null, { deleteSubscriber })(DeleteItem)
+export default DeleteItem;

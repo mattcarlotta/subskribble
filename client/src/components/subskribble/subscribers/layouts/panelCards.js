@@ -12,28 +12,42 @@ const TABLEHEADERS = [
   { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
-export default ({ activesubs, activesubcount, inactivesubs, inactivesubcount }) => {
+export default ({
+  activesubs,
+  activesubcount,
+  fetchNextSubscribers,
+  inactivesubs,
+  inactivesubcount,
+  deleteSubscriber,
+  updateSubscriber
+}) => {
   return [
     {
       BUTTONFORM: CustomerSignupForm,
       BUTTONFORMTITLE: 'Customer Signup',
       CUSTOMBUTTONS: CUSTOMERBUTTONS,
+      deleteAction: deleteSubscriber,
+      fetchAction: fetchNextSubscribers,
       FILTERFIELDLABEL: "Filter Active Subscribers",
       FILTERFORM: "FilterActiveSubscriptions",
       SELECTFIELD: true,
       TAB: "Active Subscribers",
       TABLECONTENTS: activesubs,
       TABLERECORDS: activesubcount,
-      TABLEHEADERS: TABLEHEADERS
+      TABLEHEADERS: TABLEHEADERS,
+      updateAction: updateSubscriber
     },
     {
       FILTERFIELDLABEL: "Filter Inactive Subscribers",
       FILTERFORM: "FilterInactiveSubscriptions",
+      deleteAction: deleteSubscriber,
+      fetchAction: fetchNextSubscribers,
       SELECTFIELD: true,
       TAB: "Inactive Subscribers",
       TABLECONTENTS: inactivesubs,
       TABLERECORDS: inactivesubcount,
-      TABLEHEADERS: TABLEHEADERS
+      TABLEHEADERS: TABLEHEADERS,
+      updateAction: updateSubscriber
     }
   ]
 }

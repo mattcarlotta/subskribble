@@ -24,7 +24,7 @@ const deleteSubscriber = userid => dispatch => (
 )
 
 // Fetches next/prev via sortByNum active subs from DB
-const fetchNextActiveSubscribers = (table, page, sortByNum) => dispatch => (
+const fetchNextSubscribers = (table, page, sortByNum) => dispatch => (
   app.get(`subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`)
   .then(({data: {activesubscribers, inactivesubscribers }}) => {
     activesubscribers && dispatch({ type: SET_ACTIVE_SUBS, payload: activesubscribers })
@@ -64,7 +64,7 @@ const updateSubscriber = (updateType, statusType, userid) => dispatch => (
 
 export {
   deleteSubscriber,
-  fetchNextActiveSubscribers,
+  fetchNextSubscribers,
   fetchSubscribers,
   fetchSubscriberCounts,
   updateSubscriber

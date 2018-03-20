@@ -9,10 +9,10 @@ const forms = [CustomerSignupForm];
 const formTitle = ["Customer Signup"];
 const submitFormTitle = ["Subscribe"]
 
-const noDataToDisplay = ({ buttonLabel, buttonPanel, formNum, visible }) => (
+const noDataToDisplay = ({ buttonLabel, buttonPanel, formNum, title, visible }) => (
   <PageContainer>
     <div className="panel-container">
-      <Card title="Subscribers" extra={buttonPanel()}>
+      <Card title={title} extra={buttonPanel()}>
         <div style={{ display: visible ? "block" : "none", minHeight: 400 }} className="panel-body-container">
           <div className="panel-body">
             <div className="ant-row">

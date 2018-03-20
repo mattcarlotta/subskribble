@@ -1,6 +1,18 @@
 module.exports = app => {
   const { db } = app.database;
 
+  const planTableOptions = `(
+    id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+    key SERIAL PRIMARY KEY,
+    status VARCHAR(20) DEFAULT 'inactive',
+    planName VARCHAR(40) NOT NULL,
+    amount DECIMAL(12,2),
+    setupFee DECIMAL(12,2),
+    billEvery VARCHAR(10),
+    trialPeriod VARCHAR(10),
+    subscribers INTEGER
+  )`;
+
   const subTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -16,8 +28,35 @@ module.exports = app => {
     isGod BOOLEAN DEFAULT FALSE
   )`;
 
+  const planProperties = `(status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`
   const subProperties = `(status, email, subscriber, password, phone, plan, endDate, amount)`
 
+  const planValues = `
+  ('active', 'Carlotta Prime', 99.99, 0.00, '30 days', '30 days', 299),
+  ('active', 'Carlotta Switch', 49.99, 0.00, '30 days', '30 days', 85),
+  ('active', 'Carlotta Corp', 299.99, 4.99, '30 days', '30 days', 35048),
+  ('active', 'Carlotta Inc.', 1999.99, 399.99, '30 days', '30 days', 14058),
+  ('active', 'Carlotta LLC', 499.99, 299.99, '30 days', '30 days', 11),
+  ('active', 'Carlotta Dealership', 699.99, 24.99, '30 days', '30 days', 400),
+  ('active', 'Carlotta Affiliates', 79.99, 9.99, '30 days', '30 days', 29),
+  ('active', 'Carlotta Sales', 9.99, 0.00, '30 days', '30 days', 642),
+  ('active', 'Carlotta Automechs', 14.99, 249.99, '30 days', '30 days', 22),
+  ('active', 'Carlotta Solar', 44.99, 199.99, '30 days', '30 days', 751),
+  ('active', 'Carlotta Twitch', 4.99, 0.00, '30 days', '30 days', 256),
+  ('active', 'Carlotta Youtube', 1.99, 0.00, '30 days', '30 days', 81),
+  ('inactive', 'Carlotta .com', 69.99, 0.00, '30 days', '30 days', 23),
+  ('inactive', 'Carlotta Partners', 99.99, 0.00, '30 days', '30 days', 214),
+  ('inactive', 'Carlotta Church', 0.00, 0.00, '30 days', '30 days', 845),
+  ('inactive', 'Carlotta Industries', 149.99, 29.99, '30 days', '30 days', 6514),
+  ('inactive', 'Carlotta Workshops', 39.99, 5.99, '30 days', '30 days', 742),
+  ('inactive', 'Carlotta Sports', 19.99, 0.00, '30 days', '30 days', 611),
+  ('inactive', 'Carlotta Cars Magazine', 2.99, 0.00, '30 days', '30 days', 125862),
+  ('inactive', 'Carlotta Flagships', 18.99, 0.00, '30 days', '30 days', 125),
+  ('inactive', 'Carlotta Protocols', 15.99, 0.00, '30 days', '30 days', 487),
+  ('inactive', 'Carlotta ISP', 89.99, 99.90, '30 days', '30 days', 329),
+  ('inactive', 'Carlotta Pumps', 279.99, 198.89, '30 days', '30 days', 4),
+  ('inactive', 'Carlotta Assoc.', 69.99, 0.00, '30 days', '30 days', 645);
+  `;
   const subValues = `
   ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
@@ -50,8 +89,11 @@ module.exports = app => {
       await db.none(`
         CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
         DROP TABLE IF EXISTS subscribers;
+        DROP TABLE IF EXISTS plans;
         CREATE TABLE subscribers ${subTableOptions};
+        CREATE TABLE plans ${planTableOptions};
         INSERT INTO subscribers ${subProperties} VALUES ${subValues};
+        INSERT INTO plans ${planProperties} VALUES ${planValues};
       `);
       console.log('Seeded database!');
       process.exit(0);

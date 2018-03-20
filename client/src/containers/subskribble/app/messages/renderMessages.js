@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
@@ -12,20 +13,14 @@ notification.config({
 
 class RenderMessages extends Component {
   componentDidUpdate = () => {
-    const { resetServerMessages, serverError, serverMessage } = this.props;
-    if (serverError) {
-      notification['error']({
-        message: 'Error',
-        description: serverError,
-      });
-      resetServerMessages();
-    }
+    map([{ noteType: 'error', message: 'Error', description: this.props.serverError },
+      { noteType: 'success', message: 'Update', description: this.props.serverMessage }], props => this.showNotification({...props}))
+  }
 
-    if (serverMessage) {
-      notification['success']({
-        message: 'Message',
-        description: serverMessage,
-      });
+  showNotification = ({ noteType, message, description }) => {
+    const { resetServerMessages } = this.props;
+    if (description) {
+      notification[noteType]({ message, description });
       resetServerMessages();
     }
   }
@@ -37,4 +32,7 @@ class RenderMessages extends Component {
   render = () => ( null )
 }
 
-export default connect(state => ({ serverError: state.server.error, serverMessage: state.server.message }), { resetServerMessages })(RenderMessages);
+export default connect(state => ({
+  serverError: state.server.error,
+  serverMessage: state.server.message
+}), { resetServerMessages })(RenderMessages);

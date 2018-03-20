@@ -1,16 +1,14 @@
 import map from 'lodash/map';
 import React, { PureComponent, Fragment } from 'react';
-import { connect } from 'react-redux';
 import { Select } from 'antd';
-import { fetchNextActiveSubscribers } from '../../../actions/tableActions';
 const { Option } = Select;
 
-class SelectField extends PureComponent {
+export default class SelectField extends PureComponent {
   handleSortDataBy = nextRecords => {
-    const { fetchNextActiveSubscribers, TAB, setSortByNum, selectCurrentPage } = this.props;
+    const { fetchAction, TAB, setSortByNum, selectCurrentPage } = this.props;
     setSortByNum(nextRecords);
     selectCurrentPage(1);
-    fetchNextActiveSubscribers(TAB, 0, nextRecords);
+    fetchAction(TAB, 0, nextRecords);
   };
 
   handleBlur = () => this._select.blur();
@@ -41,5 +39,3 @@ class SelectField extends PureComponent {
     )
   }
 }
-
-export default connect(null, { fetchNextActiveSubscribers })(SelectField);

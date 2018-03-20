@@ -13,7 +13,7 @@ import DashWrapper from '../components/subskribble/navigation/dashWrapper';
 import Landing from '../components/subskribble/app';
 // import LogIn from '../containers/website/forms/loginForm';
 import NotFound from '../components/subskribble/app/notfound/404';
-// import Plans from '../components/subskribble/plans';
+import Plans from '../containers/subskribble/plans/Plans';
 // import Profile from '../components/subskribble/profile';
 // import Promos from '../components/subskribble/promos';
 // import OnLoadAuth from '../containers/app/OnLoadAuth';
@@ -39,7 +39,7 @@ export const views = (
 			{/* <Route path="forgot-password" component={ForgotPassword} /> */}
 			{/* <Route path="forms" component={Forms}/> */}
 			{/* <Route path="login" component={LogIn} /> */}
-			{/* <Route path="plans" component={Plans} /> */}
+			<Route path="plans" component={Plans} />
 			{/* <Route path="promotionals" component={Promos} /> */}
 			{/* <Route path="signup" component={SignUp} /> */}
 			<Route path="subscribers" component={Subscribers} />

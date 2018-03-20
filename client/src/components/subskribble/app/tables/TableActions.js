@@ -1,26 +1,27 @@
 import React, { PureComponent, Fragment } from 'react';
-import EditItem from '../../../../containers/subskribble/app/tables/EditItem';
-import DeleteItem from '../../../../containers/subskribble/app/tables/DeleteItem';
-import MoreActions from '../../../../containers/subskribble/app/tables/MoreActions';
-import UpdateItemStatus from '../../../../containers/subskribble/app/tables/UpdateItemStatus'
+import EditItem from './EditItem';
+import DeleteItem from './DeleteItem';
+import MoreActions from './MoreActions';
+import UpdateItemStatus from './UpdateItemStatus'
 
 export default class TableActions extends PureComponent {
   render = () => {
-    const { billEvery, id, invoice, maxUsage, planName, promoName, status, templateName, type } = this.props.record;
+    const { deleteAction, updateAction } = this.props;
+    const { billEvery, id, maxUsage, planName, promoName, status, templateName, type } = this.props.record;
     const statusType = (status === "inactive" || status === "suspended") ? "activate" : "suspend";
     return (
       <Fragment>
-        { status && !invoice
-          ? <UpdateItemStatus userid={id} statusType={statusType} />
+        { updateAction
+          ? <UpdateItemStatus id={id} statusType={statusType} updateAction={updateAction} />
           : null
         }
         {  planName || promoName || templateName
-          ? <EditItem userid={id}/>
+          ? <EditItem id={id}/>
           : null
         }
-        <DeleteItem userid={id} />
+        <DeleteItem id={id} deleteAction={deleteAction} />
         { !type && !billEvery && !maxUsage
-          ? <MoreActions userid={id} />
+          ? <MoreActions id={id} />
           : null
         }
       </Fragment>

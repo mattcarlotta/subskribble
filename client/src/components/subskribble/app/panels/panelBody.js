@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import FilterField from '../../formFields/FilterField';
-import RenderPanelButtons from '../../../../components/subskribble/app/panels/renderPanelButtons';
-import SelectField from '../../formFields/selectField';
+import FilterField from '../formFields/FilterField';
+import RenderPanelButtons from './renderPanelButtons';
+import SelectField from '../formFields/selectField';
 import TableList from '../tables/TableList';
 
-class PanelBody extends Component {
+export default class PanelBody extends Component {
   state = { current: 1, sortByNum: 10 }
 
   componentDidUpdate = (prevProps) => {
-    const { activesubcount, inactivesubcount } = this.props;
-    const { activesubcount: prevActiveSubcount, inactivesubcount: prevInactiveSubcount } = prevProps;
-    if (prevActiveSubcount !== activesubcount || prevInactiveSubcount !== inactivesubcount) this.setState({ current: 1, sortByNum: 10 })
+    const { TABLERECORDS } = this.props;
+    const { TABLERECORDS: NEXTRECORDS } = prevProps;
+    if (TABLERECORDS !== NEXTRECORDS) this.setState({ current: 1, sortByNum: 10 })
   }
 
   setSortByNum = num => this.setState({ sortByNum: num })
@@ -24,6 +23,8 @@ class PanelBody extends Component {
       BUTTONFORMTITLE,
       CARDBODY,
       CUSTOMBUTTONS,
+      deleteAction,
+      fetchAction,
       FILTERFORM,
       FILTERFIELDLABEL,
       GRAPH,
@@ -33,6 +34,7 @@ class PanelBody extends Component {
       TABLECONTENTS,
       TABLEHEADERS,
       TABLERECORDS,
+      updateAction,
       visible
     } = this.props;
     const { current, sortByNum } = this.state;
@@ -45,6 +47,7 @@ class PanelBody extends Component {
             <div className="ant-col-8">
               { SELECTFIELD &&
                 <SelectField
+                  fetchAction={fetchAction}
                   OPTIONS={[10, 20, 50, 100]}
                   placeholder="Sort By"
                   setSortByNum={this.setSortByNum}
@@ -72,12 +75,15 @@ class PanelBody extends Component {
           { TABLECONTENTS &&
             <TableList
               current={current}
+              deleteAction={deleteAction}
+              fetchAction={fetchAction}
               sortByNum={sortByNum}
               selectCurrentPage={this.selectCurrentPage}
               TAB={TAB.toLowerCase().replace(/\s/g, '')}
               TABLECONTENTS={TABLECONTENTS}
               TABLEHEADERS={TABLEHEADERS}
               TABLERECORDS={TABLERECORDS}
+              updateAction={updateAction}
             />
           }
         </div>
@@ -85,8 +91,3 @@ class PanelBody extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  activesubcount: state.fields.activesubcount,
-  inactivesubcount: state.fields.inactivesubcount
-}))(PanelBody)
