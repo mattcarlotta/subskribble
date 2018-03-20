@@ -6,14 +6,21 @@ import SubscriptionsPanel from '../../../components/subskribble/subscribers/pane
 import Loader from '../../../containers/subskribble/app/loading/Loader';
 
 class Subscribers extends PureComponent {
+  state = { isLoading: true };
+
   componentDidMount = () => {
     const { activesubcount, inactivesubcount, fetchSubscriberCounts, fetchSubscribers } = this.props;
     (!activesubcount || !inactivesubcount) && fetchSubscriberCounts();
     fetchSubscribers();
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { activesubs, activesubcount, inactivesubs, inactivesubcount  } = this.props;
+    if ((activesubs && activesubcount) || (inactivesubs && inactivesubcount)) this.setState({ isLoading: false })
+  }
+
   render = () => (
-    (!this.props.activesubs || !this.props.inactivesubs || !this.props.activesubcount || !this.props.inactivesubcount)
+    (this.state.isLoading)
       ? <Loader buttonLabel="Add Subscriber" title="Subscribers" formNum={0} />
       : <SubscriptionsPanel CARDS={CARDS({...this.props})} />
   )

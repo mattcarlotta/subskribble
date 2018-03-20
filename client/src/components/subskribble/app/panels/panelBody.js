@@ -36,6 +36,7 @@ export default class PanelBody extends Component {
       visible
     } = this.props;
     const { current, sortByNum } = this.state;
+    const tabTitle = TAB.toLowerCase().replace(/\s/g, '');
 
     return (
       <div style={{ display: visible ? "block" : "none" }} className="panel-body-container">
@@ -51,7 +52,7 @@ export default class PanelBody extends Component {
                   setSortByNum={this.setSortByNum}
                   sortByNum={sortByNum}
                   selectCurrentPage={this.selectCurrentPage}
-                  TAB={TAB.toLowerCase().replace(/\s/g, '')}
+                  TAB={tabTitle}
                 />
               }
             </div>
@@ -77,7 +78,7 @@ export default class PanelBody extends Component {
               fetchAction={fetchAction}
               sortByNum={sortByNum}
               selectCurrentPage={this.selectCurrentPage}
-              TAB={TAB.toLowerCase().replace(/\s/g, '')}
+              TAB={tabTitle}
               TABLECONTENTS={TABLECONTENTS}
               TABLEHEADERS={TABLEHEADERS}
               TABLERECORDS={TABLERECORDS}
