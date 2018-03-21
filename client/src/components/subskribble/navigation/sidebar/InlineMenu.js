@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Layout, Menu, Icon } from 'antd';
 import LeftNav from '../leftNav';
 import TABLINKS from '../links/tabLinks';
@@ -17,10 +18,13 @@ const SideBar = ({
     collapsible
     collapsed={collapseSideNav}
     style={{ height: '100vh' }}
-    width={270}
+    width={240}
   >
     <div key="menu-header" className="drawer-menu-header">
-      <LeftNav collapseSideNav={collapseSideNav} />
+      <LeftNav
+        collapseSideNav={collapseSideNav}
+        onClickAction={() => browserHistory.push('/subskribble')}
+      />
     </div>
     <Menu
       key="menu-container"

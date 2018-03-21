@@ -61,15 +61,15 @@
   @include b-c($transparent);
   @include h(40px);
   @include w(40px);
-  top: -7px;
+  top: -11px;
   margin-left: 10px;
   border: 0;
 
   i {@include c($twhite);}
 
   &:hover {
-    i { @include c($formgrey); }
-    @include b-c($hoverblue);
+    i { @include c($formgrey !important); }
+    @include b-c($hoverblue !important);
   }
 
   &:focus {

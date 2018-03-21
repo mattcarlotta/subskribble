@@ -9,7 +9,7 @@ const DashboardHeader = ({ collapseSideNav, handleMenuToggle }) => (
   <Row className="dash-nav-container">
     <div className="left-nav">
       <NavButton
-        icon={collapseSideNav ? "keyboard_arrow_right" : "keyboard_arrow_left"}
+        icon={collapseSideNav ? "format_indent_increase" : "format_indent_decrease"}
         onClickAction={handleMenuToggle}
         tooltip={collapseSideNav ? "Open Menu" : "Close Menu"}
       />

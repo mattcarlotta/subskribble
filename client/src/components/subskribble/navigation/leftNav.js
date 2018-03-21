@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Button } from 'antd';
 
 export default ({ collapseSideNav, onClickAction }) => (
-  <div onClick={onClickAction} className="logo-container">
-    <Link to='/subskribble'>
+  <Button onClick={onClickAction} className="logo-container">
       <i className="material-icons icon-logo">wifi_tethering</i>
       <span style={{ display: collapseSideNav ? 'none' : '' }} className="text-logo">subskribble</span>
-    </Link>
-  </div>
+  </Button>
 )

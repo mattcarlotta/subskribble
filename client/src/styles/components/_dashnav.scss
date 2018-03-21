@@ -11,6 +11,7 @@
   top: 0;
 
   .left-nav {
+    // float: left;
     @extend %d-ib;
   }
 
@@ -137,13 +138,18 @@
 }
 
 .logo-container {
-  @extend %d-ib;
+  @extend %b-0, %d-ib;
+  @include b-c($blackblue);
   @include h(55px);
-  margin-left: 15px;
+  // margin-left: 15px;
 
   &:hover {
     @extend .fix-cursor;
     @include b-c($hoverblue);
+  }
+
+  &:focus {
+    @include b-c($transparent);
   }
 
   .icon-logo {
@@ -152,7 +158,7 @@
    @include f-s(36px);
    margin-top: 8px;
    margin-right: 5px;
-   margin-left: 10px;
+   margin-left: 11px;
   }
 
   .text-logo {
