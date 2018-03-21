@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router';
 import { Button, Tooltip } from 'antd';
 
 export default ({icon, link, onClickAction, tooltip}) => (
-  <div style={{ display: 'inline' }}>
     <Tooltip
       arrowPointAtCenter
       placement="bottom"
@@ -16,5 +15,4 @@ export default ({icon, link, onClickAction, tooltip}) => (
         <i className="material-icons nav-button-icon">{icon}</i>
       </Button>
     </Tooltip>
-  </div>
 )

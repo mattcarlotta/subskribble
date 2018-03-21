@@ -1,32 +1,46 @@
-import React, { PureComponent, Fragment } from 'react';
-import { withRouter } from 'react-router';
-import { Scrollbars } from 'react-custom-scrollbars';
-
+import React, { Component } from 'react';
+import { browserHistory, withRouter } from 'react-router';
+import { Layout } from 'antd';
 import Header from './header';
+import InlineMenu from './sidebar/InlineMenu';
+const { Content } = Layout;
+
 // import Footer from './footer';
 
 export default WrappedComponent => {
-	class DashboardWrapper extends PureComponent {
-		componentDidUpdate = prevProps => this.props.location !== prevProps.location && this.refs.scrollbars.scrollTop(0);
+	class DashboardWrapper extends Component {
+		state = { collapseSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
+
+		componentDidUpdate = (prevProps) => {
+			const pathname = this.props.location.pathname.replace(/\/subskribble\//g,'');
+			const selectedTab = this.state.selectedKey[0];
+			if (this.props.location !== prevProps.location && pathname !== selectedTab) {
+				this.setState({ selectedKey: [pathname] })
+			}
+		}
+
+		handleMenuToggle = () => this.setState({ collapseSideNav: !this.state.collapseSideNav });
+
+		handleTabClick = ({key}) => browserHistory.push(`/subskribble/${key}`)
 
 		render() {
 			return (
-				<Fragment>
-					<Header />
-					<Scrollbars
-					ref="scrollbars"
-					style={{ width: '100%', top: '55px' }}
-					autoHeight
-					autoHeightMin={`calc(100vh - 55px)`}
-					autoHide
-					autoHideTimeout={500}
-					autoHideDuration={200}
-					renderThumbVertical={props => <div {...props} className="scrollbar"/>}
-					>
-						<WrappedComponent {...this.props} />
-					</Scrollbars>
-					{/* <Footer /> */}
-				</Fragment>
+				<Layout style={{ overflow: 'hidden' }}>
+					<InlineMenu
+						handleTabClick={this.handleTabClick}
+						collapseSideNav={this.state.collapseSideNav}
+						selectedKey={this.state.selectedKey}
+					/>
+         <Layout>
+           <Header
+						handleMenuToggle={this.handleMenuToggle}
+						collapseSideNav={this.state.collapseSideNav}
+					 />
+           <Content>
+             <WrappedComponent {...this.props} />
+           </Content>
+         </Layout>
+       </Layout>
 			);
 		}
 	}

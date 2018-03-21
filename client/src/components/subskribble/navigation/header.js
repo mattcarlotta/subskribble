@@ -1,23 +1,23 @@
-import map from 'lodash/map';
 import React from 'react';
-import { Col, Row } from 'antd';
+import { Row } from 'antd';
 // import DashboardTabs from './Tabs';
-import LeftNav from './leftNav';
 import NavButton from './navButton';
-import NavButtonLinks from './links/navButtonsLinks';
-import RightNav from './rightNav';
-import SideBar from './sidebar/SideBar';
+import NotificationsButton from './notifications/NotificationButton';
+import SettingsButton from './settings/SettingsButton';
 
-const DashboardHeader = () => (
+const DashboardHeader = ({ collapseSideNav, handleMenuToggle }) => (
   <Row className="dash-nav-container">
-    <Col span={12}>
-      <LeftNav />
-      {map(NavButtonLinks, (props, key) => (<NavButton key={key} {...props} />))}
-      <SideBar />
-    </Col>
-    <Col span={12}>
-      <RightNav />
-    </Col>
+    <div className="left-nav">
+      <NavButton
+        icon={collapseSideNav ? "keyboard_arrow_right" : "keyboard_arrow_left"}
+        onClickAction={handleMenuToggle}
+        tooltip={collapseSideNav ? "Open Menu" : "Close Menu"}
+      />
+    </div>
+    <div className="right-nav">
+      <NotificationsButton />
+      <SettingsButton />
+    </div>
   </Row>
 )
 
