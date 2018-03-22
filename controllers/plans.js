@@ -1,10 +1,10 @@
 const query = {
-  deletePlan: () => ("DELETE FROM plans WHERE id=$1 RETURNING *"),
-  getPlans: (limit, offset, status) => (`SELECT id, key, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers FROM plans WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-  getPlancount: () => (
+  delete: () => ("DELETE FROM plans WHERE id=$1 RETURNING *"),
+  getList: (limit, offset, status) => (`SELECT id, key, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers FROM plans WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+  getCount: () => (
     `SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM plans;`
   ),
-  updatePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 RETURNING planName")
+  update: () => ("UPDATE plans SET status=$1 WHERE id=$2 RETURNING planName")
 }
 
 module.exports = app => {
@@ -24,8 +24,8 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const activeplans = await db.any(query.getPlans(10, 0, 'active'));
-      const inactiveplans = await db.any(query.getPlans(10, 0, 'suspended'));
+      const activeplans = await db.any(query.getList(10, 0, 'active'));
+      const inactiveplans = await db.any(query.getList(10, 0, 'suspended'));
 
       res.status(201).json({ activeplans, inactiveplans });
     } catch (err) {
@@ -36,7 +36,7 @@ module.exports = app => {
   const _delete = async (req, res) => {
     const { id } = req.params;
     try {
-      const name = await db.result(query.deletePlan(), id)
+      const name = await db.result(query.delete(), id)
 
       res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname}.` });
     } catch (err) {
@@ -52,7 +52,7 @@ module.exports = app => {
 
     try {
       let activeplans, inactiveplans;
-      const plans = await db.any(query.getPlans(limit, offset, status));
+      const plans = await db.any(query.getList(limit, offset, status));
 
       (table === "activeplans") ? activeplans = plans : inactiveplans = plans;
 
@@ -64,7 +64,7 @@ module.exports = app => {
 
   const _fetchCounts = async (req, res) => {
     try {
-      const plans = await db.any(query.getPlancount());
+      const plans = await db.any(query.getCount());
 
       res.status(201).json({
         activeplancount: parseStringToNum(plans[0].active),
@@ -80,8 +80,7 @@ module.exports = app => {
     const { updateType, statusType } = req.body;
 
     try {
-      const name = await db.one(query.updatePlan(), [statusType, id])
-      console.log(name);
+      const name = await db.one(query.update(), [statusType, id])
 
       res.status(201).json({ message: `Succesfully ${updateType} ${name.planname}.` });
     } catch (err) {

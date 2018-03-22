@@ -4,8 +4,9 @@ CREATE DATABASE "subskribble-demo";
 \c subskribble-demo;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-DROP TABLE IF EXISTS subscribers;
-DROP TABLE IF EXISTS plans;
+-- DROP TABLE IF EXISTS subscribers;
+-- DROP TABLE IF EXISTS plans;
+-- DROP TABLE IF EXISTS promotionals;
 
 CREATE TABLE subscribers (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
@@ -19,7 +20,7 @@ CREATE TABLE subscribers (
   startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   endDate TEXT,
   amount DECIMAL(12,2),
-  isGod BOOLEAN DEFAULT FALSE8
+  isGod BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE plans (
@@ -32,6 +33,19 @@ CREATE TABLE plans (
   billEvery VARCHAR(10),
   trialPeriod VARCHAR(10),
   subscribers INTEGER
+);
+
+CREATE TABLE promotionals (
+  id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+  key SERIAL PRIMARY KEY,
+  status VARCHAR(20) DEFAULT 'inactive',
+  planName VARCHAR(40) NOT NULL,
+  promoCode VARCHAR(40) NOT NULL,
+  amount VARCHAR(12),
+  startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+  validFor TEXT NOT NULL,
+  maxUsage INTEGER,
+  totalUsage INTEGER
 );
 
 INSERT INTO subscribers (status, email, subscriber, password, phone, plan, endDate, amount)
@@ -87,3 +101,30 @@ INSERT INTO plans (status, planName, amount, setupFee, billEvery, trialPeriod, s
   ('suspended', 'Carlotta ISP', 89.99, 99.90, '30 days', '30 days', 329),
   ('suspended', 'Carlotta Pumps', 279.99, 198.89, '30 days', '30 days', 4),
   ('suspended', 'Carlotta Assoc.', 69.99, 0.00, '30 days', '30 days', 645);
+
+INSERT INTO promotionals (status, planName, promoCode, amount, validFor, maxUsage, totalUsage)
+  VALUES
+  ('active', 'Carlotta Prime', 'FIRST10KACCOUNTS', '5%', '30 days', 10000, 299),
+  ('active', 'Carlotta Prime', '10PERCENTOFF', '10%', '30 days', 100, 85),
+  ('active', 'Carlotta Dealership', 'FALLBACKSALE', '15%', '30 days', 200, 48),
+  ('active', 'Carlotta Twitch', 'EVERYLOWPRICES', '20%', '30 days', 100, 51),
+  ('active', 'Carlotta Solar', 'MILITARYDISCOUNT', '25%', '30 days', 50, 11),
+  ('active', 'Carlotta Prime', '30PERCENTOFF', '30%', '30 days', 1000, 400),
+  ('active', 'Carlotta Sales', 'SPRINGSALE', '50%', '30 days', 30, 29),
+  ('active', 'Carlotta Prime', '60PERCENTOFF', '60%', '30 days', 50, 42),
+  ('active', 'Carlotta Switch', '70PERCENTOFF', '70%', '30 days', 20, 19),
+  ('active', 'Carlotta Prime', '80PERCENTOFF', '80%', '30 days', 10, 1),
+  ('active', 'Carlotta Youtube', '90PERCENTOFF', '90%', '30 days', 10, 6),
+  ('active', 'Carlotta Prime', 'FREETRIAL', '100%', '30 days', 99999999, 81),
+  ('suspended', 'Carlotta .com', 'FREETRIALOFFER', '100%', '30 days', 20, 20),
+  ('suspended', 'Carlotta Partners', 'XCLUSIVECLUB', '$20.00', '30 days', 500, 214),
+  ('suspended', 'Carlotta Church', '4CHARITY', '100%', '30 days', 1000, 845),
+  ('suspended', 'Carlotta Industries', 'HARDWORKENVBENEFITS', '$200.00', '30 days', 1000, 514),
+  ('suspended', 'Carlotta Workshops', 'WORKXSHOPPE', '10%', '30 days', 100, 74),
+  ('suspended', 'Carlotta Sports', 'GETAWORKOUT', '20%', '30 days', 20, 11),
+  ('suspended', 'Carlotta Cars Magazine', '1FREECARMAGZ', '$2.00', '30 days', 100, 62),
+  ('suspended', 'Carlotta Flagships', '20PERCENTOFF', '20%', '30 days', 125, 125),
+  ('suspended', 'Carlotta Protocols', 'FOLLOWGUIDELINES', '$5.00', '30 days', 500, 487),
+  ('suspended', 'Carlotta ISP', 'SIGNMEUP', '$10.00', '30 days', 328, 328),
+  ('suspended', 'Carlotta Pumps', '1FREEPUMP', '$100.00', '30 days', 5, 4),
+  ('suspended', 'Carlotta Assoc.', 'ASSOCIATED', '$100.00', '30 days', 10, 5);

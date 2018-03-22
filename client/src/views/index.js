@@ -15,7 +15,7 @@ import Landing from '../components/subskribble/app';
 import NotFound from '../components/subskribble/app/notfound/404';
 import Plans from '../containers/subskribble/plans/Plans';
 // import Profile from '../components/subskribble/profile';
-// import Promos from '../components/subskribble/promos';
+import Promos from '../containers/subskribble/promos/Promotionals';
 // import OnLoadAuth from '../containers/app/OnLoadAuth';
 // import RequireAuth from '../containers/auth/RequireAuth';
 // import Messages from '../components/subskribble/messages';
@@ -40,7 +40,7 @@ export const views = (
 			{/* <Route path="forms" component={Forms}/> */}
 			{/* <Route path="login" component={LogIn} /> */}
 			<Route path="plans" component={Plans} />
-			{/* <Route path="promotionals" component={Promos} /> */}
+			<Route path="promotionals" component={Promos} />
 			{/* <Route path="signup" component={SignUp} /> */}
 			<Route path="subscribers" component={Subscribers} />
 			{/* <Route path="templates" component={Templates} /> */}

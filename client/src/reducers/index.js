@@ -49,6 +49,29 @@ const planReducer = (state={}, { payload, type}) => {
 	}
 }
 
+const promoReducer = (state={}, { payload, type}) => {
+	switch (type) {
+		case types.SET_ACTIVE_PROMOS:
+			return { ...state, activeitems: payload };
+		case types.SET_INACTIVE_PROMOS:
+			return { ...state, inactiveitems: payload };
+		case types.SET_INITIAL_PROMOS:
+			return {
+				...state,
+				activeitems: payload.activepromos,
+				inactiveitems: payload.inactivepromos
+			}
+		case types.SET_INITIAL_PROMOCOUNTS:
+			return {
+				...state,
+				activeitemcount: payload.activepromocount,
+				inactiveitemcount: payload.inactivepromocount
+			}
+		default:
+			return state;
+	}
+}
+
 const serverReducer = (state={}, { payload, type }) => {
 	switch (type) {
 		case types.RESET_SERVER_MESSAGES:
@@ -111,6 +134,7 @@ const formReducers = {
 const rootReducer = combineReducers({
 	auth: authReducer,
 	plans: planReducer,
+	promos: promoReducer,
 	server: serverReducer,
 	subs: subscriberReducer,
 	...formReducers,
