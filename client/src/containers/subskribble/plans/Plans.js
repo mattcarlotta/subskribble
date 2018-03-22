@@ -5,6 +5,14 @@ import CARDS from '../../../components/subskribble/plans/layouts/panelCards';
 import PanelLoader from '../../../components/subskribble/app/panels/PanelLoader';
 import PlansPanel from '../../../components/subskribble/plans/panels/plansPanel';
 
+const Plans = props => (
+  <PanelLoader
+    CARDS={CARDS}
+    Panel={PlansPanel}
+    {...props}
+  />
+)
+
 export default connect(state => ({
   activeitems: state.plans.activeitems,
   activeitemcount: state.plans.activeitemcount,
@@ -16,10 +24,4 @@ export default connect(state => ({
   fetchItems,
   fetchItemCounts,
   updateAction
-})(props => (
-  <PanelLoader
-    CARDS={CARDS}
-    Panel={PlansPanel}
-    {...props}
-  />
-))
+})(Plans)

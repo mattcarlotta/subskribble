@@ -1,17 +1,25 @@
-.ant-menu-inline .ant-menu-item-selected:after { right: 268px; }
+.ant-menu-inline .ant-menu-item-selected:after { right: 238px; }
 
 .ant-popover-arrow, .ant-popover-inner { margin-top: -4px; }
 
 .dash-nav-container {
-  @include b-c($blackblue);
+  @include b-c($white);
   @include h(55px);
   @include w(100%);
+  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.25));
   position: fixed;
   z-index: 1000;
   top: 0;
 
+  .left-nav {
+    @extend %d-ib;
+    margin-top: 18px;
+  }
+
   .right-nav {
-    @extend .f-r;
+    @extend %d-ib;
+    position: fixed;
+    right: 5px;
 
     .loggedin-user {
       @include c($white);
@@ -28,7 +36,7 @@
 
       .ant-badge-count {
         @include c($white);
-        @include b-s(0 0 0 1px $blackblue);
+        @include b-s(0 0 0 1px $white);
       }
 
       .ant-scroll-number-only>p {
@@ -38,10 +46,10 @@
       }
 
       .notifications-icon {
-        @include c($white);
+        @include c($blackblue);
 
         &:hover {
-          @include c($lightgrey);
+          @include c($darkergrey);
         }
       }
     }
@@ -54,11 +62,12 @@
 
       .settings-icon {
         @extend %p-r;
-        @include c($white);
+        @include c($blackblue);
         top: -6px;
 
+
         &:hover {
-          @include c($lightgrey);
+          @include c($darkergrey);
         }
       }
 
@@ -76,6 +85,7 @@
 
 .drawer-content, .drawer-menu-container {
   @include b-c($blackblue);
+  @include h(100vh);
   overflow: hidden;
 }
 
@@ -132,12 +142,18 @@
 }
 
 .logo-container {
-  @extend %d-ib;
+  @extend %b-0, %d-ib;
+  @include b-c($blackblue);
   @include h(55px);
+  // margin-left: 15px;
 
   &:hover {
     @extend .fix-cursor;
     @include b-c($hoverblue);
+  }
+
+  &:focus {
+    @include b-c($transparent);
   }
 
   .icon-logo {
@@ -146,7 +162,7 @@
    @include f-s(36px);
    margin-top: 8px;
    margin-right: 5px;
-   margin-left: 10px;
+   margin-left: 11px;
   }
 
   .text-logo {
@@ -170,7 +186,6 @@
 .drawer-menu-header {
   @include b-c($blackblue);
   border-bottom: 1px solid $tlightgrey;
-  margin-bottom: 10px;
 
   .logo-container:hover { @include b-c($transparent); }
 
@@ -230,4 +245,8 @@
       }
     }
   }
+}
+
+.tooltip-placement {
+  top: 52px !important;
 }

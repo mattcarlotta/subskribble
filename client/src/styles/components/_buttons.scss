@@ -61,15 +61,13 @@
   @include b-c($transparent);
   @include h(40px);
   @include w(40px);
-  top: -7px;
+  top: -11px;
   margin-left: 10px;
   border: 0;
 
-  i {@include c($twhite);}
-
   &:hover {
-    i { @include c($formgrey); }
-    @include b-c($hoverblue);
+    i { @include c($formgrey !important); }
+    @include b-c($hoverblue !important);
   }
 
   &:focus {
@@ -80,7 +78,7 @@
 
 .nav-button-icon {
   @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
-  @include c($lightgrey);
+  @include c($blackblue);
   @include f-s(22px);
   top: 4px;
   right: 26.5px;
