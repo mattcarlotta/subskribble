@@ -11,17 +11,13 @@ export default WrappedComponent => {
 	class DashboardWrapper extends Component {
 		state = { collapseSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
 
-		componentDidUpdate = (prevProps) => {
-			const pathname = this.props.location.pathname.replace(/\/subskribble\//g,'');
-			const selectedTab = this.state.selectedKey[0];
-			if (this.props.location !== prevProps.location && pathname !== selectedTab) {
-				this.setState({ selectedKey: [pathname] })
-			}
-		}
+		shouldComponentUpdate = (nextProps, nextState) => ( this.state.collapseSideNav !== nextState.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname )
 
 		handleMenuToggle = () => this.setState({ collapseSideNav: !this.state.collapseSideNav });
 
-		handleTabClick = ({key}) => browserHistory.push(`/subskribble/${key}`)
+		handleTabClick = ({key}) => {
+			this.setState({ selectedKey: [key ? key : 'subskribble'] }, () => browserHistory.push(`/subskribble/${key}`))
+		}
 
 		render = () => (
 			<Layout style={{ overflow: 'hidden' }}>
