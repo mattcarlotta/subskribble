@@ -3,9 +3,10 @@
 .ant-popover-arrow, .ant-popover-inner { margin-top: -4px; }
 
 .dash-nav-container {
-  @include b-c($blackblue);
+  @include b-c($white);
   @include h(55px);
   @include w(100%);
+  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.25));
   position: fixed;
   z-index: 1000;
   top: 0;
@@ -33,7 +34,7 @@
 
       .ant-badge-count {
         @include c($white);
-        @include b-s(0 0 0 1px $blackblue);
+        @include b-s(0 0 0 1px $white);
       }
 
       .ant-scroll-number-only>p {
@@ -43,10 +44,10 @@
       }
 
       .notifications-icon {
-        @include c($white);
+        @include c($blackblue);
 
         &:hover {
-          @include c($lightgrey);
+          @include c($darkergrey);
         }
       }
     }
@@ -59,11 +60,12 @@
 
       .settings-icon {
         @extend %p-r;
-        @include c($white);
+        @include c($blackblue);
         top: -6px;
 
+
         &:hover {
-          @include c($lightgrey);
+          @include c($darkergrey);
         }
       }
 
@@ -241,4 +243,8 @@
       }
     }
   }
+}
+
+.tooltip-placement {
+  top: 52px !important;
 }

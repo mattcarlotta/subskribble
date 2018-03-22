@@ -65,8 +65,6 @@
   margin-left: 10px;
   border: 0;
 
-  i {@include c($twhite);}
-
   &:hover {
     i { @include c($formgrey !important); }
     @include b-c($hoverblue !important);

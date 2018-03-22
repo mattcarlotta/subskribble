@@ -25,7 +25,7 @@ class Notifications extends Component {
       <div className="notifications-container">
         <Badge
           count={notifications ? notifications.length : 0}
-          offset={[-3,3]}
+          offset={[1,-3]}
           showZero={false}
           overflowCount={99}
           >
