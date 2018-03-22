@@ -1,6 +1,6 @@
 import filter from 'lodash/filter';
 import React, { Component } from 'react';
-import { Badge, Popover } from 'antd';
+import { Badge, Popover, Tooltip } from 'antd';
 
 import NOTIFICATIONS from './notificationData';
 import NotificationBody from './notificationBody';
@@ -23,11 +23,18 @@ class Notifications extends Component {
 
     return(
       <div className="notifications-container">
-        <Badge
-          count={notifications ? notifications.length : 0}
-          offset={[1,-3]}
-          showZero={false}
-          overflowCount={99}
+        <Tooltip
+          arrowPointAtCenter
+          placement="bottom"
+          title="Notifications"
+          overlayClassName="tooltip-placement"
+          overlayStyle={{ display: visibleNotifications ? 'none' : ''}}
+        >
+          <Badge
+            count={notifications ? notifications.length : 0}
+            offset={[1,-3]}
+            showZero={false}
+            overflowCount={99}
           >
             <Popover
               arrowPointAtCenter
@@ -56,6 +63,7 @@ class Notifications extends Component {
               <i className="material-icons notifications-icon">notifications</i>
             </Popover>
           </Badge>
+        </Tooltip>
       </div>
     )
   }
