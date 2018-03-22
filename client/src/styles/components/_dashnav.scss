@@ -12,12 +12,14 @@
   top: 0;
 
   .left-nav {
-    // float: left;
     @extend %d-ib;
+    margin-top: 18px;
   }
 
   .right-nav {
     @extend %d-ib;
+    position: fixed;
+    right: 5px;
 
     .loggedin-user {
       @include c($white);

@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button } from 'antd';
+import NavButton from './navButton';
 
-export default ({ collapseSideNav, onClickAction }) => (
-  <Button onClick={onClickAction} className="logo-container">
-    <i className="material-icons icon-logo">wifi_tethering</i>
-    <span style={{ display: collapseSideNav ? 'none' : '' }} className="text-logo">subskribble</span>
-  </Button>
-)
+export default ({ collapseSideNav, handleMenuToggle }) => (
+  <div className="left-nav">
+    <NavButton
+      icon={collapseSideNav ? "menu" : "format_indent_decrease"}
+      onClickAction={handleMenuToggle}
+      tooltip={collapseSideNav ? "Open Menu" : "Close Menu"}
+    />
+  </div>
+);

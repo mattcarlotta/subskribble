@@ -1,12 +1,13 @@
 import map from 'lodash/map';
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { Layout, Menu, Icon } from 'antd';
-import LeftNav from '../leftNav';
+import { Button, Icon, Layout, Menu } from 'antd';
 import TABLINKS from '../links/tabLinks';
 
 const { Sider } = Layout;
 const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;
+
+const handleLogoClick = () => browserHistory.push('/subskribble')
 
 const SideBar = ({
   handleTabClick,
@@ -21,10 +22,10 @@ const SideBar = ({
     width={240}
   >
     <div key="menu-header" className="drawer-menu-header">
-      <LeftNav
-        collapseSideNav={collapseSideNav}
-        onClickAction={() => browserHistory.push('/subskribble')}
-      />
+      <Button onClick={handleLogoClick} className="logo-container">
+        <i className="material-icons icon-logo">wifi_tethering</i>
+        <span style={{ display: collapseSideNav ? 'none' : '' }} className="text-logo">subskribble</span>
+      </Button>
     </div>
     <Menu
       key="menu-container"

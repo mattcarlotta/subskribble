@@ -23,26 +23,24 @@ export default WrappedComponent => {
 
 		handleTabClick = ({key}) => browserHistory.push(`/subskribble/${key}`)
 
-		render() {
-			return (
-				<Layout style={{ overflow: 'hidden' }}>
-					<InlineMenu
-						handleTabClick={this.handleTabClick}
-						collapseSideNav={this.state.collapseSideNav}
-						selectedKey={this.state.selectedKey}
-					/>
-         <Layout>
-           <Header
-						handleMenuToggle={this.handleMenuToggle}
-						collapseSideNav={this.state.collapseSideNav}
-					 />
-           <Content>
-             <WrappedComponent {...this.props} />
-           </Content>
-         </Layout>
+		render = () => (
+			<Layout style={{ overflow: 'hidden' }}>
+				<InlineMenu
+					handleTabClick={this.handleTabClick}
+					collapseSideNav={this.state.collapseSideNav}
+					selectedKey={this.state.selectedKey}
+				/>
+       <Layout>
+         <Header
+					handleMenuToggle={this.handleMenuToggle}
+					collapseSideNav={this.state.collapseSideNav}
+				 />
+         <Content>
+           <WrappedComponent {...this.props} />
+         </Content>
        </Layout>
-			);
-		}
+     </Layout>
+		);
 	}
 
 	return withRouter(DashboardWrapper);
