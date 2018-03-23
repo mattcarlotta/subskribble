@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Button, Popconfirm } from 'antd';
 
-class DeleteItem extends PureComponent {
+export default class DeleteItem extends PureComponent {
   handleDelete = () => {
     const { deleteAction, id  } = this.props;
-    console.log(`requested to delete this record: ${id}`);
     deleteAction(id);
   }
 
@@ -21,5 +20,3 @@ class DeleteItem extends PureComponent {
     </Popconfirm>
   )
 }
-
-export default DeleteItem;

@@ -16,7 +16,6 @@ export default class PanelLoader extends PureComponent {
   }
 
   render = () => {
-    console.log('props', this.props)
     const { buttonLabel, CARDS, formNum, Panel, title } = this.props;
     const { isLoading } = this.state;
     return (

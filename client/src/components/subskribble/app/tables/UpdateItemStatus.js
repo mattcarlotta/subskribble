@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Button, Divider, Popconfirm } from 'antd';
 
-class UpdateItemStatus extends PureComponent {
+export default class UpdateItemStatus extends PureComponent {
   handleStatusUpdate = () => {
     const { updateAction, statusType, id } = this.props;
-    console.log(`requested ${statusType} to ${id}'s status`);
     const updateType = statusType === "activate" ? "activated" : "suspended";
     const statusChange = statusType === "activate" ? "active" : "suspended";
     updateAction(updateType, statusChange, id);
@@ -24,5 +23,3 @@ class UpdateItemStatus extends PureComponent {
     </Popconfirm>
   )
 }
-
-export default UpdateItemStatus;
