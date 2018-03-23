@@ -89,12 +89,8 @@ const subscriberReducer = (state={}, { payload, type }) => {
 	switch (type) {
 		case types.SET_ACTIVE_SUBS:
 			return { ...state, activeitems: payload };
-		// case SET_ACTIVE_SUBS_COUNT:
-		// 	return { ...state, activesubcount: action.payload }
 		case types.SET_INACTIVE_SUBS:
 			return { ...state, inactiveitems: payload };
-		// case SET_INACTIVE_SUBS_COUNT:
-		// 	return { ...state, inactivesubcount: action.payload };
 		case types.SET_INITIAL_SUBS:
 			return {
 				...state,
@@ -106,6 +102,29 @@ const subscriberReducer = (state={}, { payload, type }) => {
 				...state,
 				activeitemcount: payload.activesubscriberscount,
 				inactiveitemcount: payload.inactivesubscriberscount
+			}
+		default:
+			return state;
+	}
+}
+
+const transactionReducer = (state={}, { payload, type }) => {
+	switch (type) {
+		case types.SET_CHARGES:
+			return { ...state, activeitems: payload };
+		case types.SET_REFUNDS:
+			return { ...state, inactiveitems: payload };
+		case types.SET_INITIAL_TRANSACTIONS:
+			return {
+				...state,
+				activeitems: payload.chargetransactions,
+				inactiveitems: payload.refundtransactions
+			}
+		case types.SET_INITIAL_TRANSACTIONCOUNTS:
+			return {
+				...state,
+				activeitemcount: payload.chargecount,
+				inactiveitemcount: payload.refundcount
 			}
 		default:
 			return state;
@@ -137,6 +156,7 @@ const rootReducer = combineReducers({
 	promos: promoReducer,
 	server: serverReducer,
 	subs: subscriberReducer,
+	transactions: transactionReducer,
 	...formReducers,
 	routing
 });

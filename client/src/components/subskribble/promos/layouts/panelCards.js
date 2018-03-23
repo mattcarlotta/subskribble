@@ -23,8 +23,8 @@ export default ({
     SELECTFIELD: true,
     TAB: "Active Promotionals",
     TABLECONTENTS: activeitems,
+    TABLEHEADERS,
     TABLERECORDS: activeitemcount,
-    TABLEHEADERS: TABLEHEADERS,
     ...rest
   },
   {
@@ -33,8 +33,8 @@ export default ({
     SELECTFIELD: true,
     TAB: "Inactive Promotionals",
     TABLECONTENTS: inactiveitems,
+    TABLEHEADERS,
     TABLERECORDS: inactiveitemcount,
-    TABLEHEADERS: TABLEHEADERS,
     ...rest
   }
 ]

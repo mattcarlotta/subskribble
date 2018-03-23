@@ -23,7 +23,7 @@ import Promos from '../containers/subskribble/promos/Promotionals';
 // import SignUp from '../containers/website/forms/signupForm';
 import Subscribers from '../containers/subskribble/subscribers/Subscribers';
 // import Templates from '../components/subskribble/templates';
-// import Transactions from '../components/subskribble/transactions';
+import Transactions from '../containers/subskribble/transactions/Transactions';
 // import Tutorials from '../components/subskribble/tutorials';
 
 // CONFIG APP ROUTE VIEWS
@@ -44,7 +44,7 @@ export const views = (
 			{/* <Route path="signup" component={SignUp} /> */}
 			<Route path="subscribers" component={Subscribers} />
 			{/* <Route path="templates" component={Templates} /> */}
-			{/* <Route path="transactions" component={Transactions} /> */}
+			<Route path="transactions" component={Transactions} />
 			{/* <Route path="tutorials" component={Tutorials} /> */}
 		</Route>
 		<Route path="*" component={NotFound} />

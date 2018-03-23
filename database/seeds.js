@@ -41,9 +41,23 @@ module.exports = app => {
     totalUsage INTEGER
   )`;
 
+  const transTableOptions = `(
+    id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+    key SERIAL PRIMARY KEY,
+    status VARCHAR(20),
+    invoice UUID DEFAULT uuid_generate_v1mc(),
+    planName VARCHAR(40) NOT NULL,
+    subscriber VARCHAR NOT NULL,
+    processor VARCHAR(40) NOT NULL,
+    amount VARCHAR(12),
+    chargeDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+    refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
+  )`;
+
   const planProperties = `(status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(status, email, subscriber, password, phone, plan, endDate, amount)`;
+  const transProperties = `(status, planName, subscriber, processor, amount)`;
 
   const planValues = `
   ('active', 'Carlotta Prime', 99.99, 0.00, '30 days', '30 days', 299),
@@ -126,6 +140,33 @@ module.exports = app => {
   ('suspended', '88Damon@photonmail.com', 'Damien Smith', 'password', '(555) 555-5555', 'Carlotta Prime', 'Jan 29, 2018', 29.99);
   `;
 
+  const transValues = `
+  ('paid', 'Carlotta Prime', 'Sherry Waters', 'Paypal', 29.99),
+  ('due', 'Carlotta Prime', 'Parker Posey', '-', 29.99),
+  ('paid', 'Carlotta Prime', 'Bob Aronssen', 'Venmo', 29.99),
+  ('paid', 'Carlotta Prime', 'Shaniqua Smith', 'Stripe', 29.99),
+  ('paid', 'Carlotta Prime', 'Tanya Ballschin', 'Stripe', 29.99),
+  ('due', 'Carlotta Prime', 'Adam Oates', '-', 29.99),
+  ('due', 'Carlotta Prime', 'Wes Walls', '-', 29.99),
+  ('paid', 'Carlotta Prime', 'Siemen Walker', 'Visa Checkout', 29.99),
+  ('paid', 'Carlotta Prime', 'Jenny Tanks', 'Stripe', 29.99),
+  ('due', 'Carlotta Prime', 'Adamn Vicks', '-', 29.99),
+  ('due', 'Carlotta Prime', 'Mark Canelo', '-', 29.99),
+  ('paid', 'Carlotta Prime', 'Amber Lalampas', 'Paypal', 29.99),
+  ('refund', 'Carlotta Prime', 'Mark Canelo', 'Paypal', 29.99),
+  ('refund', 'Carlotta Prime', 'Axle Root', 'Stripe', 29.99),
+  ('refund', 'Carlotta Prime', 'Gary Pilkinson', 'Venmo', 29.99),
+  ('credit', 'Carlotta Prime', 'Kelly Ullman', '-', 29.99),
+  ('refund', 'Carlotta Prime', 'Yasmin Rodrigues', 'Stripe', 29.99),
+  ('credit', 'Carlotta Prime', 'Adam Oates', '-', 29.99),
+  ('credit', 'Carlotta Prime', 'Wes Walls', '-', 29.99),
+  ('credit', 'Carlotta Prime', 'Kyle Teegue', '-', 29.99),
+  ('refund', 'Carlotta Prime', 'Alisha Tallis', 'Stripe', 29.99),
+  ('credit', 'Carlotta Prime', 'Scott Parker', '-', 29.99),
+  ('refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99),
+  ('refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);
+  `;
+
   (async () => {
     try {
       await db.none(`
@@ -133,12 +174,15 @@ module.exports = app => {
         DROP TABLE IF EXISTS subscribers;
         DROP TABLE IF EXISTS plans;
         DROP TABLE IF EXISTS promotionals;
+        DROP TABLE IF EXISTS transactions;
         CREATE TABLE subscribers ${subTableOptions};
         CREATE TABLE plans ${planTableOptions};
         CREATE TABLE promotionals ${promoTableOptions};
+        CREATE TABLE transactions ${transTableOptions};
         INSERT INTO subscribers ${subProperties} VALUES ${subValues};
         INSERT INTO plans ${planProperties} VALUES ${planValues};
         INSERT INTO promotionals ${promoProperties} VALUES ${promoValues};
+        INSERT INTO transactions ${transProperties} VALUES ${transValues};
       `);
       console.log('Seeded database!');
       process.exit(0);

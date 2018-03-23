@@ -28,8 +28,8 @@ export default ({
     SELECTFIELD: true,
     TAB: "Active Subscribers",
     TABLECONTENTS: activeitems,
+    TABLEHEADERS,
     TABLERECORDS: activeitemcount,
-    TABLEHEADERS: TABLEHEADERS,
     ...rest
   },
   {
@@ -38,8 +38,8 @@ export default ({
     SELECTFIELD: true,
     TAB: "Inactive Subscribers",
     TABLECONTENTS: inactiveitems,
+    TABLEHEADERS,
     TABLERECORDS: inactiveitemcount,
-    TABLEHEADERS: TABLEHEADERS,
     ...rest
   }
 ]

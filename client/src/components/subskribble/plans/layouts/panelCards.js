@@ -25,7 +25,7 @@ export default ({
     SELECTFIELD: true,
     TAB: "Active Plans",
     TABLECONTENTS: activeitems,
-    TABLEHEADERS: TABLEHEADERS,
+    TABLEHEADERS,
     TABLERECORDS: activeitemcount,
     ...rest
   },
@@ -35,7 +35,7 @@ export default ({
     SELECTFIELD: true,
     TAB: "Inactive Plans",
     TABLECONTENTS: inactiveitems,
-    TABLEHEADERS: TABLEHEADERS,
+    TABLEHEADERS,
     TABLERECORDS: inactiveitemcount,
     ...rest
   }
