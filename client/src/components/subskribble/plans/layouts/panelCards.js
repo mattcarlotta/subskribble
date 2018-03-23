@@ -15,15 +15,11 @@ export const TABLEHEADERS = [
 export default ({
   activeitems,
   activeitemcount,
-  deleteAction,
-  fetchAction,
   inactiveitems,
   inactiveitemcount,
-  updateAction
+  ...rest
 }) => [
   {
-    deleteAction,
-    fetchAction,
     FILTERFIELDLABEL: "Filter Active Plans",
     FILTERFORM: "FilterActivePlans",
     SELECTFIELD: true,
@@ -31,11 +27,9 @@ export default ({
     TABLECONTENTS: activeitems,
     TABLEHEADERS: TABLEHEADERS,
     TABLERECORDS: activeitemcount,
-    updateAction
+    ...rest
   },
   {
-    deleteAction,
-    fetchAction,
     FILTERFIELDLABEL: "Filter Inactive Plans",
     FILTERFORM: "FilterInactivePlans",
     SELECTFIELD: true,
@@ -43,6 +37,6 @@ export default ({
     TABLECONTENTS: inactiveitems,
     TABLEHEADERS: TABLEHEADERS,
     TABLERECORDS: inactiveitemcount,
-    updateAction
+    ...rest
   }
 ]

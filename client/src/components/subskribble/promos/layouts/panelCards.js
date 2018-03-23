@@ -13,34 +13,28 @@ const TABLEHEADERS = [
 export default ({
   activeitems,
   activeitemcount,
-  deleteAction,
-  fetchAction,
   inactiveitems,
   inactiveitemcount,
-  updateAction
+  ...rest
 }) => [
   {
     FILTERFIELDLABEL: "Filter Active Promotionals",
     FILTERFORM: "FilterActivePromos",
-    deleteAction,
-    fetchAction,
     SELECTFIELD: true,
     TAB: "Active Promotionals",
     TABLECONTENTS: activeitems,
     TABLERECORDS: activeitemcount,
     TABLEHEADERS: TABLEHEADERS,
-    updateAction
+    ...rest
   },
   {
     FILTERFIELDLABEL: "Filter Inactive Promotionals",
     FILTERFORM: "FilterInactivePlans",
-    deleteAction,
-    fetchAction,
     SELECTFIELD: true,
     TAB: "Inactive Promotionals",
     TABLECONTENTS: inactiveitems,
     TABLERECORDS: inactiveitemcount,
     TABLEHEADERS: TABLEHEADERS,
-    updateAction
+    ...rest
   }
 ]

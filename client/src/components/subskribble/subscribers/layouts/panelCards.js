@@ -15,18 +15,14 @@ const TABLEHEADERS = [
 export default ({
   activeitems,
   activeitemcount,
-  deleteAction,
-  fetchAction,
   inactiveitems,
   inactiveitemcount,
-  updateAction
+  ...rest
 }) => [
   {
     BUTTONFORM: CustomerSignupForm,
     BUTTONFORMTITLE: 'Customer Signup',
     CUSTOMBUTTONS: CUSTOMERBUTTONS,
-    deleteAction,
-    fetchAction,
     FILTERFIELDLABEL: "Filter Active Subscribers",
     FILTERFORM: "FilterActiveSubscriptions",
     SELECTFIELD: true,
@@ -34,18 +30,16 @@ export default ({
     TABLECONTENTS: activeitems,
     TABLERECORDS: activeitemcount,
     TABLEHEADERS: TABLEHEADERS,
-    updateAction
+    ...rest
   },
   {
     FILTERFIELDLABEL: "Filter Inactive Subscribers",
     FILTERFORM: "FilterInactiveSubscriptions",
-    deleteAction,
-    fetchAction,
     SELECTFIELD: true,
     TAB: "Inactive Subscribers",
     TABLECONTENTS: inactiveitems,
     TABLERECORDS: inactiveitemcount,
     TABLEHEADERS: TABLEHEADERS,
-    updateAction
+    ...rest
   }
 ]
