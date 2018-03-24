@@ -7,6 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- DROP TABLE IF EXISTS subscribers;
 -- DROP TABLE IF EXISTS plans;
 -- DROP TABLE IF EXISTS promotionals;
+-- DROP TABLE IF EXISTS transactions;
 
 CREATE TABLE subscribers (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
@@ -145,26 +146,26 @@ INSERT INTO promotionals (status, planName, promoCode, amount, validFor, maxUsag
 INSERT INTO transactions (status, planName, subscriber, processor, amount)
   VALUES
   ('paid', 'Carlotta Prime', 'Sherry Waters', 'Paypal', 29.99),
-  ('due', 'Carlotta Prime', 'Parker Posey', '-', 29.99),
+  ('due', 'Carlotta Prime', 'Parker Posey', '', 29.99),
   ('paid', 'Carlotta Prime', 'Bob Aronssen', 'Venmo', 29.99),
   ('paid', 'Carlotta Prime', 'Shaniqua Smith', 'Stripe', 29.99),
   ('paid', 'Carlotta Prime', 'Tanya Ballschin', 'Stripe', 29.99),
-  ('due', 'Carlotta Prime', 'Adam Oates', '-', 29.99),
-  ('due', 'Carlotta Prime', 'Wes Walls', '-', 29.99),
+  ('due', 'Carlotta Prime', 'Adam Oates', '', 29.99),
+  ('due', 'Carlotta Prime', 'Wes Walls', '', 29.99),
   ('paid', 'Carlotta Prime', 'Siemen Walker', 'Visa Checkout', 29.99),
   ('paid', 'Carlotta Prime', 'Jenny Tanks', 'Stripe', 29.99),
-  ('due', 'Carlotta Prime', 'Adamn Vicks', '-', 29.99),
-  ('due', 'Carlotta Prime', 'Mark Canelo', '-', 29.99),
+  ('due', 'Carlotta Prime', 'Adamn Vicks', '', 29.99),
+  ('due', 'Carlotta Prime', 'Mark Canelo', '', 29.99),
   ('paid', 'Carlotta Prime', 'Amber Lalampas', 'Paypal', 29.99),
   ('refund', 'Carlotta Prime', 'Mark Canelo', 'Paypal', 29.99),
   ('refund', 'Carlotta Prime', 'Axle Root', 'Stripe', 29.99),
   ('refund', 'Carlotta Prime', 'Gary Pilkinson', 'Venmo', 29.99),
-  ('credit', 'Carlotta Prime', 'Kelly Ullman', '-', 29.99),
+  ('credit', 'Carlotta Prime', 'Kelly Ullman', '', 29.99),
   ('refund', 'Carlotta Prime', 'Yasmin Rodrigues', 'Stripe', 29.99),
-  ('credit', 'Carlotta Prime', 'Adam Oates', '-', 29.99),
-  ('credit', 'Carlotta Prime', 'Wes Walls', '-', 29.99),
-  ('credit', 'Carlotta Prime', 'Kyle Teegue', '-', 29.99),
+  ('credit', 'Carlotta Prime', 'Adam Oates', '', 29.99),
+  ('credit', 'Carlotta Prime', 'Wes Walls', '', 29.99),
+  ('credit', 'Carlotta Prime', 'Kyle Teegue', '', 29.99),
   ('refund', 'Carlotta Prime', 'Alisha Tallis', 'Stripe', 29.99),
-  ('credit', 'Carlotta Prime', 'Scott Parker', '-', 29.99),
+  ('credit', 'Carlotta Prime', 'Scott Parker', '', 29.99),
   ('refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99),
   ('refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);

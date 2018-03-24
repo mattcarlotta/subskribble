@@ -1,16 +1,17 @@
 const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
 const query = {
-  delete: () => ("DELETE FROM transactions WHERE id=$1 RETURNING *"),
+  deleteItem: () => ("DELETE FROM transactions WHERE id=$1 RETURNING *"),
   getList: (limit, offset, status) => (`SELECT id, key, status, status, invoice, planName, subscriber, processor, amount, chargeDate, refundDate FROM transactions ${statusType(status)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
   getCount: () => (
-    `SELECT count(*) filter (where status in ('paid', 'due')) AS charges, count(*) filter (where status in ('refund', 'credit')) AS refunds FROM transactions;`
+    "SELECT count(*) filter (where status in ('paid', 'due')) AS charges, count(*) filter (where status in ('refund', 'credit')) AS refunds FROM transactions;"
   ),
 }
 
 module.exports = app => {
   const { db } = app.database;
   const { parseStringToNum } = app.shared.helpers;
+  const { deleteItem, getList, getCount } = query;
 
   const controller = {
     // plan methods
@@ -24,8 +25,8 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const chargetransactions = await db.any(query.getList(10, 0, ['paid', 'due']));
-      const refundtransactions = await db.any(query.getList(10, 0, ['refund', 'credit']));
+      const chargetransactions = await db.any(getList(10, 0, ['paid', 'due']));
+      const refundtransactions = await db.any(getList(10, 0, ['refund', 'credit']));
 
       res.status(201).json({ chargetransactions, refundtransactions });
     } catch (err) {
@@ -34,9 +35,8 @@ module.exports = app => {
   }
 
   const _delete = async (req, res) => {
-    const { id } = req.params;
     try {
-      const name = await db.result(query.delete(), id)
+      const name = await db.result(deleteItem(), req.params.id);
 
       res.status(201).json({ message: `Succesfully deleted the ${name.rows[0].status} transaction from ${name.rows[0].planname}.` });
     } catch (err) {
@@ -52,7 +52,7 @@ module.exports = app => {
 
     try {
       let chargetransactions, refundtransactions;
-      const charges = await db.any(query.getList(limit, offset, status));
+      const charges = await db.any(getList(limit, offset, status));
 
       (table === "charges") ? chargetransactions = charges : refundtransactions = charges;
 
@@ -64,7 +64,7 @@ module.exports = app => {
 
   const _fetchCounts = async (req, res) => {
     try {
-      const tranasctions = await db.any(query.getCount());
+      const tranasctions = await db.any(getCount());
 
       res.status(201).json({
         chargecount: parseStringToNum(tranasctions[0].charges),

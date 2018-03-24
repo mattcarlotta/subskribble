@@ -1,17 +1,18 @@
 const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
 const query = {
-  delete: () => ("DELETE FROM subscribers WHERE id=$1 RETURNING *"),
+  deleteItem: () => ("DELETE FROM subscribers WHERE id=$1 RETURNING *"),
   getList: (limit, offset, status) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers ${statusType(status)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
   getCount: () => (
-    `SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;`
+    "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;"
   ),
-  update: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 RETURNING subscriber")
+  updateItem: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 RETURNING subscriber")
 }
 
 module.exports = app => {
   const { db } = app.database;
   const { parseStringToNum } = app.shared.helpers;
+  const { deleteItem, getList, getCount, updateItem } = query;
   const moment = app.get("moment");
 
   const controller = {
@@ -27,8 +28,8 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const activesubscribers = await db.any(query.getList(10, 0, ['active']));
-      const inactivesubscribers = await db.any(query.getList(10, 0, ['inactive', 'suspended']));
+      const activesubscribers = await db.any(getList(10, 0, ['active']));
+      const inactivesubscribers = await db.any(getList(10, 0, ['inactive', 'suspended']));
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
     } catch (err) {
@@ -37,9 +38,8 @@ module.exports = app => {
   }
 
   const _delete = async (req, res) => {
-    const { id } = req.params;
     try {
-      const name = await db.result(query.delete(), id)
+      const name = await db.result(deleteItem(), req.params.id);
 
       res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber}.` });
     } catch (err) {
@@ -55,7 +55,7 @@ module.exports = app => {
 
     try {
       let activesubscribers, inactivesubscribers;
-      const subscribers = await db.any(query.getList(limit, offset, status));
+      const subscribers = await db.any(getList(limit, offset, status));
 
       (table === "activesubscribers") ? activesubscribers = subscribers : inactivesubscribers = subscribers;
 
@@ -67,7 +67,7 @@ module.exports = app => {
 
   const _fetchCounts = async (req, res) => {
     try {
-      const subscribers = await db.any(query.getCount());
+      const subscribers = await db.any(getCount());
 
       res.status(201).json({
         activesubscriberscount: parseStringToNum(subscribers[0].active),
@@ -84,7 +84,7 @@ module.exports = app => {
     const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : null;
 
     try {
-      const name = await db.one(query.update(), [statusType, endDate, id])
+      const name = await db.one(updateItem(), [statusType, endDate, id])
 
       res.status(201).json({ message: `Succesfully ${updateType} ${name.subscriber}.` });
     } catch (err) {

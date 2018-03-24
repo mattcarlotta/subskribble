@@ -1,15 +1,16 @@
 const query = {
-  delete: () => ("DELETE FROM promotionals WHERE id=$1 RETURNING *"),
+  deleteItem: () => ("DELETE FROM promotionals WHERE id=$1 RETURNING *"),
   getList: (limit, offset, status) => (`SELECT id, key, status, planName, promoCode, amount, startDate, validFor, maxUsage, totalUsage FROM promotionals WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
   getCount: () => (
-    `SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM promotionals;`
+    "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM promotionals;"
   ),
-  update: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 RETURNING promoCode, planName")
+  updateItem: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 RETURNING promoCode, planName")
 }
 
 module.exports = app => {
   const { db } = app.database;
   const { parseStringToNum } = app.shared.helpers;
+  const { deleteItem, getList, getCount, updateItem } = query;
 
   const controller = {
     // promo methods
@@ -24,8 +25,8 @@ module.exports = app => {
 
   const _index = async (req, res) => {
     try {
-      const activepromos = await db.any(query.getList(10, 0, 'active'));
-      const inactivepromos = await db.any(query.getList(10, 0, 'suspended'));
+      const activepromos = await db.any(getList(10, 0, 'active'));
+      const inactivepromos = await db.any(getList(10, 0, 'suspended'));
 
       res.status(201).json({ activepromos, inactivepromos });
     } catch (err) {
@@ -34,9 +35,8 @@ module.exports = app => {
   }
 
   const _delete = async (req, res) => {
-    const { id } = req.params;
     try {
-      const name = await db.result(query.delete(), id);
+      const name = await db.result(deleteItem(), req.params.id);
 
       res.status(201).json({ message: `Succesfully deleted promo code: ${name.rows[0].promocode} from ${name.rows[0].planname}.` });
     } catch (err) {
@@ -52,7 +52,7 @@ module.exports = app => {
 
     try {
       let activepromos, inactivepromos;
-      const promos = await db.any(query.getList(limit, offset, status));
+      const promos = await db.any(getList(limit, offset, status));
 
       (table === "activepromotionals") ? activepromos = promos : inactivepromos = promos;
 
@@ -64,7 +64,7 @@ module.exports = app => {
 
   const _fetchCounts = async (req, res) => {
     try {
-      const promos = await db.any(query.getCount());
+      const promos = await db.any(getCount());
 
       res.status(201).json({
         activepromocount: parseStringToNum(promos[0].active),
@@ -80,7 +80,7 @@ module.exports = app => {
     const { updateType, statusType } = req.body;
 
     try {
-      const name = await db.one(query.update(), [statusType, id])
+      const name = await db.one(updateItem(), [statusType, id])
 
       res.status(201).json({ message: `Succesfully ${updateType} promo code: ${name.promocode} in ${name.planname}.`});
     } catch (err) {

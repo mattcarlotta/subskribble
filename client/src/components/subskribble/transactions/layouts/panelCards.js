@@ -1,24 +1,16 @@
 import React from 'react';
 
-const CHARGESTABLEHEADERS = [
+const tableProps = () => [
   { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
-  { title: 'Invoice', dataIndex: 'invoice' },
+  { title: 'Invoice #', dataIndex: 'invoice' },
   { title: 'Plan', dataIndex: 'planname' },
   { title: 'Subscriber', dataIndex: 'subscriber' },
-  { title: 'Processor', dataIndex: 'processor' },
-  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> },
-  { title: 'Charge Date', dataIndex: 'chargedate' }
+  { title: 'Processor', dataIndex: 'processor', render: proc => proc ? <span>{proc}</span> : <span style={{ marginLeft: 15 }}>-</span>  },
+  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
-export const REFUNDSTABLEHEADERS = [
-  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
-  { title: 'Transaction ID', dataIndex: 'invoice' },
-  { title: 'Plan', dataIndex: 'planname' },
-  { title: 'Subscriber', dataIndex: 'subscriber' },
-  { title: 'Processor', dataIndex: 'processor' },
-  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> },
-  { title: 'Refund Date', dataIndex: 'refunddate'}
-];
+const CHARGESTABLEHEADERS = [ ...tableProps(), { title: 'Charge Date', dataIndex: 'chargedate' } ];
+const REFUNDSTABLEHEADERS = [ ...tableProps(), { title: 'Refund Date', dataIndex: 'refunddate'} ];
 
 export default ({
   activeitems,
