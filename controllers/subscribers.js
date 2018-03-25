@@ -11,7 +11,7 @@ const query = {
 
 module.exports = app => {
   const { db } = app.database;
-  const { parseStringToNum } = app.shared.helpers;
+  const { parseStringToNum, sendError } = app.shared.helpers;
   const { deleteItem, getList, getCount, updateItem } = query;
   const moment = app.get("moment");
 
@@ -33,7 +33,7 @@ module.exports = app => {
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -43,7 +43,7 @@ module.exports = app => {
 
       res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber}.` });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -61,7 +61,7 @@ module.exports = app => {
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -74,7 +74,7 @@ module.exports = app => {
         inactivesubscriberscount: parseStringToNum(subscribers[0].inactive)
       });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -88,7 +88,7 @@ module.exports = app => {
 
       res.status(201).json({ message: `Succesfully ${updateType} ${name.subscriber}.` });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 

@@ -5,19 +5,21 @@ import Header from './header';
 import InlineMenu from './sidebar/InlineMenu';
 const { Content } = Layout;
 
-// import Footer from './footer';
-
 export default WrappedComponent => {
 	class DashboardWrapper extends Component {
-		state = { collapseSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] }
+		state = { collapseSideNav: false }
 
-		shouldComponentUpdate = (nextProps, nextState) => ( this.state.collapseSideNav !== nextState.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname )
+		componentDidMount = () => this.setSelectedKey()
+
+		componentDidUpdate = (prevProps, prevState) => (this.props.location.pathname !== prevProps.location.pathname) && this.setSelectedKey();
+
+		setSelectedKey = () => this.setState({ selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] })
+
+		shouldComponentUpdate = (nextProps, nextState) => ( this.state.collapseSideNav !== nextState.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname || this.state.selectedKey !== nextState.selectedKey )
 
 		handleMenuToggle = () => this.setState({ collapseSideNav: !this.state.collapseSideNav });
 
-		handleTabClick = ({key}) => {
-			this.setState({ selectedKey: [key ? key : 'subskribble'] }, () => browserHistory.push(`/subskribble/${key}`))
-		}
+		handleTabClick = ({key}) => browserHistory.push(`/subskribble/${key}`)
 
 		render = () => (
 			<Layout style={{ overflow: 'hidden' }}>

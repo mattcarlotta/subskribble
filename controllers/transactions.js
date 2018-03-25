@@ -10,11 +10,11 @@ const query = {
 
 module.exports = app => {
   const { db } = app.database;
-  const { parseStringToNum } = app.shared.helpers;
+  const { parseStringToNum, sendError } = app.shared.helpers;
   const { deleteItem, getList, getCount } = query;
 
   const controller = {
-    // plan methods
+    // transaction methods
     index: (req, res) => _index(req,res),
     fetchRecords: (req, res) => _fetchRecords(req, res),
     fetchCounts: (req, res) => _fetchCounts(req, res),
@@ -30,7 +30,7 @@ module.exports = app => {
 
       res.status(201).json({ chargetransactions, refundtransactions });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -40,7 +40,7 @@ module.exports = app => {
 
       res.status(201).json({ message: `Succesfully deleted the ${name.rows[0].status} transaction from ${name.rows[0].planname}.` });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -58,7 +58,7 @@ module.exports = app => {
 
       res.status(201).json({ chargetransactions, refundtransactions });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
@@ -71,7 +71,7 @@ module.exports = app => {
         refundcount: parseStringToNum(tranasctions[0].refunds)
       });
     } catch (err) {
-      return res.status(500).json({ err: err.toString() })
+      return sendError(err, res);
     }
   }
 
