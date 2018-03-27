@@ -76,9 +76,17 @@
   }
 }
 
+.delete-button {
+  @include f-s(14px);
+}
+
 .mark-as-read-button {
-  @extend %b-0;
-  padding: 0 5px;
+  @extend %b-0, %p-r;
+  @include c($tlightblack);
+  @include h(16px);
+  padding: 0 2px;
+  top: 3px;
+  margin-left: 5px;
 
 
   &:hover, &:focus  {
@@ -86,7 +94,6 @@
   }
 
   &:focus {
-    @include c($tblack);
     @include b-c($transparent);
   }
 }

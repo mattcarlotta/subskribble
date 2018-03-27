@@ -13,6 +13,11 @@ export default class Notifications extends Component {
     this.props.updateNotifications();
   }
 
+  handleDeleteNote = (e) => {
+    const note = e.target.dataset.id;
+    this.props.deleteNotification(note);
+  }
+
   handleVisibleChange = visible => this.setState({ visibleNotifications: visible });
 
   handleNotificationAsRead = (e) => {
@@ -23,7 +28,7 @@ export default class Notifications extends Component {
 
   render() {
     const { visibleNotifications } = this.state;
-    const { notifications } = this.props;
+    const { unreadNotifications, readNotifications } = this.props;
 
     return(
       <div className="notifications-container">
@@ -35,7 +40,7 @@ export default class Notifications extends Component {
           overlayStyle={{ display: visibleNotifications ? 'none' : ''}}
         >
           <Badge
-            count={notifications ? notifications.length : 0}
+            count={unreadNotifications ? unreadNotifications.length : 0}
             offset={[-2,1]}
             showZero={false}
             overflowCount={99}
@@ -48,12 +53,12 @@ export default class Notifications extends Component {
                     <div>Notifications</div>
                   </div>
                   <hr className="divider" />
-                  { !notifications || notifications.length === 0
+                  { !unreadNotifications || unreadNotifications.length === 0 || !readNotifications
                     ? <NotificationEmpty />
                     : <NotificationBody
-                      handleNotificationAsRead={this.handleNotificationAsRead}
-                      notifications={notifications}
-                    />
+                        handleDeleteNote={this.handleDeleteNote}
+                        notifications={[...unreadNotifications, ...readNotifications]}
+                      />
                   }
                   <hr className="divider" />
                   <div className="notifications-footer">

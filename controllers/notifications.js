@@ -1,7 +1,13 @@
 const query = {
   deleteItem: () => ("DELETE FROM notifications WHERE id=$1 RETURNING *"),
-  getList: () => (`SELECT id, subscriber, messageDate, message FROM notifications WHERE status='unread' ORDER BY key ASC LIMIT 99`),
-  updateItem: () => ("UPDATE notifications SET status=$1 WHERE id=$2 RETURNING *")
+  getList: () => (`
+    (SELECT array_to_json(array_agg(row_to_json(x)))
+    from ((SELECT * FROM notifications WHERE READ = false LIMIT 99)) x)
+    UNION ALL
+    SELECT array_to_json(array_agg(row_to_json(y)))
+    from ((SELECT * FROM notifications WHERE READ = true AND deleted = false LIMIT 99)) y;
+  `),
+  updateItem: () => ("UPDATE notifications SET read=$1 WHERE id=$2 RETURNING *")
 }
 
 module.exports = app => {
@@ -17,29 +23,32 @@ module.exports = app => {
     // create: (req, res) => _create(req,res)
     // show: (req, res) => _show(req,res)
     update: (req, res) => _update(req, res),
-    // delete: (req, res) => _delete(req, res)
+    delete: (req, res) => _delete(req, res)
   }
 
   const _index = async (req, res) => {
     try {
-      const notifications = await db.any(getList());
+      const noteList = await db.any(getList());
 
-      res.status(201).json({ notifications });
+      res.status(201).json({
+        unreadNotifications: noteList[0].array_to_json,
+        readNotifications: noteList[1].array_to_json
+      });
     } catch (err) {
       return sendError(err, res);
     }
   }
 
-  // const _delete = async (req, res) => {
-  //   try {
-  //     const name = await db.result(deleteItem(), req.params.id);
-  //
-  //     res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname} plan.` });
-  //   } catch (err) {
-  //     return sendError(err, res);
-  //   }
-  // }
-  //
+  const _delete = async (req, res) => {
+    try {
+      await db.result(deleteItem(), req.params.id);
+
+      // res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname} plan.` });
+    } catch (err) {
+      return sendError(err, res);
+    }
+  }
+
   // const _fetchRecords = async (req, res) => {
   //   let { table, limit, page } = req.query;
   //   limit = parseStringToNum(limit);
@@ -72,11 +81,8 @@ module.exports = app => {
   // }
 
   const _update = async (req, res) => {
-    const { id } = req.params;
-    const { updateType, statusType } = req.body;
-
     try {
-      const note = await db.one(updateItem(), ['read', id])
+      const note = await db.one(updateItem(), ['read', req.params.id])
 
       res.status(201).json({ message: `Succesfully mark ${note.id} as read.` });
     } catch (err) {

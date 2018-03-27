@@ -56,14 +56,14 @@ module.exports = app => {
 
   const noteTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    status VARCHAR(6) DEFAULT 'unread',
+    read BOOLEAN DEFAULT false,
+    deleted BOOLEAN DEFAULT false,
     subscriber VARCHAR NOT NULL,
     messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH24:MI:SS'),
     message TEXT
   )`;
 
-  const noteProperties = `(subscriber, message)`;
+  const noteProperties = `(subscriber, message, read)`;
   const planProperties = `(status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(status, email, subscriber, password, phone, plan, endDate, amount)`;
@@ -178,13 +178,13 @@ module.exports = app => {
   `;
 
   const noteValues = `
-    ('Sherry Waters', 'has been added to the Carlotta Corp gateway.'),
-    ('Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.'),
-    ('Parker Posey', 'is late to pay for the Carlotta Prime plan.'),
-    ('Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!'),
-    ('Axle Root', 'has been suspended due to non-payment'),
-    ('Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!'),
-    ('Adam Vicks', 'has parked his membership and is now an inactive subscriber');
+    ('Sherry Waters', 'has been added to the Carlotta Corp gateway.', false),
+    ('Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.', false),
+    ('Parker Posey', 'is late to pay for the Carlotta Prime plan.', false),
+    ('Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!', false),
+    ('Axle Root', 'has been suspended due to non-payment', true),
+    ('Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!', true),
+    ('Adam Vicks', 'has parked his membership and is now an inactive subscriber', true);
   `;
 
   (async () => {
