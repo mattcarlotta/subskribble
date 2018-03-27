@@ -43,17 +43,52 @@
 }
 
 .btn-tertiary {
-  background-color: $darkwarmgrey !important;
+  @include b-c($darkwarmgrey !important);
 
   &:hover, &:focus {
     @extend %no-link-focus;
     @include c($white);
-    background-color: $warmgrey !important;
+    @include b-c($darkwarmgrey !important);
   }
 }
 
 .centered {
   @extend %d-b, %m-0-a;
+}
+
+.clear-notifications {
+  @extend %b-0;
+  @include h(100%);
+  @include w(100%);
+  @include b-c($transparent);
+  border-radextendius: 0px;
+
+  &:hover {
+    @extend %no-link-focus;
+    @include c($hoverblue);
+    @include b-c($transparent);
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    @include c($tblack);
+    @include b-c($transparent);
+  }
+}
+
+.mark-as-read-button {
+  @extend %b-0;
+  padding: 0 5px;
+
+
+  &:hover, &:focus  {
+    @extend %no-link-focus;
+  }
+
+  &:focus {
+    @include c($tblack);
+    @include b-c($transparent);
+  }
 }
 
 .nav-button {

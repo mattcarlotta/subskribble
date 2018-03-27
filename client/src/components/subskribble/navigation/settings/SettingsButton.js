@@ -7,7 +7,6 @@ export default class SettingsButton extends PureComponent {
 
   handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
-
   render = () => (
     <div className="settings-tab">
       <Tooltip

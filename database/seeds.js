@@ -54,6 +54,16 @@ module.exports = app => {
     refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
   )`;
 
+  const noteTableOptions = `(
+    id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+    key SERIAL PRIMARY KEY,
+    status VARCHAR(6) DEFAULT 'unread',
+    subscriber VARCHAR NOT NULL,
+    messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH24:MI:SS'),
+    message TEXT
+  )`;
+
+  const noteProperties = `(subscriber, message)`;
   const planProperties = `(status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(status, email, subscriber, password, phone, plan, endDate, amount)`;
@@ -167,6 +177,16 @@ module.exports = app => {
   ('refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);
   `;
 
+  const noteValues = `
+    ('Sherry Waters', 'has been added to the Carlotta Corp gateway.'),
+    ('Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.'),
+    ('Parker Posey', 'is late to pay for the Carlotta Prime plan.'),
+    ('Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!'),
+    ('Axle Root', 'has been suspended due to non-payment'),
+    ('Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!'),
+    ('Adam Vicks', 'has parked his membership and is now an inactive subscriber');
+  `;
+
   (async () => {
     try {
       await db.none(`
@@ -175,14 +195,17 @@ module.exports = app => {
         DROP TABLE IF EXISTS plans;
         DROP TABLE IF EXISTS promotionals;
         DROP TABLE IF EXISTS transactions;
+        DROP TABLE IF EXISTS notifications;
         CREATE TABLE subscribers ${subTableOptions};
         CREATE TABLE plans ${planTableOptions};
         CREATE TABLE promotionals ${promoTableOptions};
         CREATE TABLE transactions ${transTableOptions};
+        CREATE TABLE notifications ${noteTableOptions};
         INSERT INTO subscribers ${subProperties} VALUES ${subValues};
         INSERT INTO plans ${planProperties} VALUES ${planValues};
         INSERT INTO promotionals ${promoProperties} VALUES ${promoValues};
         INSERT INTO transactions ${transProperties} VALUES ${transValues};
+        INSERT INTO notifications ${noteProperties} VALUES ${noteValues};
       `);
       console.log('Seeded database!');
       process.exit(0);

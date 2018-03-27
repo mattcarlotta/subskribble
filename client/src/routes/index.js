@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-import { views } from '../views';
+import views from '../views';
 
 injectTapEventPlugin();
 

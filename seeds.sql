@@ -8,6 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- DROP TABLE IF EXISTS plans;
 -- DROP TABLE IF EXISTS promotionals;
 -- DROP TABLE IF EXISTS transactions;
+-- DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE subscribers (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
@@ -60,6 +61,15 @@ CREATE TABLE transactions (
   amount VARCHAR(12),
   chargeDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
+);
+
+CREATE TABLE notifications (
+  id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+  key SERIAL PRIMARY KEY,
+  status VARCHAR(6) DEFAULT 'unread',
+  subscriber VARCHAR NOT NULL,
+  messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH24:MI:SS'),
+  message TEXT
 );
 
 INSERT INTO subscribers (status, email, subscriber, password, phone, plan, endDate, amount)
@@ -169,3 +179,13 @@ INSERT INTO transactions (status, planName, subscriber, processor, amount)
   ('credit', 'Carlotta Prime', 'Scott Parker', '', 29.99),
   ('refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99),
   ('refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);
+
+INSERT INTO notifications (subscriber, message)
+  VALUES
+  ('Sherry Waters', 'has been added to the Carlotta Corp gateway.'),
+  ('Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.'),
+  ('Parker Posey', 'is late to pay for the Carlotta Prime plan.'),
+  ('Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!'),
+  ('Axle Root', 'has been suspended due to non-payment'),
+  ('Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!'),
+  ('Adam Vicks', 'has parked his membership and is now an inactive subscriber');

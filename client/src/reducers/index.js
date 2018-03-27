@@ -1,3 +1,4 @@
+import filter from 'lodash/filter';
 import { routerReducer as routing } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
@@ -67,6 +68,17 @@ const promoReducer = (state={}, { payload, type}) => {
 				activeitemcount: payload.activepromocount,
 				inactiveitemcount: payload.inactivepromocount
 			}
+		default:
+			return state;
+	}
+}
+
+const notificationsReducer = (state={}, { payload, type }) => {
+	switch (type) {
+		case types.SET_NOTIFICATIONS:
+			return  { ...state, notifications: payload };
+		case types.FILTER_NOTIFICATIONS:
+			return  { ...state, notifications: filter(state.notifications, notification => (notification.id !== payload))};
 		default:
 			return state;
 	}
@@ -152,6 +164,7 @@ const formReducers = {
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	notes: notificationsReducer,
 	plans: planReducer,
 	promos: promoReducer,
 	server: serverReducer,

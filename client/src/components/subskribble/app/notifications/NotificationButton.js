@@ -1,25 +1,29 @@
-import filter from 'lodash/filter';
 import React, { Component } from 'react';
-import { Badge, Popover, Tooltip } from 'antd';
+import { Button, Badge, Popover, Tooltip } from 'antd';
 
-import NOTIFICATIONS from './notificationData';
+// import NOTIFICATIONS from './notificationData';
 import NotificationBody from './notificationBody';
 import NotificationEmpty from './notificationEmpty';
 
-class Notifications extends Component {
-  state = { notifications: NOTIFICATIONS, visibleNotifications: false };
+export default class Notifications extends Component {
+  state = { visibleNotifications: false };
+
+  handleClearNotes = () => {
+    // TODO Send request to API to mark all notes as read
+    this.props.updateNotifications();
+  }
 
   handleVisibleChange = visible => this.setState({ visibleNotifications: visible });
 
-  handleActiveNote = activeNote => this.setState({ activeNote })
-
-  removeNotification = deletedNote => {
-    this.setState({ notifications: filter(this.state.notifications, (notification) => (notification.id !== deletedNote)) });
+  handleNotificationAsRead = (e) => {
+    const note = e.target.dataset.id;
+    // TODO Send request to API to mark note as read
+    this.props.updateNotifications(note);
   }
 
   render() {
-    const { activeNote, notifications, visibleNotifications } = this.state;
-    // const showNotificationDot = notificationCount > 0 ? 'flex' : 'none';
+    const { visibleNotifications } = this.state;
+    const { notifications } = this.props;
 
     return(
       <div className="notifications-container">
@@ -32,7 +36,7 @@ class Notifications extends Component {
         >
           <Badge
             count={notifications ? notifications.length : 0}
-            offset={[1,-3]}
+            offset={[-2,1]}
             showZero={false}
             overflowCount={99}
           >
@@ -41,18 +45,20 @@ class Notifications extends Component {
               content={
                 <div className="notifications-popover">
                   <div className="notifications-header">
-                    <div className="note-100">Notifications</div>
+                    <div>Notifications</div>
                   </div>
                   <hr className="divider" />
-                  {(notifications.length === 0)
+                  { !notifications || notifications.length === 0
                     ? <NotificationEmpty />
                     : <NotificationBody
-                      activeNote={activeNote}
-                      handleActiveNote={this.handleActiveNote}
+                      handleNotificationAsRead={this.handleNotificationAsRead}
                       notifications={notifications}
-                      removeNotification={this.removeNotification}
                     />
                   }
+                  <hr className="divider" />
+                  <div className="notifications-footer">
+                    <Button onClick={this.handleClearNotes} className="clear-notifications">Clear Notifications</Button>
+                  </div>
                 </div>
               }
               placement="bottomRight"
@@ -68,5 +74,3 @@ class Notifications extends Component {
     )
   }
 }
-
-export default Notifications;

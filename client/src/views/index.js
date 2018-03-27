@@ -5,7 +5,6 @@ import App from '../components/subskribble';
 // import ContactUs from '../components/subskribble/contact';
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
-import DashWrapper from '../components/subskribble/navigation/dashWrapper';
 // import FAQs from '../components/subskribble/faqs';
 // import Forms from '../components/subskribble/forms';
 // import ForgotPassword from '../containers/website/forms/resetpasswordForm';
@@ -27,10 +26,10 @@ import Transactions from '../containers/subskribble/transactions/Transactions';
 // import Tutorials from '../components/subskribble/tutorials';
 
 // CONFIG APP ROUTE VIEWS
-export const views = (
+export default (
 	<Fragment>
 		<Redirect from="/" to="/subskribble" />
-		<Route path="/subskribble" component={DashWrapper(App)}>
+		<Route path="/subskribble" component={App}>
 			<IndexRoute component={Landing} />
 			{/* <Route path="dashboard" component={Dashboard} /> */}
 			{/* <Route path="contact-us" component={ContactUs} /> */}
