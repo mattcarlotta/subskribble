@@ -18,17 +18,9 @@ export default class NotificationButton extends Component {
     >
       <div className="notifications-body">
         {map(this.props.notifications, ({ id, subscriber, messagedate, message, read }, key) => (
-          <div
-            dataset-key={key}
-            key={key}
-            className="note bb-none"
-          >
+          <div dataset-key={key} key={key} className="note bb-none">
             <div className="note-15">
-              <Avatar
-                icon="user"
-                size={36}
-                style={{ position: 'relative', top: -18 }}
-              >
+              <Avatar icon="user" size={36} style={{ position: 'relative', top: -18 }}>
                 {subscriber.charAt(0).toUpperCase()}
               </Avatar>
             </div>
@@ -42,16 +34,8 @@ export default class NotificationButton extends Component {
               <p className="date">
                 {messagedate}
                 <span>
-                  <Tooltip
-                    arrowPointAtCenter
-                    placement="bottom"
-                    title="Delete notification"
-                  >
-                    <Button
-                      data-id={id}
-                      className="remove-note-button"
-                      onClick={this.props.handleDeleteNote}
-                    >
+                  <Tooltip arrowPointAtCenter placement="bottom" title="Delete notification">
+                    <Button data-id={id} className="remove-note-button" onClick={this.props.handleDeleteNote}>
                       <i className="material-icons delete-button">delete</i>
                     </Button>
                   </Tooltip>

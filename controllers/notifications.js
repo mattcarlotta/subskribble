@@ -65,7 +65,6 @@ module.exports = app => {
     }
   }
 
-
   // sets all notifications as read
   const _update = async (req, res) => {
     try {
