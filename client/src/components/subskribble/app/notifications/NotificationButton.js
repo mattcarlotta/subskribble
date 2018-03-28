@@ -6,9 +6,7 @@ import PopoverContent from './popoverContent';
 export default class Notifications extends Component {
   state = { visibleNotifications: false };
 
-  handleClearNotes = () => {
-    this.props.removeAllNotifications();
-  }
+  handleClearNotes = () => this.props.removeAllNotifications();
 
   handleDeleteNote = (e) => {
     const note = e.target.dataset.id;
@@ -26,7 +24,6 @@ export default class Notifications extends Component {
 
   handleNotificationAsRead = (e) => {
     const note = e.target.dataset.id;
-    // TODO Send request to API to mark note as read
     this.props.updateNotifications(note);
   }
 
@@ -41,7 +38,7 @@ export default class Notifications extends Component {
           placement="bottom"
           title="Notifications"
           overlayClassName="tooltip-placement"
-          overlayStyle={{ display: visibleNotifications ? 'none' : ''}}
+          overlayStyle={{ display: visibleNotifications ? 'none' : '' }}
         >
           <Badge
             count={unreadNotifications ? unreadNotifications.length : 0}
