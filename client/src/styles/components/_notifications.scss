@@ -1,17 +1,18 @@
 .notifications-popover {
-  @include w(380px);
+  @include w(400px);
 }
 
 .notifications-header {
-  @include f-f($poppinsmedium);
-  @include f-s(13px);
-  @include h(35px);
+  @include h(40px);
+  @include w(100%);
+  @include f-s($poppinslight);
   letter-spacing: .15px;
-  padding: 7px 10px;
+  padding: 10px 10px;
 }
 
 .notifications-footer {
-  @include h(30px);
+  @extend %t-a-c;
+  @include h(40px);
 }
 
 .notifications-empty {
@@ -25,8 +26,22 @@
 
   .empty-title {
     @extend %p-r, %t-a-c;
+
+    .icon-logo {
+      @include c($hortizonalhr);
+      // @include f-s(72px);
+    }
+
+    .text-logo {
+      @extend %p-r;
+      @include c($hortizonalhr);
+      @include f-f($harabara)
+      @include f-s(28px);
+      letter-spacing: 1.5px;
+      top: -2px;
+    }
     @include f-f($poppinslight);
-    @include f-s(14px);
+    @include f-s(12px);
     top: 75px;
     letter-spacing: .15px;
   }
@@ -47,11 +62,30 @@
   .date {
     @include c($darkwarmgrey);
     @include f-s(10px);
+
+    .note-status {
+      @extend .f-r;
+      padding: 0 7px;
+    }
+
+    .read {
+      color: $tblack;
+      border: 1px solid $readnoteborder;
+      background: $cream;
+      border-radius: 2px;
+    }
+
+    .unread {
+      color: $blue;
+      background: #e6f7ff;
+      border: 1px solid $greyblue;
+      border-radius: 2px;
+    }
   }
 
   .note {
     @extend %m-t-10;
-    border-bottom: 1px solid #e2e4e6;
+    border-bottom: 1px solid $hortizonalhr;
   }
 
   .link { @include c($lightblue); }
@@ -66,7 +100,11 @@
     }
   }
 
-  p { margin: 0 0 10px 0 }
+  .unread-message {
+    @include f-w(600);
+  }
+
+  p { @extend %m-0; }
 }
 
 .note-10 {
@@ -77,12 +115,18 @@
 
 .note-15 {
   @extend %d-ib;
+  @include h(50px);
   @include w(15%);
 }
 
 .note-75 {
   @extend %d-ib;
   @include w(75%);
+}
+
+.note-85 {
+  @extend %d-ib;
+  @include w(85%);
 }
 
 .note-100 {
@@ -92,7 +136,7 @@
 
 .divider {
   @extend %m-0;
-  @include b-c($lightcoolgrey);
+  @include b-c($hortizonalhr);
   height: 1px;
   border: none;
 }

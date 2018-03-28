@@ -35,4 +35,4 @@ import CARDS from '../layouts/templateLayout';
 import BasicPanel from '../../app/panels/basicPanel';
 // import AddNewPromo from '../../../../containers/forms/rocketboard/addNewPromo';
 
-export default () => (<BasicPanel key="promos-panel" title="Templates" CARDS={CARDS} />)
+export default () => (<BasicPanel title="Templates" CARDS={CARDS} />)

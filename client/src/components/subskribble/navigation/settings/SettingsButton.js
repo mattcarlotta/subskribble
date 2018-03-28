@@ -1,42 +1,33 @@
-import map from 'lodash/map';
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { Menu, Popover } from 'antd';
-import RIGHTNAVLINKS from '../links/rightNavLinks';
-const { Item: MenuItem } = Menu;
+import React, { PureComponent } from 'react';
+import { Popover, Tooltip } from 'antd';
+import SettingsMenu from './settingsMenu';
 
-class SettingsButton extends Component {
-  state = { visibleSettings: false }
+export default class SettingsButton extends PureComponent {
+  state = { visibleSettings: false, tipVisible: false }
 
   handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
-  render() {
-    return (
-      <div className="settings-tab">
-        <Popover
-          arrowPointAtCenter
-          content={
-            <Menu className="settings-tab-container">
-              {map(RIGHTNAVLINKS, ({ icon, label, link }, key) => (
-                <MenuItem key={key} >
-                  <Link to={link}>
-                    <i className="material-icons settings-icon">{icon}</i>
-                    <span className="settings-label">{label}</span>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          }
-          onVisibleChange={this.handleVisibleChange}
-          placement="bottomRight"
-          trigger="click"
-          visible={this.state.visibleSettings}
-        >
+  render = () => (
+    <div className="settings-tab">
+      <Tooltip
+        arrowPointAtCenter
+        placement="bottom"
+        title="Settings"
+        overlayClassName="tooltip-placement"
+        overlayStyle={{ display: this.state.visibleSettings ? 'none' : ''}}
+      >
+          <Popover
+            arrowPointAtCenter
+            className="nav-button"
+            content={<SettingsMenu />}
+            onVisibleChange={this.handleVisibleChange}
+            placement="bottomRight"
+            trigger="click"
+            visible={this.state.visibleSettings}
+          >
             <i className="material-icons settings-icon">settings</i>
-        </Popover>
-      </div>
-    )
-  }
+          </Popover>
+      </Tooltip>
+    </div>
+  )
 }
-
-export default SettingsButton;

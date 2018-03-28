@@ -23,7 +23,7 @@ export default [
   {
     dividerLabel: 'Networking',
     icon: 'mail_outline',
-    label: 'Messages',
+    label: 'messages',
   },
   {
     icon: 'content_copy',

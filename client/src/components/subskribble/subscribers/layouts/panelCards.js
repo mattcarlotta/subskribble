@@ -1,20 +1,53 @@
-import { ACTIVESUBSCRIPTIONS, INACTIVESUBSCRIPTIONS, TABLEHEADERS } from '../fields/subscriptionsFieldsData';
+import React from 'react';
+import CustomerSignupForm from '../../../../containers/subskribble/forms/CustomerSignupForm';
 
-export default [
+const CUSTOMERBUTTONS = [{ className: 'centered', label: "Add Subscriber" }];
+
+const ACTIVETABLEHEADERS = [
+  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
+  { title: 'Subscriber', dataIndex: 'subscriber' },
+  { title: 'Plan', dataIndex: 'plan' },
+  { title: 'Start Date', dataIndex: 'startdate' },
+  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
+];
+
+const INACTIVETABLEHEADERS = [
+  { title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
+  { title: 'Subscriber', dataIndex: 'subscriber' },
+  { title: 'Plan', dataIndex: 'plan' },
+  { title: 'Start Date', dataIndex: 'startdate' },
+  { title: 'End Date', dataIndex: 'enddate', render: enddate => <span>{enddate}</span> },
+  { title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
+];
+
+export default ({
+  activeitems,
+  activeitemcount,
+  inactiveitems,
+  inactiveitemcount,
+  ...rest
+}) => [
   {
-    FILTERFIELDLABEL: "Filter Active Subscriptions",
+    BUTTONFORM: CustomerSignupForm,
+    BUTTONFORMTITLE: 'Customer Signup',
+    CUSTOMBUTTONS: CUSTOMERBUTTONS,
+    FILTERFIELDLABEL: "Filter Active Subscribers",
     FILTERFORM: "FilterActiveSubscriptions",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Active Subscribers",
-    TABLECONTENTS: ACTIVESUBSCRIPTIONS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: activeitems,
+    TABLEHEADERS: ACTIVETABLEHEADERS,
+    TABLERECORDS: activeitemcount,
+    ...rest
   },
   {
-    FILTERFIELDLABEL: "Filter Inactive Subscriptions",
+    FILTERFIELDLABEL: "Filter Inactive Subscribers",
     FILTERFORM: "FilterInactiveSubscriptions",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Inactive Subscribers",
-    TABLECONTENTS: INACTIVESUBSCRIPTIONS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: inactiveitems,
+    TABLEHEADERS: INACTIVETABLEHEADERS,
+    TABLERECORDS: inactiveitemcount,
+    ...rest
   }
 ]

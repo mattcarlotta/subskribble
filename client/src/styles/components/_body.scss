@@ -17,4 +17,3 @@ p {
   @include f-s(15px);
   @include l-h(24px);
 }
-* { @extend %bs-bb, %m-0, %outline-none, %p-0; }

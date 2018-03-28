@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-export default WrappedComponent => (
-  () => (
+export default class PageContainer extends PureComponent {
+  render = () => (
     <div className="page-container">
-      <WrappedComponent />
+      {this.props.children}
     </div>
   )
-)
+}

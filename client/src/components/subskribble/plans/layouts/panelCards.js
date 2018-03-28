@@ -1,20 +1,42 @@
-import { ACTIVEPLANS, INACTIVEPLANS, TABLEHEADERS } from '../fields/plansFieldsData';
+import React from 'react';
+// import AddNewPlan from '../../../../containers/subskribble/forms/AddNewPlan';
+// import { TABLEHEADERS } from '../fields/plansFieldsData';
 
-export default [
+export const TABLEHEADERS = [
+  {title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span> },
+  {title: 'Name', dataIndex: 'planname'},
+  {title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> },
+  {title: 'Setup Fee', dataIndex: 'setupfee', render: fee => <span>${fee}</span> },
+  {title: 'Bill Every', dataIndex: 'billevery'},
+  {title: 'Trial Period', dataIndex: 'trialperiod'},
+  {title: 'Subscribers', dataIndex: 'subscribers', render: subscribers => <span className="subscription-count">{subscribers}</span>}
+];
+
+export default ({
+  activeitems,
+  activeitemcount,
+  inactiveitems,
+  inactiveitemcount,
+  ...rest
+}) => [
   {
     FILTERFIELDLABEL: "Filter Active Plans",
     FILTERFORM: "FilterActivePlans",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Active Plans",
-    TABLECONTENTS: ACTIVEPLANS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: activeitems,
+    TABLEHEADERS,
+    TABLERECORDS: activeitemcount,
+    ...rest
   },
   {
     FILTERFIELDLABEL: "Filter Inactive Plans",
     FILTERFORM: "FilterInactivePlans",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Inactive Plans",
-    TABLECONTENTS: INACTIVEPLANS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: inactiveitems,
+    TABLEHEADERS,
+    TABLERECORDS: inactiveitemcount,
+    ...rest
   }
-];
+]
