@@ -70,15 +70,15 @@
 
     .read {
       color: $tblack;
-      border: 1px solid #d9d9d9;
-      background: #fafafa;
+      border: 1px solid $readnoteborder;
+      background: $cream;
       border-radius: 2px;
     }
 
     .unread {
-      color: #1890ff;
+      color: $blue;
       background: #e6f7ff;
-      border: 1px solid #91d5ff;
+      border: 1px solid $greyblue;
       border-radius: 2px;
     }
   }

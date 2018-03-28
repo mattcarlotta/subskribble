@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Badge, Popover, Tooltip } from 'antd';
+import { Badge, Popover, Tooltip } from 'antd';
 
-// import NOTIFICATIONS from './notificationData';
-import NotificationBody from './notificationBody';
-import NotificationEmpty from './notificationEmpty';
+import PopoverContent from './popoverContent';
 
 export default class Notifications extends Component {
   state = { visibleNotifications: false };
 
   handleClearNotes = () => {
-    // TODO Send request to API to mark all notes as read
-    this.props.updateNotifications();
+    this.props.removeAllNotifications();
   }
 
   handleDeleteNote = (e) => {
@@ -18,7 +15,14 @@ export default class Notifications extends Component {
     this.props.deleteNotification(note);
   }
 
-  handleVisibleChange = visible => this.setState({ visibleNotifications: visible });
+  handleVisibleChange = visible => {
+    this.setState({ visibleNotifications: visible }, () => {
+      const { visibleNotifications } = this.state;
+      const { unreadNotifications, updateNotifications } = this.props;
+
+      (!visibleNotifications && unreadNotifications) && updateNotifications();
+    });
+  }
 
   handleNotificationAsRead = (e) => {
     const note = e.target.dataset.id;
@@ -48,23 +52,12 @@ export default class Notifications extends Component {
             <Popover
               arrowPointAtCenter
               content={
-                <div className="notifications-popover">
-                  <div className="notifications-header">
-                    <div>Notifications</div>
-                  </div>
-                  <hr className="divider" />
-                  { !unreadNotifications || unreadNotifications.length === 0 || !readNotifications
-                    ? <NotificationEmpty />
-                    : <NotificationBody
-                        handleDeleteNote={this.handleDeleteNote}
-                        notifications={[...unreadNotifications, ...readNotifications]}
-                      />
-                  }
-                  <hr className="divider" />
-                  <div className="notifications-footer">
-                    <Button onClick={this.handleClearNotes} className="clear-notifications">Clear Notifications</Button>
-                  </div>
-                </div>
+                <PopoverContent
+                  handleClearNotes={this.handleClearNotes}
+                  handleDeleteNote={this.handleDeleteNote}
+                  unreadNotifications={unreadNotifications}
+                  readNotifications={readNotifications}
+                />
               }
               placement="bottomRight"
               trigger="click"

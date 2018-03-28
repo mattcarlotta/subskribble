@@ -1,19 +1,20 @@
 const query = {
-  deleteItem: () => ("DELETE FROM notifications WHERE id=$1 RETURNING *"),
+  deleteAll: () => ("DELETE FROM notifications WHERE userid=$1"),
+  deleteOne: () => ("DELETE FROM notifications WHERE id=$1 AND userid=$2"),
   getList: () => (`
     (SELECT array_to_json(array_agg(row_to_json(x)))
-    from ((SELECT * FROM notifications WHERE READ = false LIMIT 99)) x)
+    from ((SELECT * FROM notifications WHERE READ = false AND userid=$1 LIMIT 99)) x)
     UNION ALL
     SELECT array_to_json(array_agg(row_to_json(y)))
-    from ((SELECT * FROM notifications WHERE READ = true AND deleted = false LIMIT 99)) y;
+    from ((SELECT * FROM notifications WHERE READ = true AND deleted = false AND userid=$1 LIMIT 99)) y;
   `),
-  updateItem: () => ("UPDATE notifications SET read=$1 WHERE id=$2 RETURNING *")
+  updateOne: () => (`UPDATE notifications SET read=true WHERE read=false AND userid=$1`)
 }
 
 module.exports = app => {
   const { db } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
-  const { deleteItem, getList, updateItem } = query;
+  const { deleteAll, deleteOne, getList, updateOne } = query;
 
   const controller = {
     // plan methods
@@ -23,12 +24,15 @@ module.exports = app => {
     // create: (req, res) => _create(req,res)
     // show: (req, res) => _show(req,res)
     update: (req, res) => _update(req, res),
-    delete: (req, res) => _delete(req, res)
+    delete: (req, res) => _delete(req, res),
+    deleteAll: (req, res) => _deleteAll(req, res)
   }
 
+  // collects all notifications for requested user
   const _index = async (req, res) => {
+    console.log(req.params.id);
     try {
-      const noteList = await db.any(getList());
+      const noteList = await db.any(getList(), req.params.id);
 
       res.status(201).json({
         unreadNotifications: noteList[0].array_to_json,
@@ -39,52 +43,35 @@ module.exports = app => {
     }
   }
 
+  // deletes one notification
   const _delete = async (req, res) => {
     try {
-      await db.result(deleteItem(), req.params.id);
+      await db.result(deleteOne(), [req.query.id, req.query.userid]);
 
-      // res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname} plan.` });
+      res.status(201).json({});
     } catch (err) {
       return sendError(err, res);
     }
   }
 
-  // const _fetchRecords = async (req, res) => {
-  //   let { table, limit, page } = req.query;
-  //   limit = parseStringToNum(limit);
-  //   const offset =  parseStringToNum(page) * limit;
-  //   const status = table === 'activeplans' ? 'active' : 'suspended';
-  //
-  //   try {
-  //     let activeplans, inactiveplans;
-  //     const plans = await db.any(getList(limit, offset, status));
-  //
-  //     (table === "activeplans") ? activeplans = plans : inactiveplans = plans;
-  //
-  //     res.status(201).json({ activeplans, inactiveplans });
-  //   } catch (err) {
-  //     return sendError(err, res);
-  //   }
-  // }
-  //
-  // const _fetchCounts = async (req, res) => {
-  //   try {
-  //     const plans = await db.any(getCount());
-  //
-  //     res.status(201).json({
-  //       activeplancount: parseStringToNum(plans[0].active),
-  //       inactiveplancount: parseStringToNum(plans[0].inactive)
-  //     });
-  //   } catch (err) {
-  //     return sendError(err, res);
-  //   }
-  // }
+  // deletes all notifications
+  const _deleteAll = async (req, res) => {
+    try {
+      await db.result(deleteAll(), req.params.id);
 
+      res.status(201).json({});
+    } catch (err) {
+      return sendError(err, res);
+    }
+  }
+
+
+  // sets all notifications as read
   const _update = async (req, res) => {
     try {
-      const note = await db.one(updateItem(), ['read', req.params.id])
+      await db.oneOrNone(updateOne(), req.params.id);
 
-      res.status(201).json({ message: `Succesfully mark ${note.id} as read.` });
+      res.status(201).json({ message: `Succesfully marked all notes as read.` });
     } catch (err) {
       return sendError(err, res);
     }

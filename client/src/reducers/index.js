@@ -73,16 +73,14 @@ const promoReducer = (state={}, { payload, type}) => {
 	}
 }
 
-const filterNotifications = (notifications, payload) => (
-	filter(notifications, notification => (notification.id !== payload))
+const filterNotifications = (notifications, deletedNote) => (
+	filter(notifications, notification => (notification.id !== deletedNote))
 )
 
 const notificationsReducer = (state={}, { payload, type }) => {
 	switch (type) {
-		case types.SET_READ_NOTIFICATIONS:
-			return  { ...state, readNotifications: payload };
-		case types.SET_UNREAD_NOTIFICATIONS:
-			return  { ...state, unreadNotifications: payload };
+		case types.SET_NOTIFICATIONS:
+			return  { ...state, readNotifications: payload.readNotifications, unreadNotifications: payload.unreadNotifications };
 		case types.FILTER_NOTIFICATIONS:
 			return  {
 				...state,

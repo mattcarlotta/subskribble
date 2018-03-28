@@ -3,23 +3,29 @@ import * as types from './types';
 
 export default {
   // Deletes notifications from DB
-  deleteNotification: userid => dispatch => (
-    app.delete(`notification/delete/${userid}`)
+  deleteNotification: (id, userid) => dispatch => (
+    app.delete(`notification/delete?id=${id}&userid=1`)
+    .then(() => dispatch({ type: types.FILTER_NOTIFICATIONS, payload: id}))
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
-  // Fetches unread notifications from DB
+  // Fetches unread/read notifications from DB
   fetchNotifications: userid => dispatch => (
-    app.get(`notifications/${userid}`)
+    app.get(`notifications/1`)
     .then(({data: {unreadNotifications, readNotifications}}) => {
-      dispatch({ type: types.SET_UNREAD_NOTIFICATIONS, payload: unreadNotifications })
-      dispatch({ type: types.SET_READ_NOTIFICATIONS, payload: readNotifications })
+      dispatch({ type: types.SET_NOTIFICATIONS, payload: {unreadNotifications, readNotifications} })
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
-  // Sets notifications status to read
+  // Removes all notifications from DB
+  removeAllNotifications: userid => dispatch => (
+    app.delete(`notifications/deleteall/1`)
+    .then(() => dispatch(this.a.fetchNotifications()))
+    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+  ),
+  // Sets all notifications to read
   updateNotifications: userid => dispatch => (
-    app.put(`notification/markasread`)
-    .then(() => dispatch({ type: types.FILTER_NOTIFICATIONS, payload: userid }))
+    app.put(`notification/markasread/1`)
+    .then(() => dispatch(this.a.fetchNotifications()))
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   )
 }

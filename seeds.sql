@@ -65,10 +65,11 @@ CREATE TABLE transactions (
 
 CREATE TABLE notifications (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+  userid INT NOT NULL,
   read BOOLEAN DEFAULT false,
   deleted BOOLEAN DEFAULT false,
   subscriber VARCHAR NOT NULL,
-  messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH24:MI:SS'),
+  messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH12:MI AM'),
   message TEXT
 );
 
@@ -180,12 +181,19 @@ INSERT INTO transactions (status, planName, subscriber, processor, amount)
   ('refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99),
   ('refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);
 
-INSERT INTO notifications (subscriber, message, read)
+INSERT INTO notifications (userid, subscriber, message, read)
   VALUES
-  ('Sherry Waters', 'has been added to the Carlotta Corp gateway.', false),
-  ('Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.', false),
-  ('Parker Posey', 'is late to pay for the Carlotta Prime plan.', false),
-  ('Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!', false),
-  ('Axle Root', 'has been suspended due to non-payment', true),
-  ('Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!', true),
-  ('Adam Vicks', 'has parked his membership and is now an inactive subscriber', true);
+  (1, 'Sherry Waters', 'has been added to the Carlotta Corp gateway.', false),
+  (1, 'Carl Sagan', 'has cancelled his membership to the Carlotta Prime plan.', false),
+  (1, 'Parker Posey', 'is late to pay for the Carlotta Prime plan.', false),
+  (1, 'Bob Aronssen', 'has been succesfully charged for the Carlotta Prime membership!', false),
+  (1, 'Axle Root', 'has been suspended due to non-payment', true),
+  (1, 'Shaniqua Smith', 'has been succesfully charged for the Carlotta Primer membership!', true),
+  (1, 'Adam Vicks', 'has parked his membership and is now an inactive subscriber', true),
+  (2, 'xxxx xxx', 'has been added to the Carlotta Corp gateway.', false),
+  (2, 'xxxx Saxxxgan', 'has cancelled his membership to the Carlotta Prime plan.', false),
+  (2, 'xxx Posexxxy', 'is late to pay for the Carlotta Prime plan.', false),
+  (2, 'xxxxx Aronxxxxssen', 'has been succesfully charged for the Carlotta Prime membership!', false),
+  (2, 'xxxx Roxxxxot', 'has been suspended due to non-payment', true),
+  (2, 'xxxxx Smxxxxxxith', 'has been succesfully charged for the Carlotta Primer membership!', true),
+  (2, 'Adaxxxxm Vxxxxicks', 'has parked his membership and is now an inactive subscriber', true);

@@ -61,7 +61,7 @@
   @include h(100%);
   @include w(100%);
   @include b-c($transparent);
-  border-radextendius: 0px;
+  border-radius: 0px;
 
   &:hover {
     @extend %no-link-focus;
@@ -80,32 +80,12 @@
   @include f-s(14px);
 }
 
-.mark-as-read-button {
-  @extend %b-0, %p-r;
-  @include c($tlightblack);
-  @include h(16px);
-  padding: 0 2px;
-  top: 3px;
-  margin-left: 5px;
-
-
-  &:hover, &:focus  {
-    @extend %no-link-focus;
-  }
-
-  &:focus {
-    @include b-c($transparent);
-  }
-}
-
 .nav-button {
-  @extend %p-r;
+  @extend %b-0, %m-l-10, %p-r;
   @include b-c($transparent);
   @include h(40px);
   @include w(40px);
   top: -11px;
-  margin-left: 10px;
-  border: 0;
 
   &:hover {
     i { @include c($formgrey !important); }
@@ -127,12 +107,11 @@
 }
 
 .panel-button {
+  @extend %b-0, %m-r-10;
   @include c($darkwarmgrey);
   @include h(25px);
   @include w(30px);
   margin-top: 11px;
-  margin-right: 10px;
-  border: 0;
 
   i {
     @extend %p-r;
@@ -148,10 +127,9 @@
 }
 
 .reset-field {
-  @extend %p-r;
+  @extend %b-0, %p-r;
   @include c($darkwarmgrey);
   top: 3px;
-  border: 0;
 
   i {
     @extend %p-r;
@@ -174,6 +152,24 @@
   //
   //
   // }
+}
+
+.remove-note-button {
+  @extend %b-0, .m-l-5, %p-r;
+  @include c($tlightblack);
+  @include h(16px);
+  padding: 0 2px;
+  top: 3px;
+
+
+  &:hover, &:focus  {
+    @extend %no-link-focus;
+  }
+
+  &:focus {
+    @include c($tlightblack);
+    @include b-c($transparent);
+  }
 }
 
 .reset-field-icon {
