@@ -38,14 +38,19 @@
     @extend %m-b-10, %m-t-10, %t-t-c;
     padding: 5px 30px;
 
-    .no-data {
-      @include c($nodata);
-      text-align: center;
-      padding-top: 100px;
+    .ant-row {
+      @extend %m-b-20;
 
-      .anticon {
+      .no-data {
+        @extend %t-t-n;
         @include c($nodata);
-        @include f-s(148px);
+        text-align: center;
+        padding-top: 100px;
+
+        .anticon {
+          @include c($nodata);
+          @include f-s(148px);
+        }
       }
     }
   }
@@ -103,6 +108,7 @@
 .filter-container {
   @extend %d-b, .f-r;
   @include w(100%);
+  max-width: 350px;
 
   .form-90 {
     @extend %d-ib, %m-r-5;

@@ -1,39 +1,10 @@
-import React, { Component } from 'react';
-
-import { fetchSubscribers } from '../../../actions/subscriberActions';
+import React from 'react';
+import { connect } from 'react-redux';
+import actions from '../../../actions/subscriberActions';
 import CARDS from '../../../components/subskribble/subscribers/layouts/panelCards';
-import SubscriptionsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
-import Loader from '../../../components/subskribble/app/loading/Loader';
-import NoSubscribers from '../../../components/subskribble/app/notfound/noSubscribers';
+import PanelLoader from '../../../components/subskribble/app/panels/PanelLoader';
+import SubsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 
-export default class Subscribers extends Component {
-  state = { activesubscribers: '', inactivesubscribers: '', serverError: '' };
+const Subscribers = props => ( <PanelLoader CARDS={CARDS} Panel={SubsPanel} {...props} /> );
 
-  componentDidMount = () => this.fetchAllSubscribers();
-
-  fetchAllSubscribers = () => (
-    fetchSubscribers()
-    .then(({data: {activesubscribers, inactivesubscribers}}) => this.setState({ activesubscribers, inactivesubscribers }))
-    .catch(err => this.setState({ serverError: err }))
-  )
-
-  // componentDidUpdate = (nextProps, nextState) => {
-	// 	const currentLoadedPage = parseInt(this.props.location.query.pageId, 10);
-	// 	if (this.state.currentPage !== currentLoadedPage) {
-	// 		this.setState({ currentPage: currentLoadedPage, isLoading: true }, () => {
-	// 			this.fetchBlogPosts(this.state.currentPage - 1);
-	// 		});
-	// 	}
-	// }
-
-
-  render = () => {
-    const { activesubscribers, inactivesubscribers, serverError } = this.state;
-
-    if (!activesubscribers || !inactivesubscribers) {
-      return <Loader Component={NoSubscribers} serverError={serverError} />
-    }
-
-    return <SubscriptionsPanel CARDS={CARDS(activesubscribers, inactivesubscribers)} />;
-  }
-}
+export default connect(state => ({ ...state.subs }), { ...actions })(Subscribers)

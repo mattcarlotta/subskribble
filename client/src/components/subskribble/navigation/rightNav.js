@@ -1,21 +1,12 @@
 import React from 'react';
 
-import NotificationsButton from './notifications/NotificationButton';
+// import NotificationsButton from '../app/notifications/NotificationButton';
+import Notifications from '../../../containers/subskribble/app/notifications/Notifications';
 import SettingsButton from './settings/SettingsButton';
 
-const Header = () => (
+export default () => (
 	<div className="right-nav">
-		<NotificationsButton />
+		<Notifications />
 		<SettingsButton />
 	</div>
 );
-
-export default Header;
-
-/*
-<CustomerAvatar />
-<b className="loggedin-user">carlotta.matt@gmail.com</b>
-<NotificationsButton />
-import CustomerAvatar from './avatar/customerAvatar';
-
-*/

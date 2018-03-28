@@ -1,26 +1,33 @@
 import React, { PureComponent } from 'react';
-import { Popover } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import SettingsMenu from './settingsMenu';
 
-class SettingsButton extends PureComponent {
-  state = { visibleSettings: false }
+export default class SettingsButton extends PureComponent {
+  state = { visibleSettings: false, tipVisible: false }
 
   handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
   render = () => (
     <div className="settings-tab">
-      <Popover
+      <Tooltip
         arrowPointAtCenter
-        content={<SettingsMenu />}
-        onVisibleChange={this.handleVisibleChange}
-        placement="bottomRight"
-        trigger="click"
-        visible={this.state.visibleSettings}
+        placement="bottom"
+        title="Settings"
+        overlayClassName="tooltip-placement"
+        overlayStyle={{ display: this.state.visibleSettings ? 'none' : ''}}
       >
-          <i className="material-icons settings-icon">settings</i>
-      </Popover>
+          <Popover
+            arrowPointAtCenter
+            className="nav-button"
+            content={<SettingsMenu />}
+            onVisibleChange={this.handleVisibleChange}
+            placement="bottomRight"
+            trigger="click"
+            visible={this.state.visibleSettings}
+          >
+            <i className="material-icons settings-icon">settings</i>
+          </Popover>
+      </Tooltip>
     </div>
   )
 }
-
-export default SettingsButton;

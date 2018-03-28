@@ -67,7 +67,7 @@
   padding: 4px 27px;
 }
 
-.late {
+.due {
   @extend %t-t-c;
   @include c($darkyellow);
   border: 1px solid $darkyellow;

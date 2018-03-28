@@ -1,30 +1,40 @@
-import { ACTIVECAMPAIGNS, INACTIVECAMPAIGNS, TABLEHEADERS } from '../fields/promosFieldsData';
+import React from 'react';
 
-/*
-<Panel
-  key="newpromocodepanel"
-  containerClassName="active-panel"
-  initiallyExpanded={false}
-  title="Add Promo Code"
-  FORM={AddNewPromo}
-/>
-*/
+const TABLEHEADERS = [
+  {title: 'Status', dataIndex: 'status', render: status => <span className={`label ${status}`}> {status}</span>},
+  {title: 'Name', dataIndex: 'promocode'},
+  {title: 'Amount', dataIndex: 'amount'},
+  {title: 'Start Date', dataIndex: 'startdate'},
+  {title: 'Valid For', dataIndex: 'validfor'},
+  {title: 'Max Usage', dataIndex: 'maxusage', render: usage => <span className="max-usage"> {usage}</span>},
+  {title: 'Total Usage', dataIndex: 'totalusage', render: usage => <span className="total-usage"> {usage}</span>}
+];
 
-export default [
+export default ({
+  activeitems,
+  activeitemcount,
+  inactiveitems,
+  inactiveitemcount,
+  ...rest
+}) => [
   {
     FILTERFIELDLABEL: "Filter Active Promotionals",
     FILTERFORM: "FilterActivePromos",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Active Promotionals",
-    TABLECONTENTS: ACTIVECAMPAIGNS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: activeitems,
+    TABLEHEADERS,
+    TABLERECORDS: activeitemcount,
+    ...rest
   },
   {
     FILTERFIELDLABEL: "Filter Inactive Promotionals",
     FILTERFORM: "FilterInactivePlans",
-    SELECTFIELDITEMS: ['10', '20', '50', 'All'],
+    SELECTFIELD: true,
     TAB: "Inactive Promotionals",
-    TABLECONTENTS: INACTIVECAMPAIGNS,
-    TABLEHEADERS: TABLEHEADERS
+    TABLECONTENTS: inactiveitems,
+    TABLEHEADERS,
+    TABLERECORDS: inactiveitemcount,
+    ...rest
   }
 ]

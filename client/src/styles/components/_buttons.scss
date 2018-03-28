@@ -43,29 +43,53 @@
 }
 
 .btn-tertiary {
-  background-color: $darkwarmgrey !important;
+  @include b-c($darkwarmgrey !important);
 
   &:hover, &:focus {
     @extend %no-link-focus;
     @include c($white);
-    background-color: $warmgrey !important;
+    @include b-c($darkwarmgrey !important);
   }
 }
 
+.centered {
+  @extend %d-b, %m-0-a;
+}
+
+.clear-notifications {
+  @extend %b-0;
+  @include h(100%);
+  @include w(100%);
+  @include b-c($transparent);
+  border-radius: 0px;
+
+  &:hover {
+    @extend %no-link-focus;
+    @include c($hoverblue);
+    @include b-c($transparent);
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    @include c($tblack);
+    @include b-c($transparent);
+  }
+}
+
+.delete-button {
+  @include f-s(14px);
+}
+
 .nav-button {
-  @extend %p-r;
+  @extend %b-0, %m-l-10, %p-r;
   @include b-c($transparent);
   @include h(40px);
   @include w(40px);
-  top: -7px;
-  margin-left: 10px;
-  border: 0;
-
-  i {@include c($twhite);}
+  top: -11px;
 
   &:hover {
-    i { @include c($formgrey); }
-    @include b-c($hoverblue);
+    i { @include c($formgrey !important); }
+    @include b-c($hoverblue !important);
   }
 
   &:focus {
@@ -76,19 +100,18 @@
 
 .nav-button-icon {
   @extend %d-ib, .fix-cursor, %m-r-10, %m-l-20, %p-r;
-  @include c($lightgrey);
+  @include c($blackblue);
   @include f-s(22px);
   top: 4px;
   right: 26.5px;
 }
 
 .panel-button {
+  @extend %b-0, %m-r-10;
   @include c($darkwarmgrey);
   @include h(25px);
   @include w(30px);
   margin-top: 11px;
-  margin-right: 10px;
-  border: 0;
 
   i {
     @extend %p-r;
@@ -104,12 +127,9 @@
 }
 
 .reset-field {
-  @extend %p-r;
+  @extend %b-0, %p-r;
   @include c($darkwarmgrey);
-  @include h(32px);
-  @include w(32px);
   top: 3px;
-  border: 0;
 
   i {
     @extend %p-r;
@@ -132,6 +152,24 @@
   //
   //
   // }
+}
+
+.remove-note-button {
+  @extend %b-0, .m-l-5, %p-r;
+  @include c($tlightblack);
+  @include h(16px);
+  padding: 0 2px;
+  top: 3px;
+
+
+  &:hover, &:focus  {
+    @extend %no-link-focus;
+  }
+
+  &:focus {
+    @include c($tlightblack);
+    @include b-c($transparent);
+  }
 }
 
 .reset-field-icon {

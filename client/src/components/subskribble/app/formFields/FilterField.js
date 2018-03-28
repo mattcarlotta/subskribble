@@ -1,9 +1,6 @@
 import debounce from 'lodash/debounce'
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { AntInput } from '../../../../containers/formfields/antReduxFormFields';
-import IconButton from '../buttons/iconButton';
+import { Input } from 'antd';
 
 class FilterField extends Component {
   state = { filterField: '' }
@@ -11,37 +8,25 @@ class FilterField extends Component {
   logInput = debounce(value => { this.setState({ filterField: value }) }, 300)
 
   handleResetField = () => {
-    this.props.reset();
     this.setState({ filterField: '' });
   }
 
-  handleFormChange = event => this.logInput(event.target.value);
+  handleFormChange = event => this.setState({ filterField: event.target.value });
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log('final input', this.state.filterField);
+  }
 
   render = () => (
-    <form className="filter-container" onChange={this.handleFormChange}>
-      <div>
-        <div className='form-90'>
-          <Field
-            name="filter"
-            component={AntInput}
-            placeholder={this.props.placeholder}
-            ref="filter"
-          />
-        </div>
-        <div className="form-05">
-          {this.state.filterField.length > 0 &&
-            <IconButton
-              className="reset-field"
-              icon="clear"
-              iconClassName="reset-field-icon"
-              onClickAction={this.handleResetField}
-              tooltip="Reset Filter"
-            />
-          }
-        </div>
-      </div>
+    <form className="filter-container" onSubmit={this.handleFormSubmit} onChange={this.handleFormChange}>
+      <Input
+        name="filter"
+        placeholder={this.props.placeholder}
+        value={this.state.filterField}
+      />
     </form>
   )
 }
 
-export default FilterField = reduxForm({})(FilterField);
+export default FilterField;
