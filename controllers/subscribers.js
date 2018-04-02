@@ -1,50 +1,23 @@
-const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
-
-const query = {
-  deleteItem: () => ("DELETE FROM subscribers WHERE id=$1 RETURNING *"),
-  getList: (limit, offset, status) => (`SELECT id, key, status, email, subscriber, plan, startdate, enddate, amount FROM subscribers ${statusType(status)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-  getCount: () => (
-    "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;"
-  ),
-  updateItem: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 RETURNING subscriber")
-}
-
 module.exports = app => {
-  const { db } = app.database;
+  const { db, query: {deleteOneSubcriber, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
-  const { deleteItem, getList, getCount, updateItem } = query;
   const moment = app.get("moment");
-
-  const controller = {
-    // subscribers methods
-    index: (req, res) => _index(req,res),
-    fetchRecords: (req, res) => _fetchRecords(req, res),
-    fetchCounts: (req, res) => _fetchCounts(req, res),
-    // create: (req, res) => _create(req,res)
-    // show: (req, res) => _show(req,res)
-    update: (req, res) => _update(req, res),
-    delete: (req, res) => _delete(req, res)
-  }
 
   const _index = async (req, res) => {
     try {
-      const activesubscribers = await db.any(getList(10, 0, ['active']));
-      const inactivesubscribers = await db.any(getList(10, 0, ['inactive', 'suspended']));
+      const activesubscribers = await db.any(getSomeSubcribers(10, 0, ['active']));
+      const inactivesubscribers = await db.any(getSomeSubcribers(10, 0, ['inactive', 'suspended']));
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
-    } catch (err) {
-      return sendError(err, res);
-    }
+    } catch (err) { return sendError(err, res); }
   }
 
   const _delete = async (req, res) => {
     try {
-      const name = await db.result(deleteItem(), req.params.id);
+      const name = await db.result(deleteOneSubcriber(), req.params.id);
 
       res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber}.` });
-    } catch (err) {
-      return sendError(err, res);
-    }
+    } catch (err) { return sendError(err, res); }
   }
 
   const _fetchRecords = async (req, res) => {
@@ -55,27 +28,23 @@ module.exports = app => {
 
     try {
       let activesubscribers, inactivesubscribers;
-      const subscribers = await db.any(getList(limit, offset, status));
+      const subscribers = await db.any(getSomeSubcribers(limit, offset, status));
 
       (table === "activesubscribers") ? activesubscribers = subscribers : inactivesubscribers = subscribers;
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
-    } catch (err) {
-      return sendError(err, res);
-    }
+    } catch (err) { return sendError(err, res); }
   }
 
   const _fetchCounts = async (req, res) => {
     try {
-      const subscribers = await db.any(getCount());
+      const subscribers = await db.any(getSubscriberCount());
 
       res.status(201).json({
         activesubscriberscount: parseStringToNum(subscribers[0].active),
         inactivesubscriberscount: parseStringToNum(subscribers[0].inactive)
       });
-    } catch (err) {
-      return sendError(err, res);
-    }
+    } catch (err) { return sendError(err, res); }
   }
 
   const _update = async (req, res) => {
@@ -84,13 +53,19 @@ module.exports = app => {
     const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : null;
 
     try {
-      const name = await db.one(updateItem(), [statusType, endDate, id])
+      const name = await db.one(updateOneSubscriber(), [statusType, endDate, id])
 
       res.status(201).json({ message: `Succesfully ${updateType} ${name.subscriber}.` });
-    } catch (err) {
-      return sendError(err, res);
-    }
+    } catch (err) { return sendError(err, res); }
   }
 
-  return controller;
+  return {
+    index: (req, res) => _index(req,res),
+    fetchRecords: (req, res) => _fetchRecords(req, res),
+    fetchCounts: (req, res) => _fetchCounts(req, res),
+    // create: (req, res) => _create(req,res)
+    // show: (req, res) => _show(req,res)
+    updateOne: (req, res) => _update(req, res),
+    deleteOne: (req, res) => _delete(req, res)
+  }
 }

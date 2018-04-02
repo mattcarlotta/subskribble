@@ -216,10 +216,7 @@ module.exports = app => {
         INSERT INTO notifications ${noteProperties} VALUES ${noteValues};
       `);
       console.log('Seeded database!');
-      process.exit(0);
-    } catch (err) {
-      console.log('ERROR:', err);
-      process.exit(0);
-    }
+    } catch (err) { console.log('ERROR:', err);
+    } finally { process.exit(0); }
   })();
 }

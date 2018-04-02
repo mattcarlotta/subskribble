@@ -69,7 +69,7 @@
       }
 
       .plan-selection-container {
-        @include h(850px);
+        min-height: 550px;
 
         .selection-container {
           @extend .f-l, %m-b-20;
@@ -230,18 +230,23 @@
   }
 }
 
-.input-10 { @include h(72px); @include w(10%); }
-.input-15 { @include h(72px); @include w(15%); }
-.input-16 { @include h(72px); @include w(16%); }
-.input-20 { @include h(72px); @include w(20%); }
-.input-25 { @include h(72px); @include w(25%); }
-.input-40 { @include h(72px); @include w(40%); }
-.input-50 { @include h(72px); @include w(50%); }
-.input-66 { @include h(72px); @include w(66%); }
-.input-75 { @include h(72px); @include w(75%); }
-.input-85 { @include h(72px); @include w(85%); }
-.input-95 { @include h(72px); @include w(95%); }
-.input-100 { @include h(72px); @include w(100%); }
+.input-fields {
+  @extend %m-r-5;
+  @include h(60px);
+}
+
+.input-10 { @extend .input-fields; @include w(10%); }
+.input-15 { @extend .input-fields; @include w(15%); }
+.input-16 { @extend .input-fields; @include w(16%); }
+.input-20 { @extend .input-fields; @include w(20%); }
+.input-25 { @extend .input-fields; @include w(25%); }
+.input-40 { @extend .input-fields; @include w(40%); }
+.input-50 { @extend .input-fields; @include w(50%); }
+.input-66 { @extend .input-fields; @include w(66%); }
+.input-75 { @extend .input-fields; @include w(75%); }
+.input-85 { @extend .input-fields; @include w(85%); }
+.input-95 { @extend .input-fields; @include w(95%); }
+.input-100 { @extend .input-fields; @include w(100%); }
 
 .new-form-container {
   @extend %t-t-n;

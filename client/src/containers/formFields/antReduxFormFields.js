@@ -22,11 +22,11 @@ const CreateAntReduxField = Component => ({
     <FormItem
       className={formItemClassName}
       label={label}
-      hasFeedback={hasFeedback && hasError}
+      hasFeedback={hasFeedback && touched}
       help={hasError && error}
-      validateStatus={hasError ? 'error' : 'success'}
+      validateStatus={hasError ? "error" : "success"}
     >
-      <Component {...input} {...props} children={children}  />
+      <Component {...input} {...props} children={children} />
     </FormItem>
   );
 };
@@ -98,11 +98,13 @@ const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack,
 )
 
 const AntFormFields = ({ FIELDS }) => (
-  map(FIELDS, ({ className, selectOptions, style, ...props}, key) => (
+  map(FIELDS, ({ component, className, selectOptions, style, ...props}, key) => (
     <div key={key} className={className}>
       <Field
+        component={component || AntInput}
         {...props}
         style={{ fontSize: 15, ...style }}
+        hasFeedback
       >
         {selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
       </Field>
