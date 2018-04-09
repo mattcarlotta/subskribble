@@ -18,7 +18,7 @@ const SideBar = ({
       collapsible
       collapsed={collapseSideNav}
       style={{ height: '100vh' }}
-      width={240}
+      width={210}
     >
       <div key="menu-header" className="drawer-menu-header">
         <Button onClick={handleLogoClick} className="logo-container">

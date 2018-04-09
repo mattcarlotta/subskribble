@@ -1,251 +1,286 @@
-.ant-menu-inline .ant-menu-item-selected:after { right: 238px; }
+.ant-menu-inline .ant-menu-item-selected:after {
+	right: 208px;
+}
 
-.ant-popover-arrow, .ant-popover-inner { margin-top: -4px; }
+.ant-popover-arrow,
+.ant-popover-inner {
+	margin-top: -4px;
+}
 
 .dash-nav-container {
-  @extend %p-f;
-  @include b-c($white);
-  @include h(55px);
-  @include w(100%);
-  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.25));
-  z-index: 1000;
-  top: 0;
+	@extend %p-f;
+	@include b-c($white);
+	@include h(55px);
+	@include w(100%);
+	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.25));
+	z-index: 1000;
+	top: 0;
 
-  .left-nav {
-    @extend %d-ib;
-    margin-top: 18px;
-  }
+	.left-nav {
+		@extend %d-ib;
+		margin-top: 18px;
+	}
 
-  .right-nav {
-    @extend %d-ib, %p-f;
-    right: 5px;
+	.right-nav {
+		@extend %d-ib, %p-f;
+		right: 5px;
 
-    .loggedin-user {
-      @include c($white);
-      @include f-f($poppinsmedium);
-      @include f-s(15px);
-    }
+		.loggedin-user {
+			@include c($white);
+			@include f-f($poppinsmedium);
+			@include f-s(15px);
+		}
 
-    .notifications-container {
-      @extend %d-ib, .fix-cursor, %p-r;
-      @include c($white);
-      top: -13px;
-      left: 3px;
-      padding-right: 20px;
+		.notifications-container {
+			@extend %d-ib, .fix-cursor, %p-r;
+			@include c($white);
+			top: -13px;
+			left: 3px;
+			padding-right: 20px;
 
-      .ant-badge-count {
-        @include c($white);
-        @include b-s(0 0 0 1px $white);
-      }
+			.ant-badge-count {
+				@include c($white);
+				@include b-s(0 0 0 1px $white);
+			}
 
-      .ant-scroll-number-only>p {
-        @include f-f(sans-serif);
-        @include f-s(12px);
-        @include l-h(20px);
-      }
+			.ant-scroll-number-only > p {
+				@include f-f(sans-serif);
+				@include f-s(12px);
+				@include l-h(20px);
+			}
 
-      .notifications-icon {
-        @include c($blackblue);
+			.notifications-icon {
+				@include c($blue);
 
-        &:hover {
-          @include c($darkergrey);
-        }
-      }
-    }
+				&:hover {
+					@include c($lightblue);
+				}
+			}
+		}
 
-    .settings-tab {
-      @extend %d-ib, .fix-cursor, %no-link-focus;
-      margin-top: 23px;
-      padding-right: 25px;
-      padding-left: 3px;
+		.settings-tab {
+			@extend %d-ib, .fix-cursor, %no-link-focus;
+			margin-top: 23px;
+			padding-right: 25px;
+			padding-left: 3px;
 
-      .settings-icon {
-        @extend %p-r;
-        @include c($blackblue);
-        top: -6px;
+			.settings-icon {
+				@extend %p-r;
+				@include c($blue);
+				@include f-s(26px);
+				top: -6px;
 
+				&:hover {
+					@include c($darkergrey);
+				}
+			}
 
-        &:hover {
-          @include c($darkergrey);
-        }
-      }
-
-      .menu-label {
-        @extend %pl-10, %p-r;
-        top: -5px;
-      }
-    }
-  }
+			.menu-label {
+				@extend %pl-10, %p-r;
+				top: -5px;
+			}
+		}
+	}
 }
 
 .dash-footer-container {
-  @include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
+	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
-.drawer-content, .drawer-menu-container {
-  @include b-c($blackblue);
-  @include h(100vh);
-  overflow: hidden;
+.drawer-content,
+.drawer-menu-container {
+	@include b-c($blackblue);
+	@include h(100vh);
+	overflow: hidden;
 }
 
 .drawer-content-wrapper {
-  @include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
+	@include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
 }
 
 .drawer-menu-container {
-  @extend %b-0;
-  @include c(#676b70);
+	@extend %b-0;
+	@include c(#676b70);
 
-  .ant-menu-item-group {
-    & > .ant-menu-item-group-title > .divider-title {
-      @extend %t-t-u;
-      @include c(#647897);
-      @include f-s(14px);
-      @include f-w(600);
-      margin-top: 10px;
-      padding-top: 20px;
-      padding-left: 20px;
-      border-top: 1px solid $tlightgrey;
-    }
-    .ant-menu-item {
-      padding-left: 20px !important;
+	.ant-menu-item-group {
+		& > .ant-menu-item-group-title > .divider-title {
+			@extend %t-t-u;
+			@include c(#647897);
+			@include f-s(14px);
+			@include f-w(600);
+			margin-top: 10px;
+			padding-top: 20px;
+			// padding-left: 20px;
+			border-top: 1px solid $tlightgrey;
+		}
+		.ant-menu-item {
+			// padding-left: 20px !important;
 
-      &:hover {
-        @include c($white);
-        @include b-c($hoverblue);
-      }
-    }
-  }
+			&:hover {
+				@include c($white);
+				@include b-c($hoverblue);
+			}
+		}
+	}
 
-  .ant-menu-item-group-title {
-    @extend %p-0;
-  }
+	.ant-menu-item-group-title {
+		@extend %p-0;
+	}
 
-  .ant-menu-item-selected {
-    @include b-c($thoverblue !important);
+	.ant-menu-item-selected {
+		@include b-c($thoverblue !important);
 
-    &:hover {
-      @include c($blue !important);
-    }
-  }
+		&:hover {
+			@include c($blue !important);
+		}
+	}
 
-    .menu-icon {
-      @extend %m-r-15, %p-r;
-      top: 6px;
-    }
+	.menu-icon {
+		@extend %m-r-10, %p-r;
+		top: 6px;
+	}
 
-    .menu-label {
-      @include f-s(16px);
-      @include l-h(24px);
-    }
+	.menu-label {
+		@include f-s(16px);
+		@include l-h(24px);
+	}
 }
 
 .logo-container {
-  @extend %b-0, %d-ib;
-  @include b-c($blackblue);
-  @include h(55px);
-  // margin-left: 15px;
+	@extend %b-0, %d-ib;
+	@include b-c($blackblue);
+	@include h(55px);
+	// margin-left: 15px;
 
-  &:hover {
-    @extend .fix-cursor;
-    @include b-c($hoverblue);
-  }
+	&:hover {
+		@extend .fix-cursor;
+		@include b-c($hoverblue);
+	}
 
-  &:focus {
-    @include b-c($transparent);
-  }
+	&:focus {
+		@include b-c($transparent);
+	}
 
-  .icon-logo {
-   @extend %p-r;
-   @include c($white);
-   @include f-s(36px);
-   margin-top: 8px;
-   margin-right: 5px;
-   margin-left: 11px;
-  }
+	.icon-logo {
+		@extend %p-r;
+		@include c($white);
+		@include f-s(36px);
+		margin-top: 8px;
+		margin-right: 5px;
+		margin-left: 11px;
+	}
 
-  .text-logo {
-    @extend %p-r;
-    @include c($white);
-    @include f-f($harabara)
-    @include f-s(28px);
-    letter-spacing: 1.5px;
-    top: -7px;
-    margin-right: 10px;
-  }
+	.text-logo {
+		@extend %p-r;
+		@include c($white);
+		@include f-f($harabara);
+    @include f-s(24px);
+		letter-spacing: 1.5px;
+		top: -7px;
+		margin-right: 10px;
+	}
 }
 
 .logo-header {
-  @extend .logo-container;
-  @include b-c($blackblue);
-  @include h(55px);
-  @include w(100%);
+	@extend .logo-container;
+	@include b-c($blackblue);
+	@include h(55px);
+	@include w(100%);
 }
 
 .drawer-menu-header {
-  @include b-c($blackblue);
-  border-bottom: 1px solid $tlightgrey;
+	@include b-c($blackblue);
+	border-bottom: 1px solid $tlightgrey;
 
-  .logo-container:hover { @include b-c($transparent); }
+	.logo-container:hover {
+		@include b-c($transparent);
+	}
 
-  .nav-button {
-    @include b-c($blackblue);
-    i { @include c($white); }
+	.nav-button {
+		@include b-c($blackblue);
+		i {
+			@include c($white);
+		}
 
-    &:hover { i {@include c($blue);} }
-  }
+		&:hover {
+			i {
+				@include c($blue);
+			}
+		}
+	}
 
-  .icon-logo, .text-logo { @include c($white); }
+	.icon-logo,
+	.text-logo {
+		@include c($white);
+	}
 }
 
 .user-header {
-  @include c($white);
-  @include b-c($rbblue);
-  padding: 5px 15px;
+	@include c($white);
+	@include b-c($rbblue);
+	padding: 5px 15px;
 
-  .user-name, .user-email, p { @include f-f($ralewaylight); }
+	.user-name,
+	.user-email,
+	p {
+		@include f-f($ralewaylight);
+	}
 
-  .user-name {
-    @include f-w(500);
-    margin-top: 15px;
-  }
+	.user-name {
+		@include f-w(500);
+		margin-top: 15px;
+	}
 
-  p {
-    @extend %m-0;
-    @include l-h(15px);
-  }
+	p {
+		@extend %m-0;
+		@include l-h(15px);
+	}
 }
 
 .ant-popover-inner-content {
-  @extend %m-0, %p-0;
-  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-  @include w(100%);
+	@extend %m-0, %p-0;
+	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+	@include w(100%);
 }
 
 .settings-tab-container {
-  @extend %bb-none;
-  @include w(150px);
-  border-radius: 10px;
+	@extend %bb-none;
+	@include w(250px);
+	border-radius: 10px;
 
-  .settings-icon {
-    @extend %p-r;
-    top: 6px;
-    margin: 0 15px;
+  .my-profile-container {
+    @include c($white);
+    @include b-c($lightblue);
+    padding: 5px 15px;
   }
 
-  .ant-menu-item {
-    @extend %p-0, %no-margin;
+  .settings-label {
+    @extend %d-ib, %m-l-20;
 
-    a {
-      @include trans(.5s);
-      &:hover {
-        @include c($tblack);
-        @include b-c($lightgrey);
-      }
+    p {
+      @extend %no-margin;
     }
   }
+
+	.settings-icon {
+		@extend %p-r;
+		top: 6px;
+		margin: 0 15px;
+	}
+
+	.ant-menu-item {
+		@extend %p-0, %no-margin;
+
+		a {
+			@include trans(0.5s);
+			&:hover {
+				@include c($tblack);
+				@include b-c($lightgrey);
+			}
+		}
+	}
 }
 
 .tooltip-placement {
-  top: 52px !important;
+	top: 52px !important;
 }
