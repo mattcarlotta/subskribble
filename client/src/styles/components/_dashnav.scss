@@ -1,5 +1,5 @@
 .ant-menu-inline .ant-menu-item-selected:after {
-	right: 208px;
+	right: 218px;
 }
 
 .ant-popover-arrow,
@@ -70,9 +70,14 @@
 				@include f-s(26px);
 				top: -6px;
 
-				&:hover {
-					@include c($darkergrey);
-				}
+        .user-icon {
+          @include c($white);
+          @include b-c($blue);
+
+          &:hover {
+            @include b-c($lightblue);
+          }
+        }
 			}
 
 			.menu-label {
@@ -251,14 +256,43 @@
   .my-profile-container {
     @include c($white);
     @include b-c($lightblue);
-    padding: 5px 15px;
+    padding: 10px 15px;
+
+    .popover-user {
+      @extend %p-r;
+      @include b-c($transparent);
+      @include c($white);
+      border: 1px solid $white;
+      top: 3px;
+
+      & i {
+        margin-right: 0;
+      }
+    }
+
+    .user {
+      font-weight: 600;
+    }
+
+    .email {
+      @include f-s(13px);
+      font-style: italic;
+    }
+
+    &:hover {
+      @include b-c($lightblue);
+      @include c($white);
+    }
   }
 
   .settings-label {
-    @extend %d-ib, %m-l-20;
+    @extend %d-ib;
+    margin-left: 15px;
+
 
     p {
       @extend %no-margin;
+      @include l-h(16px);
     }
   }
 
@@ -271,7 +305,7 @@
 	.ant-menu-item {
 		@extend %p-0, %no-margin;
 
-		a {
+		.menu-options {
 			@include trans(0.5s);
 			&:hover {
 				@include c($tblack);

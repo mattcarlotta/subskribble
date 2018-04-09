@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Popover, Tooltip } from 'antd';
+import { Avatar, Popover, Tooltip } from 'antd';
 import SettingsMenu from './settingsMenu';
 
 export default class SettingsButton extends PureComponent {
@@ -25,7 +25,9 @@ export default class SettingsButton extends PureComponent {
 					trigger="click"
 					visible={this.state.visibleSettings}
         >
-					<i className="material-icons settings-icon">account_circle</i>
+					<div className="settings-icon">
+						<Avatar className="user-icon" size="small" icon="user" />
+					</div>
 				</Popover>
 			</Tooltip>
 		</div>
