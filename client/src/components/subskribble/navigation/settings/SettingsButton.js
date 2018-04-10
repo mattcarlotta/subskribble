@@ -25,9 +25,10 @@ export default class SettingsButton extends PureComponent {
 					trigger="click"
 					visible={this.state.visibleSettings}
         >
-					<div className="settings-icon">
-						<Avatar className="user-icon" size="small" icon="user" />
-					</div>
+					<Avatar className="settings-icon user-icon" size="small" icon="user" />
+					{/* <div className="settings-icon">
+
+					</div> */}
 				</Popover>
 			</Tooltip>
 		</div>

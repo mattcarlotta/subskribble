@@ -29,7 +29,6 @@ export default class TableList extends PureComponent {
 						{
 							title: 'Actions',
 							key: 'action',
-							width: 330,
 							render: record => (
 								<TableActions
 									deleteAction={deleteAction}

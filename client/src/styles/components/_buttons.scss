@@ -86,16 +86,6 @@
   @include h(40px);
   @include w(40px);
   top: -11px;
-
-  &:hover {
-    i { @include c($formgrey !important); }
-    @include b-c($hoverblue !important);
-  }
-
-  &:focus {
-    @extend %no-link-focus;
-    @include b-c($transparent);
-  }
 }
 
 .nav-button-icon {

@@ -19,6 +19,22 @@
 	.left-nav {
 		@extend %d-ib;
 		margin-top: 18px;
+
+    .menu-collapse {
+      @extend %b-0;
+
+      & i {
+        @include c($tblack);
+      }
+
+      &:hover > i {
+        @include c($softwarmgrey);
+      }
+
+      &:hover, &:focus {
+        @include b-c($transparent);
+      }
+    }
 	}
 
 	.right-nav {
@@ -60,15 +76,19 @@
 
 		.settings-tab {
 			@extend %d-ib, .fix-cursor, %no-link-focus;
-			margin-top: 23px;
-			padding-right: 25px;
+			margin-top: 25px;
+			padding-right: 31px;
 			padding-left: 3px;
 
 			.settings-icon {
 				@extend %p-r;
-				@include c($blue);
-				@include f-s(26px);
+				@include c($white);
+        @include b-c($blue);
 				top: -10px;
+
+        &:hover {
+          @include b-c($lightblue);
+        }
 
         .user-icon {
           @include c($white);
