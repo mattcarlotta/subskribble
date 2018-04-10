@@ -34,7 +34,7 @@
 		.notifications-container {
 			@extend %d-ib, .fix-cursor, %p-r;
 			@include c($white);
-			top: -13px;
+			top: -17px;
 			left: 3px;
 			padding-right: 20px;
 
@@ -68,7 +68,7 @@
 				@extend %p-r;
 				@include c($blue);
 				@include f-s(26px);
-				top: -6px;
+				top: -10px;
 
         .user-icon {
           @include c($white);

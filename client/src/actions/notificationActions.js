@@ -19,7 +19,7 @@ export default {
   // Removes all notifications from DB
   removeAllNotifications: userid => dispatch => (
     app.delete(`notifications/deleteall/1`)
-    .then(() => dispatch(this.a.fetchNotifications()))
+    .then(() => dispatch({ type: types.RESET_NOTIFICATIONS }))
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
   // Sets all notifications to read

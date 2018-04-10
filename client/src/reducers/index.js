@@ -12,8 +12,6 @@ const authReducer = (state = {}, { payload, type }) => {
 			return { ...state, success: payload };
 		case types.FETCHING_USER:
 			return { ...state, fetchingUser: payload };
-		case types.RESET_NOTIFICATIONS:
-			return { ...state, error: '', success: '' };
 		case types.SET_SIGNEDIN_USER:
 			return {
 				...state,
@@ -79,6 +77,8 @@ const filterNotifications = (notifications, deletedNote) => (
 
 const notificationsReducer = (state={}, { payload, type }) => {
 	switch (type) {
+		case types.RESET_NOTIFICATIONS:
+			return { ...state, readNotifications: '', unreadNotifications: '' };
 		case types.SET_NOTIFICATIONS:
 			return  { ...state, readNotifications: payload.readNotifications, unreadNotifications: payload.unreadNotifications };
 		case types.FILTER_NOTIFICATIONS:
