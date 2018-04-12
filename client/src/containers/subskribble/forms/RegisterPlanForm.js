@@ -5,12 +5,12 @@ import BillingSwitchField from '../../formFields/renderBillingSwitchField';
 import RenderPlanSelection from '../../formFields/renderPlanSelection';
 import ReviewPlanForm from '../../formFields/reviewPlanForm';
 
-const RenderFormFields = ({ billingSwitch, FIELDS, title, position, width }) => (
+const RenderFormFields = ({ billingSwitch, FIELDS, title, position }) => (
   FIELDS
   ? <div className={`${position}-form`}>
       <h3>{title}</h3>
       { billingSwitch && <BillingSwitchField /> }
-      <div className={`input-${width}`}>
+      <div className="input-100">
         <AntFormFields FIELDS={FIELDS} />
       </div>
     </div>
@@ -38,10 +38,10 @@ const RegisterPlanForm = ({
   <div className="form-container">
     <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
     <form onSubmit={handleSubmit}>
-      <RenderFormFields FIELDS={LEFTFIELDS} title={leftTitle} position="left" width="100" />
+      <RenderFormFields FIELDS={LEFTFIELDS} title={leftTitle} position="left" />
       { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
       { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
-      <RenderFormFields billingSwitch={billingSwitch} FIELDS={RIGHTFIELDS} title={rightTitle} position="right" width="100" />
+      <RenderFormFields billingSwitch={billingSwitch} FIELDS={RIGHTFIELDS} title={rightTitle} position="right" />
       <div className="clear-fix" />
       <hr />
       <AntStepFormButtons

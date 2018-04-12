@@ -44,7 +44,7 @@ const CustomerFormFields = [
     leftTitle: "Contact Information",
     PLANSELECTIONS: null,
     PLANSELECTIONFIELDS: null,
-    mainTitle: null,
+    mainTitle: "<span>Please fill out the information below and click <strong>next</strong> to continue.</span>",
     RIGHTFIELDS: BILLINGADDRESSFIELDS,
     rightTitle: "Billing Information",
   },
@@ -54,19 +54,14 @@ const CustomerFormFields = [
     leftTitle: null,
     PLANSELECTIONS: null,
     PLANSELECTIONFIELDS: PLANSELECTIONFIELDS,
-    mainTitle: null,
+    mainTitle: "<span>Please <strong>select</strong> a plan below and click <strong>next</strong> to continue.</span>",
     RIGHTFIELDS: null,
     rightTitle: null
   },
   {
-    billingSwitch: false,
-    LEFTFIELDS: null,
-    leftTitle: null,
     PLANSELECTIONS: PLANSELECTIONFIELDS,
     PLANSELECTIONFIELDS: null,
     mainTitle: "<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>",
-    RIGHTFIELDS: null,
-    rightTitle: null,
   }
 ]
 
