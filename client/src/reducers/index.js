@@ -6,20 +6,16 @@ import * as types from '../actions/types';
 
 const authReducer = (state = {}, { payload, type }) => {
 	switch (type) {
-		case types.AUTH_ERROR:
-			return { ...state, error: payload };
-		case types.AUTH_SUCCESS:
-			return { ...state, success: payload };
 		case types.FETCHING_USER:
 			return { ...state, fetchingUser: payload };
 		case types.SET_SIGNEDIN_USER:
 			return {
 				...state,
-				username: payload.user,
+				loggedinUser: payload.user,
 				isGod: payload.isGod
 			};
 		case types.UNAUTH_USER:
-			return { ...state, username: null, isGod: null };
+			return { ...state, loggedinUser: null, isGod: null };
 		default:
 			return state;
 	}

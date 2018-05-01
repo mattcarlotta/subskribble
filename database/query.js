@@ -49,11 +49,16 @@ module.exports = app => {
     ),
   }
 
+  const userQueries = {
+    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName) WHERE id=$1 RETURNING *"),
+  }
+
   return {
     ...notificationQueries,
     ...planQueries,
     ...promoQueries,
     ...subQueries,
-    ...transactQueries
+    ...transactQueries,
+    ...userQueries
   }
 }

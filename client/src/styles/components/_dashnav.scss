@@ -39,6 +39,9 @@
 
 	.right-nav {
 		@extend %d-ib, %p-f;
+		margin-top: 27px;
+		padding-right: 31px;
+		padding-left: 3px;
 		right: 5px;
 
 		.loggedin-user {
@@ -76,29 +79,50 @@
 
 		.settings-tab {
 			@extend %d-ib, .fix-cursor, %no-link-focus;
-			margin-top: 25px;
-			padding-right: 31px;
-			padding-left: 3px;
+
+			.signed-out {
+				@include c($lightwhite);
+				@include b-c($lightgrey);
+
+				&:hover {
+					@include c($blue);
+					@include b-c($lightgrey);
+				}
+			}
 
 			.settings-icon {
 				@extend %p-r;
-				@include c($white);
-        @include b-c($blue);
 				top: -10px;
+			}
+
+			.user-icon {
+        @include c($white);
+        @include b-c($blue);
 
         &:hover {
           @include b-c($lightblue);
         }
+      }
 
-        .user-icon {
-          @include c($white);
-          @include b-c($blue);
-
-          &:hover {
-            @include b-c($lightblue);
-          }
-        }
-			}
+			// .settings-icon {
+			// 	@extend %p-r;
+			// 	@include c($white);
+      //   @include b-c($blue);
+			// 	top: -10px;
+			//
+      //   &:hover {
+      //     @include b-c($lightblue);
+      //   }
+			//
+      //   .user-icon {
+      //     @include c($white);
+      //     @include b-c($blue);
+			//
+      //     &:hover {
+      //       @include b-c($lightblue);
+      //     }
+      //   }
+			// }
 
 			.menu-label {
 				@extend %pl-10, %p-r;
@@ -135,7 +159,7 @@
 			@include f-w(600);
 			margin-top: 10px;
 			padding-top: 20px;
-			// padding-left: 20px;
+			margin-left: 5px;
 			border-top: 1px solid $tlightgrey;
 		}
 		.ant-menu-item {

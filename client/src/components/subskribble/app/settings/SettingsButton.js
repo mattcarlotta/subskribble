@@ -26,9 +26,6 @@ export default class SettingsButton extends PureComponent {
 					visible={this.state.visibleSettings}
         >
 					<Avatar className="settings-icon user-icon" size="small" icon="user" />
-					{/* <div className="settings-icon">
-
-					</div> */}
 				</Popover>
 			</Tooltip>
 		</div>

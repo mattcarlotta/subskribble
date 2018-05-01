@@ -1,6 +1,6 @@
 .auth-container {
-  @include h(100vh);
-  padding-top: 75px;
+  // @include h(100vh);
+  // padding-top: 75px;
 
   .auth-logo {
     @extend %d-b, %m-a;
@@ -10,12 +10,11 @@
 
   .auth-box-container {
     @extend %m-0-a;
-    @include b-c($white);
     @include w(400px);
 
     .auth-box {
       @extend %outline-none, %m-t-20;
-      padding: 25px;
+      // padding: 25px;
     }
 
     .auth-title {

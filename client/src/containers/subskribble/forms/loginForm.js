@@ -3,19 +3,17 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../../formfields/signinFormFields';
-import { signinUser } from '../../../actions/authActionCreators';
+import FIELDS from '../../formFields/signinFormFields';
+import signinUser from '../../../actions/authActions';
 
-const LoginForm = ({ signinUser }) => {
-	const handleFormSubmit = (formProps) => {
-		console.log(formProps);
-	}
+const LoginForm = ({ confirmLoading, onFormSubmit, signinUser }) => {
 	return (
 		<div className="auth-container">
 			<AuthForm
-				onSubmit={values => handleFormSubmit(values)}
+				confirmLoading={confirmLoading}
+				onSubmit={values => onFormSubmit(values)}
 				FIELDS={FIELDS}
-				formTitle='Sign In'
+				formTitle='Log In'
 				showForgotPassword={true}
 				submitLabel='Login'
 			/>

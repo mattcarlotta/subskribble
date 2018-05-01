@@ -1,9 +1,14 @@
 import map from 'lodash/map';
 import React from 'react';
-import RIGHTNAVLINKS from '../links/rightNavLinks';
 import { Link } from 'react-router';
 import { Avatar, Menu } from 'antd';
 const { Item: MenuItem } = Menu;
+
+const RIGHTNAVLINKS = [
+  // { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
+  { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
+  { icon: 'settings', label: 'Settings', link: '/subskribble/settings' },
+]
 
 export default () => (
   <Menu className="settings-tab-container">

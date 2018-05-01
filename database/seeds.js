@@ -1,6 +1,19 @@
 module.exports = app => {
   const { db } = app.database;
 
+  const userTableOptions = `(
+    id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+    status VARCHAR(20) DEFAULT 'unverified',
+    username VARCHAR(20),
+    email VARCHAR,
+    firstName TEXT,
+    lastName TEXT,
+    password VARCHAR(64),
+    startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+    endDate TEXT,
+    isGod BOOLEAN DEFAULT FALSE
+  )`
+
   const planTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -199,11 +212,13 @@ module.exports = app => {
     try {
       await db.none(`
         CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        DROP TABLE IF EXISTS users;
         DROP TABLE IF EXISTS subscribers;
         DROP TABLE IF EXISTS plans;
         DROP TABLE IF EXISTS promotionals;
         DROP TABLE IF EXISTS transactions;
         DROP TABLE IF EXISTS notifications;
+        CREATE TABLE users ${userTableOptions};
         CREATE TABLE subscribers ${subTableOptions};
         CREATE TABLE plans ${planTableOptions};
         CREATE TABLE promotionals ${promoTableOptions};

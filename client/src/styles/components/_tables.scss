@@ -109,7 +109,7 @@
 
 .table-status-action {
 	@extend %t-t-c;
-	i { @include f-s(18px); }
+	i { @include f-s(18px); padding-top: 5px; }
 }
 
 .total-usage {
