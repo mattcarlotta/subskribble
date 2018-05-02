@@ -4,11 +4,10 @@ module.exports = app => {
   const userTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
     status VARCHAR(20) DEFAULT 'unverified',
-    username VARCHAR(20),
     email VARCHAR,
     firstName TEXT,
     lastName TEXT,
-    password VARCHAR(64),
+    password VARCHAR(64) NOT NULL UNIQUE,
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
     endDate TEXT,
     isGod BOOLEAN DEFAULT FALSE

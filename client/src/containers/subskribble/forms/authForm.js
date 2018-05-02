@@ -3,16 +3,16 @@ import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { AntFormFields, AntFormSubmit } from '../../formFields/antReduxFormFields';
 
-const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting }) => (
+const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting, switchAuthForm }) => (
 	<div className="auth-box-container">
 		<div className="auth-box">
-			<h3 className="auth-title">{formTitle}</h3>
+			{/* <h3 className="auth-title">{formTitle}</h3> */}
 			<div className="auth-form">
 				<form onSubmit={handleSubmit}>
 					<AntFormFields FIELDS={FIELDS} />
 					{showForgotPassword &&
 						<div className="forgot-password">
-							<Link to="/forgot-password"><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
+							<Link data-formid={1} onClick={switchAuthForm}><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
 						</div>
 					}
 					<AntFormSubmit
@@ -25,14 +25,14 @@ const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, pristine, s
 				</form>
 			</div>
 			<p className="auth-link">
-			{formTitle === 'Sign In'
+			{ showForgotPassword
 				? <span>
 						Don't have an account?
-						<Link className="m-l-5" to="/signup">Sign Up</Link>
+						<Link className="m-l-5" data-formid={2} onClick={switchAuthForm}>Sign Up</Link>
 					</span>
 				:	<span>
 						Already have an account?
-						<Link className="m-l-5" to="/login">Sign In</Link>
+						<Link className="m-l-5" data-formid={0} onClick={switchAuthForm}>Log In</Link>
 					</span>
 			}
 			</p>

@@ -1,8 +1,9 @@
 module.exports = app => {
-  const { auth: { create, login } } = app.controllers;
+  const { auth: { create, login, reset } } = app.controllers;
 
-  app.get('/api/signup', create);
-  app.get('/api/signin', login);
+  app.post('/api/signup', create);
+  app.post('/api/signin', login);
+  app.put('/api/reset-password', reset);
   // app.get('/api/plancounts', plans.fetchCounts)
   // app.get('/api/plans/records', plans.fetchRecords)
   // app.post('/v1/customers', auth.checkSudo, auth.isActiveUser, controller.create)

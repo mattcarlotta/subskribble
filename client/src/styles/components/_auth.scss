@@ -31,7 +31,7 @@
       @extend %m-b-20;
 
       .forgot-password {
-        @extend %m-t-20;
+        @extend %m-t-5;
         a { @include c($warmgrey); }
       }
     }

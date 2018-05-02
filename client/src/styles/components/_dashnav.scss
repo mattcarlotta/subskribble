@@ -39,7 +39,7 @@
 
 	.right-nav {
 		@extend %d-ib, %p-f;
-		margin-top: 27px;
+		margin-top: 15px;
 		padding-right: 31px;
 		padding-left: 3px;
 		right: 5px;
@@ -53,9 +53,9 @@
 		.notifications-container {
 			@extend %d-ib, .fix-cursor, %p-r;
 			@include c($white);
-			top: -17px;
+			top: -3px;
 			left: 3px;
-			padding-right: 20px;
+			padding-right: 22px;
 
 			.ant-badge-count {
 				@include c($white);
@@ -81,8 +81,10 @@
 			@extend %d-ib, .fix-cursor, %no-link-focus;
 
 			.signed-out {
+				@extend %p-r;
 				@include c($lightwhite);
 				@include b-c($lightgrey);
+				top: 3px;
 
 				&:hover {
 					@include c($blue);
@@ -91,8 +93,8 @@
 			}
 
 			.settings-icon {
-				@extend %p-r;
-				top: -10px;
+				// @extend %p-r;
+				// top: -15px;
 			}
 
 			.user-icon {

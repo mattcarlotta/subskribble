@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../../../actions/authActions';
+// import actions from '../../../../actions/authActions';
 import SettingsButton from '../../../../components/subskribble/app/settings/SettingsButton';
 import LoginButton from './LoginButton'
-
 // class LoggedinSettings extends PureComponent {
 //   // componentDidMount = () => this.props.signinUser();
 //   render = () => (
@@ -21,4 +20,5 @@ class LoggedinSettings extends PureComponent {
   )
 }
 
-export default connect(state => ({ ...state.auth }), { ...actions })(LoggedinSettings)
+// export default connect(state => ({ ...state.auth }), { ...actions })(LoggedinSettings)
+export default connect(state => ({ ...state.auth }))(LoggedinSettings)

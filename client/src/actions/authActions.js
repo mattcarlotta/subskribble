@@ -1,6 +1,4 @@
-import * as app from 'axios';
-// import { browserHistory } from 'react-router';
-
+import app from './axiosConfig';
 import * as types from '../actions/types';
 
 //==========================================================================
@@ -98,17 +96,46 @@ import * as types from '../actions/types';
 // 		type: UNAUTH_USER
 // 	};
 // };
+const resetUserPassword = (props) => dispatch => (
+	app.put(`reset-password`, { ...props })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
 
+const signinUser = props => dispatch => (
+  app.post(`signin`, { ...props })
+  .then(data => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
 
-export default {
-	// attempts to sign in a user
-  signinUser: props => dispatch => (
-    app.post(`api/signin`, { ...props })
-    .then(data => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-  ),
+const signupUser = props => dispatch => (
+  app.post(`signup`, { ...props })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
 
+export {
+  resetUserPassword,
+  signinUser,
+  signupUser
 }
+
+// export default {
+//   // attempts to reset user password
+//   resetUserPassword: ({ password }) => async dispatch => (
+// 		await app.post(`api/reset-password`, { password })
+//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+//   ),
+// 	// attempts to sign in a user
+//   signinUser: props => dispatch => (
+//     app.post(`api/signin`, { ...props })
+//     .then(data => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
+//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+//   ),
+//   // attempts to create a new user
+//   signupUser: props => async dispatch => (
+//     await app.post(`api/signup`, { ...props })
+//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+//   ),
+// }
 
 // export {
 // 	authError,
