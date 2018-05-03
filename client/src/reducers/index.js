@@ -91,7 +91,7 @@ const notificationsReducer = (state={}, { payload, type }) => {
 const serverReducer = (state={}, { payload, type }) => {
 	switch (type) {
 		case types.RESET_SERVER_MESSAGES:
-			return { ...state, error: '', message: '' };
+			return { ...state, error: undefined, message: undefined };
 		case types.SERVER_ERROR:
 			return { ...state, error: payload };
 		case types.SERVER_MESSAGE:

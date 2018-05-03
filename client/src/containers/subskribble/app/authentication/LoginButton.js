@@ -14,11 +14,8 @@ class LoginButton extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError, serverMessage } = this.props;
-    const { confirmLoading } = this.state;
-    serverError && confirmLoading && this.setState({ confirmLoading: false });
-    serverMessage && confirmLoading && this.setState({ confirmLoading: false}, () => {
-      this.handleClose();
-    })
+    serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
+    serverMessage !== prevProps.serverMessage && this.handleClose();
   }
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({

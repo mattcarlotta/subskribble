@@ -3,14 +3,20 @@ module.exports = app => {
   const { sendError } = app.shared.helpers;
   const passport = app.get("passport");
 
-  app.post('/api/signup', (req, res, next) => passport.authenticate('local-signup', (err, user) => {
+  app.post('/api/signup', (req, res, next) => passport.authenticate('local-signup', () => {
     if (req.error) {
       sendError(req.error, res)
       return next();
     }
     create(req, res);
   })(req, res, next));
-  app.post('/api/signin', login);
+  app.post('/api/signin', (req, res, next) => passport.authenticate('local-login', () => {
+    if (req.error) {
+      sendError(req.error, res)
+      return next();
+    }
+    res.status(201);
+  })(req, res, next));
   app.put('/api/reset-password', reset);
   // app.get('/api/plancounts', plans.fetchCounts)
   // app.get('/api/plans/records', plans.fetchRecords)
