@@ -81,10 +81,9 @@
 			@extend %d-ib, .fix-cursor, %no-link-focus;
 
 			.signed-out {
-				@extend %p-r;
+				// @extend %p-r;
 				@include c($lightwhite);
 				@include b-c($lightgrey);
-				top: 3px;
 
 				&:hover {
 					@include c($blue);
@@ -93,8 +92,8 @@
 			}
 
 			.settings-icon {
-				// @extend %p-r;
-				// top: -15px;
+				@extend %p-r;
+				top: 3px;
 			}
 
 			.user-icon {

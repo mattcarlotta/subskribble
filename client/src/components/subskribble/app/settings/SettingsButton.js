@@ -19,7 +19,7 @@ export default class SettingsButton extends PureComponent {
 				<Popover
 					arrowPointAtCenter
 					className="nav-button"
-					content={<SettingsMenu />}
+					content={<SettingsMenu {...this.props}/>}
 					onVisibleChange={this.handleVisibleChange}
 					placement="bottomRight"
 					trigger="click"

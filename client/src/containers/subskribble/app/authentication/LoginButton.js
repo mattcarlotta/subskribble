@@ -13,9 +13,10 @@ class LoginButton extends Component {
   state = { visible: false, confirmLoading: false, selectedForm: forms[0], title: titles[0] }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { serverError, serverMessage } = this.props;
+    const { serverError, serverMessage, loggedinUser } = this.props;
+    console.log('loggedinUser', loggedinUser);
     serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
-    serverMessage !== prevProps.serverMessage && this.handleClose();
+    ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) && this.handleClose();
   }
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({
@@ -59,6 +60,7 @@ class LoginButton extends Component {
 }
 
 export default connect(state => ({
+  loggedinUser: state.auth.loggedinUser,
   serverError: state.server.error,
   serverMessage: state.server.message
 }))(LoginButton);

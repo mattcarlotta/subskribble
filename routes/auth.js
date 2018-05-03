@@ -15,7 +15,7 @@ module.exports = app => {
       sendError(req.error, res)
       return next();
     }
-    res.status(201);
+    login(req,res);
   })(req, res, next));
   app.put('/api/reset-password', reset);
   // app.get('/api/plancounts', plans.fetchCounts)

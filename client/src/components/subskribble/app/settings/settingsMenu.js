@@ -8,16 +8,17 @@ const RIGHTNAVLINKS = [
   // { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
   { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
   { icon: 'settings', label: 'Settings', link: '/subskribble/settings' },
+  { icon: 'exit_to_app', label: 'Logout', link: '/subskribble/logout' },
 ]
 
-export default () => (
+export default ({ firstName, lastName, loggedinUser }) => (
   <Menu className="settings-tab-container">
     <MenuItem style={{ height: 65 }}>
       <Link className="my-profile-container" to="/subskribble/profile">
         <Avatar className="popover-user" icon="user" />
         <div className="settings-label">
-          <p className="user">Matt Carlotta</p>
-          <p className="email">carlotta.matt@gmail.com</p>
+          <p className="user">{firstName} {lastName}</p>
+          <p className="email">{loggedinUser}</p>
         </div>
       </Link>
     </MenuItem>

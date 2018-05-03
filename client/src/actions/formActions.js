@@ -2,21 +2,21 @@ import * as app from 'axios';
 import * as types from './types';
 import { formValueSelector } from 'redux-form';
 
-// Add new rocketboard form
+// Add new form
 const addNewForm = formProps => dispatch => (
   app.post(`api/add-new-form`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
-// Add new rocketboard promo code
+// Add new promo code
 const addNewPromoCode = formProps => dispatch => (
   app.post(`api/create-promo-code`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
-// Add new rocketboard template
+// Add new template
 const addNewTemplate = formProps => dispatch => (
   app.post(`api/add-new-template`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))

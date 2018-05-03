@@ -68,19 +68,20 @@ module.exports = app => {
     },
     async (req, email, password, done) => {
       // check to see if the user already exists
-      const existingUser = await db.oneOrNone(findUserByEmail(), [email])
+      const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
       if (!existingUser) {
-        req.err = 'There was a problem with your login credentials. That username does not exist in our records.';
+        req.error = 'There was a problem with your login credentials. That username does not exist in our records.';
         return done(null, false);
       }
 
       // compare password to existingUser password
-      const validPassword = bcrypt.compare(password, existingUser.password);
+      const validPassword = await bcrypt.compare(password, existingUser.password);
       if (!validPassword) {
-        req.err = 'There was a problem with your login credentials. That password does not match our records.';
+        req.error = 'There was a problem with your login credentials. That password does not match our records.';
         return done(null, false);
       }
 
+      req.user = existingUser;
       return done(null, true);
     })
   );

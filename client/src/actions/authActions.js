@@ -103,7 +103,7 @@ const resetUserPassword = (props) => dispatch => (
 
 const signinUser = props => dispatch => (
   app.post(`signin`, { ...props })
-  .then(data => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
+  .then(({data}) => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 

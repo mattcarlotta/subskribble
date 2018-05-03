@@ -8,13 +8,8 @@ module.exports = app => {
   }
 
   const _login = async (req, res) => {
-    console.log("req.body", req.body);
-    // try {
-    //   const newUser = await db.none(createNewUser());
-    //   // TODO: Add verification link and change 'your email' to user submission
-    //   res.status(201).json({ message: `Succesfully signed up. Please check your email for a verification link.` })
-    // } catch (err) { return sendError(err, res); }
-    setTimeout(() => sendError('Create route not created', res), 3000);
+    const { email, firstname, lastname, isgod } = req.user;
+    res.status(201).json({ user: email, firstname, lastname, isgod });
   }
 
   const _reset = async (req, res) => {
