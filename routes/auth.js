@@ -1,7 +1,15 @@
 module.exports = app => {
   const { auth: { create, login, reset } } = app.controllers;
+  const { sendError } = app.shared.helpers;
+  const passport = app.get("passport");
 
-  app.post('/api/signup', create);
+  app.post('/api/signup', (req, res, next) => passport.authenticate('local-signup', (err, user) => {
+    if (req.error) {
+      sendError(req.error, res)
+      return next();
+    }
+    create(req, res);
+  })(req, res, next));
   app.post('/api/signin', login);
   app.put('/api/reset-password', reset);
   // app.get('/api/plancounts', plans.fetchCounts)

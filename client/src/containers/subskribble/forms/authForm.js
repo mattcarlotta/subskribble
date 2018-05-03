@@ -3,10 +3,9 @@ import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { AntFormFields, AntFormSubmit } from '../../formFields/antReduxFormFields';
 
-const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, pristine, submitLabel, showForgotPassword, submitting, switchAuthForm }) => (
+const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, onSubmit, pristine, submitLabel, showForgotPassword, submitting, switchAuthForm }) => (
 	<div className="auth-box-container">
 		<div className="auth-box">
-			{/* <h3 className="auth-title">{formTitle}</h3> */}
 			<div className="auth-form">
 				<form onSubmit={handleSubmit}>
 					<AntFormFields FIELDS={FIELDS} />
@@ -40,4 +39,4 @@ const AuthForm = ({ confirmLoading, handleSubmit, FIELDS, formTitle, pristine, s
 	</div>
 );
 
-export default reduxForm({ form: 'AuthForm' })(AuthForm);
+export default reduxForm({ form: '' })(AuthForm);

@@ -3,14 +3,8 @@ module.exports = app => {
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   const _create = async (req, res) => {
-    console.log("req.body", req.body);
-    try {
-      const newUser = await db.one(createNewUser(), [...req.body]);
-      // TODO: Add verification link and change 'your email' to user submission
-      res.status(201).json({ message: `Succesfully signed up. Please check your email for a verification link.` })
-    } catch (err) { return sendError(err, res); }
-    // setTimeout(() => sendError('Create route not created', res), 3000);
-
+    const { firstName, lastName, email } = req.body
+    res.status(201).json({ message: `Thank you for registering, ${firstName} ${lastName}. Please check ${email} for a verification link.` })
   }
 
   const _login = async (req, res) => {

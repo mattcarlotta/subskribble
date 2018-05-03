@@ -20,6 +20,7 @@ module.exports = app => {
 	app.set('database', vars[env].database);
  	app.set("port", vars[env].port);
 	app.set("moment", moment);
+	app.set("passport", passport);
 	app.use(cors()); // allows cross origin calls
 	app.use(morgan('tiny')); // logging framework
 	app.use(bodyParser.json()); // parse req.bodyParser

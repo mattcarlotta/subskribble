@@ -16,7 +16,9 @@ class LoginButton extends Component {
     const { serverError, serverMessage } = this.props;
     const { confirmLoading } = this.state;
     serverError && confirmLoading && this.setState({ confirmLoading: false });
-    serverMessage && this.handleClose();
+    serverMessage && confirmLoading && this.setState({ confirmLoading: false}, () => {
+      this.handleClose();
+    })
   }
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({
@@ -29,7 +31,7 @@ class LoginButton extends Component {
   showLoadingButton = () => this.setState({ confirmLoading: true })
 
   handleClose = () => this.setState({
-    confirmLoading: false ,
+    confirmLoading: false,
     visible: false,
     selectedForm: forms[0],
     title: titles[0]

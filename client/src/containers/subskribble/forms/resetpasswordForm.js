@@ -1,13 +1,12 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
 import FIELDS from '../../formFields/passwordResetFormFields';
 import { resetUserPassword } from '../../../actions/authActions';
 
-const ResetPasswordForm =	({ confirmLoading, resetUserPassword, showLoadingButton, switchAuthForm }) => {
-	const handleSubmit = values => {
+const ResetPasswordForm =	({ resetUserPassword, showLoadingButton, ...props }) => {
+	const handleFormSubmit = values => {
 		showLoadingButton();
 		console.log('values', values);
 		resetUserPassword(values);
@@ -16,16 +15,16 @@ const ResetPasswordForm =	({ confirmLoading, resetUserPassword, showLoadingButto
 	return (
 		<div className="auth-container">
 			<AuthForm
-				confirmLoading={confirmLoading}
-				onSubmit={values => handleSubmit(values)}
+				{...props}
+				form="ResetPasswordForm"
+				onSubmit={handleFormSubmit}
 				FIELDS={FIELDS}
 				formTitle='Reset Password'
 				submitLabel='Confirm'
-				switchAuthForm={switchAuthForm}
 			/>
 		</div>
 	)
 }
 
 
-export default reduxForm({ form: 'ResetPasswordForm' })(connect(null, { resetUserPassword })(ResetPasswordForm));
+export default connect(null, { resetUserPassword })(ResetPasswordForm);

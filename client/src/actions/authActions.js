@@ -109,6 +109,7 @@ const signinUser = props => dispatch => (
 
 const signupUser = props => dispatch => (
   app.post(`signup`, { ...props })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
