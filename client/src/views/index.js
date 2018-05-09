@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
-import App from '../components/subskribble';
+// import App from '../components/subskribble';
+import AuthHandler from '../containers/subskribble/app/authentication/AuthHandler';
 // import ContactUs from '../components/subskribble/contact';
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
@@ -29,7 +30,7 @@ import Transactions from '../containers/subskribble/transactions/Transactions';
 export default (
 	<Fragment>
 		<Redirect from="/" to="/subskribble" />
-		<Route path="/subskribble" component={App}>
+		<Route path="/subskribble" component={AuthHandler}>
 			<IndexRoute component={Landing} />
 			{/* <Route path="dashboard" component={Dashboard} /> */}
 			{/* <Route path="contact-us" component={ContactUs} /> */}

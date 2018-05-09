@@ -10,13 +10,23 @@ const forms = [LoginForm, ResetForm, SignupForm];
 const titles = ["Log In", "Reset Password", "Sign Up"];
 
 class LoginButton extends Component {
-  state = { visible: false, confirmLoading: false, selectedForm: forms[0], title: titles[0] }
+  state = {
+    visible: true,
+    confirmLoading: false,
+    selectedForm: forms[0],
+    title: titles[0]
+  }
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError, serverMessage, loggedinUser } = this.props;
-    console.log('loggedinUser', loggedinUser);
+
     serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
-    ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) && this.handleClose();
+
+    if ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) {
+      const { cookies, token } = this.props;
+      if (token) cookies.set('Authorization', token)
+      this.handleClose();
+    }
   }
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({
@@ -49,6 +59,8 @@ class LoginButton extends Component {
         </button>
         <AsyncModal
           {...this.state}
+          closable={false}
+          maskClosable={false}
           FORM={this.state.selectedForm}
           onCancel={this.handleClose}
           showLoadingButton={this.showLoadingButton}
@@ -61,6 +73,7 @@ class LoginButton extends Component {
 
 export default connect(state => ({
   loggedinUser: state.auth.loggedinUser,
+  token: state.auth.token,
   serverError: state.server.error,
   serverMessage: state.server.message
 }))(LoginButton);

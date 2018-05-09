@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { auth: { create, login, reset } } = app.controllers;
+  const { auth: { create, login, loggedin, reset } } = app.controllers;
   const { sendError } = app.shared.helpers;
   const passport = app.get("passport");
 
@@ -10,6 +10,7 @@ module.exports = app => {
     }
     create(req, res);
   })(req, res, next));
+
   app.post('/api/signin', (req, res, next) => passport.authenticate('local-login', () => {
     if (req.error) {
       sendError(req.error, res)
@@ -17,6 +18,17 @@ module.exports = app => {
     }
     login(req,res);
   })(req, res, next));
+
+  app.get('/api/loggedin', (req, res, next) => passport.authenticate('local-loggedin', () => {
+    // console.log('cookies token', req.cookies);
+    // console.log('headers', req.headers)
+    if (req.error) {
+      sendError(req.error, res)
+      return next();
+    }
+    loggedin(req,res);
+  })(req, res, next));
+
   app.put('/api/reset-password', reset);
   // app.get('/api/plancounts', plans.fetchCounts)
   // app.get('/api/plans/records', plans.fetchRecords)

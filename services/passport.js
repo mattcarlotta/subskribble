@@ -1,9 +1,14 @@
 const bcrypt          = require('bcrypt');
+const jwt             = require('jwt-simple');
 const passport        = require('passport');
 const LocalStrategy   = require('passport-local').Strategy;
+const JwtStrategy     = require('passport-jwt').Strategy;
+const ExtractJwt      = require('passport-jwt').ExtractJwt;
+var cookieParser = require('cookie-parser')
 
 module.exports = app => {
   const { db, query: { createNewUser, findUserByEmail, findUserById } } = app.database;
+  const tokenForUser = user => ( jwt.encode({ sub: user, iat: new Date().getTime()}, app.get("cookieKey")))
 
   // serialize the user for the session
   passport.serializeUser((user, done) => done(null, user.id));
@@ -82,8 +87,35 @@ module.exports = app => {
       }
 
       req.user = existingUser;
+      req.user.token = tokenForUser(existingUser.email);
+      console.log('existingUser', existingUser);
       return done(null, true);
     })
   );
 
+  // =========================================================================
+  // ON REFRESH LOGIN ========================================================
+  // =========================================================================
+
+  const ExtractToken = req => ( req && req.cookies ? req.cookies.Authorization : null )
+
+  passport.use('local-loggedin', new JwtStrategy({
+		jwtFromRequest: ExtractToken,
+		secretOrKey: app.get("cookieKey"),
+    passReqToCallback: true
+	},
+    async (req, payload, done) => {
+		  if (!payload || !payload.sub) return done(null, false);
+
+      const existingUser = await db.oneOrNone(findUserByEmail(), [payload.sub]);
+
+      if (!existingUser) {
+        req.error = 'There was a problem with your login credentials. That username does not exist in our records.';
+        return done(null, false);
+      }
+
+      req.user = existingUser;
+      return done(null, true);
+	 })
+  )
 }

@@ -96,7 +96,19 @@ import * as types from '../actions/types';
 // 		type: UNAUTH_USER
 // 	};
 // };
-const resetUserPassword = (props) => dispatch => (
+const authenticateUser = () => dispatch => (
+	app.get('loggedin', {withCredentials: true})
+	.then(({data}) => {
+		dispatch({ type: types.APP_LOADING_STATE })
+		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
+	})
+	.catch(err => {
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
+		dispatch({ type: types.SERVER_ERROR, payload: err })
+	})
+)
+
+const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
@@ -114,6 +126,7 @@ const signupUser = props => dispatch => (
 )
 
 export {
+	authenticateUser,
   resetUserPassword,
   signinUser,
   signupUser

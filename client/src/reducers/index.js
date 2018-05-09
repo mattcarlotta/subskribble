@@ -4,6 +4,13 @@ import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
+const appReducer = (state=true, { type }) => {
+	switch (type) {
+		case types.APP_LOADING_STATE: return !state;
+		default: return state;
+	}
+}
+
 const authReducer = (state = {}, { payload, type }) => {
 	switch (type) {
 		case types.FETCHING_USER: return { ...state, fetchingUser: payload };
@@ -13,7 +20,8 @@ const authReducer = (state = {}, { payload, type }) => {
 				loggedinUser: payload.user,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
-				isGod: payload.isgod
+				isGod: payload.isgod,
+				token: payload.token
 			};
 		case types.UNAUTH_USER: return { ...state, loggedinUser: null, firstName: null, lastName: null, isGod: null };
 		default: return state;
@@ -151,6 +159,7 @@ const formReducers = {
 }
 
 const rootReducer = combineReducers({
+	app: appReducer,
 	auth: authReducer,
 	notes: notificationsReducer,
 	plans: planReducer,

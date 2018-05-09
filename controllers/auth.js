@@ -7,9 +7,14 @@ module.exports = app => {
     res.status(201).json({ message: `Thank you for registering, ${firstName} ${lastName}. Please check ${email} for a verification link.` })
   }
 
-  const _login = async (req, res) => {
+  const _loggedin = async (req, res) => {
     const { email, firstname, lastname, isgod } = req.user;
-    res.status(201).json({ user: email, firstname, lastname, isgod });
+    res.status(201).json({ user: email, firstname, lastname, isgod })
+  }
+
+  const _login = async (req, res) => {
+    const { email, firstname, lastname, isgod, token } = req.user;
+    res.status(201).json({ user: email, firstname, lastname, isgod, token });
   }
 
   const _reset = async (req, res) => {
@@ -63,6 +68,7 @@ module.exports = app => {
 
   return {
     create: (req, res) => _create(req, res),
+    loggedin: (req, res) => _loggedin(req, res),
     login: (req, res) => _login(req,res),
     reset: (req, res) => _reset(req, res),
     // fetchRecords: (req, res) => _fetchRecords(req, res),
