@@ -4,7 +4,6 @@ import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from './navigation/header';
 import InlineMenu from './navigation/sidebar/InlineMenu';
-import RenderMessages from '../../containers/subskribble/app/messages/renderMessages';
 const { Content } = Layout;
 
 class App extends Component {
@@ -27,7 +26,6 @@ class App extends Component {
 			<InlineMenu collapseSideNav={this.state.collapseSideNav} handleTabClick={this.handleTabClick} selectedKey={this.state.selectedKey} />
      <Layout>
        <Header collapseSideNav={this.state.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
-			 <RenderMessages />
        <Content>
 				 <Scrollbars
 				 	ref="scrollbars"

@@ -8,8 +8,7 @@ import { signinUser } from '../../../actions/authActions';
 const LoginForm = ({ showLoadingButton, signinUser, ...props }) => {
 	const handleFormSubmit = values => {
 		showLoadingButton();
-		console.log('values', values)
-		signinUser(values);
+		signinUser(values, props.cookies);
 	}
 	return (
 		<div className="auth-container">

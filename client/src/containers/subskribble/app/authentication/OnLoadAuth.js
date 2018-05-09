@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { authenticateUser } from '../../../../actions/authActions';
 import { withCookies } from 'react-cookie';
 import App from '../../../../components/subskribble';
-import LoginLoader from '../loading/LoginLoader';
+import Spinner from '../loading/Spinner';
 import Login from './LoginButton';
 
 class OnLoadAuth extends PureComponent {
 	componentDidMount = () => {
-		this.props.authenticateUser();
+		this.props.authenticateUser(this.props.cookies);
 	}
 
 	render = () => {
-		if (this.props.isLoading === undefined || this.props.isLoading) return <LoginLoader />
+		if (this.props.isLoading) return <Spinner />
 
 		return (
 			!this.props.loggedinUser

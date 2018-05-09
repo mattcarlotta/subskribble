@@ -20,12 +20,13 @@ module.exports = app => {
   })(req, res, next));
 
   app.get('/api/loggedin', (req, res, next) => passport.authenticate('local-loggedin', () => {
-    // console.log('cookies token', req.cookies);
-    // console.log('headers', req.headers)
+    if (!req.user) { return next(); }
+
     if (req.error) {
       sendError(req.error, res)
       return next();
     }
+    
     loggedin(req,res);
   })(req, res, next));
 

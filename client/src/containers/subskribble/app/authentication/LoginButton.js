@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Avatar, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import AsyncModal from '../../../../components/subskribble/app/modals/asyncModal';
 import LoginForm from '../../forms/loginForm';
 import ResetForm from '../../forms/resetpasswordForm';
@@ -22,11 +22,7 @@ class LoginButton extends Component {
 
     serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
 
-    if ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) {
-      const { cookies, token } = this.props;
-      if (token) cookies.set('Authorization', token)
-      this.handleClose();
-    }
+    ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) && this.handleClose();
   }
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({
@@ -54,11 +50,9 @@ class LoginButton extends Component {
 				overlayClassName="tooltip-placement"
         overlayStyle={{ display: this.state.visible ? 'none' : '' }}
       >
-        <button className="settings-icon hide-button" onClick={this.showModal}>
-          <Avatar className="signed-out" size="small" icon="user" />
-        </button>
         <AsyncModal
           {...this.state}
+          cookies={this.props.cookies}
           closable={false}
           maskClosable={false}
           FORM={this.state.selectedForm}
@@ -73,7 +67,6 @@ class LoginButton extends Component {
 
 export default connect(state => ({
   loggedinUser: state.auth.loggedinUser,
-  token: state.auth.token,
   serverError: state.server.error,
   serverMessage: state.server.message
 }))(LoginButton);
