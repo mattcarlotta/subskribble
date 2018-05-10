@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory, withRouter } from 'react-router';
 import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
-import Header from './navigation/header';
+import Header from './navigation/topbar/header';
 import InlineMenu from './navigation/sidebar/InlineMenu';
 const { Content } = Layout;
 

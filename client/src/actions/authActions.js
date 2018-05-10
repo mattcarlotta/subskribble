@@ -19,10 +19,10 @@ const authenticateUser = () => dispatch => (
 
 const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
 
-const logoutUser = cookies => {
-	cookies.remove('Authorization')
-	return { type: types.UNAUTH_USER }
-}
+const logoutUser = () => ({
+	type: types.UNAUTH_USER
+})
+
 
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
@@ -32,7 +32,7 @@ const resetUserPassword = props => dispatch => (
 const signinUser = (props, cookies) => dispatch => (
   app.post(`signin`, { ...props })
   .then(({data}) => {
-		cookies.set('Authorization', data.token, {maxAge: 2592000 });
+		cookies.set('Authorization', data.token, { path: '/', maxAge: 2592000 });
 		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
 
 	})

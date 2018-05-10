@@ -8,7 +8,12 @@ class SettingsButton extends PureComponent {
 
 	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
-	unauthorizeUser = () => this.props.logoutUser(this.props.cookies)
+	unauthorizeUser = () => {
+		const { cookies, logoutUser } = this.props;
+		cookies.remove('Authorization', { path: '/' });
+		logoutUser();
+	}
+
 
 	render = () => (
 		<div className="settings-tab">

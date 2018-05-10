@@ -9,7 +9,7 @@ import SignupForm from '../../forms/signupForm';
 const forms = [LoginForm, ResetForm, SignupForm];
 const titles = ["Log In", "Reset Password", "Sign Up"];
 
-class LoginButton extends Component {
+class Login extends Component {
   state = {
     visible: true,
     confirmLoading: false,
@@ -66,4 +66,4 @@ export default connect(state => ({
   loggedinUser: state.auth.loggedinUser,
   serverError: state.server.error,
   serverMessage: state.server.message
-}))(LoginButton);
+}))(Login);
