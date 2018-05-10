@@ -1,5 +1,9 @@
 .ant-menu-inline .ant-menu-item-selected:after {
-	right: 218px;
+	right: 233px;
+}
+
+.ant-layout-sider {
+	@include b-s(2px 0 6px rgba(0,21,41,.35));
 }
 
 .ant-popover-arrow,
