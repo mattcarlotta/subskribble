@@ -8,10 +8,10 @@ import Login from './Login';
 
 class RequireAuth extends Component {
 	componentDidMount = () => {
-		const { cookies, loggedinUser} = this.props;
+		const { authenticateUser, cookies, doNotAuthUser, loggedinUser} = this.props;
 		const hasCookie = cookies.get('Authorization');
-		if (!loggedinUser && hasCookie) this.props.authenticateUser(cookies)
-		if (!loggedinUser && !hasCookie) this.props.doNotAuthUser()
+		if (!loggedinUser && hasCookie) authenticateUser(cookies)
+		if (!loggedinUser && !hasCookie) doNotAuthUser()
 	}
 
 	render = () => (

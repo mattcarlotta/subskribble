@@ -5,6 +5,7 @@ import * as types from '../actions/types';
 // Authorization
 //==========================================================================
 
+// attempts to auth user on refresh
 const authenticateUser = () => dispatch => (
 	app.get('loggedin')
 	.then(({data}) => {
@@ -17,18 +18,19 @@ const authenticateUser = () => dispatch => (
 	})
 )
 
+// sets app loading state to false
 const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
 
-const logoutUser = () => ({
-	type: types.UNAUTH_USER
-})
+// removes current user from redux props
+const logoutUser = () => ({ type: types.UNAUTH_USER });
 
-
+// emails user a token to reset password
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-)
+);
 
+// attempts to sign user in, then sets jwt token to cookie if successful
 const signinUser = (props, cookies) => dispatch => (
   app.post(`signin`, { ...props })
   .then(({data}) => {
@@ -37,13 +39,14 @@ const signinUser = (props, cookies) => dispatch => (
 
 	})
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-)
+);
 
+// attempts to sign up a new user
 const signupUser = props => dispatch => (
   app.post(`signup`, { ...props })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-)
+);
 
 export {
 	authenticateUser,
@@ -53,34 +56,3 @@ export {
   signinUser,
   signupUser
 }
-
-// export default {
-//   // attempts to reset user password
-//   resetUserPassword: ({ password }) => async dispatch => (
-// 		await app.post(`api/reset-password`, { password })
-//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-//   ),
-// 	// attempts to sign in a user
-//   signinUser: props => dispatch => (
-//     app.post(`api/signin`, { ...props })
-//     .then(data => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
-//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-//   ),
-//   // attempts to create a new user
-//   signupUser: props => async dispatch => (
-//     await app.post(`api/signup`, { ...props })
-//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-//   ),
-// }
-
-// export {
-// 	authError,
-// 	authSuccess,
-// 	authenticateUser,
-// 	fetchingUser,
-// 	resetNotifications,
-// 	resetUserPassword,
-// 	signinUser,
-// 	signupUser,
-// 	signoutUser
-// }

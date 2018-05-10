@@ -14,7 +14,6 @@ class SettingsButton extends PureComponent {
 		logoutUser();
 	}
 
-
 	render = () => (
 		<div className="settings-tab">
 			<Tooltip

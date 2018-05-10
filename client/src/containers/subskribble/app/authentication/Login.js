@@ -20,8 +20,11 @@ class Login extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError, serverMessage, loggedinUser } = this.props;
     serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
-    ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) && this.handleClose();
+    serverMessage !== prevProps.serverMessage && this.resetSelectedForm();
+    loggedinUser !== prevProps.loggedinUser && this.handleClose();
   }
+
+  resetSelectedForm = () => this.setState({ confirmLoading: false, selectedForm: forms[0], title: titles[0] })
 
   switchAuthForm = ({target: {dataset: {formid}}}) => this.setState({
     selectedForm: forms[formid],
