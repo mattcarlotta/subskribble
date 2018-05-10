@@ -50,7 +50,7 @@ module.exports = app => {
   }
 
   const userQueries = {
-    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName) VALUES ($1, $2, $3, $4)"),
+    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, token) VALUES ($1, $2, $3, $4, $5)"),
     findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),
   }

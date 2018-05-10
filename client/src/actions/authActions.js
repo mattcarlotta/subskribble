@@ -27,6 +27,7 @@ const logoutUser = () => ({ type: types.UNAUTH_USER });
 // emails user a token to reset password
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 

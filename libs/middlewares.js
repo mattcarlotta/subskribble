@@ -13,6 +13,7 @@ console.log(`[${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
 //============================================================//
 module.exports = app => {
 	app.set('env', env); // sets current env mode (development, production or test)
+	app.set('apiURL', vars[env].apiURL);
 	app.set("cookieKey", vars[env].cookieKey);
 	app.set('host', vars[env].host); // sets localhost or remote host
 	app.set('dbpassword', vars[env].dbpassword);
@@ -22,6 +23,7 @@ module.exports = app => {
  	app.set("port", vars[env].port);
 	app.set("moment", moment);
 	app.set("passport", passport);
+	app.set("sendgridAPIKey", vars[env].sendgridAPIKey);
 	// app.use(cors()); // allows cross origin calls
 	app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 	app.use(morgan('tiny')); // logging framework

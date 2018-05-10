@@ -1,14 +1,22 @@
 const bcrypt          = require('bcrypt');
-const cookieParser    = require('cookie-parser')
+const cookieParser    = require('cookie-parser');
 const jwt             = require('jwt-simple');
+const mailTemplate    = require('./mailer');
 const passport        = require('passport');
 const ExtractJwt      = require('passport-jwt').ExtractJwt;
 const JwtStrategy     = require('passport-jwt').Strategy;
 const LocalStrategy   = require('passport-local').Strategy;
+const sgMail          = require('@sendgrid/mail');
+const randomToken     = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
 
 module.exports = app => {
   const { db, query: { createNewUser, findUserByEmail, findUserById } } = app.database;
+  const apiURL = app.get("apiURL");
   const cookieKey = app.get("cookieKey");
+  const sendgridAPIKey = app.get("sendgridAPIKey");
+
+  // sets sendgrid API key
+  sgMail.setApiKey(sendgridAPIKey);
 
   // serialize the user for the session
   passport.serializeUser((user, done) => done(null, user.id));
@@ -31,6 +39,8 @@ module.exports = app => {
     },
     async (req, email, password, done) => {
       const { firstName, lastName } = req.body;
+      const token = randomToken(32); // a token used for email verification
+
 
       // check to see if both an email and password were supplied
       if (!email || !password || !firstName || !lastName) {
@@ -50,13 +60,30 @@ module.exports = app => {
         // hash password before attempting to create the user
         const newPassword = await bcrypt.hash(password, 12)
         // create new user
-        await db.none(createNewUser(),[email, newPassword, firstName, lastName])
-
-        return done(null, true);
+        await db.none(createNewUser(),[email, newPassword, firstName, lastName, token])
       } catch (err) {
         req.error = err;
         return done(err, false)
       }
+
+      // attempts to send a token to the user
+      const msg = {
+        to: `${email}`,
+        from: `helpdesk@subskribble.com`,
+        subject: `Please verify your email address`,
+        html: mailTemplate(apiURL, firstName, lastName, token)
+      }
+
+      sgMail.send(msg)
+        .then(() => {
+          console.log(`Email was succesfully sent to ${email}`)
+          return done(null, true);
+        })
+        .catch(err => {
+          req.error = err;
+          console.log(err.toString());
+          return done(err, false)
+        });
     })
   )
 

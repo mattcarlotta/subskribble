@@ -13,13 +13,14 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE users (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
-  status VARCHAR(20) DEFAULT 'unverified',
+  status TEXT DEFAULT 'unverified',
   email VARCHAR,
   firstName TEXT,
   lastName TEXT,
   password VARCHAR NOT NULL UNIQUE,
   startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   endDate TEXT,
+  token VARCHAR(32),
   isGod BOOLEAN DEFAULT FALSE
 );
 
