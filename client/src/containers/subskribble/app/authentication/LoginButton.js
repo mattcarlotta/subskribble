@@ -19,9 +19,7 @@ class LoginButton extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError, serverMessage, loggedinUser } = this.props;
-
     serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
-
     ((serverMessage !== prevProps.serverMessage) || (loggedinUser !== prevProps.loggedinUser)) && this.handleClose();
   }
 
@@ -52,7 +50,6 @@ class LoginButton extends Component {
       >
         <AsyncModal
           {...this.state}
-          cookies={this.props.cookies}
           closable={false}
           maskClosable={false}
           FORM={this.state.selectedForm}

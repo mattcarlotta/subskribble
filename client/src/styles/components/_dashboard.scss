@@ -6,7 +6,7 @@
 .page-container {
   @extend %p-r, %outline-none, %t-t-u;
   @include c($black);
-  margin: 40px 30px 0px 30px;
+  margin: 20px 30px 0px 30px;
 }
 
 .dark {

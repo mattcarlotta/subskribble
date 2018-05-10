@@ -1,11 +1,11 @@
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
-import OnLoadAuth from './OnLoadAuth';
+import RequireAuth from './RequireAuth';
 import RenderMessages from '../messages/renderMessages';
 
 export default props => (
   <CookiesProvider>
-    <OnLoadAuth {...props} />
+    <RequireAuth {...props} />
     <RenderMessages />
   </CookiesProvider>
 )

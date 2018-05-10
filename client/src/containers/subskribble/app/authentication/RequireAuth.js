@@ -1,53 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { authenticateUser, doNotAuthUser } from '../../../../actions/authActions';
+import { withCookies } from 'react-cookie';
+import App from '../../../../components/subskribble';
+import Spinner from '../loading/Spinner';
+import Login from './LoginButton';
 
-import { authError, signoutUser } from '../../actions/authActionCreators';
-import Spinner from '../../components/loaders/spinner';
-
-export default function(ComposedComponent) {
-	class Authentication extends Component {
-		componentWillMount() {
-			if (!this.props.isLoading) {
-				if (!this.props.username || !this.props.userIsGod) {
-					this.redirectUser();
-				}
-			}
-		}
-
-		componentWillUpdate(nextProps, nextState) {
-			if (!this.props.isLoading) {
-				if (!nextProps.username || !nextProps.userIsGod) {
-					this.redirectUser();
-				}
-			}
-		}
-
-		redirectUser = () => {
-			this.props.authError('You do not have permission to do that.');
-			browserHistory.push('/');
-		};
-
-		render() {
-			if (this.props.isLoading) return <Spinner />;
-
-			return (
-				<span>
-					{this.props.username && this.props.userIsGod
-						? <ComposedComponent {...this.props} />
-						: null}
-				</span>
-			);
-		}
+class RequireAuth extends Component {
+	componentDidMount = () => {
+		const { cookies } = this.props;
+		(cookies.get('Authorization'))
+			? this.props.authenticateUser(this.props.cookies)
+			: this.props.doNotAuthUser()
 	}
 
-	const mapStateToProps = state => {
-		return {
-			isLoading: state.auth.fetchingUser,
-			username: state.auth.username,
-			userIsGod: state.auth.isGod
-		};
-	};
+	render = () => {
+		if (this.props.isLoading) return <Spinner />
 
-	return connect(mapStateToProps, { authError, signoutUser })(Authentication);
+		return (
+			!this.props.loggedinUser
+				?	<Login visible={true} {...this.props}/>
+				:	<App {...this.props}/>
+		)
+	}
 }
+
+export default connect(state => ({ loggedinUser: state.auth.loggedinUser, isLoading: state.app }), { authenticateUser, doNotAuthUser })(withCookies(RequireAuth));
