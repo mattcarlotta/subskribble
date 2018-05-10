@@ -1,11 +1,17 @@
 import React, { PureComponent } from 'react';
 import { Avatar, Popover, Tooltip } from 'antd';
+import { withCookies } from 'react-cookie';
 import SettingsMenu from './settingsMenu';
 
-export default class SettingsButton extends PureComponent {
+class SettingsButton extends PureComponent {
 	state = { visibleSettings: false, tipVisible: false };
 
 	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
+
+	unauthorizeUser = () => {
+		const { cookies, logoutUser } = this.props;
+		logoutUser(cookies);
+	}
 
 	render = () => (
 		<div className="settings-tab">
@@ -19,7 +25,7 @@ export default class SettingsButton extends PureComponent {
 				<Popover
 					arrowPointAtCenter
 					className="nav-button"
-					content={<SettingsMenu {...this.props}/>}
+					content={<SettingsMenu unauthorizeUser={this.unauthorizeUser} {...this.props}/>}
 					onVisibleChange={this.handleVisibleChange}
 					placement="bottomRight"
 					trigger="click"
@@ -31,3 +37,5 @@ export default class SettingsButton extends PureComponent {
 		</div>
 	);
 }
+
+export default withCookies(SettingsButton);

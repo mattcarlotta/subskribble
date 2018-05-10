@@ -1,14 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticateUser } from '../../../../actions/authActions';
+import { authenticateUser, doNotAuthUser } from '../../../../actions/authActions';
 import { withCookies } from 'react-cookie';
 import App from '../../../../components/subskribble';
 import Spinner from '../loading/Spinner';
 import Login from './LoginButton';
 
-class OnLoadAuth extends PureComponent {
+class OnLoadAuth extends Component {
 	componentDidMount = () => {
-		this.props.authenticateUser(this.props.cookies);
+		const { cookies } = this.props;
+		(cookies.get('Authorization'))
+			? this.props.authenticateUser(this.props.cookies)
+			: this.props.doNotAuthUser()
 	}
 
 	render = () => {
@@ -22,4 +25,4 @@ class OnLoadAuth extends PureComponent {
 	}
 }
 
-export default connect(state => ({ loggedinUser: state.auth.loggedinUser, isLoading: state.app }), { authenticateUser })(withCookies(OnLoadAuth));
+export default connect(state => ({ loggedinUser: state.auth.loggedinUser, isLoading: state.app }), { authenticateUser, doNotAuthUser })(withCookies(OnLoadAuth));

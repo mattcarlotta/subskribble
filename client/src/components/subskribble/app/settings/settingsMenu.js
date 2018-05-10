@@ -8,10 +8,10 @@ const RIGHTNAVLINKS = [
   // { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
   { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
   { icon: 'settings', label: 'Settings', link: '/subskribble/settings' },
-  { icon: 'exit_to_app', label: 'Logout', link: '/subskribble/logout' },
+  // { icon: '', label: '', link: '/subskribble/logout' },
 ]
 
-export default ({ firstName, lastName, loggedinUser }) => (
+export default ({ firstName, lastName, loggedinUser, unauthorizeUser }) => (
   <Menu className="settings-tab-container">
     <MenuItem style={{ height: 65 }}>
       <Link className="my-profile-container" to="/subskribble/profile">
@@ -30,5 +30,11 @@ export default ({ firstName, lastName, loggedinUser }) => (
         </Link>
       </MenuItem>
     ))}
+    <MenuItem>
+      <Link className="menu-options" onClick={unauthorizeUser}>
+        <i className="material-icons settings-icon">exit_to_app</i>
+        <span className="settings-label">Logout</span>
+      </Link>
+    </MenuItem>
   </Menu>
 )

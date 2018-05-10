@@ -19,14 +19,14 @@ module.exports = app => {
     login(req,res);
   })(req, res, next));
 
-  app.get('/api/loggedin', (req, res, next) => passport.authenticate('local-loggedin', () => {
+  app.get('/api/loggedin', (req, res, next) => passport.authenticate('require-login', () => {
     if (!req.user) { return next(); }
 
     if (req.error) {
       sendError(req.error, res)
       return next();
     }
-    
+
     loggedin(req,res);
   })(req, res, next));
 

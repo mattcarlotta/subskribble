@@ -87,8 +87,7 @@ module.exports = app => {
       }
 
       req.user = existingUser;
-      req.user.token = tokenForUser(existingUser.email);
-      console.log('existingUser', existingUser);
+      req.user.token = tokenForUser(existingUser.id);
       return done(null, true);
     })
   );
@@ -99,7 +98,7 @@ module.exports = app => {
 
   const ExtractToken = req => ( req && req.cookies ? req.cookies.Authorization : null )
 
-  passport.use('local-loggedin', new JwtStrategy({
+  passport.use('require-login', new JwtStrategy({
 		jwtFromRequest: ExtractToken,
 		secretOrKey: app.get("cookieKey"),
     passReqToCallback: true
@@ -107,7 +106,7 @@ module.exports = app => {
     async (req, payload, done) => {
 		  if (!payload || !payload.sub) return done(null, false);
 
-      const existingUser = await db.oneOrNone(findUserByEmail(), [payload.sub]);
+      const existingUser = await db.oneOrNone(findUserById(), [payload.sub]);
 
       if (!existingUser) {
         req.error = 'There was a problem with your login credentials. That username does not exist in our records.';

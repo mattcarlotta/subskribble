@@ -22,7 +22,14 @@ const authReducer = (state = {}, { payload, type }) => {
 				lastName: payload.lastname,
 				isGod: payload.isgod
 			};
-		case types.UNAUTH_USER: return { ...state, loggedinUser: null, firstName: null, lastName: null, isGod: null };
+		case types.UNAUTH_USER:
+		return { 
+			...state,
+			loggedinUser: null,
+			firstName: null,
+			lastName: null,
+			isGod: null
+			};
 		default: return state;
 	}
 };

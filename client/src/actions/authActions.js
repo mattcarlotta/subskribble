@@ -6,7 +6,7 @@ import * as types from '../actions/types';
 //==========================================================================
 
 const authenticateUser = () => dispatch => (
-	app.get('loggedin', {withCredentials: true})
+	app.get('loggedin')
 	.then(({data}) => {
 		dispatch({ type: types.APP_LOADING_STATE })
 		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
@@ -17,6 +17,13 @@ const authenticateUser = () => dispatch => (
 	})
 )
 
+const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
+
+const logoutUser = cookies => {
+	cookies.remove('Authorization')
+	return { type: types.UNAUTH_USER }
+}
+
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
@@ -25,7 +32,7 @@ const resetUserPassword = props => dispatch => (
 const signinUser = (props, cookies) => dispatch => (
   app.post(`signin`, { ...props })
   .then(({data}) => {
-		cookies.set('Authorization', data.token);
+		cookies.set('Authorization', data.token, {maxAge: 2592000 });
 		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
 
 	})
@@ -40,6 +47,8 @@ const signupUser = props => dispatch => (
 
 export {
 	authenticateUser,
+	doNotAuthUser,
+	logoutUser,
   resetUserPassword,
   signinUser,
   signupUser
