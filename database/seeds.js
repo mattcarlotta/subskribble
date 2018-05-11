@@ -4,7 +4,7 @@ module.exports = app => {
   const userTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
-    status TEXT DEFAULT 'unverified',
+    verified BOOLEAN DEFAULT FALSE,
     email VARCHAR,
     firstName TEXT,
     lastName TEXT,

@@ -1,7 +1,7 @@
 const bcrypt          = require('bcrypt');
 const cookieParser    = require('cookie-parser');
 const jwt             = require('jwt-simple');
-const mailTemplate    = require('./mailer');
+const mailerTemplate  = require('./mailer');
 const passport        = require('passport');
 const ExtractJwt      = require('passport-jwt').ExtractJwt;
 const JwtStrategy     = require('passport-jwt').Strategy;
@@ -66,14 +66,15 @@ module.exports = app => {
         return done(err, false)
       }
 
-      // attempts to send a token to the user
+      // creates an email template
       const msg = {
         to: `${email}`,
         from: `helpdesk@subskribble.com`,
         subject: `Please verify your email address`,
-        html: mailTemplate(apiURL, firstName, lastName, token)
+        html: mailerTemplate(apiURL, firstName, lastName, token)
       }
 
+      // attempts to send a verification email to newly created user
       sgMail.send(msg)
         .then(() => {
           console.log(`Email was succesfully sent to ${email}`)
