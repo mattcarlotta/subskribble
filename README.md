@@ -75,7 +75,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 module.exports = {
   "development": {
     apiURL: "http://localhost:3000/",
-    cookieKey: "<create_unique_key>",
+    cookieKey: "<unique_cookie_key>",
     database: "<postgres_db_name>",
     dbport: <postgres_db_port>,
     dbpassword: "<postgres_db_password>",
@@ -86,13 +86,13 @@ module.exports = {
     url: "http://localhost:5000/",
   },
   "production": {
-    (see above)
+    (see above example)
   },
   "staging": {
-    (see above)
+    (see above example)
   },
   "testing": {
-    (see above)
+    (see above example)
   }
 }
 ```
