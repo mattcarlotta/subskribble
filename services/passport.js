@@ -15,6 +15,12 @@ module.exports = app => {
   const cookieKey = app.get("cookieKey");
   const sendgridAPIKey = app.get("sendgridAPIKey");
 
+  // error messages
+  const badCredentials = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
+  const missingCredentials = 'You must supply a valid first name, last name, email and password in order to sign up.';
+  const emailAlreadyTaken = 'That email is already in use and is associated with an active account.';
+  const emailConfirmationReq = 'You must verify your email before attempting to do that.';
+
   // sets sendgrid API key
   sgMail.setApiKey(sendgridAPIKey);
 
@@ -41,19 +47,12 @@ module.exports = app => {
       const { firstName, lastName } = req.body;
       const token = randomToken(32); // a token used for email verification
 
-
       // check to see if both an email and password were supplied
-      if (!email || !password || !firstName || !lastName) {
-        req.error = 'You must supply a valid first name, last name, email and password in order to sign up.';
-        return done(null, false)
-      }
+      if (!email || !password || !firstName || !lastName) return done(missingCredentials, false);
 
       // check to see if the email is already in use
       const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
-      if (existingUser) {
-        req.error = 'That email is already in use and is associated with an active account.'
-        return done(null, false);
-      }
+      if (existingUser) return done(emailAlreadyTaken, false);
 
       // attempt to create new user
       try {
@@ -61,10 +60,7 @@ module.exports = app => {
         const newPassword = await bcrypt.hash(password, 12)
         // create new user
         await db.none(createNewUser(),[email, newPassword, firstName, lastName, token])
-      } catch (err) {
-        req.error = err;
-        return done(err, false)
-      }
+      } catch (err) { return done(err, false) }
 
       // creates an email template
       const msg = {
@@ -76,15 +72,8 @@ module.exports = app => {
 
       // attempts to send a verification email to newly created user
       sgMail.send(msg)
-        .then(() => {
-          console.log(`Email was succesfully sent to ${email}`)
-          return done(null, true);
-        })
-        .catch(err => {
-          req.error = err;
-          console.log(err.toString());
-          return done(err, false)
-        });
+        .then(() => (done(null, true)))
+        .catch(err => (done(err, false)))
     })
   )
 
@@ -97,27 +86,24 @@ module.exports = app => {
     // override username with email
       usernameField : 'email',
       passwordField : 'password',
-      passReqToCallback : true // allows us to send request to the callback
+      // passReqToCallback : true // allows us to send request to the callback
     },
-    async (req, email, password, done) => {
+    async (email, password, done) => {
+      // check to see if both an email and password were supplied
+      if (!email || !password) return done(missingCredentials, false);
+
       // check to see if the user already exists
       const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
-      if (!existingUser) {
-        req.error = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
-        return done(null, false);
-      }
+      if (!existingUser) return done(badCredentials, false);
+      if (!existingUser.verified) return done(emailConfirmationReq, false);
 
       // compare password to existingUser password
       const validPassword = await bcrypt.compare(password, existingUser.password);
-      if (!validPassword) {
-        req.error = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
-        return done(null, false);
-      }
+      if (!validPassword) return done(badCredentials, false);
 
       // set existingUser and a token to req
-      req.user = existingUser;
-      req.user.token = jwt.encode({ sub: existingUser.id, iat: new Date().getTime()}, cookieKey);
-      return done(null, true);
+      const loggedinUser = { ...existingUser, token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()}, cookieKey)};
+      return done(null, loggedinUser);
     })
   );
 
@@ -136,14 +122,10 @@ module.exports = app => {
 
       // see if the jwt payload id matches any user record
       const existingUser = await db.oneOrNone(findUserById(), [payload.sub]);
+      if (!existingUser) return done(badCredentials, false);
+      if (!existingUser.verified) return done(emailConfirmationReq, false);
 
-      if (!existingUser) {
-        req.error = 'There was a problem with your login credentials. That username does not exist in our records.';
-        return done(null, false);
-      }
-
-      req.user = existingUser;
-      return done(null, true);
+      return done(null, existingUser);
 	 })
   )
 }

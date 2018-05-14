@@ -1,6 +1,15 @@
 module.exports = app => {
   const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
+  const authQueries = {
+    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, token) VALUES ($1, $2, $3, $4, $5)"),
+    findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
+    findUserById: () => ("SELECT * FROM users WHERE id=$1"),
+    findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
+    removeToken: () => ("UPDATE users SET token=null WHERE id=$1"),
+    verifyEmail: () => ("UPDATE users SET verified=true WHERE id=$1")
+  }
+
   const promoQueries = {
     deleteOnePromotion: () => ("DELETE FROM promotionals WHERE id=$1 RETURNING *"),
     getAllPromotions: (limit, offset, status) => (`SELECT * FROM promotionals WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
@@ -49,18 +58,12 @@ module.exports = app => {
     ),
   }
 
-  const userQueries = {
-    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, token) VALUES ($1, $2, $3, $4, $5)"),
-    findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
-    findUserById: () => ("SELECT * FROM users WHERE id=$1"),
-  }
-
   return {
+    ...authQueries,
     ...notificationQueries,
     ...planQueries,
     ...promoQueries,
     ...subQueries,
-    ...transactQueries,
-    ...userQueries
+    ...transactQueries
   }
 }

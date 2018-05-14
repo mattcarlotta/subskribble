@@ -25,10 +25,12 @@ import Subscribers from '../containers/subskribble/subscribers/Subscribers';
 // import Templates from '../components/subskribble/templates';
 import Transactions from '../containers/subskribble/transactions/Transactions';
 // import Tutorials from '../components/subskribble/tutorials';
+import VerifyEmail from '../containers/subskribble/app/authentication/VerifyEmail';
 
 // CONFIG APP ROUTE VIEWS
 export default (
 	<Fragment>
+		<Route path="/subskribble/email/:id" component={VerifyEmail} />
 		<Redirect from="/" to="/subskribble" />
 		<Route path="/subskribble" component={AuthHandler}>
 			<IndexRoute component={Landing} />

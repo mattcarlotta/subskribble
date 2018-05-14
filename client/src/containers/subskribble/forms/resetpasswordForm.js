@@ -8,7 +8,6 @@ import { resetUserPassword } from '../../../actions/authActions';
 const ResetPasswordForm =	({ resetUserPassword, showLoadingButton, ...props }) => {
 	const handleFormSubmit = values => {
 		showLoadingButton();
-		console.log('values', values);
 		resetUserPassword(values);
 	}
 

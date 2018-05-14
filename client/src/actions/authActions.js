@@ -24,6 +24,9 @@ const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
 // removes current user from redux props
 const logoutUser = () => ({ type: types.UNAUTH_USER });
 
+// returns error message if missing token
+const missingToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
+
 // emails user a token to reset password
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
@@ -49,11 +52,23 @@ const signupUser = props => dispatch => (
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
+// attempts to verify user's email via token
+const verifyEmail = token => dispatch => (
+	app.put(`email/verify?token=${token}`)
+	.then(({data: {email}}) => dispatch({ type: types.USER_WAS_VERIFIED, payload: email }))
+	.catch(err => {
+		dispatch({ type: types.USER_WAS_VERIFIED, payload: false })
+		dispatch({ type: types.SERVER_ERROR, payload: err })
+	})
+)
+
 export {
 	authenticateUser,
 	doNotAuthUser,
 	logoutUser,
+	missingToken,
   resetUserPassword,
   signinUser,
-  signupUser
+  signupUser,
+	verifyEmail
 }

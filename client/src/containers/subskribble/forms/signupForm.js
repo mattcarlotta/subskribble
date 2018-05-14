@@ -8,7 +8,6 @@ import { signupUser } from '../../../actions/authActions';
 const SignupForm = ({ showLoadingButton, signupUser, ...props }) => {
 	const handleFormSubmit = values => {
 		showLoadingButton();
-		console.log('values', values);
 		signupUser(values);
 	}
 	return (

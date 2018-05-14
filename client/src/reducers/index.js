@@ -13,11 +13,10 @@ const appReducer = (state=true, { type }) => {
 
 const authReducer = (state = {}, { payload, type }) => {
 	switch (type) {
-		case types.FETCHING_USER: return { ...state, fetchingUser: payload };
 		case types.SET_SIGNEDIN_USER:
 			return {
 				...state,
-				loggedinUser: payload.user,
+				loggedinUser: payload.email,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
 				isGod: payload.isgod
@@ -30,6 +29,7 @@ const authReducer = (state = {}, { payload, type }) => {
 			lastName: null,
 			isGod: null
 			};
+		case types.USER_WAS_VERIFIED: return { ...state, userVerified: payload };
 		default: return state;
 	}
 };
