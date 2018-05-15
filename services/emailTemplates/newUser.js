@@ -1,4 +1,4 @@
-module.exports = (apiURL, firstName, lastName, token) => (
+module.exports = app => (apiURL, firstName, lastName, token) => (
   `
   <html>
     <body>
