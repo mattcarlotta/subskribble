@@ -1,6 +1,7 @@
 import app from './axiosConfig';
 import * as types from '../actions/types';
 
+app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 //==========================================================================
 // Authorization
 //==========================================================================

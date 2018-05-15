@@ -1,8 +1,10 @@
+const bcrypt        = require('bcrypt');
 const bodyParser 		= require('body-parser');
-const cookieParser = require('cookie-parser');
+const cookieParser 	= require('cookie-parser');
 const cors					= require('cors');
 const passport 			= require('passport');
 const moment				= require('moment');
+const LocalStrategy = require('passport-local').Strategy;
 const morgan 				= require('morgan');
 const vars        	= require('../config/vars.js');
 
@@ -20,8 +22,10 @@ module.exports = app => {
 	app.set('dbport', vars[env].dbport);
 	app.set('dbowner', vars[env].dbowner);
 	app.set('database', vars[env].database);
- 	app.set("port", vars[env].port);
+	app.set('bcrypt', bcrypt);
+	app.set('LocalStrategy', LocalStrategy);
 	app.set("moment", moment);
+	app.set("port", vars[env].port);
 	app.set("passport", passport);
 	app.set("sendgridAPIKey", vars[env].sendgridAPIKey);
 	// app.use(cors()); // allows cross origin calls
