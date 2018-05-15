@@ -1,25 +1,27 @@
-const bcrypt          = require('bcrypt');
-const cookieParser    = require('cookie-parser');
-const jwt             = require('jwt-simple');
-const mailerTemplate  = require('./mailer');
-const passport        = require('passport');
-const ExtractJwt      = require('passport-jwt').ExtractJwt;
-const JwtStrategy     = require('passport-jwt').Strategy;
-const LocalStrategy   = require('passport-local').Strategy;
-const sgMail          = require('@sendgrid/mail');
-const randomToken     = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+const bcrypt            = require('bcrypt');
+const cookieParser      = require('cookie-parser');
+const jwt               = require('jwt-simple');
+const newUserTemplate   = require('./emailTemplates/newUser');
+const newTokenTemplate  = require('./emailTemplates/newToken');
+const passport          = require('passport');
+const ExtractJwt        = require('passport-jwt').ExtractJwt;
+const JwtStrategy       = require('passport-jwt').Strategy;
+const LocalStrategy     = require('passport-local').Strategy;
+const sgMail            = require('@sendgrid/mail');
+const randomToken       = require('random-token').create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+
+// error messages
+const badCredentials = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
+const missingCredentials = 'You must supply a valid first name, last name, email and password in order to sign up.';
+const missingEmailCreds = 'That email is not associated with an active account. Please make sure the email address is spelled correctly.';
+const emailAlreadyTaken = 'That email is already in use and is associated with an active account.';
+const emailConfirmationReq = 'You must verify your email before attempting to do that.';
 
 module.exports = app => {
-  const { db, query: { createNewUser, findUserByEmail, findUserById } } = app.database;
+  const { db, query: { createNewUser, findUserByEmail, findUserById, resetToken } } = app.database;
   const apiURL = app.get("apiURL");
   const cookieKey = app.get("cookieKey");
   const sendgridAPIKey = app.get("sendgridAPIKey");
-
-  // error messages
-  const badCredentials = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
-  const missingCredentials = 'You must supply a valid first name, last name, email and password in order to sign up.';
-  const emailAlreadyTaken = 'That email is already in use and is associated with an active account.';
-  const emailConfirmationReq = 'You must verify your email before attempting to do that.';
 
   // sets sendgrid API key
   sgMail.setApiKey(sendgridAPIKey);
@@ -34,7 +36,7 @@ module.exports = app => {
   });
 
   // =========================================================================
-  // LOCAL SIGNUP =============================================================
+  // LOCAL SIGNUP ============================================================
   // =========================================================================
 
   passport.use('local-signup', new LocalStrategy({
@@ -67,7 +69,7 @@ module.exports = app => {
         to: `${email}`,
         from: `helpdesk@subskribble.com`,
         subject: `Please verify your email address`,
-        html: mailerTemplate(apiURL, firstName, lastName, token)
+        html: newUserTemplate(apiURL, firstName, lastName, token)
       }
 
       // attempts to send a verification email to newly created user
@@ -128,4 +130,39 @@ module.exports = app => {
       return done(null, existingUser);
 	 })
   )
+
+  // =========================================================================
+  // RESET TOKEN =============================================================
+  // =========================================================================
+
+  passport.use('reset-token', new LocalStrategy({
+      usernameField : 'email'
+    },
+    async (email, password, done) => {
+      if (!email) return done(missingEmailCreds, false);
+
+      // check to see if email exists in the db
+      const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
+      if (!existingUser) return done(missingEmailCreds, false);
+
+      // create a new token for email reset
+      const token = randomToken(32);
+      try { await db.none(resetToken(), [token, email]) }
+      catch (err) { return done(err, false) }
+
+      // creates an email template
+      const { firstname, lastname } = existingUser;
+      const msg = {
+        to: `${email}`,
+        from: `helpdesk@subskribble.com`,
+        subject: `Password Reset Confirmation`,
+        html: newTokenTemplate(apiURL, firstname, lastname, token)
+      }
+
+      // attempts to send a verification email to newly created user
+      sgMail.send(msg)
+        .then(() => (done(null, email)))
+        .catch(err => (done(err, false)))
+    })
+  );
 }

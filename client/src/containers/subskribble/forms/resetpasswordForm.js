@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
 import FIELDS from '../../formFields/passwordResetFormFields';
-import { resetUserPassword } from '../../../actions/authActions';
+import { resetUserToken } from '../../../actions/authActions';
 
-const ResetPasswordForm =	({ resetUserPassword, showLoadingButton, ...props }) => {
-	const handleFormSubmit = values => {
+const ResetPasswordForm =	({ resetUserToken, showLoadingButton, ...props }) => {
+	const handleFormSubmit = ({ email }) => {
 		showLoadingButton();
-		resetUserPassword(values);
+		resetUserToken(email);
 	}
 
 	return (
@@ -19,11 +19,11 @@ const ResetPasswordForm =	({ resetUserPassword, showLoadingButton, ...props }) =
 				onSubmit={handleFormSubmit}
 				FIELDS={FIELDS}
 				formTitle='Reset Password'
-				submitLabel='Confirm'
+				submitLabel='Reset Password'
 			/>
 		</div>
 	)
 }
 
 
-export default connect(null, { resetUserPassword })(ResetPasswordForm);
+export default connect(null, { resetUserToken })(ResetPasswordForm);

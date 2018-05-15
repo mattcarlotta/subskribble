@@ -27,9 +27,16 @@ const logoutUser = () => ({ type: types.UNAUTH_USER });
 // returns error message if missing token
 const missingToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
 
-// emails user a token to reset password
+// updates a user's password
 const resetUserPassword = props => dispatch => (
 	app.put(`reset-password`, { ...props })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
+
+// emails user a token to reset password
+const resetUserToken = email => dispatch => (
+	app.put(`reset-token`, { email, password: 'reset-password' })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
@@ -68,6 +75,7 @@ export {
 	logoutUser,
 	missingToken,
   resetUserPassword,
+	resetUserToken,
   signinUser,
   signupUser,
 	verifyEmail

@@ -6,7 +6,8 @@ module.exports = app => {
     findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),
     findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
-    removeToken: () => ("UPDATE users SET token=null WHERE id=$1"),
+    resetToken: () => ("UPDATE users SET token=$1 WHERE email=$2"),
+    resetPassword: () => ("UPDATE users SET password=$1 WHERE id=$2"),
     verifyEmail: () => ("UPDATE users SET verified=true WHERE id=$1")
   }
 
