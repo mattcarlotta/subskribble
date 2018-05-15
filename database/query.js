@@ -7,8 +7,8 @@ module.exports = app => {
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),
     findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
     resetToken: () => ("UPDATE users SET token=$1 WHERE email=$2"),
-    resetPassword: () => ("UPDATE users SET password=$1 WHERE id=$2"),
-    verifyEmail: () => ("UPDATE users SET verified=true WHERE id=$1")
+    updateUserPassword: () => ("UPDATE users SET password=$1 WHERE id=$2"),
+    verifyEmail: () => ("UPDATE users SET verified=true WHERE email=$1")
   }
 
   const promoQueries = {

@@ -21,6 +21,7 @@ import Promos from '../containers/subskribble/promos/Promotionals';
 // import Messages from '../components/subskribble/messages';
 // import Settings from '../components/subskribble/settings';
 // import SignUp from '../containers/website/forms/signupForm';
+import ResetPassword from '../containers/subskribble/app/authentication/ResetPassword';
 import Subscribers from '../containers/subskribble/subscribers/Subscribers';
 // import Templates from '../components/subskribble/templates';
 import Transactions from '../containers/subskribble/transactions/Transactions';
@@ -31,6 +32,7 @@ import VerifyEmail from '../containers/subskribble/app/authentication/VerifyEmai
 export default (
 	<Fragment>
 		<Route path="/subskribble/email/:id" component={VerifyEmail} />
+		<Route path="/subskribble/password/:id" component={ResetPassword} />
 		<Redirect from="/" to="/subskribble" />
 		<Route path="/subskribble" component={AuthHandler}>
 			<IndexRoute component={Landing} />

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { missingToken, verifyEmail } from '../../../../actions/authActions';
+import { missingVerificationToken, verifyEmail } from '../../../../actions/authActions';
 import EmailConfirmation from '../../../../components/subskribble/app/auth/emailConfirmation';
 import Spinner from '../loading/Spinner';
 
 class VerifyEmail extends Component {
   componentDidMount = () => {
-    const { missingToken, verifyEmail, userVerified } = this.props;
+    const { missingVerificationToken, verifyEmail, userVerified } = this.props;
     const { token } = this.props.location.query;
 
-    !userVerified && !token ? missingToken() : verifyEmail(token)
+    !userVerified && !token ? missingVerificationToken() : verifyEmail(token)
   }
 
   render = () => (
@@ -19,4 +19,4 @@ class VerifyEmail extends Component {
   )
 }
 
-export default connect(state => ({ userVerified: state.auth.userVerified }), { missingToken, verifyEmail })(VerifyEmail);
+export default connect(state => ({ userVerified: state.auth.userVerified }), { missingVerificationToken, verifyEmail })(VerifyEmail);

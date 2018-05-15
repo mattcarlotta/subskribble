@@ -25,18 +25,23 @@ const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
 const logoutUser = () => ({ type: types.UNAUTH_USER });
 
 // returns error message if missing token
-const missingToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
+const missingVerificationToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
+
+const missingPasswordToken = () => ({
+	type: types.SERVER_ERROR,
+	payload: 'Missing password token! Please check your email and click on the "Create New Password" button.'
+})
 
 // updates a user's password
-const resetUserPassword = props => dispatch => (
-	app.put(`reset-password`, { ...props })
+const resetUserPassword = (password, token) => dispatch => (
+	app.put(`reset-password/verify?token=${token}`, { email: 'fake@email.com', password })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
 // emails user a token to reset password
 const resetUserToken = email => dispatch => (
-	app.put(`reset-token`, { email, password: 'reset-password' })
+	app.put(`reset-token`, { email, password: 'reset-token' })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
@@ -73,7 +78,8 @@ export {
 	authenticateUser,
 	doNotAuthUser,
 	logoutUser,
-	missingToken,
+	missingPasswordToken,
+	missingVerificationToken,
   resetUserPassword,
 	resetUserToken,
   signinUser,

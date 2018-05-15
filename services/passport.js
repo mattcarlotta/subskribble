@@ -12,13 +12,26 @@ const randomToken       = require('random-token').create('abcdefghijklmnopqrstuv
 
 // error messages
 const badCredentials = 'There was a problem with your login credentials. Please make sure your username and password are correct.';
-const missingCredentials = 'You must supply a valid first name, last name, email and password in order to sign up.';
-const missingEmailCreds = 'That email is not associated with an active account. Please make sure the email address is spelled correctly.';
 const emailAlreadyTaken = 'That email is already in use and is associated with an active account.';
 const emailConfirmationReq = 'You must verify your email before attempting to do that.';
+const invalidToken = 'There was a problem authenticating your request. Please open the "Password Reset Confirmation" email and click on the "Create New Password" or on the link below it.'
+const missingCredentials = 'You must supply a valid first name, last name, email and password in order to sign up.';
+const missingEmailCreds = 'That email is not associated with an active account. Please make sure the email address is spelled correctly.';
+const missingToken = 'There was a problem authenticating your request.';
+const notUniquePassword = 'Your new password must not match the old password. Please try again.'
 
 module.exports = app => {
-  const { db, query: { createNewUser, findUserByEmail, findUserById, resetToken } } = app.database;
+  const {
+    db,
+    query: {
+      createNewUser,
+      findUserByEmail,
+      findUserById,
+      findUserByToken,
+      updateUserPassword,
+      resetToken
+    }
+  } = app.database;
   const apiURL = app.get("apiURL");
   const cookieKey = app.get("cookieKey");
   const sendgridAPIKey = app.get("sendgridAPIKey");
@@ -64,7 +77,7 @@ module.exports = app => {
         await db.none(createNewUser(),[email, newPassword, firstName, lastName, token])
       } catch (err) { return done(err, false) }
 
-      // creates an email template
+      // creates an email template for a new user signup
       const msg = {
         to: `${email}`,
         from: `helpdesk@subskribble.com`,
@@ -150,7 +163,7 @@ module.exports = app => {
       try { await db.none(resetToken(), [token, email]) }
       catch (err) { return done(err, false) }
 
-      // creates an email template
+      // creates an email template for a password reset
       const { firstname, lastname } = existingUser;
       const msg = {
         to: `${email}`,
@@ -163,6 +176,37 @@ module.exports = app => {
       sgMail.send(msg)
         .then(() => (done(null, email)))
         .catch(err => (done(err, false)))
+    })
+  );
+
+  // =========================================================================
+  // RESET PASSWORD ==========================================================
+  // =========================================================================
+  passport.use('reset-password', new LocalStrategy({
+      usernameField : 'email',
+      passwordField : 'password',
+      passReqToCallback : true // allows us to send request to the callback
+    },
+    async (req, email, password, done) => {
+      const { token } = req.query;
+      if (!token) return done(missingToken, false);
+
+      // check to see if email exists in the db
+      const existingUser = await db.oneOrNone(findUserByToken(), [token]);
+      if (!existingUser) return done(invalidToken, false);
+
+      // compare newpassword to existingUser password
+      const validPassword = await bcrypt.compare(password, existingUser.password);
+      if (validPassword) return done(notUniquePassword, false);
+
+      try {
+        // hash password before attempting to create the user
+        const newPassword = await bcrypt.hash(password, 12)
+        // update user's password
+        await db.none(updateUserPassword(),[newPassword, existingUser.id])
+
+        return done(null, existingUser);
+      } catch (err) { return done(err, false) }
     })
   );
 }
