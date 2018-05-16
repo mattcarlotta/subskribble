@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/subskribble';
@@ -32,27 +32,29 @@ import VerifyEmail from '../containers/subskribble/app/authentication/VerifyEmai
 
 // CONFIG APP ROUTE VIEWS
 export default (
-	<Route path="/" component={App}>
-		<Route path="/subskribble/email/:id" component={VerifyEmail} />
-		<Route path="/subskribble/password/:id" component={ResetPassword} />
+	<Fragment>
 		<Redirect from="/" to="/subskribble" />
-		<Route path="/subskribble" component={RequireAuth}>
-			<IndexRoute component={Landing} />
-			{/* <Route path="dashboard" component={Dashboard} /> */}
-			{/* <Route path="contact-us" component={ContactUs} /> */}
-			{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
-			{/* <Route path="faqs" component={FAQs} /> */}
-			{/* <Route path="forgot-password" component={ForgotPassword} /> */}
-			{/* <Route path="forms" component={Forms}/> */}
-			{/* <Route path="login" component={LogIn} /> */}
-			<Route path="plans" component={Plans} />
-			<Route path="promotionals" component={Promos} />
-			{/* <Route path="signup" component={SignUp} /> */}
-			<Route path="subscribers" component={Subscribers} />
-			{/* <Route path="templates" component={Templates} /> */}
-			<Route path="transactions" component={Transactions} />
-			{/* <Route path="tutorials" component={Tutorials} /> */}
+		<Route path="/" component={App}>
+			<Route path="/subskribble/email/:id" component={VerifyEmail} />
+			<Route path="/subskribble/password/:id" component={ResetPassword} />
+			<Route path="/subskribble" component={RequireAuth}>
+				<IndexRoute component={Landing} />
+				{/* <Route path="dashboard" component={Dashboard} /> */}
+				{/* <Route path="contact-us" component={ContactUs} /> */}
+				{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
+				{/* <Route path="faqs" component={FAQs} /> */}
+				{/* <Route path="forgot-password" component={ForgotPassword} /> */}
+				{/* <Route path="forms" component={Forms}/> */}
+				{/* <Route path="login" component={LogIn} /> */}
+				<Route path="plans" component={Plans} />
+				<Route path="promotionals" component={Promos} />
+				{/* <Route path="signup" component={SignUp} /> */}
+				<Route path="subscribers" component={Subscribers} />
+				{/* <Route path="templates" component={Templates} /> */}
+				<Route path="transactions" component={Transactions} />
+				{/* <Route path="tutorials" component={Tutorials} /> */}
+			</Route>
+			<Route path="*" component={NotFound} />
 		</Route>
-		<Route path="*" component={NotFound} />
-	</Route>
+	</Fragment>
 );
