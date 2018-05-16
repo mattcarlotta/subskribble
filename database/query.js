@@ -30,8 +30,9 @@ module.exports = app => {
   }
 
   const notificationQueries = {
+    createNotification: () => ("INSERT INTO notifications(userid, message) VALUES ($1, $2)"),
     deleteAllNotifications: () => ("DELETE FROM notifications WHERE userid=$1"),
-    deleteOneNotification: () => ("DELETE FROM notifications WHERE id=$1 AND userid=$2"),
+    deleteOneNotification: () => ("DELETE FROM notifications WHERE userid=$1 AND id=$2"),
     getSomeNotifications: () => (`
       (SELECT array_to_json(array_agg(row_to_json(x)))
       from ((SELECT * FROM notifications WHERE READ = false AND userid=$1 LIMIT 99)) x)
@@ -39,7 +40,7 @@ module.exports = app => {
       SELECT array_to_json(array_agg(row_to_json(y)))
       from ((SELECT * FROM notifications WHERE READ = true AND deleted = false AND userid=$1 LIMIT 99)) y;
     `),
-    updateOneNotification: () => (`UPDATE notifications SET read=true WHERE read=false AND userid=$1`)
+    setReadNotifications: () => (`UPDATE notifications SET read=true WHERE read=false AND userid=$1`)
   }
 
   const subQueries = {

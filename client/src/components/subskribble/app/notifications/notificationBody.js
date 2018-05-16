@@ -21,14 +21,16 @@ export default class NotificationButton extends Component {
           <div dataset-key={key} key={key} className="note bb-none">
             <div className="note-15">
               <Avatar icon="user" size={36} style={{ position: 'relative', top: -18 }}>
-                {subscriber.charAt(0).toUpperCase()}
+                { subscriber && subscriber.charAt(0).toUpperCase()}
               </Avatar>
             </div>
             <div className="note-85">
               <p className="title">
-                <Link className="link" to={`/subskribble/subscribers/${subscriber.replace(/\s/g, '').toLowerCase()}`}>
-                  <strong>{subscriber} </strong>
-                </Link>
+                { subscriber &&
+                  <Link className="link" to={`/subskribble/subscribers/${subscriber.replace(/\s/g, '').toLowerCase()}`}>
+                    <strong>{subscriber} </strong>
+                  </Link>
+                }
                 {message}
               </p>
               <p className="date">

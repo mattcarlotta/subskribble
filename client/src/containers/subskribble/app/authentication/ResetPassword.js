@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import AsyncModal from '../../../../components/subskribble/app/modals/asyncModal';
 import NewPasswordForm from '../../forms/newPasswordForm';
-import RenderMessages from '../messages/renderMessages';
 
 class ResetPassword extends Component {
   state = { visible: true, confirmLoading: false }
@@ -19,19 +18,16 @@ class ResetPassword extends Component {
   handleClose = () => this.setState({ confirmLoading: false, visible: false });
 
 	render = () => (
-    <Fragment>
-      <AsyncModal
-        {...this.state}
-        closable={false}
-        location={this.props.location}
-        destroyOnClose={true}
-        maskClosable={false}
-        FORM={NewPasswordForm}
-        showLoadingButton={this.showLoadingButton}
-        title="Create New Password"
-      />
-      <RenderMessages />
-    </Fragment>
+    <AsyncModal
+      {...this.state}
+      closable={false}
+      location={this.props.location}
+      destroyOnClose={true}
+      maskClosable={false}
+      FORM={NewPasswordForm}
+      showLoadingButton={this.showLoadingButton}
+      title="Create New Password"
+    />
 	);
 }
 

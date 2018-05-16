@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router';
-import RenderMessages from '../../../../containers/subskribble/app/messages/renderMessages';
 
 const verificationFailure = () => (
   <Fragment>
@@ -40,6 +39,5 @@ export default ({ status, userVerified }) => (
         </div>
       </div>
     </div>
-    <RenderMessages />
   </div>
 )

@@ -21,7 +21,8 @@ class RenderMessages extends Component {
     const { resetServerMessages } = this.props;
     if (description) {
       notification[noteType]({ message, description });
-      resetServerMessages();
+      setTimeout(() => resetServerMessages(), 1000);
+      ;
     }
   }
 

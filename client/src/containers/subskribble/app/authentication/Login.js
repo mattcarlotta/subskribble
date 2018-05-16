@@ -19,7 +19,7 @@ class Login extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError, serverMessage, loggedinUser } = this.props;
-    serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
+    serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
     serverMessage !== prevProps.serverMessage && this.resetSelectedForm();
     loggedinUser !== prevProps.loggedinUser && this.handleClose();
   }

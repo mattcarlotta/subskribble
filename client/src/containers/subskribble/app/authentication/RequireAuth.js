@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authenticateUser, doNotAuthUser } from '../../../../actions/authActions';
 import { withCookies } from 'react-cookie';
-import App from '../../../../components/subskribble';
+import App from '../../../../components/subskribble/app';
 import Spinner from '../loading/Spinner';
 import Login from './Login';
 
@@ -14,7 +14,7 @@ class RequireAuth extends Component {
 	}
 
 	render = () => (
-		this.props.isLoading
+		(this.props.isLoading || this.props.loggedinUser === undefined)
 			? <Spinner />
 			: !this.props.loggedinUser
 				?	<Login {...this.props}/>

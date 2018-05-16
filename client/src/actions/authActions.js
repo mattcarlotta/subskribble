@@ -10,17 +10,20 @@ app.interceptors.response.use(response => (response), error => (Promise.reject(e
 const authenticateUser = () => dispatch => (
 	app.get('loggedin')
 	.then(({data}) => {
-		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 	.catch(err => {
-		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 		dispatch({ type: types.SERVER_ERROR, payload: err })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 )
 
 // sets app loading state to false
-const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE, payload: false });
+const doNotAuthUser = () => dispatch => {
+	dispatch({ type: types.NO_SIGNEDIN_USER });
+	dispatch({ type: types.APP_LOADING_STATE, payload: false });
+}
 
 // removes current user from redux props
 const logoutUser = cookies => {

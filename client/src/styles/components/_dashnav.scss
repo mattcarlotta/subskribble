@@ -22,13 +22,14 @@
 
 	.left-nav {
 		@extend %d-ib;
-		margin-top: 18px;
+		margin-top: 20px;
 
     .menu-collapse {
       @extend %b-0;
 
       & i {
         @include c($tblack);
+				@include f-s(26px);
       }
 
       &:hover > i {
@@ -43,7 +44,7 @@
 
 	.right-nav {
 		@extend %d-ib, %p-f;
-		margin-top: 15px;
+		margin-top: 10px;
 		padding-right: 31px;
 		padding-left: 3px;
 		right: 5px;
@@ -74,6 +75,7 @@
 
 			.notifications-icon {
 				@include c($blue);
+				@include f-s(28px);
 
 				&:hover {
 					@include c($lightblue);
@@ -97,7 +99,7 @@
 
 			.settings-icon {
 				@extend %p-r;
-				top: 3px;
+				top: 4px;
 			}
 
 			.user-icon {
@@ -342,7 +344,6 @@
 
 	.settings-icon {
 		@extend %p-r;
-		top: 6px;
 		margin: 0 15px;
 	}
 

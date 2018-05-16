@@ -70,10 +70,11 @@ module.exports = app => {
 
   const noteTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
-    userid INT NOT NULL,
+    key SERIAL PRIMARY KEY,
+    userid VARCHAR(36) NOT NULL,
     read BOOLEAN DEFAULT false,
     deleted BOOLEAN DEFAULT false,
-    subscriber VARCHAR NOT NULL,
+    subscriber VARCHAR,
     messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH12:MI AM'),
     message TEXT
   )`;
