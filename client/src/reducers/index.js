@@ -4,9 +4,9 @@ import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
-const appReducer = (state=true, { type }) => {
+const appReducer = (state = {}, { payload, type }) => {
 	switch (type) {
-		case types.APP_LOADING_STATE: return !state;
+		case types.APP_LOADING_STATE: return { ...state, isLoading: payload };
 		default: return state;
 	}
 }

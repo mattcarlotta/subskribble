@@ -24,5 +24,5 @@ class RequireAuth extends Component {
 
 export default connect(state => ({
 	loggedinUser: state.auth.loggedinUser,
-	isLoading: state.app
+	isLoading: state.app.isLoading
 }), { authenticateUser, doNotAuthUser })(withCookies(RequireAuth));

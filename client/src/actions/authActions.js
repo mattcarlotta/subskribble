@@ -10,20 +10,23 @@ app.interceptors.response.use(response => (response), error => (Promise.reject(e
 const authenticateUser = () => dispatch => (
 	app.get('loggedin')
 	.then(({data}) => {
-		dispatch({ type: types.APP_LOADING_STATE })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
 	})
 	.catch(err => {
-		dispatch({ type: types.APP_LOADING_STATE })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 		dispatch({ type: types.SERVER_ERROR, payload: err })
 	})
 )
 
 // sets app loading state to false
-const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE });
+const doNotAuthUser = () => ({ type: types.APP_LOADING_STATE, payload: false });
 
 // removes current user from redux props
-const logoutUser = () => ({ type: types.UNAUTH_USER });
+const logoutUser = cookies => {
+	cookies.remove('Authorization', { path: '/' });
+	return { type: types.UNAUTH_USER }
+};
 
 // returns error message if missing token
 const missingVerificationToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });

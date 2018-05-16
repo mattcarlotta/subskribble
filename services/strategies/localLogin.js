@@ -25,11 +25,12 @@ module.exports = app => {
 
       // compare password to existingUser password
       const validPassword = await bcrypt.compare(password, existingUser.password);
-      if (!validPassword) return done(authErrors.badCredentials, false);
-
-      // set existingUser and a token to req
-      const loggedinUser = { ...existingUser, token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()}, cookieKey)};
-      return done(null, loggedinUser);
+      return (!validPassword)
+        ? done(authErrors.badCredentials, false)
+        : done(null, {
+            ...existingUser,
+            token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()
+            }, cookieKey)});
     })
   );
 }

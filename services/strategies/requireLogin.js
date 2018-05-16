@@ -18,9 +18,7 @@ module.exports = app => {
       // see if the jwt payload id matches any user record
       const existingUser = await db.oneOrNone(findUserById(), [payload.sub]);
       if (!existingUser) return done(authErrors.badCredentials, false);
-      if (!existingUser.verified) return done(authErrors.emailConfirmationReq, false);
-
-      return done(null, existingUser);
+      return (!existingUser.verified) ? done(authErrors.emailConfirmationReq, false) : done(null, existingUser)
     })
   )
 }
