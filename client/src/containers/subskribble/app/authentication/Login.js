@@ -56,7 +56,6 @@ class Login extends Component {
           closable={false}
           maskClosable={false}
           FORM={this.state.selectedForm}
-          onCancel={this.handleClose}
           showLoadingButton={this.showLoadingButton}
           switchAuthForm={this.switchAuthForm}
         />

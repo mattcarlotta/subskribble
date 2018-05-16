@@ -16,7 +16,7 @@ module.exports = app => {
     },
     async (email, password, done) => {
       // check to see if both an email and password were supplied
-      if (!email || !password) return done(authErrors.missingCredentials, false);
+      if (!email || !password) return done(authErrors.badCredentials, false);
 
       // check to see if the user already exists
       const existingUser = await db.oneOrNone(findUserByEmail(), [email]);

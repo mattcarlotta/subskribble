@@ -9,11 +9,10 @@ module.exports = app => {
   passport.use('require-login', new JwtStrategy({
     jwtFromRequest: req => (req && req.cookies ? req.cookies.Authorization : null), // returns jwt token from req.cookies
     secretOrKey: cookieKey,
-    passReqToCallback: true
   },
-    async (req, payload, done) => {
+    async (payload, done) => {
       // make sure jwt token was valid
-      if (!payload || !payload.sub) return done(null, false);
+      if (!payload || !payload.sub) return done(authErrors.invalidToken, false);
 
       // see if the jwt payload id matches any user record
       const existingUser = await db.oneOrNone(findUserById(), [payload.sub]);

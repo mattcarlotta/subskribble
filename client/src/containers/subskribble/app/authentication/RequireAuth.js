@@ -10,7 +10,7 @@ class RequireAuth extends Component {
 	componentDidMount = () => {
 		const { authenticateUser, cookies, doNotAuthUser, loggedinUser} = this.props;
 		const hasCookie = cookies.get('Authorization');
-		if (!loggedinUser) hasCookie ? authenticateUser(cookies) : doNotAuthUser()
+		if (!loggedinUser) hasCookie ? authenticateUser() : doNotAuthUser()
 	}
 
 	render = () => (

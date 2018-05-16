@@ -53,6 +53,7 @@ export default (
 				{/* <Route path="templates" component={Templates} /> */}
 				<Route path="transactions" component={Transactions} />
 				{/* <Route path="tutorials" component={Tutorials} /> */}
+				<Route path="*" component={NotFound} />
 			</Route>
 			<Route path="*" component={NotFound} />
 		</Route>
