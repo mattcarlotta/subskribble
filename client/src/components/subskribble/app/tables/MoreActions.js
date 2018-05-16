@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import React, { Fragment, PureComponent } from 'react';
-import { Button, Divider, Dropdown, Icon, Menu } from 'antd';
+import { Button, Divider, Dropdown, Menu, Tooltip } from 'antd';
 const { Item: MenuItem } = Menu;
 const OPTIONS = ["Refund", "Message", "Report"]
 
@@ -23,11 +23,17 @@ export default class MoreActions extends PureComponent {
   render = () => (
     <Fragment>
       <Divider type="vertical" />
-      <Dropdown overlay={this.renderMoreActions(this.props.userid)} trigger={['click']}>
-        <Button>
-          More Actions <Icon type="down" />
-        </Button>
-      </Dropdown>
+      <Tooltip
+        arrowPointAtCenter
+        placement="bottom"
+        title="More Actions"
+      >
+        <Dropdown overlay={this.renderMoreActions(this.props.userid)} trigger={['click']}>
+          <Button className="table-status-action">
+            <i className="material-icons">settings</i>
+          </Button>
+        </Dropdown>
+      </Tooltip>
     </Fragment>
   )
 }

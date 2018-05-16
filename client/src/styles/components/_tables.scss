@@ -1,130 +1,127 @@
 .table-container {
-  margin: 10px 0 10px 0;
+	margin: 10px 0 10px 0;
 
-  .adjust-enddate-position {
-    padding-left: 30px !important;
-  }
+	.adjust-enddate-position {
+		padding-left: 30px !important;
+	}
 
-  .adjust-plans-position {
-    padding-left: 25px !important;
-  }
+	.adjust-plans-position {
+		padding-left: 25px !important;
+	}
 
-  .adjust-subscriptions-position {
-    padding-left: 50px !important;
-  }
+	.adjust-subscriptions-position {
+		padding-left: 50px !important;
+	}
 
-  .adjust-subscribers-position {
-    padding-left: 40px !important;
-  }
+	.adjust-subscribers-position {
+		padding-left: 40px !important;
+	}
 
+	.override-table-style {
+		th {
+			// @include c($black !important);
+			@include f-f($poppinssemibold);
+			@include f-s(14px !important);
+		}
 
-  .override-table-style {
-    th {
-      // @include c($black !important);
-      @include f-f($poppinssemibold);
-      @include f-s(14px !important);
-    }
-
-    td {
-      @extend %t-t-n;
-      @include c($black !important);
-      @include f-f(sans-serif);
-      @include f-s(13px !important);
-    }
-  }
+		td {
+			@extend %t-t-n;
+			@include c($black !important);
+			@include f-f(sans-serif);
+			@include f-s(13px !important);
+		}
+	}
 }
 
 .label {
-  @extend %t-a-c;
-  @include f-w(500);
-  display: inline;
-  letter-spacing: 0.05em;
-  border-radius: 60px;
-  padding: 4px 16px 3px;
+	@extend %t-a-c;
+	@include f-w(500);
+	display: inline;
+	letter-spacing: 0.05em;
+	border-radius: 60px;
 }
 
 .active {
-  @extend %t-t-c;
-  @include c($tealgreen);
-  border: 1px solid $tealgreen;
-  border-radius: 0px;
-  padding: 4px 34px;
+	@extend %m-l-10;
+	@include c($tealgreen);
 }
 
 .credit {
-  @extend %t-t-c;
-  @include c($darkblue);
-  border: 1px solid $darkblue;
-  border-radius: 0px;
-  padding: 4px 38px;
-}
-
-.inactive {
-  @extend %t-t-c;
-  @include c($lightcoolgrey);
-  border: 1px solid $lightcoolgrey;
-  border-radius: 0px;
-  padding: 4px 27px;
+	@extend %m-l-10;
+	@include c($darkblue);
 }
 
 .due {
-  @extend %t-t-c;
-  @include c($darkyellow);
-  border: 1px solid $darkyellow;
-  border-radius: 0px;
-  padding: 4px 41px;
+	@extend %m-l-10;
+	@include c($darkyellow);
+}
+
+.inactive {
+	@extend %m-l-10;
+	@include c($lightcoolgrey);
+}
+
+.lowercase {
+	@extend %t-t-l;
 }
 
 .max-usage {
-  @extend .label, %t-a-c;
-  @include c($white);
-  @include b-c($darkyellow);
-  @include f-w(500);
-  padding: 4px 10px 3px;
-  margin-left: 12px;
+	@media (max-width: 1450px) {
+		padding: 2px 5px 1.5px;
+		margin-left: 0;
+	}
+	@extend .label, %t-a-c;
+	@include c($white);
+	@include b-c($darkyellow);
+	@include f-w(500);
+	padding: 4px 10px 3px;
+	margin-left: 12px;
 }
 
 .paid {
-  @extend %t-t-c;
-  @include c($limegreen);
-  border: 1px solid $limegreen;
-  border-radius: 0px;
-  padding: 4px 41px;
+	@extend %m-l-10;
+	@include c($limegreen);
 }
 
 .refund {
-  @extend %t-t-c;
-  @include c($redorange);
-  border: 1px solid $redorange;
-  border-radius: 0px;
-  padding: 4px 34px;
+	@extend %m-l-10;
+	@include c($redorange);
 }
 
 .suspended {
-  @extend %t-t-c;
-  @include c($firered);
-  border: 1px solid $firered;
-  border-radius: 0px;
+	@extend %m-l-10;
+	@include c($firered);
 }
 
 .subscription-count {
-  @extend .label, %t-a-c;
-  @include c($white);
-  @include b-c($lightblue);
-  @include f-w(500);
-  padding: 4px 10px 3px;
-  margin-left: 18px;
+	@media (max-width: 1450px) {
+		padding: 2px 5px 1.5px;
+	}
+	@media (min-width: 1450px) {
+		margin-left: 18px;
+	}
+	@extend .label, %t-a-c;
+	@include c($white);
+	@include b-c($lightblue);
+	@include f-w(500);
+	padding: 4px 10px 3px;
 }
 
 .table-status-action {
-  @extend %t-t-c;
+	@extend %t-t-c;
+	i { @include f-s(18px); padding-top: 5px; }
 }
 
 .total-usage {
-  @extend .label, %t-a-c;
-  @include c($white);
-  @include b-c($lightblue);
-  @include f-w(500);
-  padding: 4px 10px 3px;
-  margin-left: 18px;
+	@media (max-width: 1450px) {
+		padding: 2px 5px 1.5px;
+	}
+	@media (min-width: 1450px) {
+		margin-left: 18px;
+	}
+	@extend .label, %t-a-c;
+	@include c($white);
+	@include b-c($lightblue);
+	@include f-w(500);
+	padding: 4px 10px 3px;
 }

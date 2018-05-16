@@ -80,22 +80,22 @@
   @include f-s(14px);
 }
 
+.hide-button {
+  @extend %b-0, .fix-cursor;
+  @include c($transparent);
+  @include b-c($transparent);
+
+  &:hover, &:focus {
+    @extend %no-link-focus;
+  }
+}
+
 .nav-button {
   @extend %b-0, %m-l-10, %p-r;
   @include b-c($transparent);
   @include h(40px);
   @include w(40px);
   top: -11px;
-
-  &:hover {
-    i { @include c($formgrey !important); }
-    @include b-c($hoverblue !important);
-  }
-
-  &:focus {
-    @extend %no-link-focus;
-    @include b-c($transparent);
-  }
 }
 
 .nav-button-icon {

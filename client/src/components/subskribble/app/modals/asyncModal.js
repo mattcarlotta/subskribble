@@ -1,11 +1,13 @@
 import React from 'react';
 import { Modal } from 'antd';
 
-export default (props) => {
-  const { confirmLoading, FORM, onOk } = props;
-  return (
-    <Modal {...props}>
-      <FORM confirmLoading={confirmLoading} onFormSubmit={onOk}  />
-    </Modal>
-  )
-}
+export default ({ confirmLoading, FORM, showLoadingButton, ...props }) => (
+  <Modal
+    {...props}
+    destroyOnClose={true}
+    footer={null}
+    style={{ top: 150 }}
+  >
+    <FORM confirmLoading={confirmLoading} showLoadingButton={showLoadingButton} {...props} />
+  </Modal>
+)

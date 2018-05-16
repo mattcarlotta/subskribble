@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Tooltip } from 'antd';
 
 export default class DeleteItem extends PureComponent {
   handleDelete = () => {
@@ -16,7 +16,15 @@ export default class DeleteItem extends PureComponent {
       onConfirm={this.handleDelete}
       overlayClassName="table-tooltip"
     >
-      <Button>Delete</Button>
+      <Tooltip
+        arrowPointAtCenter
+        placement="bottom"
+        title="Delete"
+      >
+        <Button className="table-status-action">
+          <i className="material-icons">delete</i>
+        </Button>
+      </Tooltip>
     </Popconfirm>
   )
 }

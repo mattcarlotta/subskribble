@@ -9,7 +9,6 @@ import { getCustomerFormFields } from '../../formFields/customerSignupFields';
 
 const stepLabels = [
   { title: 'Contact Information', icon: 'mail_outline' },
-  { title: 'Payment', icon: 'payment' },
   { title: 'Plan', icon: 'content_paste' },
   { title: 'Review', icon: 'shopping_cart' }
 ];
@@ -41,7 +40,7 @@ class CustomerPlanSignup extends Component {
       formFields: getCustomerFormFields(formKey),
       stepIndex: formKey,
       visited: visited.concat(stepIndex).filter((val, idx, arr) => (arr.indexOf(val) === idx)),
-      wasReviewed: visited.length > 1 && true
+      wasReviewed: visited.length > 0 && true
     })
   }
 
@@ -53,7 +52,7 @@ class CustomerPlanSignup extends Component {
   render() {
     const { formFields, stepIndex, wasReviewed } = this.state;
     const { confirmLoading } = this.props;
-    const finished = stepIndex === 3;
+    const finished = stepIndex === 2;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">

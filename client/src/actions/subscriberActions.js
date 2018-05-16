@@ -1,10 +1,8 @@
 import app from './axiosConfig';
 import * as types from './types';
 
-app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
-
-// Deletes requested subscriber from DB
 export default {
+  // Deletes requested subscriber from DB
   deleteAction: userid => dispatch => (
     app.delete(`subscribers/delete/${userid}`)
     .then(({data: {message}}) => {

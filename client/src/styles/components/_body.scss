@@ -3,6 +3,7 @@ html, body {
   @include b-c($background);
   @include h(100vh);
   @include w(100%);
+  overflow: hidden;
 }
 body {
   @extend %m-0;

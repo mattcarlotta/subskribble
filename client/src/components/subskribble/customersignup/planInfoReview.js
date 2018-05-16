@@ -6,7 +6,7 @@ const PlanInfoReview = ({ displayPrice, description, editStep, selectedPlan }) =
     <div className="details-container">
       <p className="plan">
         {selectedPlan}
-        <span className="edit-link" onClick={ editStep ? () => editStep(2) : null}>Edit</span>
+        <span className="edit-link" onClick={ editStep ? () => editStep(1) : null}>Edit</span>
       </p>
       <p className="price">
         <span className="price-sign">$</span>
