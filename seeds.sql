@@ -10,19 +10,31 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- DROP TABLE IF EXISTS transactions;
 -- DROP TABLE IF EXISTS notifications;
 
+CREATE TABLE users (
+  id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+  key SERIAL PRIMARY KEY,
+  verified BOOLEAN DEFAULT FALSE,
+  email VARCHAR,
+  firstName TEXT,
+  lastName TEXT,
+  password VARCHAR NOT NULL UNIQUE,
+  startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+  endDate TEXT,
+  token VARCHAR(32),
+  isGod BOOLEAN DEFAULT FALSE
+);
+
 CREATE TABLE subscribers (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
   status VARCHAR(20) DEFAULT 'inactive',
   email VARCHAR,
   subscriber VARCHAR NOT NULL,
-  password VARCHAR,
   phone VARCHAR,
   plan VARCHAR,
   startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   endDate TEXT,
-  amount DECIMAL(12,2),
-  isGod BOOLEAN DEFAULT FALSE
+  amount DECIMAL(12,2)
 );
 
 CREATE TABLE plans (
@@ -65,40 +77,41 @@ CREATE TABLE transactions (
 
 CREATE TABLE notifications (
   id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
-  userid INT NOT NULL,
+  key SERIAL PRIMARY KEY,
+  userid VARCHAR(36) NOT NULL,
   read BOOLEAN DEFAULT false,
   deleted BOOLEAN DEFAULT false,
-  subscriber VARCHAR NOT NULL,
+  subscriber VARCHAR,
   messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH12:MI AM'),
   message TEXT
 );
 
-INSERT INTO subscribers (status, email, subscriber, password, phone, plan, endDate, amount)
+INSERT INTO subscribers (status, email, subscriber, phone, plan, endDate, amount)
   VALUES
-  ('active', 'admin@admin.com', 'Admin', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'squatters@gmail.com', 'Sherry Waters', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'bob-eh@sap.com', 'Bob Aronssen', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'shani.smith@hotmail.com', 'Shaniqua Smith', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'tanyaballschin@gmail.com', 'Tanya Ballschin', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'lukeskywalker@rebelforce.com', 'Siemen Walker', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'jTank@aol.com', 'Jenny Tanks', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'amberLamps@yahoo.com', 'Amber Lalampas', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'kylebTeegue@gmail.com', 'Kyle Teegue', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('active', 'adaDamn@photonmail.com', 'Adam Johnson', 'password', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  ('inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 3, 2018', 29.99),
-  ('inactive', 'seamark@outlook.com', 'Mark Canelo', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 12, 2018', 29.99),
-  ('suspended', 'axxll@manjaro.com', 'Axle Root', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 16, 2018', 29.99),
-  ('inactive', 'vicksAdam@sap.com', 'Adamn Vicks', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  ('inactive', 'wallyworld@manjaro.com', 'Wes Walls', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  ('suspended', 'kellyUll@gmail.com', 'Kelly Ullman', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  ('inactive', 'oatesA@aol.com', 'Adam Oates', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  ('suspended', 'scottParker@jaro.com', 'Scott Parker', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 21, 2018', 29.99),
-  ('suspended', 'asmLossenger@mancusco.com', 'Emily Loz', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 22, 2018', 29.99),
-  ('inactive', 'pparks@akins.com', 'Parker Posey', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
-  ('suspended', 'aleashtrails@kilmas.com', 'Alisha Tallis', 'password', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
-  ('suspended', '88Damon@photonmail.com', 'Damien Smith', 'password', '(555) 555-5555', 'Carlotta Prime', 'Jan 29, 2018', 29.99);
+  ('active', 'admin@admin.com', 'Admin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'squatters@gmail.com', 'Sherry Waters', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'bob-eh@sap.com', 'Bob Aronssen', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'shani.smith@hotmail.com', 'Shaniqua Smith', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'tanyaballschin@gmail.com', 'Tanya Ballschin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'lukeskywalker@rebelforce.com', 'Siemen Walker', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'jTank@aol.com', 'Jenny Tanks', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'amberLamps@yahoo.com', 'Amber Lalampas', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'kylebTeegue@gmail.com', 'Kyle Teegue', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('active', 'adaDamn@photonmail.com', 'Adam Johnson', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
+  ('inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', '(555) 555-555', 'Carlotta Prime', 'Jan 3, 2018', 29.99),
+  ('inactive', 'seamark@outlook.com', 'Mark Canelo', '(555) 555-555', 'Carlotta Prime', 'Jan 12, 2018', 29.99),
+  ('suspended', 'axxll@manjaro.com', 'Axle Root', '(555) 555-555', 'Carlotta Prime', 'Jan 16, 2018', 29.99),
+  ('inactive', 'vicksAdam@sap.com', 'Adamn Vicks', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
+  ('inactive', 'wallyworld@manjaro.com', 'Wes Walls', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
+  ('suspended', 'kellyUll@gmail.com', 'Kelly Ullman', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
+  ('inactive', 'oatesA@aol.com', 'Adam Oates', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
+  ('suspended', 'scottParker@jaro.com', 'Scott Parker', '(555) 555-555', 'Carlotta Prime', 'Jan 21, 2018', 29.99),
+  ('suspended', 'asmLossenger@mancusco.com', 'Emily Loz', '(555) 555-555', 'Carlotta Prime', 'Jan 22, 2018', 29.99),
+  ('inactive', 'pparks@akins.com', 'Parker Posey', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
+  ('suspended', 'aleashtrails@kilmas.com', 'Alisha Tallis', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
+  ('suspended', '88Damon@photonmail.com', 'Damien Smith', '(555) 555-5555', 'Carlotta Prime', 'Jan 29, 2018', 29.99);
 
 INSERT INTO plans (status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)
   VALUES

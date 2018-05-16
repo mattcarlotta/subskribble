@@ -1,131 +1,95 @@
-import * as app from 'axios';
-import { browserHistory } from 'react-router';
+import app from './axiosConfig';
+import * as types from '../actions/types';
 
-import {
-	AUTH_ERROR,
-	AUTH_SUCCESS,
-	FETCHING_USER,
-	RESET_NOTIFICATIONS,
-	SET_SIGNEDIN_USER,
-	UNAUTH_USER
-} from '../actions/types';
-import configAuth from './configAuth';
-import dispatchError from './dispatchError';
-
+app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 //==========================================================================
 // Authorization
 //==========================================================================
 
-// Displays error messages
-const authError = error => {
-	return {
-		type: AUTH_ERROR,
-		payload: error
-	};
+// attempts to auth user on refresh
+const authenticateUser = () => dispatch => (
+	app.get('loggedin')
+	.then(({data}) => {
+		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
+	})
+	.catch(err => {
+		dispatch({ type: types.SERVER_ERROR, payload: err })
+		dispatch({ type: types.APP_LOADING_STATE, payload: false })
+	})
+)
+
+// sets app loading state to false
+const doNotAuthUser = () => dispatch => {
+	dispatch({ type: types.NO_SIGNEDIN_USER });
+	dispatch({ type: types.APP_LOADING_STATE, payload: false });
+}
+
+// removes current user from redux props
+const logoutUser = cookies => {
+	cookies.remove('Authorization', { path: '/' });
+	return { type: types.UNAUTH_USER }
 };
 
-// Displays success messages
-const authSuccess = message => {
-	return {
-		type: AUTH_SUCCESS,
-		payload: message
-	};
-};
+// returns error message if missing token
+const missingVerificationToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
 
-// Attempts to auth a previously signed in user
-const authenticateUser = id => async dispatch => {
-	try {
-		const config = configAuth();
+const missingPasswordToken = () => ({
+	type: types.SERVER_ERROR,
+	payload: 'Missing password token! Please check your email and click on the "Create New Password" button.'
+})
 
-		if (!config.user) {
-			dispatch(fetchingUser(false));
-		} else {
-			const { data } = await app.get(`/api/signedin`, config);
+// updates a user's password
+const resetUserPassword = (password, token) => dispatch => (
+	app.put(`reset-password/verify?token=${token}`, { email: 'fake@email.com', password })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
 
-			dispatch({ type: SET_SIGNEDIN_USER, payload: data });
-			dispatch({ type: FETCHING_USER, payload: false });
-		}
-	} catch (err) {
-		dispatchError(dispatch, err);
-		dispatch({ type: FETCHING_USER, payload: false });
-		dispatch(signoutUser());
-		throw err;
-	}
-};
+// emails user a token to reset password
+const resetUserToken = email => dispatch => (
+	app.put(`reset-token`, { email, password: 'reset-token' })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
 
-// Allows AJAX time to fetch a user on refresh before loading app
-const fetchingUser = bool => {
-	return {
-		type: FETCHING_USER,
-		payload: bool
-	};
-};
+// attempts to sign user in, then sets jwt token to cookie if successful
+const signinUser = (props, cookies) => dispatch => (
+  app.post(`signin`, { ...props })
+  .then(({data}) => {
+		cookies.set('Authorization', data.token, { path: '/', maxAge: 2592000 });
+		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
 
-// Resets auth notifications
-const resetNotifications = () => {
-	return {
-		type: RESET_NOTIFICATIONS
-	};
-};
+	})
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
 
-// Resets user password
-const resetUserPassword = ({ password }) => async dispatch => {
-	try {
-		await app.post(`api/reset-password`, { password });
-		browserHistory.push('/login');
-	} catch (err) {
-		dispatchError(dispatch, err);
-	}
-};
+// attempts to sign up a new user
+const signupUser = props => dispatch => (
+  app.post(`signup`, { ...props })
+	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
 
-// Attempts to sign in user
-const signinUser = ({ username, password }) => async dispatch => {
-	try {
-		const { data } = await app.post(`api/signin`, { username, password });
-		localStorage.setItem('token', data.token);
-		dispatch({ type: SET_SIGNEDIN_USER, payload: data });
-		browserHistory.push('/');
-	} catch (err) {
-		const error = `Your username or password is incorrect!`;
-		dispatchError(dispatch, error);
-	}
-};
-
-// Atempts to sign up user
-const signupUser = ({ email, username, password }) => async dispatch => {
-	try {
-		const { data } = await app.post(`api/signup`, {
-			email,
-			username,
-			password
-		});
-
-		localStorage.setItem('token', data.token);
-		dispatch({ type: SET_SIGNEDIN_USER, payload: data.user });
-		browserHistory.push('/');
-	} catch (err) {
-		dispatchError(dispatch, err);
-		console.error(err);
-	}
-};
-
-// Signs user out
-const signoutUser = () => {
-	localStorage.removeItem('token');
-
-	return {
-		type: UNAUTH_USER
-	};
-};
+// attempts to verify user's email via token
+const verifyEmail = token => dispatch => (
+	app.put(`email/verify?token=${token}`)
+	.then(({data: {email}}) => dispatch({ type: types.USER_WAS_VERIFIED, payload: email }))
+	.catch(err => {
+		dispatch({ type: types.USER_WAS_VERIFIED, payload: false })
+		dispatch({ type: types.SERVER_ERROR, payload: err })
+	})
+)
 
 export {
-	authError,
-	authSuccess,
 	authenticateUser,
-	fetchingUser,
-	resetNotifications,
-	resetUserPassword,
-	signinUser,
-	signupUser,
-	signoutUser
+	doNotAuthUser,
+	logoutUser,
+	missingPasswordToken,
+	missingVerificationToken,
+  resetUserPassword,
+	resetUserToken,
+  signinUser,
+  signupUser,
+	verifyEmail
 }

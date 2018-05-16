@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Loading from '../../../../images/logos/loading-blocks.gif'
+import Spinner from './Spinner';
 import NoDataToDisplay from '../../../../components/subskribble/app/notfound/noDataToDisplay';
 
 class Loader extends Component {
@@ -21,9 +21,7 @@ class Loader extends Component {
   render = () => (
 		(this.props.serverError || this.state.requestTimeout)
       ? <NoDataToDisplay {...this.props} />
-      : <div className="spinner-container">
-          <img src={Loading} alt="loading-block.gif" height="128px" />
-        </div>
+      : <Spinner />
   )
 }
 

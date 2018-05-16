@@ -1,5 +1,9 @@
 .ant-menu-inline .ant-menu-item-selected:after {
-	right: 218px;
+	right: 233px;
+}
+
+.ant-layout-sider {
+	@include b-s(2px 0 6px rgba(0,21,41,.35));
 }
 
 .ant-popover-arrow,
@@ -18,13 +22,14 @@
 
 	.left-nav {
 		@extend %d-ib;
-		margin-top: 18px;
+		margin-top: 20px;
 
     .menu-collapse {
       @extend %b-0;
 
       & i {
         @include c($tblack);
+				@include f-s(26px);
       }
 
       &:hover > i {
@@ -39,6 +44,9 @@
 
 	.right-nav {
 		@extend %d-ib, %p-f;
+		margin-top: 10px;
+		padding-right: 31px;
+		padding-left: 3px;
 		right: 5px;
 
 		.loggedin-user {
@@ -50,9 +58,9 @@
 		.notifications-container {
 			@extend %d-ib, .fix-cursor, %p-r;
 			@include c($white);
-			top: -17px;
+			top: 5px;
 			left: 3px;
-			padding-right: 20px;
+			padding-right: 22px;
 
 			.ant-badge-count {
 				@include c($white);
@@ -67,6 +75,7 @@
 
 			.notifications-icon {
 				@include c($blue);
+				@include f-s(28px);
 
 				&:hover {
 					@include c($lightblue);
@@ -76,29 +85,51 @@
 
 		.settings-tab {
 			@extend %d-ib, .fix-cursor, %no-link-focus;
-			margin-top: 25px;
-			padding-right: 31px;
-			padding-left: 3px;
+
+			.signed-out {
+				// @extend %p-r;
+				@include c($lightwhite);
+				@include b-c($lightgrey);
+
+				&:hover {
+					@include c($blue);
+					@include b-c($lightgrey);
+				}
+			}
 
 			.settings-icon {
 				@extend %p-r;
-				@include c($white);
+				top: 4px;
+			}
+
+			.user-icon {
+        @include c($white);
         @include b-c($blue);
-				top: -10px;
 
         &:hover {
           @include b-c($lightblue);
         }
+      }
 
-        .user-icon {
-          @include c($white);
-          @include b-c($blue);
-
-          &:hover {
-            @include b-c($lightblue);
-          }
-        }
-			}
+			// .settings-icon {
+			// 	@extend %p-r;
+			// 	@include c($white);
+      //   @include b-c($blue);
+			// 	top: -10px;
+			//
+      //   &:hover {
+      //     @include b-c($lightblue);
+      //   }
+			//
+      //   .user-icon {
+      //     @include c($white);
+      //     @include b-c($blue);
+			//
+      //     &:hover {
+      //       @include b-c($lightblue);
+      //     }
+      //   }
+			// }
 
 			.menu-label {
 				@extend %pl-10, %p-r;
@@ -112,13 +143,6 @@
 	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
-.drawer-content,
-.drawer-menu-container {
-	@include b-c($blackblue);
-	@include h(100vh);
-	overflow: hidden;
-}
-
 .drawer-content-wrapper {
 	@include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
 }
@@ -126,6 +150,8 @@
 .drawer-menu-container {
 	@extend %b-0;
 	@include c(#676b70);
+	@include b-c($blackblue);
+	@include h(100vh);
 
 	.ant-menu-item-group {
 		& > .ant-menu-item-group-title > .divider-title {
@@ -135,7 +161,7 @@
 			@include f-w(600);
 			margin-top: 10px;
 			padding-top: 20px;
-			// padding-left: 20px;
+			margin-left: 5px;
 			border-top: 1px solid $tlightgrey;
 		}
 		.ant-menu-item {
@@ -276,14 +302,14 @@
   .my-profile-container {
     @include c($white);
     @include b-c($lightblue);
-    padding: 10px 15px;
+    padding: 10px 15px 5px 15px;
 
     .popover-user {
       @extend %p-r;
       @include b-c($transparent);
       @include c($white);
       border: 1px solid $white;
-      top: 3px;
+      top: -8px;
 
       & i {
         margin-right: 0;
@@ -318,7 +344,6 @@
 
 	.settings-icon {
 		@extend %p-r;
-		top: 6px;
 		margin: 0 15px;
 	}
 

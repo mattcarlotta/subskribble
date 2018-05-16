@@ -1,6 +1,20 @@
 module.exports = app => {
   const { db } = app.database;
 
+  const userTableOptions = `(
+    id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
+    key SERIAL PRIMARY KEY,
+    verified BOOLEAN DEFAULT FALSE,
+    email VARCHAR,
+    firstName TEXT,
+    lastName TEXT,
+    password VARCHAR NOT NULL UNIQUE,
+    startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+    endDate TEXT,
+    token VARCHAR(32),
+    isGod BOOLEAN DEFAULT FALSE
+  )`
+
   const planTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -56,10 +70,11 @@ module.exports = app => {
 
   const noteTableOptions = `(
     id VARCHAR(36) DEFAULT uuid_generate_v1mc(),
-    userid INT NOT NULL,
+    key SERIAL PRIMARY KEY,
+    userid VARCHAR(36) NOT NULL,
     read BOOLEAN DEFAULT false,
     deleted BOOLEAN DEFAULT false,
-    subscriber VARCHAR NOT NULL,
+    subscriber VARCHAR,
     messageDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY HH12:MI AM'),
     message TEXT
   )`;
@@ -199,11 +214,13 @@ module.exports = app => {
     try {
       await db.none(`
         CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        DROP TABLE IF EXISTS users;
         DROP TABLE IF EXISTS subscribers;
         DROP TABLE IF EXISTS plans;
         DROP TABLE IF EXISTS promotionals;
         DROP TABLE IF EXISTS transactions;
         DROP TABLE IF EXISTS notifications;
+        CREATE TABLE users ${userTableOptions};
         CREATE TABLE subscribers ${subTableOptions};
         CREATE TABLE plans ${planTableOptions};
         CREATE TABLE promotionals ${promoTableOptions};

@@ -1,25 +1,27 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../../formfields/signupFormFields';
-import { signupUser } from '../../../actions/authActionCreators';
+import FIELDS from '../../formFields/signupFormFields';
+import { signupUser } from '../../../actions/authActions';
 
-const SignupForm = ({ signupUser }) => {
-	const handleFormSubmit = (formProps) => {
-		console.log(formProps);
+const SignupForm = ({ showLoadingButton, signupUser, ...props }) => {
+	const handleFormSubmit = values => {
+		showLoadingButton();
+		signupUser(values);
 	}
 	return (
 		<div className="auth-container">
 			<AuthForm
-				onSubmit={values => handleFormSubmit(values)}
+				{...props}
+				form="SignupForm"
+				onSubmit={handleFormSubmit}
 				FIELDS={FIELDS}
 				formTitle='Sign Up'
-				submitLabel='Register'
+				submitLabel='Signup'
 			/>
 		</div>
-	);
-};
+	)
+}
 
-export default reduxForm({ form: 'SignupForm' })(connect(null, { signupUser })(SignupForm));
+export default connect(null, { signupUser })(SignupForm);

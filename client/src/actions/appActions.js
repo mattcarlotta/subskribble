@@ -1,7 +1,9 @@
-import { RESET_SERVER_MESSAGES } from './types';
+import * as types from './types';
 
-const resetServerMessages = () => ({ type: RESET_SERVER_MESSAGES })
+const appIsLoading = () => ({ type: types.APP_LOADING_STATE })
+const resetServerMessages = () => ({ type: types.RESET_SERVER_MESSAGES })
 
 export {
+  appIsLoading,
   resetServerMessages
 }

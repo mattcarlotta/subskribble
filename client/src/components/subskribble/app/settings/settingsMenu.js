@@ -1,18 +1,24 @@
 import map from 'lodash/map';
 import React from 'react';
-import RIGHTNAVLINKS from '../links/rightNavLinks';
 import { Link } from 'react-router';
 import { Avatar, Menu } from 'antd';
 const { Item: MenuItem } = Menu;
 
-export default () => (
+const RIGHTNAVLINKS = [
+  // { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
+  { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
+  { icon: 'settings', label: 'Settings', link: '/subskribble/settings' },
+  // { icon: '', label: '', link: '/subskribble/logout' },
+]
+
+export default ({ firstName, lastName, loggedinUser, unauthorizeUser }) => (
   <Menu className="settings-tab-container">
     <MenuItem style={{ height: 65 }}>
       <Link className="my-profile-container" to="/subskribble/profile">
         <Avatar className="popover-user" icon="user" />
         <div className="settings-label">
-          <p className="user">Matt Carlotta</p>
-          <p className="email">carlotta.matt@gmail.com</p>
+          <p className="user">{firstName} {lastName}</p>
+          <p className="email">{loggedinUser}</p>
         </div>
       </Link>
     </MenuItem>
@@ -24,5 +30,11 @@ export default () => (
         </Link>
       </MenuItem>
     ))}
+    <MenuItem>
+      <Link className="menu-options" onClick={unauthorizeUser}>
+        <i className="material-icons settings-icon">exit_to_app</i>
+        <span className="settings-label">Logout</span>
+      </Link>
+    </MenuItem>
   </Menu>
 )

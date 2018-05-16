@@ -22,7 +22,7 @@ export default class Notifications extends Component {
     });
   }
 
-  handleNotificationAsRead = (e) => {
+  handleNotificationAsRead = e => {
     const note = e.target.dataset.id;
     this.props.updateNotifications(note);
   }
@@ -42,7 +42,7 @@ export default class Notifications extends Component {
         >
           <Badge
             count={unreadNotifications ? unreadNotifications.length : 0}
-            offset={[-1,-1]}
+            offset={[1,-2]}
             showZero={false}
             overflowCount={99}
           >

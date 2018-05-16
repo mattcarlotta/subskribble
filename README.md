@@ -70,15 +70,31 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm run dev`
 
 
-*Note*: In order to run this app, you must create and load an env configuration similar to this:
+*Note*: In order to run this app, you must create a single js config file that exports an object:
 ```
-database: "subskribble-demo",
-dbport: 5432,
-dbpassword: <dbpassword>,
-dbowner: <dbowner>,
-host: "localhost",
-port: 5000,
-url: "http://localhost:5000/",
+module.exports = {
+  "development": {
+    apiURL: "http://localhost:3000/",
+    cookieKey: "<unique_cookie_key>",
+    database: "<postgres_db_name>",
+    dbport: <postgres_db_port>,
+    dbpassword: "<postgres_db_password>",
+    dbowner: "<postgres_db_owner>",
+    host: "localhost",
+    port: 5000,
+    sendgridAPIKey: "<sendgrid_api_key>",
+    url: "http://localhost:5000/",
+  },
+  "production": {
+    (see above example)
+  },
+  "staging": {
+    (see above example)
+  },
+  "testing": {
+    (see above example)
+  }
+}
 ```
 
 

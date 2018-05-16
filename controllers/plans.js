@@ -1,12 +1,3 @@
-const query = {
-  deleteOne: () => ("DELETE FROM plans WHERE id=$1 RETURNING *"),
-  getAll: (limit, offset, status) => (`SELECT id, key, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers FROM plans WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-  getCount: () => (
-    "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM plans;"
-  ),
-  updateOne: () => ("UPDATE plans SET status=$1 WHERE id=$2 RETURNING planName")
-}
-
 module.exports = app => {
   const { db, query: {deleteOnePlan, getAllPlans, getPlanCount, updateOnePlan} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
