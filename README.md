@@ -70,7 +70,9 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm run dev`
 
 
-*Note*: In order to run and use this app, you MUST sign up with a valid email address, you MUST have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails), and you MUST create a single js config file that exports an object:
+# Notes
+
+In order to run and use this app, you MUST sign up with a valid email address, you MUST have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails), and you MUST create a single js config file that exports an object:
 ```
 module.exports = {
   "development": {
