@@ -11,12 +11,14 @@ module.exports = app => {
       res.status(201).json({ message: `Thank you for registering, ${firstName} ${lastName}. Please check ${email} for a verification link.` })
     },
     // ALLOWS A USER TO LOG INTO THE APP
-    login: (err, user, res, next) => {
+    login: (err, user, req, res, next) => {
       if (err) return sendError(err, res, next);
       if (!user) return next();
 
-      res.status(201).json({ ...user });
+      res.status(201).json({ ...req.session });
     },
+    // ALLOWS A USER TO LOG INTO THE APP
+    loggedin: (req, res) => res.status(201).json({ ...req.session }),
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
     resetPassword: (err, user, res, next) => {
       if (err) return sendError(err, res, next);

@@ -29,7 +29,7 @@
 
       & i {
         @include c($tblack);
-				@include f-s(26px);
+				@include f-s(24px);
       }
 
       &:hover > i {

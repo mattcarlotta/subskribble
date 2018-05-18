@@ -12,9 +12,9 @@ module.exports = app => {
     // override username with email
       usernameField : 'email',
       passwordField : 'password',
-      // passReqToCallback : true // allows us to send request to the callback
+      passReqToCallback: true
     },
-    async (email, password, done) => {
+    async (req, email, password, done) => {
       // check to see if both an email and password were supplied
       if (!email || !password) return done(authErrors.badCredentials, false);
 
@@ -25,12 +25,13 @@ module.exports = app => {
 
       // compare password to existingUser password
       const validPassword = await bcrypt.compare(password, existingUser.password);
-      return (!validPassword)
-        ? done(authErrors.badCredentials, false)
-        : done(null, {
-            ...existingUser,
-            token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()
-            }, cookieKey)});
+      if (!validPassword) return done(authErrors.badCredentials, false);
+
+      const loggedinUser = { ...existingUser, token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()}, cookieKey)}
+
+      req.session = loggedinUser;
+
+      return done(null, loggedinUser);
     })
   );
 }

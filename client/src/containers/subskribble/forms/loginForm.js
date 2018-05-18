@@ -6,10 +6,10 @@ import AuthForm from './authForm';
 import FIELDS from '../../formFields/signinFormFields';
 import { signinUser } from '../../../actions/authActions';
 
-const LoginForm = ({ cookies, showLoadingButton, signinUser, ...props }) => {
+const LoginForm = ({ showLoadingButton, signinUser, ...props }) => {
 	const handleFormSubmit = values => {
 		showLoadingButton();
-		signinUser(values, cookies);
+		signinUser(values);
 	}
 	return (
 		<div className="auth-container">

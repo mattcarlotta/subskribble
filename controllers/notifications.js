@@ -29,7 +29,7 @@ module.exports = app => {
         res.status(201).json({});
       } catch (err) { return sendError(err, res, next) }
     },
-    // DELETES ONE NOTIFICATION 
+    // DELETES ONE NOTIFICATION
     deleteOne: async (err, user, req, res, next) => {
       if (err) return sendError(err, res, next);
       if (!req.query) return sendError('Could not find notification to delete!', res, next);

@@ -14,7 +14,8 @@ const authenticateUser = () => dispatch => (
 		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 	.catch(err => {
-		dispatch({ type: types.SERVER_ERROR, payload: err })
+		// dispatch({ type: types.SERVER_ERROR, payload: err })
+		dispatch({ type: types.NO_SIGNEDIN_USER });
 		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 )
@@ -28,6 +29,7 @@ const doNotAuthUser = () => dispatch => {
 // removes current user from redux props
 const logoutUser = cookies => {
 	cookies.remove('Authorization', { path: '/' });
+	cookies.remove('Authorization.sig', { path: '/' });
 	return { type: types.UNAUTH_USER }
 };
 
@@ -54,13 +56,9 @@ const resetUserToken = email => dispatch => (
 );
 
 // attempts to sign user in, then sets jwt token to cookie if successful
-const signinUser = (props, cookies) => dispatch => (
+const signinUser = props => dispatch => (
   app.post(`signin`, { ...props })
-  .then(({data}) => {
-		cookies.set('Authorization', data.token, { path: '/', maxAge: 2592000 });
-		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
-
-	})
+  .then(({data}) => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
