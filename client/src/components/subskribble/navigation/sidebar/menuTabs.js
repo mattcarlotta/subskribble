@@ -19,9 +19,12 @@ export default (collapseSideNav) => (
     <MenuItemGroup
       key={label}
       title={ dividerLabel &&
-        <h6 style={{ display: collapseSideNav ? 'none' : '' }} className="divider-title">
-          {dividerLabel}
-        </h6>
+        <span className="divider" style={{ display: collapseSideNav ? 'none' : '' }}>
+          <hr className="divider" />
+          <h6 className="divider-title">
+            {dividerLabel}
+          </h6>
+        </span>
       }
     >
       <MenuItem style={{ margin: 0 }} key={label}>

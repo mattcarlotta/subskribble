@@ -4,13 +4,10 @@ module.exports = app => {
 
   return {
     // COLLECTS/SENDS ALL NOTIFICATIONS FOR USER
-    index: async (err, user, res, next) => {
-      if (err) return sendError(err, res, next);
-      if (!user) return next();
-
+    index: async (req, res, next) => {
       try {
-        // await db.none(createNotification(), [user.id, `This is a generic notification created for testing!`])
-        const noteList = await db.any(getSomeNotifications(), [user.id]);
+        // await db.none(createNotification(), [req.session.id, `This is a generic notification created for testing!`])
+        const noteList = await db.any(getSomeNotifications(), [req.session.id]);
 
         res.status(201).json({
           unreadNotifications: noteList[0].array_to_json,
@@ -19,35 +16,25 @@ module.exports = app => {
       } catch (err) { return sendError(err, res, next) }
     },
     // UPDATES ALL NOTIFICATIONS AS READ FOR USER
-    updateAll: async (err, user, res, next) => {
-      if (err) return sendError(err, res, next);
-      if (!user) return next();
-
+    updateAll: async (req, res, next) => {
       try {
-        await db.oneOrNone(setReadNotifications(), [user.id]);
+        await db.oneOrNone(setReadNotifications(), [req.session.id]);
 
         res.status(201).json({});
       } catch (err) { return sendError(err, res, next) }
     },
     // DELETES ONE NOTIFICATION
-    deleteOne: async (err, user, req, res, next) => {
-      if (err) return sendError(err, res, next);
-      if (!req.query) return sendError('Could not find notification to delete!', res, next);
-      if (!user) return next();
-
+    deleteOne: async (req, res, next) => {
       try {
-        await db.result(deleteOneNotification(), [user.id, req.query.id]);
+        await db.result(deleteOneNotification(), [req.session.id, req.query.id]);
 
         res.status(201).json({});
       } catch (err) { return sendError(err, res, next) }
     },
     // DELETES ALL NOTIFICATIONS
-    deleteAll: async (err, user, res, next) => {
-      if (err) return sendError(err, res, next);
-      if (!user) return next();
-
+    deleteAll: async (req, res, next) => {
       try {
-        await db.result(deleteAllNotifications(), [user.id]);
+        await db.result(deleteAllNotifications(), [req.session.id]);
 
         res.status(201).json({});
       } catch (err) { return sendError(err, res, next); }

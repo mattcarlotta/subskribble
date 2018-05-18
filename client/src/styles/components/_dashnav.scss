@@ -153,30 +153,16 @@
 	@include b-c($blackblue);
 	@include h(100vh);
 
-	.ant-menu-item-group {
-		& > .ant-menu-item-group-title > .divider-title {
-			@extend %t-t-u;
-			@include c(#647897);
-			@include f-s(14px);
-			@include f-w(600);
-			margin-top: 10px;
-			padding-top: 20px;
-			margin-left: 5px;
-			border-top: 1px solid $tlightgrey;
-		}
-		.ant-menu-item {
-			// padding-left: 20px !important;
+	.divider { @include b-c($tlightgrey); }
 
-			&:hover {
-				@include c($white);
-				@include b-c($hoverblue);
-			}
-		}
+	.divider-title {
+		@extend %m-t-10, %m-l-20, %t-t-u;
+		@include c(#647897);
+		@include f-s(14px);
+		@include f-w(600);
 	}
 
-	.ant-menu-item-group-title {
-		@extend %p-0;
-	}
+	.ant-menu-item-group-title { @extend %p-0; }
 
 	.ant-menu-item-selected {
 		@include b-c($thoverblue !important);
@@ -200,17 +186,13 @@
 .logo-container {
 	@extend %b-0, %d-ib;
 	@include b-c($blackblue);
-	@include h(55px);
-	// margin-left: 15px;
 
 	&:hover {
 		@extend .fix-cursor;
 		@include b-c($hoverblue);
 	}
 
-	&:focus {
-		@include b-c($transparent);
-	}
+	&:focus { @include b-c($transparent); }
 
 	.icon-logo {
 		@extend %p-r;
@@ -235,17 +217,15 @@
 .logo-header {
 	@extend .logo-container;
 	@include b-c($blackblue);
-	@include h(55px);
 	@include w(100%);
 }
 
 .drawer-menu-header {
 	@include b-c($blackblue);
+	@include h(55px);
 	border-bottom: 1px solid $tlightgrey;
 
-	.logo-container:hover {
-		@include b-c($transparent);
-	}
+	.logo-container:hover { @include b-c($transparent);}
 
 	.nav-button {
 		@include b-c($blackblue);
