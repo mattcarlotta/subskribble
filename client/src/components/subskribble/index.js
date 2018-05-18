@@ -1,10 +1,9 @@
-import React from 'react';
-import { CookiesProvider } from 'react-cookie';
+import React, { Fragment } from 'react';
 import RenderMessages from '../../containers/subskribble/app/messages/renderMessages';
 
 export default ({children}) => (
-  <CookiesProvider>
+  <Fragment>
     {children}
     <RenderMessages />
-  </CookiesProvider>
+  </Fragment>
 )

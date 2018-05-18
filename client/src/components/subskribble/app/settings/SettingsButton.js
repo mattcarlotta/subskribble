@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Avatar, Popover, Tooltip } from 'antd';
-import { withCookies } from 'react-cookie';
 import SettingsMenu from './settingsMenu';
 
 class SettingsButton extends PureComponent {
@@ -8,7 +7,7 @@ class SettingsButton extends PureComponent {
 
 	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
-	unauthorizeUser = () => this.props.logoutUser(this.props.cookies);
+	unauthorizeUser = () => this.props.logoutUser();
 
 	render = () => (
 		<div className="settings-tab">
@@ -35,4 +34,4 @@ class SettingsButton extends PureComponent {
 	);
 }
 
-export default withCookies(SettingsButton);
+export default SettingsButton;

@@ -37,7 +37,6 @@ module.exports = app => {
 	app.use(cookieSession({
 		name: 'Authorization',
 		maxAge: 30 * 24 * 60 * 60 * 1000, // expire after 30 days, 24hr/60m/60s/1000ms
-		httpOnly: false,
 		keys: [vars[env].cookieKey]
 	}));
 	app.use(passport.initialize());

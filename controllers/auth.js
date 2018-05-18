@@ -1,6 +1,6 @@
 module.exports = app => {
   const { db, query: { findUserByToken, verifyEmail } } = app.database;
-  const { sendError } = app.shared.helpers;
+  const { authErrors, sendError } = app.shared.helpers;
 
   return {
     // CREATES A NEW USER
@@ -11,14 +11,19 @@ module.exports = app => {
       res.status(201).json({ message: `Thank you for registering, ${firstName} ${lastName}. Please check ${email} for a verification link.` })
     },
     // ALLOWS A USER TO LOG INTO THE APP
-    login: (err, user, req, res, next) => {
+    login: (err, req, res, next) => {
       if (err) return sendError(err, res, next);
-      if (!user) return next();
+      if (!req.session.id) return sendError(authErrors.badCredentials, res, next);
 
       res.status(201).json({ ...req.session });
     },
     // ALLOWS A USER TO LOG INTO THE APP
     loggedin: (req, res) => res.status(201).json({ ...req.session }),
+    logout: (req, res, next) => {
+      if (!req.session.id) return sendError('Already logged out', res, next);
+      req.session = null;
+      res.clearCookie('Authorization', { path: '/'}).status(200).send('Cookie deleted.');
+    },
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
     resetPassword: (err, user, res, next) => {
       if (err) return sendError(err, res, next);

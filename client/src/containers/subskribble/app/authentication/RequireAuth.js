@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticateUser, doNotAuthUser } from '../../../../actions/authActions';
-import { withCookies } from 'react-cookie';
+import { authenticateUser } from '../../../../actions/authActions';
 import App from '../../../../components/subskribble/app';
 import Spinner from '../loading/Spinner';
 import Login from './Login';
 
 class RequireAuth extends Component {
 	componentDidMount = () => {
-		const { authenticateUser, cookies, doNotAuthUser, loggedinUser} = this.props;
-		const hasCookie = cookies.get('Authorization');
-		if (!loggedinUser) hasCookie ? authenticateUser() : doNotAuthUser()
+		const { authenticateUser, loggedinUser} = this.props;
+		if (!loggedinUser) authenticateUser();
 	}
 
 	render = () => (
@@ -25,4 +23,4 @@ class RequireAuth extends Component {
 export default connect(state => ({
 	loggedinUser: state.auth.loggedinUser,
 	isLoading: state.app.isLoading
-}), { authenticateUser, doNotAuthUser })(withCookies(RequireAuth));
+}), { authenticateUser })(RequireAuth);

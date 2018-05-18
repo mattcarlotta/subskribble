@@ -1,7 +1,7 @@
 module.exports = app => {
   const { notifications: {index, deleteAll, deleteOne, updateAll} } = app.controllers;
   const passport = app.get("passport");
-  const { requireLogin2 } = app.services.strategies;
+  const { requireAuth } = app.services.strategies;
 
   app.get('/api/notifications', (req, res, next) => passport.authenticate('require-login', (err, user) => index(err, user, res, next))(req, res, next));
   // app.get('/api/notifications', requireLogin2, index);

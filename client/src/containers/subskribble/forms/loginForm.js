@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withCookies } from 'react-cookie';
 
 import AuthForm from './authForm';
 import FIELDS from '../../formFields/signinFormFields';
@@ -27,4 +26,4 @@ const LoginForm = ({ showLoadingButton, signinUser, ...props }) => {
 }
 
 
-export default connect(null, { signinUser })(withCookies(LoginForm));
+export default connect(null, { signinUser })(LoginForm);
