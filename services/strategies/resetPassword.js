@@ -1,6 +1,6 @@
 module.exports = app => {
   const { db, query: { findUserByToken, updateUserPassword } } = app.database;
-  const { authErrors } = app.shared;
+  const { invalidToken, missingToken, notUniquePassword } = app.shared.authErrors;
   const bcrypt = app.get("bcrypt");
   const LocalStrategy = app.get("LocalStrategy");
   const passport = app.get("passport");
@@ -12,15 +12,15 @@ module.exports = app => {
     },
     async (req, email, password, done) => {
       const { token } = req.query;
-      if (!token) return done(authErrors.missingToken, false);
+      if (!token) return done(missingToken, false);
 
       // check to see if email exists in the db
       const existingUser = await db.oneOrNone(findUserByToken(), [token]);
-      if (!existingUser) return done(authErrors.invalidToken, false);
+      if (!existingUser) return done(invalidToken, false);
 
       // compare newpassword to existingUser password
       const validPassword = await bcrypt.compare(password, existingUser.password);
-      if (validPassword) return done(authErrors.notUniquePassword, false);
+      if (validPassword) return done(notUniquePassword, false);
 
       try {
         // hash password before attempting to create the user

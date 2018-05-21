@@ -1,6 +1,6 @@
 module.exports = app => {
   const { db, query: { findUserByEmail, resetToken } } = app.database;
-  const { authErrors } = app.shared;
+  const { missingEmailCreds } = app.shared.authErrors;
   const { mailer, emailTemplates: { newToken } } = app.services;
   const { createRandomToken } = app.shared.helpers;
   const apiURL = app.get("apiURL");
@@ -11,11 +11,11 @@ module.exports = app => {
       usernameField : 'email'
     },
     async (email, password, done) => {
-      if (!email) return done(authErrors.missingEmailCreds, false);
+      if (!email) return done(missingEmailCreds, false);
 
       // check to see if email exists in the db
       const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
-      if (!existingUser) return done(authErrors.missingEmailCreds, false);
+      if (!existingUser) return done(missingEmailCreds, false);
 
       // create a new token for email reset
       const token = createRandomToken();

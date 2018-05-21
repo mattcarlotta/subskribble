@@ -29,6 +29,7 @@
 
     .icon-logo {
       @include c($hortizonalhr);
+      @include f-s(46px);
       // @include f-s(72px);
     }
 
@@ -36,11 +37,12 @@
       @extend %p-r;
       @include c($hortizonalhr);
       @include f-f($harabara)
-      @include f-s(28px);
+      @include f-s(46px);
       letter-spacing: 1.5px;
       top: -2px;
     }
-    @include f-f($poppinslight);
+    // @include f-f($harabara);
+    // @include f-w(200);
     @include f-s(12px);
     top: 75px;
     letter-spacing: .15px;

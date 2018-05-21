@@ -3,8 +3,8 @@ import * as types from './types';
 
 export default {
   // Deletes requested subscriber from DB
-  deleteAction: userid => dispatch => (
-    app.delete(`subscribers/delete/${userid}`)
+  deleteAction: subscriberid => dispatch => (
+    app.delete(`subscribers/delete/${subscriberid}`)
     .then(({data: {message}}) => {
       dispatch(this.a.fetchItemCounts())
       dispatch(this.a.fetchItems())
@@ -38,8 +38,8 @@ export default {
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
   // Sets subscribers status to active or suspended
-  updateAction: (updateType, statusType, userid) => dispatch => (
-    app.put(`subscribers/update/${userid}`, { statusType, updateType })
+  updateAction: (updateType, statusType, subscriberid) => dispatch => (
+    app.put(`subscribers/update/${subscriberid}`, { statusType, updateType })
     .then(({data: {message}}) => {
       dispatch(this.a.fetchItemCounts())
       dispatch(this.a.fetchItems())

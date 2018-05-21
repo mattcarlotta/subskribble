@@ -44,12 +44,12 @@ module.exports = app => {
   }
 
   const subQueries = {
-    deleteOneSubcriber: () => ("DELETE FROM subscribers WHERE id=$1 RETURNING *"),
-    getSomeSubcribers: (limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    deleteOneSubcriber: () => ("DELETE FROM subscribers WHERE id=$1 AND userid=$2 RETURNING *"),
+    getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getSubscriberCount: () => (
-      "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status in ('inactive', 'suspended')) as inactive FROM subscribers;"
+      "SELECT count(*) filter (WHERE status = 'active' AND userid=$1) AS active, count(*) filter (where status in ('inactive', 'suspended') and userid=$1) as inactive FROM subscribers;"
     ),
-    updateOneSubscriber: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 RETURNING subscriber")
+    updateOneSubscriber: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 AND userid=$4 RETURNING subscriber")
   }
 
   const transactQueries = {

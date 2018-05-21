@@ -1,7 +1,7 @@
 module.exports = app => {
   const { db, query: { createNewUser, findUserByEmail } } = app.database;
-  const { authErrors } = app.shared;
   const { mailer, emailTemplates: { newUser } } = app.services;
+  const { emailAlreadyTaken, missingCredentials } = app.shared.authErrors;
   const { createRandomToken } = app.shared.helpers;
   const apiURL = app.get("apiURL");
   const bcrypt = app.get("bcrypt");
@@ -19,11 +19,11 @@ module.exports = app => {
       const token = createRandomToken(); // a token used for email verification
 
       // check to see if both an email and password were supplied
-      if (!email || !password || !firstName || !lastName) return done(authErrors.missingCredentials, false);
+      if (!email || !password || !firstName || !lastName) return done(missingCredentials, false);
 
       // check to see if the email is already in use
       const existingUser = await db.oneOrNone(findUserByEmail(), [email]);
-      if (existingUser) return done(authErrors.emailAlreadyTaken, false);
+      if (existingUser) return done(emailAlreadyTaken, false);
 
       // attempt to create new user
       try {

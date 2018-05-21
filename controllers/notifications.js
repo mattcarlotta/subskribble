@@ -20,7 +20,7 @@ module.exports = app => {
       try {
         await db.oneOrNone(setReadNotifications(), [req.session.id]);
 
-        res.status(201).json({});
+        res.status(201).json(null);
       } catch (err) { return sendError(err, res, next) }
     },
     // DELETES ONE NOTIFICATION
@@ -28,7 +28,7 @@ module.exports = app => {
       try {
         await db.result(deleteOneNotification(), [req.session.id, req.query.id]);
 
-        res.status(201).json({});
+        res.status(201).json(null);
       } catch (err) { return sendError(err, res, next) }
     },
     // DELETES ALL NOTIFICATIONS
@@ -36,7 +36,7 @@ module.exports = app => {
       try {
         await db.result(deleteAllNotifications(), [req.session.id]);
 
-        res.status(201).json({});
+        res.status(201).json(null);
       } catch (err) { return sendError(err, res, next); }
     }
   }
