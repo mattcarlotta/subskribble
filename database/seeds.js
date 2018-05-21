@@ -231,12 +231,12 @@ module.exports = app => {
       // create new user
       const token = createRandomToken(); // a token used for email verification
       try {
-        const newPassword = await bcrypt.hash('password', 12) // hash password before attempting to create the user
-        await db.none(createNewUser(),['betatester@subsribble.com', newPassword, 'Beta', 'Tester', token])
+        const newPassword = await bcrypt.hash('password123', 12) // hash password before attempting to create the user
+        await db.none(createNewUser(),['betatester@subskribble.com', newPassword, 'Beta', 'Tester', token])
       } catch (err) { return console.log('\n--[ERROR]-- Seed FAILED to creat a new user! Process has been terminated.'); }
 
       // get newly created user info
-      const existingUser = await db.oneOrNone(findUserByEmail(), ['betatester@subsribble.com']);
+      const existingUser = await db.oneOrNone(findUserByEmail(), ['betatester@subskribble.com']);
       if (!existingUser) { return console.log('\n--[ERROR]-- Seed FAILED to find the newly created user! Process has been terminated.'); }
 
       // verify newly created user's email
