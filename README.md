@@ -72,8 +72,11 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm run dev`
 </details>
 
+## Compile Front-End For Production
 
-# Notes
+- `cd client && npm run build`
+
+## Notes
 ⚠️ If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
 
 ⚠️ When running `npm run seeds`, a user account will be created that will be seeded with data. You may bypass signing up with a valid email and instead sign into this account for testing purposes:
@@ -138,7 +141,3 @@ module.exports = {
 }
 ```
 </details>
-
-# Compile Front-End For Production
-
-- `cd client && npm run build`
