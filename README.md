@@ -1,8 +1,9 @@
 # subskribble
 subskribble - an experimental app to create, manage, and send personalized updates to a lists of subscribers.
 
-## Quickstart Linux:
-
+## Quickstart:
+<details>
+<summary>Linux Instructions</summary>
 ### 1. Install NodeJS
 
 - `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
@@ -31,11 +32,10 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ### 6. Seed DB and Run Node Server
 - `psql -U <username> -f seeds.sql` (only required to initially create a DB, otherwise `npm run seeds`)
 - `npm run dev`
+</details>
 
-
-
-## Quickstart OSX:
-
+<details>
+<summary>MacOS Instructions</summary>
 ### 1. Install Brew
 
 - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -68,17 +68,20 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ### 7. Seed DB and Run Node Server
 - `psql -U <username> -f seeds.sql` (required to initially create a DB, otherwise `npm run seeds` afterward)
 - `npm run dev`
+</details>
 
 
 # Notes
-When running `npm run seeds`, a user account will be created that will be seeded with data. You may bypass signing up with a valid email and instead sign into this account for testing purposes:
+⚠️ When running `npm run seeds`, a user account will be created that will be seeded with data. You may bypass signing up with a valid email and instead sign into this account for testing purposes:
 ```
 login: betatester@subskribble.com
 password: password123
 ```
 
-In order to run and use this app, you MUST sign up with a valid email address (or use the beta test email), you MUST have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails), and you MUST create a single js config file that exports an object:
-```
+⚠️ In order to run and use this app, you MUST sign up with a valid email address (or use the beta test email), you MUST have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails), and you MUST create a single js config file that exports an object:
+<details>
+<summary>Example Config</summary>
+```js
 module.exports = {
   "development": {
     apiURL: "http://localhost:3000/",
@@ -93,17 +96,44 @@ module.exports = {
     url: "http://localhost:5000/",
   },
   "production": {
-    (see above example)
+    apiURL: "<host>",
+    cookieKey: "<unique_cookie_key>",
+    database: "<postgres_db_name>",
+    dbport: <postgres_db_port>,
+    dbpassword: "<postgres_db_password>",
+    dbowner: "<postgres_db_owner>",
+    host: "localhost",
+    port: 5000,
+    sendgridAPIKey: "<sendgrid_api_key>",
+    url: "http://localhost:5000/",
   },
   "staging": {
-    (see above example)
+    apiURL: "<host>",
+    cookieKey: "<unique_cookie_key>",
+    database: "<postgres_db_name>",
+    dbport: <postgres_db_port>,
+    dbpassword: "<postgres_db_password>",
+    dbowner: "<postgres_db_owner>",
+    host: "localhost",
+    port: 5000,
+    sendgridAPIKey: "<sendgrid_api_key>",
+    url: "http://localhost:5000/",
   },
   "testing": {
-    (see above example)
+    apiURL: "<host>",
+    cookieKey: "<unique_cookie_key>",
+    database: "<postgres_db_name>",
+    dbport: <postgres_db_port>,
+    dbpassword: "<postgres_db_password>",
+    dbowner: "<postgres_db_owner>",
+    host: "localhost",
+    port: 5000,
+    sendgridAPIKey: "<sendgrid_api_key>",
+    url: "http://localhost:5000/",
   }
 }
 ```
-
+</details>
 
 † If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
 
