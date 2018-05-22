@@ -3,15 +3,18 @@
 }
 
 .notifications-header {
+  @include b-c($lightblue);
+  @include c($white);
+  @include f-w(600);
   @include h(40px);
   @include w(100%);
-  @include f-s($poppinslight);
   letter-spacing: .15px;
   padding: 10px 10px;
 }
 
 .notifications-footer {
   @extend %t-a-c;
+  @include b-c($lightblue);
   @include h(40px);
 }
 
@@ -32,6 +35,8 @@
       @include f-s(46px);
       // @include f-s(72px);
     }
+
+    .message { @include c($darkgrey); }
 
     .text-logo {
       @extend %p-r;

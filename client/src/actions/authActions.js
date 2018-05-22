@@ -58,6 +58,13 @@ const resetUserToken = email => dispatch => (
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
+// will save the state of the sidebar (collapsed or visible)
+const saveSidebarState = collapseSideNav => dispatch => (
+	app.put(`save-sidebar-state?collapseSideNav=${collapseSideNav}`)
+	.then(({data: { collapseSideNav }}) => dispatch({ type: types.SET_NAVBAR_STATE, payload: collapseSideNav }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
 // attempts to sign user in, then sets jwt token to cookie if successful
 const signinUser = props => dispatch => (
   app.post(`signin`, { ...props })
@@ -90,6 +97,7 @@ export {
 	missingVerificationToken,
   resetUserPassword,
 	resetUserToken,
+	saveSidebarState,
   signinUser,
   signupUser,
 	verifyEmail

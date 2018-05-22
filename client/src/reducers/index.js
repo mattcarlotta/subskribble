@@ -13,13 +13,15 @@ const appReducer = (state = {}, { payload, type }) => {
 
 const authReducer = (state = {}, { payload, type }) => {
 	switch (type) {
-		case types.NO_SIGNEDIN_USER : return { ...state, loggedinUser: null };
+		case types.NO_SIGNEDIN_USER: return { ...state, loggedinUser: null };
+		case types.SET_NAVBAR_STATE: return { ...state, collapseSideNav: payload }
 		case types.SET_SIGNEDIN_USER:
 			return {
 				...state,
 				loggedinUser: payload.email,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
+				collapseSideNav: payload.collapsesidenav,
 				isGod: payload.isgod
 			};
 		case types.UNAUTH_USER:
@@ -28,6 +30,7 @@ const authReducer = (state = {}, { payload, type }) => {
 			loggedinUser: null,
 			firstName: null,
 			lastName: null,
+			collapseSideNav: null,
 			isGod: null
 			};
 		case types.USER_WAS_VERIFIED: return { ...state, userVerified: payload };

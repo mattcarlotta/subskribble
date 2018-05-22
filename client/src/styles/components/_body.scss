@@ -18,3 +18,7 @@ p {
   @include f-s(15px);
   @include l-h(24px);
 }
+.ant-menu-inline .ant-menu-item-selected:after { right: 233px; }
+.ant-layout-sider { @include b-s(2px 0 6px rgba(0,21,41,.35)); }
+.ant-popover-placement-bottomRight>.ant-popover-content>.ant-popover-arrow { @include b-c($lightblue); }
+.ant-popover-arrow, .ant-popover-inner { margin-top: -4px;}

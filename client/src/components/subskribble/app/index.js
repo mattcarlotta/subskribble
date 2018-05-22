@@ -7,7 +7,7 @@ import InlineMenu from '../navigation/sidebar/InlineMenu';
 const { Content } = Layout;
 
 class App extends Component {
-	state = { collapseSideNav: false, selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] };
+	state = { selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] };
 
 	componentDidUpdate = (prevProps, prevState) => {
 		const { location } = this.props;
@@ -15,17 +15,17 @@ class App extends Component {
 		location.pathname !== prevProps.location.pathname && this.setState({ selectedKey: [location.pathname.replace(/\/subskribble\//g,'')] })
 	}
 
-	shouldComponentUpdate = (nextProps, nextState) => ( this.state.collapseSideNav !== nextState.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname || this.state.selectedKey !== nextState.selectedKey )
+	shouldComponentUpdate = (nextProps, nextState) => ( this.props.collapseSideNav !== nextProps.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname || this.state.selectedKey !== nextState.selectedKey )
 
-	handleMenuToggle = () => this.setState({ collapseSideNav: !this.state.collapseSideNav });
+	handleMenuToggle = () => this.props.saveSidebarState(!this.props.collapseSideNav);
 
 	handleTabClick = ({key}) => browserHistory.push(`/subskribble/${key}`)
 
 	render = () => (
 		<Layout style={{ overflow: 'hidden' }}>
-			<InlineMenu collapseSideNav={this.state.collapseSideNav} handleTabClick={this.handleTabClick} selectedKey={this.state.selectedKey} />
+			<InlineMenu collapseSideNav={this.props.collapseSideNav} handleTabClick={this.handleTabClick} selectedKey={this.state.selectedKey} />
      <Layout>
-       <Header collapseSideNav={this.state.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
+       <Header collapseSideNav={this.props.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
        <Content>
 				 <Scrollbars
 				 	ref="scrollbars"

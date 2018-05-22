@@ -8,6 +8,7 @@ module.exports = app => {
     findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
     resetToken: () => ("UPDATE users SET token=$1 WHERE email=$2"),
     updateUserPassword: () => ("UPDATE users SET password=$1 WHERE id=$2"),
+    updateSidebarState: () => ("UPDATE users SET collapseSideNav=$1 WHERE id=$2"),
     verifyEmail: () => ("UPDATE users SET verified=true WHERE email=$1")
   }
 

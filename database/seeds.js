@@ -14,6 +14,7 @@ module.exports = app => {
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
     endDate TEXT,
     token VARCHAR(32),
+    collapseSideNav BOOLEAN DEFAULT FALSE,
     isGod BOOLEAN DEFAULT FALSE
   )`
 

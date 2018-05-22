@@ -1,16 +1,3 @@
-.ant-menu-inline .ant-menu-item-selected:after {
-	right: 233px;
-}
-
-.ant-layout-sider {
-	@include b-s(2px 0 6px rgba(0,21,41,.35));
-}
-
-.ant-popover-arrow,
-.ant-popover-inner {
-	margin-top: -4px;
-}
-
 .dash-nav-container {
 	@extend %p-f;
 	@include b-c($white);
@@ -289,21 +276,29 @@
       @include b-c($transparent);
       @include c($white);
       border: 1px solid $white;
-      top: -8px;
+      top: -9px;
 
       & i {
         margin-right: 0;
       }
     }
 
-    .user {
-      font-weight: 600;
-    }
+		.user-label {
+			@extend %d-ib;
+			margin-left: 15px;
 
-    .email {
-      @include f-s(13px);
-      font-style: italic;
-    }
+			.user {
+				@extend %m-0;
+				font-weight: 600;
+			}
+
+			.email {
+				@extend %p-0;
+				@include f-s(13px);
+				margin: -6px 0 0 0;
+				font-style: italic;
+			}
+		}
 
     &:hover {
       @include b-c($lightblue);
@@ -312,7 +307,8 @@
   }
 
   .settings-label {
-    @extend %d-ib;
+    @extend %d-ib, %p-r;
+		top: -6px;
     margin-left: 15px;
 
 
@@ -322,10 +318,7 @@
     }
   }
 
-	.settings-icon {
-		@extend %p-r;
-		margin: 0 15px;
-	}
+	.settings-icon { margin: 7px 15px; }
 
 	.ant-menu-item {
 		@extend %p-0, %no-margin;

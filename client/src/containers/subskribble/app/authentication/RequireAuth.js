@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticateUser } from '../../../../actions/authActions';
+import { authenticateUser, saveSidebarState } from '../../../../actions/authActions';
 import App from '../../../../components/subskribble/app';
 import Spinner from '../loading/Spinner';
 import Login from './Login';
@@ -21,6 +21,7 @@ class RequireAuth extends Component {
 }
 
 export default connect(state => ({
+	collapseSideNav: state.auth.collapseSideNav,
 	loggedinUser: state.auth.loggedinUser,
 	isLoading: state.app.isLoading
-}), { authenticateUser })(RequireAuth);
+}), { authenticateUser, saveSidebarState })(RequireAuth);

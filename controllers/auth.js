@@ -1,7 +1,7 @@
 module.exports = app => {
-  const { db, query: { findUserByToken, verifyEmail } } = app.database;
+  const { db, query: { findUserByToken, updateSidebarState, verifyEmail } } = app.database;
   const { sendError } = app.shared.helpers;
-  const { badCredentials, invalidToken, missingToken } = app.shared.authErrors;
+  const { badCredentials, invalidToken, missingSidebarState, missingToken } = app.shared.authErrors;
   const { passwordReset, passwordResetSuccess, passwordResetToken, thanksForReg } = app.shared.authSuccess;
   const passport = app.get("passport");
 
@@ -44,6 +44,19 @@ module.exports = app => {
 
       res.status(201).json(passwordResetToken(email))
     })(req, res, next),
+
+    // SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
+    saveSidebarState: async (req, res, next) => {
+      if (!req.query) return sendError(missingSidebarState, res, next);
+      const updatedSidebarState = req.query.collapseSideNav === 'true' ? true : false;
+
+      try {
+        await db.none(updateSidebarState(), [updatedSidebarState, req.session.id]);
+        req.session.collapsesidenav = updatedSidebarState;
+
+        res.status(201).json({ collapseSideNav: updatedSidebarState });
+      } catch (err) { return sendError(err, res, next) }
+    },
 
     // VERIFIES THE USER HAS A VALID EMAIL BEFORE GIVING LOGIN ACCESS
     verifyEmail: async (req, res, next) => {

@@ -58,6 +58,8 @@
 
 .clear-notifications {
   @extend %b-0;
+  @include c($white);
+  @include f-w(600);
   @include h(100%);
   @include w(100%);
   @include b-c($transparent);
@@ -65,7 +67,7 @@
 
   &:hover {
     @extend %no-link-focus;
-    @include c($hoverblue);
+    @include c($paleblue);
     @include b-c($transparent);
   }
 

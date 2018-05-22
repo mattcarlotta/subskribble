@@ -17,7 +17,5 @@ module.exports = app => {
 	//============================================================//
 	/* CREATE EXPRESS SERVER */
 	//============================================================//
-	const port = app.get("port");
-
-	app.listen(port, () => console.log(`Server is now listening on port: ${port}`));
+	app.listen(app.get("port"));
 };

@@ -5,6 +5,7 @@ module.exports = app => ({
   invalidToken: 'There was a problem authenticating your request. The token that was supplied was invalid.',
   missingCredentials: 'You must supply a valid first name, last name, email and password in order to sign up.',
   missingEmailCreds: 'That email is not associated with an active account. Please make sure the email address is spelled correctly.',
+  missingSidebarState: 'There was a problem updating the sidebar state.',
   missingToken: 'There was a problem authenticating your request.',
   notUniquePassword: 'Your new password must not match the old password. Please try again.'
 })
