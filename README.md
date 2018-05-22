@@ -113,7 +113,7 @@ module.exports = {
     host: "localhost",
     port: 5000,
     sendgridAPIKey: "<sendgrid_api_key>",
-    url: "http://localhost:5000/",⚠️ If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
+    url: "http://localhost:5000/",
   },
   "staging": {
     apiURL: "<host>",
