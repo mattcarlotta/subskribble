@@ -4,12 +4,13 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ## Quickstart:
 <details>
 <summary>Linux Instructions</summary>
+
 ### 1. Install NodeJS
 
 - `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
 - `sudo apt-get update && install -y nodejs`
 
-### 2. Install and Configure PostgreSQL†
+### 2. Install and Configure PostgreSQL
 - `sudo apt-get install postgresql postgresql-contrib`
 - `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
 - `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
@@ -36,6 +37,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 
 <details>
 <summary>MacOS Instructions</summary>
+
 ### 1. Install Brew
 
 - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -46,7 +48,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `brew install node`
 - `brew install postgresql`
 
-### 3. Configure PostgreSQL†
+### 3. Configure PostgreSQL
 - `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
 - `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
 - `\q` (exits PostgreSQL shell)
@@ -72,6 +74,8 @@ subskribble - an experimental app to create, manage, and send personalized updat
 
 
 # Notes
+⚠️ If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
+
 ⚠️ When running `npm run seeds`, a user account will be created that will be seeded with data. You may bypass signing up with a valid email and instead sign into this account for testing purposes:
 ```
 login: betatester@subskribble.com
@@ -105,7 +109,7 @@ module.exports = {
     host: "localhost",
     port: 5000,
     sendgridAPIKey: "<sendgrid_api_key>",
-    url: "http://localhost:5000/",
+    url: "http://localhost:5000/",⚠️ If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
   },
   "staging": {
     apiURL: "<host>",
@@ -134,8 +138,6 @@ module.exports = {
 }
 ```
 </details>
-
-† If running into authentication failures when attempting to connect to psql, please follow this guide: <a href="https://connect.boundlessgeo.com/docs/suite/4.8/dataadmin/pgGettingStarted/firstconnect.html">Getting Started</a>
 
 # Compile Front-End For Production
 
