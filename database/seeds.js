@@ -233,7 +233,7 @@ module.exports = app => {
       try {
         const newPassword = await bcrypt.hash('password123', 12) // hash password before attempting to create the user
         await db.none(createNewUser(),['betatester@subskribble.com', newPassword, 'Beta', 'Tester', token])
-      } catch (err) { return console.log('\n--[ERROR]-- Seed FAILED to creat a new user! Process has been terminated.'); }
+      } catch (err) { return console.log('\n--[ERROR]-- Seed FAILED to create a new user! Process has been terminated.'); }
 
       // get newly created user info
       const existingUser = await db.oneOrNone(findUserByEmail(), ['betatester@subskribble.com']);

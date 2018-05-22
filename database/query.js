@@ -11,22 +11,22 @@ module.exports = app => {
     verifyEmail: () => ("UPDATE users SET verified=true WHERE email=$1")
   }
 
-  const promoQueries = {
-    deleteOnePromotion: () => ("DELETE FROM promotionals WHERE id=$1 RETURNING *"),
-    getAllPromotions: (limit, offset, status) => (`SELECT * FROM promotionals WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-    getPromotionCount: () => (
-      "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM promotionals;"
+  const planQueries = {
+    deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
+    getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getPlanCount: () => (
+      "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM plans;"
     ),
-    updateOnePromotion: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 RETURNING promoCode, planName")
+    updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName")
   }
 
-  const planQueries = {
-    deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 RETURNING *"),
-    getAllPlans: (limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-    getPlanCount: () => (
-      "SELECT count(*) filter (where status = 'active') AS active, count(*) filter (where status = 'suspended') as inactive FROM plans;"
+  const promoQueries = {
+    deleteOnePromotion: () => ("DELETE FROM promotionals WHERE id=$1 AND userid=$2 RETURNING *"),
+    getAllPromotions: (userid, limit, offset, status) => (`SELECT * FROM promotionals WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getPromotionCount: () => (
+      "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM promotionals;"
     ),
-    updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 RETURNING planName")
+    updateOnePromotion: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode, planName")
   }
 
   const notificationQueries = {
@@ -53,10 +53,10 @@ module.exports = app => {
   }
 
   const transactQueries = {
-    deleteOneTransactaction: () => ("DELETE FROM transactions WHERE id=$1 RETURNING *"),
-    getSomeTransactactions: (limit, offset, status) => (`SELECT * FROM transactions ${statusType(status)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    deleteOneTransactaction: () => ("DELETE FROM transactions WHERE id=$1 AND userid=$2 RETURNING *"),
+    getSomeTransactactions: (userid, limit, offset, status) => (`SELECT * FROM transactions ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTransactactionCount: () => (
-      "SELECT count(*) filter (where status in ('paid', 'due')) AS charges, count(*) filter (where status in ('refund', 'credit')) AS refunds FROM transactions;"
+      "SELECT count(*) filter (where status in ('paid', 'due') AND userid=$1) AS charges, count(*) filter (where status in ('refund', 'credit') AND userid=$1) AS refunds FROM transactions;"
     ),
   }
 

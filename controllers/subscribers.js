@@ -4,13 +4,14 @@ module.exports = app => {
   const moment = app.get("moment");
 
   return {
-    // SENDS FIRST 10 RECORDS
-    index: async (req, res, next) => {
-      try {
-        const activesubscribers = await db.any(getSomeSubcribers(req.session.id, 10, 0, ['active']));
-        const inactivesubscribers = await db.any(getSomeSubcribers(req.session.id, 10, 0, ['inactive', 'suspended']));
+    // DELETES REQURESTED RECORD
+    deleteOne: async (req, res, next) => {
+      if (!req.params.id) return sendError('Missing subscriber delete parameters', res, next);
 
-        res.status(201).json({ activesubscribers, inactivesubscribers });
+      try {
+        const name = await db.result(deleteOneSubcriber(), [req.params.id, req.session.id]);
+
+        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber} from the ${name.rows[0].plan} plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
@@ -42,6 +43,15 @@ module.exports = app => {
         });
       } catch (err) { return sendError(err, res, next); }
     },
+    // SENDS FIRST 10 RECORDS
+    index: async (req, res, next) => {
+      try {
+        const activesubscribers = await db.any(getSomeSubcribers(req.session.id, 10, 0, ['active']));
+        const inactivesubscribers = await db.any(getSomeSubcribers(req.session.id, 10, 0, ['inactive', 'suspended']));
+
+        res.status(201).json({ activesubscribers, inactivesubscribers });
+      } catch (err) { return sendError(err, res, next); }
+    },
     // create: (req, res) => _create(req,res)
     // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
     updateOne: async (req, res, next) => {
@@ -54,16 +64,6 @@ module.exports = app => {
         const name = await db.one(updateOneSubscriber(), [statusType, endDate, id, req.session.id])
 
         res.status(201).json({ message: `Succesfully ${updateType} ${name.subscriber}.` });
-      } catch (err) { return sendError(err, res, next); }
-    },
-    // DELETES REQURESTED RECORD
-    deleteOne: async (req, res, next) => {
-      if (!req.params.id) return sendError('Missing subscriber delete parameters', res, next);
-
-      try {
-        const name = await db.result(deleteOneSubcriber(), [req.params.id, req.session.id]);
-
-        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber} from the ${name.rows[0].plan} plan.` });
       } catch (err) { return sendError(err, res, next); }
     }
   }
