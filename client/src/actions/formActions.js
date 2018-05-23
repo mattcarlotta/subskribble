@@ -1,38 +1,32 @@
-import * as app from 'axios';
+import app from './axiosConfig';
 import * as types from './types';
 import { formValueSelector } from 'redux-form';
+import { browserHistory } from 'react-router';
 
 // Add new form
 const addNewForm = formProps => dispatch => (
-  app.post(`api/add-new-form`, { formProps })
+  app.post(`form/create`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
 // Add new promo code
 const addNewPromoCode = formProps => dispatch => (
-  app.post(`api/create-promo-code`, { formProps })
+  app.post(`promotional/create`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
 // Add new template
 const addNewTemplate = formProps => dispatch => (
-  app.post(`api/add-new-template`, { formProps })
-  .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
-)
-
-// Form information for registering to a plan
-const customerRegisterToPlan = formProps => dispatch => (
-  app.post(`api/customer-signup`, { formProps })
+  app.post(`template/create`, { formProps })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
 // Register to newsletter
 const registerToNewsletter = email => dispatch => (
-  app.post(`api/register-to-newsletter`, { email })
+  app.post(`register-to-newsletter`, { email })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
@@ -53,8 +47,18 @@ const setBillingFieldValues = () => (dispatch, getState) => (
 
 // Send email to support
 const sendSupportEmail = ({name, email, message}) => dispatch => (
-  app.post(`api/send-support-email`, { name, email, message })
+  app.post(`send-support-email`, { name, email, message })
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
+// Form information for registering to a plan
+const subRegisterToPlan = ({ contactAddress, contactCity, contactEmail, contactFirstName, contactLastName, contactPhone, contactState, contactZip, selectedPlan }) => dispatch => (
+  app.post(`subscribers/signup`, { subscriber: `${contactFirstName} ${contactLastName}`, contactAddress, contactCity, contactEmail, contactPhone, contactState, contactZip, selectedPlan })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/subscribers');
+  })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
@@ -75,9 +79,9 @@ export {
   addNewForm,
   addNewPromoCode,
   addNewTemplate,
-  customerRegisterToPlan,
   registerToNewsletter,
   resetBillingFieldValues,
   setBillingFieldValues,
-  sendSupportEmail
+  sendSupportEmail,
+  subRegisterToPlan
 }

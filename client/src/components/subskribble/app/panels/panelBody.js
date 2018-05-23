@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import FilterField from '../formFields/FilterField';
-import RenderPanelButtons from './renderPanelButtons';
+import CustomButton from '../../app/buttons/customButton';
 import SelectField from '../formFields/selectField';
 import TableList from '../tables/TableList';
 
@@ -17,17 +16,13 @@ export default class PanelBody extends Component {
 
   render = () => {
     const {
-      BUTTONFORM,
-      BUTTONFORMTITLE,
+      buttonAction,
+      buttonLabel,
       CARDBODY,
-      CUSTOMBUTTONS,
       deleteAction,
       fetchAction,
-      FILTERFORM,
-      FILTERFIELDLABEL,
       GRAPH,
       SELECTFIELD,
-      SUBMITFORMTITLE,
       TAB,
       TABLECONTENTS,
       TABLEHEADERS,
@@ -43,7 +38,7 @@ export default class PanelBody extends Component {
         { CARDBODY && <CARDBODY /> }
         <div className="panel-body">
           <div className="ant-row">
-            <div className="ant-col-8">
+            <div className="ant-col-12">
               { SELECTFIELD &&
                 <SelectField
                   fetchAction={fetchAction}
@@ -56,18 +51,8 @@ export default class PanelBody extends Component {
                 />
               }
             </div>
-            <div className="ant-col-8">
-              { CUSTOMBUTTONS &&
-                <RenderPanelButtons
-                  CUSTOMBUTTONS={CUSTOMBUTTONS}
-                  FORM={BUTTONFORM}
-                  FORMTITLE={BUTTONFORMTITLE}
-                  SUBMITFORMTITLE={SUBMITFORMTITLE}
-                />
-              }
-            </div>
-            <div className="ant-col-8 f-r">
-              { FILTERFORM && <FilterField form={FILTERFORM} placeholder={FILTERFIELDLABEL} /> }
+            <div className="ant-col-12 f-r">
+              { buttonAction && <CustomButton className="f-r" label={buttonLabel} onClickAction={buttonAction} /> }
             </div>
           </div>
           { GRAPH && <GRAPH /> }

@@ -18,12 +18,14 @@ const RenderFormFields = ({ billingSwitch, FIELDS, title, position }) => (
 )
 
 const RegisterPlanForm = ({
+  BILLINGADDRESSFIELDS,
   billingSwitch,
   confirmLoading,
+  CONTACTFIELDS,
+  CREDITCARDFIELDS,
   handleSubmit,
   editStep,
   finished,
-  LEFTFIELDS,
   leftTitle,
   mainTitle,
   onClickBack,
@@ -38,10 +40,11 @@ const RegisterPlanForm = ({
   <div className="form-container">
     <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
     <form onSubmit={handleSubmit}>
-      <RenderFormFields FIELDS={LEFTFIELDS} title={leftTitle} position="left" />
+      <RenderFormFields FIELDS={CONTACTFIELDS} title="Contact Information" position="left" />
       { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
       { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
-      <RenderFormFields billingSwitch={billingSwitch} FIELDS={RIGHTFIELDS} title={rightTitle} position="right" />
+      <RenderFormFields billingSwitch={true} FIELDS={BILLINGADDRESSFIELDS} title="Billing Information" position="right" />
+      <RenderFormFields FIELDS={CREDITCARDFIELDS} title="Credit Card Information" position="right" />
       <div className="clear-fix" />
       <hr />
       <AntStepFormButtons

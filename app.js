@@ -4,8 +4,7 @@ const consign 	= require('consign');
 
 consign({ locale: 'en-us', verbose: false})
 	.include('libs/middlewares.js') // express middlewares
-	.then("database/db.js")
-	.then("database/query.js")
+	.then("database")
 	.then("shared")
 	.then("services")
   .then("controllers")

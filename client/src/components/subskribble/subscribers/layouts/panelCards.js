@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import CustomerSignupForm from '../../../../containers/subskribble/forms/CustomerSignupForm';
+import { browserHistory } from 'react-router';
 
-const CUSTOMERBUTTONS = [{ className: 'centered', label: 'Add Subscriber' }];
+const buttonAction = () => browserHistory.push('/subskribble/subscribers/register');
 
 const SUB = {
 	active: 'person',
@@ -18,40 +18,20 @@ const renderStatus = status => (
 );
 
 const ACTIVETABLEHEADERS = [
-	{
-		title: 'Status',
-		dataIndex: 'status',
-		render: status => renderStatus(status)
-	},
+	{ title: 'Status', dataIndex: 'status', render: status => renderStatus(status) },
 	{ title: 'Subscriber', dataIndex: 'subscriber' },
-	{ title: 'Plan', dataIndex: 'plan' },
+	{ title: 'Plan', dataIndex: 'planname' },
 	{ title: 'Start Date', dataIndex: 'startdate' },
-	{
-		title: 'Amount',
-		dataIndex: 'amount',
-		render: amount => <span>${amount}</span>
-	}
+	{	title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
 const INACTIVETABLEHEADERS = [
-	{
-		title: 'Status',
-		dataIndex: 'status',
-		render: status => renderStatus(status)
-	},
+	{ title: 'Status', dataIndex: 'status', render: status => renderStatus(status) },
 	{ title: 'Subscriber', dataIndex: 'subscriber' },
-	{ title: 'Plan', dataIndex: 'plan' },
+	{ title: 'Plan', dataIndex: 'planname' },
 	{ title: 'Start Date', dataIndex: 'startdate' },
-	{
-		title: 'End Date',
-		dataIndex: 'enddate',
-		render: enddate => <span>{enddate}</span>
-	},
-	{
-		title: 'Amount',
-		dataIndex: 'amount',
-		render: amount => <span>${amount}</span>
-	}
+	{ title: 'End Date', dataIndex: 'enddate', render: enddate => <span>{enddate}</span> },
+	{ title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
 ];
 
 export default ({
@@ -62,11 +42,8 @@ export default ({
 	...rest
 }) => [
 	{
-		BUTTONFORM: CustomerSignupForm,
-		BUTTONFORMTITLE: 'Customer Signup',
-		CUSTOMBUTTONS: CUSTOMERBUTTONS,
-		FILTERFIELDLABEL: 'Filter Active Subscribers',
-		FILTERFORM: 'FilterActiveSubscriptions',
+		buttonAction,
+		buttonLabel: 'Add Subscriber',
 		SELECTFIELD: true,
 		TAB: 'Active Subscribers',
 		TABLECONTENTS: activeitems,
@@ -75,8 +52,6 @@ export default ({
 		...rest
 	},
 	{
-		FILTERFIELDLABEL: 'Filter Inactive Subscribers',
-		FILTERFORM: 'FilterInactiveSubscriptions',
 		SELECTFIELD: true,
 		TAB: 'Inactive Subscribers',
 		TABLECONTENTS: inactiveitems,

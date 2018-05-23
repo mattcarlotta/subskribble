@@ -5,6 +5,15 @@ import CARDS from '../../../components/subskribble/subscribers/layouts/panelCard
 import PanelLoader from '../../../components/subskribble/app/panels/PanelLoader';
 import SubsPanel from '../../../components/subskribble/subscribers/panels/subscriptionsPanels';
 
-const Subscribers = props => ( <PanelLoader CARDS={CARDS} Panel={SubsPanel} {...props} /> );
+const Subscribers = props => (
+  <PanelLoader
+    {...props}
+    buttonLabel="Add Subscriber"
+    buttonPushLocation="subscribers/register"
+    cardTitle="Subscribers"
+    CARDS={CARDS}
+    Panel={SubsPanel}
+  />
+);
 
 export default connect(state => ({ ...state.subs }), { ...actions })(Subscribers)

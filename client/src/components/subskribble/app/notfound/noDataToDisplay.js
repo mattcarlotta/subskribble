@@ -1,27 +1,18 @@
 import React from 'react';
 import { Card, Icon } from 'antd';
+import { browserHistory } from 'react-router';
 import PageContainer from '../panels/pageContainer';
-import RenderPanelButtons from '../panels/renderPanelButtons';
+import CustomButton from '../buttons/customButton';
 import TogglePanelVisibility from '../panels/TogglePanelVisibility';
-import CustomerSignupForm from '../../../../containers/subskribble/forms/CustomerSignupForm';
 
-const forms = [CustomerSignupForm];
-const formTitle = ["Customer Signup"];
-const submitFormTitle = ["Subscribe"]
-
-const noDataToDisplay = ({ buttonLabel, buttonPanel, formNum, title, visible }) => (
+const noDataToDisplay = ({ buttonLabel, buttonPushLocation, buttonPanel, cardTitle, visible }) => (
   <PageContainer>
     <div className="panel-container">
-      <Card title={title} extra={buttonPanel()}>
+      <Card title={cardTitle} extra={buttonPanel()}>
         <div style={{ display: visible ? "block" : "none", minHeight: 400 }} className="panel-body-container">
           <div className="panel-body">
             <div className="ant-row">
-              <RenderPanelButtons
-                CUSTOMBUTTONS={[{ className: 'f-r', label: buttonLabel }]}
-                FORM={forms[formNum]}
-                FORMTITLE={formTitle[formNum]}
-                SUBMITFORMTITLE={submitFormTitle[formNum]}
-              />
+              <CustomButton className="f-r" label={buttonLabel} onClickAction={() => browserHistory.push(`/subskribble/${buttonPushLocation}`)} />
               <div className="no-data">
                 <Icon type="line-chart" />
                 <h2>No data to display.</h2>

@@ -55,8 +55,6 @@ export default ({
 	...rest
 }) => [
 	{
-		FILTERFIELDLABEL: 'Filter Charges',
-		FILTERFORM: 'FilterCharges',
 		SELECTFIELD: true,
 		TAB: 'Charges',
 		TABLECONTENTS: activeitems,
@@ -65,8 +63,6 @@ export default ({
 		...rest
 	},
 	{
-		FILTERFIELDLABEL: 'Filter Refunds',
-		FILTERFORM: 'FilterRefunds',
 		SELECTFIELD: true,
 		TAB: 'Refunds',
 		TABLECONTENTS: inactiveitems,

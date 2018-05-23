@@ -8,9 +8,14 @@ class Loader extends Component {
 
 	componentDidMount = () => this.setTimer();
 
-  shouldComponentUpdate = nextProps => (nextProps.serverError !== '')
+  componentDidUpdate = (nextProps, nextState) => {
+    const { serverError } = this.props;
+    serverError !== nextProps.serverError && this.noDataWasFound()
+  }
 
-	componentWillUnmount = () => this.clearTimer();
+  componentWillUnmount = () => this.clearTimer();
+
+  noDataWasFound = () => this.setState({ requestTimeout: true }, () => this.clearTimer())
 
   clearTimer = () => clearTimeout(this.timeout)
 
@@ -19,7 +24,7 @@ class Loader extends Component {
   setTimer = () => this.timeout = setTimeout(this.timer, 3000)
 
   render = () => (
-		(this.props.serverError || this.state.requestTimeout)
+		this.state.requestTimeout
       ? <NoDataToDisplay {...this.props} />
       : <Spinner />
   )

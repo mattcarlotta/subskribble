@@ -35,8 +35,6 @@ export default ({
 	...rest
 }) => [
 	{
-		FILTERFIELDLABEL: 'Filter Active Promotionals',
-		FILTERFORM: 'FilterActivePromos',
 		SELECTFIELD: true,
 		TAB: 'Active Promotionals',
 		TABLECONTENTS: activeitems,
@@ -45,8 +43,6 @@ export default ({
 		...rest
 	},
 	{
-		FILTERFIELDLABEL: 'Filter Inactive Promotionals',
-		FILTERFORM: 'FilterInactivePlans',
 		SELECTFIELD: true,
 		TAB: 'Inactive Promotionals',
 		TABLECONTENTS: inactiveitems,

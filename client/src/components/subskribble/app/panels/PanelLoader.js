@@ -16,11 +16,15 @@ export default class PanelLoader extends PureComponent {
   }
 
   render = () => {
-    const { buttonLabel, CARDS, formNum, Panel, title } = this.props;
+    const { buttonLabel, buttonPushLocation, CARDS, cardTitle, Panel } = this.props;
     const { isLoading } = this.state;
     return (
       isLoading
-        ? <Loader buttonLabel={buttonLabel} formNum={formNum} title={title} />
+        ? <Loader
+            buttonLabel={buttonLabel}
+            buttonPushLocation={buttonPushLocation}
+            cardTitle={cardTitle}
+          />
         : <Panel CARDS={CARDS({...this.props})} />
     )
   }

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/subskribble';
+import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupForm';
 // import ContactUs from '../components/subskribble/contact';
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
@@ -15,13 +16,13 @@ import Plans from '../containers/subskribble/plans';
 import Promos from '../containers/subskribble/promos';
 // import Messages from '../components/subskribble/messages';
 // import Settings from '../components/subskribble/settings';
-import RequireAuth from '../containers/subskribble/app/authentication/RequireAuth';
-import ResetPassword from '../containers/subskribble/app/authentication/ResetPassword';
+import RequireAuth from '../containers/subskribble/app/auth/RequireAuth';
+import ResetPassword from '../containers/subskribble/app/auth/ResetPassword';
 import Subscribers from '../containers/subskribble/subscribers';
 // import Templates from '../components/subskribble/templates';
 import Transactions from '../containers/subskribble/transactions';
 // import Tutorials from '../components/subskribble/tutorials';
-import VerifyEmail from '../containers/subskribble/app/authentication/VerifyEmail';
+import VerifyEmail from '../containers/subskribble/app/auth/VerifyEmail';
 
 // CONFIG APP ROUTE VIEWS
 export default (
@@ -40,6 +41,7 @@ export default (
 				<Route path="plans" component={Plans} />
 				<Route path="promotionals" component={Promos} />
 				<Route path="subscribers" component={Subscribers} />
+				<Route path="subscribers/register" component={CustomerSignupForm} />
 				{/* <Route path="templates" component={Templates} /> */}
 				<Route path="transactions" component={Transactions} />
 				{/* <Route path="tutorials" component={Tutorials} /> */}

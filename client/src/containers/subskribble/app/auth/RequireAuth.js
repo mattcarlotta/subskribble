@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { authenticateUser, saveSidebarState } from '../../../../actions/authActions';
 import App from '../../../../components/subskribble/app';
 import Spinner from '../loading/Spinner';
-import Login from './Login';
+import Login from '../../../../components/subskribble/app/auth/Login';
 
 class RequireAuth extends Component {
 	componentDidMount = () => {

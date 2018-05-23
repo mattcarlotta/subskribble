@@ -20,7 +20,7 @@
 }
 
 .customer-signup-bg {
-  @include b-c($whiteblue);
+  // @include b-c($whiteblue);
   @include h(100%);
 
   .customer-signup-container {
@@ -33,7 +33,7 @@
     .title {
       @extend %t-a-c;
       @include c($black);
-      margin: 30px 0;
+      margin: 30px 0 60px 0;
     }
 
     .form-container {
@@ -53,18 +53,19 @@
 
       .left-form {
         @extend .f-l, %pr-10;
-        @include h(450px);
+        // @include h(450px);
         @include w(50%);
       }
 
       .main-title {
         @extend %t-a-c;
-        margin-bottom: 40px;
+        @include f-s(28px);
+        margin-bottom: 80px;
       }
 
       .right-form {
         @extend .f-r, %pl-10;
-        @include h(450px);
+        @include h(220px);
         @include w(50%);
       }
 
@@ -242,7 +243,10 @@
 .input-25 { @extend .input-fields; @include w(25%); }
 .input-40 { @extend .input-fields; @include w(40%); }
 .input-50 { @extend .input-fields; @include w(50%); }
+.input-55 { @extend .input-fields; @include w(55%); }
+.input-60 { @extend .input-fields; @include w(60%); }
 .input-66 { @extend .input-fields; @include w(66%); }
+.input-70 { @extend .input-fields; @include w(70%); }
 .input-75 { @extend .input-fields; @include w(75%); }
 .input-85 { @extend .input-fields; @include w(85%); }
 .input-95 { @extend .input-fields; @include w(95%); }

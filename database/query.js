@@ -45,6 +45,10 @@ module.exports = app => {
   }
 
   const subQueries = {
+    createSubscriber: () => (
+      `INSERT INTO subscribers (userid, subscriber, address, addressCity, addressState, addressZip, email, phone, planName, amount)
+      VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7, $8, $9, (SELECT amount FROM plans WHERE planName=$9))`
+    ),
     deleteOneSubcriber: () => ("DELETE FROM subscribers WHERE id=$1 AND userid=$2 RETURNING *"),
     getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getSubscriberCount: () => (

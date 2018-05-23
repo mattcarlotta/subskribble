@@ -64,6 +64,19 @@ CREATE TABLE promotionals (
   totalUsage INTEGER
 );
 
+CREATE TABLE plans (
+  id UUID DEFAULT uuid_generate_v1mc(),
+  key SERIAL PRIMARY KEY,
+  userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  status VARCHAR DEFAULT 'suspended',
+  planName VARCHAR NOT NULL,
+  amount DECIMAL(12,2),
+  setupFee DECIMAL(12,2),
+  billEvery VARCHAR,
+  trialPeriod VARCHAR,
+  subscribers INTEGER
+);
+
 CREATE TABLE subscribers (
   id UUID DEFAULT uuid_generate_v1mc(),
   key SERIAL PRIMARY KEY,
@@ -73,12 +86,12 @@ CREATE TABLE subscribers (
   subscriber VARCHAR NOT NULL,
   password VARCHAR,
   phone VARCHAR,
-  plan VARCHAR,
+  planName VARCHAR,
   startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   endDate TEXT,
   amount DECIMAL(12,2),
-  isGod BOOLEAN DEFAULT FALSE
-);
+  isGod BOOLEAN DEFAULT FALSE,
+)
 
 CREATE TABLE transactions (
   id UUID DEFAULT uuid_generate_v1mc(),

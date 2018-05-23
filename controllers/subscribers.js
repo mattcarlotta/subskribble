@@ -1,9 +1,20 @@
 module.exports = app => {
-  const { db, query: { deleteOneSubcriber, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
+  const { db, query: { createSubscriber, deleteOneSubcriber, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
   const moment = app.get("moment");
 
   return {
+    // CREATES SUBSCRIBER RECORD
+    create: async (req, res, next) => {
+      if (!req.body) return sendError('Missing subscriber creation parameters', res, next);
+
+      const { contactAddress, contactCity, contactState, contactZip, contactEmail, contactPhone, selectedPlan, subscriber } = req.body;
+      try {
+        await db.none(createSubscriber(), [req.session.id, subscriber, contactAddress, contactCity, contactState, contactZip, contactEmail, contactPhone, selectedPlan]);
+
+        res.status(201).json({ message: `Succesfully added ${subscriber} to the ${selectedPlan} plan` });
+      } catch (err) { return sendError(err, res, next); }
+    },
     // DELETES REQURESTED RECORD
     deleteOne: async (req, res, next) => {
       if (!req.params.id) return sendError('Missing subscriber delete parameters', res, next);
@@ -52,7 +63,6 @@ module.exports = app => {
         res.status(201).json({ activesubscribers, inactivesubscribers });
       } catch (err) { return sendError(err, res, next); }
     },
-    // create: (req, res) => _create(req,res)
     // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
     updateOne: async (req, res, next) => {
       if (!req.body || !req.params.id) return sendError('Missing subscriber update parameters', res, next);

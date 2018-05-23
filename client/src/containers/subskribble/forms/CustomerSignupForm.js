@@ -1,10 +1,11 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { Steps } from 'antd';
 import Stepper from './Stepper';
 import RegisterPlanForm from './RegisterPlanForm';
-import { customerRegisterToPlan } from '../../../actions/formActions';
+import { subRegisterToPlan } from '../../../actions/formActions';
 import { getCustomerFormFields } from '../../formFields/customerSignupFields';
 
 const stepLabels = [
@@ -15,6 +16,7 @@ const stepLabels = [
 
 class CustomerPlanSignup extends Component {
   state = {
+    confirmLoading: false,
     formFields: getCustomerFormFields(),
     stepIndex: 0,
     visited: [],
@@ -22,15 +24,17 @@ class CustomerPlanSignup extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    this.state.stepIndex !== prevState.stepIndex && window.scrollTo(0, 0)
+    const { serverError } = this.props;
+    serverError !== prevProps.serverError && serverError !== undefined && this.showLoadingButton();
   }
 
   editStep = number => this.setState({ formFields: getCustomerFormFields(number), stepIndex: number })
 
   handleFormSave = (formProps) => {
+    const { subRegisterToPlan } = this.props;
     console.log(formProps);
-    this.props.onFormSubmit();
-    // this.props.customerRegisterToPlan(formProps);
+    this.showLoadingButton();
+    subRegisterToPlan(formProps);
   }
 
   handleNext = () => {
@@ -49,17 +53,19 @@ class CustomerPlanSignup extends Component {
     this.setState({ formFields: getCustomerFormFields(formKey), stepIndex: formKey })
   }
 
+  showLoadingButton = () => this.setState({ confirmLoading: !this.state.confirmLoading });
+
+  goBackPage = () => browserHistory.goBack();
+
   render() {
-    const { formFields, stepIndex, wasReviewed } = this.state;
-    const { confirmLoading } = this.props;
+    const { confirmLoading, formFields, stepIndex, wasReviewed } = this.state;
     const finished = stepIndex === 2;
     return (
       <div className="customer-signup-bg">
         <div className="customer-signup-container">
           <div className="stepper-container">
             <div className="title">
-              <h1>Carlotta Corp</h1>
-              <h3>Plan Registration</h3>
+              <h1>Subscriber Registration</h1>
             </div>
             <Steps current={stepIndex}>
               {map(stepLabels, ({ title, icon }, key) => (
@@ -80,7 +86,7 @@ class CustomerPlanSignup extends Component {
             confirmLoading={confirmLoading}
             finished={finished}
             editStep={!confirmLoading ? this.editStep : null}
-            onClickBack={ stepIndex > 0 ? this.handlePrev : null }
+            onClickBack={ stepIndex > 0 ? this.handlePrev : this.goBackPage }
             onSubmit={ finished ? this.handleFormSave : this.handleNext }
           />
         </div>
@@ -89,4 +95,4 @@ class CustomerPlanSignup extends Component {
   }
 }
 
-export default connect(null, { customerRegisterToPlan })(CustomerPlanSignup);
+export default connect(state => ({ serverError: state.server.error }), { subRegisterToPlan })(CustomerPlanSignup);

@@ -43,8 +43,6 @@ export default ({
 	...rest
 }) => [
 	{
-		FILTERFIELDLABEL: 'Filter Active Plans',
-		FILTERFORM: 'FilterActivePlans',
 		SELECTFIELD: true,
 		TAB: 'Active Plans',
 		TABLECONTENTS: activeitems,
@@ -53,8 +51,6 @@ export default ({
 		...rest
 	},
 	{
-		FILTERFIELDLABEL: 'Filter Inactive Plans',
-		FILTERFORM: 'FilterInactivePlans',
 		SELECTFIELD: true,
 		TAB: 'Inactive Plans',
 		TABLECONTENTS: inactiveitems,

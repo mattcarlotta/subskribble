@@ -9,17 +9,20 @@ const BILLINGADDRESSFIELDS = [
   { className: "input-25 f-l", name: "billingUnit", placeholder: "Billing Unit, Apt, or Suite #", type: "text" },
   { className: "input-40 f-l", name: "billingCity", placeholder: "Billing City", type: "text", validate: [isRequired, allowedCharacters] },
   { className: "input-20 f-l", name: "billingState", placeholder: "Billing State", normalize: formatState, type: "text", validate: [isRequired, isValidState] },
-  { className: "input-20 f-l", name: "billingZip", placeholder: "Billing Zip Code", normalize: formatZip, type: "text", validate: [isRequired]},
+  { className: "input-20 f-l", name: "billingZip", placeholder: "Billing Zip Code", normalize: formatZip, type: "text", validate: [isRequired]}
+]
+
+const CREDITCARDFIELDS = [
   { className: "input-40 f-l", name: "creditCard", placeholder: "Credit Card", normalize: formatCreditCard, type: "text", validate: [isRequired, isValidCC] },
   { className: "input-20 f-l", component: AntSelect, name: "creditCardExpMonth", placeholder: "Exp. Month", selectOptions: MENUITEMS, type: "text", validate: isValidExpMonth },
   { className: "input-20 f-l", name: "creditCardExpYear", placeholder: "Exp. Year", normalize: formatYear, type: "text", validate: [isRequired, isValidYear] },
-  { className: "input-10 f-l", name: "creditCardCVV", placeholder: "CVV", normalize: formatCVV, type: "text", validate: [isRequired, isValidCVV] },
+  { className: "input-10 f-l", name: "creditCardCVV", placeholder: "CVV", normalize: formatCVV, type: "text", validate: [isRequired, isValidCVV] }
 ]
 
 const CONTACTFIELDS = [
   { className: "input-40 f-l", name: "contactFirstName", placeholder: "First Name", type: "text", validate: [isRequired, allowedCharacters] },
   { className: "input-40 f-l", name: "contactLastName", placeholder: "Last Name", type: "text", validate: [isRequired, allowedCharacters] },
-  { className: "input-50 f-l", name: "contactAddress", placeholder: "Address", validate: [isRequired, allowedCharacters] },
+  { className: "input-55 f-l", name: "contactAddress", placeholder: "Address", validate: [isRequired, allowedCharacters] },
   { className: "input-25 f-l", name: "contactUnit", placeholder: "Unit, Apt, or Suite #", style:{ width: "100%" }, },
   { className: "input-40 f-l", name: "contactCity", placeholder: "City", validate: [isRequired, allowedCharacters] },
   { className: "input-20 f-l", name: "contactState", placeholder: "State", normalize: formatState, validate: [isRequired, isValidState] },
@@ -39,23 +42,23 @@ const PLANSELECTIONFIELDS = [
 
 const CustomerFormFields = [
   {
-    billingSwitch: true,
-    LEFTFIELDS: CONTACTFIELDS,
+    BILLINGADDRESSFIELDS,
+    CONTACTFIELDS,
+    CREDITCARDFIELDS,
     leftTitle: "Contact Information",
     PLANSELECTIONS: null,
     PLANSELECTIONFIELDS: null,
     mainTitle: "<span>Please fill out the information below and click <strong>next</strong> to continue.</span>",
-    RIGHTFIELDS: BILLINGADDRESSFIELDS,
     rightTitle: "Billing Information",
   },
   {
-    billingSwitch: false,
-    LEFTFIELDS: null,
+    BILLINGADDRESSFIELDS: null,
+    CONTACTFIELDS: null,
+    CREDITCARDFIELDS: null,
     leftTitle: null,
     PLANSELECTIONS: null,
     PLANSELECTIONFIELDS: PLANSELECTIONFIELDS,
     mainTitle: "<span>Please <strong>select</strong> a plan below and click <strong>next</strong> to continue.</span>",
-    RIGHTFIELDS: null,
     rightTitle: null
   },
   {
