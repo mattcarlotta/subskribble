@@ -4,11 +4,12 @@ CREATE DATABASE "subskribble-demo";
 \c subskribble-demo;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
--- DROP TABLE IF EXISTS subscribers;
--- DROP TABLE IF EXISTS plans;
--- DROP TABLE IF EXISTS promotionals;
--- DROP TABLE IF EXISTS transactions;
--- DROP TABLE IF EXISTS notifications;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS subscribers;
+DROP TABLE IF EXISTS plans;
+DROP TABLE IF EXISTS promotionals;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE users (
   id UUID DEFAULT uuid_generate_v1mc() UNIQUE,

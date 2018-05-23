@@ -216,12 +216,12 @@ module.exports = app => {
       // create DB tables
       await db.none(`
         CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-        DROP TABLE IF EXISTS users cascade;
-        DROP TABLE IF EXISTS subscribers cascade;
-        DROP TABLE IF EXISTS plans cascade;
-        DROP TABLE IF EXISTS promotionals cascade;
-        DROP TABLE IF EXISTS transactions cascade;
-        DROP TABLE IF EXISTS notifications cascade;
+        DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS subscribers;
+        DROP TABLE IF EXISTS plans;
+        DROP TABLE IF EXISTS promotionals;
+        DROP TABLE IF EXISTS transactions;
+        DROP TABLE IF EXISTS notifications;
         CREATE TABLE users ${userTableOptions};
         CREATE TABLE subscribers ${subTableOptions};
         CREATE TABLE plans ${planTableOptions};
