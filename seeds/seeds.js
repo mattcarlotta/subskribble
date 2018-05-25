@@ -33,13 +33,13 @@ module.exports = app => {
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'suspended',
+    status VARCHAR DEFAULT 'active',
     planName VARCHAR NOT NULL UNIQUE,
     amount DECIMAL(12,2) NOT NULL,
-    setupFee DECIMAL(12,2),
-    billEvery VARCHAR,
-    trialPeriod VARCHAR,
-    subscribers INTEGER
+    setupFee DECIMAL(12,2) DEFAULT 0.00,
+    billEvery VARCHAR DEFAULT '30 Days',
+    trialPeriod VARCHAR DEFAULT '0 Days',
+    subscribers INTEGER DEFAULT 0
   )`;
 
   const promoTableOptions = `(
@@ -63,7 +63,7 @@ module.exports = app => {
     status VARCHAR DEFAULT 'active',
     email VARCHAR UNIQUE,
     subscriber VARCHAR NOT NULL,
-    planName VARCHAR,
+    planName VARCHAR NOT NULL,
     amount DECIMAL(12,2),
     phone VARCHAR,
     address TEXT,

@@ -8,11 +8,12 @@ const BasicPanel = ({
   buttonPanel,
   CARDS,
   title,
-  visible
+  visible,
+  ...rest
 }) => (
   <div className="panel-container">
     <Card title={title} extra={buttonPanel()}>
-      {map(CARDS, (props, key) => <PanelBody key={key} visible={visible} {...props} />)}
+      {map(CARDS, (props, key) => <PanelBody key={key} visible={visible} {...props} {...rest} />)}
     </Card>
   </div>
 )

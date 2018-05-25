@@ -16,8 +16,9 @@ export default class PanelLoader extends PureComponent {
   }
 
   render = () => {
-    const { buttonLabel, buttonPushLocation, CARDS, cardTitle, Panel } = this.props;
+    const { buttonLabel, buttonPushLocation, CARDS, cardTitle, Panel, serverMessage } = this.props;
     const { isLoading } = this.state;
+
     return (
       isLoading
         ? <Loader
@@ -25,7 +26,7 @@ export default class PanelLoader extends PureComponent {
             buttonPushLocation={buttonPushLocation}
             cardTitle={cardTitle}
           />
-        : <Panel CARDS={CARDS({...this.props})} />
+        : <Panel CARDS={CARDS({...this.props})} serverMessage={serverMessage} />
     )
   }
 }

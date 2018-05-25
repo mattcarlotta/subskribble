@@ -7,4 +7,4 @@ import PlansPanel from '../../../components/subskribble/plans/panels/plansPanel'
 
 const Plans = props => ( <PanelLoader CARDS={CARDS} Panel={PlansPanel} {...props} /> );
 
-export default connect(state => ({ ...state.plans }), { ...actions })(Plans)
+export default connect(state => ({ serverMessage: state.server.message, ...state.plans }), { ...actions })(Plans)

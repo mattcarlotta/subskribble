@@ -7,7 +7,8 @@ export default class PanelBody extends Component {
   state = { current: 1, sortByNum: 10 }
 
   componentDidUpdate = (prevProps) => {
-    if (this.props.TABLERECORDS !== prevProps.TABLERECORDS) this.setState({ current: 1, sortByNum: 10 })
+    const { serverMessage } = this.props;
+    serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.setState({ current: 1, sortByNum: 10 })
   }
 
   setSortByNum = num => this.setState({ sortByNum: num })

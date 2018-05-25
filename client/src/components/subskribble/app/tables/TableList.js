@@ -21,6 +21,7 @@ export default class TableList extends PureComponent {
 			TABLERECORDS,
 			updateAction
 		} = this.props;
+
 		return (
 			<div className="table-container">
 				<Table

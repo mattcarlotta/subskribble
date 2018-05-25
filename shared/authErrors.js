@@ -7,5 +7,6 @@ module.exports = app => ({
   missingEmailCreds: 'That email is not associated with an active account. Please make sure the email address is spelled correctly.',
   missingSidebarState: 'There was a problem updating the sidebar state.',
   missingToken: 'There was a problem authenticating your request.',
+  notAdmin: 'You DO NOT have permission to do that.',
   notUniquePassword: 'Your new password must not match the old password. Please try again.'
 })

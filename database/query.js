@@ -17,12 +17,16 @@ module.exports = app => {
   }
 
   const planQueries = {
+    createPlan: () => ("INSERT INTO plans(userid, planName, amount) VALUES((SELECT id FROM users WHERE id=$1), $2, $3)"),
+    deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
     deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
     getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getPlanCount: () => (
       "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM plans;"
     ),
-    updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName")
+    updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName"),
+    updatePlanSubCount: () => ("UPDATE plans SET subscribers=(SELECT count(*) FROM subscribers WHERE planName=$2) WHERE planName=$2"),
+    selectPlan: () => ("SELECT * FROM plans WHERE planName=$1")
   }
 
   const promoQueries = {

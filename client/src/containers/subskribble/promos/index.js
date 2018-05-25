@@ -7,4 +7,4 @@ import PromosPanel from '../../../components/subskribble/promos/panels/promosPan
 
 const Promotionals = props => ( <PanelLoader CARDS={CARDS} Panel={PromosPanel} {...props} /> );
 
-export default connect(state => ({ ...state.promos }), { ...actions })(Promotionals)
+export default connect(state => ({ serverMessage: state.server.message, ...state.promos }), { ...actions })(Promotionals)

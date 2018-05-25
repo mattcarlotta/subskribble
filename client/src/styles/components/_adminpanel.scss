@@ -1,21 +1,36 @@
+.drawer-menu-container {
+  .ant-menu-item-selected { @include c($darkwarmgrey); }
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected { @include b-c($transparent); }
+  .ant-menu-inline .ant-menu-item-selected:after { opacity: 0; }
+  .menu-title {
+    @extend %m-r-15, %p-r;
+    top: 5px;
+  }
+
+  .menu-option {
+    @extend %p-r;
+    top: 5px;
+  }
+}
+
 .drawer-content-wrapper {
-  @include w(220px);
+  @include w(250px);
 	@include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
 
-	.drawer-content { overflow: hidden; }
+	// .drawer-content { overflow: hidden; }
 
   .drawer-menu-header {
     @extend %t-a-c;
-    background-color: #2e323b;
-    height: 55px;
-    border-bottom: 1px solid #485063;
+    @include b-c($blackblue)
+    @include h(55px);
 
-    .text {
+    .title {
+      @extend %d-ib, %p-t-10;
       @include c($white);
       @include f-f($harabara);
       @include f-s(24px);
       letter-spacing: 1.5px;
-      padding-top: 15px;
+      // padding-top: 10px;
     }
   }
 

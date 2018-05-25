@@ -5,7 +5,7 @@ import PanelBody from './panelBody';
 import TogglePanelVisibility from './TogglePanelVisibility';
 const { TabPane } = Tabs;
 
-const TabPanel = ({ buttonPanel, CARDS, selectFieldClassName, visible }) => (
+const TabPanel = ({ buttonPanel, CARDS, selectFieldClassName, visible, serverMessage }) => (
   <div className="panel-container">
     <Tabs
       className="tabs-container"
@@ -14,7 +14,7 @@ const TabPanel = ({ buttonPanel, CARDS, selectFieldClassName, visible }) => (
       >
        {map(CARDS, (props) => (
          <TabPane tab={props.TAB} key={props.TAB}>
-           <PanelBody visible={visible} {...props} />
+           <PanelBody serverMessage={serverMessage} visible={visible} {...props} />
          </TabPane>
        ))}
     </Tabs>

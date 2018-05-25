@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from '../navigation/topbar/header';
 import InlineMenu from '../navigation/sidebar/InlineMenu';
-import AdminPanel from '../../../containers/subskribble/app/auth/AdminPanel';
+import AdminPanel from '../../../containers/subskribble/app/admin/AdminPanel';
 
 const { Content } = Layout;
 

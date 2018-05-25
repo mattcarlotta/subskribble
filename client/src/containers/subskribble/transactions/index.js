@@ -7,4 +7,4 @@ import TransactionsPanel from '../../../components/subskribble/transactions/pane
 
 const Transactions = props => ( <PanelLoader CARDS={CARDS} Panel={TransactionsPanel} {...props} /> );
 
-export default connect(state => ({ ...state.transactions }), { ...actions })(Transactions)
+export default connect(state => ({ serverMessage: state.server.message, ...state.transactions }), { ...actions })(Transactions)
