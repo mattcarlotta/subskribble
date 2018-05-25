@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import AsyncModal from '../../../../components/subskribble/app/modals/asyncModal';
+import AsyncModal from '../modals/asyncModal';
 import NewPasswordForm from '../../forms/newPasswordForm';
 
 class ResetPassword extends Component {
-  state = { visible: true, confirmLoading: false }
+  state = { visible: true }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { serverError, serverMessage } = this.props;
-    serverError !== prevProps.serverError && this.setState({ confirmLoading: false });
-    serverMessage !== prevProps.serverMessage && browserHistory.push('/subskribble')
-  }
-
-  showLoadingButton = () => this.setState({ confirmLoading: true })
-
-  handleClose = () => this.setState({ confirmLoading: false, visible: false });
+  resetSelectedForm = () => browserHistory.push('/');
 
 	render = () => (
     <AsyncModal
+      {...this.props}
       {...this.state}
       closable={false}
       location={this.props.location}
       destroyOnClose={true}
       maskClosable={false}
       FORM={NewPasswordForm}
-      showLoadingButton={this.showLoadingButton}
+      resetSelectedForm={this.resetSelectedForm}
       title="Create New Password"
     />
 	);
 }
 
-export default connect(state => ({
-  serverError: state.server.error,
-  serverMessage: state.server.message
-}))(ResetPassword);
+export default connect(state => ({ serverMessage: state.server.message }))(ResetPassword);

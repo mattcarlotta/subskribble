@@ -1,6 +1,10 @@
 module.exports = app => {
   const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
 
+  const adminQueries = {
+    setUserAsAdmin: () => ("UPDATE users SET isGod=true WHERE id=$1")
+  }
+
   const authQueries = {
     createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, token) VALUES ($1, $2, $3, $4, $5)"),
     findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
@@ -66,6 +70,7 @@ module.exports = app => {
   }
 
   return {
+    ...adminQueries,
     ...authQueries,
     ...notificationQueries,
     ...planQueries,

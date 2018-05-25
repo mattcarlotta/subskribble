@@ -6,9 +6,12 @@ class AsyncModal extends Component {
   state = { confirmLoading: false };
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { serverError } = this.props;
+    const { serverError, serverMessage } = this.props;
     serverError !== prevProps.serverError && serverError !== undefined && this.showLoadingButton();
+    serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.resetForm()
   }
+
+  resetForm = () => this.setState({ confirmLoading: !this.state.confirmLoading }, () => this.props.resetSelectedForm())
 
   showLoadingButton = () => this.setState({ confirmLoading: !this.state.confirmLoading })
 

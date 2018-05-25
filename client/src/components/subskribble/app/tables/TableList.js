@@ -29,6 +29,7 @@ export default class TableList extends PureComponent {
 						{
 							title: 'Actions',
 							key: 'action',
+							width: 300,
 							render: record => (
 								<TableActions
 									deleteAction={deleteAction}
@@ -38,6 +39,7 @@ export default class TableList extends PureComponent {
 							)
 						}
 					]}
+					bordered={true}
 					dataSource={TABLECONTENTS}
 					pagination={{
 						defaultCurrent: 1,
@@ -45,6 +47,7 @@ export default class TableList extends PureComponent {
 						pageSize: sortByNum,
 						total: TABLERECORDS
 					}}
+					size="middle"
 					onChange={this.handlePageChange}
 				/>
 			</div>

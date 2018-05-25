@@ -35,7 +35,7 @@ module.exports = app => {
     resetPassword: (req, res, next) => passport.authenticate('reset-password', (err, user) => {
       if (err || !user) return sendError(err || 'No user found!', res, next);
 
-      res.status(201).json(passwordResetSuccess(email))
+      res.status(201).json(passwordResetSuccess(user.email))
     })(req, res, next),
 
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD

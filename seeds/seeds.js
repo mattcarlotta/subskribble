@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { db, query: { createNewUser, findUserByEmail, verifyEmail } } = app.database;
+  const { db, query: { createNewUser, findUserByEmail, verifyEmail, setUserAsAdmin } } = app.database;
   const { createRandomToken } = app.shared.helpers;
   const bcrypt = app.get("bcrypt");
 
@@ -249,8 +249,11 @@ module.exports = app => {
       // verify newly created user's email
       await db.none(verifyEmail(), [existingUser.email]);
 
-      // inset fake data into created tables
+      // set users as admin
       const { id } = existingUser;
+      await db.none(setUserAsAdmin(), [id]);
+
+      // inset fake data into created tables
       await db.none(`
         INSERT INTO plans ${planProperties} VALUES ${planValues(id)};
         INSERT INTO notifications ${noteProperties} VALUES ${noteValues(id)};

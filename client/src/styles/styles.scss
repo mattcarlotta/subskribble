@@ -9,9 +9,11 @@
 @import "~font-awesome/css/font-awesome.css";
 @import '~froala-editor/css/froala_style.min.css';
 @import '~froala-editor/css/froala_editor.pkgd.min.css';
-@import '~rc-drawer-menu/dist/rc-drawer-menu.min.css';
+// @import '~rc-drawer-menu/dist/rc-drawer-menu.min.css';
+@import '~rc-drawer-menu/assets/index.css';
 
 // Components
+@import 'components/adminpanel';
 @import 'components/auth';
 @import 'components/body';
 @import 'components/buttons';

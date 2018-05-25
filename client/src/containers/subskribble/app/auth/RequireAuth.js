@@ -23,5 +23,6 @@ class RequireAuth extends Component {
 export default connect(state => ({
 	collapseSideNav: state.auth.collapseSideNav,
 	loggedinUser: state.auth.loggedinUser,
-	isLoading: state.app.isLoading
+	isLoading: state.app.isLoading,
+	serverMessage: state.server.message
 }), { authenticateUser, saveSidebarState })(RequireAuth);

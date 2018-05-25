@@ -130,11 +130,7 @@
 	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
 }
 
-.drawer-content-wrapper {
-	@include b-s(rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px);
-}
-
-.drawer-menu-container {
+.sider-menu-container {
 	@extend %b-0;
 	@include c(#676b70);
 	@include b-c($blackblue);
@@ -207,7 +203,7 @@
 	@include w(100%);
 }
 
-.drawer-menu-header {
+.sider-menu-header {
 	@include b-c($blackblue);
 	@include h(55px);
 	border-bottom: 1px solid $tlightgrey;

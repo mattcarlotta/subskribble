@@ -11,7 +11,7 @@ export default ({ handleTabClick, collapseSideNav, selectedKey }) => {
       <MenuHeader collapseSideNav={collapseSideNav} handleLogoClick={handleLogoClick} />
       <Menu
         key="menu-container"
-        className="drawer-menu-container"
+        className="sider-menu-container"
         mode="inline"
         selectedKeys={selectedKey}
         onSelect={handleTabClick}
