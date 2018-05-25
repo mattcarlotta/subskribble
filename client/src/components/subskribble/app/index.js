@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from '../navigation/topbar/header';
 import InlineMenu from '../navigation/sidebar/InlineMenu';
-import AdminPanel from '../../../containers/subskribble/app/admin/AdminPanel';
+import AdminDrawer from '../../../containers/subskribble/app/admin/AdminDrawer';
 
 const { Content } = Layout;
 
@@ -42,7 +42,7 @@ class App extends Component {
          		{ this.props.children }
 				</Scrollbars>
        </Content>
-			 <AdminPanel />
+			 <AdminDrawer />
      </Layout>
    </Layout>
 	);

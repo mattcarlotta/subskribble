@@ -7,9 +7,11 @@ export default class PanelBody extends Component {
   state = { current: 1, sortByNum: 10 }
 
   componentDidUpdate = (prevProps) => {
-    const { serverMessage } = this.props;
-    serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.setState({ current: 1, sortByNum: 10 })
+    const { serverMessage, TABLERECORDS } = this.props;
+    (TABLERECORDS !== prevProps.TABLERECORDS || (serverMessage !== prevProps.serverMessage && serverMessage !== undefined)) && this.resetTable();
   }
+
+  resetTable = () => this.setState({ current: 1, sortByNum: 10 })
 
   setSortByNum = num => this.setState({ sortByNum: num })
 

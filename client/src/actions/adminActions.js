@@ -4,7 +4,7 @@ import plans from './planActions';
 import subscribers from './subscriberActions';
 
 const planActions = {
-  // Creates a fake plan
+  // Creates the fake plan
   createPlan: () => dispatch => (
     app.post(`admin/plan/create`)
     .then(({data: {message}}) => {
@@ -14,6 +14,7 @@ const planActions = {
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
+  // Deletes the fake plan
   deletePlan: () => dispatch => (
     app.delete(`admin/plan/delete`)
     .then(({data: {message}}) => {
