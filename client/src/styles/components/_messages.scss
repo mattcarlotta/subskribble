@@ -1,6 +1,6 @@
 .icon-message-container {
   @extend %p-r;
-  @include h(110px);
+  @include h(100vh);
   @include w(60px);
   top: -16px;
   left: -30px;
