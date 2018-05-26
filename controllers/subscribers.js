@@ -22,7 +22,7 @@ module.exports = app => {
       try {
         const name = await db.result(deleteOneSubcriber(), [req.params.id, req.session.id]);
 
-        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber} from the ${name.rows[0].plan} plan.` });
+        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber} from the '${name.rows[0].planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET

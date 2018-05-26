@@ -1,5 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
+import { browserHistory } from 'react-router';
+
+const buttonAction = () => browserHistory.push('/subskribble/promotionals/create');
 
 const TABLEHEADERS = [
 	{
@@ -35,11 +38,14 @@ export default ({
 	...rest
 }) => [
 	{
+		buttonAction,
+		buttonIcon: 'playlist_add',
 		SELECTFIELD: true,
 		TAB: 'Active Promotionals',
 		TABLECONTENTS: activeitems,
 		TABLEHEADERS,
 		TABLERECORDS: activeitemcount,
+		tipTitle: 'Add Promo',
 		...rest
 	},
 	{

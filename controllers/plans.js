@@ -10,7 +10,7 @@ module.exports = app => {
       try {
         const name = await db.result(deleteOnePlan(), [req.params.id, req.session.id]);
 
-        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname} plan.` });
+        res.status(201).json({ message: `Succesfully deleted '${name.rows[0].planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
@@ -54,14 +54,14 @@ module.exports = app => {
     // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
     updateOne: async (req, res, next) => {
       if (!req.body || !req.params.id) return sendError('Missing plan update parameters', res, next);
-      
+
       const { id } = req.params;
       const { updateType, statusType } = req.body;
 
       try {
         const name = await db.one(updateOnePlan(), [statusType, id, req.session.id])
 
-        res.status(201).json({ message: `Succesfully ${updateType} ${name.planname}.` });
+        res.status(201).json({ message: `Succesfully ${updateType} '${name.planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }
     }
   }

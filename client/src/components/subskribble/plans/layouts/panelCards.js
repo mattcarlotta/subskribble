@@ -1,7 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-// import AddNewPlan from '../../../../containers/subskribble/forms/AddNewPlan';
-// import { TABLEHEADERS } from '../fields/plansFieldsData';
+import { browserHistory } from 'react-router';
+
+const buttonAction = () => browserHistory.push('/subskribble/plans/create');
 
 export const TABLEHEADERS = [
 	{
@@ -43,11 +44,14 @@ export default ({
 	...rest
 }) => [
 	{
+		buttonAction,
+		buttonIcon: 'note_add',
 		SELECTFIELD: true,
 		TAB: 'Active Plans',
 		TABLECONTENTS: activeitems,
 		TABLEHEADERS,
 		TABLERECORDS: activeitemcount,
+		tipTitle: 'Add Plan',
 		...rest
 	},
 	{

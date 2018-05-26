@@ -43,12 +43,13 @@ export default ({
 }) => [
 	{
 		buttonAction,
-		buttonLabel: 'Add Subscriber',
+		buttonIcon: 'person_add',
 		SELECTFIELD: true,
 		TAB: 'Active Subscribers',
 		TABLECONTENTS: activeitems,
 		TABLEHEADERS: ACTIVETABLEHEADERS,
 		TABLERECORDS: activeitemcount,
+		tipTitle: 'Add Subscriber',
 		...rest
 	},
 	{

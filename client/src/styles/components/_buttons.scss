@@ -17,6 +17,11 @@
   border-color: $deepblue;
 }
 
+.adjust-position {
+  @extend %p-r, %p-t-5;
+  @include f-s(20px);
+}
+
 .btn {
   @extend %t-t-u;
   @include f-f($poppinsmedium);
@@ -27,6 +32,7 @@
 .btn-primary {
   @extend %b-0;
   @include b-c($lightblue);
+  @include h(35px);
 
   &:hover, &:focus {
     @extend %no-link-focus;

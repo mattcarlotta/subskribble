@@ -1,0 +1,18 @@
+.icon-message-container {
+  @extend %p-r;
+  @include h(110px);
+  @include w(60px);
+  top: -16px;
+  left: -30px;
+
+  .icon {
+    padding: 10px 17px 15px 17px;
+    i {
+      @include c($white);
+      @include f-s(30px);
+    }
+  }
+}
+
+.error { @include b-c($red); }
+.success { @include b-c($green); }

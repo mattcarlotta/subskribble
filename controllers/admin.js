@@ -16,7 +16,7 @@ module.exports = app => {
       try {
         const name = await db.result(deletePlanByName(), [req.session.id, 'Fake Plan']);
 
-        res.status(201).json({ message: `Succesfully deleted ${name.rows[0].planname} plan.` });
+        res.status(201).json({ message: `Succesfully deleted '${name.rows[0].planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
   }
@@ -33,7 +33,7 @@ module.exports = app => {
         await db.none(createSubscriber(), [req.session.id, subscriber, "555 Fake Lane", "Fake City", "Fake State", "55555", "fake@email.com", "(555)555-555", selectedPlan]);
         await db.none(updatePlanSubCount(), [req.session.id, selectedPlan]);
 
-        res.status(201).json({ message: `Succesfully added ${subscriber} to the ${selectedPlan} plan` });
+        res.status(201).json({ message: `Succesfully added ${subscriber} to the ${selectedPlan} plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // // DELETES REQURESTED RECORD

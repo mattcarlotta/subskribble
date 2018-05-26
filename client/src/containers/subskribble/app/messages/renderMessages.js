@@ -1,14 +1,13 @@
 import map from 'lodash/map';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
-
 import { resetServerMessages } from '../../../../actions/appActions';
 
 notification.config({
   placement: 'topRight',
   top: 50,
-  duration: 8,
+  duration: 0,
 });
 
 class RenderMessages extends Component {
@@ -18,12 +17,23 @@ class RenderMessages extends Component {
   }
 
   showNotification = ({ noteType, message, description }) => {
-    const { resetServerMessages } = this.props;
     if (description) {
-      notification[noteType]({ message, description });
-      resetServerMessages();
+      notification[noteType]({
+        message,
+        description,
+        icon: this.iconMessageLayout(noteType)
+      });
+      this.props.resetServerMessages();
     }
   }
+
+  iconMessageLayout = noteType => (
+    <div className={`icon-message-container ${noteType}`}>
+      <div className="icon">
+        <i className="material-icons">{noteType === 'error' ? 'error' : 'check'}</i>
+      </div>
+    </div>
+  )
 
   shouldComponentUpdate = (nextProps) => (
     this.props.serverError !== '' || nextProps.serverError !== '' || this.props.serverMessage !== '' || nextProps.serverMessage !== ''
