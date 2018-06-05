@@ -7,24 +7,14 @@ const TABLEHEADERS = [
 		dataIndex: 'status',
 		render: status => (
 			<Tooltip placement="bottom" title={status}>
-				<i className={`material-icons ${status}`}>new_releases</i>
+				<i className={`material-icons ${status}`}>content_copy</i>
 			</Tooltip>
 		)
 	},
 	{ title: 'Name', dataIndex: 'promocode' },
-	{ title: 'Amount', dataIndex: 'amount' },
-	{ title: 'Start Date', dataIndex: 'startdate' },
-	{ title: 'Valid For', dataIndex: 'validfor' },
-	{
-		title: 'Max Usage',
-		dataIndex: 'maxusage',
-		render: usage => <span className="max-usage"> {usage}</span>
-	},
-	{
-		title: 'Total Usage',
-		dataIndex: 'totalusage',
-		render: usage => <span className="total-usage"> {usage}</span>
-	}
+	{ title: 'Gateway', dataIndex: 'gateway' },
+	{ title: 'Unique Id', dataIndex: 'unqiueid' },
+	{ title: 'Plans', dataIndex: 'plans' }
 ];
 
 export default ({
@@ -36,16 +26,16 @@ export default ({
 }) => [
 	{
 		SELECTFIELD: true,
-		TAB: 'Active Promotionals',
+		TAB: 'Active Forms',
 		TABLECONTENTS: activeitems,
 		TABLEHEADERS,
 		TABLERECORDS: activeitemcount,
-		tipTitle: 'Add Promo',
+		tipTitle: 'Create Form',
 		...rest
 	},
 	{
 		SELECTFIELD: true,
-		TAB: 'Inactive Promotionals',
+		TAB: 'Inactive Forms',
 		TABLECONTENTS: inactiveitems,
 		TABLEHEADERS,
 		TABLERECORDS: inactiveitemcount,

@@ -8,7 +8,7 @@ import SubsPanel from '../../../components/subskribble/subscribers/panels/subscr
 const Subscribers = props => (
   <PanelLoader
     {...props}
-    buttonLabel="Add Subscriber"
+    buttonIcon="person_add"
     buttonPushLocation="subscribers/register"
     cardTitle="Subscribers"
     CARDS={CARDS}

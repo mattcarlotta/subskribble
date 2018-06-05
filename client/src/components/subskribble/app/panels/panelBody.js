@@ -18,7 +18,7 @@ export default class extends Component {
   selectCurrentPage = page => this.setState({ current: page })
 
   render = () => {
-    const { buttonAction, CARDBODY, fetchAction, GRAPH, SELECTFIELD, TAB, TABLECONTENTS } = this.props;
+    const { buttonPushLocation, CARDBODY, fetchAction, GRAPH, SELECTFIELD, TAB, TABLECONTENTS } = this.props;
     const tabTitle = TAB.toLowerCase().replace(/\s/g, '');
 
     return (
@@ -40,11 +40,11 @@ export default class extends Component {
               }
             </div>
             <div className="ant-col-12 f-r">
-              { buttonAction &&
+              { buttonPushLocation &&
                 <CustomButton
                   buttonIcon={this.props.buttonIcon}
                   className="f-r"
-                  onClickAction={buttonAction}
+                  buttonPushLocation={buttonPushLocation}
                   tipTitle={this.props.tipTitle}
                 />
               }

@@ -52,6 +52,17 @@ module.exports = app => {
     setReadNotifications: () => (`UPDATE notifications SET read=true WHERE read=false AND userid=$1`)
   }
 
+  const subformQueries = {
+    createForm: () => ( `INSERT INTO forms (userid, name, plans, uniqueFormName) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4)`),
+    deleteOneForm: () => ("DELETE FROM forms WHERE id=$1 AND userid=$2 RETURNING *"),
+    getSomeForms: (userid, limit, offset, status) => (`SELECT * FROM forms ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getFormCount: () => (
+      "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM forms;"
+    ),
+    updateOneForm: () => ("UPDATE forms SET status=$1 WHERE id=$2 AND userid=$3 RETURNING name"),
+    selectForm: () => ("SELECT name FROM forms WHERE userid=$1 AND uniqueFormName=$2")
+  }
+
   const subQueries = {
     createSubscriber: () => (
       `INSERT INTO subscribers (userid, subscriber, address, addressCity, addressState, addressZip, email, phone, planName, amount)
@@ -79,6 +90,7 @@ module.exports = app => {
     ...notificationQueries,
     ...planQueries,
     ...promoQueries,
+    ...subformQueries,
     ...subQueries,
     ...transactQueries
   }

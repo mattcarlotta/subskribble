@@ -8,10 +8,7 @@ class Loader extends Component {
 
 	componentDidMount = () => this.setTimer();
 
-  componentDidUpdate = (nextProps, nextState) => {
-    const { serverError } = this.props;
-    serverError !== nextProps.serverError && this.noDataWasFound()
-  }
+  componentDidUpdate = (nextProps, nextState) => this.props.serverError !== nextProps.serverError && this.noDataWasFound()
 
   componentWillUnmount = () => this.clearTimer();
 
@@ -23,11 +20,7 @@ class Loader extends Component {
 
   setTimer = () => this.timeout = setTimeout(this.timer, 3000)
 
-  render = () => (
-		this.state.requestTimeout
-      ? <NoDataToDisplay {...this.props} />
-      : <Spinner />
-  )
+  render = () => ( this.state.requestTimeout ? <NoDataToDisplay {...this.props} /> : <Spinner /> )
 }
 
 export default connect(state => ({ serverError: state.server.error }))(Loader);

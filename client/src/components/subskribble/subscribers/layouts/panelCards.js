@@ -1,8 +1,5 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { browserHistory } from 'react-router';
-
-const buttonAction = () => browserHistory.push('/subskribble/subscribers/register');
 
 const SUB = {
 	active: 'person',
@@ -42,8 +39,6 @@ export default ({
 	...rest
 }) => [
 	{
-		buttonAction,
-		buttonIcon: 'person_add',
 		SELECTFIELD: true,
 		TAB: 'Active Subscribers',
 		TABLECONTENTS: activeitems,

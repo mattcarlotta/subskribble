@@ -56,6 +56,15 @@ module.exports = app => {
     totalUsage INTEGER
   )`;
 
+  const subformTableOptions = `(
+    key SERIAL PRIMARY KEY,
+    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCASE,
+    status VARCHAR DEFAULT 'active',
+    formName VARCHAR UNIQUE,
+    uniqueFormName VARCAR UNIQUE,
+    plans TEXT ARRAY
+  )`
+
   const subTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -94,6 +103,7 @@ module.exports = app => {
   const planProperties = `(userid, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(userid, status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
+  const subformProperties = `(userid, formName, uniqueFormName, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
 
@@ -150,6 +160,13 @@ module.exports = app => {
   (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', '1FREEPUMP', '$100.00', '30 days', 5, 4),
   (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'ASSOCIATED', '$100.00', '30 days', 10, 5);
   `);
+
+  const subformValues = id => (
+    (${selectUserid(id)}, 'Partners Form', 'partners-form', ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Sales', 'Carlotta Youtube']),
+    (${selectUserid(id)}, 'Affiliates Form', 'affiates-form', ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Solar'] ),
+    (${selectUserid(id)}, 'Subscriber Form', 'subscriber-form', ['Carlotta Prime']),
+    (${selectUserid(id)}, 'Employee Form', 'employee-form', ['']),
+  )
 
   const subValues = id => (`
   (${selectUserid(id)}, 'active', 'admin@admin.com', 'Admin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
@@ -232,6 +249,7 @@ module.exports = app => {
         CREATE TABLE promotionals ${promoTableOptions};
         CREATE TABLE notifications ${noteTableOptions};
         CREATE TABLE subscribers ${subTableOptions};
+        CREATE TABLE forms ${subformTableOptions};
         CREATE TABLE transactions ${transTableOptions};
       `);
 
@@ -259,6 +277,7 @@ module.exports = app => {
         INSERT INTO notifications ${noteProperties} VALUES ${noteValues(id)};
         INSERT INTO promotionals ${promoProperties} VALUES ${promoValues(id)};
         INSERT INTO subscribers ${subProperties} VALUES ${subValues(id)};
+        INSERT INTO forms ${subformProperties} VALUES ${subformValues(id)};
         INSERT INTO transactions ${transProperties} VALUES ${transValues(id)};
       `)
 

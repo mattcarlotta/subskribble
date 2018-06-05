@@ -7,7 +7,7 @@ import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupFo
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
 // import FAQs from '../components/subskribble/faqs';
-// import Forms from '../components/subskribble/forms';
+import Forms from '../containers/subskribble/subforms';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app/landing';
 import NotFound from '../components/subskribble/app/notfound/404';
@@ -37,7 +37,7 @@ export default (
 				{/* <Route path="contact-us" component={ContactUs} /> */}
 				{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
 				{/* <Route path="faqs" component={FAQs} /> */}
-				{/* <Route path="forms" component={Forms}/> */}
+				<Route path="forms" component={Forms}/>
 				<Route path="plans" component={Plans} />
 				<Route path="promotionals" component={Promos} />
 				<Route path="subscribers" component={Subscribers} />

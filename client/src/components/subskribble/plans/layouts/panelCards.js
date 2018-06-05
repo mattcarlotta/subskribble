@@ -1,8 +1,5 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { browserHistory } from 'react-router';
-
-const buttonAction = () => browserHistory.push('/subskribble/plans/create');
 
 export const TABLEHEADERS = [
 	{
@@ -44,8 +41,6 @@ export default ({
 	...rest
 }) => [
 	{
-		buttonAction,
-		buttonIcon: 'note_add',
 		SELECTFIELD: true,
 		TAB: 'Active Plans',
 		TABLECONTENTS: activeitems,

@@ -1,27 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import AsyncModal from '../modals/asyncModal';
 import NewPasswordForm from '../../forms/newPasswordForm';
 
-class ResetPassword extends Component {
-  state = { visible: true }
+const resetSelectedForm = () => browserHistory.push('/');
 
-  resetSelectedForm = () => browserHistory.push('/');
-
-	render = () => (
-    <AsyncModal
-      {...this.props}
-      {...this.state}
-      closable={false}
-      location={this.props.location}
-      destroyOnClose={true}
-      maskClosable={false}
-      FORM={NewPasswordForm}
-      resetSelectedForm={this.resetSelectedForm}
-      title="Create New Password"
-    />
-	);
-}
+const ResetPassword = props => (
+  <AsyncModal
+    {...props}
+    closable={false}
+    location={props.location}
+    destroyOnClose={true}
+    maskClosable={false}
+    FORM={NewPasswordForm}
+    resetSelectedForm={resetSelectedForm}
+    title="Create New Password"
+    visible={true}
+  />
+)
 
 export default connect(state => ({ serverMessage: state.server.message }))(ResetPassword);

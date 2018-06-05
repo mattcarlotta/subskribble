@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS subscribers;
 DROP TABLE IF EXISTS plans;
 DROP TABLE IF EXISTS promotionals;
 DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS forms;
 DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE users (
@@ -105,4 +106,13 @@ CREATE TABLE transactions (
   amount VARCHAR,
   chargeDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
   refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
+);
+
+CREATE TABLE forms (
+  key SERIAL PRIMARY KEY,
+  userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  status VARCHAR default 'active',
+  formName VARCHAR UNIQUE NOT NULL,
+  uniqueFormName VARCAR UNIQUE NOT NULL,
+  plans TEXT ARRAY
 );
