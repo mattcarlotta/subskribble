@@ -110,6 +110,26 @@ const serverReducer = (state={}, { payload, type }) => {
 	}
 }
 
+const subformReducer = (state={}, { payload, type }) => {
+	switch (type) {
+		case types.SET_ACTIVE_FORMS: return { ...state, activeitems: payload };
+		case types.SET_INACTIVE_FORMS: return { ...state, inactiveitems: payload };
+		case types.SET_INITIAL_FORMS:
+			return {
+				...state,
+				activeitems: payload.activeforms,
+				inactiveitems: payload.inactiveforms
+			}
+		case types.SET_INITIAL_FORMCOUNTS:
+			return {
+				...state,
+				activeitemcount: payload.activeformscount,
+				inactiveitemcount: payload.inactiveformscount
+			}
+		default: return state;
+	}
+}
+
 const subscriberReducer = (state={}, { payload, type }) => {
 	switch (type) {
 		case types.SET_ACTIVE_SUBS: return { ...state, activeitems: payload };
@@ -176,6 +196,7 @@ const rootReducer = combineReducers({
 	promos: promoReducer,
 	server: serverReducer,
 	subs: subscriberReducer,
+	subforms: subformReducer,
 	transactions: transactionReducer,
 	...formReducers,
 	routing

@@ -16,8 +16,8 @@ export default {
   fetchAction: (table, page, sortByNum) => dispatch => (
     app.get(`forms/records?table=${table}&page=${page}&limit=${sortByNum}`)
     .then(({data: {activeforms, inactiveforms}}) => {
-      activeforms && dispatch({ type: types.SET_ACTIVE_SUBS, payload: activeforms })
-      inactiveforms && dispatch({ type: types.SET_INACTIVE_SUBS, payload: inactiveforms })
+      activeforms && dispatch({ type: types.SET_ACTIVE_FORMS, payload: activeforms })
+      inactiveforms && dispatch({ type: types.SET_INACTIVE_FORMS, payload: inactiveforms })
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
@@ -25,7 +25,7 @@ export default {
   fetchItems: () => dispatch => (
     app.get('forms')
     .then(({data: {activeforms, inactiveforms}}) => {
-      dispatch({ type: types.SET_INITIAL_SUBS, payload: {activeforms, inactiveforms}})
+      dispatch({ type: types.SET_INITIAL_FORMS, payload: {activeforms, inactiveforms}})
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
@@ -33,7 +33,7 @@ export default {
   fetchItemCounts: () => dispatch => (
     app.get('formcounts')
     .then(({data: {activeformscount, inactiveformscount}}) => {
-      dispatch({ type: types.SET_INITIAL_SUBCOUNTS, payload: { activeformscount, inactiveformscount }})
+      dispatch({ type: types.SET_INITIAL_FORMCOUNTS, payload: { activeformscount, inactiveformscount }})
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),

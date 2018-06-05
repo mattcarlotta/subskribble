@@ -59,7 +59,7 @@ module.exports = app => {
     getFormCount: () => (
       "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM forms;"
     ),
-    updateOneForm: () => ("UPDATE forms SET status=$1 WHERE id=$2 AND userid=$3 RETURNING name"),
+    updateOneForm: () => ("UPDATE forms SET status=$1 WHERE id=$2 AND userid=$3 RETURNING formName"),
     selectForm: () => ("SELECT name FROM forms WHERE userid=$1 AND uniqueFormName=$2")
   }
 

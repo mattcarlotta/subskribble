@@ -17,7 +17,7 @@ module.exports = app => {
 
         await db.none(createForm(), [req.session.id, formname, plans, uniqueFormName]);
 
-        res.status(201).json({ message: `Succesfully created a new form: ${formname}` });
+        res.status(201).json({ message: `Succesfully created '${formname}' form.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // DELETES REQURESTED RECORD
@@ -27,7 +27,7 @@ module.exports = app => {
       try {
         const name = await db.result(deleteOneForm(), [req.params.id, req.session.id]);
 
-        res.status(201).json({ message: `Succesfully deleted the form: ${name.rows[0].name}` });
+        res.status(201).json({ message: `Succesfully deleted the '${name.rows[0].formname}' form.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
@@ -54,8 +54,8 @@ module.exports = app => {
         const forms = await db.any(getFormCount(), [req.session.id]);
 
         res.status(201).json({
-          activesubscriberscount: parseStringToNum(forms[0].active),
-          inactivesubscriberscount: parseStringToNum(forms[0].inactive)
+          activeformscount: parseStringToNum(forms[0].active),
+          inactiveformscount: parseStringToNum(forms[0].inactive)
         });
       } catch (err) { return sendError(err, res, next); }
     },
@@ -76,9 +76,9 @@ module.exports = app => {
       const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : null;
 
       try {
-        const form = await db.one(updateOneSubscriber(), [statusType, id, req.session.id])
+        const form = await db.one(updateOneForm(), [statusType, id, req.session.id])
 
-        res.status(201).json({ message: `Succesfully ${updateType} ${form.name}.` });
+        res.status(201).json({ message: `Succesfully ${updateType} the '${form.formname}' form.` });
       } catch (err) { return sendError(err, res, next); }
     }
   }

@@ -7,7 +7,7 @@ import UpdateItemStatus from './UpdateItemStatus'
 export default class TableActions extends PureComponent {
   render = () => {
     const { deleteAction, updateAction } = this.props;
-    const { billevery, id, maxusage, status, type } = this.props.record;
+    const { billevery, id, maxusage, status, type, uniqueformname } = this.props.record;
     const statusType = (status === "inactive" || status === "suspended") ? "activate" : "suspend";
     return (
       <Fragment>
@@ -20,7 +20,7 @@ export default class TableActions extends PureComponent {
           : null
         } */}
         <DeleteItem id={id} deleteAction={deleteAction} />
-        { !type && !billevery && !maxusage
+        { !type && !billevery && !maxusage && !uniqueformname
           ? <MoreActions id={id} />
           : null
         }

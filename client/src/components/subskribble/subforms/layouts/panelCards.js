@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
 
@@ -11,10 +12,30 @@ const TABLEHEADERS = [
 			</Tooltip>
 		)
 	},
-	{ title: 'Name', dataIndex: 'promocode' },
-	{ title: 'Gateway', dataIndex: 'gateway' },
-	{ title: 'Unique Id', dataIndex: 'unqiueid' },
-	{ title: 'Plans', dataIndex: 'plans' }
+	{ title: 'Form Name', dataIndex: 'formname' },
+	{
+    title: 'Unique Form Name',
+    dataIndex:  'uniqueformname',
+    render: uniqueid => (
+      <span style={{ textTransform: 'lowercase' }}>{uniqueid}</span>
+    )
+  },
+	{
+    title: 'Associated Plans',
+    dataIndex: 'plans',
+    render: plans => (
+      <span>
+        { map(plans, (name, key) => (
+          name
+          ? <span key={key}>{name}{ key < plans.length-1 && ', '}
+            </span>
+          : <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
+              (none)
+            </span>
+        ))}
+      </span>
+    )
+  }
 ];
 
 export default ({

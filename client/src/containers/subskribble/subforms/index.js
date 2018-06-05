@@ -17,4 +17,4 @@ const Subscribers = props => (
   />
 );
 
-export default connect(state => ({ serverMessage: state.server.message, ...state.subs }), { ...actions })(Subscribers)
+export default connect(state => ({ serverMessage: state.server.message, ...state.subforms }), { ...actions })(Subscribers)
