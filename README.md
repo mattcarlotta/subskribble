@@ -5,15 +5,15 @@ subskribble - an experimental app to create, manage, and send personalized updat
 <details>
 <summary>Linux Instructions</summary>
 <ul style="list-style-type:circle">
-  <li>Install NodeJS: <pre><code>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && sudo apt-get update && install -y nodejs </code></pre>
-  <li>Install and Configure PostgreSQL:</li>
+  Install NodeJS: <pre><code>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && sudo apt-get update && install -y nodejs </code></pre>
+  Install and Configure PostgreSQL:
   <ul>
     <li><pre><code>sudo apt-get install postgresql postgresql-contrib</code></pre></li>
     <li>Logs into PostgreSQL shell with default user "postgres": <pre><code>sudo -u postgres psql</code></pre></li>
     <li>Asks to set a password for "postgres"; after pressing enter, it'll prompt for the password: <pre><code>password postgres</code></pre></li>
     <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
-  <li>Create a Custom postgreSQL User (optional):</li>
+  Create a Custom postgreSQL User (optional):
   <ul>
     <li>Logs into postgreSQL as "postgres": <pre><code>psql -U postgres</code></pre></li>
     <li>Creates a new user with a password: <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
@@ -21,9 +21,9 @@ subskribble - an experimental app to create, manage, and send personalized updat
     <li>Shows active DB maintainers: <pre><code>\du</code></pre></li>
     <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
-  <li>Starting PostgreSQL on Boot (optional): <pre><code>sudo systemctl enable postgresql</pre></code></li>
-  <li>Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code></li>
-  <li>Seed DB and Run Node Server</li>
+  Starting PostgreSQL on Boot (optional): <pre><code>sudo systemctl enable postgresql</pre></code>
+  Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code>
+  Seed DB and Run Node Server
   <ul>
     <li>Required to initially create a DB, otherwise 'npm run seeds' afterward: <pre><code>psql -U <username> -f initDB.sql</code></pre></li>
     <li><pre><code>npm run dev</code></pre></li>
@@ -35,14 +35,15 @@ subskribble - an experimental app to create, manage, and send personalized updat
 <details>
 <summary>MacOS Instructions</summary>
 <ul style="list-style-type:circle">
-  <li>Install Brew: <pre><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre></li>
-  <li>Install NodeJS and PostgreSQL: <pre><code>brew update && brew install node && brew install postgresql</code></pre>
-  <li>Configure PostgreSQL:</li>
-  <li>Logs into PostgreSQL shell with default user "postgres": <pre><code>sudo -u postgres psql</code></pre></li>
-  <li>Asks to set a password for "postgres"; after pressing enter, it'll prompt for the password: <pre><code>password postgres</code></pre></li>
-  <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
+  Install Brew: <pre><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
+  Install NodeJS and PostgreSQL: <pre><code>brew update && brew install node && brew install postgresql</code></pre>
+  Configure PostgreSQL:
+  <ul>
+    <li>Logs into PostgreSQL shell with default user "postgres": <pre><code>sudo -u postgres psql</code></pre></li>
+    <li>Asks to set a password for "postgres"; after pressing enter, it'll prompt for the password: <pre><code>password postgres</code></pre></li>
+    <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
-  <li>Create a Custom postgreSQL User (optional):</li>
+  Create a Custom postgreSQL User (optional):
   <ul>
     <li>Logs into postgreSQL as "postgres": <pre><code>psql -U postgres</code></pre></li>
     <li>Creates a new user with a password: <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
@@ -50,7 +51,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
     <li>Shows active DB maintainers: <pre><code>\du</code></pre></li>
     <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
-  <li>Starting PostgreSQL on Boot (optional): <pre><code>brew services start postgresql</pre></code></li>
+  Starting PostgreSQL on Boot (optional): <pre><code>brew services start postgresql</pre></code>
   Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code>
   Seed DB and Run Node Server
   <ul>
