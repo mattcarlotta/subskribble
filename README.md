@@ -4,6 +4,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ## Quickstart
 <details>
 <summary>Linux Instructions</summary>
+<br />
 <ul style="list-style-type:circle">
   Install NodeJS: <pre><code>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && sudo apt-get update && install -y nodejs </code></pre>
   Install and Configure PostgreSQL:
@@ -34,6 +35,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 
 <details>
 <summary>MacOS Instructions</summary>
+<br />
 <ul style="list-style-type:circle">
   Install Brew: <pre><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
   Install NodeJS and PostgreSQL: <pre><code>brew update && brew install node && brew install postgresql</code></pre>
