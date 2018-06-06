@@ -37,13 +37,13 @@ subskribble - an experimental app to create, manage, and send personalized updat
 <details>
 <summary>MacOS Instructions</summary>
 <ul style="list-style-type:circle">
-  <li>Install Brew</li>
+  <li>Install Brew:</li>
     <ul>
-      <li>type `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`</li>
+      <li style="margin-left: 20px">```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```</li>
     </ul>
   </ul>
 </ul>
-    
+
 2. Install NodeJS and PostgreSQL
     a.) `brew update`
     b.) `brew install node`
