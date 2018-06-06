@@ -17,8 +17,8 @@ subskribble - an experimental app to create, manage, and send personalized updat
   Create a Custom postgreSQL User (optional):
   <ul>
     <li>Logs into postgreSQL as "postgres": <pre><code>psql -U postgres</code></pre></li>
-    <li>Creates a new user with a password: <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
-    <li>Gives user limited ability to create DBs or GRANT ALL PRIVILEDGES ON DATABASE 'dbname' TO 'username';<pre><code>ALTER ROLE <username> CREATEDB;</code></pre></li>
+    <li>Creates a new user with a password (replace quotes with new login details): <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
+    <li>Gives user limited ability to create DBs (or you can GRANT ALL PRIVILEDGES ON DATABASE 'dbname' TO 'username';): <pre><code>ALTER ROLE 'username' CREATEDB;</code></pre></li>
     <li>Shows active DB maintainers: <pre><code>\du</code></pre></li>
     <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
@@ -48,8 +48,8 @@ subskribble - an experimental app to create, manage, and send personalized updat
   Create a Custom postgreSQL User (optional):
   <ul>
     <li>Logs into postgreSQL as "postgres": <pre><code>psql -U postgres</code></pre></li>
-    <li>Creates a new user with a password: <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
-    <li>Gives user limited ability to create DBs or GRANT ALL PRIVILEDGES ON DATABASE 'dbname' TO 'username';<pre><code>ALTER ROLE <username> CREATEDB;</code></pre></li>
+    <li>Creates a new user with a password (replace quotes with new login details): <pre><code>CREATE ROLE 'username' WITH LOGIN PASSWORD 'password';</code></pre></li>
+    <li>Gives user limited ability to create DBs (or you can GRANT ALL PRIVILEDGES ON DATABASE 'dbname' TO 'username';): <pre><code>ALTER ROLE 'username' CREATEDB;</code></pre></li>
     <li>Shows active DB maintainers: <pre><code>\du</code></pre></li>
     <li>Exits PostgreSQL shell: <pre><code>\q</code></pre></li>
   </ul>
