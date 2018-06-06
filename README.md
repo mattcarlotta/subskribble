@@ -38,8 +38,8 @@ subskribble - an experimental app to create, manage, and send personalized updat
 <summary>MacOS Instructions</summary>
 <ul style="list-style-type:circle">
   <li>Install Brew:</li>
-    <ul>
-      <li style="margin-left: 20px">```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```</li>
+    <ul style="padding-left: 20px">
+      <li><pre><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre></li>
     </ul>
   </ul>
 </ul>
