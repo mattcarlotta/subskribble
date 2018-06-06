@@ -83,7 +83,7 @@ password: password123
 - You **MUST** create a single js config file that exports an object:
 <details>
 <summary>Example Config</summary>
-```javascript
+<pre><code>
 module.exports = {
   "development": {
     apiURL: "http://localhost:3000/",
@@ -134,5 +134,5 @@ module.exports = {
     url: "http://localhost:5000/",
   }
 }
-```
+</code></pre>
 </details>
