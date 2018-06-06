@@ -52,7 +52,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
   </ul>
   <li>Starting PostgreSQL on Boot (optional): <pre><code>brew services start postgresql</pre></code></li>
   <li>Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code></li>
-  <li>Seed DB and Run Node Server</li>
+  Seed DB and Run Node Server
   <ul>
     <li>Required to initially create a DB, otherwise 'npm run seeds' afterward: <pre><code>psql -U <username> -f initDB.sql</code></pre></li>
     <li><pre><code>npm run dev</code></pre></li>
