@@ -4,35 +4,33 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ## Quickstart
 <details>
 <summary>Linux Instructions</summary>
-```
-1. Install NodeJS
-    a.) `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
-    b.) `sudo apt-get update && install -y nodejs`
-
-2. Install and Configure PostgreSQL
-    a.) `sudo apt-get install postgresql postgresql-contrib`
-    b.) `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
-    c.) `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
-    d.) `\q` (exits postgresSQL shell)
-
-3. Create a Custom PostgreSQL User (optional)
-    a.) `psql -U postgres` (logs into PostgreSQL as "postgres")
-    b.) `CREATE ROLE <username> WITH LOGIN PASSWORD '<password>';` (creates a new user with a password)
-    c.) `ALTER ROLE <username> CREATEDB;` (gives user limited ability to create DBs or `GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;`)
-    d.) `\du` (shows active DB maintainers)
-    e.) `\q` (exits postgresSQL shell)
-
-4. Starting PostgreSQL on Boot (optional)
-    a.) `sudo systemctl enable postgresql`
-
-5. Install App Dependencies
-    a.) `npm i && cd client && npm i`
-
-6. Seed DB and Run Node Server
-    a.) `psql -U <username> -f initDB.sql` (only required to initially create a DB, otherwise `npm run seeds`)
-    b.) `npm run dev`
-```
+<ul style="list-style-type:circle">
+  <li>Install NodeJS: <pre><code>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && sudo apt-get update && install -y nodejs </code></pre>
+  <li>Install and Configure PostgreSQL:</li>
+  <ul>
+    <li><pre><code>sudo apt-get install postgresql postgresql-contrib</code></pre>logs into PostgreSQL shell with default user "postgres"</li>
+    <li><pre><code>sudo -u postgres psql</code></pre>logs into PostgreSQL shell with default user "postgres"</li>
+    <li><pre><code>password postgres</code></pre>(will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)</li>
+    <li><pre><code>\q</code></pre>(exits PostgreSQL shell)</li>
+  </ul>
+  <li>Create a Custom postgreSQL User (optional):</li>
+  <ul>
+    <li><pre><code>psql -U postgres</code></pre>(logs into postgreSQL as "postgres")</li>
+    <li><pre><code>CREATE ROLE <username> WITH LOGIN PASSWORD '<password>';</code></pre>(creates a new user with a password)</li>
+    <li><pre><code>ALTER ROLE <username> CREATEDB;</code></pre>(gives user limited ability to create DBs or GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;)</li>
+    <li><pre><code>\du</code></pre>(shows active DB maintainers)</li>
+    <li><pre><code>\q</code></pre>(exits PostgreSQL shell)</li>
+  </ul>
+  <li>Starting PostgreSQL on Boot (optional): <pre><code>sudo systemctl enable postgresql</pre></code></li>
+  <li>Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code></li>
+  <li>Seed DB and Run Node Server</li>
+  <ul>
+    <li><pre><code>psql -U <username> -f initDB.sql (required to initially create a DB, otherwise 'npm run seeds' afterward)</code></pre></li>
+    <li><pre><code>npm run dev</code></pre></li>
+  </ul>
+</ul>
 </details>
+
 
 <details>
 <summary>MacOS Instructions</summary>
@@ -41,17 +39,17 @@ subskribble - an experimental app to create, manage, and send personalized updat
   <li>Install NodeJS and PostgreSQL: <pre><code>brew update && brew install node && brew install postgresql</code></pre>
   <li>Configure PostgreSQL:</li>
   <ul>
-    <li><pre><code>sudo -u postgres psql /// logs into PostgreSQL shell with default user "postgres"</code></pre></li>
-    <li><pre><code>password postgres /// (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)</code></pre></li>
-    <li><pre><code>\q /// (exits PostgreSQL shell)</code></pre></li>
+    <li><pre><code>sudo -u postgres psql</code></pre>logs into PostgreSQL shell with default user "postgres"</li>
+    <li><pre><code>password postgres</code></pre>(will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)</li>
+    <li><pre><code>\q</code></pre>(exits PostgreSQL shell)</li>
   </ul>
-  <li>Create a Custom postgreSQL User (optional)</li>
+  <li>Create a Custom postgreSQL User (optional):</li>
   <ul>
-    <li><pre><code>psql -U postgres /// (logs into postgreSQL as "postgres")</code></pre></li>
-    <li><pre><code>CREATE ROLE <username> WITH LOGIN PASSWORD '<password>'; /// (creates a new user with a password)</code></pre></li>
-    <li><pre><code>ALTER ROLE <username> CREATEDB; /// (gives user limited ability to create DBs or GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;)</code></pre></li>
-    <li><pre><code>\du /// (shows active DB maintainers)</code></pre></li>
-    <li><pre><code>\q (exits PostgreSQL shell)</code></pre></li>
+    <li><pre><code>psql -U postgres</code></pre>(logs into postgreSQL as "postgres")</li>
+    <li><pre><code>CREATE ROLE <username> WITH LOGIN PASSWORD '<password>';</code></pre>(creates a new user with a password)</li>
+    <li><pre><code>ALTER ROLE <username> CREATEDB;</code></pre>(gives user limited ability to create DBs or GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;)</li>
+    <li><pre><code>\du</code></pre>(shows active DB maintainers)</li>
+    <li><pre><code>\q</code></pre>(exits PostgreSQL shell)</li>
   </ul>
   <li>Starting PostgreSQL on Boot (optional): <pre><code>brew services start postgresql</pre></code></li>
   <li>Install App Dependencies: <pre><code>npm i && cd client && npm i</pre></code></li>
