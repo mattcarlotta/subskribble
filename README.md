@@ -84,7 +84,7 @@ password: password123
 ```
 
 ⚠️ In order to run and use this app:
-- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f init.sql` while at the app root.
+- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f initDB.sql` while at the app root.
 - You **MUST** sign up with a valid email address (or use the beta test email).
 - You **MUST** have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails).
 - You **MUST** create a single js config file that exports an object:
