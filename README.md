@@ -36,27 +36,23 @@ subskribble - an experimental app to create, manage, and send personalized updat
 
 <details>
 <summary>MacOS Instructions</summary>
-
-1. Install Brew
-    a.) type `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-
-
-
+<ul style="list-style-type:circle">
+  <li>Install Brew</li>
+    <ul>
+      <li>type `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`</li>
+    </ul>
+  </ul>
+</ul>
+    
 2. Install NodeJS and PostgreSQL
     a.) `brew update`
     b.) `brew install node`
     c.) `brew install postgresql`
 
-
-
-
 3. Configure PostgreSQL
     a.) `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
     b.) `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
     c.) `\q` (exits PostgreSQL shell)
-
-
-
 
 4. Create a Custom postgreSQL User (optional)
     a.) `psql -U postgres` (logs into postgreSQL as "postgres")
@@ -65,27 +61,15 @@ subskribble - an experimental app to create, manage, and send personalized updat
     d.) `\du` (shows active DB maintainers)
     e.) `\q` (exits PostgreSQL shell)
 
-
-
-
 5. Starting PostgreSQL on Boot (optional)
     a.) `brew services start postgresql`
-
-
-
 
 6. Install App Dependencies
     a.) `npm i && cd client && npm i`
 
-
-
-
 7. Seed DB and Run Node Server
     a.) `psql -U <username> -f initDB.sql` (required to initially create a DB, otherwise `npm run seeds` afterward)
     b.) `npm run dev`
-
-
-    
 ```
 </details>
 
