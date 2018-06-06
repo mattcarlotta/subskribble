@@ -31,7 +31,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 6. Seed DB and Run Node Server
-- `psql -U <username> -f initializeDB.sql` (only required to initially create a DB, otherwise `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initially create a DB, otherwise `npm run seeds`)
 - `npm run dev`
 </details>
 
@@ -68,7 +68,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 7. Seed DB and Run Node Server
-- `psql -U <username> -f initializeDB.sql` (required to initially create a DB, otherwise `npm run seeds` afterward)
+- `psql -U <username> -f initDB.sql` (required to initially create a DB, otherwise `npm run seeds` afterward)
 - `npm run dev`
 </details>
 
@@ -86,7 +86,7 @@ password: password123
 ```
 
 ⚠️ In order to run and use this app:
-- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f initializeDB.sql` while at the app root.
+- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f init.sql` while at the app root.
 - You **MUST** sign up with a valid email address (or use the beta test email).
 - You **MUST** have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails).
 - You **MUST** create a single js config file that exports an object:

@@ -64,7 +64,7 @@ module.exports = app => {
     formName VARCHAR UNIQUE,
     uniqueFormName VARCHAR UNIQUE,
     plans TEXT ARRAY
-  )`
+  )`;
 
   const subTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc(),
