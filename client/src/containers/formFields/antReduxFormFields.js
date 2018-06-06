@@ -11,7 +11,8 @@ const { Option } = Select;
 
 const CreateAntReduxField = Component => ({
   children,
-  input, meta: { invalid, touched, error },
+  input,
+  meta: { invalid, touched, error },
   label,
   formItemClassName,
   hasFeedback,
@@ -36,7 +37,7 @@ const AntInput = CreateAntReduxField(Input);
 const AntMonthPicker = CreateAntReduxField(MonthPicker);
 const AntRadioGroup = CreateAntReduxField(RadioGroup);
 const AntRangePicker = CreateAntReduxField(RangePicker);
-const AntSelect = CreateAntReduxField(Select);
+// const AntSelect = CreateAntReduxField(Select);
 const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
@@ -139,6 +140,42 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
   </div>
 )
 
+const AntSelect = ({
+  children,
+  currentValue,
+  input: { value, ...inputMethods },
+  meta: { invalid, touched, error },
+  label,
+  formItemClassName,
+  hasFeedback,
+  ...props
+}) => {
+  const hasError = touched && invalid;
+  return (
+    <FormItem
+      className={formItemClassName}
+      label={label}
+      hasFeedback={hasFeedback && touched}
+      help={hasError && error}
+      validateStatus={hasError ? "error" : "success"}
+    >
+      <Select {...inputMethods} {...props} children={children} />
+    </FormItem>
+  );
+};
+
+const AntSelectField = ({ className, selectOptions, ...props }) => (
+  <div className={className}>
+    <Field
+      {...props}
+      component={AntSelect}
+      hasFeedback
+    >
+      {selectOptions && map(selectOptions, ({planname}) => (<Option key={planname}>{planname}</Option>))}
+    </Field>
+  </div>
+)
+
 const AntSwitchField = (props) => (
   <Field
     {...props}
@@ -158,6 +195,7 @@ export {
   AntRadioGroupField,
   AntRangePicker,
   AntSelect,
+  AntSelectField,
   AntStepFormButtons,
   AntSwitch,
   AntSwitchField,

@@ -1,5 +1,7 @@
+import isEmpty from 'lodash/isEmpty';
+
 const allowedCharacters = value => (/[~`@#$%&*+=[\]\\/{}|\\":<>]/g.test(value)) ? 'Please remove any special characters' : undefined;
-const isNotEmpty = value => value.length === 0 ? 'You must include at least one item' : undefined;
+const isNotEmpty = value => isEmpty(value) ? 'You must include at least one item' : undefined;
 const isRequired = value => !value ? 'Required' : undefined;
 const isSelected = value => !value ? 'Please select a plan' : undefined;
 const isValidCC = value => value.length < 19 ? 'Invalid Credit Card' : undefined;

@@ -1,5 +1,7 @@
+const isEmpty = require('lodash').isEmpty;
+
 module.exports = app => {
-  const { db, query: { deleteOnePlan, getAllPlans, getPlanCount, updateOnePlan } } = app.database;
+  const { db, query: { deleteOnePlan, getAllActivePlans, getAllPlans, getPlanCount, updateOnePlan } } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
@@ -11,6 +13,16 @@ module.exports = app => {
         const name = await db.result(deleteOnePlan(), [req.params.id, req.session.id]);
 
         res.status(201).json({ message: `Succesfully deleted '${name.rows[0].planname}' plan.` });
+      } catch (err) { return sendError(err, res, next); }
+    },
+    // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
+    fetchAllActiveRecords: async (req, res, next) => {
+      if (!req.query) return sendError('Missing query fetch parameters', res, next);
+      try {
+        const activeplans = await db.any(getAllActivePlans(), [req.session.id]);
+        if (isEmpty(activeplans)) return sendError('You must create a plan before attempting to create a new form!', res, next);
+
+        res.status(201).json({ activeplans });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET

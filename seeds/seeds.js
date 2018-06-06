@@ -63,7 +63,7 @@ module.exports = app => {
     status VARCHAR DEFAULT 'active',
     formName VARCHAR UNIQUE,
     uniqueFormName VARCHAR UNIQUE,
-    plans TEXT ARRAY
+    plans TEXT ARRAY NOT NULL
   )`;
 
   const subTableOptions = `(

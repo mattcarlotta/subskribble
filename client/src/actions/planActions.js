@@ -1,5 +1,6 @@
 import app from './axiosConfig';
 import * as types from './types';
+import { browserHistory } from 'react-router';
 
 export default {
   // Deletes requested plan from DB
@@ -20,6 +21,14 @@ export default {
       inactiveplans && dispatch({ type: types.SET_INACTIVE_PLANS, payload: inactiveplans })
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+  ),
+  // fetch all active plans
+  fetchAllActivePlans: () => dispatch => (
+    app.get(`plans/only-active`)
+    .catch(err => {
+      dispatch({ type: types.SERVER_ERROR, payload: err })
+      browserHistory.goBack();
+    })
   ),
   // Fetches initial 10 active/inactive plans from DB
   fetchItems: () => dispatch => (

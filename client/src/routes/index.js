@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/subskribble';
+import CreateNewForm from '../containers/subskribble/forms/createNewForm';
 import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupForm';
 // import ContactUs from '../components/subskribble/contact';
 // import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
@@ -38,6 +39,7 @@ export default (
 				{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
 				{/* <Route path="faqs" component={FAQs} /> */}
 				<Route path="forms" component={Forms}/>
+				<Route path="forms/create" component={CreateNewForm} />
 				<Route path="plans" component={Plans} />
 				<Route path="promotionals" component={Promos} />
 				<Route path="subscribers" component={Subscribers} />
