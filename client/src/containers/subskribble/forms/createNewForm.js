@@ -1,8 +1,8 @@
-import filter from 'lodash/filter';
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { AntFormFields, AntSelectField, AntFormSubmit } from '../../formFields/antReduxFormFields';
+import { browserHistory } from 'react-router';
+import { AntFormFields, AntSelectField, AntStepFormButtons } from '../../formFields/antReduxFormFields';
 import actions from '../../../actions/planActions';
 import { allowedCharacters, isNotEmpty, isRequired } from '../../formFields/validateFormFields';
 import Spinner from '../app/loading/Spinner';
@@ -11,12 +11,12 @@ const { addNewForm, fetchAllActivePlans } = actions;
 const FIELDS = [{
   name: 'formName',
   type: 'text',
-  placeholder: 'Form Name',
+  placeholder: 'Unique form name',
   validate: [isRequired, allowedCharacters]
 }]
 
 class CreateNewForm extends Component {
-  state = { confirmLoading: false, isLoading: true, selectOptions: [], value: [] };
+  state = { confirmLoading: false, isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
     this.props.fetchAllActivePlans()
@@ -26,44 +26,47 @@ class CreateNewForm extends Component {
 
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
-    // addNewForm
 		console.log(formProps);
+    // addNewForm(formProps);
 	}
 
-  handleDeselect = remVal => this.setState({ value: filter(this.state.value, val => val !== remVal) })
-
-  handleChange = value => this.setState({ value: !value ? value : {...this.state.value, value} })
+  goBackPage = () => browserHistory.goBack();
 
   render = () => {
     const { handleSubmit, pristine, submitting } = this.props;
-    const { confirmLoading, selectOptions, isLoading, value } = this.state;
+    const { confirmLoading, selectOptions, isLoading } = this.state;
 
     return (
       isLoading
         ? <Spinner />
         : <div className="new-form-container">
-            <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-              <AntFormFields FIELDS={FIELDS} />
-              <AntSelectField
-                currentValue={value}
-                name="plans"
-                mode="tags"
-                placeholder="Click inside this box and select plans from the list below."
-                style={{ width: '100%' }}
-                onChange={this.handleChange}
-                onDeselect={this.handleDeselect}
-                selectOptions={selectOptions}
-                tokenSeparators={[',']}
-                validate={[isNotEmpty]}
-              />
-              <AntFormSubmit
-    						confirmLoading={confirmLoading}
-                label="Submit"
-    						pristine={pristine}
-    						submitting={submitting}
-    						style={{ fontSize: 18, height: 45, marginTop: 5, width: '100%' }}
-    					/>
-            </form>
+            <div className="form-box-container">
+              <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Form</h1>
+                <AntFormFields FIELDS={FIELDS} />
+                <AntSelectField
+                  className="tag-container"
+                  name="plans"
+                  mode="tags"
+                  placeholder="Click inside this box and select plans from the list below."
+                  style={{ width: '100%' }}
+                  selectOptions={selectOptions}
+                  tokenSeparators={[',']}
+                  validate={[isNotEmpty]}
+                />
+                <hr />
+                <AntStepFormButtons
+                  backLabel="Back"
+                  backStyle={{ height: 50, float: 'left' }}
+                  confirmLoading={confirmLoading}
+                  onClickBack={this.goBackPage}
+                  pristine={pristine}
+                  submitLabel="Submit"
+                  submitStyle= {{ height: 50, float: 'right' }}
+                  submitting={submitting}
+                />
+              </form>
+            </div>
           </div>
     )
   }

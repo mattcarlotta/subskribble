@@ -1,3 +1,27 @@
+.ant-select-selection--multiple .ant-select-selection__choice {
+  @include c($white);
+  @include b-c($lightblue);
+  @include b-s(inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(0,0,0,.2));
+  border-color: $tealblue;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+
+  .ant-select-selection__choice__remove {
+    @include c($white);
+    border-left: 1px solid $tealblue;
+
+    &:hover {
+      @include c($lightgrey);
+    }
+
+    &:before {
+      @extend %p-r;
+      left: 3px;
+    }
+  }
+}
+
 .ant-form-item {
   @extend %m-b-0;
   @include h(60px);
@@ -20,10 +44,13 @@
 }
 
 .customer-signup-bg {
-  // @include b-c($whiteblue);
   @include h(100%);
+  padding: 15px;
 
   .customer-signup-container {
+    @include b-c($white);
+    @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+
     padding-top: 10px;
 
     .stepper-container {
@@ -50,6 +77,8 @@
       }
 
       h4 { @include f-w(300); @include l-h(30px); }
+
+      .ant-form-item { @include h(75px); }
 
       .left-form {
         @extend .f-l, %pr-10;
@@ -254,20 +283,28 @@
 
 .new-form-container {
   @extend %t-t-n;
-  @include w(100%);
-  max-width: 800px;
-  padding: 16px;
 
-  .input-container {
-    margin: 10px 0px;
-    @include h(72px);
+  .form-box-container {
+    @extend %m-0-a;
+    @include b-c($white);
+    @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+    @include w(700px);
+    padding: 40px 80px;
+    margin-top: 80px;
 
-    .override-chip-style {
-      & div > div > div {
-        background-color: $neutralgreen !important;
+    .tag-container > .ant-form-item { overflow-y: auto; margin-bottom: 30px; }
 
-        span {
-          color: $white !important;
+    .input-container {
+      margin: 10px 0px;
+      @include h(72px);
+
+      .override-chip-style {
+        & div > div > div {
+          background-color: $neutralgreen !important;
+
+          span {
+            color: $white !important;
+          }
         }
       }
     }

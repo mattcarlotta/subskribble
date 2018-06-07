@@ -142,18 +142,15 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
 
 const AntSelect = ({
   children,
-  currentValue,
   input: { value, ...inputMethods },
   meta: { invalid, touched, error },
   label,
-  formItemClassName,
   hasFeedback,
   ...props
 }) => {
   const hasError = touched && invalid;
   return (
     <FormItem
-      className={formItemClassName}
       label={label}
       hasFeedback={hasFeedback && touched}
       help={hasError && error}
