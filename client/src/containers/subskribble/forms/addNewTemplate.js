@@ -5,13 +5,14 @@ import { browserHistory } from 'react-router';
 import { AntFormFields, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
 import actions from '../../../actions/planActions';
 import { allowedCharacters, isNotEmpty, isRequired } from '../app/formFields/validateFormFields';
-import Spinner from '../loading/Spinner';
+import Spinner from '../app/loading/Spinner';
+import QuillEditor from '../app/formFields/QuillEditor';
 const { addNewForm, fetchAllActivePlans } = actions;
 
 const FIELDS = [{
-  name: 'formName',
+  name: 'templateName',
   type: 'text',
-  placeholder: 'Unique form name',
+  placeholder: 'Unique template name',
   validate: [isRequired, allowedCharacters]
 }]
 
@@ -42,18 +43,19 @@ class CreateNewTemplate extends Component {
         : <div className="new-form-container">
             <div className="form-box-container">
               <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Form</h1>
+                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Template</h1>
                 <AntFormFields FIELDS={FIELDS} />
                 <AntSelectField
                   className="tag-container"
                   name="plans"
                   mode="tags"
-                  placeholder="Click inside this box and select plans from the list below."
+                  placeholder="Click here to select plans from the list below."
                   style={{ width: '100%' }}
                   selectOptions={selectOptions}
                   tokenSeparators={[',']}
                   validate={[isNotEmpty]}
                 />
+                <QuillEditor />
                 <hr />
                 <AntStepFormButtons
                   backLabel="Back"

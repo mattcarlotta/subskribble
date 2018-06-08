@@ -22,7 +22,7 @@ const AuthForm = ({
 					<AntFormFields FIELDS={FIELDS} />
 					{showForgotPassword &&
 						<div className="forgot-password">
-							<Link data-formid={1} onClick={switchAuthForm}><i className="fa fa-lock m-r-5"/>Forgot password?</Link>
+							<Link data-formid={1} onClick={switchAuthForm}><i className="material-icons lock-icon">lock_open</i> Forgot your password?</Link>
 						</div>
 					}
 					<AntFormSubmit

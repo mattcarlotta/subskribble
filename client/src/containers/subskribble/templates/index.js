@@ -9,7 +9,7 @@ const Templates = props => (
   <PanelLoader
     {...props}
     buttonIcon="library_add"
-    buttonPushLocation="template/create"
+    buttonPushLocation="templates/create"
     cardTitle="Templates"
     CARDS={CARDS}
     Panel={TemplatePanel}

@@ -15,6 +15,7 @@ const isValidYear = value => value.length < 4 ? 'Invalid Year' : undefined;
 const isValidZip = value => !/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ? 'Invalid zip code' : undefined;
 const maxLength = max => value => value && value.length > max ? `Must be ${max} characters or less!` : undefined;
 const minPassword = value => (value.length <= 5) ? 'Password must be longer than 6 characters!' : null
+const missingInput = value => (value === "<p><br></p>") ? 'You must include a message!' : null;
 
 export {
   allowedCharacters,
@@ -30,5 +31,6 @@ export {
   isValidYear,
   isValidZip,
   maxLength,
-  minPassword
+  minPassword,
+  missingInput
 }
