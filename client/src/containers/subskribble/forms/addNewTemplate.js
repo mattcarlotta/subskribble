@@ -1,61 +1,75 @@
-import map from 'lodash/map';
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { TextField } from 'redux-form-material-ui';
+import { browserHistory } from 'react-router';
+import { AntFormFields, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
+import actions from '../../../actions/planActions';
+import { allowedCharacters, isNotEmpty, isRequired } from '../app/formFields/validateFormFields';
+import Spinner from '../loading/Spinner';
+const { addNewForm, fetchAllActivePlans } = actions;
 
-import { addNewTemplate } from '../../../actions/formActionCreators';
-import { isRequired, isValidEmail } from '../../formfields/validateFormFields';
-import FroalaEditor from '../../formfields/FroalaEditorField';
-import Button from '../../formfields/renderFormButton';
+const FIELDS = [{
+  name: 'formName',
+  type: 'text',
+  placeholder: 'Unique form name',
+  validate: [isRequired, allowedCharacters]
+}]
 
-const TEMPLATEFIELDS = [
-  { name: 'templateName', label: 'Template Name', hintText: 'Enter a unique template name', validate: [isRequired] },
-  { name: 'emailAddress', label: 'Addresser Email', hintText: 'Enter an email address you wish to address from', validate: [isRequired, isValidEmail] }
-]
+class CreateNewTemplate extends Component {
+  state = { confirmLoading: false, isLoading: true, selectOptions: [] };
 
-const AddNewTemplate = ({ addNewTemplate, handleSubmit, submitting }) => {
-  const handleFormSubmit = (formProps) => {
-    formProps.id = formProps.templateName.replace(/[^\w\s]/gi, '').replace(/ /g, '-').toLowerCase();
+  componentDidMount = () => {
+    this.props.fetchAllActivePlans()
+    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: activeplans }))
+    .catch(() => null)
+  }
+
+	handleFormSubmit = (formProps) => {
+    this.setState({ confirmLoading: true });
 		console.log(formProps);
+    // addNewForm(formProps);
 	}
-  return (
-    <div className="new-form-container">
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        {map(TEMPLATEFIELDS, ({ name, label, hintText, validate }, key) => (
-              <div key={key} className="input-container">
-                <Field
-                  name={name}
-                  type="text"
-                  component={TextField}
-                  floatingLabelText={label}
-                  hintText={hintText}
-                  style={{ fontSize: 15, width: '100%' }}
-                  validate={validate}
+
+  goBackPage = () => browserHistory.goBack();
+
+  render = () => {
+    const { handleSubmit, pristine, submitting } = this.props;
+    const { confirmLoading, selectOptions, isLoading } = this.state;
+
+    return (
+      isLoading
+        ? <Spinner />
+        : <div className="new-form-container">
+            <div className="form-box-container">
+              <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Form</h1>
+                <AntFormFields FIELDS={FIELDS} />
+                <AntSelectField
+                  className="tag-container"
+                  name="plans"
+                  mode="tags"
+                  placeholder="Click inside this box and select plans from the list below."
+                  style={{ width: '100%' }}
+                  selectOptions={selectOptions}
+                  tokenSeparators={[',']}
+                  validate={[isNotEmpty]}
                 />
-              </div>
-        ))}
-        <Field
-          name="template"
-          type="text"
-          component={FroalaEditor}
-          validate={[isRequired]}
-        />
-        <div className="button-container">
-          <div className="button-center">
-            <Button
-              backgroundColor="#03a9f3"
-              fontSize={15}
-							height={50}
-              label="Save Template"
-              submitting={submitting}
-              type="submit"
-            />
+                <hr />
+                <AntStepFormButtons
+                  backLabel="Back"
+                  backStyle={{ height: 50, float: 'left' }}
+                  confirmLoading={confirmLoading}
+                  onClickBack={this.goBackPage}
+                  pristine={pristine}
+                  submitLabel="Submit"
+                  submitStyle= {{ height: 50, float: 'right' }}
+                  submitting={submitting}
+                />
+              </form>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
-  );
+    )
+  }
 };
 
-export default reduxForm({ form: 'NewTemplate' })(connect(null, { addNewTemplate })(AddNewTemplate));
+export default reduxForm({ form: 'NewTemplate' })(connect(null, { addNewForm, fetchAllActivePlans })(CreateNewTemplate));

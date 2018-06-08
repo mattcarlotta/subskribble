@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-import { AntFormFields, AntFormSubmit } from '../../formFields/antReduxFormFields';
+import { AntFormFields, AntFormSubmit } from '../app/formFields/antReduxFormFields';
 
 const AuthForm = ({
 	confirmLoading,
-	handleSubmit, 
+	handleSubmit,
 	FIELDS,
 	formTitle,
 	onSubmit,

@@ -6,7 +6,8 @@ module.exports = app => {
   }
 
   const authQueries = {
-    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, token) VALUES ($1, $2, $3, $4, $5)"),
+    createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, company, token) VALUES ($1, $2, $3, $4, $5, $6)"),
+    findCompany: () => ("SELECT company FROM users WHERE company=$1"),
     findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),
     findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
@@ -53,17 +54,6 @@ module.exports = app => {
     setReadNotifications: () => (`UPDATE notifications SET read=true WHERE read=false AND userid=$1`)
   }
 
-  const subformQueries = {
-    createForm: () => ( `INSERT INTO forms (userid, name, plans, uniqueFormName) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4)`),
-    deleteOneForm: () => ("DELETE FROM forms WHERE id=$1 AND userid=$2 RETURNING *"),
-    getSomeForms: (userid, limit, offset, status) => (`SELECT * FROM forms ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
-    getFormCount: () => (
-      "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM forms;"
-    ),
-    updateOneForm: () => ("UPDATE forms SET status=$1 WHERE id=$2 AND userid=$3 RETURNING formName"),
-    selectForm: () => ("SELECT name FROM forms WHERE userid=$1 AND uniqueFormName=$2")
-  }
-
   const subQueries = {
     createSubscriber: () => (
       `INSERT INTO subscribers (userid, subscriber, address, addressCity, addressState, addressZip, email, phone, planName, amount)
@@ -75,6 +65,17 @@ module.exports = app => {
       "SELECT count(*) filter (WHERE status = 'active' AND userid=$1) AS active, count(*) filter (where status in ('inactive', 'suspended') and userid=$1) as inactive FROM subscribers;"
     ),
     updateOneSubscriber: () => ("UPDATE subscribers SET status=$1, enddate=$2 WHERE id=$3 AND userid=$4 RETURNING subscriber")
+  }
+
+  const templateQueries = {
+    createTemplate: () => ( `INSERT INTO templates (userid, template, uniqueTemplateName, message, plans) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5)`),
+    deleteOneTemplate: () => ("DELETE FROM templates WHERE id=$1 AND userid=$2 RETURNING *"),
+    getSomeTemplates: (userid, limit, offset, status) => (`SELECT * FROM templates ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getTemplateCount: () => (
+      "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM templates;"
+    ),
+    updateOneTemplate: () => ("UPDATE templates SET status=$1 WHERE id=$2 AND userid=$3 RETURNING templateName"),
+    selectTemplate: () => ("SELECT templateName FROM templates WHERE userid=$1 AND uniqueTemplateName=$2")
   }
 
   const transactQueries = {
@@ -91,8 +92,8 @@ module.exports = app => {
     ...notificationQueries,
     ...planQueries,
     ...promoQueries,
-    ...subformQueries,
     ...subQueries,
+    ...templateQueries,
     ...transactQueries
   }
 }

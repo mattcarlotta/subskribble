@@ -1,13 +1,12 @@
 import { isRequired, isValidEmail, minPassword } from './validateFormFields';
 
 export default [
-	// {
-	// 	name: 'company',
-	// 	type: 'text',
-	// 	component: AntInput,
-	// 	placeholder: 'Company or Organization Name',
-	// 	validate: [isRequired]
-	// },
+	{
+		name: 'company',
+		type: 'text',
+		placeholder: 'Company',
+		validate: [isRequired]
+	},
 	{
 		name: 'firstName',
 		type: 'text',

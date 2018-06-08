@@ -6,7 +6,7 @@ import { Steps } from 'antd';
 import Stepper from './Stepper';
 import RegisterPlanForm from './RegisterPlanForm';
 import { subRegisterToPlan } from '../../../actions/formActions';
-import { getCustomerFormFields } from '../../formFields/customerSignupFields';
+import { getCustomerFormFields } from '../app/formFields/customerSignupFields';
 
 const stepLabels = [
   { title: 'Contact Information', icon: 'mail_outline' },

@@ -293,21 +293,6 @@
     margin-top: 80px;
 
     .tag-container > .ant-form-item { overflow-y: auto; margin-bottom: 30px; }
-
-    .input-container {
-      margin: 10px 0px;
-      @include h(72px);
-
-      .override-chip-style {
-        & div > div > div {
-          background-color: $neutralgreen !important;
-
-          span {
-            color: $white !important;
-          }
-        }
-      }
-    }
   }
 
   .editor-container {

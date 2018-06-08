@@ -12,14 +12,7 @@ const TABLEHEADERS = [
 			</Tooltip>
 		)
 	},
-	{ title: 'Form Name', dataIndex: 'formname' },
-	{
-    title: 'Unique Form Name',
-    dataIndex:  'uniqueformname',
-    render: uniqueid => (
-      <span style={{ textTransform: 'lowercase' }}>{uniqueid}</span>
-    )
-  },
+	{ title: 'Template Name', dataIndex: 'templatename' },
 	{
     title: 'Associated Plans',
     dataIndex: 'plans',

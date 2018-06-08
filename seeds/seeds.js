@@ -11,6 +11,7 @@ module.exports = app => {
     firstName TEXT NOT NULL,
     lastName TEXT NOT NULL,
     password VARCHAR NOT NULL UNIQUE,
+    company VARCHAR NOT NULL UNIQUE,
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
     endDate TEXT,
     token VARCHAR UNIQUE,
@@ -56,16 +57,6 @@ module.exports = app => {
     totalUsage INTEGER
   )`;
 
-  const subformTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'active',
-    formName VARCHAR UNIQUE,
-    uniqueFormName VARCHAR UNIQUE,
-    plans TEXT ARRAY NOT NULL
-  )`;
-
   const subTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -86,6 +77,17 @@ module.exports = app => {
     FOREIGN KEY (planName) REFERENCES plans(planName) ON DELETE CASCADE
   )`;
 
+  const templateTableOptions = `(
+    id UUID DEFAULT uuid_generate_v1mc(),
+    key SERIAL PRIMARY KEY,
+    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    status VARCHAR DEFAULT 'active',
+    templateName VARCHAR UNIQUE,
+    uniqueTemplateName VARCHAR UNIQUE,
+    message TEXT NOT NULL,
+    plans TEXT ARRAY NOT NULL
+  )`;
+
   const transTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
@@ -104,7 +106,7 @@ module.exports = app => {
   const planProperties = `(userid, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(userid, status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
-  const subformProperties = `(userid, status, formName, uniqueFormName, plans)`
+  const templateProperties = `(userid, status, templateName, uniqueTemplateName, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
 
@@ -162,17 +164,6 @@ module.exports = app => {
   (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'ASSOCIATED', '$100.00', '30 days', 10, 5);
   `);
 
-  const subformValues = id => (`
-  (${selectUserid(id)}, 'active', 'Partners Form', 'partners-form', ARRAY ['Carlotta Dealership', 'Carlotta Prime', 'Carlotta Sales', 'Carlotta Youtube']),
-  (${selectUserid(id)}, 'active', 'Affiliates Form', 'affiliates-form', ARRAY ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Solar'] ),
-  (${selectUserid(id)}, 'active', 'Subscriber Form', 'subscriber-form', ARRAY ['Carlotta Prime']),
-  (${selectUserid(id)}, 'active', 'Employee Form', 'employee-form', ARRAY ['Carlotta Corp']),
-  (${selectUserid(id)}, 'suspended', 'General Newsletter Form', 'general-newsletter-form', ARRAY ['Carlotta Cars Magazine', 'Carlotta Sports']),
-  (${selectUserid(id)}, 'suspended', 'Flagships Form', 'flagships-form', ARRAY ['Carlotta Flashships'] ),
-  (${selectUserid(id)}, 'suspended', 'Billing ISP Form', 'billing-isp-form', ARRAY ['Carlotta ISP']),
-  (${selectUserid(id)}, 'suspended', 'Billing Cars Form', 'billing-cars-form', ARRAY ['Carlotta Cars Magazine']);
-  `)
-
   const subValues = id => (`
   (${selectUserid(id)}, 'active', 'admin@admin.com', 'Admin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
   (${selectUserid(id)}, 'active', 'squatters@gmail.com', 'Sherry Waters', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
@@ -200,6 +191,16 @@ module.exports = app => {
   (${selectUserid(id)}, 'suspended', '88Damon@photonmail.com', 'Damien Smith', '(555) 555-5555', 'Carlotta Prime', 'Jan 29, 2018', 29.99);
   `);
 
+  const templateValues = id => (`
+  (${selectUserid(id)}, 'active', 'Partners Template', 'partners-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Dealership', 'Carlotta Prime', 'Carlotta Sales', 'Carlotta Youtube']),
+  (${selectUserid(id)}, 'active', 'Affiliates Template', 'affiliates-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Solar'] ),
+  (${selectUserid(id)}, 'active', 'Subscriber Template', 'subscriber-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime']),
+  (${selectUserid(id)}, 'active', 'Employee Template', 'employee-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Corp']),
+  (${selectUserid(id)}, 'suspended', 'General Newsletter Template', 'general-newsletter-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine', 'Carlotta Sports']),
+  (${selectUserid(id)}, 'suspended', 'Flagships Template', 'flagships-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Flashships'] ),
+  (${selectUserid(id)}, 'suspended', 'Billing ISP Template', 'billing-isp-template', '<span>This is a test example template</span>', ARRAY ['Carlotta ISP']),
+  (${selectUserid(id)}, 'suspended', 'Billing Cars Template', 'billing-cars-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine']);
+  `)
 
   const transValues = id => (`
   (${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Sherry Waters', 'Paypal', 29.99),
@@ -248,14 +249,14 @@ module.exports = app => {
         DROP TABLE IF EXISTS plans;
         DROP TABLE IF EXISTS promotionals;
         DROP TABLE IF EXISTS transactions;
-        DROP TABLE IF EXISTS forms;
+        DROP TABLE IF EXISTS templates;
         DROP TABLE IF EXISTS notifications;
         CREATE TABLE users ${userTableOptions};
         CREATE TABLE plans ${planTableOptions};
         CREATE TABLE promotionals ${promoTableOptions};
         CREATE TABLE notifications ${noteTableOptions};
         CREATE TABLE subscribers ${subTableOptions};
-        CREATE TABLE forms ${subformTableOptions};
+        CREATE TABLE templates ${templateTableOptions};
         CREATE TABLE transactions ${transTableOptions};
       `);
 
@@ -263,7 +264,7 @@ module.exports = app => {
       const token = createRandomToken(); // a token used for email verification
       try {
         const newPassword = await bcrypt.hash('password123', 12) // hash password before attempting to create the user
-        await db.none(createNewUser(),['betatester@subskribble.com', newPassword, 'Beta', 'Tester', token])
+        await db.none(createNewUser(),['betatester@subskribble.com', newPassword, 'Beta', 'Tester', 'Subskribble', token])
       } catch (err) { return console.log('\n--[ERROR]-- Seed FAILED to create a new user! Process has been terminated.'); }
 
       // get newly created user info
@@ -283,7 +284,7 @@ module.exports = app => {
         INSERT INTO notifications ${noteProperties} VALUES ${noteValues(id)};
         INSERT INTO promotionals ${promoProperties} VALUES ${promoValues(id)};
         INSERT INTO subscribers ${subProperties} VALUES ${subValues(id)};
-        INSERT INTO forms ${subformProperties} VALUES ${subformValues(id)};
+        INSERT INTO templates ${templateProperties} VALUES ${templateValues(id)};
         INSERT INTO transactions ${transProperties} VALUES ${transValues(id)};
       `)
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Divider, Popconfirm } from 'antd';
+import { Button, Divider, Popconfirm, Tooltip } from 'antd';
 
 export default class EditItem extends Component {
   handleEdit = () => {
@@ -16,7 +16,15 @@ export default class EditItem extends Component {
         onConfirm={this.handleEdit}
         overlayClassName="table-tooltip"
         >
-          <Button>Edit</Button>
+          <Tooltip
+            arrowPointAtCenter
+            placement="bottom"
+            title="Edit"
+          >
+            <Button className="table-status-action">
+              <i className="material-icons">create</i>
+            </Button>
+          </Tooltip>
       </Popconfirm>
       <Divider type="vertical" />
     </Fragment>

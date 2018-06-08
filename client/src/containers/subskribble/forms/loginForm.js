@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../../formFields/signinFormFields';
+import FIELDS from '../app/formFields/signinFormFields';
 import { signinUser } from '../../../actions/authActions';
 
 const LoginForm = ({ showLoadingButton, signinUser, ...props }) => {

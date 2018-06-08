@@ -1,9 +1,9 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { AntFormFields, AntFormSubmit } from '../../formfields/antReduxFormFields';
-import { sendSupportEmail } from '../../../actions/formActionCreators';
-import FIELDS from '../formfields/contactFormFields';
+import { AntFormFields, AntFormSubmit } from '../app/formfields/antReduxFormFields';
+import { sendSupportEmail } from '../../app/actions/formActionCreators';
+import FIELDS from '../app/formfields/contactFormFields';
 
 const ContactForm = ({ handleSubmit, pristine, sendSupportEmail, submitting }) => {
 	const handleFormSubmit = (formProps) => {

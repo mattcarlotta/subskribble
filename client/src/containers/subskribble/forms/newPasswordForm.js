@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { AntFormFields, AntFormSubmit } from '../../formFields/antReduxFormFields';
+import { AntFormFields, AntFormSubmit } from '../app/formFields/antReduxFormFields';
 
-import FIELDS from '../../formFields/newPasswordFormFields';
+import FIELDS from '../app/formFields/newPasswordFormFields';
 import { missingPasswordToken, resetUserPassword } from '../../../actions/authActions';
 
 class NewPasswordForm extends Component {

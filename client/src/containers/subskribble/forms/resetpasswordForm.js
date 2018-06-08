@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AuthForm from './authForm';
-import FIELDS from '../../formFields/passwordResetFormFields';
+import FIELDS from '../app/formFields/passwordResetFormFields';
 import { resetUserToken } from '../../../actions/authActions';
 
 const ResetPasswordForm =	({ resetUserToken, showLoadingButton, ...props }) => {

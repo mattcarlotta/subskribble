@@ -1,10 +1,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { AntFormSubmit, AntInput } from '../../formfields/antReduxFormFields';
+import { AntFormSubmit, AntInput } from '../app/formfields/antReduxFormFields';
 
 import { registerToNewsletter } from '../../../actions/formActionCreators';
-import { isValidEmail, isRequired } from '../formfields/validateFormFields';
+import { isValidEmail, isRequired } from '../app/formfields/validateFormFields';
 
 const NewsletterForm = ({ handleSubmit, pristine, registerToNewsletter, submitting }) => {
 	const handleFormSubmit = (formProps) => {

@@ -21,6 +21,7 @@ const authReducer = (state = {}, { payload, type }) => {
 				loggedinUser: payload.email,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
+				company: payload.company,
 				collapseSideNav: payload.collapsesidenav,
 				isGod: payload.isgod
 			};
@@ -110,25 +111,6 @@ const serverReducer = (state={}, { payload, type }) => {
 	}
 }
 
-const subformReducer = (state={}, { payload, type }) => {
-	switch (type) {
-		case types.SET_ACTIVE_FORMS: return { ...state, activeitems: payload };
-		case types.SET_INACTIVE_FORMS: return { ...state, inactiveitems: payload };
-		case types.SET_INITIAL_FORMS:
-			return {
-				...state,
-				activeitems: payload.activeforms,
-				inactiveitems: payload.inactiveforms
-			}
-		case types.SET_INITIAL_FORMCOUNTS:
-			return {
-				...state,
-				activeitemcount: payload.activeformscount,
-				inactiveitemcount: payload.inactiveformscount
-			}
-		default: return state;
-	}
-}
 
 const subscriberReducer = (state={}, { payload, type }) => {
 	switch (type) {
@@ -145,6 +127,26 @@ const subscriberReducer = (state={}, { payload, type }) => {
 				...state,
 				activeitemcount: payload.activesubscriberscount,
 				inactiveitemcount: payload.inactivesubscriberscount
+			}
+		default: return state;
+	}
+}
+
+const templateReducer = (state={}, { payload, type }) => {
+	switch (type) {
+		case types.SET_ACTIVE_TEMPLATES: return { ...state, activeitems: payload };
+		case types.SET_INACTIVE_TEMPLATES: return { ...state, inactiveitems: payload };
+		case types.SET_INITIAL_TEMPLATES:
+			return {
+				...state,
+				activeitems: payload.activetemplates,
+				inactiveitems: payload.inactivetemplates
+			}
+		case types.SET_INITIAL_TEMPLATECOUNTS:
+			return {
+				...state,
+				activeitemcount: payload.activetemplatescount,
+				inactiveitemcount: payload.inactivetemplatescount
 			}
 		default: return state;
 	}
@@ -196,7 +198,7 @@ const rootReducer = combineReducers({
 	promos: promoReducer,
 	server: serverReducer,
 	subs: subscriberReducer,
-	subforms: subformReducer,
+	templates: templateReducer,
 	transactions: transactionReducer,
 	...formReducers,
 	routing

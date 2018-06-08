@@ -10,7 +10,6 @@ const TABS = [
   { dividerLabel: 'Accounting', icon: 'new_releases', label: 'promotionals' },
   { icon: 'payment', label: 'transactions' },
   { dividerLabel: 'Networking', icon: 'mail_outline', label: 'messages' },
-  { icon: 'content_copy', label: 'forms' },
   { icon: 'view_quilt', label: 'templates' }
 ]
 
