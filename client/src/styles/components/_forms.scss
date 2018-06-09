@@ -288,20 +288,22 @@
     @extend %m-0-a;
     @include b-c($white);
     @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-    @include w(700px);
+    // @include w(700px);
+    margin: 0 5px 0px 20px;
     padding: 40px 80px;
-    margin-top: 80px;
+    margin-top: 30px;
+    min-height: 635px;
 
     .tag-container {
       .ant-form-explain { margin-top: -15px; }
 
       .has-error.has-feedback .ant-form-item-children:after, .has-success.has-feedback .ant-form-item-children:after, .has-warning.has-feedback .ant-form-item-children:after, .is-validating.has-feedback .ant-form-item-children:after {
-        top: -100%;
+        top: -25%;
       }
     }
 
     .ant-select-selection--multiple {
-      height: 60px;
+      @include h(30px);
       overflow-y: auto;
       overflow-x: hidden;
     }
@@ -309,7 +311,6 @@
 
   .editor-container {
     @include w(100%);
-    margin-top: 35px;
     min-height: 140px;
 
     .has-error {
@@ -325,6 +326,54 @@
         border-bottom: 1px solid $formerror;
         border-left: 1px solid $formerror;
         border-right: 1px solid $formerror;
+      }
+    }
+  }
+
+  .preview-box-container {
+    @extend %m-0-a;
+    @include b-c($white);
+    @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+    // @include w(700px);
+    margin: 0 20px 0px 5px;
+    padding: 40px;
+    margin-top: 30px;
+    min-height: 635px;
+
+    .box-empty {
+      @extend %t-a-c;
+      @include b-c($hortizonalhr);
+      border: 1px dotted $lightcoolgrey;
+      min-height: 455px;
+
+      .empty-icon {
+        @extend %d-ib;
+        margin-top: 25%;
+      }
+    }
+
+    .box-container {
+      @include b-c(aliceblue);
+      border: 1px dotted $lightcoolgrey;
+      min-height: 455px;
+      padding: 0 5px;
+
+      .from-company { @include f-s(17px); @include f-w(600); }
+      .from-sender { @include f-s(12px);}
+      .to-addresse { @extend %m-b-20; @include f-s(11px); }
+      .preview { padding: 0 10px; }
+      .subject { @extend .f-l; }
+      .time {
+        @extend .f-r, %m-t-5;
+        @include f-s(12px);
+
+        .current-time { @extend %m-r-5; }
+
+        .message-icons {
+          @extend %m-r-5, %p-r;
+          @include f-s(13px);
+          top: 2px;
+        }
       }
     }
   }

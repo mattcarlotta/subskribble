@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import { Row, Col } from 'antd';
 import { AntFormFields, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
-import actions from '../../../actions/planActions';
-import { allowedCharacters, isNotEmpty, isRequired } from '../app/formFields/validateFormFields';
+
 import Spinner from '../app/loading/Spinner';
 import QuillEditor from '../app/formFields/QuillEditor';
-const { addNewForm, fetchAllActivePlans } = actions;
+import PreviewTemplate from '../../../components/subskribble/app/editor/previewTemplate';
+import FIELDS from '../app/formFields/templateFormFields';
+import { isNotEmpty } from '../app/formFields/validateFormFields';
 
-const FIELDS = [{
-  name: 'templateName',
-  type: 'text',
-  placeholder: 'Unique template name',
-  validate: [isRequired, allowedCharacters]
-}]
+import actions from '../../../actions/planActions';
+const { addNewForm, fetchAllActivePlans } = actions;
 
 class CreateNewTemplate extends Component {
   state = { confirmLoading: false, isLoading: true, selectOptions: [] };
@@ -41,37 +39,51 @@ class CreateNewTemplate extends Component {
       isLoading
         ? <Spinner />
         : <div className="new-form-container">
-            <div className="form-box-container">
-              <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+          <Row>
+            <Col span={12}>
+              <div className="form-box-container">
                 <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Template</h1>
-                <AntFormFields FIELDS={FIELDS} />
-                <AntSelectField
-                  className="tag-container"
-                  name="plans"
-                  mode="tags"
-                  placeholder="Click here to select plans from the list below."
-                  style={{ width: '100%' }}
-                  selectOptions={selectOptions}
-                  tokenSeparators={[',']}
-                  validate={[isNotEmpty]}
-                />
-                <QuillEditor />
-                <hr />
-                <AntStepFormButtons
-                  backLabel="Back"
-                  backStyle={{ height: 50, float: 'left' }}
-                  confirmLoading={confirmLoading}
-                  onClickBack={this.goBackPage}
-                  pristine={pristine}
-                  submitLabel="Submit"
-                  submitStyle= {{ height: 50, float: 'right' }}
-                  submitting={submitting}
-                />
-              </form>
-            </div>
+                <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+                  <AntFormFields FIELDS={FIELDS} />
+                  <AntSelectField
+                    className="tag-container"
+                    name="plans"
+                    mode="tags"
+                    placeholder="Click here to associate plans to the form."
+                    style={{ width: '100%' }}
+                    selectOptions={selectOptions}
+                    tokenSeparators={[',']}
+                    validate={[isNotEmpty]}
+                  />
+                  <QuillEditor />
+                  <hr />
+                  <AntStepFormButtons
+                    backLabel="Back"
+                    backStyle={{ height: 50, float: 'left' }}
+                    confirmLoading={confirmLoading}
+                    onClickBack={this.goBackPage}
+                    pristine={pristine}
+                    submitLabel="Submit"
+                    submitStyle= {{ height: 50, float: 'right' }}
+                    submitting={submitting}
+                  />
+                </form>
+              </div>
+            </Col>
+            <Col span={12}>
+              <PreviewTemplate {...this.props} />
+            </Col>
+          </Row>
+
           </div>
     )
   }
 };
 
-export default reduxForm({ form: 'NewTemplate' })(connect(null, { addNewForm, fetchAllActivePlans })(CreateNewTemplate));
+const selector = formValueSelector('NewTemplate');
+export default reduxForm({ form: 'NewTemplate' })(connect(state => ({
+  company: state.auth.company,
+  message: selector(state, 'message'),
+  fromSender: selector(state, 'fromSender'),
+  subject: selector(state, 'subject')
+}), { addNewForm, fetchAllActivePlans })(CreateNewTemplate));
