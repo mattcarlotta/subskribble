@@ -292,7 +292,7 @@
     margin: 0 5px 0px 20px;
     padding: 40px 80px;
     margin-top: 30px;
-    min-height: 635px;
+    height: 881px;
 
     .tag-container {
       .ant-form-explain { margin-top: -15px; }
@@ -311,7 +311,13 @@
 
   .editor-container {
     @include w(100%);
-    min-height: 140px;
+    height: 400px;
+
+    .ql-container.ql-snow {
+      height: 300px;
+      max-height: 300px;
+      overflow-x: hidden;
+    }
 
     .has-error {
       @include c($formerror);
@@ -338,25 +344,27 @@
     margin: 0 20px 0px 5px;
     padding: 40px;
     margin-top: 30px;
-    min-height: 635px;
+    height: 881px;
 
     .box-empty {
       @extend %t-a-c;
       @include b-c($hortizonalhr);
       border: 1px dotted $lightcoolgrey;
-      min-height: 455px;
+      height: 685px;
 
       .empty-icon {
         @extend %d-ib;
-        margin-top: 25%;
+        margin-top: 300px;
       }
     }
 
     .box-container {
       @include b-c(aliceblue);
       border: 1px dotted $lightcoolgrey;
-      min-height: 455px;
-      padding: 0 5px;
+      height: 685px;
+      max-height: 685px;
+      padding: 0 10px;
+      overflow-y: auto;
 
       .from-company { @include f-s(17px); @include f-w(600); }
       .from-sender { @include f-s(12px);}

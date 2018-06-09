@@ -28,6 +28,7 @@ export default ({ company, fromSender, message, subject }) => (
       <span className="from-sender">{ fromSender ? ` <${fromSender}>` : null }</span>
     </div>
     <div className="to-addresse">{ fromSender ? 'to Firstname Lastname <example@example.com>' : null }</div>
+    { (subject || fromSender) ? <hr /> : null }
     <div className="preview" dangerouslySetInnerHTML={{ __html: message }} />
   </div>
 )

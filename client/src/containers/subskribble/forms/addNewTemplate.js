@@ -7,7 +7,7 @@ import { AntFormFields, AntSelectField, AntStepFormButtons } from '../app/formFi
 
 import Spinner from '../app/loading/Spinner';
 import QuillEditor from '../app/formFields/QuillEditor';
-import PreviewTemplate from '../../../components/subskribble/app/editor/previewTemplate';
+import TemplatePreview from '../../../components/subskribble/app/editor/templatePreview';
 import FIELDS from '../app/formFields/templateFormFields';
 import { isNotEmpty } from '../app/formFields/validateFormFields';
 
@@ -44,7 +44,6 @@ class CreateNewTemplate extends Component {
               <div className="form-box-container">
                 <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Template</h1>
                 <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-                  <AntFormFields FIELDS={FIELDS} />
                   <AntSelectField
                     className="tag-container"
                     name="plans"
@@ -55,6 +54,7 @@ class CreateNewTemplate extends Component {
                     tokenSeparators={[',']}
                     validate={[isNotEmpty]}
                   />
+                  <AntFormFields FIELDS={FIELDS} />
                   <QuillEditor />
                   <hr />
                   <AntStepFormButtons
@@ -71,7 +71,7 @@ class CreateNewTemplate extends Component {
               </div>
             </Col>
             <Col span={12}>
-              <PreviewTemplate {...this.props} />
+              <TemplatePreview {...this.props} />
             </Col>
           </Row>
 
