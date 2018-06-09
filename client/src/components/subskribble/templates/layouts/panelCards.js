@@ -40,7 +40,7 @@ export default ({
 }) => [
 	{
 		SELECTFIELD: true,
-		TAB: 'Active Forms',
+		TAB: 'Active Templates',
 		TABLECONTENTS: activeitems,
 		TABLEHEADERS,
 		TABLERECORDS: activeitemcount,
@@ -49,7 +49,7 @@ export default ({
 	},
 	{
 		SELECTFIELD: true,
-		TAB: 'Inactive Forms',
+		TAB: 'Inactive Templates',
 		TABLECONTENTS: inactiveitems,
 		TABLEHEADERS,
 		TABLERECORDS: inactiveitemcount,
