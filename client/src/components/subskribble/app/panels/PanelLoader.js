@@ -15,19 +15,9 @@ export default class PanelLoader extends PureComponent {
     if ((activeitems && activeitemcount) || (inactiveitems && inactiveitemcount)) this.setState({ isLoading: false })
   }
 
-  render = () => {
-    const { buttonIcon, buttonPushLocation, CARDS, cardTitle, Panel, serverMessage, tipTitle } = this.props;
-    const { isLoading } = this.state;
-
-    return (
-      isLoading
-        ? <Loader
-            buttonIcon={buttonIcon}
-            buttonPushLocation={buttonPushLocation}
-            cardTitle={cardTitle}
-            tipTitle={tipTitle}
-          />
-        : <Panel CARDS={CARDS({...this.props})} serverMessage={serverMessage} />
-    )
-  }
+  render = () => (
+    this.state.isLoading
+      ? <Loader {...this.props} />
+      : <this.props.Panel CARDS={this.props.CARDS({...this.props})} />
+  )
 }

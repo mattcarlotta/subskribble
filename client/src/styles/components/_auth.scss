@@ -20,7 +20,7 @@
     .auth-title {
       @extend %t-a-c, %t-t-u;
       @include c($black);
-      @include f-f($poppinsmedium);
+      @include f-f($arimo);
       @include f-s(16px);
       @include f-w(500);
       @include l-h(30px)

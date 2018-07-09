@@ -74,7 +74,7 @@
     border-right: 1px solid rgba(120, 130, 140, 0.13);
 
     .subtitle {
-      @include f-f($poppinssemibold);
+      @include f-f($arimo);
       @include f-s(14px);
       @include l-h(30px);
       letter-spacing: 2px;
@@ -83,7 +83,7 @@
 
     .amount {
       @include c($lightblue);
-      @include f-f($poppinssemibold);
+      @include f-f($arimo);
       @include f-s(36px);
       @include f-w(300);
       @include l-h(48px);

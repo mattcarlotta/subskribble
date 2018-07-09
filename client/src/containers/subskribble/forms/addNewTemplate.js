@@ -11,8 +11,9 @@ import TemplatePreview from '../../../components/subskribble/app/editor/template
 import FIELDS from '../app/formFields/templateFormFields';
 import { isNotEmpty } from '../app/formFields/validateFormFields';
 
+import { addNewTemplate } from '../../../actions/formActions';
 import actions from '../../../actions/planActions';
-const { addNewForm, fetchAllActivePlans } = actions;
+const { fetchAllActivePlans } = actions;
 
 class CreateNewTemplate extends Component {
   state = { confirmLoading: false, isLoading: true, selectOptions: [] };
@@ -23,10 +24,14 @@ class CreateNewTemplate extends Component {
     .catch(() => null)
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { serverError } = this.props;
+    serverError !== prevProps.serverError && serverError !== undefined && this.setState({  confirmLoading: false });
+  }
+
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
-		console.log(formProps);
-    // addNewForm(formProps);
+    this.props.addNewTemplate(formProps);
 	}
 
   goBackPage = () => browserHistory.goBack();
@@ -85,5 +90,6 @@ export default reduxForm({ form: 'NewTemplate' })(connect(state => ({
   company: state.auth.company,
   message: selector(state, 'message'),
   fromSender: selector(state, 'fromSender'),
-  subject: selector(state, 'subject')
-}), { addNewForm, fetchAllActivePlans })(CreateNewTemplate));
+  subject: selector(state, 'subject'),
+  serverError: state.server.error
+}), { addNewTemplate, fetchAllActivePlans })(CreateNewTemplate));

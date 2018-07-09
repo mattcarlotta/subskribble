@@ -98,13 +98,14 @@
   .link { @include c($lightblue); }
 
   .title {
-    @include f-f($poppinslight);
-    @include f-s(12px);
+    @include f-f($arimo);
+    @include f-s(13px);
+  }
 
-    .date {
-      @include f-f($poppinslight);
-      @include f-s(10px);
-    }
+  .date {
+    @include c($darkblue);
+    @include f-f($arimo-italic);
+    @include f-s(11px);
   }
 
   .unread-message {

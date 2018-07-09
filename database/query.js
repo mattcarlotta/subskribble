@@ -68,7 +68,7 @@ module.exports = app => {
   }
 
   const templateQueries = {
-    createTemplate: () => ( `INSERT INTO templates (userid, template, uniqueTemplateName, message, plans) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5)`),
+    createTemplate: () => ( `INSERT INTO templates (userid, fromSender, plans, message, subject, templateName, uniqueTemplateName) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7)`),
     deleteOneTemplate: () => ("DELETE FROM templates WHERE id=$1 AND userid=$2 RETURNING *"),
     getSomeTemplates: (userid, limit, offset, status) => (`SELECT * FROM templates ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTemplateCount: () => (

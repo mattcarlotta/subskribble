@@ -20,7 +20,7 @@
 	.override-table-style {
 		th {
 			// @include c($black !important);
-			@include f-f($poppinssemibold);
+			@include f-f($arimo);
 			@include f-s(14px !important);
 		}
 

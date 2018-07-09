@@ -9,6 +9,7 @@ body {
   @extend %m-0;
   @include c($darkwarmgrey);
   @include f-s(14px);
+  @include f-f($arimo);
   @include f-w(300);
 }
 a:link, a:visited, a:focus, a:hover, a:active { @extend %no-link-focus; }
@@ -18,6 +19,8 @@ p {
   @include f-s(15px);
   @include l-h(24px);
 }
+.ant-menu, .ant-notification, .ant-table, .ant-form-item, .ant-select, .ant-select-dropdown { @include f-f($arimo); }
+.ant-tabs { @include f-f($arimo); }
 .ant-menu-inline .ant-menu-item-selected:after { right: 233px; }
 .ant-layout-sider { @include b-s(2px 0 6px rgba(0,21,41,.35)); }
 .ant-popover-placement-bottomRight>.ant-popover-content>.ant-popover-arrow { @include b-c($lightblue); }

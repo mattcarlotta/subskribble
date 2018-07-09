@@ -38,7 +38,7 @@
 
 		.loggedin-user {
 			@include c($white);
-			@include f-f($poppinsmedium);
+			@include f-f($arimo);
 			@include f-s(15px);
 		}
 
@@ -141,6 +141,7 @@
 	.divider-title {
 		@extend %m-t-10, %m-l-20, %t-t-u;
 		@include c(#647897);
+		@include f-f($arimo-bold);
 		@include f-s(14px);
 		@include f-w(600);
 	}
@@ -237,7 +238,7 @@
 	.user-name,
 	.user-email,
 	p {
-		@include f-f($ralewaylight);
+		@include f-f($arimo);
 	}
 
 	.user-name {

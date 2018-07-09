@@ -24,7 +24,7 @@
 
 .btn {
   @extend %t-t-u;
-  @include f-f($poppinsmedium);
+  @include f-f($arimo);
   border-radius: 6px;
   border: 0;
 }
@@ -175,9 +175,9 @@
   padding: 0 2px;
   top: 3px;
 
-
-  &:hover, &:focus  {
-    @extend %no-link-focus;
+  &:hover {
+    @include c($blue);
+    @include b-c($transparent);
   }
 
   &:focus {

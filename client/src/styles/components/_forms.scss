@@ -66,11 +66,12 @@
     .form-container {
       @extend %p-r;
       @include c($black);
-      @include f-f($poppinslight);
+      @include f-f($arimo);
       margin: 50px 50px 0 50px;
       min-height: 600px;
 
       h3 {
+        @include f-f($arimo);
         @include f-s(21px);
         @include f-w(300);
         @include l-h(30px);
@@ -155,7 +156,7 @@
       .review-signup-container {
         min-height: 450px;
 
-        h1,h2,h3,p { @include f-f($poppinsregular);}
+        h1,h2,h3,p { @include f-f($arimo);}
         h2 { @include f-s(24px); }
         i { @include c($lightblue); @include f-s(22px); }
 
@@ -195,7 +196,7 @@
           .details-container {
             @include b-c($white);
             @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-            @include f-f($poppinsmedium);
+            @include f-f($arimo);
             min-height: 205px;
             padding: 16px;
             margin-top: 2px;

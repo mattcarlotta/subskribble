@@ -82,6 +82,8 @@ module.exports = app => {
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR DEFAULT 'active',
+    fromSender VARCHAR NOT NULL,
+    subject VARCHAR NOT NULL,
     templateName VARCHAR UNIQUE,
     uniqueTemplateName VARCHAR UNIQUE,
     message TEXT NOT NULL,
@@ -106,7 +108,7 @@ module.exports = app => {
   const planProperties = `(userid, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(userid, status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
-  const templateProperties = `(userid, status, templateName, uniqueTemplateName, message, plans)`
+  const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
 
@@ -192,14 +194,14 @@ module.exports = app => {
   `);
 
   const templateValues = id => (`
-  (${selectUserid(id)}, 'active', 'Partners Template', 'partners-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Dealership', 'Carlotta Prime', 'Carlotta Sales', 'Carlotta Youtube']),
-  (${selectUserid(id)}, 'active', 'Affiliates Template', 'affiliates-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Solar'] ),
-  (${selectUserid(id)}, 'active', 'Subscriber Template', 'subscriber-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime']),
-  (${selectUserid(id)}, 'active', 'Employee Template', 'employee-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Corp']),
-  (${selectUserid(id)}, 'suspended', 'General Newsletter Template', 'general-newsletter-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine', 'Carlotta Sports']),
-  (${selectUserid(id)}, 'suspended', 'Flagships Template', 'flagships-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Flashships'] ),
-  (${selectUserid(id)}, 'suspended', 'Billing ISP Template', 'billing-isp-template', '<span>This is a test example template</span>', ARRAY ['Carlotta ISP']),
-  (${selectUserid(id)}, 'suspended', 'Billing Cars Template', 'billing-cars-template', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine']);
+  (${selectUserid(id)}, 'active', 'Partners Template', 'partners-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Dealership', 'Carlotta Prime', 'Carlotta Sales', 'Carlotta Youtube']),
+  (${selectUserid(id)}, 'active', 'Affiliates Template', 'affiliates-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime', 'Carlotta Dealership', 'Carlotta Solar'] ),
+  (${selectUserid(id)}, 'active', 'Subscriber Template', 'subscriber-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Prime']),
+  (${selectUserid(id)}, 'active', 'Employee Template', 'employee-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Corp']),
+  (${selectUserid(id)}, 'suspended', 'General Newsletter Template', 'general-newsletter-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine', 'Carlotta Sports']),
+  (${selectUserid(id)}, 'suspended', 'Flagships Template', 'flagships-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Flashships'] ),
+  (${selectUserid(id)}, 'suspended', 'Billing ISP Template', 'billing-isp-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta ISP']),
+  (${selectUserid(id)}, 'suspended', 'Billing Cars Template', 'billing-cars-template', 'betatester@subskribble.com', 'Test Template Subject', '<span>This is a test example template</span>', ARRAY ['Carlotta Cars Magazine']);
   `)
 
   const transValues = id => (`

@@ -9,15 +9,15 @@ module.exports = app => {
     create: async (req, res, next) => {
       if (!req.body) return sendError('Missing template creation parameters', res, next);
 
-      const { templatename, plans, message } = req.body;
-      const uniqueTemplateName = createUniqueTemplateName(templatename);
+      const { fromSender, plans, message, subject, templateName } = req.body;
+      const uniqueTemplateName = createUniqueTemplateName(templateName);
       try {
-        const templateExists = db.oneOrNone(selectTemplate(), [req.session.id, uniqueTemplateName]);
-        if (templateExists) return sendError('That template already exists. You must create a unique for name!');
+        const templateExists = await db.oneOrNone(selectTemplate(), [req.session.id, uniqueTemplateName]);
+        if (templateExists) return sendError('That template already exists. You must create a unique template name!', res, next);
 
-        await db.none(createTemplate(), [req.session.id, template, uniqueTemplateName, message, plans]);
+        await db.none(createTemplate(), [req.session.id, fromSender, plans, message, subject, templateName, uniqueTemplateName]);
 
-        res.status(201).json({ message: `Succesfully created '${template}' template.` });
+        res.status(201).json({ message: `Succesfully created '${templateName}' template.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // DELETES REQURESTED RECORD

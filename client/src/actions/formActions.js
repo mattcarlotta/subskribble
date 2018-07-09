@@ -19,8 +19,11 @@ const addNewPromoCode = formProps => dispatch => (
 
 // Add new template
 const addNewTemplate = formProps => dispatch => (
-  app.post(`template/create`, { formProps })
-  .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  app.post(`templates/create`, { ...formProps })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/templates')
+  })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 

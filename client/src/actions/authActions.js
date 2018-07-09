@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import app from './axiosConfig';
 import * as types from '../actions/types';
 
@@ -31,10 +32,12 @@ const doNotAuthUser = () => dispatch => {
 // removes current user from redux props and clears cookie
 const logoutUser = () => dispatch => {
 	app.post(`logout`)
-	.then(() => dispatch({ type: types.UNAUTH_USER }))
+	.then(() => {
+		dispatch({ type: types.UNAUTH_USER })
+		browserHistory.push('/subskribble')
+	})
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 };
-
 
 // returns error message if missing token
 const missingVerificationToken = () => ({ type: types.USER_WAS_VERIFIED, payload: false });
