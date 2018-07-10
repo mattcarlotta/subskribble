@@ -11,9 +11,12 @@ const addNewForm = formProps => dispatch => (
 )
 
 // Add new promo code
-const addNewPromoCode = formProps => dispatch => (
+const addNewPromo = formProps => dispatch => (
   app.post(`promotional/create`, { formProps })
-  .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/promotionals')
+  })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
@@ -23,6 +26,16 @@ const addNewTemplate = formProps => dispatch => (
   .then(({data: {message}}) => {
     dispatch({ type: types.SERVER_MESSAGE, payload: message })
     browserHistory.push('/subskribble/templates')
+  })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
+// Edits a selected promo
+const editPromo = (id, formProps) => dispatch => (
+  app.put(`promotionals/edit/${id}`, { ...formProps })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/promotionals')
   })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
@@ -90,8 +103,9 @@ const updateBillingFields = (state) => {
 
 export {
   addNewForm,
-  addNewPromoCode,
+  addNewPromo,
   addNewTemplate,
+  editPromo,
   editTemplate,
   registerToNewsletter,
   resetBillingFieldValues,

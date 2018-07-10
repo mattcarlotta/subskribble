@@ -9,17 +9,18 @@ import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupFo
 // import FAQs from '../components/subskribble/faqs';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app/landing';
-import TemplateHandler from '../containers/subskribble/forms/templateHandler';
 import NotFound from '../components/subskribble/app/notfound/404';
 import Plans from '../containers/subskribble/plans';
 // import Profile from '../components/subskribble/profile';
 import Promos from '../containers/subskribble/promos';
+import PromosForm from '../containers/subskribble/forms/promosForm';
 // import Messages from '../components/subskribble/messages';
 // import Settings from '../components/subskribble/settings';
 import RequireAuth from '../containers/subskribble/app/auth/RequireAuth';
 import ResetPassword from '../containers/subskribble/app/auth/ResetPassword';
 import Subscribers from '../containers/subskribble/subscribers';
 import Templates from '../containers/subskribble/templates';
+import TemplateForm from '../containers/subskribble/forms/templateForm';
 import Transactions from '../containers/subskribble/transactions';
 // import Tutorials from '../components/subskribble/tutorials';
 import VerifyEmail from '../containers/subskribble/app/auth/VerifyEmail';
@@ -41,11 +42,13 @@ export default (
 
 				<Route path="plans" component={Plans} />
 				<Route path="promotionals" component={Promos} />
+				<Route path="promotionals/create" component={PromosForm} />
+				<Route path="promotionals/edit/:id" component={PromosForm} />
 				<Route path="subscribers" component={Subscribers} />
 				<Route path="subscribers/register" component={CustomerSignupForm} />
 				<Route path="templates" component={Templates} />
-				<Route path="templates/create" component={TemplateHandler} />
-				<Route path="templates/edit/:id" component={TemplateHandler} />
+				<Route path="templates/create" component={TemplateForm} />
+				<Route path="templates/edit/:id" component={TemplateForm} />
 				<Route path="transactions" component={Transactions} />
 				{/* <Route path="tutorials" component={Tutorials} /> */}
 				<Route path="*" component={NotFound} />

@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import React, { Component } from 'react';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
@@ -17,13 +18,12 @@ import templateActions from '../../../actions/templateActions'
 const { fetchAllActivePlans } = planActions;
 const { fetchTemplate } = templateActions;
 
-class CreateNewTemplate extends Component {
+class TemplateForm extends Component {
   state = { confirmLoading: false, isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
     !id ? this.fetchPlans() : this.fetchTemplateForEditing(id)
-
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -33,7 +33,7 @@ class CreateNewTemplate extends Component {
 
   fetchPlans = () => {
     this.props.fetchAllActivePlans()
-    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: activeplans }))
+    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: map(activeplans, ({planname}) => (planname)) }))
     .catch(() => null)
   }
 
@@ -64,45 +64,44 @@ class CreateNewTemplate extends Component {
       isLoading
         ? <Spinner />
         : <div className="new-form-container">
-          <Row>
-            <Col span={12}>
-              <div className="form-box-container">
-                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
-                  {!this.props.location.query.id ? 'Create' : 'Edit'} Template
-                </h1>
-                <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-                  <AntSelectField
-                    className="tag-container"
-                    name="plans"
-                    mode="tags"
-                    placeholder="Click here to associate plans to the form."
-                    style={{ width: '100%' }}
-                    selectOptions={selectOptions}
-                    tokenSeparators={[',']}
-                    validate={[isNotEmpty]}
-                    defaultValue={selectedPlans}
-                  />
-                  <AntFormFields FIELDS={FIELDS} />
-                  <QuillEditor />
-                  <hr />
-                  <AntStepFormButtons
-                    backLabel="Back"
-                    backStyle={{ height: 50, float: 'left' }}
-                    confirmLoading={confirmLoading}
-                    onClickBack={this.goBackPage}
-                    pristine={pristine}
-                    submitLabel="Submit"
-                    submitStyle= {{ height: 50, float: 'right' }}
-                    submitting={submitting}
-                  />
-                </form>
-              </div>
-            </Col>
-            <Col span={12}>
-              <TemplatePreview {...this.props} />
-            </Col>
-          </Row>
-
+            <Row>
+              <Col span={12}>
+                <div style={{ height: 881 }} className="form-box-container">
+                  <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
+                    {!this.props.location.query.id ? 'Create' : 'Edit'} Template
+                  </h1>
+                  <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+                    <AntSelectField
+                      className="tag-container"
+                      name="plans"
+                      mode="tags"
+                      placeholder="Click here to associate plans to the form."
+                      style={{ width: '100%' }}
+                      selectOptions={selectOptions}
+                      tokenSeparators={[',']}
+                      validate={[isNotEmpty]}
+                      defaultValue={selectedPlans}
+                    />
+                    <AntFormFields FIELDS={FIELDS} />
+                    <QuillEditor />
+                    <hr />
+                    <AntStepFormButtons
+                      backLabel="Back"
+                      backStyle={{ height: 50, float: 'left' }}
+                      confirmLoading={confirmLoading}
+                      onClickBack={this.goBackPage}
+                      pristine={pristine}
+                      submitLabel="Submit"
+                      submitStyle= {{ height: 50, float: 'right' }}
+                      submitting={submitting}
+                    />
+                  </form>
+                </div>
+              </Col>
+              <Col span={12}>
+                <TemplatePreview {...this.props} />
+              </Col>
+            </Row>
           </div>
     )
   }
@@ -115,4 +114,4 @@ export default reduxForm({ form: 'NewTemplate' })(connect(state => ({
   fromSender: selector(state, 'fromSender'),
   subject: selector(state, 'subject'),
   serverError: state.server.error
-}), { addNewTemplate, editTemplate, fetchAllActivePlans, fetchTemplate })(CreateNewTemplate));
+}), { addNewTemplate, editTemplate, fetchAllActivePlans, fetchTemplate })(TemplateForm));

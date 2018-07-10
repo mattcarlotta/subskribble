@@ -11,7 +11,8 @@ const TABLEHEADERS = [
 			</Tooltip>
 		)
 	},
-	{ title: 'Name', dataIndex: 'promocode' },
+	{ title: 'Promo Code', dataIndex: 'promocode' },
+	{ title: 'Associated Plan', dataIndex: 'planname' },
 	{ title: 'Amount', dataIndex: 'amount' },
 	{ title: 'Start Date', dataIndex: 'startdate' },
 	{ title: 'Valid For', dataIndex: 'validfor' },

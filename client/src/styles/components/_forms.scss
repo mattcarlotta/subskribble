@@ -289,11 +289,10 @@
     @extend %m-0-a;
     @include b-c($white);
     @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-    // @include w(700px);
     margin: 0 5px 0px 20px;
     padding: 40px 80px;
     margin-top: 30px;
-    height: 881px;
+    margin-bottom: 30px;
 
     .tag-container {
       .ant-form-explain { margin-top: -15px; }
