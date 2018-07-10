@@ -27,6 +27,16 @@ const addNewTemplate = formProps => dispatch => (
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
+// Edits a selected template
+const editTemplate = (id, formProps) => dispatch => (
+  app.put(`templates/edit/${id}`, { ...formProps })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/templates')
+  })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
 // Register to newsletter
 const registerToNewsletter = email => dispatch => (
   app.post(`register-to-newsletter`, { email })
@@ -82,6 +92,7 @@ export {
   addNewForm,
   addNewPromoCode,
   addNewTemplate,
+  editTemplate,
   registerToNewsletter,
   resetBillingFieldValues,
   setBillingFieldValues,

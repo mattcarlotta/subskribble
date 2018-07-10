@@ -37,9 +37,14 @@ export default {
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
+  // Fetches a template for editing
+  fetchTemplate: (id) => dispatch => (
+    app.get(`templates/template?id=${id}`)
+    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+  ),
   // Sets templates status to active or suspended
   updateAction: (updateType, statusType, id) => dispatch => (
-    app.put(`templates/update/${id}`, { statusType, updateType })
+    app.put(`templates/status/${id}`, { statusType, updateType })
     .then(({data: {message}}) => {
       dispatch(this.a.fetchItemCounts())
       dispatch(this.a.fetchItems())

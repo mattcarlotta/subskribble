@@ -9,7 +9,7 @@ import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupFo
 // import FAQs from '../components/subskribble/faqs';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app/landing';
-import NewTemplate from '../containers/subskribble/forms/addNewTemplate';
+import TemplateHandler from '../containers/subskribble/forms/templateHandler';
 import NotFound from '../components/subskribble/app/notfound/404';
 import Plans from '../containers/subskribble/plans';
 // import Profile from '../components/subskribble/profile';
@@ -44,7 +44,8 @@ export default (
 				<Route path="subscribers" component={Subscribers} />
 				<Route path="subscribers/register" component={CustomerSignupForm} />
 				<Route path="templates" component={Templates} />
-				<Route path="templates/create" component={NewTemplate} />
+				<Route path="templates/create" component={TemplateHandler} />
+				<Route path="templates/edit/:id" component={TemplateHandler} />
 				<Route path="transactions" component={Transactions} />
 				{/* <Route path="tutorials" component={Tutorials} /> */}
 				<Route path="*" component={NotFound} />

@@ -14,6 +14,11 @@ const TABLEHEADERS = [
 	},
 	{ title: 'Template Name', dataIndex: 'templatename' },
 	{
+		title: 'From Sender',
+		dataIndex: 'fromsender',
+		render: sender => (<span style={{ textTransform: 'lowercase' }}>{sender}</span>)
+	},
+	{
     title: 'Associated Plans',
     dataIndex: 'plans',
     render: plans => (

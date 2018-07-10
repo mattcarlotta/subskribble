@@ -70,11 +70,13 @@ module.exports = app => {
   const templateQueries = {
     createTemplate: () => ( `INSERT INTO templates (userid, fromSender, plans, message, subject, templateName, uniqueTemplateName) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7)`),
     deleteOneTemplate: () => ("DELETE FROM templates WHERE id=$1 AND userid=$2 RETURNING *"),
+    findTemplateById: () => ("SELECT * from templates WHERE userid=$1 AND id=$2"),
     getSomeTemplates: (userid, limit, offset, status) => (`SELECT * FROM templates ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTemplateCount: () => (
       "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM templates;"
     ),
-    updateOneTemplate: () => ("UPDATE templates SET status=$1 WHERE id=$2 AND userid=$3 RETURNING templateName"),
+    updateTemplate: () => ("UPDATE templates SET fromSender=$3, plans=$4, message=$5, subject=$6, templateName=$7, uniqueTemplateName=$8 WHERE userid=$1 AND id=$2 RETURNING templateName"),
+    updateTemplateStatus: () => ("UPDATE templates SET status=$1 WHERE id=$2 AND userid=$3 RETURNING templateName"),
     selectTemplate: () => ("SELECT templateName FROM templates WHERE userid=$1 AND uniqueTemplateName=$2")
   }
 

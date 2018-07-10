@@ -9,10 +9,10 @@ const timeStamp = moment().format("LLLL");
 export default ({ company, fromSender, message, subject }) => (
   <div className="box-container">
       <Row style={{ marginBottom: 10 }}>
-        <Col span={16}>
+        <Col span={15}>
           <h4 className="subject">{ subject ? subject : null }</h4>
         </Col>
-        <Col span={8}>
+        <Col span={9}>
           { subject &&
             <div className="time">
               <span className="current-time">

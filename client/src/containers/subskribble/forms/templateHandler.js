@@ -11,17 +11,19 @@ import TemplatePreview from '../../../components/subskribble/app/editor/template
 import FIELDS from '../app/formFields/templateFormFields';
 import { isNotEmpty } from '../app/formFields/validateFormFields';
 
-import { addNewTemplate } from '../../../actions/formActions';
-import actions from '../../../actions/planActions';
-const { fetchAllActivePlans } = actions;
+import { addNewTemplate, editTemplate } from '../../../actions/formActions';
+import planActions from '../../../actions/planActions';
+import templateActions from '../../../actions/templateActions'
+const { fetchAllActivePlans } = planActions;
+const { fetchTemplate } = templateActions;
 
 class CreateNewTemplate extends Component {
   state = { confirmLoading: false, isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
-    this.props.fetchAllActivePlans()
-    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: activeplans }))
-    .catch(() => null)
+    const { id } = this.props.location.query;
+    !id ? this.fetchPlans() : this.fetchTemplateForEditing(id)
+
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -29,16 +31,34 @@ class CreateNewTemplate extends Component {
     serverError !== prevProps.serverError && serverError !== undefined && this.setState({  confirmLoading: false });
   }
 
+  fetchPlans = () => {
+    this.props.fetchAllActivePlans()
+    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: activeplans }))
+    .catch(() => null)
+  }
+
+  fetchTemplateForEditing = id => {
+    this.props.fetchTemplate(id)
+    .then(({ data }) => {
+      this.setState({ selectedPlans: data.plans }, () => {
+        this.props.initialize(data)
+        this.fetchPlans()
+      })
+    })
+    .catch((err) => console.log(err))
+  }
+
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
-    this.props.addNewTemplate(formProps);
+    const { id } = this.props.location.query;
+    !id ? this.props.addNewTemplate(formProps) : this.props.editTemplate(id, formProps)
 	}
 
   goBackPage = () => browserHistory.goBack();
 
   render = () => {
     const { handleSubmit, pristine, submitting } = this.props;
-    const { confirmLoading, selectOptions, isLoading } = this.state;
+    const { confirmLoading, selectOptions, isLoading, selectedPlans } = this.state;
 
     return (
       isLoading
@@ -47,7 +67,9 @@ class CreateNewTemplate extends Component {
           <Row>
             <Col span={12}>
               <div className="form-box-container">
-                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Create Template</h1>
+                <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
+                  {!this.props.location.query.id ? 'Create' : 'Edit'} Template
+                </h1>
                 <form onSubmit={handleSubmit(this.handleFormSubmit)}>
                   <AntSelectField
                     className="tag-container"
@@ -58,6 +80,7 @@ class CreateNewTemplate extends Component {
                     selectOptions={selectOptions}
                     tokenSeparators={[',']}
                     validate={[isNotEmpty]}
+                    defaultValue={selectedPlans}
                   />
                   <AntFormFields FIELDS={FIELDS} />
                   <QuillEditor />
@@ -92,4 +115,4 @@ export default reduxForm({ form: 'NewTemplate' })(connect(state => ({
   fromSender: selector(state, 'fromSender'),
   subject: selector(state, 'subject'),
   serverError: state.server.error
-}), { addNewTemplate, fetchAllActivePlans })(CreateNewTemplate));
+}), { addNewTemplate, editTemplate, fetchAllActivePlans, fetchTemplate })(CreateNewTemplate));

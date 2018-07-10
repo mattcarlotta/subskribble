@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { db, query: { createTemplate, deleteOneTemplate, getSomeTemplates, getTemplateCount, updateOneTemplate, selectTemplate } } = app.database;
+  const { db, query: { createTemplate, deleteOneTemplate, findTemplateById, getSomeTemplates, getTemplateCount, updateTemplate, updateTemplateStatus, selectTemplate } } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
   const moment = app.get("moment");
   const createUniqueTemplateName = name => ( name.trim().toLowerCase().replace(/[^\w\s]/gi, '').replace(/ /g, '-') )
@@ -9,15 +9,15 @@ module.exports = app => {
     create: async (req, res, next) => {
       if (!req.body) return sendError('Missing template creation parameters', res, next);
 
-      const { fromSender, plans, message, subject, templateName } = req.body;
-      const uniqueTemplateName = createUniqueTemplateName(templateName);
+      const { fromsender, plans, message, subject, templatename } = req.body;
+      const uniquetemplatename = createUniqueTemplateName(templatename);
       try {
-        const templateExists = await db.oneOrNone(selectTemplate(), [req.session.id, uniqueTemplateName]);
+        const templateExists = await db.oneOrNone(selectTemplate(), [req.session.id, uniquetemplatename]);
         if (templateExists) return sendError('That template already exists. You must create a unique template name!', res, next);
 
-        await db.none(createTemplate(), [req.session.id, fromSender, plans, message, subject, templateName, uniqueTemplateName]);
+        await db.none(createTemplate(), [req.session.id, fromsender, plans, message, subject, templatename, uniquetemplatename]);
 
-        res.status(201).json({ message: `Succesfully created '${templateName}' template.` });
+        res.status(201).json({ message: `Succesfully created '${templatename}' template.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // DELETES REQURESTED RECORD
@@ -68,18 +68,41 @@ module.exports = app => {
         res.status(201).json({ activetemplates, inactivetemplates });
       } catch (err) { return sendError(err, res, next); }
     },
-    // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
-    updateOne: async (req, res, next) => {
+    // UPDATES A RECORD STATUS PER CLIENT-SIDE REQUEST
+    updateStatus: async (req, res, next) => {
       if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, next);
       const { id } = req.params;
       const { updateType, statusType } = req.body;
       const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : null;
 
       try {
-        const template = await db.one(updateOneTemplate(), [statusType, id, req.session.id])
+        const template = await db.one(updateTemplateStatus(), [statusType, id, req.session.id])
 
         res.status(201).json({ message: `Succesfully ${updateType} the '${template.templatename}' template.` });
       } catch (err) { return sendError(err, res, next); }
-    }
+    },
+    // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
+    updateOne: async (req, res, next) => {
+      if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, next);
+      const { fromsender, plans, message, subject, templatename } = req.body;
+      const uniquetemplatename = createUniqueTemplateName(templatename);
+
+      try {
+        const template = await db.one(updateTemplate(), [req.session.id, req.params.id, fromsender, plans, message, subject, templatename, uniquetemplatename])
+
+        res.status(201).json({ message: `Succesfully updated the '${template.templatename}' template.` });
+      } catch (err) { return sendError(err, res, next); }
+    },
+    // SELECTS A SINGLE RECORD
+    selectOne: async (req, res, next) => {
+      if (!req.query) return sendError('Missing template select parameters', res, next);
+
+      try {
+        const template = await db.oneOrNone(findTemplateById(), [req.session.id, req.query.id]);
+        if (!template) return sendError("Unable to locate the template!", res, next);
+
+        res.status(201).json({ ...template });
+      } catch (err) { return sendError(err, res, next); }
+    },
   }
 }

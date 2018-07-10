@@ -300,6 +300,7 @@
 
       .has-error.has-feedback .ant-form-item-children:after, .has-success.has-feedback .ant-form-item-children:after, .has-warning.has-feedback .ant-form-item-children:after, .is-validating.has-feedback .ant-form-item-children:after {
         top: -25%;
+        right: 10px;
       }
     }
 

@@ -2,7 +2,7 @@ import { allowedCharacters, isRequired, isValidEmail } from './validateFormField
 
 export default [
   {
-    name: 'templateName',
+    name: 'templatename',
     type: 'text',
     placeholder: 'Unique template name',
     validate: [isRequired, allowedCharacters]
@@ -14,7 +14,7 @@ export default [
     validate: [isRequired, allowedCharacters]
   },
   {
-    name: 'fromSender',
+    name: 'fromsender',
     type: 'email',
     placeholder: 'From (email address)',
     validate: [isRequired, isValidEmail]

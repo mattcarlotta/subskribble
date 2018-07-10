@@ -1,9 +1,11 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Button, Divider, Popconfirm, Tooltip } from 'antd';
+import { browserHistory } from 'react-router';
 
 export default class EditItem extends PureComponent {
   handleEdit = () => {
-    console.log(`requested to edit this record: ${this.props.id}`);
+    // console.log(`requested to edit this record: ${this.props.id}`);
+    browserHistory.push(`/subskribble/templates/edit/template?id=${this.props.id}`)
   }
 
   render = () => (
