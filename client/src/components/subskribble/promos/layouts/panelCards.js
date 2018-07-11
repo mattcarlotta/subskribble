@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
 
@@ -12,10 +13,29 @@ const TABLEHEADERS = [
 		)
 	},
 	{ title: 'Promo Code', dataIndex: 'promocode' },
-	{ title: 'Associated Plan', dataIndex: 'planname' },
-	{ title: 'Amount', dataIndex: 'amount' },
+	{
+    title: 'Associated Plans',
+    dataIndex: 'plans',
+    render: plans => (
+      <span>
+        { map(plans, (name, key) => (
+          name
+          ? <span key={key}>{name}{ key < plans.length-1 && ', '}
+            </span>
+          : <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
+              (none)
+            </span>
+        ))}
+      </span>
+    )
+  },
+	{
+		title: 'Amount',
+		dataIndex: 'amount',
+		render: (amount, {discounttype}) => <span>{ (discounttype === '$') ? `${discounttype}${amount}` : `${amount}${discounttype}` }</span>
+	},
 	{ title: 'Start Date', dataIndex: 'startdate' },
-	{ title: 'Valid For', dataIndex: 'validfor' },
+	{ title: 'End Date', dataIndex: 'enddate' },
 	{
 		title: 'Max Usage',
 		dataIndex: 'maxusage',

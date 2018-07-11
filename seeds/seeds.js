@@ -48,13 +48,14 @@ module.exports = app => {
     id UUID DEFAULT uuid_generate_v1mc(),
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'inactive',
-    planName VARCHAR NOT NULL,
+    status VARCHAR DEFAULT 'active',
+    plans TEXT ARRAY NOT NULL,
     promoCode VARCHAR NOT NULL,
-    amount VARCHAR,
+    amount VARCHAR NOT NULL,
+    discountType VARCHAR NOT NULL,
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
-    validFor TEXT NOT NULL,
-    maxUsage INTEGER,
+    endDate TEXT,
+    maxUsage BIGINT DEFAULT 9223372036854775807,
     totalUsage INTEGER
   )`;
 
@@ -107,7 +108,7 @@ module.exports = app => {
 
   const noteProperties = `(userid, subscriber, message, read)`;
   const planProperties = `(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, subscribers)`;
-  const promoProperties = `(userid, status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
+  const promoProperties = `(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
   const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
@@ -141,30 +142,30 @@ module.exports = app => {
   `);
 
   const promoValues = id => (`
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', 'FIRST10KACCOUNTS', '5%', '30 days', 10000, 299),
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', '10PERCENTOFF', '10%', '30 days', 100, 85),
-  (${selectUserid(id)}, 'active', 'Carlotta Dealership', 'FALLBACKSALE', '15%', '30 days', 200, 48),
-  (${selectUserid(id)}, 'active', 'Carlotta Twitch', 'EVERYLOWPRICES', '20%', '30 days', 100, 51),
-  (${selectUserid(id)}, 'active', 'Carlotta Solar', 'MILITARYDISCOUNT', '25%', '30 days', 50, 11),
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', '30PERCENTOFF', '30%', '30 days', 1000, 400),
-  (${selectUserid(id)}, 'active', 'Carlotta Sales', 'SPRINGSALE', '50%', '30 days', 30, 29),
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', '60PERCENTOFF', '60%', '30 days', 50, 42),
-  (${selectUserid(id)}, 'active', 'Carlotta Switch', '70PERCENTOFF', '70%', '30 days', 20, 19),
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', '80PERCENTOFF', '80%', '30 days', 10, 1),
-  (${selectUserid(id)}, 'active', 'Carlotta Youtube', '90PERCENTOFF', '90%', '30 days', 10, 6),
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', 'FREETRIAL', '100%', '30 days', 99999999, 81),
-  (${selectUserid(id)}, 'suspended', 'Carlotta .com', 'FREETRIALOFFER', '100%', '30 days', 20, 20),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Partners', 'XCLUSIVECLUB', '$20.00', '30 days', 500, 214),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Church', '4CHARITY', '100%', '30 days', 1000, 845),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Industries', 'HARDWORKENVBENEFITS', '$200.00', '30 days', 1000, 514),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Workshops', 'WORKXSHOPPE', '10%', '30 days', 100, 74),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Sports', 'GETAWORKOUT', '20%', '30 days', 20, 11),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Cars Magazine', '1FREECARMAGZ', '$2.00', '30 days', 100, 62),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Flagships', '20PERCENTOFF', '20%', '30 days', 125, 125),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Protocols', 'FOLLOWGUIDELINES', '$5.00', '30 days', 500, 487),
-  (${selectUserid(id)}, 'suspended', 'Carlotta ISP', 'SIGNMEUP', '$10.00', '30 days', 328, 328),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', '1FREEPUMP', '$100.00', '30 days', 5, 4),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'ASSOCIATED', '$100.00', '30 days', 10, 5);
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FIRST10KACCOUNTS', '5', '%', 10000, 299),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '10PERCENTOFF', '10', '%', 100, 85),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Dealership'], 'FALLBACKSALE', '15', '$', 200, 48),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Twitch'], 'EVERYLOWPRICES', '20', '%', 100, 51),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Solar'], 'MILITARYDISCOUNT', '25', '%', 50, 11),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '30PERCENTOFF', '30', '%', 1000, 400),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Sales'], 'SPRINGSALE', '50', '$', 30, 29),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '60PERCENTOFF', '60', '%', 50, 42),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Switch'], '70PERCENTOFF', '70', '%', 20, 19),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '80PERCENTOFF', '80', '%', 10, 1),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Youtube'], '90PERCENTOFF', '90', '%', 10, 6),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FREETRIAL', '100', '%', 99999999, 81),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta .com'], 'FREETRIALOFFER', '100', '%', 20, 20),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Partners'], 'XCLUSIVECLUB', '20.00', '$', 500, 214),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Church'], '4CHARITY', '100', '%', 1000, 845),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Industries'], 'HARDWORKENVBENEFITS', '200.00', '$', 1000, 514),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Workshops'], 'WORKXSHOPPE', '10', '%', 100, 74),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Sports'], 'GETAWORKOUT', '20', '%', 20, 11),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Cars Magazine'], '1FREECARMAGZ', '2.00', '$', 100, 62),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Flagships'], '20PERCENTOFF', '20', '%', 125, 125),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Protocols'], 'FOLLOWGUIDELINES', '5.00', '$', 500, 487),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta ISP'], 'SIGNMEUP', '10.00', '$', 328, 328),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Pumps'], '1FREEPUMP', '100.00', '$', 5, 4),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Assoc.'], 'ASSOCIATED', '100.00', '$', 10, 5);
   `);
 
   const subValues = id => (`

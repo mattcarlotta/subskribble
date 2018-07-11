@@ -1,8 +1,23 @@
 module.exports = app => {
-  const { db, query: {deleteOnePromotion, getAllPromotions, getPromotionCount, updateOnePromotion} } = app.database;
+  const { db, query: {deleteOnePromotion, getAllPromotions, getPromotionCount, updateOnePromotion, selectPromotion} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
+    // CREATES PROMO RECORD
+    create: async (req, res, next) => {
+      if (!req.body) return sendError('Missing promotional creation parameters', res, next);
+
+      const { promocode, plans, amount, maxusage } = req.body;
+
+      try {
+        const promoExists = await db.oneOrNone(selectPromotion(), [req.session.id, promocode]);
+        if (promoExists) return sendError('That template already exists. You must create a unique template name!', res, next);
+
+        await db.none(createPromotion(), [req.session.id, promocode, plans, amount, type, maxusage || null]);
+
+        res.status(201).json({ message: `Succesfully created '${promocode}' promotional.` });
+      } catch (err) { return sendError(err, res, next); }
+    },
     // DELETES REQURESTED RECORD
     deleteOne: async (req, res, next) => {
       if (!req.params.id) return sendError('Missing promotional delete parameters', res, next);

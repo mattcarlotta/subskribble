@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
+import moment from 'moment';
 import { Field } from 'redux-form';
 import { Button, Col, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Switch } from "antd";
 
@@ -37,14 +38,14 @@ const AntInput = CreateAntReduxField(Input);
 const AntInputNumber = CreateAntReduxField(InputNumber);
 const AntMonthPicker = CreateAntReduxField(MonthPicker);
 const AntRadioGroup = CreateAntReduxField(RadioGroup);
-const AntRangePicker = CreateAntReduxField(RangePicker);
+// const ARangePicker = CreateAntReduxField(RangePicker);
 // const AntSelect = CreateAntReduxField(Select);
 const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
-const AntSubmitButton = ({ confirmLoading, disabled, icon, label, onClick, style, type }) => (
-  <Col span={12}>
+const AntSubmitButton = ({ column, confirmLoading, disabled, icon, label, onClick, style, type }) => (
+  <Col span={column}>
     <Button
       type="primary"
       disabled={disabled}
@@ -80,9 +81,10 @@ const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   </FormItem>
 )
 
-const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+const AntStepFormButtons = ({ backStyle, backLabel, column, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
   <FormItem>
     <AntSubmitButton
+      column={column}
       icon="left"
       disabled={confirmLoading}
       label={backLabel}
@@ -90,6 +92,7 @@ const AntStepFormButtons = ({ backStyle, backLabel, confirmLoading, onClickBack,
       style={backStyle}
     />
     <AntSubmitButton
+      column={column}
       confirmLoading={confirmLoading}
       icon={submitLabel === "Next" ? "right" : ""}
       label={submitLabel}
@@ -143,6 +146,34 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
   </div>
 )
 
+const AntRangePicker = ({
+  children,
+  input: { value, ...inputMethods },
+  meta: { invalid, touched, error },
+  label,
+  hasFeedback,
+  ...props
+}) => {
+  const hasError = touched && invalid;
+  return (
+    <FormItem
+      label={label}
+      hasFeedback={hasFeedback && touched}
+      help={hasError && error}
+      validateStatus={hasError ? "error" : "success"}
+    >
+      <RangePicker
+        {...inputMethods}
+        {...props}
+        children={children}
+        format="MMMM/DD/YYYY"
+        placeholder={['Start Date', 'End Date']}
+        ranges={{ Today: [moment(), moment()], 'This Month': [moment(), moment().endOf('month')] }}
+      />
+    </FormItem>
+  );
+};
+
 const AntSelect = ({
   children,
   input: { value, ...inputMethods },
@@ -184,6 +215,8 @@ const AntSwitchField = (props) => (
     unCheckedChildren={<Icon type="cross" />}
   />
 )
+
+
 
 export {
   AntCheckbox,

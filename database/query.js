@@ -32,12 +32,14 @@ module.exports = app => {
   }
 
   const promoQueries = {
+    createPromotion: () => ("INSERT INTO promotionals(userid, promoCode, planName, amount, type, maxUsage) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6)"),
     deleteOnePromotion: () => ("DELETE FROM promotionals WHERE id=$1 AND userid=$2 RETURNING *"),
     getAllPromotions: (userid, limit, offset, status) => (`SELECT * FROM promotionals WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getPromotionCount: () => (
       "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM promotionals;"
     ),
-    updateOnePromotion: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode, planName")
+    updateOnePromotion: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode, planName"),
+    selectPromotion: () => ("SELECT promoCode FROM promotionals WHERE userid=$1 AND promoCode=$2")
   }
 
   const notificationQueries = {

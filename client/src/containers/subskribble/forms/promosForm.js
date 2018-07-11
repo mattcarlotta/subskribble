@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Col } from 'antd';
-import { AntInput, AntInputNumber, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
+import { AntInput, AntInputNumber, AntRangePicker, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
 // import MenuItem from 'material-ui/MenuItem';
 
 import Spinner from '../app/loading/Spinner';
@@ -49,6 +49,7 @@ class PromoForm extends Component {
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
 		console.log(formProps);
+    // this.props.addNewPromo(formProps)
 	}
 
   goBackPage = () => browserHistory.goBack();
@@ -61,7 +62,7 @@ class PromoForm extends Component {
       isLoading
         ? <Spinner />
         : <div className="new-form-container">
-            <div style={{ width: '600px', margin: '0 auto', marginTop: 30, marginBottom: 30 }} className="form-box-container">
+            <div style={{ width: '600px', margin: '0 auto', marginTop: 40, marginBottom: 30 }} className="form-box-container">
               <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
                 {!this.props.location.query.id ? 'Create' : 'Edit'} Promotional
               </h1>
@@ -113,11 +114,20 @@ class PromoForm extends Component {
                 <div className="input-100">
                   <Field
                     hasFeedback
+                    name="dates"
+                    component={AntRangePicker}
+                    placeholder="Start and End Date"
+                    style={{ width: '100%' }}
+                    validate={[isRequired]}
+                  />
+                </div>
+                <div className="input-100">
+                  <Field
+                    hasFeedback
                     name="maxusage"
                     component={AntInputNumber}
                     placeholder="Max Usage (leave empty if unlimited)"
                     style={{ width: '100%' }}
-                    validate={[isNumber]}
                   />
                 </div>
                 <hr />

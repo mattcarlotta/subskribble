@@ -26,6 +26,7 @@ const AuthForm = ({
 						</div>
 					}
 					<AntFormSubmit
+						column={24}
 						confirmLoading={confirmLoading}
 						label={submitLabel}
 						pristine={pristine}

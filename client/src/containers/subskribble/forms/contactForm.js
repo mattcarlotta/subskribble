@@ -14,6 +14,7 @@ const ContactForm = ({ handleSubmit, pristine, sendSupportEmail, submitting }) =
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <AntFormFields FIELDS={FIELDS} />
 				<AntFormSubmit
+					column={24}
 					label="Send Message"
 					pristine={pristine}
 					submitting={submitting}

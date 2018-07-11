@@ -45,7 +45,7 @@
 
 .customer-signup-bg {
   @include h(100%);
-  padding: 15px;
+  margin: 40px;
 
   .customer-signup-container {
     @extend %m-b-20;

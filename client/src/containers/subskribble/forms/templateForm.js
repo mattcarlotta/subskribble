@@ -88,6 +88,7 @@ class TemplateForm extends Component {
                     <AntStepFormButtons
                       backLabel="Back"
                       backStyle={{ height: 50, float: 'left' }}
+                      column={12}
                       confirmLoading={confirmLoading}
                       onClickBack={this.goBackPage}
                       pristine={pristine}

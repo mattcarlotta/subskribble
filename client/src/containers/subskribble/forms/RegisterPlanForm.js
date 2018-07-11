@@ -55,6 +55,7 @@ const RegisterPlanForm = ({
       <AntStepFormButtons
         backLabel="Back"
         backStyle={{ height: 50 }}
+        column={12}
         confirmLoading={confirmLoading}
         onClickBack={onClickBack}
         pristine={pristine}

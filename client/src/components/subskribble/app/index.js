@@ -1,3 +1,4 @@
+import each from 'lodash/each';
 import React, { Component } from 'react';
 import { browserHistory, withRouter } from 'react-router';
 import { Layout } from 'antd';
@@ -8,12 +9,20 @@ import AdminDrawer from '../../../containers/subskribble/app/admin/AdminDrawer';
 
 const { Content } = Layout;
 
+const tabs = ['dashboard', 'subscribers', 'plans', 'promotionals', 'transactions', 'messages', 'templates'];
+
+const selectedTab = (path) => {
+	const selected = [];
+	each(tabs, tab => { if (path.indexOf(tab) >= 1) selected.push(tab) })
+	return selected;
+}
+
 class App extends Component {
-	state = { selectedKey: [this.props.location.pathname.replace(/\/subskribble\//g,'')] };
+	state = { selectedKey: selectedTab(this.props.location.pathname) };
 
 	componentDidUpdate = (prevProps, prevState) => {
 		const { location } = this.props;
-		location.pathname !== prevProps.location.pathname && this.setState({ selectedKey: [location.pathname.replace(/\/subskribble\//g,'')] })
+		location.pathname !== prevProps.location.pathname && this.setState({ selectedKey: selectedTab(location.pathname) })
 	}
 
 	shouldComponentUpdate = (nextProps, nextState) => ( this.props.collapseSideNav !== nextProps.collapseSideNav || this.props.location.pathname !== nextProps.location.pathname || this.state.selectedKey !== nextState.selectedKey )
