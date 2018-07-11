@@ -7,14 +7,12 @@ import RenderPlanSelection from '../app/formFields/renderPlanSelection';
 import ReviewPlanForm from '../app/formFields/reviewPlanForm';
 
 const RenderFormFields = ({ billingSwitch, FIELDS, title, position }) => (
-  FIELDS
-  ? <Col span={12}>
-      <h3>{title} { billingSwitch && <BillingSwitchField /> }</h3>
-      <div className="input-100">
-        <AntFormFields FIELDS={FIELDS} />
-      </div>
-    </Col>
-  : null
+  <Col span={12}>
+    <h3>{title} { billingSwitch && <BillingSwitchField /> }</h3>
+    <div className="input-100">
+      <AntFormFields FIELDS={FIELDS} />
+    </div>
+  </Col>
 )
 
 const RegisterPlanForm = ({
@@ -36,15 +34,20 @@ const RegisterPlanForm = ({
   PLANSELECTIONS,
   RIGHTFIELDS,
   rightTitle,
+  showContactInfo,
   showPlans,
   submitting,
 }) => (
   <div className="form-container">
     <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
     <form onSubmit={handleSubmit}>
-      <RenderFormFields FIELDS={CONTACTFIELDS} title="Contact Information" />
-      <RenderFormFields billingSwitch={true} FIELDS={BILLINGADDRESSFIELDS} title="Billing Information" />
-      <RenderFormFields FIELDS={CREDITCARDFIELDS} title="Credit Card Information" />
+      { showContactInfo &&
+        <div className="contact-container">
+          <RenderFormFields FIELDS={CONTACTFIELDS} title="Contact Information" />
+          <RenderFormFields billingSwitch={true} FIELDS={BILLINGADDRESSFIELDS} title="Billing Information" />
+          <RenderFormFields FIELDS={CREDITCARDFIELDS} title="Credit Card Information" />
+        </div>
+      }
       { showPlans && <RenderPlanSelection PLANSELECTIONFIELDS={plans} /> }
       { finished && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={plans} /> }
       <div className="clear-fix" />

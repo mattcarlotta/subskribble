@@ -1,23 +1,14 @@
 import React, { PureComponent } from 'react';
 import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { Scrollbars } from 'react-custom-scrollbars';
 import { isSelected } from './validateFormFields';
 import { AntRadioGroupField } from './antReduxFormFields';
+import CustomScrollbars from '../../../../components/subskribble/app/scrollbars/CustomScrollbars';
 
 class RenderPlanSelection extends PureComponent {
   render = () => (
-    <div style={{ minHeight: 500, marginBottom: 20 }}>
-      <Scrollbars
-        ref="scrollbars"
-        style={{ width: '100%', top: 0 }}
-        autoHeight
-        autoHeightMin={500}
-        autoHide
-        autoHideTimeout={500}
-        autoHideDuration={200}
-        renderThumbVertical={props => <div {...props} className="scrollbar"/>}
-        >
+    <div className="plans-container">
+      <CustomScrollbars minHeight={400} top={0}>
           <AntRadioGroupField
             name="selectedPlan"
             FIELDS={this.props.PLANSELECTIONFIELDS}
@@ -26,14 +17,10 @@ class RenderPlanSelection extends PureComponent {
             validate={[isSelected]}
           />
           <div className="clear-fix" />
-        </Scrollbars>
+      </CustomScrollbars>
     </div>
   )
 }
 
 
-export default connect(
-  state => ({
-    selectedPlan: formValueSelector('CustomerPlanSignup')(state, 'selectedPlan')
-  })
-)(RenderPlanSelection);
+export default connect(state => ({ selectedPlan: formValueSelector('CustomerPlanSignup')(state, 'selectedPlan') }))(RenderPlanSelection);

@@ -75,38 +75,39 @@ class CustomerPlanSignup extends Component {
       isLoading
         ? null
         : <div className="customer-signup-bg">
-          <div className="customer-signup-container">
-            <div className="stepper-container">
-              <div className="title">
-                <h1>Subscriber Registration</h1>
+            <div className="customer-signup-container">
+              <div className="stepper-container">
+                <div className="title">
+                  <h1>Subscriber Registration</h1>
+                </div>
+                <Steps current={stepIndex}>
+                  {map(stepLabels, ({ title, icon }, key) => (
+                    <Stepper
+                      confirmLoading={confirmLoading}
+                      icon={icon}
+                      key={title}
+                      onClick={this.editStep}
+                      stepKey={key}
+                      title={title}
+                      wasReviewed={wasReviewed}
+                    />
+                  ))}
+                </Steps>
               </div>
-              <Steps current={stepIndex}>
-                {map(stepLabels, ({ title, icon }, key) => (
-                  <Stepper
-                    confirmLoading={confirmLoading}
-                    icon={icon}
-                    key={title}
-                    onClick={this.editStep}
-                    stepKey={key}
-                    title={title}
-                    wasReviewed={wasReviewed}
-                  />
-                ))}
-              </Steps>
+              <RegisterPlanForm
+                {...formFields}
+                confirmLoading={confirmLoading}
+                finished={finished}
+                editStep={!confirmLoading ? this.editStep : null}
+                onClickBack={ stepIndex > 0 ? this.handlePrev : this.goBackPage }
+                onSubmit={ finished ? this.handleFormSave : this.handleNext }
+                plans={plans}
+                showPlans={ stepIndex === 1 ? true : false }
+                showContactInfo={ stepIndex === 0 ? true : false }
+              />
             </div>
-            <RegisterPlanForm
-              {...formFields}
-              confirmLoading={confirmLoading}
-              finished={finished}
-              editStep={!confirmLoading ? this.editStep : null}
-              onClickBack={ stepIndex > 0 ? this.handlePrev : this.goBackPage }
-              onSubmit={ finished ? this.handleFormSave : this.handleNext }
-              plans={plans}
-              showPlans={ stepIndex === 1 ? true : false }
-            />
           </div>
-        </div>
-      );
+        );
   }
 }
 

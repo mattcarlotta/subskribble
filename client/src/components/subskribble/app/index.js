@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory, withRouter } from 'react-router';
 import { Layout } from 'antd';
-import { Scrollbars } from 'react-custom-scrollbars';
+import CustomScrollbars from './scrollbars/CustomScrollbars';
 import Header from './navigation/topbar/header';
 import InlineMenu from './navigation/sidebar/InlineMenu';
 import AdminDrawer from '../../../containers/subskribble/app/admin/AdminDrawer';
@@ -13,7 +13,6 @@ class App extends Component {
 
 	componentDidUpdate = (prevProps, prevState) => {
 		const { location } = this.props;
-		location !== prevProps.location && this.refs.scrollbars.scrollTop(0);
 		location.pathname !== prevProps.location.pathname && this.setState({ selectedKey: [location.pathname.replace(/\/subskribble\//g,'')] })
 	}
 
@@ -29,18 +28,9 @@ class App extends Component {
      <Layout>
        <Header collapseSideNav={this.props.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
        <Content>
-				 <Scrollbars
-				 	ref="scrollbars"
-					style={{ width: '100%', top: '55px' }}
-					autoHeight
-					autoHeightMin={`calc(100vh - 55px)`}
-					autoHide
-					autoHideTimeout={500}
-					autoHideDuration={200}
-					renderThumbVertical={props => <div {...props} className="scrollbar"/>}
-					>
+				 <CustomScrollbars minHeight={`calc(100vh - 55px)`} top={55}>
          		{ this.props.children }
-				</Scrollbars>
+				</CustomScrollbars>
        </Content>
 			 <AdminDrawer />
      </Layout>

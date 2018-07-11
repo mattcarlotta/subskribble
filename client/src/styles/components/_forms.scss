@@ -48,13 +48,14 @@
   padding: 15px;
 
   .customer-signup-container {
+    @extend %m-b-20;
     @include b-c($white);
     @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-
     padding-top: 10px;
 
     .stepper-container {
-      @extend %container-1200;
+      @extend %m-0-a;
+      @include w(90%);
     }
 
     .title {
@@ -84,65 +85,76 @@
       .main-title {
         @extend %t-a-c;
         @include f-s(28px);
-        margin-bottom: 80px;
+        margin-bottom: 60px;
       }
 
-      .plan-selection-container {
-        min-height: 550px;
+      .contact-container {
+        min-height: 422px;
+      }
 
-        .selection-container {
-          @extend %m-b-20;
-          @include h(250px);
-          @include w(100%);
-          max-width: 300px;
-          min-width: 200px;
-          border-top: 1px solid rgba(120, 130, 140, 0.23);
-          border-left: 1px solid rgba(120, 130, 140, 0.23);
-          border-right: 1px solid rgba(120, 130, 140, 0.23);
-          border-bottom: 5px solid rgba(120, 130, 140, 0.23);
-          padding: 30px 0px;
-          margin-left: 15px;
+      .plans-container {
+        margin-bottom: 20px;
+        border: 1px dotted $lightblue;
 
-          .header {
-            @extend %t-a-c;
+        .plan-selection-container {
+          @extend %m-t-20, %t-a-c;
+          margin-right: 15px;
+          min-height: 550px;
 
-            .price {
-              @extend %p-r;
-              @include f-s(46px);
-              @include f-w(bold);
-              margin: 20px 0 10px;
+          .selection-container {
+            @extend %m-b-20;
+            @include h(250px);
+            @include w(100%);
+            max-width: 300px;
+            min-width: 200px;
+            border-top: 1px solid rgba(120, 130, 140, 0.23);
+            border-left: 1px solid rgba(120, 130, 140, 0.23);
+            border-right: 1px solid rgba(120, 130, 140, 0.23);
+            border-bottom: 5px solid rgba(120, 130, 140, 0.23);
+            padding: 30px 0px;
+            margin-left: 15px;
 
-              .price-sign {
+            .header {
+              @extend %t-a-c;
+
+              .price {
                 @extend %p-r;
-                @include f-s(15px);
-                top: -25px;
-                margin-left: -10px;
+                @include f-s(46px);
+                @include f-w(bold);
+                margin: 20px 0 10px;
+
+                .price-sign {
+                  @extend %p-r;
+                  @include f-s(15px);
+                  top: -25px;
+                  margin-left: -10px;
+                }
+              }
+
+              .plan-title {
+                @include f-s(18px);
+                line-height: 22px;
               }
             }
 
-            .plan-title {
-              @include f-s(18px);
-              line-height: 22px;
+            .body {
+              @extend %m-b-20, %t-a-c;
+              border-top: 1px solid rgba(120, 130, 140, 0.13);
+              border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+              padding: 20px 0;
             }
-          }
 
-          .body {
-            @extend %m-b-20, %t-a-c;
-            border-top: 1px solid rgba(120, 130, 140, 0.13);
-            border-bottom: 1px solid rgba(120, 130, 140, 0.13);
-            padding: 20px 0;
-          }
-
-          .selection {
-            @extend %m-a;
-            width: 25px;
-            height: 50px;
+            .selection {
+              @extend %m-a;
+              width: 25px;
+              height: 50px;
+            }
           }
         }
       }
 
       .review-signup-container {
-        min-height: 450px;
+        min-height: 422px;
 
         h1,h2,h3,p { @include f-f($arimo);}
         h2 { @include f-s(24px); }
@@ -185,11 +197,16 @@
             @include b-c($white);
             @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
             @include f-f($arimo);
-            min-height: 205px;
+            min-height: 210px;
             padding: 16px;
             margin-top: 2px;
           }
         }
+      }
+
+      .plan-icon {
+        @extend %p-r;
+        top: 3px;
       }
 
       .contact-info-container {

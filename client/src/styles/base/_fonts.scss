@@ -1,6 +1,18 @@
 /// --FONTS-- ///
 
 @font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/fontawesome-webfont.eot") format("eot"),
+  url("assets/fonts/fontawesome-webfont.woff2") format("woff2"),
+  url("assets/fonts/fontawesome-webfont.woff") format("woff"),
+  url("assets/fonts/fontawesome-webfont.ttf") format("truetype"),
+  url("assets/fonts/fontawesome-webfont.svg") format("svg");
+}
+
+
+@font-face {
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
