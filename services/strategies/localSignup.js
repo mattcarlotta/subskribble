@@ -26,7 +26,7 @@ module.exports = app => {
       if (existingUser) return done(emailAlreadyTaken, false);
 
       const existingCompany = await db.oneOrNone(findCompany(), [company]);
-      if (company) return done(companyAlreadyExists, false);
+      if (existingCompany) return done(companyAlreadyExists, false);
 
       // attempt to create new user
       try {

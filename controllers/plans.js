@@ -20,7 +20,7 @@ module.exports = app => {
       if (!req.query) return sendError('Missing query fetch parameters', res, next);
       try {
         const activeplans = await db.any(getAllActivePlans(), [req.session.id]);
-        if (isEmpty(activeplans)) return sendError('You must create a plan before attempting to create a new form!', res, next);
+        if (isEmpty(activeplans)) return sendError('You must create a plan first!', res, next);
 
         res.status(201).json({ activeplans });
       } catch (err) { return sendError(err, res, next); }

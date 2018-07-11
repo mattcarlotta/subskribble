@@ -3,10 +3,7 @@ import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components/subskribble';
 import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupForm';
-// import ContactUs from '../components/subskribble/contact';
-// import CustomerSignup from '../containers/website/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
-// import FAQs from '../components/subskribble/faqs';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app/landing';
 import NotFound from '../components/subskribble/app/notfound/404';
@@ -22,7 +19,6 @@ import Subscribers from '../containers/subskribble/subscribers';
 import Templates from '../containers/subskribble/templates';
 import TemplateForm from '../containers/subskribble/forms/templateForm';
 import Transactions from '../containers/subskribble/transactions';
-// import Tutorials from '../components/subskribble/tutorials';
 import VerifyEmail from '../containers/subskribble/app/auth/VerifyEmail';
 
 // CONFIG APP ROUTE VIEWS
@@ -35,11 +31,6 @@ export default (
 			<Route path="/subskribble" component={RequireAuth}>
 				<IndexRoute component={Landing} />
 				{/* <Route path="dashboard" component={Dashboard} /> */}
-				{/* <Route path="contact-us" component={ContactUs} /> */}
-				{/* <Route path="customer-signup/:gateway" component={CustomerSignup} /> */}
-				{/* <Route path="faqs" component={FAQs} /> */}
-				{/* <Route path="forms" component={Forms}/> */}
-
 				<Route path="plans" component={Plans} />
 				<Route path="promotionals" component={Promos} />
 				<Route path="promotionals/create" component={PromosForm} />
@@ -50,7 +41,6 @@ export default (
 				<Route path="templates/create" component={TemplateForm} />
 				<Route path="templates/edit/:id" component={TemplateForm} />
 				<Route path="transactions" component={Transactions} />
-				{/* <Route path="tutorials" component={Tutorials} /> */}
 				<Route path="*" component={NotFound} />
 			</Route>
 			<Route path="*" component={NotFound} />

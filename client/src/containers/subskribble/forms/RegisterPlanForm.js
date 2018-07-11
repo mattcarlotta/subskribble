@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col } from 'antd'
 import { reduxForm } from 'redux-form';
 import { AntFormFields, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
 import BillingSwitchField from '../app/formFields/renderBillingSwitchField';
@@ -7,13 +8,12 @@ import ReviewPlanForm from '../app/formFields/reviewPlanForm';
 
 const RenderFormFields = ({ billingSwitch, FIELDS, title, position }) => (
   FIELDS
-  ? <div className={`${position}-form`}>
-      <h3>{title}</h3>
-      { billingSwitch && <BillingSwitchField /> }
+  ? <Col span={12}>
+      <h3>{title} { billingSwitch && <BillingSwitchField /> }</h3>
       <div className="input-100">
         <AntFormFields FIELDS={FIELDS} />
       </div>
-    </div>
+    </Col>
   : null
 )
 
@@ -31,25 +31,27 @@ const RegisterPlanForm = ({
   onClickBack,
   onSubmit,
   pristine,
+  plans,
   PLANSELECTIONFIELDS,
   PLANSELECTIONS,
   RIGHTFIELDS,
   rightTitle,
+  showPlans,
   submitting,
 }) => (
   <div className="form-container">
     <h2 className="main-title" dangerouslySetInnerHTML={{__html: mainTitle}}></h2>
     <form onSubmit={handleSubmit}>
-      <RenderFormFields FIELDS={CONTACTFIELDS} title="Contact Information" position="left" />
-      { PLANSELECTIONFIELDS && <RenderPlanSelection PLANSELECTIONFIELDS={PLANSELECTIONFIELDS} /> }
-      { PLANSELECTIONS && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={PLANSELECTIONS} /> }
-      <RenderFormFields billingSwitch={true} FIELDS={BILLINGADDRESSFIELDS} title="Billing Information" position="right" />
-      <RenderFormFields FIELDS={CREDITCARDFIELDS} title="Credit Card Information" position="right" />
+      <RenderFormFields FIELDS={CONTACTFIELDS} title="Contact Information" />
+      <RenderFormFields billingSwitch={true} FIELDS={BILLINGADDRESSFIELDS} title="Billing Information" />
+      <RenderFormFields FIELDS={CREDITCARDFIELDS} title="Credit Card Information" />
+      { showPlans && <RenderPlanSelection PLANSELECTIONFIELDS={plans} /> }
+      { finished && <ReviewPlanForm editStep={editStep} PLANSELECTIONS={plans} /> }
       <div className="clear-fix" />
       <hr />
       <AntStepFormButtons
         backLabel="Back"
-        backStyle={{ height: 50, float: 'left' }}
+        backStyle={{ height: 50 }}
         confirmLoading={confirmLoading}
         onClickBack={onClickBack}
         pristine={pristine}

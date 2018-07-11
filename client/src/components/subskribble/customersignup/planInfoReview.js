@@ -2,7 +2,7 @@ import React from 'react';
 
 const PlanInfoReview = ({ displayPrice, description, editStep, selectedPlan }) => (
   <div className="plan-info-container">
-    <h2 className="head-title"><i className="fa fa-sticky-note-o" aria-hidden="true" /> Plan</h2>
+    <h2 className="head-title"><i className="material-icons" aria-hidden="true" >content_paste</i> Plan</h2>
     <div className="details-container">
       <p className="plan">
         {selectedPlan}

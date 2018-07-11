@@ -10,7 +10,7 @@ import { AntInput, AntInputNumber, AntSelectField, AntStepFormButtons } from '..
 import Spinner from '../app/loading/Spinner';
 import { addNewPromo, editPromo } from '../../../actions/formActions';
 import planActions from '../../../actions/planActions';
-import { isRequired, isNotEmpty } from '../app/formFields/validateFormFields';
+import { allowedCharacters, isRequired, isNotEmpty, isNumber } from '../app/formFields/validateFormFields';
 
 // import FIELDS from '../app/formFields/promoFormFields';
 const { fetchAllActivePlans } = planActions;
@@ -26,7 +26,7 @@ class PromoForm extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError } = this.props;
-    serverError !== prevProps.serverError && serverError !== undefined && this.setState({  confirmLoading: false });
+    serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
   }
 
   fetchPromoForEditing = id => {
@@ -85,7 +85,7 @@ class PromoForm extends Component {
                     name="promocode"
                     component={AntInput}
                     placeholder="Unique Promo Code"
-                    validate={[isRequired]}
+                    validate={[isRequired, allowedCharacters]}
                   />
                 </div>
                 <div className="input-100">
@@ -105,7 +105,7 @@ class PromoForm extends Component {
                       name="amount"
                       component={AntInputNumber}
                       placeholder="Discount Amount"
-                      validate={[isRequired]}
+                      validate={[isRequired, isNumber]}
                       style={{ width: '100%' }}
                     />
                   </Col>
@@ -117,6 +117,7 @@ class PromoForm extends Component {
                     component={AntInputNumber}
                     placeholder="Max Usage (leave empty if unlimited)"
                     style={{ width: '100%' }}
+                    validate={[isNumber]}
                   />
                 </div>
                 <hr />

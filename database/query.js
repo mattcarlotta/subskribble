@@ -21,7 +21,7 @@ module.exports = app => {
     createPlan: () => ("INSERT INTO plans(userid, planName, amount) VALUES((SELECT id FROM users WHERE id=$1), $2, $3)"),
     deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
     deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
-    getAllActivePlans: () => (`SELECT planName FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
+    getAllActivePlans: () => (`SELECT planName, description, amount FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
     getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getPlanCount: () => (
       "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM plans;"

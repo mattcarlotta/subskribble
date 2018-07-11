@@ -1,23 +1,23 @@
-import { isRequired, isValidEmail, minPassword } from './validateFormFields';
+import { allowedCharacters, isRequired, isValidEmail, minPassword } from './validateFormFields';
 
 export default [
 	{
 		name: 'company',
 		type: 'text',
 		placeholder: 'Company',
-		validate: [isRequired]
+		validate: [isRequired, allowedCharacters]
 	},
 	{
 		name: 'firstName',
 		type: 'text',
 		placeholder: 'First Name',
-		validate: [isRequired]
+		validate: [isRequired, allowedCharacters]
 	},
 	{
 		name: 'lastName',
 		type: 'text',
 		placeholder: 'Last Name',
-		validate: [isRequired]
+		validate: [isRequired, allowedCharacters]
 	},
 	{
 		name: 'email',

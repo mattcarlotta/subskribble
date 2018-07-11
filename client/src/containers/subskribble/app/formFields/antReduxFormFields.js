@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
-import { Button, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Switch } from "antd";
+import { Button, Col, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Switch } from "antd";
 
 const FormItem = Form.Item;
 const { Button: RadioButton, Group: RadioGroup } = Radio;
@@ -44,23 +44,25 @@ const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
 
 const AntSubmitButton = ({ confirmLoading, disabled, icon, label, onClick, style, type }) => (
-  <Button
-    type="primary"
-    disabled={disabled}
-    htmlType={type}
-    loading={confirmLoading}
-    onClick={onClick}
-    style={{ ...style }}
-  >
-    {icon === "left"
-      ? <Fragment>
+  <Col span={12}>
+    <Button
+      type="primary"
+      disabled={disabled}
+      htmlType={type}
+      loading={confirmLoading}
+      onClick={onClick}
+      style={{ ...style }}
+      >
+        {icon === "left"
+        ? <Fragment>
           <Icon type={icon} /> { label }
         </Fragment>
-      : <Fragment>
+        : <Fragment>
           { label } <Icon type={icon} />
         </Fragment>
-    }
-  </Button>
+      }
+    </Button>
+  </Col>
 )
 
 const AntFormSubmit = (props) => (
@@ -121,15 +123,15 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
       value={value}
       component={AntRadioGroup}
     >
-     {map(FIELDS, ({ description, plan, price }, key) => (
+     {map(FIELDS, ({ description, planname, amount }, key) => (
         <RadioButton
-          className={`selection-container ${(plan === value) ? "selected" : ""}`}
+          className={`selection-container ${(planname === value) ? "selected" : ""}`}
           key={key}
-          value={plan}
+          value={planname}
         >
           <div className="header">
-            <h3 className="plan-title">{plan}</h3>
-            <h2 className="price"><span className="price-sign">$</span>{price}</h2>
+            <h3 className="plan-title">{planname}</h3>
+            <h2 className="price"><span className="price-sign">$</span>{amount}</h2>
             <p>per month</p>
           </div>
           <div className="body">

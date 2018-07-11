@@ -7,6 +7,8 @@ import Stepper from './Stepper';
 import RegisterPlanForm from './RegisterPlanForm';
 import { subRegisterToPlan } from '../../../actions/formActions';
 import { getCustomerFormFields } from '../app/formFields/customerSignupFields';
+import planActions from '../../../actions/planActions';
+const { fetchAllActivePlans } = planActions;
 
 const stepLabels = [
   { title: 'Contact Information', icon: 'mail_outline' },
@@ -18,10 +20,19 @@ class CustomerPlanSignup extends Component {
   state = {
     confirmLoading: false,
     formFields: getCustomerFormFields(),
+    isLoading: true,
     stepIndex: 0,
     visited: [],
     wasReviewed: false
   };
+
+  componentDidMount = () => {
+    this.props.fetchAllActivePlans()
+    .then(({data: {activeplans}}) => {
+      activeplans ? this.setState({ isLoading: false, plans: activeplans}) : browserHistory.goBack()
+    })
+    .catch(() => null)
+  }
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError } = this.props;
@@ -58,41 +69,45 @@ class CustomerPlanSignup extends Component {
   goBackPage = () => browserHistory.goBack();
 
   render() {
-    const { confirmLoading, formFields, stepIndex, wasReviewed } = this.state;
+    const { confirmLoading, formFields, isLoading, plans, stepIndex, wasReviewed } = this.state;
     const finished = stepIndex === 2;
     return (
-      <div className="customer-signup-bg">
-        <div className="customer-signup-container">
-          <div className="stepper-container">
-            <div className="title">
-              <h1>Subscriber Registration</h1>
+      isLoading
+        ? null
+        : <div className="customer-signup-bg">
+          <div className="customer-signup-container">
+            <div className="stepper-container">
+              <div className="title">
+                <h1>Subscriber Registration</h1>
+              </div>
+              <Steps current={stepIndex}>
+                {map(stepLabels, ({ title, icon }, key) => (
+                  <Stepper
+                    confirmLoading={confirmLoading}
+                    icon={icon}
+                    key={title}
+                    onClick={this.editStep}
+                    stepKey={key}
+                    title={title}
+                    wasReviewed={wasReviewed}
+                  />
+                ))}
+              </Steps>
             </div>
-            <Steps current={stepIndex}>
-              {map(stepLabels, ({ title, icon }, key) => (
-                <Stepper
-                  confirmLoading={confirmLoading}
-                  icon={icon}
-                  key={title}
-                  onClick={this.editStep}
-                  stepKey={key}
-                  title={title}
-                  wasReviewed={wasReviewed}
-                />
-              ))}
-            </Steps>
+            <RegisterPlanForm
+              {...formFields}
+              confirmLoading={confirmLoading}
+              finished={finished}
+              editStep={!confirmLoading ? this.editStep : null}
+              onClickBack={ stepIndex > 0 ? this.handlePrev : this.goBackPage }
+              onSubmit={ finished ? this.handleFormSave : this.handleNext }
+              plans={plans}
+              showPlans={ stepIndex === 1 ? true : false }
+            />
           </div>
-          <RegisterPlanForm
-            {...formFields}
-            confirmLoading={confirmLoading}
-            finished={finished}
-            editStep={!confirmLoading ? this.editStep : null}
-            onClickBack={ stepIndex > 0 ? this.handlePrev : this.goBackPage }
-            onSubmit={ finished ? this.handleFormSave : this.handleNext }
-          />
         </div>
-      </div>
-    );
+      );
   }
 }
 
-export default connect(state => ({ serverError: state.server.error }), { subRegisterToPlan })(CustomerPlanSignup);
+export default connect(state => ({ serverError: state.server.error }), { fetchAllActivePlans, subRegisterToPlan })(CustomerPlanSignup);

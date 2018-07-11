@@ -5,7 +5,7 @@ const CartTotalReview = ({ displayPrice, price }) => {
   const total = (price + parseFloat(tax)).toFixed(2);
   return (
     <div className="total-container">
-      <h2 className="head-title"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Total</h2>
+      <h2 className="head-title"><i className="material-icons">shopping_cart</i> Total</h2>
       <div className="details-container">
         <p className="subtotal">
           Subtotal:

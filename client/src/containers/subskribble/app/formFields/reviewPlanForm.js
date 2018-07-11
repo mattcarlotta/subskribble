@@ -9,15 +9,15 @@ import PlanInfoReview from '../../../../components/subskribble/customersignup/pl
 import CartTotalReview from '../../../../components/subskribble/customersignup/cartTotalReview';
 
 const ReviewPlanForm = ({ finalValues, editStep, PLANSELECTIONS }) => {
-  let { price, description } = filter(PLANSELECTIONS, ({ plan }) => (plan === finalValues.selectedPlan))[0];
-  price = parseFloat(price);
-  const displayPrice = price.toFixed(2);
+  let { amount, description } = filter(PLANSELECTIONS, ({ planname }) => (planname === finalValues.selectedPlan))[0];
+  amount = parseFloat(amount);
+  const displayPrice = amount.toFixed(2);
   return(
     <div className="review-signup-container">
       <ContactInfoReview {...finalValues} editStep={editStep} />
       <PaymentInfoReview {...finalValues} editStep={editStep}/>
       <PlanInfoReview {...finalValues} displayPrice={displayPrice} description={description} editStep={editStep} />
-      <CartTotalReview displayPrice={displayPrice} price={price} />
+      <CartTotalReview displayPrice={displayPrice} price={amount} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { isRequired, isValidEmail, maxLength2000 } from './validateFormFields';
+import { allowedCharacters, isRequired, isValidEmail, maxLength2000 } from './validateFormFields';
 import { AntInput, AntTextArea } from './antReduxFormFields';
 
 export default [
@@ -7,7 +7,7 @@ export default [
 		type: 'text',
     component: AntInput,
 		placeholder: 'Full Name',
-		validate: [isRequired]
+		validate: [isRequired, allowedCharacters]
 	},
 	{
 		name: 'email',

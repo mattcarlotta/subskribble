@@ -28,7 +28,7 @@ class TemplateForm extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError } = this.props;
-    serverError !== prevProps.serverError && serverError !== undefined && this.setState({  confirmLoading: false });
+    serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
   }
 
   fetchPlans = () => {

@@ -28,7 +28,7 @@
 }
 
 .billing-switch-field {
-  @include h(50px);
+  @include h(40px !important);
   @include w(100%);
 
   .ant-form-item-label {
@@ -81,29 +81,17 @@
 
       .ant-form-item { @include h(75px); }
 
-      .left-form {
-        @extend .f-l, %pr-10;
-        // @include h(450px);
-        @include w(50%);
-      }
-
       .main-title {
         @extend %t-a-c;
         @include f-s(28px);
         margin-bottom: 80px;
       }
 
-      .right-form {
-        @extend .f-r, %pl-10;
-        @include h(220px);
-        @include w(50%);
-      }
-
       .plan-selection-container {
         min-height: 550px;
 
         .selection-container {
-          @extend .f-l, %m-b-20;
+          @extend %m-b-20;
           @include h(250px);
           @include w(100%);
           max-width: 300px;

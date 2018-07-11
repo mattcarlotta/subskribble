@@ -36,6 +36,7 @@ module.exports = app => {
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR DEFAULT 'active',
     planName VARCHAR NOT NULL UNIQUE,
+    description TEXT NOT NULL,
     amount DECIMAL(12,2) NOT NULL,
     setupFee DECIMAL(12,2) DEFAULT 0.00,
     billEvery VARCHAR DEFAULT '30 Days',
@@ -105,7 +106,7 @@ module.exports = app => {
   )`;
 
   const noteProperties = `(userid, subscriber, message, read)`;
-  const planProperties = `(userid, status, planName, amount, setupFee, billEvery, trialPeriod, subscribers)`;
+  const planProperties = `(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(userid, status, planName, promoCode, amount, validFor, maxUsage, totalUsage)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
   const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
@@ -113,30 +114,30 @@ module.exports = app => {
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
 
   const planValues = id => (`
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', 99.99, 0.00, '30 days', '30 days', 299),
-  (${selectUserid(id)}, 'active', 'Carlotta Switch', 49.99, 0.00, '30 days', '30 days', 85),
-  (${selectUserid(id)}, 'active', 'Carlotta Corp', 299.99, 4.99, '30 days', '30 days', 35048),
-  (${selectUserid(id)}, 'active', 'Carlotta Inc.', 1999.99, 399.99, '30 days', '30 days', 14058),
-  (${selectUserid(id)}, 'active', 'Carlotta LLC', 499.99, 299.99, '30 days', '30 days', 11),
-  (${selectUserid(id)}, 'active', 'Carlotta Dealership', 699.99, 24.99, '30 days', '30 days', 400),
-  (${selectUserid(id)}, 'active', 'Carlotta Affiliates', 79.99, 9.99, '30 days', '30 days', 29),
-  (${selectUserid(id)}, 'active', 'Carlotta Sales', 9.99, 0.00, '30 days', '30 days', 642),
-  (${selectUserid(id)}, 'active', 'Carlotta Automechs', 14.99, 249.99, '30 days', '30 days', 22),
-  (${selectUserid(id)}, 'active', 'Carlotta Solar', 44.99, 199.99, '30 days', '30 days', 751),
-  (${selectUserid(id)}, 'active', 'Carlotta Twitch', 4.99, 0.00, '30 days', '30 days', 256),
-  (${selectUserid(id)}, 'active', 'Carlotta Youtube', 1.99, 0.00, '30 days', '30 days', 81),
-  (${selectUserid(id)}, 'suspended', 'Carlotta .com', 69.99, 0.00, '30 days', '30 days', 23),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Partners', 99.99, 0.00, '30 days', '30 days', 214),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Church', 0.00, 0.00, '30 days', '30 days', 845),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Industries', 149.99, 29.99, '30 days', '30 days', 6514),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Workshops', 39.99, 5.99, '30 days', '30 days', 742),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Sports', 19.99, 0.00, '30 days', '30 days', 611),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Cars Magazine', 2.99, 0.00, '30 days', '30 days', 125862),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Flagships', 18.99, 0.00, '30 days', '30 days', 125),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Protocols', 15.99, 0.00, '30 days', '30 days', 487),
-  (${selectUserid(id)}, 'suspended', 'Carlotta ISP', 89.99, 99.90, '30 days', '30 days', 329),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', 279.99, 198.89, '30 days', '30 days', 4),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 69.99, 0.00, '30 days', '30 days', 645);
+  (${selectUserid(id)}, 'active', 'Carlotta Prime', 'Carlotta Subscription', 99.99, 0.00, '30 days', '30 days', 299),
+  (${selectUserid(id)}, 'active', 'Carlotta Switch', 'Carlotta Subscription', 49.99, 0.00, '30 days', '30 days', 85),
+  (${selectUserid(id)}, 'active', 'Carlotta Corp', 'Carlotta Subscription', 299.99, 4.99, '30 days', '30 days', 35048),
+  (${selectUserid(id)}, 'active', 'Carlotta Inc.', 'Carlotta Subscription', 1999.99, 399.99, '30 days', '30 days', 14058),
+  (${selectUserid(id)}, 'active', 'Carlotta LLC', 'Carlotta Subscription', 499.99, 299.99, '30 days', '30 days', 11),
+  (${selectUserid(id)}, 'active', 'Carlotta Dealership', 'Carlotta Subscription', 699.99, 24.99, '30 days', '30 days', 400),
+  (${selectUserid(id)}, 'active', 'Carlotta Affiliates', 'Carlotta Subscription', 79.99, 9.99, '30 days', '30 days', 29),
+  (${selectUserid(id)}, 'active', 'Carlotta Sales', 'Carlotta Subscription', 9.99, 0.00, '30 days', '30 days', 642),
+  (${selectUserid(id)}, 'active', 'Carlotta Automechs', 'Carlotta Subscription', 14.99, 249.99, '30 days', '30 days', 22),
+  (${selectUserid(id)}, 'active', 'Carlotta Solar', 'Carlotta Subscription', 44.99, 199.99, '30 days', '30 days', 751),
+  (${selectUserid(id)}, 'active', 'Carlotta Twitch', 'Carlotta Subscription', 4.99, 0.00, '30 days', '30 days', 256),
+  (${selectUserid(id)}, 'active', 'Carlotta Youtube', 'Carlotta Subscription', 1.99, 0.00, '30 days', '30 days', 81),
+  (${selectUserid(id)}, 'suspended', 'Carlotta .com', 'Carlotta Subscription', 69.99, 0.00, '30 days', '30 days', 23),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Partners', 'Carlotta Subscription', 99.99, 0.00, '30 days', '30 days', 214),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Church', 'Carlotta Subscription', 0.00, 0.00, '30 days', '30 days', 845),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Industries', 'Carlotta Subscription', 149.99, 29.99, '30 days', '30 days', 6514),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Workshops', 'Carlotta Subscription', 39.99, 5.99, '30 days', '30 days', 742),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Sports', 'Carlotta Subscription', 19.99, 0.00, '30 days', '30 days', 611),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Cars Magazine', 'Carlotta Subscription', 2.99, 0.00, '30 days', '30 days', 125862),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Flagships', 'Carlotta Subscription', 18.99, 0.00, '30 days', '30 days', 125),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Protocols', 'Carlotta Subscription', 15.99, 0.00, '30 days', '30 days', 487),
+  (${selectUserid(id)}, 'suspended', 'Carlotta ISP', 'Carlotta Subscription', 89.99, 99.90, '30 days', '30 days', 329),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', 'Carlotta Subscription', 279.99, 198.89, '30 days', '30 days', 4),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'Carlotta Subscription', 69.99, 0.00, '30 days', '30 days', 645);
   `);
 
   const promoValues = id => (`

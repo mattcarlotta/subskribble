@@ -18,7 +18,7 @@ const PaymentInfoReview = ({
   const cardType = GetCreditCardType(creditCard.replace(/-/g, ""));
   return (
     <div className="payment-info-container">
-      <h2 className="head-title"><i className="fa fa-credit-card" aria-hidden="true" /> Payment</h2>
+      <h2 className="head-title"><i className="material-icons">credit_card</i> Payment</h2>
       <div className="details-container">
         <p className="creditcard">
           <i className={ cardType ? `fa fa-cc-${cardType}` : "fa fa-credit-card-alt"} aria-hidden="true" />

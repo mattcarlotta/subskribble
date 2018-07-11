@@ -13,7 +13,7 @@ const ContactInfoReview = ({
     editStep
 }) => (
   <div className="contact-info-container">
-    <h2 className="head-title"><i className="fa fa-address-book" aria-hidden="true" /> Contact</h2>
+    <h2 className="head-title"><i className="material-icons">import_contacts</i> Contact</h2>
     <div className="details-container">
       <p className="name">
         {contactFirstName} {contactLastName}
