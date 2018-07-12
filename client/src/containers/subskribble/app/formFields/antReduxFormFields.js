@@ -145,32 +145,59 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
   </div>
 )
 
+// const AntRangePicker = ({
+//   children,
+//   input: { value, ...inputs},
+//   meta: { invalid, touched, error },
+//   label,
+//   hasFeedback,
+//   selectedDate,
+//   ...props
+// }) => {
+//   const hasError = touched && invalid;
+//   return (
+//     <FormItem
+//       label={label}
+//       hasFeedback={hasFeedback && touched}
+//       help={hasError && error}
+//       validateStatus={hasError ? "error" : "success"}
+//     >
+//       <RangePicker
+//         {...inputs}
+//         {...props}
+//         children={children}
+//         format="MMMM, DD YYYY"
+//       />
+//     </FormItem>
+//   );
+// };
+
 const AntRangePicker = ({
+  input,
+  meta,
   children,
-  input: { value, ...inputs},
-  meta: { invalid, touched, error },
-  label,
   hasFeedback,
-  selectedDate,
-  ...props
+  label,
+  ...rest
 }) => {
-  const hasError = touched && invalid;
+  const hasError = meta.touched && meta.invalid;
   return (
     <FormItem
       label={label}
-      hasFeedback={hasFeedback && touched}
-      help={hasError && error}
       validateStatus={hasError ? "error" : "success"}
+      hasFeedback={hasFeedback && hasError}
+      help={hasError && meta.error}
     >
       <RangePicker
-        {...inputs}
-        {...props}
+        {...input}
+        {...rest}
         children={children}
         format="MMMM, DD YYYY"
       />
     </FormItem>
   );
 };
+
 
 const AntSelect = ({
   children,

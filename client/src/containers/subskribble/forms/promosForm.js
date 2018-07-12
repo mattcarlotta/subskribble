@@ -67,7 +67,14 @@ class PromoForm extends Component {
 
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
+    formProps.startdate = formProps.dates[0].format("MMMM DD YYYY")
+    formProps.enddate = formProps.dates[0].format("MMMM DD YYYY")
+    formProps.datestamps = [formProps.dates[0].toString(), formProps.dates[1].toString()]
 		console.log(formProps);
+    // console.log(formProps.dates[0].toString())
+    // console.log(formProps.dates[0].format("MMMM DD YYYY"))
+    // console.log(formProps.dates[1].toString())
+    // console.log(formProps.dates[1].format("MMMM DD YYYY"))
 	}
 
   goBackPage = () => browserHistory.goBack();
@@ -132,10 +139,12 @@ class PromoForm extends Component {
                 <div className="input-100">
                   <Field
                     name="dates"
-                    placeholder={ this.state.dates || ['Start Date', 'End Date']}
+                    placeholder={['Start Date', 'End Date']}
                     component={AntRangePicker}
                     style={{ width: '100%' }}
                     validate={[isRequired, hasDates]}
+                    onFocus={e => e.preventDefault()}
+                    onBlur={e => e.preventDefault()}
                   />
                 </div>
                 <div className="input-100">
