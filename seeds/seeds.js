@@ -53,6 +53,7 @@ module.exports = app => {
     promoCode VARCHAR NOT NULL,
     amount VARCHAR NOT NULL,
     discountType VARCHAR NOT NULL,
+    dates TEXT ARRAY,
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
     endDate TEXT,
     maxUsage BIGINT DEFAULT 9223372036854775807,

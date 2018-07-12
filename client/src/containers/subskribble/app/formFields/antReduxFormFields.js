@@ -1,6 +1,5 @@
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
-import moment from 'moment';
 import { Field } from 'redux-form';
 import { Button, Col, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Switch } from "antd";
 
@@ -148,10 +147,11 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
 
 const AntRangePicker = ({
   children,
-  input: { value, ...inputMethods },
+  input: { value, ...inputs},
   meta: { invalid, touched, error },
   label,
   hasFeedback,
+  selectedDate,
   ...props
 }) => {
   const hasError = touched && invalid;
@@ -163,12 +163,10 @@ const AntRangePicker = ({
       validateStatus={hasError ? "error" : "success"}
     >
       <RangePicker
-        {...inputMethods}
+        {...inputs}
         {...props}
         children={children}
-        format="MMMM/DD/YYYY"
-        placeholder={['Start Date', 'End Date']}
-        ranges={{ Today: [moment(), moment()], 'This Month': [moment(), moment().endOf('month')] }}
+        format="MMMM, DD YYYY"
       />
     </FormItem>
   );

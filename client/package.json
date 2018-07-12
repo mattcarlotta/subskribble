@@ -23,7 +23,7 @@
 		"react-router-redux": "4.0.8",
 		"react-tap-event-plugin": "^3.0.2",
 		"redux": "^3.7.2",
-		"redux-form": "^7.1.1",
+		"redux-form": "^7.4.2",
 		"redux-thunk": "^2.2.0"
 	},
 	"scripts": {

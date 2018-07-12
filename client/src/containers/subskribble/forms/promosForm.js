@@ -1,6 +1,7 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import moment from 'moment';
+import { reduxForm, Field, change } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Col } from 'antd';
@@ -10,18 +11,36 @@ import { AntInput, AntInputNumber, AntRangePicker, AntSelectField, AntStepFormBu
 import Spinner from '../app/loading/Spinner';
 import { addNewPromo, editPromo } from '../../../actions/formActions';
 import planActions from '../../../actions/planActions';
-import { allowedCharacters, isRequired, isNotEmpty, isNumber } from '../app/formFields/validateFormFields';
+import { allowedCharacters, hasDates, isRequired, isNotEmpty, isNumber } from '../app/formFields/validateFormFields';
 
 // import FIELDS from '../app/formFields/promoFormFields';
 const { fetchAllActivePlans } = planActions;
 
+const dates = [
+  moment("Wed Jul 11 2018 17:25:22 GMT-0700", 'ddd MMM D YYYY HH:mm:ss ZZ'),
+  moment('Mon Aug 13 2018 17:30:40 GMT-0700', 'ddd MMM D YYYY HH:mm:ss ZZ')
+]
+
 class PromoForm extends Component {
-  state = { confirmLoading: false, isLoading: true, selectOptions: [] };
+  state = {
+    confirmLoading: false,
+    isLoading: true,
+    selectOptions: [],
+  };
 
   componentDidMount = () => {
     // const { id } = this.props.location.query;
     // !id ? this.fetchPromos() : this.fetchPromoForEditing(id)
     this.fetchPlans()
+    this.setState({ dates: ["July 11, 2018", "Aug 13 2018" ], selectedPlans: ['Carlotta Prime'] }, () =>{
+      this.props.initialize({
+        promocode: 'dfshjsfdbhfsdh',
+        discounttype: '$',
+        dates,
+        amount: 80,
+        plans: ['Carlotta Prime']
+      })
+    })
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -49,7 +68,6 @@ class PromoForm extends Component {
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
 		console.log(formProps);
-    // this.props.addNewPromo(formProps)
 	}
 
   goBackPage = () => browserHistory.goBack();
@@ -113,12 +131,11 @@ class PromoForm extends Component {
                 </div>
                 <div className="input-100">
                   <Field
-                    hasFeedback
                     name="dates"
+                    placeholder={ this.state.dates || ['Start Date', 'End Date']}
                     component={AntRangePicker}
-                    placeholder="Start and End Date"
                     style={{ width: '100%' }}
-                    validate={[isRequired]}
+                    validate={[isRequired, hasDates]}
                   />
                 </div>
                 <div className="input-100">
@@ -150,5 +167,4 @@ class PromoForm extends Component {
 
 export default reduxForm({
   form: 'PromoForm',
-  initialValues: { discounttype: "$" }
-})(connect(null, { addNewPromo, editPromo, fetchAllActivePlans })(PromoForm));
+})(connect(null, { addNewPromo, change, editPromo, fetchAllActivePlans })(PromoForm));

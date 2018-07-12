@@ -41,6 +41,7 @@ class TemplateForm extends Component {
     this.props.fetchTemplate(id)
     .then(({ data }) => {
       this.setState({ selectedPlans: data.plans }, () => {
+        console.log(data);
         this.props.initialize(data)
         this.fetchPlans()
       })

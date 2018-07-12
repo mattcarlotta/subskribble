@@ -20,7 +20,6 @@ class SettingsButton extends PureComponent {
       >
 				<Popover
 					arrowPointAtCenter
-					className="nav-button"
 					content={<SettingsMenu unauthorizeUser={this.unauthorizeUser} {...this.props}/>}
 					onVisibleChange={this.handleVisibleChange}
 					placement="bottomRight"
