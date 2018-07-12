@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 const allowedCharacters = value => (/[~`'@#$%&*+=[\]\\/{}|\\":<>]/g.test(value)) ? 'Please remove any special characters' : undefined;
 const hasDates = value => value && value.length !== 2 ? 'You must select 2 dates' : undefined;
 const isNotEmpty = value => isEmpty(value) ? 'You must include at least one item' : undefined;
-const isNumber = value => !(/^\d+$/.test(value)) ? 'Please only use numbers' : undefined;
+const isNumber = value => !(/^\d+$/.test(value)) ? 'Please only use whole numbers' : undefined;
 const isRequired = value => !value ? 'Required' : undefined;
 const isSelected = value => !value ? 'Please select a plan' : undefined;
 const isValidCC = value => value.length < 19 ? 'Invalid Credit Card' : undefined;

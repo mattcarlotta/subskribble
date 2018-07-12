@@ -15,7 +15,7 @@ import { allowedCharacters, hasDates, isRequired, isNotEmpty, isNumber } from '.
 
 // import FIELDS from '../app/formFields/promoFormFields';
 const { fetchAllActivePlans } = planActions;
-//
+
 // const dates = [
 //   moment("Wed Jul 11 2018 17:25:22 GMT-0700", 'ddd MMM D YYYY HH:mm:ss ZZ'),
 //   moment('Mon Aug 13 2018 17:30:40 GMT-0700', 'ddd MMM D YYYY HH:mm:ss ZZ')
@@ -34,7 +34,7 @@ class PromoForm extends Component {
     // const { id } = this.props.location.query;
     // !id ? this.fetchPromos() : this.fetchPromoForEditing(id)
     this.fetchPlans()
-    this.props.initialize({ discounttype: '$'})
+    // this.props.initialize({ discounttype: '$'})
     // this.setState({ dates: ["July 11, 2018", "Aug 13 2018" ], selectedPlans: ['Carlotta Prime'] }, () =>{
     //   this.props.initialize({
     //     promocode: 'dfshjsfdbhfsdh',
@@ -122,13 +122,13 @@ class PromoForm extends Component {
                 <div className="input-100">
                   <Col span={4}>
                     <AntSelectField
+                      defaultValue={['$']}
                       name="discounttype"
                       disabled={confirmLoading}
                       selectOptions={['$', '%']}
-                      tokenSeparators={[',']}
-                      validate={[isNotEmpty]}
-                      defaultValue={['$']}
                       style={{ width: '100%' }}
+                      tokenSeparators={[',']}
+                      validate={[isRequired]}
                     />
                   </Col>
                   <Col span={20}>
@@ -185,4 +185,7 @@ class PromoForm extends Component {
 
 export default reduxForm({
   form: 'PromoForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { discounttype: "$" }
 })(connect(null, { addNewPromo, change, editPromo, fetchAllActivePlans })(PromoForm));
