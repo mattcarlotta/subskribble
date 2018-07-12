@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
+// import moment from 'moment';
 import { reduxForm, Field, change } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -14,6 +15,12 @@ import { allowedCharacters, hasDates, isRequired, isNotEmpty, isNumber } from '.
 
 // import FIELDS from '../app/formFields/promoFormFields';
 const { fetchAllActivePlans } = planActions;
+//
+// const dates = [
+//   moment("Wed Jul 11 2018 17:25:22 GMT-0700", 'ddd MMM D YYYY HH:mm:ss ZZ'),
+//   moment('Mon Aug 13 2018 17:30:40 GMT-0700', 'ddd MMM D YYYY HH:mm:ss ZZ')
+// ]
+
 
 class PromoForm extends Component {
   state = {
@@ -64,7 +71,7 @@ class PromoForm extends Component {
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
     formProps.startdate = formProps.dates[0].format("MMMM DD YYYY")
-    formProps.enddate = formProps.dates[0].format("MMMM DD YYYY")
+    formProps.enddate = formProps.dates[1].format("MMMM DD YYYY")
     formProps.datestamps = [formProps.dates[0].toString(), formProps.dates[1].toString()]
 		console.log(formProps);
     // console.log(formProps.dates[0].toString())
@@ -145,7 +152,6 @@ class PromoForm extends Component {
                     component={AntRangePicker}
                     style={{ width: '100%' }}
                     validate={[isRequired, hasDates]}
-                    onFocus={e => e.preventDefault()}
                     onBlur={e => e.preventDefault()}
                   />
                 </div>
