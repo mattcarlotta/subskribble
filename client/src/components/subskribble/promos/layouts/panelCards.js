@@ -39,7 +39,7 @@ const TABLEHEADERS = [
 	{
 		title: 'Max Usage',
 		dataIndex: 'maxusage',
-		render: usage => <span className="max-usage"> {usage}</span>
+		render: usage => <span className="max-usage">{usage === 2147483647 ? 'Unlimited' : usage}</span>
 	},
 	{
 		title: 'Total Usage',
@@ -56,6 +56,7 @@ export default ({
 	...rest
 }) => [
 	{
+		editLocation: 'promotionals',
 		SELECTFIELD: true,
 		TAB: 'Active Promotionals',
 		TABLECONTENTS: activeitems,

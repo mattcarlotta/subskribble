@@ -44,6 +44,7 @@ export default ({
 	...rest
 }) => [
 	{
+		editLocation: 'templates',
 		SELECTFIELD: true,
 		TAB: 'Active Templates',
 		TABLECONTENTS: activeitems,

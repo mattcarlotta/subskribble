@@ -2,6 +2,7 @@ module.exports = app => {
   const { db, query: { createNewUser, findUserByEmail, verifyEmail, setUserAsAdmin } } = app.database;
   const { createRandomToken } = app.shared.helpers;
   const bcrypt = app.get("bcrypt");
+  const moment = app.get("moment");
 
   const userTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc() UNIQUE,
@@ -51,13 +52,13 @@ module.exports = app => {
     status VARCHAR DEFAULT 'active',
     plans TEXT ARRAY NOT NULL,
     promoCode VARCHAR NOT NULL,
-    amount VARCHAR NOT NULL,
+    amount INTEGER NOT NULL,
     discountType VARCHAR NOT NULL,
     datestamps TEXT ARRAY,
-    startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+    startDate TEXT,
     endDate TEXT,
-    maxUsage BIGINT DEFAULT 9223372036854775807,
-    totalUsage INTEGER
+    maxUsage INTEGER NOT NULL,
+    totalUsage INTEGER DEFAULT 0
   )`;
 
   const subTableOptions = `(
@@ -109,11 +110,17 @@ module.exports = app => {
 
   const noteProperties = `(userid, subscriber, message, read)`;
   const planProperties = `(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, subscribers)`;
-  const promoProperties = `(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage)`;
+  const promoProperties = `(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage, startDate, endDate, dateStamps)`;
   const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
   const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
+  const currentDate = moment.utc()
+  const laterDate = moment.utc().add(30, 'days')
+  const startDate = currentDate.format("MMMM DD YYYY")
+  const endDate = laterDate.format("MMMM DD YYYY")
+  const startStamp = currentDate.toString()
+  const endStamp = laterDate.toString()
 
   const planValues = id => (`
   (${selectUserid(id)}, 'active', 'Carlotta Prime', 'Carlotta Subscription', 99.99, 0.00, '30 days', '30 days', 299),
@@ -143,30 +150,30 @@ module.exports = app => {
   `);
 
   const promoValues = id => (`
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FIRST10KACCOUNTS', '5', '%', 10000, 299),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '10PERCENTOFF', '10', '%', 100, 85),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Dealership'], 'FALLBACKSALE', '15', '$', 200, 48),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Twitch'], 'EVERYLOWPRICES', '20', '%', 100, 51),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Solar'], 'MILITARYDISCOUNT', '25', '%', 50, 11),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '30PERCENTOFF', '30', '%', 1000, 400),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Sales'], 'SPRINGSALE', '50', '$', 30, 29),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '60PERCENTOFF', '60', '%', 50, 42),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Switch'], '70PERCENTOFF', '70', '%', 20, 19),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '80PERCENTOFF', '80', '%', 10, 1),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Youtube'], '90PERCENTOFF', '90', '%', 10, 6),
-  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FREETRIAL', '100', '%', 99999999, 81),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta .com'], 'FREETRIALOFFER', '100', '%', 20, 20),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Partners'], 'XCLUSIVECLUB', '20.00', '$', 500, 214),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Church'], '4CHARITY', '100', '%', 1000, 845),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Industries'], 'HARDWORKENVBENEFITS', '200.00', '$', 1000, 514),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Workshops'], 'WORKXSHOPPE', '10', '%', 100, 74),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Sports'], 'GETAWORKOUT', '20', '%', 20, 11),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Cars Magazine'], '1FREECARMAGZ', '2.00', '$', 100, 62),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Flagships'], '20PERCENTOFF', '20', '%', 125, 125),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Protocols'], 'FOLLOWGUIDELINES', '5.00', '$', 500, 487),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta ISP'], 'SIGNMEUP', '10.00', '$', 328, 328),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Pumps'], '1FREEPUMP', '100.00', '$', 5, 4),
-  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Assoc.'], 'ASSOCIATED', '100.00', '$', 10, 5);
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FIRST10KACCOUNTS', '5', '%', 10000, 299, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '10PERCENTOFF', '10', '%', 100, 85, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Dealership'], 'FALLBACKSALE', '15', '$', 200, 48, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Twitch'], 'EVERYLOWPRICES', '20', '%', 100, 51, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Solar'], 'MILITARYDISCOUNT', '25', '%', 50, 11, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '30PERCENTOFF', '30', '%', 1000, 400, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Sales'], 'SPRINGSALE', '50', '$', 30, 29, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '60PERCENTOFF', '60', '%', 50, 42, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Switch'], '70PERCENTOFF', '70', '%', 20, 19, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], '80PERCENTOFF', '80', '%', 10, 1, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Youtube'], '90PERCENTOFF', '90', '%', 10, 6, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'active', ARRAY ['Carlotta Prime'], 'FREETRIAL', '100', '%', 2147483647, 81, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta .com'], 'FREETRIALOFFER', '100', '%', 20, 20, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Partners'], 'XCLUSIVECLUB', '20', '$', 500, 214, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Church'], '4CHARITY', '100', '%', 1000, 845, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Industries'], 'HARDWORKENVBENEFITS', '200', '$', 1000, 514, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Workshops'], 'WORKXSHOPPE', '10', '%', 100, 74, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Sports'], 'GETAWORKOUT', '20', '%', 20, 11, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Cars Magazine'], '1FREECARMAGZ', '2', '$', 100, 62, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Flagships'], '20PERCENTOFF', '20', '%', 125, 125, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Protocols'], 'FOLLOWGUIDELINES', '5', '$', 500, 487, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta ISP'], 'SIGNMEUP', '10', '$', 328, 328, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Pumps'], '1FREEPUMP', '100', '$', 5, 4, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']),
+  (${selectUserid(id)}, 'suspended', ARRAY ['Carlotta Assoc.'], 'ASSOCIATED', '100', '$', 10, 5, '${startDate}', '${endDate}', ARRAY ['${startStamp}', '${endStamp}']);
   `);
 
   const subValues = id => (`

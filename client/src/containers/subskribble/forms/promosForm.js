@@ -1,19 +1,19 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
-// import moment from 'moment';
+import moment from 'moment';
 import { reduxForm, Field, change } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Col } from 'antd';
 import { AntInput, AntInputNumber, AntRangePicker, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
-// import MenuItem from 'material-ui/MenuItem';
 
 import Spinner from '../app/loading/Spinner';
+import promoActions from '../../../actions/promoActions';
 import { addNewPromo, editPromo } from '../../../actions/formActions';
 import planActions from '../../../actions/planActions';
 import { allowedCharacters, hasDates, isRequired, isNotEmpty, isNumber } from '../app/formFields/validateFormFields';
 
-// import FIELDS from '../app/formFields/promoFormFields';
+const { fetchPromo } = promoActions;
 const { fetchAllActivePlans } = planActions;
 
 // const dates = [
@@ -31,9 +31,9 @@ class PromoForm extends Component {
   };
 
   componentDidMount = () => {
-    // const { id } = this.props.location.query;
-    // !id ? this.fetchPromos() : this.fetchPromoForEditing(id)
-    this.fetchPlans()
+    const { id } = this.props.location.query;
+    !id ? this.fetchPlans() : this.fetchPromoForEditing(id)
+    // this.fetchPlans()
     // this.props.initialize({ discounttype: '$'})
     // this.setState({ dates: ["July 11, 2018", "Aug 13 2018" ], selectedPlans: ['Carlotta Prime'] }, () =>{
     //   this.props.initialize({
@@ -54,8 +54,15 @@ class PromoForm extends Component {
   fetchPromoForEditing = id => {
     this.props.fetchPromo(id)
     .then(({ data }) => {
-      this.setState({ selectedPlans: data.plans }, () => {
-        this.props.initialize(data)
+      this.setState({ discountType: data.discounttype, selectedPlans: data.plans }, () => {
+          this.props.initialize({
+          ...data,
+          dateStamps: [
+              moment(data.datestamps[0], 'ddd MMM D YYYY HH:mm:ss ZZ'),
+              moment(data.datestamps[1], 'ddd MMM D YYYY HH:mm:ss ZZ')
+          ],
+          maxusage: data.maxusage === 2147483647 ? undefined : data.maxusage
+        })
         this.fetchPlans()
       })
     })
@@ -70,14 +77,11 @@ class PromoForm extends Component {
 
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
-    formProps.startdate = formProps.dates[0].format("MMMM DD YYYY")
-    formProps.enddate = formProps.dates[1].format("MMMM DD YYYY")
-    formProps.datestamps = [formProps.dates[0].toString(), formProps.dates[1].toString()]
-		console.log(formProps);
-    // console.log(formProps.dates[0].toString())
-    // console.log(formProps.dates[0].format("MMMM DD YYYY"))
-    // console.log(formProps.dates[1].toString())
-    // console.log(formProps.dates[1].format("MMMM DD YYYY"))
+    const { id } = this.props.location.query;
+    formProps.startdate = formProps.dateStamps[0].format("MMMM DD YYYY")
+    formProps.enddate = formProps.dateStamps[1].format("MMMM DD YYYY")
+    formProps.datestamps = [formProps.dateStamps[0].toString(), formProps.dateStamps[1].toString()]
+    !id ? this.props.addNewPromo(formProps) : this.props.editPromo(id, formProps);
 	}
 
   goBackPage = () => browserHistory.goBack();
@@ -104,7 +108,7 @@ class PromoForm extends Component {
                     placeholder="Click here to associate plans to the form."
                     style={{ width: '100%' }}
                     selectOptions={selectOptions}
-                    tokenSeparators={[',']}
+                    createPromotion  tokenSeparators={[',']}
                     validate={[isNotEmpty]}
                     defaultValue={selectedPlans}
                   />
@@ -122,7 +126,7 @@ class PromoForm extends Component {
                 <div className="input-100">
                   <Col span={4}>
                     <AntSelectField
-                      defaultValue={['$']}
+                      defaultValue={[this.state.discountType || '$']}
                       name="discounttype"
                       disabled={confirmLoading}
                       selectOptions={['$', '%']}
@@ -147,7 +151,7 @@ class PromoForm extends Component {
                   <Field
                     hasFeedback
                     disabled={confirmLoading}
-                    name="dates"
+                    name="dateStamps"
                     placeholder={['Start Date', 'End Date']}
                     component={AntRangePicker}
                     style={{ width: '100%' }}
@@ -188,4 +192,4 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   initialValues: { discounttype: "$" }
-})(connect(null, { addNewPromo, change, editPromo, fetchAllActivePlans })(PromoForm));
+})(connect(state => ({ serverError: state.server.error }), { addNewPromo, change, editPromo, fetchPromo, fetchAllActivePlans })(PromoForm));

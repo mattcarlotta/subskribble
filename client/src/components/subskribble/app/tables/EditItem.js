@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 export default class EditItem extends PureComponent {
   handleEdit = () => {
     // console.log(`requested to edit this record: ${this.props.id}`);
-    browserHistory.push(`/subskribble/templates/edit/template?id=${this.props.id}`)
+    browserHistory.push(`/subskribble/${this.props.editLocation}/edit/${this.props.editLocation}?id=${this.props.id}`)
   }
 
   render = () => (

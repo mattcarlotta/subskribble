@@ -12,7 +12,7 @@ const addNewForm = formProps => dispatch => (
 
 // Add new promo code
 const addNewPromo = formProps => dispatch => (
-  app.post(`promotional/create`, { formProps })
+  app.post(`promotionals/create`, { ...formProps })
   .then(({data: {message}}) => {
     dispatch({ type: types.SERVER_MESSAGE, payload: message })
     browserHistory.push('/subskribble/promotionals')

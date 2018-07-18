@@ -55,6 +55,7 @@ export default class extends Component {
             <TableList
               {...this.state}
               deleteAction={this.props.deleteAction}
+              editLocation={this.props.editLocation}
               fetchAction={fetchAction}
               selectCurrentPage={this.selectCurrentPage}
               TAB={tabTitle}

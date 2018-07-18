@@ -1,21 +1,24 @@
 module.exports = app => {
-  const { db, query: {deleteOnePromotion, getAllPromotions, getPromotionCount, updateOnePromotion, selectPromotion} } = app.database;
+  const { db, query: {createPromotion, deleteOnePromotion, findPromoById, getAllPromotions, getPromotionCount, updatePromotion, updatePromotionStatus, selectPromotion} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
     // CREATES PROMO RECORD
     create: async (req, res, next) => {
       if (!req.body) return sendError('Missing promotional creation parameters', res, next);
+      const { amount, datestamps, discounttype, enddate, promocode, plans, maxusage, startdate } = req.body;
 
-      const { promocode, plans, amount, maxusage } = req.body;
+      if (!amount || !datestamps || !discounttype || !enddate || !promocode || !plans || !startdate) return sendError('Missing promotional creation parameters', res, next);
+
+      const allowedUsage = maxusage ? parseStringToNum(maxusage) : 2147483647;
 
       try {
         const promoExists = await db.oneOrNone(selectPromotion(), [req.session.id, promocode]);
-        if (promoExists) return sendError('That template already exists. You must create a unique template name!', res, next);
+        if (promoExists) return sendError('That promotional already exists. You must create a unique promotional name.', res, next);
 
-        await db.none(createPromotion(), [req.session.id, promocode, plans, amount, type, maxusage || null]);
+        await db.none(createPromotion(), [req.session.id, amount, datestamps, discounttype, enddate, promocode, plans, allowedUsage, startdate]);
 
-        res.status(201).json({ message: `Succesfully created '${promocode}' promotional.` });
+        res.status(201).json({ message: `Succesfully created promotional: ${promocode}` });
       } catch (err) { return sendError(err, res, next); }
     },
     // DELETES REQURESTED RECORD
@@ -25,7 +28,7 @@ module.exports = app => {
       try {
         const name = await db.result(deleteOnePromotion(), [req.params.id, req.session.id]);
 
-        res.status(201).json({ message: `Succesfully deleted promo code: ${name.rows[0].promocode} from ${name.rows[0].planname}.` });
+        res.status(201).json({ message: `Succesfully deleted promotional: ${name.rows[0].promocode}.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
@@ -66,18 +69,44 @@ module.exports = app => {
         res.status(201).json({ activepromos, inactivepromos });
       } catch (err) { return sendError(err, res, next); }
     },
-    // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
+    // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
     updateOne: async (req, res, next) => {
+      if (!req.body || !req.params.id) return sendError('Missing promotional creation parameters', res, next);
+
+      const { amount, datestamps, discounttype, enddate, promocode, plans, maxusage, startdate } = req.body;
+      if (!amount || !datestamps || !discounttype || !enddate || !promocode || !plans || !startdate) return sendError('Missing promotional creation parameters', res, next);
+
+      const allowedUsage = maxusage ? parseStringToNum(maxusage) : 2147483647;
+
+      try {
+        await db.none(updatePromotion(), [req.session.id, req.params.id, amount, datestamps, discounttype, enddate, promocode, plans, allowedUsage, startdate]);
+
+        res.status(201).json({ message: `Succesfully updated promotional: ${promocode}` });
+      } catch (err) { return sendError(err, res, next); }
+    },
+    // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
+    updateStatus: async (req, res, next) => {
       if (!req.body || !req.params.id) return sendError('Missing plan update parameters', res, next);
 
       const { id } = req.params;
       const { updateType, statusType } = req.body;
 
       try {
-        const name = await db.one(updateOnePromotion(), [statusType, id, req.session.id])
+        const name = await db.one(updatePromotionStatus(), [statusType, id, req.session.id])
 
-        res.status(201).json({ message: `Succesfully ${updateType} promo code: ${name.promocode} in ${name.planname}.`});
+        res.status(201).json({ message: `Succesfully ${updateType} promo code: ${name.promocode}`});
       } catch (err) { return sendError(err, res, next); }
-    }
+    },
+    // SELECTS A SINGLE RECORD
+    selectOne: async (req, res, next) => {
+      if (!req.query) return sendError('Missing promo select parameters', res, next);
+      console.log(req.query)
+      try {
+        const promotional = await db.oneOrNone(findPromoById(), [req.session.id, req.query.id]);
+        if (!promotional) return sendError("Unable to locate the promotional", res, next);
+
+        res.status(201).json({ ...promotional });
+      } catch (err) { return sendError(err, res, next); }
+    },
   }
 }

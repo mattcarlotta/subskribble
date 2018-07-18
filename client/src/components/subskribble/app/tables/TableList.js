@@ -15,6 +15,7 @@ export default class TableList extends PureComponent {
 		const {
 			current,
 			deleteAction,
+			editLocation,
 			sortByNum,
 			TABLECONTENTS,
 			TABLEHEADERS,
@@ -34,6 +35,7 @@ export default class TableList extends PureComponent {
 							render: record => (
 								<TableActions
 									deleteAction={deleteAction}
+									editLocation={editLocation}
 									record={record}
 									updateAction={updateAction}
 								/>
