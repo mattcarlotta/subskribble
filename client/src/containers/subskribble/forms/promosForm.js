@@ -16,12 +16,6 @@ import { allowedCharacters, hasDates, isRequired, isNotEmpty, isNumber } from '.
 const { fetchPromo } = promoActions;
 const { fetchAllActivePlans } = planActions;
 
-// const dates = [
-//   moment("Wed Jul 11 2018 17:25:22 GMT-0700", 'ddd MMM D YYYY HH:mm:ss ZZ'),
-//   moment('Mon Aug 13 2018 17:30:40 GMT-0700', 'ddd MMM D YYYY HH:mm:ss ZZ')
-// ]
-
-
 class PromoForm extends Component {
   state = {
     confirmLoading: false,
@@ -33,17 +27,6 @@ class PromoForm extends Component {
   componentDidMount = () => {
     const { id } = this.props.location.query;
     !id ? this.fetchPlans() : this.fetchPromoForEditing(id)
-    // this.fetchPlans()
-    // this.props.initialize({ discounttype: '$'})
-    // this.setState({ dates: ["July 11, 2018", "Aug 13 2018" ], selectedPlans: ['Carlotta Prime'] }, () =>{
-    //   this.props.initialize({
-    //     promocode: 'dfshjsfdbhfsdh',
-    //     discounttype: '$',
-    //     dates,
-    //     amount: 80,
-    //     plans: ['Carlotta Prime']
-    //   })
-    // })
   }
 
   componentDidUpdate = (prevProps, prevState) => {

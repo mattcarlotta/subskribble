@@ -54,9 +54,9 @@ module.exports = app => {
     promoCode VARCHAR NOT NULL,
     amount INTEGER NOT NULL,
     discountType VARCHAR NOT NULL,
-    datestamps TEXT ARRAY,
-    startDate TEXT,
-    endDate TEXT,
+    datestamps TEXT ARRAY NOT NULL,
+    startDate TEXT NOT NULL,
+    endDate TEXT NOT NULL,
     maxUsage INTEGER NOT NULL,
     totalUsage INTEGER DEFAULT 0
   )`;
