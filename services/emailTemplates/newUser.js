@@ -1,4 +1,4 @@
-module.exports = app => (apiURL, firstName, lastName, token) => (
+module.exports = app => (portal, firstName, lastName, token) => (
   `
   <html>
     <body>
@@ -25,11 +25,11 @@ module.exports = app => (apiURL, firstName, lastName, token) => (
                   The Subskribble Team
                 </p>
                 <div style="margin-bottom: 20px; text-align: center">
-                  <a style="font-size: 18px; text-decoration: none; line-height: 40px; width: 200px; color: #FFFFFF; background-color: #03A9F3; display: inline-block;" href="${apiURL}subskribble/email/verify?token=${token}">Verify Email</a>
+                  <a style="font-size: 18px; text-decoration: none; line-height: 40px; width: 200px; color: #FFFFFF; background-color: #03A9F3; display: inline-block;" href="${portal}/subskribble/email/verify?token=${token}">Verify Email</a>
                 </div>
                 <small style="color: #999999; font-size: 11px; text-align: center">
                   Or click on this link:
-                  <a style="color: #999999; text-decoration: underline; margin-left: 4px;" href="${apiURL}subskribble/email/verify?token=${token}">${apiURL}subskribble/email/verify?token=${token}</a>
+                  <a style="color: #999999; text-decoration: underline; margin-left: 4px;" href="${portal}subskribble/email/verify?token=${token}">${portal}/subskribble/email/verify?token=${token}</a>
                 </small>
               </div>
             </div>

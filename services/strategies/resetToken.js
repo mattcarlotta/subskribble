@@ -3,7 +3,7 @@ module.exports = app => {
   const { missingEmailCreds } = app.shared.authErrors;
   const { mailer, emailTemplates: { newToken } } = app.services;
   const { createRandomToken } = app.shared.helpers;
-  const apiURL = app.get("apiURL");
+  const portal = app.get("portal");
   const LocalStrategy = app.get("LocalStrategy");
   const passport = app.get("passport");
 
@@ -28,7 +28,7 @@ module.exports = app => {
         to: `${email}`,
         from: `helpdesk@subskribble.com`,
         subject: `Password Reset Confirmation`,
-        html: newToken(apiURL, firstname, lastname, token)
+        html: newToken(portal, firstname, lastname, token)
       }
 
       // attempts to send a verification email to newly created user

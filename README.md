@@ -6,7 +6,8 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ### 1. Install NodeJS
 
 - `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
-- `sudo apt-get update && install -y nodejs`
+- `sudo apt-get update`
+- `sudo apt-get install -y nodejs`
 
 ### 2. Install and Configure PostgreSQL†
 - `sudo apt-get install postgresql postgresql-contrib`
@@ -93,7 +94,6 @@ password: password123
 <pre><code>
 module.exports = {
   "development": {
-    apiURL: "http://localhost:3000/",
     cookieKey: "unique_cookie_key",
     database: "postgres_db_name",
     dbport: postgres_db_port,
@@ -101,11 +101,11 @@ module.exports = {
     dbowner: "postgres_db_owner",
     host: "localhost",
     port: 5000,
+    portal: "http://localhost:3000/",
     sendgridAPIKey: "sendgrid_api_key",
     url: "http://localhost:5000/",
   },
   "production": {
-    apiURL: "http://project-domain.com",
     cookieKey: "unique_cookie_key",
     database: "postgres_db_name",
     dbport: postgres_db_port,
@@ -113,11 +113,11 @@ module.exports = {
     dbowner: "postgres_db_owner",
     host: "localhost",
     port: 5000,
+    portal: "http://project-domain.com",
     sendgridAPIKey: "sendgrid_api_key",
     url: "http://localhost:5000/",
   },
   "staging": {
-    apiURL: "host",
     cookieKey: "unique_cookie_key",
     database: "postgres_db_name",
     dbport: postgres_db_port,
@@ -125,11 +125,11 @@ module.exports = {
     dbowner: "postgres_db_owner",
     host: "localhost",
     port: 5000,
+    portal: "http://staging-domain.com",
     sendgridAPIKey: "sendgrid_api_key",
     url: "http://localhost:5000/",
   },
   "testing": {
-    apiURL: "host",
     cookieKey: "unique_cookie_key",
     database: "postgres_db_name",
     dbport: postgres_db_port,
@@ -137,6 +137,7 @@ module.exports = {
     dbowner: "postgres_db_owner",
     host: "localhost",
     port: 5000,
+    portal: ""http://testing-domain.com"",
     sendgridAPIKey: "sendgrid_api_key",
     url: "http://localhost:5000/",
   }

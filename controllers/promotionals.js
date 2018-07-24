@@ -3,7 +3,7 @@ module.exports = app => {
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
-    // LOOKS UP PROMOCODE FROM CLIENT-SIDE REQUEST
+    // LOOKS UP PROMOCODE PER CLIENT-SIDE REQUEST
     apply: async (req, res, next) => {
       if (!req.query)  return sendError('Missing promotional plan parameters.', res, next);
       const { promocode, plan } = req.query;

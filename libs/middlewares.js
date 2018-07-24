@@ -15,31 +15,33 @@ console.log(`[${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
 /* APP MIDDLEWARE */
 //============================================================//
 module.exports = app => {
+	/// CONFIGS ///
 	app.set('env', env); // sets current env mode (development, production or test)
-	app.set('apiURL', vars[env].apiURL);
-	app.set("cookieKey", vars[env].cookieKey);
+	app.set("cookieKey", vars[env].cookieKey); // sets unique cookie key
 	app.set('host', vars[env].host); // sets localhost or remote host
-	app.set('dbpassword', vars[env].dbpassword);
-	app.set('dbport', vars[env].dbport);
-	app.set('dbowner', vars[env].dbowner);
-	app.set('database', vars[env].database);
-	app.set('bcrypt', bcrypt);
-	app.set('LocalStrategy', LocalStrategy);
-	app.set("moment", moment);
-	app.set("port", vars[env].port);
-	app.set("passport", passport);
-	app.set("sendgridAPIKey", vars[env].sendgridAPIKey);
-	app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
+	app.set('dbpassword', vars[env].dbpassword); // sets database password
+	app.set('dbport', vars[env].dbport); // sets database port
+	app.set('dbowner', vars[env].dbowner); // sets owner of database
+	app.set('database', vars[env].database); // sets database name
+	app.set("port", vars[env].port); // current listening port
+	app.set('portal', vars[env].portal); // sets current front-end url
+
+	/// FRAMEWORKS ///
+	app.set('bcrypt', bcrypt); // framework for hashing/salting passwords
+	app.set('LocalStrategy', LocalStrategy); // passport LocalStrategy framework
+	app.set("moment", moment); // framework for managing time
+	app.set("passport", passport); // framework for authenticating users
+	app.set("sendgridAPIKey", vars[env].sendgridAPIKey); // SendGrid API key for sending emails
+	app.use(cors({credentials: true, origin: vars[env].portal})) // allows receiving of cookies from front-end
 	app.use(morgan('tiny')); // logging framework
-	app.use(bodyParser.json()); // parse req.bodyParser
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(cookieParser());
-	app.use(cookieSession({
+	app.use(bodyParser.json()); // parses header requests (req.body)
+	app.use(bodyParser.urlencoded({ extended: true })); // allows objects and arrays to be URL-encoded
+	app.use(cookieParser()); // parses header cookies
+	app.use(cookieSession({ // sets up a cookie session as req.session ==> set in passport local login strategy
 		name: 'Authorization',
 		maxAge: 30 * 24 * 60 * 60 * 1000, // expire after 30 days, 24hr/60m/60s/1000ms
-		keys: [vars[env].cookieKey]
+		keys: [vars[env].cookieKey] // unique cookie key to encrypt/decrypt
 	}));
-	app.use(passport.initialize());
-	app.use(passport.session());
-	app.set('json spaces', 2);
+	app.use(passport.initialize()); // initialize passport routes to accept req/res/next
+	app.set('json spaces', 2); // sets JSON spaces for clarity
 };

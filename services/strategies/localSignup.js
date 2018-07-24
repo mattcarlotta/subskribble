@@ -3,7 +3,7 @@ module.exports = app => {
   const { mailer, emailTemplates: { newUser } } = app.services;
   const { companyAlreadyExists, emailAlreadyTaken, missingCredentials } = app.shared.authErrors;
   const { createRandomToken } = app.shared.helpers;
-  const apiURL = app.get("apiURL");
+  const portal = app.get("portal");
   const bcrypt = app.get("bcrypt");
   const LocalStrategy = app.get("LocalStrategy");
   const passport = app.get("passport");
@@ -41,7 +41,7 @@ module.exports = app => {
         to: `${email}`,
         from: `helpdesk@subskribble.com`,
         subject: `Please verify your email address`,
-        html: newUser(apiURL, firstName, lastName, token)
+        html: newUser(portal, firstName, lastName, token)
       }
 
       // attempts to send a verification email to newly created user

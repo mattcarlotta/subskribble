@@ -35,7 +35,7 @@ class RenderMessages extends Component {
       description,
       icon: descriptionLayout(noteType)
     });
-    this.props.resetServerMessages();
+    setTimeout(() => this.props.resetServerMessages(), 3000); 
   }
 
   render = () => ( null )
