@@ -32,10 +32,10 @@ class ApplyPromotional extends Component {
   }
 
   render = () => (
-    <div className="promo-form">
+    <div style={{ float: this.props.appliedPromoCode ? 'right' : 'none' }} className="promo-form">
       { !this.props.appliedPromoCode
           ? <span>
-              <Col span={18} style={{ padding: '0 5px', marginTop: '-3px' }}>
+              <Col span={18} style={{ paddingRight: '5px', marginTop: '-3px' }}>
                 <Field
                   name="promoCode"
                   component={AntInput}
@@ -57,9 +57,12 @@ class ApplyPromotional extends Component {
                   </button>
               </Col>
             </span>
-          : <Tag className="tag" closable onClose={this.removeAppliedPromo}>
-              { `${this.showAppliedPromo()} OFF` }
-            </Tag>
+          : <span>
+              <Tag className="tag" closable onClose={this.removeAppliedPromo}>
+                { `${this.showAppliedPromo()} OFF` }
+              </Tag>
+              <div style={{ textAlign: 'right' }}>(-${this.props.adjustedPrice})</div>
+            </span>
       }
     </div>
   )

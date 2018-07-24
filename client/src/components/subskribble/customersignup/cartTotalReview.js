@@ -2,7 +2,7 @@ import React from 'react';
 import ApplyPromotionalForm from '../../../containers/subskribble/forms/applyPromotionalForm';
 import { Col } from 'antd';
 
-const CartTotalReview = ({ appliedPromoCode, displayPrice, plan, price, promoCode }) => {
+const CartTotalReview = ({ adjustedPrice, appliedPromoCode, displayPrice, originalAmount, plan, price, promoCode }) => {
   const tax = (price - price * .925).toFixed(2);
   const total = (price + parseFloat(tax)).toFixed(2);
   return (
@@ -14,7 +14,7 @@ const CartTotalReview = ({ appliedPromoCode, displayPrice, plan, price, promoCod
             Subtotal:
           </Col>
           <Col span={12}>
-            <strong className="f-r">${displayPrice}</strong>
+            <strong className="f-r">${originalAmount}</strong>
           </Col>
         </div>
         <div className="taxes">
@@ -26,11 +26,18 @@ const CartTotalReview = ({ appliedPromoCode, displayPrice, plan, price, promoCod
           </Col>
         </div>
         <div className="promo">
-          <Col span={5}>
-            Promo:
-          </Col>
-          <Col span={19}>
-            <ApplyPromotionalForm appliedPromoCode={appliedPromoCode} promoCode={promoCode} plan={plan} />
+          { appliedPromoCode &&
+            <Col span={5}>
+              Promo:
+            </Col>
+          }
+          <Col span={appliedPromoCode ? 19 : 24}>
+            <ApplyPromotionalForm
+              adjustedPrice={adjustedPrice}
+              appliedPromoCode={appliedPromoCode}
+              promoCode={promoCode}
+              plan={plan}
+            />
           </Col>
         </div>
         <div className="clear-fix" />

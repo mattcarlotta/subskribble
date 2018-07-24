@@ -43,7 +43,6 @@ class CustomerPlanSignup extends Component {
 
   handleFormSave = (formProps) => {
     const { subRegisterToPlan } = this.props;
-    console.log('triggered form save', formProps);
     this.showLoadingButton();
     subRegisterToPlan(formProps);
   }

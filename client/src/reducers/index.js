@@ -61,9 +61,7 @@ const planReducer = (state={}, { payload, type}) => {
 
 const promoReducer = (state={}, { payload, type}) => {
 	switch (type) {
-		case types.APPLY_PROMO_CODE:
-			console.log('payload', payload);
-			return { ...state, appliedPromoCode: payload };
+		case types.APPLY_PROMO_CODE: return { ...state, appliedPromoCode: payload };
 		case types.SET_ACTIVE_PROMOS: return { ...state, activeitems: payload };
 		case types.SET_INACTIVE_PROMOS: return { ...state, inactiveitems: payload };
 		case types.SET_INITIAL_PROMOS:

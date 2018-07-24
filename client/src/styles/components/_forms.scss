@@ -159,7 +159,7 @@
         h1,h2,h3,p { @include f-f($arimo);}
         h2 { @include f-s(24px); }
 
-        .review-icons { @include c($lightblue); @include f-s(22px); }
+        .fa, .plan-icon { @include c($lightblue); @include f-s(22px); }
 
         .head-title { @include f-s(26px); }
 
@@ -202,8 +202,11 @@
             padding: 16px;
             margin-top: 2px;
 
-            .subtotal, .taxes, .promo {
+            .subtotal, .taxes {
               @include h(30px);
+            }
+            .promo {
+              @include h(72px);
             }
           }
         }
@@ -399,7 +402,6 @@
 }
 
 .promo-form {
-  @extend .f-r;
 
   .ant-tag {
     margin-right: 0px;
@@ -413,15 +415,24 @@
     top: 1px;
     left: 4px;
     border-left: 1px solid #0585bf;
+
+    &:hover {
+      @include c($lightwhite);
+    }
   }
 
   .tag {
+    @extend %m-b-5;
     @include c($white);
     @include b-c($lightblue);
     @include b-s(inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 1px 1px rgba(0, 0, 0, 0.2));
     @include f-f($arimo-bold);
     border-color: #0585bf;
-    // text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
+    cursor: default;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
