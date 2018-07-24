@@ -137,7 +137,7 @@ module.exports = {
     dbowner: "postgres_db_owner",
     host: "localhost",
     port: 5000,
-    portal: ""http://testing-domain.com"",
+    portal: "http://testing-domain.com",
     sendgridAPIKey: "sendgrid_api_key",
     url: "http://localhost:5000/",
   }

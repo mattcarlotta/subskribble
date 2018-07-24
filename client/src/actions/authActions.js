@@ -49,7 +49,7 @@ const missingPasswordToken = () => ({
 
 // updates a user's password
 const resetUserPassword = (password, token) => dispatch => (
-	app.put(`reset-password/verify?token=${token}`, { email: 'fake@email.com', password })
+	app.put(`reset-password/verify?token=${token}`, { email: 'helpdesk@subskribble.com', password })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
