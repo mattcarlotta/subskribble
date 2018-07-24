@@ -37,7 +37,7 @@ export default {
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
-  // Fetches a template for editing
+  // Fetches a promo for editing
   fetchPromo: (id) => dispatch => (
     app.get(`promotionals/promotional?id=${id}`)
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))

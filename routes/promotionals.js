@@ -1,7 +1,8 @@
 module.exports = app => {
-  const { promotionals: { create, index, deleteOne, fetchCounts, fetchRecords, updateOne, updateStatus, selectOne } } = app.controllers;
+  const { promotionals: { apply, create, index, deleteOne, fetchCounts, fetchRecords, updateOne, updateStatus, selectOne } } = app.controllers;
   const { requireAuth } = app.services.strategies;
 
+  app.get('/api/promotionals/apply-promotion?', requireAuth, apply)
   app.post('/api/promotionals/create', requireAuth, create)
   app.get('/api/promotionals/promotional?', requireAuth, selectOne)
   app.delete('/api/promotionals/delete/:id', requireAuth, deleteOne)

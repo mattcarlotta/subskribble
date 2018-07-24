@@ -8,18 +8,28 @@ import PaymentInfoReview from '../../../../components/subskribble/customersignup
 import PlanInfoReview from '../../../../components/subskribble/customersignup/planInfoReview';
 import CartTotalReview from '../../../../components/subskribble/customersignup/cartTotalReview';
 
-const ReviewPlanForm = ({ finalValues, editStep, PLANSELECTIONS }) => {
+const ReviewPlanForm = ({ appliedPromoCode, finalValues, editStep, PLANSELECTIONS }) => {
   let { amount, description } = filter(PLANSELECTIONS, ({ planname }) => (planname === finalValues.selectedPlan))[0];
   amount = parseFloat(amount);
   const displayPrice = amount.toFixed(2);
+  console.log('finalValues', finalValues);
   return(
     <div className="review-signup-container">
       <ContactInfoReview {...finalValues} editStep={editStep} />
       <PaymentInfoReview {...finalValues} editStep={editStep}/>
       <PlanInfoReview {...finalValues} displayPrice={displayPrice} description={description} editStep={editStep} />
-      <CartTotalReview displayPrice={displayPrice} price={amount} />
+      <CartTotalReview
+        appliedPromoCode={appliedPromoCode}
+        displayPrice={displayPrice}
+        plan={finalValues.selectedPlan}
+        price={amount}
+        promoCode={finalValues.promoCode}
+      />
     </div>
   );
 }
 
-export default connect(state => ({ finalValues: getFormValues('CustomerPlanSignup')(state)}))(ReviewPlanForm);
+export default connect(state => ({
+  appliedPromoCode: state.promos.appliedPromoCode,
+  finalValues: getFormValues('CustomerPlanSignup')(state),
+}))(ReviewPlanForm);

@@ -1,25 +1,48 @@
 import React from 'react';
+import ApplyPromotionalForm from '../../../containers/subskribble/forms/applyPromotionalForm';
+import { Col } from 'antd';
 
-const CartTotalReview = ({ displayPrice, price }) => {
+const CartTotalReview = ({ appliedPromoCode, displayPrice, plan, price, promoCode }) => {
   const tax = (price - price * .925).toFixed(2);
   const total = (price + parseFloat(tax)).toFixed(2);
   return (
     <div className="total-container">
       <h2 className="head-title"><i className="fa fa-shopping-cart" aria-hidden="true"/> Total</h2>
       <div className="details-container">
-        <p className="subtotal">
-          Subtotal:
-          <span className="f-r"><strong>${displayPrice}</strong></span>
-        </p>
-        <p className="taxes">
-          Sales Tax:
-          <span className="f-r">${tax}</span>
-        </p>
+        <div className="subtotal">
+          <Col span={12}>
+            Subtotal:
+          </Col>
+          <Col span={12}>
+            <strong className="f-r">${displayPrice}</strong>
+          </Col>
+        </div>
+        <div className="taxes">
+          <Col span={12}>
+            Sales Tax:
+          </Col>
+          <Col span={12}>
+            <strong className="f-r">${tax}</strong>
+          </Col>
+        </div>
+        <div className="promo">
+          <Col span={5}>
+            Promo:
+          </Col>
+          <Col span={19}>
+            <ApplyPromotionalForm appliedPromoCode={appliedPromoCode} promoCode={promoCode} plan={plan} />
+          </Col>
+        </div>
+        <div className="clear-fix" />
         <hr />
-        <p className="total">
-          You Pay:
-          <span className="f-r"><strong>${total}</strong></span>
-        </p>
+        <div className="total">
+          <Col span={12}>
+            You Pay:
+          </Col>
+          <Col span={12}>
+            <strong className="f-r">${total}</strong>
+          </Col>
+        </div>
       </div>
     </div>
   )

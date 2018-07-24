@@ -80,7 +80,7 @@ const AntFormButtons = ({ label, pristine, reset, submitting }) => (
   </FormItem>
 )
 
-const AntStepFormButtons = ({ backStyle, backLabel, column, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting }) => (
+const AntStepFormButtons = ({ backStyle, backLabel, column, confirmLoading, onClickBack, pristine, submitLabel, submitStyle, submitting, type }) => (
   <FormItem>
     <AntSubmitButton
       column={column}
@@ -89,6 +89,7 @@ const AntStepFormButtons = ({ backStyle, backLabel, column, confirmLoading, onCl
       label={backLabel}
       onClick={onClickBack}
       style={backStyle}
+      type={type}
     />
     <AntSubmitButton
       column={column}

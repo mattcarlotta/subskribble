@@ -60,6 +60,7 @@ const RegisterPlanForm = ({
         onClickBack={onClickBack}
         pristine={pristine}
         submitLabel={ finished ? "Subscribe" : "Next" }
+        type={ finished ? "submit" : "button"}
         submitStyle= {{ height: 50, float: 'right' }}
         submitting={submitting}
       />

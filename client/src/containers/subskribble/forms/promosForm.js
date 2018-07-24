@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
 import moment from 'moment';
-import { reduxForm, Field, change } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Col } from 'antd';
@@ -175,4 +175,4 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   initialValues: { discounttype: "$" }
-})(connect(state => ({ serverError: state.server.error }), { addNewPromo, change, editPromo, fetchPromo, fetchAllActivePlans })(PromoForm));
+})(connect(state => ({ serverError: state.server.error }), { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans })(PromoForm));

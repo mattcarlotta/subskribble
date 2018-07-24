@@ -30,6 +30,18 @@ const addNewTemplate = formProps => dispatch => (
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
+// Attempts to apply promo to subscription
+const applyPromo = (promocode, plan) => dispatch => (
+  app.get(`promotionals/apply-promotion?promocode=${promocode}&plan=${plan}`)
+  .then(({data: {promotional}}) => {
+    dispatch({ type: types.APPLY_PROMO_CODE, payload: promotional })
+  })
+  .catch(err => {
+    dispatch(resetPromo())
+    dispatch({ type: types.SERVER_ERROR, payload: err })
+  })
+)
+
 // Edits a selected promo
 const editPromo = (id, formProps) => dispatch => (
   app.put(`promotionals/edit/${id}`, { ...formProps })
@@ -56,6 +68,12 @@ const registerToNewsletter = email => dispatch => (
   .then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
+
+// Resets applied promo
+const resetPromo = () => dispatch => {
+  dispatch({ type: types.APPLY_PROMO_CODE, payload: undefined })
+  dispatch({ type: types.FORM_PROMO_CODE, payload: { promoCode: undefined }})
+}
 
 // resetting billing fields values from customer contact form
 const resetBillingFieldValues = () => ({
@@ -105,10 +123,12 @@ export {
   addNewForm,
   addNewPromo,
   addNewTemplate,
+  applyPromo,
   editPromo,
   editTemplate,
   registerToNewsletter,
   resetBillingFieldValues,
+  resetPromo,
   setBillingFieldValues,
   sendSupportEmail,
   subRegisterToPlan

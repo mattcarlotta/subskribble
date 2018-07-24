@@ -36,14 +36,14 @@ class CustomerPlanSignup extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { serverError } = this.props;
-    serverError !== prevProps.serverError && serverError !== undefined && this.showLoadingButton();
+    serverError !== prevProps.serverError && serverError !== undefined && this.resetLoadButton();
   }
 
   editStep = number => this.setState({ formFields: getCustomerFormFields(number), stepIndex: number })
 
   handleFormSave = (formProps) => {
     const { subRegisterToPlan } = this.props;
-    console.log(formProps);
+    console.log('triggered form save', formProps);
     this.showLoadingButton();
     subRegisterToPlan(formProps);
   }
@@ -65,6 +65,8 @@ class CustomerPlanSignup extends Component {
   }
 
   showLoadingButton = () => this.setState({ confirmLoading: !this.state.confirmLoading });
+
+  resetLoadButton = () => this.setState({ confirmLoading: false })
 
   goBackPage = () => browserHistory.goBack();
 
