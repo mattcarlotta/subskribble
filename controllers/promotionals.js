@@ -3,17 +3,14 @@ module.exports = app => {
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
+    // LOOKS UP PROMOCODE FROM CLIENT-SIDE REQUEST
     apply: async (req, res, next) => {
-      console.log('req.query', req.query);
       if (!req.query)  return sendError('Missing promotional plan parameters.', res, next);
-
       const { promocode, plan } = req.query;
+
       try {
         const promotional = await db.oneOrNone(selectPromotionDetails(), [req.session.id, promocode, [plan]]);
-        console.log('promotional', promotional)
         if (!promotional) return sendError("That promo code is invalid and/or can't be applied to the selected plan.", res, next);
-
-        // await db.none(createPromotion(), [req.session.id, amount, datestamps, discounttype, enddate, promocode, plans, allowedUsage, startdate]);
 
         res.status(201).json({ promotional });
       } catch (err) { return sendError(err, res, next); }
