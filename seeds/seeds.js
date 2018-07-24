@@ -66,18 +66,25 @@ module.exports = app => {
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR DEFAULT 'active',
-    email VARCHAR UNIQUE,
+    email VARCHAR,
     subscriber VARCHAR NOT NULL,
     planName VARCHAR NOT NULL,
     amount DECIMAL(12,2),
-    phone VARCHAR,
-    address TEXT,
-    addressCity TEXT,
-    addressState TEXT,
-    addressZip TEXT,
-    startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
+    billingAddress TEXT,
+    billingCity TEXT,
+    billingState TEXT,
+    billingUnit TEXT,
+    billingZip TEXT,
+    contactAddress TEXT,
+    contactCity TEXT,
+    contactState TEXT,
+    contactUnit TEXT,
+    contactZip TEXT,
+    contactPhone VARCHAR,
+    promoCode TEXT,
+    sameBillingAddress BOOLEAN,
+    startDate TEXT NOT NULL,
     endDate TEXT,
-    isGod BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (planName) REFERENCES plans(planName) ON DELETE CASCADE
   )`;
 
@@ -111,14 +118,14 @@ module.exports = app => {
   const noteProperties = `(userid, subscriber, message, read)`;
   const planProperties = `(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, subscribers)`;
   const promoProperties = `(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage, startDate, endDate, dateStamps)`;
-  const subProperties = `(userid, status, email, subscriber, phone, planName, endDate, amount)`;
+  const subProperties = `(userid, status, email, subscriber, contactPhone, planName, startDate, endDate, amount)`;
   const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
   const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
   const currentDate = moment.utc()
   const laterDate = moment.utc().add(30, 'days')
-  const startDate = currentDate.format("MMMM DD YYYY")
-  const endDate = laterDate.format("MMMM DD YYYY")
+  const startDate = currentDate.format("MMMM Do, YYYY")
+  const endDate = laterDate.format("MMMM Do, YYYY")
   const startStamp = currentDate.toString()
   const endStamp = laterDate.toString()
 
@@ -177,30 +184,30 @@ module.exports = app => {
   `);
 
   const subValues = id => (`
-  (${selectUserid(id)}, 'active', 'admin@admin.com', 'Admin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'squatters@gmail.com', 'Sherry Waters', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'bob-eh@sap.com', 'Bob Aronssen', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'shani.smith@hotmail.com', 'Shaniqua Smith', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'tanyaballschin@gmail.com', 'Tanya Ballschin', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'lukeskywalker@rebelforce.com', 'Siemen Walker', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'jTank@aol.com', 'Jenny Tanks', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'amberLamps@yahoo.com', 'Amber Lalampas', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'kylebTeegue@gmail.com', 'Kyle Teegue', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'active', 'adaDamn@photonmail.com', 'Adam Johnson', '(555) 555-5555', 'Carlotta Prime', null, 29.99),
-  (${selectUserid(id)}, 'inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', '(555) 555-555', 'Carlotta Prime', 'Jan 3, 2018', 29.99),
-  (${selectUserid(id)}, 'inactive', 'seamark@outlook.com', 'Mark Canelo', '(555) 555-555', 'Carlotta Prime', 'Jan 12, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', 'axxll@manjaro.com', 'Axle Root', '(555) 555-555', 'Carlotta Prime', 'Jan 16, 2018', 29.99),
-  (${selectUserid(id)}, 'inactive', 'vicksAdam@sap.com', 'Adamn Vicks', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  (${selectUserid(id)}, 'inactive', 'wallyworld@manjaro.com', 'Wes Walls', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', 'kellyUll@gmail.com', 'Kelly Ullman', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  (${selectUserid(id)}, 'inactive', 'oatesA@aol.com', 'Adam Oates', '(555) 555-555', 'Carlotta Prime', 'Jan 17, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', 'scottParker@jaro.com', 'Scott Parker', '(555) 555-555', 'Carlotta Prime', 'Jan 21, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', 'asmLossenger@mancusco.com', 'Emily Loz', '(555) 555-555', 'Carlotta Prime', 'Jan 22, 2018', 29.99),
-  (${selectUserid(id)}, 'inactive', 'pparks@akins.com', 'Parker Posey', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', 'aleashtrails@kilmas.com', 'Alisha Tallis', '(555) 555-555', 'Carlotta Prime', 'Jan 29, 2018', 29.99),
-  (${selectUserid(id)}, 'suspended', '88Damon@photonmail.com', 'Damien Smith', '(555) 555-5555', 'Carlotta Prime', 'Jan 29, 2018', 29.99);
+  (${selectUserid(id)}, 'active', 'admin@admin.com', 'Admin', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'squatters@gmail.com', 'Sherry Waters', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'bob-eh@sap.com', 'Bob Aronssen', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'shani.smith@hotmail.com', 'Shaniqua Smith', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'tanyaballschin@gmail.com', 'Tanya Ballschin', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'lukeskywalker@rebelforce.com', 'Siemen Walker', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'jTank@aol.com', 'Jenny Tanks', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'amberLamps@yahoo.com', 'Amber Lalampas', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'kylebTeegue@gmail.com', 'Kyle Teegue', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'snakePiliskin@gmail.com', 'Gary Pilkinson', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'yasminRod@hotmail.com', 'Yasmin Rodrigues', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'active', 'adaDamn@photonmail.com', 'Adam Johnson', '(555) 555-5555', 'Carlotta Prime', '${startDate}', null, 29.99),
+  (${selectUserid(id)}, 'inactive', 'carlsagan42@yahoo.com', 'Carl Sagan', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'inactive', 'seamark@outlook.com', 'Mark Canelo', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', 'axxll@manjaro.com', 'Axle Root', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'inactive', 'vicksAdam@sap.com', 'Adamn Vicks', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'inactive', 'wallyworld@manjaro.com', 'Wes Walls', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', 'kellyUll@gmail.com', 'Kelly Ullman', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'inactive', 'oatesA@aol.com', 'Adam Oates', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', 'scottParker@jaro.com', 'Scott Parker', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', 'asmLossenger@mancusco.com', 'Emily Loz', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'inactive', 'pparks@akins.com', 'Parker Posey', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', 'aleashtrails@kilmas.com', 'Alisha Tallis', '(555) 555-555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99),
+  (${selectUserid(id)}, 'suspended', '88Damon@photonmail.com', 'Damien Smith', '(555) 555-5555', 'Carlotta Prime', '${startDate}', '${endDate}', 29.99);
   `);
 
   const templateValues = id => (`

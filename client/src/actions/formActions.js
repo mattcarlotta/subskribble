@@ -97,10 +97,11 @@ const sendSupportEmail = ({name, email, message}) => dispatch => (
 )
 
 // Form information for registering to a plan
-const subRegisterToPlan = ({ contactAddress, contactCity, contactEmail, contactFirstName, contactLastName, contactPhone, contactState, contactZip, selectedPlan }) => dispatch => (
-  app.post(`subscribers/signup`, { subscriber: `${contactFirstName} ${contactLastName}`, contactAddress, contactCity, contactEmail, contactPhone, contactState, contactZip, selectedPlan })
+const subRegisterToPlan = ({ contactFirstName, contactLastName, ...rest }) => dispatch => (
+  app.post(`subscribers/signup`, { subscriber: `${contactFirstName} ${contactLastName}`, ...rest })
   .then(({data: {message}}) => {
     dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    dispatch({ type: types.APPLY_PROMO_CODE, payload: undefined })
     browserHistory.push('/subskribble/subscribers');
   })
   .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))

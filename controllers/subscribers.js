@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { db, query: { createSubscriber, deleteOneSubcriber, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
+  const { db, query: { createSubscriber, deleteOneSubcriber, findSubscriberByEmail, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
   const moment = app.get("moment");
 
@@ -8,9 +8,36 @@ module.exports = app => {
     create: async (req, res, next) => {
       if (!req.body) return sendError('Missing subscriber creation parameters', res, next);
 
-      const { contactAddress, contactCity, contactState, contactZip, contactEmail, contactPhone, selectedPlan, subscriber } = req.body;
+      const {
+        amount,
+        billingAddress,
+        billingCity,
+        billingState,
+        billingUnit,
+        billingZip,
+        contactEmail,
+        contactAddress,
+        contactCity,
+        contactPhone,
+        contactState,
+        contactUnit,
+        contactZip,
+        creditCard,
+        creditCardExpMonth,
+        creditCardExpYear,
+        creditCardCVV,
+        promoCode,
+        sameBillingAddress,
+        selectedPlan,
+        subscriber,
+      } = req.body;
+      const startDate = moment().format("MMMM Do, YYYY");
+
       try {
-        await db.none(createSubscriber(), [req.session.id, subscriber, contactAddress, contactCity, contactState, contactZip, contactEmail, contactPhone, selectedPlan]);
+        const existingUser = await db.oneOrNone(findSubscriberByEmail(), [contactEmail, selectedPlan]);
+        if (existingUser) return sendError(`Can't create duplicate subscribers within the same plan. The provided email: ${contactEmail}, is already associated with the following plan: ${existingUser.planname}.`, res, next);
+
+        await db.none(createSubscriber(), [req.session.id, subscriber, amount, billingAddress, billingCity, billingState, billingUnit, billingZip, contactEmail, contactAddress, contactCity, contactPhone, contactState, contactUnit, contactZip, promoCode, sameBillingAddress, selectedPlan, startDate]);
 
         res.status(201).json({ message: `Succesfully added ${subscriber} to the ${selectedPlan} plan` });
       } catch (err) { return sendError(err, res, next); }

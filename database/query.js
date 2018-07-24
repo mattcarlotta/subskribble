@@ -43,7 +43,7 @@ module.exports = app => {
     updatePromotion: () => ("UPDATE promotionals SET amount=$3, dateStamps=$4, discountType=$5, endDate=$6, promoCode=$7, plans=$8, maxUsage=$9, startDate=$10 WHERE userid=$1 AND id=$2"),
     updatePromotionStatus: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode"),
     selectPromotionCode: () => ("SELECT promoCode FROM promotionals WHERE userid=$1 AND promoCode=$2"),
-    selectPromotionDetails: () => ("SELECT amount,discountType FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3")
+    selectPromotionDetails: () => ("SELECT amount,discountType FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3 and status='active'")
   }
 
   const notificationQueries = {
@@ -62,10 +62,11 @@ module.exports = app => {
 
   const subQueries = {
     createSubscriber: () => (
-      `INSERT INTO subscribers (userid, subscriber, address, addressCity, addressState, addressZip, email, phone, planName, amount)
-      VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7, $8, $9, (SELECT amount FROM plans WHERE planName=$9))`
+      `INSERT INTO subscribers(userid, subscriber, amount, billingAddress, billingCity, billingState, billingUnit, billingZip, email, contactAddress, contactCity, contactPhone, contactState, contactUnit, contactZip, promoCode, sameBillingAddress, planName, startDate)
+      VALUES((SELECT id FROM users WHERE id=$1), $2, (SELECT amount FROM plans WHERE planName=$18), $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`
     ),
     deleteOneSubcriber: () => ("DELETE FROM subscribers WHERE id=$1 AND userid=$2 RETURNING *"),
+    findSubscriberByEmail: () => ("SELECT planName FROM subscribers WHERE email=$1 and planName=$2"),
     getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getSubscriberCount: () => (
       "SELECT count(*) filter (WHERE status = 'active' AND userid=$1) AS active, count(*) filter (where status in ('inactive', 'suspended') and userid=$1) as inactive FROM subscribers;"
