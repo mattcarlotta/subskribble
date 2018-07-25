@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 
 const allowedCharacters = value => (/[~`'@#$%&*+=[\]\\/{}|\\":<>]/g.test(value)) ? 'Please remove any special characters' : undefined;
 const hasDates = value => value && value.length !== 2 ? 'You must select 2 dates' : undefined;
+const isFloat = value => value && !(/^[0-9]+\.[0-9]{2}$/.test(value)) ? 'Please specify a dollar amount (0.00)' : undefined;
 const isNotEmpty = value => isEmpty(value) ? 'You must include at least one item' : undefined;
 const isNumber = value => !(/^\d+$/.test(value)) ? 'Please only use whole numbers' : undefined;
 const isRequired = value => !value ? 'Required' : undefined;
@@ -22,6 +23,7 @@ const missingInput = value => (value === "<p><br></p>") ? 'You must include a me
 export {
   allowedCharacters,
   hasDates,
+  isFloat,
   isNotEmpty,
   isNumber,
   isRequired,

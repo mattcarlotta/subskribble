@@ -8,6 +8,7 @@ import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupFo
 import Landing from '../components/subskribble/app/landing';
 import NotFound from '../components/subskribble/app/notfound/404';
 import Plans from '../containers/subskribble/plans';
+import PlansForm from '../containers/subskribble/forms/plansForm';
 // import Profile from '../components/subskribble/profile';
 import Promos from '../containers/subskribble/promos';
 import PromosForm from '../containers/subskribble/forms/promosForm';
@@ -32,6 +33,8 @@ export default (
 				<IndexRoute component={Landing} />
 				{/* <Route path="dashboard" component={Dashboard} /> */}
 				<Route path="plans" component={Plans} />
+				<Route path="plans/create" component={PlansForm} />
+				<Route path="plans/edit/:id" component={PlansForm} />
 				<Route path="promotionals" component={Promos} />
 				<Route path="promotionals/create" component={PromosForm} />
 				<Route path="promotionals/edit/:id" component={PromosForm} />

@@ -91,7 +91,7 @@ class PromoForm extends Component {
                     placeholder="Click here to associate plans to the form."
                     style={{ width: '100%' }}
                     selectOptions={selectOptions}
-                    createPromotion  tokenSeparators={[',']}
+                    tokenSeparators={[',']}
                     validate={[isNotEmpty]}
                     defaultValue={selectedPlans}
                   />

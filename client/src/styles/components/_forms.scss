@@ -298,6 +298,17 @@
 .new-form-container {
   @extend %t-t-n;
 
+  .select-container > .ant-form-item {
+    @include h(30px);
+    @include w(150px);
+    .ant-form-item-control {
+      line-height: 0;
+    }
+    .ant-select {
+      margin: 0px;
+    }
+  }
+
   .form-box-container {
     @extend %m-0-a;
     @include b-c($white);

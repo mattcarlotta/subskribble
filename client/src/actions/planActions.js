@@ -46,6 +46,11 @@ export default {
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
   ),
+  // Fetches a plan for editing
+  fetchPlan: (id) => dispatch => (
+    app.get(`plans/plan?id=${id}`)
+    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+  ),
   // Sets plan status to active or suspended
   updateAction: (updateType, statusType, id) => dispatch => (
     app.put(`plans/update/${id}`, { statusType, updateType })

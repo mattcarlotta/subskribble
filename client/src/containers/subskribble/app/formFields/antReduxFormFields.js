@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
-import { Button, Col, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Switch } from "antd";
+import { Button, Col, Checkbox, DatePicker, Form, Icon, Input, InputNumber, Radio, Select, Slider, Switch } from "antd";
 
 const FormItem = Form.Item;
 const { Button: RadioButton, Group: RadioGroup } = Radio;
@@ -37,6 +37,7 @@ const AntInput = CreateAntReduxField(Input);
 const AntInputNumber = CreateAntReduxField(InputNumber);
 const AntMonthPicker = CreateAntReduxField(MonthPicker);
 const AntRadioGroup = CreateAntReduxField(RadioGroup);
+const AntSlider = CreateAntReduxField(Slider);
 // const ARangePicker = CreateAntReduxField(RangePicker);
 // const AntSelect = CreateAntReduxField(Select);
 const AntSwitch = CreateAntReduxField(Switch);
@@ -256,6 +257,7 @@ export {
   AntRangePicker,
   AntSelect,
   AntSelectField,
+  AntSlider,
   AntStepFormButtons,
   AntSwitch,
   AntSwitchField,

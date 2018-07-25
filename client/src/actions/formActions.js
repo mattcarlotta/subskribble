@@ -11,6 +11,16 @@ const addNewForm = formProps => dispatch => (
 )
 
 // Add new promo code
+const addNewPlan = formProps => dispatch => (
+  app.post(`plans/create`, { ...formProps })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/plans')
+  })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
+// Add new promo code
 const addNewPromo = formProps => dispatch => (
   app.post(`promotionals/create`, { ...formProps })
   .then(({data: {message}}) => {
@@ -122,6 +132,7 @@ const updateBillingFields = (state) => {
 
 export {
   addNewForm,
+  addNewPlan,
   addNewPromo,
   addNewTemplate,
   applyPromo,
