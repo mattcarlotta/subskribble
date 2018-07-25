@@ -38,8 +38,6 @@ const AntInputNumber = CreateAntReduxField(InputNumber);
 const AntMonthPicker = CreateAntReduxField(MonthPicker);
 const AntRadioGroup = CreateAntReduxField(RadioGroup);
 const AntSlider = CreateAntReduxField(Slider);
-// const ARangePicker = CreateAntReduxField(RangePicker);
-// const AntSelect = CreateAntReduxField(Select);
 const AntSwitch = CreateAntReduxField(Switch);
 const AntTextArea = CreateAntReduxField(TextArea);
 const AntWeekPicker = CreateAntReduxField(WeekPicker);
@@ -147,33 +145,6 @@ const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
   </div>
 )
 
-// const AntRangePicker = ({
-//   children,
-//   input: { value, ...inputs},
-//   meta: { invalid, touched, error },
-//   label,
-//   hasFeedback,
-//   selectedDate,
-//   ...props
-// }) => {
-//   const hasError = touched && invalid;
-//   return (
-//     <FormItem
-//       label={label}
-//       hasFeedback={hasFeedback && touched}
-//       help={hasError && error}
-//       validateStatus={hasError ? "error" : "success"}
-//     >
-//       <RangePicker
-//         {...inputs}
-//         {...props}
-//         children={children}
-//         format="MMMM, DD YYYY"
-//       />
-//     </FormItem>
-//   );
-// };
-
 const AntRangePicker = ({
   input,
   meta,
@@ -199,7 +170,6 @@ const AntRangePicker = ({
     </FormItem>
   );
 };
-
 
 const AntSelect = ({
   children,
@@ -242,7 +212,6 @@ const AntSwitchField = (props) => (
     unCheckedChildren={<Icon type="cross" />}
   />
 )
-
 
 
 export {

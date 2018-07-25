@@ -27,7 +27,7 @@ module.exports = app => {
       try {
         const subscriber = 'Fake Subscriber';
         const selectedPlan = 'Fake Plan';
-        const planExists = await db.oneOrNone(selectPlan(), 'Fake Plan');
+        const planExists = await db.oneOrNone(selectPlan(), [req.session.id, 'Fake Plan']);
         if (!planExists) return sendError('You must create a plan before adding a subscriber!', res, next);
 
         await db.none(createSubscriber(), [req.session.id, subscriber, "555 Fake Lane", "Fake City", "Fake State", "55555", "fake@email.com", "(555)555-555", selectedPlan]);

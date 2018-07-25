@@ -16,19 +16,30 @@ const renderStatus = status => (
 
 const ACTIVETABLEHEADERS = [
 	{ title: 'Status', dataIndex: 'status', render: status => renderStatus(status) },
-	{ title: 'Subscriber', dataIndex: 'subscriber' },
+	{
+		title: 'Subscriber',
+		dataIndex: 'subscriber',
+		render: subscriber => <span className="subscriber">{subscriber}</span>
+	},
 	{ title: 'Plan', dataIndex: 'planname' },
 	{ title: 'Start Date', dataIndex: 'startdate' },
-	{	title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
+	{	title: 'Amount', dataIndex: 'amount', render: amount => <span className="amount">${amount}</span> }
 ];
 
 const INACTIVETABLEHEADERS = [
 	{ title: 'Status', dataIndex: 'status', render: status => renderStatus(status) },
-	{ title: 'Subscriber', dataIndex: 'subscriber' },
+	{
+		title: 'Subscriber',
+		dataIndex: 'subscriber',
+		render: (subscriber, {status}) => <span className={`subscriber-${status}`}>{subscriber}</span>
+	},
 	{ title: 'Plan', dataIndex: 'planname' },
 	{ title: 'Start Date', dataIndex: 'startdate' },
-	{ title: 'End Date', dataIndex: 'enddate', render: enddate => <span>{enddate}</span> },
-	{ title: 'Amount', dataIndex: 'amount', render: amount => <span>${amount}</span> }
+	{
+		title: 'End Date',
+		dataIndex: 'enddate',
+		render: (enddate, {status}) => <span className={`enddate-${status}`}>{enddate}</span>
+	}
 ];
 
 export default ({

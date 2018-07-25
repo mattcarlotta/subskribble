@@ -4,9 +4,25 @@ module.exports = app => {
   const bcrypt = app.get("bcrypt");
   const moment = app.get("moment");
 
+  const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
+  const currentDate = moment.utc()
+  const laterDate = moment.utc().add(30, 'days')
+  const startDate = currentDate.format("MMMM Do, YYYY")
+  const endDate = laterDate.format("MMMM Do, YYYY")
+  const startStamp = currentDate.toString()
+  const endStamp = laterDate.toString()
+
+  const enddate = "endDate TEXT";
+  const id = "id UUID DEFAULT uuid_generate_v1mc()";
+  const key = "key SERIAL PRIMARY KEY";
+  const planName = "planName VARCHAR NOT NULL";
+  const userid = "userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE";
+  const startdate = "startDate TEXT NOT NULL";
+  const status = "status VARCHAR DEFAULT 'active'";
+
   const userTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc() UNIQUE,
-    key SERIAL PRIMARY KEY,
+    ${id} UNIQUE,
+    ${key},
     verified BOOLEAN DEFAULT FALSE,
     email VARCHAR NOT NULL UNIQUE,
     firstName TEXT NOT NULL,
@@ -14,16 +30,17 @@ module.exports = app => {
     password VARCHAR NOT NULL UNIQUE,
     company VARCHAR NOT NULL UNIQUE,
     startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
-    endDate TEXT,
+    ${enddate},
+    credit INTEGER DEFAULT 0,
     token VARCHAR UNIQUE,
     collapseSideNav BOOLEAN DEFAULT FALSE,
     isGod BOOLEAN DEFAULT FALSE
   )`
 
   const noteTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    ${id},
+    ${key},
+    ${userid},
     read BOOLEAN DEFAULT false,
     deleted BOOLEAN DEFAULT false,
     subscriber VARCHAR,
@@ -32,43 +49,43 @@ module.exports = app => {
   )`;
 
   const planTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'active',
-    planName VARCHAR NOT NULL UNIQUE,
+    ${id},
+    ${key},
+    ${userid},
+    ${status},
+    ${planName} UNIQUE,
     description TEXT NOT NULL,
     amount DECIMAL(12,2) NOT NULL,
-    setupFee DECIMAL(12,2) DEFAULT 0.00,
-    billEvery VARCHAR DEFAULT '30 Days',
-    trialPeriod VARCHAR DEFAULT '0 Days',
+    setupFee DECIMAL(12,2),
+    billEvery VARCHAR NOT NULL,
+    trialPeriod VARCHAR,
     subscribers INTEGER DEFAULT 0
   )`;
 
   const promoTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'active',
+    ${id},
+    ${key},
+    ${userid},
+    ${status},
     plans TEXT ARRAY NOT NULL,
     promoCode VARCHAR NOT NULL,
     amount INTEGER NOT NULL,
     discountType VARCHAR NOT NULL,
     datestamps TEXT ARRAY NOT NULL,
-    startDate TEXT NOT NULL,
-    endDate TEXT NOT NULL,
+    ${startdate},
+    ${enddate} NOT NULL,
     maxUsage INTEGER NOT NULL,
     totalUsage INTEGER DEFAULT 0
   )`;
 
   const subTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'active',
+    ${id},
+    ${key},
+    ${userid},
+    ${status},
     email VARCHAR,
     subscriber VARCHAR NOT NULL,
-    planName VARCHAR NOT NULL,
+    ${planName},
     amount DECIMAL(12,2),
     billingAddress TEXT,
     billingCity TEXT,
@@ -83,16 +100,16 @@ module.exports = app => {
     contactPhone VARCHAR,
     promoCode TEXT,
     sameBillingAddress BOOLEAN,
-    startDate TEXT NOT NULL,
-    endDate TEXT,
+    ${startdate},
+    ${enddate},
     FOREIGN KEY (planName) REFERENCES plans(planName) ON DELETE CASCADE
   )`;
 
   const templateTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    status VARCHAR DEFAULT 'active',
+    ${id},
+    ${key},
+    ${userid},
+    ${status},
     fromSender VARCHAR NOT NULL,
     subject VARCHAR NOT NULL,
     templateName VARCHAR UNIQUE,
@@ -102,12 +119,12 @@ module.exports = app => {
   )`;
 
   const transTableOptions = `(
-    id UUID DEFAULT uuid_generate_v1mc(),
-    key SERIAL PRIMARY KEY,
-    userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    ${id},
+    ${key},
+    ${userid},
     status VARCHAR,
     invoice UUID DEFAULT uuid_generate_v1mc(),
-    planName VARCHAR NOT NULL,
+    ${planName},
     subscriber VARCHAR NOT NULL,
     processor VARCHAR NOT NULL,
     amount VARCHAR,
@@ -121,39 +138,32 @@ module.exports = app => {
   const subProperties = `(userid, status, email, subscriber, contactPhone, planName, startDate, endDate, amount)`;
   const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
   const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
-  const selectUserid = id => (`(SELECT id FROM users WHERE id='${id}')`);
-  const currentDate = moment.utc()
-  const laterDate = moment.utc().add(30, 'days')
-  const startDate = currentDate.format("MMMM Do, YYYY")
-  const endDate = laterDate.format("MMMM Do, YYYY")
-  const startStamp = currentDate.toString()
-  const endStamp = laterDate.toString()
 
   const planValues = id => (`
-  (${selectUserid(id)}, 'active', 'Carlotta Prime', 'Carlotta Subscription', 99.99, 0.00, '30 days', '30 days', 299),
-  (${selectUserid(id)}, 'active', 'Carlotta Switch', 'Carlotta Subscription', 49.99, 0.00, '30 days', '30 days', 85),
-  (${selectUserid(id)}, 'active', 'Carlotta Corp', 'Carlotta Subscription', 299.99, 4.99, '30 days', '30 days', 35048),
-  (${selectUserid(id)}, 'active', 'Carlotta Inc.', 'Carlotta Subscription', 1999.99, 399.99, '30 days', '30 days', 14058),
-  (${selectUserid(id)}, 'active', 'Carlotta LLC', 'Carlotta Subscription', 499.99, 299.99, '30 days', '30 days', 11),
-  (${selectUserid(id)}, 'active', 'Carlotta Dealership', 'Carlotta Subscription', 699.99, 24.99, '30 days', '30 days', 400),
-  (${selectUserid(id)}, 'active', 'Carlotta Affiliates', 'Carlotta Subscription', 79.99, 9.99, '30 days', '30 days', 29),
-  (${selectUserid(id)}, 'active', 'Carlotta Sales', 'Carlotta Subscription', 9.99, 0.00, '30 days', '30 days', 642),
-  (${selectUserid(id)}, 'active', 'Carlotta Automechs', 'Carlotta Subscription', 14.99, 249.99, '30 days', '30 days', 22),
-  (${selectUserid(id)}, 'active', 'Carlotta Solar', 'Carlotta Subscription', 44.99, 199.99, '30 days', '30 days', 751),
-  (${selectUserid(id)}, 'active', 'Carlotta Twitch', 'Carlotta Subscription', 4.99, 0.00, '30 days', '30 days', 256),
-  (${selectUserid(id)}, 'active', 'Carlotta Youtube', 'Carlotta Subscription', 1.99, 0.00, '30 days', '30 days', 81),
-  (${selectUserid(id)}, 'suspended', 'Carlotta .com', 'Carlotta Subscription', 69.99, 0.00, '30 days', '30 days', 23),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Partners', 'Carlotta Subscription', 99.99, 0.00, '30 days', '30 days', 214),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Church', 'Carlotta Subscription', 0.00, 0.00, '30 days', '30 days', 845),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Industries', 'Carlotta Subscription', 149.99, 29.99, '30 days', '30 days', 6514),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Workshops', 'Carlotta Subscription', 39.99, 5.99, '30 days', '30 days', 742),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Sports', 'Carlotta Subscription', 19.99, 0.00, '30 days', '30 days', 611),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Cars Magazine', 'Carlotta Subscription', 2.99, 0.00, '30 days', '30 days', 125862),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Flagships', 'Carlotta Subscription', 18.99, 0.00, '30 days', '30 days', 125),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Protocols', 'Carlotta Subscription', 15.99, 0.00, '30 days', '30 days', 487),
-  (${selectUserid(id)}, 'suspended', 'Carlotta ISP', 'Carlotta Subscription', 89.99, 99.90, '30 days', '30 days', 329),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', 'Carlotta Subscription', 279.99, 198.89, '30 days', '30 days', 4),
-  (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'Carlotta Subscription', 69.99, 0.00, '30 days', '30 days', 645);
+  (${selectUserid(id)}, 'active', 'Carlotta Prime', 'Carlotta Subscription', 99.99, null, 'Monthly', '1 Month', 299),
+  (${selectUserid(id)}, 'active', 'Carlotta Switch', 'Carlotta Subscription', 49.99, null, 'Monthly', '1 Month', 85),
+  (${selectUserid(id)}, 'active', 'Carlotta Corp', 'Carlotta Subscription', 299.99, 4.99, 'Monthly', '1 Month', 35048),
+  (${selectUserid(id)}, 'active', 'Carlotta Inc.', 'Carlotta Subscription', 1999.99, 399.99, 'Monthly', '1 Month', 14058),
+  (${selectUserid(id)}, 'active', 'Carlotta LLC', 'Carlotta Subscription', 499.99, 299.99, 'Monthly', '1 Month', 11),
+  (${selectUserid(id)}, 'active', 'Carlotta Dealership', 'Carlotta Subscription', 699.99, 24.99, 'Monthly', '1 Month', 400),
+  (${selectUserid(id)}, 'active', 'Carlotta Affiliates', 'Carlotta Subscription', 79.99, 9.99, 'Monthly', '1 Month', 29),
+  (${selectUserid(id)}, 'active', 'Carlotta Sales', 'Carlotta Subscription', 9.99, null, 'Monthly', '1 Month', 642),
+  (${selectUserid(id)}, 'active', 'Carlotta Automechs', 'Carlotta Subscription', 14.99, 249.99, 'Monthly', '1 Month', 22),
+  (${selectUserid(id)}, 'active', 'Carlotta Solar', 'Carlotta Subscription', 44.99, 199.99, 'Monthly', '1 Month', 751),
+  (${selectUserid(id)}, 'active', 'Carlotta Twitch', 'Carlotta Subscription', 4.99, null, 'Monthly', '1 Month', 256),
+  (${selectUserid(id)}, 'active', 'Carlotta Youtube', 'Carlotta Subscription', 1.99, null, 'Monthly', '1 Month', 81),
+  (${selectUserid(id)}, 'suspended', 'Carlotta .com', 'Carlotta Subscription', 69.99, null, 'Monthly', '1 Month', 23),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Partners', 'Carlotta Subscription', 99.99, null, 'Monthly', '1 Month', 214),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Church', 'Carlotta Subscription', 0.00, null, 'Monthly', '1 Month', 845),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Industries', 'Carlotta Subscription', 149.99, 29.99, 'Monthly', '1 Month', 6514),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Workshops', 'Carlotta Subscription', 39.99, 5.99, 'Monthly', '1 Month', 742),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Sports', 'Carlotta Subscription', 19.99, null, 'Monthly', '1 Month', 611),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Cars Magazine', 'Carlotta Subscription', 2.99, null, 'Monthly', '1 Month', 125862),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Flagships', 'Carlotta Subscription', 18.99, null, 'Monthly', '1 Month', 125),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Protocols', 'Carlotta Subscription', 15.99, null, 'Monthly', '1 Month', 487),
+  (${selectUserid(id)}, 'suspended', 'Carlotta ISP', 'Carlotta Subscription', 89.99, 99.90, 'Monthly', '1 Month', 329),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Pumps', 'Carlotta Subscription', 279.99, 198.89, 'Monthly', '1 Month', 4),
+  (${selectUserid(id)}, 'suspended', 'Carlotta Assoc.', 'Carlotta Subscription', 69.99, null, 'Monthly', '1 Month', 645);
   `);
 
   const promoValues = id => (`

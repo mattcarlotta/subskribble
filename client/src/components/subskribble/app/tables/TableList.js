@@ -50,7 +50,6 @@ export default class TableList extends PureComponent {
 						pageSize: sortByNum,
 						total: TABLERECORDS
 					}}
-					size="middle"
 					onChange={this.handlePageChange}
 				/>
 			</div>

@@ -1,13 +1,27 @@
 const isEmpty = require('lodash').isEmpty;
 
 module.exports = app => {
-  const { db, query: { deleteOnePlan, getAllActivePlans, getAllPlans, getPlanCount, updateOnePlan } } = app.database;
+  const { db, query: { createPlan, deleteOnePlan, getAllActivePlans, getAllPlans, getPlanCount, updateOnePlan, selectPlan } } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
+    create: async (req, res, next) => {
+      console.log('req.body', req.body);
+      // if (!req.body) return sendError('Missing plan creation parameters.', res, next);
+      // return sendError('Missing plan creation parameters.', res, next);
+      const { amount, billEvery, planName, description, setupFee } = req.body;
+      try {
+        const planExists = await db.oneOrNone(selectPlan(), [req.session.id, planName])
+        if (planExists) return sendError('A plan with that name already exists. Please use another name.', res, next);
+
+        await db.result(createPlan(), [req.session.id, amount, billEvery, planName, description, setupFee]);
+
+        res.status(201).json({ message: `Succesfully created a '${planName}' plan.` });
+      } catch (err) { return sendError(err, res, next); }
+    },
     // DELETES REQURESTED RECORD
     deleteOne: async (req, res, next) => {
-      if (!req.params.id) return sendError('Missing plan delete parameters', res, next);
+      if (!req.params.id) return sendError('Missing plan delete parameters.', res, next);
 
       try {
         const name = await db.result(deleteOnePlan(), [req.params.id, req.session.id]);
@@ -17,7 +31,7 @@ module.exports = app => {
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
     fetchAllActiveRecords: async (req, res, next) => {
-      if (!req.query) return sendError('Missing query fetch parameters', res, next);
+      if (!req.query) return sendError('Missing query fetch parameters.', res, next);
       try {
         const activeplans = await db.any(getAllActivePlans(), [req.session.id]);
         if (isEmpty(activeplans)) return sendError('You must create a plan first!', res, next);
@@ -27,7 +41,7 @@ module.exports = app => {
     },
     // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
     fetchRecords:  async (req, res, next) => {
-      if (!req.query) return sendError('Missing query fetch parameters', res, next);
+      if (!req.query) return sendError('Missing query fetch parameters.', res, next);
 
       let { table, limit, page } = req.query;
       limit = parseStringToNum(limit);

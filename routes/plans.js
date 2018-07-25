@@ -1,7 +1,8 @@
 module.exports = app => {
-  const { plans: { index, deleteOne, fetchAllActiveRecords, fetchCounts, fetchRecords, updateOne } } = app.controllers;
+  const { plans: { create, deleteOne, fetchAllActiveRecords, fetchCounts, fetchRecords, index, updateOne } } = app.controllers;
   const { requireAuth } = app.services.strategies;
 
+  app.post('/api/plans/create', requireAuth, create)
   app.delete('/api/plans/delete/:id', requireAuth, deleteOne)
   app.get('/api/plancounts', requireAuth, fetchCounts)
   app.get('/api/plans/only-active', requireAuth, fetchAllActiveRecords)

@@ -18,7 +18,7 @@ module.exports = app => {
   }
 
   const planQueries = {
-    createPlan: () => ("INSERT INTO plans(userid, planName, amount) VALUES((SELECT id FROM users WHERE id=$1), $2, $3)"),
+    createPlan: () => ("INSERT INTO plans(userid, amount, billEvery, planName, description, setupFee) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6)"),
     deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
     deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
     getAllActivePlans: () => (`SELECT planName, description, amount FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
@@ -28,7 +28,7 @@ module.exports = app => {
     ),
     updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName"),
     updatePlanSubCount: () => ("UPDATE plans SET subscribers=(SELECT count(*) FROM subscribers WHERE planName=$2) WHERE planName=$2"),
-    selectPlan: () => ("SELECT * FROM plans WHERE planName=$1")
+    selectPlan: () => ("SELECT * FROM plans WHERE userid=$1 AND planName=$2")
   }
 
   const promoQueries = {

@@ -12,7 +12,11 @@ const TABLEHEADERS = [
 			</Tooltip>
 		)
 	},
-	{ title: 'Promo Code', dataIndex: 'promocode' },
+	{
+		title: 'Promo Code',
+		dataIndex: 'promocode',
+		render: promo => <span className="promo">{promo}</span>
+	},
 	{
     title: 'Associated Plans',
     dataIndex: 'plans',
@@ -32,7 +36,7 @@ const TABLEHEADERS = [
 	{
 		title: 'Amount',
 		dataIndex: 'amount',
-		render: (amount, {discounttype}) => <span>{ (discounttype === '$') ? `${discounttype}${amount}` : `${amount}${discounttype}` }</span>
+		render: (amount, {discounttype}) => <span className="amount">{ (discounttype === '$') ? `${discounttype}${amount}` : `${amount}${discounttype}` }</span>
 	},
 	{ title: 'Start Date', dataIndex: 'startdate' },
 	{ title: 'End Date', dataIndex: 'enddate' },

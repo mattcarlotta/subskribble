@@ -1,21 +1,7 @@
 .table-container {
 	margin: 10px 0 10px 0;
 
-	.adjust-enddate-position {
-		padding-left: 30px !important;
-	}
-
-	.adjust-plans-position {
-		padding-left: 25px !important;
-	}
-
-	.adjust-subscriptions-position {
-		padding-left: 50px !important;
-	}
-
-	.adjust-subscribers-position {
-		padding-left: 40px !important;
-	}
+	.ant-table-tbody > tr > td, .ant-table-thead > tr> th { @extend %t-a-c; }
 
 	.override-table-style {
 		th {
@@ -35,93 +21,39 @@
 
 .label {
 	@extend %t-a-c;
-	@include f-w(500);
-	display: inline;
-	letter-spacing: 0.05em;
-	border-radius: 60px;
-}
-
-.active {
-	@extend %m-l-10;
-	@include c($tealgreen);
-}
-
-.credit {
-	@extend %m-l-10;
-	@include c($darkblue);
-}
-
-.due {
-	@extend %m-l-10;
-	@include c($darkyellow);
-}
-
-.inactive {
-	@extend %m-l-10;
-	@include c($lightcoolgrey);
-}
-
-.lowercase {
-	@extend %t-t-l;
-}
-
-.max-usage {
-	@media (max-width: 1450px) {
-		padding: 2px 5px 1.5px;
-		margin-left: 0;
-	}
-	@extend .label, %t-a-c;
+	@include b-s(inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 1px 1px rgba(0, 0, 0, 0.2));
 	@include c($white);
-	@include b-c($darkyellow);
 	@include f-w(500);
-	padding: 4px 10px 3px;
-	margin-left: 12px;
-}
-
-.paid {
-	@extend %m-l-10;
-	@include c($limegreen);
-}
-
-.refund {
-	@extend %m-l-10;
-	@include c($redorange);
-}
-
-.suspended {
-	@extend %m-l-10;
-	@include c($firered);
-}
-
-.subscription-count {
-	@media (max-width: 1450px) {
-		padding: 2px 5px 1.5px;
-	}
-	@media (min-width: 1450px) {
-		margin-left: 18px;
-	}
-	@extend .label, %t-a-c;
-	@include c($white);
-	@include b-c($lightblue);
-	@include f-w(500);
+  border-color: #0585bf;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 	padding: 4px 10px 3px;
 }
 
+.active { @include c($tealgreen);}
+.amount { @extend .label; @include b-c($darkyellow);}
+.amount-suspended { @extend .label; @include b-c($lightcoolgrey);}
+.bill { @extend .label; @include b-c($trueorange);}
+.bill-suspended { @extend .label; @include b-c($lightcoolgrey);}
+.credit { @include c($darkblue);}
+.due { @include c($darkyellow);}
+.enddate-inactive { @extend .label; @include b-c($lightcoolgrey);}
+.enddate-suspended { @extend .label; @include b-c($firered);}
+.inactive { @include c($lightcoolgrey);}
+.lowercase { @extend %t-t-l;}
+.max-usage { @extend .label; @include b-c($lightblue);}
+.paid { @include c($limegreen);}
+.plan { @extend .label; @include b-c($tealgreen);}
+.plan-suspended { @extend .label; @include b-c($firered);}
+.promo { @extend .label; @include b-c($tealgreen);}
+.refund { @include c($redorange);}
+.subscriber { @extend .label; @include b-c($tealgreen);}
+.subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
+.subscriber-suspended { @extend .label; @include b-c($firered);}
+.suspended { @include c($firered);}
+.subscription-count { @extend .label; @include b-c($lightblue);}
 .table-status-action {
 	@extend %t-t-c;
 	i { @include f-s(18px); padding-top: 5px; }
 }
-
-.total-usage {
-	@media (max-width: 1450px) {
-		padding: 2px 5px 1.5px;
-	}
-	@media (min-width: 1450px) {
-		margin-left: 18px;
-	}
-	@extend .label, %t-a-c;
-	@include c($white);
-	@include b-c($lightblue);
-	@include f-w(500);
-	padding: 4px 10px 3px;
-}
+.total-usage { @extend .label; @include b-c($trueorange);}

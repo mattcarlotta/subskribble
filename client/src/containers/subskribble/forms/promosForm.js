@@ -17,12 +17,7 @@ const { fetchPromo } = promoActions;
 const { fetchAllActivePlans } = planActions;
 
 class PromoForm extends Component {
-  state = {
-    confirmLoading: false,
-    isLoading: true,
-    selectOptions: [],
-    dates: []
-  };
+  state = { confirmLoading: false, isLoading: true, selectOptions: [], dates: [] };
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
@@ -41,21 +36,21 @@ class PromoForm extends Component {
           this.props.initialize({
           ...data,
           dateStamps: [
-              moment(data.datestamps[0], 'ddd MMM D YYYY HH:mm:ss ZZ'),
-              moment(data.datestamps[1], 'ddd MMM D YYYY HH:mm:ss ZZ')
+            moment(data.datestamps[0], 'ddd MMM D YYYY HH:mm:ss ZZ'),
+            moment(data.datestamps[1], 'ddd MMM D YYYY HH:mm:ss ZZ')
           ],
           maxusage: data.maxusage === 2147483647 ? undefined : data.maxusage
         })
         this.fetchPlans()
       })
     })
-    .catch((err) => console.log(err))
+    .catch(() => this.goBackPage())
   }
 
   fetchPlans = () => {
     this.props.fetchAllActivePlans()
     .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: map(activeplans, ({planname}) => (planname)) }))
-    .catch(() => null)
+    .catch(() => this.goBackPage())
   }
 
 	handleFormSubmit = (formProps) => {

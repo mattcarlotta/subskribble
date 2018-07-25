@@ -9,42 +9,36 @@ module.exports = app => {
     // CREATES A NEW USER
     create: (req, res, next) => passport.authenticate('local-signup', err => {
       if (err) return sendError(err, res, next);
-
       res.status(201).json(thanksForReg(req.body.email, req.body.firstName, req.body.lastName))
     })(req, res, next),
-
     // ALLOWS A USER TO LOG INTO THE APP
     login: (req, res, next) => passport.authenticate('local-login', err => {
       if (err || !req.session) return sendError(err || badCredentials, res, next);
-
-      res.status(201).json({ ...req.session });
+      const { company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
+      res.status(201).json({ company, collapsesidenav, email, firstname, isgod, lastname });
     })(req, res, next),
-
     // ALLOWS A USER TO LOG INTO THE APP
-    loggedin: (req, res) => res.status(201).json({ ...req.session }),
-
+    loggedin: (req, res) => {
+      if (!req.session) return sendError(badCredentials, res, next);
+      const { company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
+      res.status(201).json({ company, collapsesidenav, email, firstname, isgod, lastname });
+    },
     // REMOVES USER FROM SESSION AND DELETES CLIENT COOKIE
     logout: (req, res, next) => {
       if (!req.session.id) return sendError('Already logged out', res, next);
       req.session = null;
-
       res.clearCookie('Authorization', { path: '/' }).status(200).send('Cookie deleted.');
     },
-
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
     resetPassword: (req, res, next) => passport.authenticate('reset-password', (err, user) => {
       if (err || !user) return sendError(err || 'No user found!', res, next);
-
       res.status(201).json(passwordResetSuccess(user.email))
     })(req, res, next),
-
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD
     resetToken: (req, res, next) => passport.authenticate('reset-token', (err, email) => {
       if (err || !email) return sendError(err || 'No user found!', res, next);
-
       res.status(201).json(passwordResetToken(email))
     })(req, res, next),
-
     // SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
     saveSidebarState: async (req, res, next) => {
       if (!req.query) return sendError(missingSidebarState, res, next);
@@ -57,7 +51,6 @@ module.exports = app => {
         res.status(201).json({ collapseSideNav: updatedSidebarState });
       } catch (err) { return sendError(err, res, next) }
     },
-
     // VERIFIES THE USER HAS A VALID EMAIL BEFORE GIVING LOGIN ACCESS
     verifyEmail: async (req, res, next) => {
       const { token } = req.query;

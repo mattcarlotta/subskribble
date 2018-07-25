@@ -6,7 +6,7 @@ import { AntInput, AntSelectField, AntStepFormButtons } from '../app/formFields/
 import Spinner from '../app/loading/Spinner';
 import promoActions from '../../../actions/promoActions';
 import { addNewPlan } from '../../../actions/formActions';
-import { allowedCharacters, isRequired, isNotEmpty, isFloat } from '../app/formFields/validateFormFields';
+import { allowedCharacters, isRequired, isNotEmpty, isFloat, maxLength50 } from '../app/formFields/validateFormFields';
 
 const { fetchPlan } = promoActions;
 
@@ -42,8 +42,9 @@ class PlanForm extends Component {
   // }
 
 	handleFormSubmit = (formProps) => {
+    this.setState({ confirmLoading: true });
     console.log(formProps);
-    // this.setState({ confirmLoading: true });
+    this.props.addNewPlan(formProps);
     // const { id } = this.props.location.query;
     // formProps.startdate = formProps.dateStamps[0].format("MMMM DD YYYY")
     // formProps.enddate = formProps.dateStamps[1].format("MMMM DD YYYY")
@@ -73,7 +74,17 @@ class PlanForm extends Component {
                     name="planName"
                     component={AntInput}
                     placeholder="Unique Plan Name"
-                    validate={[isRequired, allowedCharacters]}
+                    validate={[isRequired, allowedCharacters, maxLength50]}
+                  />
+                </div>
+                <div className="input-100">
+                  <Field
+                    hasFeedback
+                    disabled={confirmLoading}
+                    name="description"
+                    component={AntInput}
+                    placeholder="Plan Description"
+                    validate={[isRequired, allowedCharacters, maxLength50]}
                   />
                 </div>
                 <div className="input-100">
@@ -100,8 +111,18 @@ class PlanForm extends Component {
                   />
                 </div>
                 <div className="input-100">
-                  <AntSelectField
+                  <Field
                     hasFeedback
+                    disabled={confirmLoading}
+                    name="setupFee"
+                    addonBefore={<div style={{ width: 20 }}>$</div>}
+                    component={AntInput}
+                    placeholder="Plan Setup Fee (leave empty if none)"
+                    validate={[isFloat]}
+                  />
+                </div>
+                <div className="input-100">
+                  <AntSelectField
                     disabled={confirmLoading}
                     name="trialPeriod"
                     placeholder="Trial Period (leave empty if none)"

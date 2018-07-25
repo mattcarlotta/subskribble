@@ -49,7 +49,6 @@ const CustomerFormFields = [
     rightTitle: null
   },
   {
-    PLANSELECTIONFIELDS: null,
     mainTitle: "<span>You're almost done. Please <strong>review</strong> the information below and <strong>subscribe to the plan</strong>.</span>",
   }
 ]
