@@ -3,8 +3,8 @@ import * as types from './types';
 
 export default {
   // Deletes requested subscriber from DB
-  deleteAction: subscriberid => dispatch => (
-    app.delete(`subscribers/delete/${subscriberid}`)
+  deleteAction: (subscriberid, planName) => dispatch => (
+    app.delete(`subscribers/delete?subscriberid=${subscriberid}&planname=${planName}`)
     .then(({data: {message}}) => {
       dispatch(this.a.fetchItemCounts())
       dispatch(this.a.fetchItems())

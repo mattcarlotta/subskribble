@@ -128,16 +128,14 @@ const subRegisterToPlan = ({ contactFirstName, contactLastName, ...rest }) => di
 )
 
 // Updates billing fields
-const updateBillingFields = (state) => {
-  const selector = formValueSelector('CustomerPlanSignup');
-  return {
-    billingAddress: state ? selector(state, 'contactAddress') : undefined,
-    billingUnit: state ? selector(state, 'contactUnit') : undefined,
-    billingCity: state ? selector(state, 'contactCity') : undefined,
-    billingState: state ? selector(state, 'contactState'): undefined,
-    billingZip: state ? selector(state, 'contactZip') : undefined
-  }
-}
+const selector = formValueSelector('CustomerPlanSignup');
+const updateBillingFields = (state) => ({
+  billingAddress: state ? selector(state, 'contactAddress') : undefined,
+  billingUnit: state ? selector(state, 'contactUnit') : undefined,
+  billingCity: state ? selector(state, 'contactCity') : undefined,
+  billingState: state ? selector(state, 'contactState'): undefined,
+  billingZip: state ? selector(state, 'contactZip') : undefined
+})
 
 
 export {

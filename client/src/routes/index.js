@@ -13,7 +13,7 @@ import PlansForm from '../containers/subskribble/forms/plansForm';
 import Promos from '../containers/subskribble/promos';
 import PromosForm from '../containers/subskribble/forms/promosForm';
 // import Messages from '../components/subskribble/messages';
-// import Settings from '../components/subskribble/settings';
+import Settings from '../components/subskribble/app/settings/MyProfile';
 import RequireAuth from '../containers/subskribble/app/auth/RequireAuth';
 import ResetPassword from '../containers/subskribble/app/auth/ResetPassword';
 import Subscribers from '../containers/subskribble/subscribers';
@@ -38,6 +38,7 @@ export default (
 				<Route path="promotionals" component={Promos} />
 				<Route path="promotionals/create" component={PromosForm} />
 				<Route path="promotionals/edit/:id" component={PromosForm} />
+				<Route path="settings" component={Settings} />
 				<Route path="subscribers" component={Subscribers} />
 				<Route path="subscribers/register" component={CustomerSignupForm} />
 				<Route path="templates" component={Templates} />

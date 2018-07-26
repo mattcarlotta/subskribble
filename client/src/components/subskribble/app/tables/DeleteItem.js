@@ -3,8 +3,8 @@ import { Button, Popconfirm, Tooltip } from 'antd';
 
 export default class DeleteItem extends PureComponent {
   handleDelete = () => {
-    const { deleteAction, id  } = this.props;
-    deleteAction(id);
+    const { deleteAction, id, plan } = this.props;
+    deleteAction(id,plan);
   }
 
   render = () => (

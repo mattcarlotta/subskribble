@@ -1,5 +1,49 @@
 .table-container {
-	margin: 10px 0 10px 0;
+	margin: 10px 0;
+
+	.label {
+		@extend %t-a-c;
+		@include b-s(inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 1px 1px rgba(0, 0, 0, 0.2));
+		@include c($white);
+		@include f-w(500);
+	  border-color: $tealblue;
+	  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	  border-radius: 3px;
+		padding: 4px 10px 3px;
+	}
+
+	.active { @include c($tealgreen);}
+	.amount, .promo, .subscriber, .template-active { @extend .label; @include b-c($tealgreen);}
+
+	.due { @include c($darkyellow);}
+	.plan, .amount-due, .invoice-due, .subscriber-due { @extend .label; @include b-c($darkyellow);}
+
+	.credit { @include c($darkblue);}
+	.amount-credit, .invoice-credit, .subscriber-credit { @extend .label; @include b-c($darkblue);}
+
+	.inactive { @include c($lightcoolgrey);}
+	.amount-suspended, .bill-suspended, .enddate-inactive, .invoice-inactive, .plans-suspended, .max-usage-suspended, .subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
+
+	.paid { @include c($limegreen);}
+	.amount-paid, .invoice-paid, .subscriber-paid { @extend .label; @include b-c($limegreen); }
+
+	.refund { @include c($redorange);}
+	.amount-refund, .invoice-refund, .subscriber-refund { @extend .label; @include b-c($redorange);}
+
+	.bill, .total-usage { @extend .label; @include b-c($trueorange);}
+
+	.suspended { @include c($firered);}
+	.enddate-suspended, .invoice-suspended, .plan-suspended, .promo-suspended, .subscriber-suspended, .template-suspended,  .total-usage-suspended { @extend .label; @include b-c($firered);}
+
+	.plans-active, .plans-suspended { @extend %m-r-5; }
+
+	.lowercase { @extend %t-t-l;}
+	.max-usage, .plans-active, .subscription-count { @extend .label; @include b-c($lightblue);}
+
+	.table-status-action {
+		@extend %t-t-c;
+		i { @include f-s(18px); padding-top: 5px; }
+	}
 
 	.ant-table-tbody > tr > td, .ant-table-thead > tr> th { @extend %t-a-c; }
 
@@ -13,52 +57,8 @@
 		td {
 			@extend %t-t-n;
 			@include c($black !important);
-			@include f-f(sans-serif);
+			@include f-f($arimo);
 			@include f-s(13px !important);
 		}
 	}
-}
-
-.label {
-	@extend %t-a-c;
-	@include b-s(inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 1px 1px rgba(0, 0, 0, 0.2));
-	@include c($white);
-	@include f-w(500);
-  border-color: #0585bf;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-	padding: 4px 10px 3px;
-}
-
-.active { @include c($tealgreen);}
-.plan, .promo, .subscriber, .template-active { @extend .label; @include b-c($tealgreen);}
-
-.due { @include c($darkyellow);}
-.amount, .amount-due, .invoice-due, .subscriber-due { @extend .label; @include b-c($darkyellow);}
-
-.credit { @include c($darkblue);}
-.amount-credit, .invoice-credit, .subscriber-credit { @extend .label; @include b-c($darkblue);}
-
-.inactive { @include c($lightcoolgrey);}
-.amount-suspended, .bill-suspended, .enddate-inactive, .invoice-inactive, .plans-suspended, .max-usage-suspended, .subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
-
-.paid { @include c($limegreen);}
-.amount-paid, .invoice-paid, .subscriber-paid { @extend .label; @include b-c($limegreen); }
-
-.refund { @include c($redorange);}
-.amount-refund, .invoice-refund, .subscriber-refund { @extend .label; @include b-c($redorange);}
-
-.bill, .total-usage { @extend .label; @include b-c($trueorange);}
-
-.suspended { @include c($firered);}
-.enddate-suspended, .invoice-suspended, .plan-suspended, .promo-suspended, .subscriber-suspended, .template-suspended,  .total-usage-suspended { @extend .label; @include b-c($firered);}
-
-.plans-active, .plans-suspended { @extend %m-r-5; }
-
-.lowercase { @extend %t-t-l;}
-.max-usage, .plans-active, .subscription-count { @extend .label; @include b-c($lightblue);}
-
-.table-status-action {
-	@extend %t-t-c;
-	i { @include f-s(18px); padding-top: 5px; }
 }

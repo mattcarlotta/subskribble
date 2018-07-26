@@ -1,0 +1,12 @@
+.settings-container {
+  @extend %t-t-n;
+  @include b-c($white);
+  @include h(400px);
+  @include w(100%);
+  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+  padding: 10px 30px;
+
+  .delete-account, .profile-picture, .profile-settings {
+    @extend %m-b-20;
+  }
+}

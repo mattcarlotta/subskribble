@@ -44,10 +44,11 @@ module.exports = app => {
     },
     // DELETES REQURESTED RECORD
     deleteOne: async (req, res, next) => {
-      if (!req.params.id) return sendError('Missing subscriber delete parameters', res, next);
+      if (!req.query.planname || !req.query.subscriberid) return sendError('Missing subscriber delete parameters', res, next);
+      const { planname, subscriberid } = req.query;
 
       try {
-        const name = await db.result(deleteOneSubcriber(), [req.params.id, req.session.id]);
+        const name = await db.result(deleteOneSubcriber(), [req.session.id, subscriberid, planname]);
 
         res.status(201).json({ message: `Succesfully deleted ${name.rows[0].subscriber} from the '${name.rows[0].planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }

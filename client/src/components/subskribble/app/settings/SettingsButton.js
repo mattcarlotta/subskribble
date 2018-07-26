@@ -5,7 +5,10 @@ import SettingsMenu from './settingsMenu';
 class SettingsButton extends PureComponent {
 	state = { visibleSettings: false, tipVisible: false };
 
-	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
+	handleVisibleChange = visible => {
+		console.log('visible', visible);
+		this.setState({ visibleSettings: visible });
+	}
 
 	unauthorizeUser = () => this.props.logoutUser();
 
@@ -20,7 +23,7 @@ class SettingsButton extends PureComponent {
       >
 				<Popover
 					arrowPointAtCenter
-					content={<SettingsMenu unauthorizeUser={this.unauthorizeUser} {...this.props}/>}
+					content={<SettingsMenu handleVisibleChange={this.handleVisibleChange} unauthorizeUser={this.unauthorizeUser} {...this.props}/>}
 					onVisibleChange={this.handleVisibleChange}
 					placement="bottomRight"
 					trigger="click"

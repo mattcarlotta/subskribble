@@ -65,9 +65,14 @@ module.exports = app => {
   const subQueries = {
     createSubscriber: () => (
       `INSERT INTO subscribers(userid, subscriber, amount, billingAddress, billingCity, billingState, billingUnit, billingZip, email, contactAddress, contactCity, contactPhone, contactState, contactUnit, contactZip, promoCode, sameBillingAddress, planName, startDate)
-      VALUES((SELECT id FROM users WHERE id=$1), $2, (SELECT amount FROM plans WHERE planName=$18), $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`
+      VALUES((SELECT id FROM users WHERE id=$1), $2, (SELECT amount FROM plans WHERE userid=$1 AND planName=$18), $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19);
+      UPDATE plans SET subscribers = subscribers+1 WHERE userid=$1 and planName=$18
+      `
     ),
-    deleteOneSubcriber: () => ("DELETE FROM subscribers WHERE id=$1 AND userid=$2 RETURNING *"),
+    deleteOneSubcriber: () => (`
+      UPDATE plans SET subscribers = subscribers-1 WHERE userid=$1 and planName=$3;
+      DELETE FROM subscribers WHERE userid=$1 AND id=$2 RETURNING *
+    `),
     findSubscriberByEmail: () => ("SELECT planName FROM subscribers WHERE email=$1 and planName=$2"),
     getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getSubscriberCount: () => (

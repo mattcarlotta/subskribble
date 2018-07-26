@@ -18,6 +18,7 @@ const authReducer = (state = {}, { payload, type }) => {
 		case types.SET_SIGNEDIN_USER:
 			return {
 				...state,
+				userid: payload.id,
 				loggedinUser: payload.email,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
