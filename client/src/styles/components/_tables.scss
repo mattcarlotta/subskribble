@@ -31,29 +31,34 @@
 }
 
 .active { @include c($tealgreen);}
-.amount { @extend .label; @include b-c($darkyellow);}
-.amount-suspended { @extend .label; @include b-c($lightcoolgrey);}
-.bill { @extend .label; @include b-c($trueorange);}
-.bill-suspended { @extend .label; @include b-c($lightcoolgrey);}
-.credit { @include c($darkblue);}
+.plan, .promo, .subscriber, .template-active { @extend .label; @include b-c($tealgreen);}
+
 .due { @include c($darkyellow);}
-.enddate-inactive { @extend .label; @include b-c($lightcoolgrey);}
-.enddate-suspended { @extend .label; @include b-c($firered);}
+.amount, .amount-due, .invoice-due, .subscriber-due { @extend .label; @include b-c($darkyellow);}
+
+.credit { @include c($darkblue);}
+.amount-credit, .invoice-credit, .subscriber-credit { @extend .label; @include b-c($darkblue);}
+
 .inactive { @include c($lightcoolgrey);}
-.lowercase { @extend %t-t-l;}
-.max-usage { @extend .label; @include b-c($lightblue);}
+.amount-suspended, .bill-suspended, .enddate-inactive, .invoice-inactive, .plans-suspended, .max-usage-suspended, .subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
+
 .paid { @include c($limegreen);}
-.plan { @extend .label; @include b-c($tealgreen);}
-.plan-suspended { @extend .label; @include b-c($firered);}
-.promo { @extend .label; @include b-c($tealgreen);}
+.amount-paid, .invoice-paid, .subscriber-paid { @extend .label; @include b-c($limegreen); }
+
 .refund { @include c($redorange);}
-.subscriber { @extend .label; @include b-c($tealgreen);}
-.subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
-.subscriber-suspended { @extend .label; @include b-c($firered);}
+.amount-refund, .invoice-refund, .subscriber-refund { @extend .label; @include b-c($redorange);}
+
+.bill, .total-usage { @extend .label; @include b-c($trueorange);}
+
 .suspended { @include c($firered);}
-.subscription-count { @extend .label; @include b-c($lightblue);}
+.enddate-suspended, .invoice-suspended, .plan-suspended, .promo-suspended, .subscriber-suspended, .template-suspended,  .total-usage-suspended { @extend .label; @include b-c($firered);}
+
+.plans-active, .plans-suspended { @extend %m-r-5; }
+
+.lowercase { @extend %t-t-l;}
+.max-usage, .plans-active, .subscription-count { @extend .label; @include b-c($lightblue);}
+
 .table-status-action {
 	@extend %t-t-c;
 	i { @include f-s(18px); padding-top: 5px; }
 }
-.total-usage { @extend .label; @include b-c($trueorange);}

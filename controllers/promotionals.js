@@ -112,7 +112,7 @@ module.exports = app => {
     // SELECTS A SINGLE RECORD
     selectOne: async (req, res, next) => {
       if (!req.query) return sendError('Missing promo select parameters.', res, next);
-      console.log(req.query)
+      
       try {
         const promotional = await db.oneOrNone(findPromoById(), [req.session.id, req.query.id]);
         if (!promotional) return sendError("Unable to locate the promotional.", res, next);

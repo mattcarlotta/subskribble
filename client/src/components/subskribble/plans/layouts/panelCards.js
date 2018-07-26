@@ -59,12 +59,12 @@ export const INACTIVETABLEHEADERS = [
 	{
 		title: 'Plan',
 		dataIndex: 'planname',
-		render: (planname, {status}) => <span className={`plan-${status}`}>{planname}</span>
+		render: planname => <span className="plan-suspended">{planname}</span>
 	},
 	{
 		title: 'Amount',
 		dataIndex: 'amount',
-		render: (amount, {status}) => <span className={`amount-${status}`}>${amount}</span>
+		render: amount => <span className="amount-suspended">${amount}</span>
 	},
 	{
 		title: 'Setup Fee',
@@ -75,7 +75,7 @@ export const INACTIVETABLEHEADERS = [
 	{
 		title: 'Billing Frequency',
 		dataIndex: 'billevery',
-		render: (bill, {status}) => <span className={`bill-${status}`}>{bill}</span>
+		render: bill => <span className="bill-suspended">{bill}</span>
 	},
 	{
 		title: 'Trial Period',
@@ -85,7 +85,7 @@ export const INACTIVETABLEHEADERS = [
 	{
 		title: 'Subscribers',
 		dataIndex: 'subscribers',
-		render: (subscribers, {status}) => <span className={`subscriber-${status}`}>{subscribers}</span>
+		render: subscribers => <span className="subscriber-suspended">{subscribers}</span>
 	}
 ];
 
@@ -97,6 +97,7 @@ export default ({
 	...rest
 }) => [
 	{
+		editLocation: 'plans',
 		SELECTFIELD: true,
 		TAB: 'Active Plans',
 		TABLECONTENTS: activeitems,

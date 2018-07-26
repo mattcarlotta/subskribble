@@ -21,12 +21,14 @@ module.exports = app => {
     createPlan: () => ("INSERT INTO plans(userid, amount, billEvery, planName, description, setupFee) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6)"),
     deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
     deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
+    findPlanById: () => ("SELECT amount, billEvery, planName, description, setupFee, trialPeriod from plans WHERE userid=$1 and id=$2"),
     getAllActivePlans: () => (`SELECT planName, description, amount FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
     getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getPlanCount: () => (
       "SELECT count(*) filter (where status = 'active' AND userid=$1) AS active, count(*) filter (where status = 'suspended' AND userid=$1) as inactive FROM plans;"
     ),
-    updateOnePlan: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName"),
+    updatePlan: () => ("UPDATE plans SET amount=$3, billEvery=$4, planName=$5, description=$6, setupFee=$7, trialPeriod=$8 WHERE userid=$1 AND id=$2"),
+    updatePlanStatus: () => ("UPDATE plans SET status=$1 WHERE id=$2 AND userid=$3 RETURNING planName"),
     updatePlanSubCount: () => ("UPDATE plans SET subscribers=(SELECT count(*) FROM subscribers WHERE planName=$2) WHERE planName=$2"),
     selectPlan: () => ("SELECT * FROM plans WHERE userid=$1 AND planName=$2")
   }

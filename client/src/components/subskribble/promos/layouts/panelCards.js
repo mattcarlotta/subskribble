@@ -2,15 +2,14 @@ import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
 
-const TABLEHEADERS = [
+const ACTIVETABLEHEADERS = [
 	{
 		title: 'Status',
 		dataIndex: 'status',
-		render: status => (
+		render: status =>
 			<Tooltip placement="bottom" title={status}>
 				<i className={`material-icons ${status}`}>new_releases</i>
 			</Tooltip>
-		)
 	},
 	{
 		title: 'Promo Code',
@@ -52,6 +51,55 @@ const TABLEHEADERS = [
 	}
 ];
 
+const INACTIVETABLEHEADERS = [
+	{
+		title: 'Status',
+		dataIndex: 'status',
+		render: status =>
+			<Tooltip placement="bottom" title={status}>
+				<i className={`material-icons ${status}`}>new_releases</i>
+			</Tooltip>
+	},
+	{
+		title: 'Promo Code',
+		dataIndex: 'promocode',
+		render: promo => <span className="promo-suspended">{promo}</span>
+	},
+	{
+    title: 'Associated Plans',
+    dataIndex: 'plans',
+    render: plans => (
+      <span>
+        { map(plans, (name, key) => (
+          name
+          ? <span key={key}>{name}{ key < plans.length-1 && ', '}
+            </span>
+          : <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
+              (none)
+            </span>
+        ))}
+      </span>
+    )
+  },
+	{
+		title: 'Amount',
+		dataIndex: 'amount',
+		render: (amount, {discounttype}) => <span className="amount-suspended">{ (discounttype === '$') ? `${discounttype}${amount}` : `${amount}${discounttype}` }</span>
+	},
+	{ title: 'Start Date', dataIndex: 'startdate' },
+	{ title: 'End Date', dataIndex: 'enddate' },
+	{
+		title: 'Max Usage',
+		dataIndex: 'maxusage',
+		render: usage => <span className="max-usage-suspended">{usage === 2147483647 ? 'Unlimited' : usage}</span>
+	},
+	{
+		title: 'Total Usage',
+		dataIndex: 'totalusage',
+		render: usage => <span className="total-usage-suspended"> {usage}</span>
+	}
+];
+
 export default ({
 	activeitems,
 	activeitemcount,
@@ -64,7 +112,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Active Promotionals',
 		TABLECONTENTS: activeitems,
-		TABLEHEADERS,
+		TABLEHEADERS: ACTIVETABLEHEADERS,
 		TABLERECORDS: activeitemcount,
 		tipTitle: 'Add Promo',
 		...rest
@@ -73,7 +121,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Inactive Promotionals',
 		TABLECONTENTS: inactiveitems,
-		TABLEHEADERS,
+		TABLEHEADERS: INACTIVETABLEHEADERS,
 		TABLERECORDS: inactiveitemcount,
 		...rest
 	}

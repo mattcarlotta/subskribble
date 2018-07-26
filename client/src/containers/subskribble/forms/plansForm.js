@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { AntInput, AntSelectField, AntStepFormButtons } from '../app/formFields/antReduxFormFields';
 import Spinner from '../app/loading/Spinner';
-import promoActions from '../../../actions/promoActions';
-import { addNewPlan } from '../../../actions/formActions';
+import planActions from '../../../actions/planActions';
+import { addNewPlan, editPlan } from '../../../actions/formActions';
 import { allowedCharacters, isRequired, isNotEmpty, isFloat, maxLength50 } from '../app/formFields/validateFormFields';
 
-const { fetchPlan } = promoActions;
+const { fetchPlan } = planActions;
 
 class PlanForm extends Component {
-  state = { confirmLoading: false, isLoading: true };
+  state = { billEveryDefault: "Weekly", confirmLoading: false, isEditing: false, isLoading: true,  trialPeriodDefault: '' };
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
@@ -23,40 +23,28 @@ class PlanForm extends Component {
     serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
   }
 
-  // fetchPlanForEditing = id => {
-  //   this.props.fetchPlan(id)
-  //   .then(({ data }) => {
-  //     this.setState({ discountType: data.discounttype, selectedPlans: data.plans }, () => {
-  //         this.props.initialize({
-  //         ...data,
-  //         dateStamps: [
-  //             moment(data.datestamps[0], 'ddd MMM D YYYY HH:mm:ss ZZ'),
-  //             moment(data.datestamps[1], 'ddd MMM D YYYY HH:mm:ss ZZ')
-  //         ],
-  //         maxusage: data.maxusage === 2147483647 ? undefined : data.maxusage
-  //       })
-  //       this.fetchPlans()
-  //     })
-  //   })
-  //   .catch((err) => console.log(err))
-  // }
+  fetchPlanForEditing = id => {
+    this.props.fetchPlan(id)
+    .then(({ data }) => this.setState({
+      billEveryDefault: data.billevery,
+      isEditing: true,
+      isLoading: false,
+      trialPeriodDefault: data.trialperiod || undefined
+    }, () => this.props.initialize({ ...data })))
+    .catch(() => this.goBackPage())
+  }
 
 	handleFormSubmit = (formProps) => {
     this.setState({ confirmLoading: true });
-    console.log(formProps);
-    this.props.addNewPlan(formProps);
-    // const { id } = this.props.location.query;
-    // formProps.startdate = formProps.dateStamps[0].format("MMMM DD YYYY")
-    // formProps.enddate = formProps.dateStamps[1].format("MMMM DD YYYY")
-    // formProps.datestamps = [formProps.dateStamps[0].toString(), formProps.dateStamps[1].toString()]
-    // !id ? this.props.addNewPromo(formProps) : this.props.editPromo(id, formProps);
+    const { id } = this.props.location.query;
+    !id ? this.props.addNewPromo(formProps) : this.props.editPlan(id, formProps);
 	}
 
   goBackPage = () => browserHistory.goBack();
 
   render = () => {
     const { handleSubmit, pristine, submitting } = this.props;
-    const { confirmLoading, isLoading } = this.state;
+    const { billEveryDefault, confirmLoading, isEditing, isLoading, trialPeriodDefault } = this.state;
 
     return (
       isLoading
@@ -70,8 +58,8 @@ class PlanForm extends Component {
                 <div className="input-100">
                   <Field
                     hasFeedback
-                    disabled={confirmLoading}
-                    name="planName"
+                    disabled={confirmLoading || isEditing}
+                    name="planname"
                     component={AntInput}
                     placeholder="Unique Plan Name"
                     validate={[isRequired, allowedCharacters, maxLength50]}
@@ -95,13 +83,13 @@ class PlanForm extends Component {
                     addonAfter={
                       <AntSelectField
                         disabled={confirmLoading}
-                        name="billEvery"
+                        name="billevery"
                         placeholder="Bill Period"
                         selectOptions={['Weekly', 'Bi-Weekly', 'Monthly', 'Bi-Monthly', 'Quarterly', 'Twice a Year', 'Annually']}
                         className="select-container"
                         style={{ width: '100%' }}
                         tokenSeparators={[',']}
-                        defaultValue="Weekly"
+                        defaultValue={billEveryDefault}
                         validate={[isNotEmpty]}
                       />
                     }
@@ -114,7 +102,7 @@ class PlanForm extends Component {
                   <Field
                     hasFeedback
                     disabled={confirmLoading}
-                    name="setupFee"
+                    name="setupfee"
                     addonBefore={<div style={{ width: 20 }}>$</div>}
                     component={AntInput}
                     placeholder="Plan Setup Fee (leave empty if none)"
@@ -124,11 +112,12 @@ class PlanForm extends Component {
                 <div className="input-100">
                   <AntSelectField
                     disabled={confirmLoading}
-                    name="trialPeriod"
+                    name="trialperiod"
                     placeholder="Trial Period (leave empty if none)"
-                    selectOptions={['1 Week', '2 Weeks', '1 Month', '2 Months', '3 Months', '6 Months', '1 Year']}
+                    selectOptions={['(none)', '1 Week', '2 Weeks', '1 Month', '2 Months', '3 Months', '6 Months', '1 Year']}
                     style={{ width: '100%' }}
                     tokenSeparators={[',']}
+                    defaultValue={trialPeriodDefault}
                   />
                 </div>
                 <hr />
@@ -153,5 +142,5 @@ export default reduxForm({
   form: 'PlanForm',
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
-  initialValues: { billEvery: "Weekly" }
-})(connect(state => ({ serverError: state.server.error }), { addNewPlan, fetchPlan })(PlanForm));
+  initialValues: { billevery: "Weekly" }
+})(connect(state => ({ serverError: state.server.error }), { addNewPlan, editPlan, fetchPlan })(PlanForm));

@@ -1,22 +1,22 @@
 const isEmpty = require('lodash').isEmpty;
 
 module.exports = app => {
-  const { db, query: { createPlan, deleteOnePlan, getAllActivePlans, getAllPlans, getPlanCount, updateOnePlan, selectPlan } } = app.database;
+  const { db, query: { createPlan, deleteOnePlan, findPlanById, getAllActivePlans, getAllPlans, getPlanCount, updatePlan, updatePlanStatus, selectPlan } } = app.database;
   const { parseStringToNum, sendError } = app.shared.helpers;
 
   return {
+    // CREATES A PLAN PER CLIENT-SIDE REQUEST
     create: async (req, res, next) => {
-      console.log('req.body', req.body);
-      // if (!req.body) return sendError('Missing plan creation parameters.', res, next);
-      // return sendError('Missing plan creation parameters.', res, next);
-      const { amount, billEvery, planName, description, setupFee } = req.body;
+      if (!req.body) return sendError('Missing plan creation parameters.', res, next);
+      const { amount, billevery, planname, description, setupfee } = req.body;
+
       try {
-        const planExists = await db.oneOrNone(selectPlan(), [req.session.id, planName])
+        const planExists = await db.oneOrNone(selectPlan(), [req.session.id, planname])
         if (planExists) return sendError('A plan with that name already exists. Please use another name.', res, next);
 
-        await db.result(createPlan(), [req.session.id, amount, billEvery, planName, description, setupFee]);
+        await db.result(createPlan(), [req.session.id, amount, billevery, planname, description, setupfee]);
 
-        res.status(201).json({ message: `Succesfully created a '${planName}' plan.` });
+        res.status(201).json({ message: `Succesfully created a '${planname}' plan.` });
       } catch (err) { return sendError(err, res, next); }
     },
     // DELETES REQURESTED RECORD
@@ -77,17 +77,41 @@ module.exports = app => {
         res.status(201).json({ activeplans, inactiveplans });
       } catch (err) { return sendError(err, res, next); }
     },
-    // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
+    // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
     updateOne: async (req, res, next) => {
+      if (!req.body || !req.params.id) return sendError('Missing promotional creation parameters.', res, next);
+      let { amount, billevery, planname, description, setupfee, trialperiod } = req.body;
+      trialperiod = trialperiod === '(none)' ? undefined : trialperiod
+      setupfee = setupfee === '' ? undefined : setupfee
+
+      try {
+        await db.none(updatePlan(), [req.session.id, req.params.id, amount, billevery, planname, description, setupfee, trialperiod]);
+
+        res.status(201).json({ message: `Succesfully updated plan: ${planname}` });
+      } catch (err) { return sendError(err, res, next); }
+    },
+    // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
+    updateStatus: async (req, res, next) => {
       if (!req.body || !req.params.id) return sendError('Missing plan update parameters', res, next);
 
       const { id } = req.params;
       const { updateType, statusType } = req.body;
 
       try {
-        const name = await db.one(updateOnePlan(), [statusType, id, req.session.id])
+        const name = await db.one(updatePlanStatus(), [statusType, id, req.session.id])
 
         res.status(201).json({ message: `Succesfully ${updateType} '${name.planname}' plan.` });
+      } catch (err) { return sendError(err, res, next); }
+    },
+    // SELECTS A SINGLE RECORD
+    selectOne: async (req, res, next) => {
+      if (!req.query) return sendError('Missing plan select parameters.', res, next);
+
+      try {
+        const plan = await db.oneOrNone(findPlanById(), [req.session.id, req.query.id]);
+        if (!plan) return sendError("Unable to locate the plan.", res, next);
+
+        res.status(201).json({ ...plan });
       } catch (err) { return sendError(err, res, next); }
     }
   }

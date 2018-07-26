@@ -52,6 +52,16 @@ const applyPromo = (promocode, plan) => dispatch => (
   })
 )
 
+// Edits a selected plan
+const editPlan = (id, formProps) => dispatch => (
+  app.put(`plans/edit/${id}`, { ...formProps })
+  .then(({data: {message}}) => {
+    dispatch({ type: types.SERVER_MESSAGE, payload: message })
+    browserHistory.push('/subskribble/plans')
+  })
+  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
 // Edits a selected promo
 const editPromo = (id, formProps) => dispatch => (
   app.put(`promotionals/edit/${id}`, { ...formProps })
@@ -136,6 +146,7 @@ export {
   addNewPromo,
   addNewTemplate,
   applyPromo,
+  editPlan,
   editPromo,
   editTemplate,
   registerToNewsletter,

@@ -8,43 +8,37 @@ const PAYMENTS = {
 	refund: 'account_balance'
 };
 
-const tableProps = () => [
+const TABLEHEADERS = [
 	{
 		title: 'Status',
 		dataIndex: 'status',
-		render: status => (
+		render: status =>
 			<Tooltip placement="bottom" title={status}>
 				<i className={`material-icons ${status}`}>{PAYMENTS[status]}</i>
 			</Tooltip>
-		)
 	},
 	{
 		title: 'Invoice #',
 		dataIndex: 'invoice',
-		render: invoice => <span className="lowercase">{invoice}</span>
+		render: (invoice, {status}) => <span className={`invoice-${status}`}>{invoice}</span>
 	},
 	{ title: 'Plan', dataIndex: 'planname' },
-	{ title: 'Subscriber', dataIndex: 'subscriber' },
+	{
+		title: 'Subscriber',
+		dataIndex: 'subscriber',
+		render: (subscriber, {status}) => <span className={`subscriber-${status}`}>{subscriber}</span>
+	},
 	{
 		title: 'Processor',
 		dataIndex: 'processor',
-		render: proc =>
-			proc ? <span>{proc}</span> : <span style={{ marginLeft: 15 }}>-</span>
+		render: proc => <span>{proc ? proc : '-'}</span>
 	},
 	{
 		title: 'Amount',
 		dataIndex: 'amount',
-		render: amount => <span>${amount}</span>
-	}
-];
-
-const CHARGESTABLEHEADERS = [
-	...tableProps(),
+		render: (amount, {status}) => <span className={`amount-${status}`}>${amount}</span>
+	},
 	{ title: 'Charge Date', dataIndex: 'chargedate' }
-];
-const REFUNDSTABLEHEADERS = [
-	...tableProps(),
-	{ title: 'Refund Date', dataIndex: 'refunddate' }
 ];
 
 export default ({
@@ -58,7 +52,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Charges',
 		TABLECONTENTS: activeitems,
-		TABLEHEADERS: CHARGESTABLEHEADERS,
+		TABLEHEADERS,
 		TABLERECORDS: activeitemcount,
 		...rest
 	},
@@ -66,7 +60,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Refunds',
 		TABLECONTENTS: inactiveitems,
-		TABLEHEADERS: REFUNDSTABLEHEADERS,
+		TABLEHEADERS,
 		TABLERECORDS: inactiveitemcount,
 		...rest
 	}
