@@ -11,22 +11,22 @@
 		@extend %d-ib;
 		margin-top: 20px;
 
-    .menu-collapse {
-      @extend %b-0;
+		.menu-collapse {
+			@extend %b-0;
 
-      & i {
-        @include c($tblack);
+			& i {
+				@include c($tblack);
 				@include f-s(24px);
-      }
+			}
 
-      &:hover > i {
-        @include c($softwarmgrey);
-      }
+			&:hover > i {
+				@include c($softwarmgrey);
+			}
 
-      &:hover, &:focus {
-        @include b-c($transparent);
-      }
-    }
+			&:hover, &:focus {
+				@include b-c($transparent);
+			}
+		}
 	}
 
 	.right-nav {
@@ -90,32 +90,32 @@
 			}
 
 			.user-icon {
-        @include c($white);
-        @include b-c($blue);
+				@include c($white);
+				@include b-c($blue);
 
-        &:hover {
-          @include b-c($lightblue);
-        }
-      }
+				&:hover {
+					@include b-c($lightblue);
+				}
+			}
 
 			// .settings-icon {
 			// 	@extend %p-r;
 			// 	@include c($white);
-      //   @include b-c($blue);
+			//   @include b-c($blue);
 			// 	top: -10px;
 			//
-      //   &:hover {
-      //     @include b-c($lightblue);
-      //   }
+			//   &:hover {
+			//     @include b-c($lightblue);
+			//   }
 			//
-      //   .user-icon {
-      //     @include c($white);
-      //     @include b-c($blue);
+			//   .user-icon {
+			//     @include c($white);
+			//     @include b-c($blue);
 			//
-      //     &:hover {
-      //       @include b-c($lightblue);
-      //     }
-      //   }
+			//     &:hover {
+			//       @include b-c($lightblue);
+			//     }
+			//   }
 			// }
 
 			.menu-label {
@@ -191,7 +191,7 @@
 		@extend %p-r;
 		@include c($white);
 		@include f-f($harabara);
-    @include f-s(24px);
+		@include f-s(24px);
 		letter-spacing: 1.5px;
 		top: -7px;
 		margin-right: 10px;
@@ -263,22 +263,22 @@
 	@include w(300px);
 	border-radius: 10px;
 
-  .my-profile-container {
-    @include c($white);
-    @include b-c($lightblue);
-    padding: 10px 15px 5px 15px;
+	.my-profile-container {
+		@include c($white);
+		@include b-c($lightblue);
+		padding: 10px 15px 5px 15px;
 
-    .popover-user {
-      @extend %p-r;
-      @include b-c($transparent);
-      @include c($white);
-      border: 1px solid $white;
-      top: -9px;
+		.popover-user {
+			@extend %p-r;
+			@include b-c($transparent);
+			@include c($white);
+			border: 1px solid $white;
+			top: -9px;
 
-      & i {
-        margin-right: 0;
-      }
-    }
+			& i {
+				margin-right: 0;
+			}
+		}
 
 		.user-label {
 			@extend %d-ib;
@@ -297,23 +297,23 @@
 			}
 		}
 
-    &:hover {
-      @include b-c($lightblue);
-      @include c($white);
-    }
-  }
+		&:hover {
+			@include b-c($lightblue);
+			@include c($white);
+		}
+	}
 
-  .settings-label {
-    @extend %d-ib, %p-r;
+	.settings-label {
+		@extend %d-ib, %p-r;
 		top: -6px;
-    margin-left: 15px;
+		margin-left: 15px;
 
 
-    p {
-      @extend %no-margin;
-      @include l-h(16px);
-    }
-  }
+		p {
+			@extend %no-margin;
+			@include l-h(16px);
+		}
+	}
 
 	.settings-icon { margin: 7px 15px; }
 

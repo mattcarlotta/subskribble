@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 
 const allowedCharacters = value => (/[~`'@#$%&*+=[\]\\/{}|\\":<>]/g.test(value)) ? 'Please remove any special characters' : undefined;
 const hasDates = value => value && value.length !== 2 ? 'You must select 2 dates' : undefined;
+const hasFileList = value => value && isEmpty(value.fileList) ? 'Required' : undefined;
 const isFloat = value => value && !(/^[0-9]+\.[0-9]{2}$/.test(value)) ? 'Please specify a dollar amount (0.00)' : undefined;
 const isNotEmpty = value => isEmpty(value) ? 'You must include at least one item' : undefined;
 const isNumber = value => !(/^\d+$/.test(value)) ? 'Please only use whole numbers' : undefined;
@@ -22,23 +23,24 @@ const minPassword = value => (value.length <= 5) ? 'Password must be longer than
 const missingInput = value => (value === "<p><br></p>") ? 'You must include a message!' : null;
 
 export {
-  allowedCharacters,
-  hasDates,
-  isFloat,
-  isNotEmpty,
-  isNumber,
-  isRequired,
-  isSelected,
-  isValidCC,
-  isValidCVV,
-  isValidEmail,
-  isValidExpMonth,
-  isValidPhone,
-  isValidState,
-  isValidYear,
-  isValidZip,
-  maxLength,
-  maxLength50,
-  minPassword,
-  missingInput
+	allowedCharacters,
+	hasDates,
+	hasFileList,
+	isFloat,
+	isNotEmpty,
+	isNumber,
+	isRequired,
+	isSelected,
+	isValidCC,
+	isValidCVV,
+	isValidEmail,
+	isValidExpMonth,
+	isValidPhone,
+	isValidState,
+	isValidYear,
+	isValidZip,
+	maxLength,
+	maxLength50,
+	minPassword,
+	missingInput
 }

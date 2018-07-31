@@ -23,17 +23,17 @@ export default [
 	},
 	{ title: 'Subject', dataIndex: 'subject' },
 	{
-    title: 'Associated Plans',
-    dataIndex: 'plans',
-    render: (plans, {status}) =>
-      <span>
-        { map(plans, (name, key) => (
-          name
-          ? <span className={`plans-${status}`} key={key}>{name}</span>
-          : <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
-              (none)
-            </span>
-        ))}
-      </span>
-  }
+		title: 'Associated Plans',
+		dataIndex: 'plans',
+		render: (plans, {status}) =>
+			<span>
+				{ map(plans, (name, key) => (
+					name
+					? <span className={`plans-${status}`} key={key}>{name}</span>
+					: <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
+							(none)
+						</span>
+				))}
+			</span>
+	}
 ];

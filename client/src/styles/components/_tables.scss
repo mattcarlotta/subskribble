@@ -6,9 +6,9 @@
 		@include b-s(inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 1px 1px rgba(0, 0, 0, 0.2));
 		@include c($white);
 		@include f-w(500);
-	  border-color: $tealblue;
-	  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-	  border-radius: 3px;
+		border-color: $tealblue;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
 		padding: 4px 10px 3px;
 	}
 

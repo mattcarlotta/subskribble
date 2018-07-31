@@ -12,26 +12,26 @@ const NewsletterForm = ({ handleSubmit, pristine, registerToNewsletter, submitti
 	}
 	return (
 		<div className="newsletter-container">
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <div className="newsletter-input">
-          <Field
-            name="email"
-            type="email"
-            component={AntInput}
-            placeholder="Enter Email Address"
-            style={{ fontSize: 15, width: '100%' }}
-            validate={[isRequired, isValidEmail]}
-          />
-        </div>
-        <div className="newsletter-button">
+			<form onSubmit={handleSubmit(handleFormSubmit)}>
+				<div className="newsletter-input">
+					<Field
+						name="email"
+						type="email"
+						component={AntInput}
+						placeholder="Enter Email Address"
+						style={{ fontSize: 15, width: '100%' }}
+						validate={[isRequired, isValidEmail]}
+					/>
+				</div>
+				<div className="newsletter-button">
 					<AntFormSubmit
 						label="Join"
 						pristine={pristine}
 						submitting={submitting}
 						style={{ fontSize: 16, height: 33, width: 100 }}
 					/>
-        </div>
-      </form>
+				</div>
+			</form>
 		</div>
 	);
 };

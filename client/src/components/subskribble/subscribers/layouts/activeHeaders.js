@@ -10,13 +10,13 @@ const SUB = {
 
 export default [
 	{
-    title: 'Status',
-    dataIndex: 'status',
-    render: status =>
-      <Tooltip placement="bottom" title={status}>
-    		<i className={`material-icons ${status}`}>{SUB[status]}</i>
-    	</Tooltip>
-  },
+		title: 'Status',
+		dataIndex: 'status',
+		render: status =>
+			<Tooltip placement="bottom" title={status}>
+				<i className={`material-icons ${status}`}>{SUB[status]}</i>
+			</Tooltip>
+	},
 	{
 		title: 'Subscriber',
 		dataIndex: 'subscriber',

@@ -20,7 +20,7 @@ module.exports = app => {
   const planQueries = {
     createPlan: () => ("INSERT INTO plans(userid, amount, billEvery, planName, description, setupFee) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6)"),
     deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
-    deleteOnePlan: () => ("DELETE FROM plans WHERE id=$1 AND userid=$2 RETURNING *"),
+    deleteOnePlan: () => ("DELETE FROM plans WHERE userid=$1 AND id=$2 RETURNING *"),
     findPlanById: () => ("SELECT amount, billEvery, planName, description, setupFee, trialPeriod from plans WHERE userid=$1 and id=$2"),
     getAllActivePlans: () => (`SELECT planName, description, amount FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
     getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),

@@ -7,17 +7,17 @@ import NewPasswordForm from '../../forms/newPasswordForm';
 const resetSelectedForm = () => browserHistory.push('/');
 
 const ResetPassword = props => (
-  <AsyncModal
-    {...props}
-    closable={false}
-    location={props.location}
-    destroyOnClose={true}
-    maskClosable={false}
-    FORM={NewPasswordForm}
-    resetSelectedForm={resetSelectedForm}
-    title="Create New Password"
-    visible={true}
-  />
+	<AsyncModal
+		{...props}
+		closable={false}
+		location={props.location}
+		destroyOnClose={true}
+		maskClosable={false}
+		FORM={NewPasswordForm}
+		resetSelectedForm={resetSelectedForm}
+		title="Create New Password"
+		visible={true}
+	/>
 )
 
 export default connect(state => ({ serverMessage: state.server.message }))(ResetPassword);

@@ -36,7 +36,7 @@ const logoutUser = () => dispatch => {
 		dispatch({ type: types.UNAUTH_USER })
 		browserHistory.push('/subskribble')
 	})
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 };
 
 // returns error message if missing token
@@ -51,14 +51,14 @@ const missingPasswordToken = () => ({
 const resetUserPassword = (password, token) => dispatch => (
 	app.put(`reset-password/verify?token=${token}`, { email: 'helpdesk@subskribble.com', password })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
 // emails user a token to reset password
 const resetUserToken = email => dispatch => (
 	app.put(`reset-token`, { email, password: 'reset-token' })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
 // will save the state of the sidebar (collapsed or visible)
@@ -70,16 +70,16 @@ const saveSidebarState = collapseSideNav => dispatch => (
 
 // attempts to sign user in, then sets jwt token to cookie if successful
 const signinUser = props => dispatch => (
-  app.post(`signin`, { ...props })
-  .then(({data}) => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+	app.post(`signin`, { ...props })
+	.then(({data}) => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
 // attempts to sign up a new user
 const signupUser = props => dispatch => (
-  app.post(`signup`, { ...props })
+	app.post(`signup`, { ...props })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))
-  .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
 // attempts to verify user's email via token
@@ -98,10 +98,10 @@ export {
 	logoutUser,
 	missingPasswordToken,
 	missingVerificationToken,
-  resetUserPassword,
+	resetUserPassword,
 	resetUserToken,
 	saveSidebarState,
-  signinUser,
-  signupUser,
+	signinUser,
+	signupUser,
 	verifyEmail
 }

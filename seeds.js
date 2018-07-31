@@ -7,4 +7,4 @@ consign({ locale: 'en-us', verbose: false})
 	.then("shared")
 	.then("database")
 	.then("seeds")
-  .into(app);
+	.into(app);

@@ -11,8 +11,8 @@ const ContactForm = ({ handleSubmit, pristine, sendSupportEmail, submitting }) =
 	}
 	return (
 		<div className="contact-form">
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <AntFormFields FIELDS={FIELDS} />
+			<form onSubmit={handleSubmit(handleFormSubmit)}>
+				<AntFormFields FIELDS={FIELDS} />
 				<AntFormSubmit
 					column={24}
 					label="Send Message"
@@ -20,7 +20,7 @@ const ContactForm = ({ handleSubmit, pristine, sendSupportEmail, submitting }) =
 					submitting={submitting}
 					style={{ fontSize: 18, height: 45, marginTop: 165, width: '100%' }}
 				/>
-      </form>
+			</form>
 		</div>
 	);
 };

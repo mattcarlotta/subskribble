@@ -1,35 +1,35 @@
 .active-panel {
-  @include w(100%);
-  margin-bottom: 30px;
+	@include w(100%);
+	margin-bottom: 30px;
 }
 
 .page-container {
-  @extend %p-r, %outline-none, %t-t-u;
-  @include c($black);
-  margin: 25px 30px 0px 30px;
+	@extend %p-r, %outline-none, %t-t-u;
+	@include c($black);
+	margin: 25px 30px 0px 30px;
 }
 
 .dark {
-  @include b-c($tblue);
+	@include b-c($tblue);
 }
 
 .dash-overview-panel {
-  @extend %d-ib, %m-b-10;
-  @include w(100%);
+	@extend %d-ib, %m-b-10;
+	@include w(100%);
 }
 
 .dash-plans-panel, .dash-customers-panel {
-  @extend %m-b-20;
-  @include w(100%);
+	@extend %m-b-20;
+	@include w(100%);
 }
 
 .inactive-panel {
-  @include w(100%);
-  margin-bottom: 50px;
+	@include w(100%);
+	margin-bottom: 50px;
 }
 
 .scrollbar {
-  @include b-c($lightblue);
-  border-radius: 3px;
-  z-index: 1700;
+	@include b-c($lightblue);
+	border-radius: 3px;
+	z-index: 1700;
 }

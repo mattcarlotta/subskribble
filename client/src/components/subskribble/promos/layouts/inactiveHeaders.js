@@ -17,21 +17,21 @@ export default [
 		render: promo => <span className="promo-suspended">{promo}</span>
 	},
 	{
-    title: 'Associated Plans',
-    dataIndex: 'plans',
-    render: plans => (
-      <span>
-        { map(plans, (name, key) => (
-          name
-          ? <span key={key}>{name}{ key < plans.length-1 && ', '}
-            </span>
-          : <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
-              (none)
-            </span>
-        ))}
-      </span>
-    )
-  },
+		title: 'Associated Plans',
+		dataIndex: 'plans',
+		render: plans => (
+			<span>
+				{ map(plans, (name, key) => (
+					name
+					? <span key={key}>{name}{ key < plans.length-1 && ', '}
+						</span>
+					: <span key={key} style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}>
+							(none)
+						</span>
+				))}
+			</span>
+		)
+	},
 	{
 		title: 'Amount',
 		dataIndex: 'amount',

@@ -1,23 +1,23 @@
 html, body {
-  @extend %m-0, %p-0;
-  @include b-c($background);
-  @include h(100vh);
-  @include w(100%);
-  overflow: hidden;
+	@extend %m-0, %p-0;
+	@include b-c($background);
+	@include h(100vh);
+	@include w(100%);
+	overflow: hidden;
 }
 body {
-  @extend %m-0;
-  @include c($darkwarmgrey);
-  @include f-s(14px);
-  @include f-f($arimo);
-  @include f-w(300);
+	@extend %m-0;
+	@include c($darkwarmgrey);
+	@include f-s(14px);
+	@include f-f($arimo);
+	@include f-w(300);
 }
 a:link, a:visited, a:focus, a:hover, a:active { @extend %no-link-focus; }
 p {
-  @extend %brk-ww, %m-r-15;
-  @include f-w(200);
-  @include f-s(15px);
-  @include l-h(24px);
+	@extend %brk-ww, %m-r-15;
+	@include f-w(200);
+	@include f-s(15px);
+	@include l-h(24px);
 }
 .ant-menu, .ant-notification, .ant-table, .ant-form-item, .ant-select, .ant-select-dropdown { @include f-f($arimo); }
 .ant-tabs { @include f-f($arimo); }

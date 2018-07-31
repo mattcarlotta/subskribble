@@ -34,16 +34,16 @@ class App extends Component {
 	render = () => (
 		<Layout style={{ overflow: 'hidden' }}>
 			<InlineMenu collapseSideNav={this.props.collapseSideNav} handleTabClick={this.handleTabClick} selectedKey={this.state.selectedKey} />
-     <Layout>
-       <Header collapseSideNav={this.props.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
-       <Content>
+		 <Layout>
+			 <Header collapseSideNav={this.props.collapseSideNav} handleMenuToggle={this.handleMenuToggle} />
+			 <Content>
 				 <CustomScrollbars minHeight={`calc(100vh - 55px)`} top={55}>
-         		{ this.props.children }
+						{ this.props.children }
 				</CustomScrollbars>
-       </Content>
+			 </Content>
 			 <AdminDrawer />
-     </Layout>
-   </Layout>
+		 </Layout>
+	 </Layout>
 	);
 }
 

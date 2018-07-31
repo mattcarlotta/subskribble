@@ -7,7 +7,7 @@ consign({ locale: 'en-us', verbose: false})
 	.then("database")
 	.then("shared")
 	.then("services")
-  .then("controllers")
-  .then("routes")
+	.then("controllers")
+	.then("routes")
 	.then('libs/server.js')
-  .into(app);
+	.into(app);

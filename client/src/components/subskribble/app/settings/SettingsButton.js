@@ -20,7 +20,7 @@ class SettingsButton extends PureComponent {
 				title="My Account"
 				overlayClassName="tooltip-placement"
 				overlayStyle={{ display: this.state.visibleSettings ? 'none' : '' }}
-      >
+			>
 				<Popover
 					arrowPointAtCenter
 					content={<SettingsMenu handleVisibleChange={this.handleVisibleChange} unauthorizeUser={this.unauthorizeUser} {...this.props}/>}
@@ -28,7 +28,7 @@ class SettingsButton extends PureComponent {
 					placement="bottomRight"
 					trigger="click"
 					visible={this.state.visibleSettings}
-        >
+				>
 					<Avatar className="settings-icon user-icon" size="small" icon="user" />
 				</Popover>
 			</Tooltip>

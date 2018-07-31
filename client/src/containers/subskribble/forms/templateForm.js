@@ -19,101 +19,101 @@ const { fetchAllActivePlans } = planActions;
 const { fetchTemplate } = templateActions;
 
 class TemplateForm extends Component {
-  state = { confirmLoading: false, isLoading: true, selectOptions: [] };
+	state = { confirmLoading: false, isLoading: true, selectOptions: [] };
 
-  componentDidMount = () => {
-    const { id } = this.props.location.query;
-    !id ? this.fetchPlans() : this.fetchTemplateForEditing(id)
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    const { serverError } = this.props;
-    serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
-  }
-
-  fetchPlans = () => {
-    this.props.fetchAllActivePlans()
-    .then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: map(activeplans, ({planname}) => (planname)) }))
-    .catch(() => null)
-  }
-
-  fetchTemplateForEditing = id => {
-    this.props.fetchTemplate(id)
-    .then(({ data }) => {
-      this.setState({ selectedPlans: data.plans }, () => {
-        console.log(data);
-        this.props.initialize(data)
-        this.fetchPlans()
-      })
-    })
-    .catch((err) => console.log(err))
-  }
-
-	handleFormSubmit = (formProps) => {
-    this.setState({ confirmLoading: true });
-    const { id } = this.props.location.query;
-    !id ? this.props.addNewTemplate(formProps) : this.props.editTemplate(id, formProps)
+	componentDidMount = () => {
+		const { id } = this.props.location.query;
+		!id ? this.fetchPlans() : this.fetchTemplateForEditing(id)
 	}
 
-  goBackPage = () => browserHistory.goBack();
+	componentDidUpdate = (prevProps, prevState) => {
+		const { serverError } = this.props;
+		serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
+	}
 
-  render = () => {
-    const { handleSubmit, pristine, submitting } = this.props;
-    const { confirmLoading, selectOptions, isLoading, selectedPlans } = this.state;
+	fetchPlans = () => {
+		this.props.fetchAllActivePlans()
+		.then(({data: {activeplans}}) => this.setState({ isLoading: false, selectOptions: map(activeplans, ({planname}) => (planname)) }))
+		.catch(() => null)
+	}
 
-    return (
-      isLoading
-        ? <Spinner />
-        : <div className="new-form-container">
-            <Row>
-              <Col span={12}>
-                <div style={{ height: 881 }} className="form-box-container">
-                  <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
-                    {!this.props.location.query.id ? 'Create' : 'Edit'} Template
-                  </h1>
-                  <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-                    <AntSelectField
-                      className="tag-container"
-                      name="plans"
-                      mode="tags"
-                      placeholder="Click here to associate plans to the form."
-                      style={{ width: '100%' }}
-                      selectOptions={selectOptions}
-                      tokenSeparators={[',']}
-                      validate={[isNotEmpty]}
-                      defaultValue={selectedPlans}
-                    />
-                    <AntFormFields FIELDS={FIELDS} />
-                    <QuillEditor />
-                    <hr />
-                    <AntStepFormButtons
-                      backLabel="Back"
-                      backStyle={{ height: 50, float: 'left' }}
-                      column={12}
-                      confirmLoading={confirmLoading}
-                      onClickBack={this.goBackPage}
-                      pristine={pristine}
-                      submitLabel="Submit"
-                      submitStyle= {{ height: 50, float: 'right' }}
-                      submitting={submitting}
-                    />
-                  </form>
-                </div>
-              </Col>
-              <Col span={12}>
-                <TemplatePreview {...this.props} />
-              </Col>
-            </Row>
-          </div>
-    )
-  }
+	fetchTemplateForEditing = id => {
+		this.props.fetchTemplate(id)
+		.then(({ data }) => {
+			this.setState({ selectedPlans: data.plans }, () => {
+				console.log(data);
+				this.props.initialize(data)
+				this.fetchPlans()
+			})
+		})
+		.catch((err) => console.log(err))
+	}
+
+	handleFormSubmit = (formProps) => {
+		this.setState({ confirmLoading: true });
+		const { id } = this.props.location.query;
+		!id ? this.props.addNewTemplate(formProps) : this.props.editTemplate(id, formProps)
+	}
+
+	goBackPage = () => browserHistory.goBack();
+
+	render = () => {
+		const { handleSubmit, pristine, submitting } = this.props;
+		const { confirmLoading, selectOptions, isLoading, selectedPlans } = this.state;
+
+		return (
+			isLoading
+				? <Spinner />
+				: <div className="new-form-container">
+						<Row>
+							<Col span={12}>
+								<div style={{ height: 881 }} className="form-box-container">
+									<h1 style={{ textAlign: 'center', marginBottom: 30 }}>
+										{!this.props.location.query.id ? 'Create' : 'Edit'} Template
+									</h1>
+									<form onSubmit={handleSubmit(this.handleFormSubmit)}>
+										<AntSelectField
+											className="tag-container"
+											name="plans"
+											mode="tags"
+											placeholder="Click here to associate plans to the form."
+											style={{ width: '100%' }}
+											selectOptions={selectOptions}
+											tokenSeparators={[',']}
+											validate={[isNotEmpty]}
+											defaultValue={selectedPlans}
+										/>
+										<AntFormFields FIELDS={FIELDS} />
+										<QuillEditor />
+										<hr />
+										<AntStepFormButtons
+											backLabel="Back"
+											backStyle={{ height: 50, float: 'left' }}
+											column={12}
+											confirmLoading={confirmLoading}
+											onClickBack={this.goBackPage}
+											pristine={pristine}
+											submitLabel="Submit"
+											submitStyle= {{ height: 50, float: 'right' }}
+											submitting={submitting}
+										/>
+									</form>
+								</div>
+							</Col>
+							<Col span={12}>
+								<TemplatePreview {...this.props} />
+							</Col>
+						</Row>
+					</div>
+		)
+	}
 };
 
 const selector = formValueSelector('NewTemplate');
 export default reduxForm({ form: 'NewTemplate' })(connect(state => ({
-  company: state.auth.company,
-  message: selector(state, 'message'),
-  fromSender: selector(state, 'fromSender'),
-  subject: selector(state, 'subject'),
-  serverError: state.server.error
+	company: state.auth.company,
+	message: selector(state, 'message'),
+	fromSender: selector(state, 'fromSender'),
+	subject: selector(state, 'subject'),
+	serverError: state.server.error
 }), { addNewTemplate, editTemplate, fetchAllActivePlans, fetchTemplate })(TemplateForm));

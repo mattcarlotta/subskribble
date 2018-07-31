@@ -1,51 +1,51 @@
 /// --FONTS-- ///
 
 @font-face {
-  font-family: "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  src: url("assets/fonts/fontawesome-webfont.eot") format("eot"),
-  url("assets/fonts/fontawesome-webfont.woff2") format("woff2"),
-  url("assets/fonts/fontawesome-webfont.woff") format("woff"),
-  url("assets/fonts/fontawesome-webfont.ttf") format("truetype"),
-  url("assets/fonts/fontawesome-webfont.svg") format("svg");
+	font-family: "FontAwesome";
+	font-weight: normal;
+	font-style: normal;
+	src: url("assets/fonts/fontawesome-webfont.eot") format("eot"),
+	url("assets/fonts/fontawesome-webfont.woff2") format("woff2"),
+	url("assets/fonts/fontawesome-webfont.woff") format("woff"),
+	url("assets/fonts/fontawesome-webfont.ttf") format("truetype"),
+	url("assets/fonts/fontawesome-webfont.svg") format("svg");
 }
 
 
 @font-face {
-  font-family: "Material Icons";
-  font-style: normal;
-  font-weight: 400;
-  src: url("assets/fonts/MaterialIcons-Regular.eot") format("eot"),
-  url("assets/fonts/MaterialIcons-Regular.woff2") format("woff2"),
-  url("assets/fonts/MaterialIcons-Regular.woff") format("woff"),
-  url("assets/fonts/MaterialIcons-Regular.ttf") format("truetype"),
-  url("assets/fonts/MaterialIcons-Regular.svg") format("svg");
+	font-family: "Material Icons";
+	font-style: normal;
+	font-weight: 400;
+	src: url("assets/fonts/MaterialIcons-Regular.eot") format("eot"),
+	url("assets/fonts/MaterialIcons-Regular.woff2") format("woff2"),
+	url("assets/fonts/MaterialIcons-Regular.woff") format("woff"),
+	url("assets/fonts/MaterialIcons-Regular.ttf") format("truetype"),
+	url("assets/fonts/MaterialIcons-Regular.svg") format("svg");
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
 
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
 
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+	/* Support for IE. */
+	font-feature-settings: 'liga';
 }
 
 @font-face {

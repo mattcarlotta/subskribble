@@ -10,7 +10,7 @@ const morgan 				= require('morgan');
 const vars        	= require('../config/vars.js');
 
 const env = process.env.NODE_ENV;
-console.log(`[${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
+console.log(`[SUBSKRIBBLE APPLICATION ${env.toUpperCase()} ENVIRONMENT] \n`, vars[env], "\n");
 //============================================================//
 /* APP MIDDLEWARE */
 //============================================================//

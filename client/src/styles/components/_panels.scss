@@ -1,126 +1,126 @@
 .panel-container {
-  @include h(100%);
-  @include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-  margin: 30px 0;
+	@include h(100%);
+	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+	margin: 30px 0;
 
-  .ant-card-wider-padding .ant-card-head, .ant-card-head, .ant-card-extra, .ant-card-head-title, .ant-card-wider-padding .ant-card-body {
-    @extend %p-0;
-  }
+	.ant-card-wider-padding .ant-card-head, .ant-card-head, .ant-card-extra, .ant-card-head-title, .ant-card-wider-padding .ant-card-body {
+		@extend %p-0;
+	}
 
-  .ant-tabs-nav .ant-tabs-tab {
-    margin: 0 16px;
-  }
+	.ant-tabs-nav .ant-tabs-tab {
+		margin: 0 16px;
+	}
 
-  .ant-card-head-title {
-    @include f-s(14px);
-    @include f-w(500);
-    padding-top: 15px;
-    margin-left: 48px;
-  }
+	.ant-card-head-title {
+		@include f-s(14px);
+		@include f-w(500);
+		padding-top: 15px;
+		margin-left: 48px;
+	}
 
-  .btn-reposition {
-    @extend %p-r;
-    top: 13px;
-    padding: 10px;
-    border-right: 0 !important;
-  }
+	.btn-reposition {
+		@extend %p-r;
+		top: 13px;
+		padding: 10px;
+		border-right: 0 !important;
+	}
 
-  .tabs-container {
-    @include b-c($white);
+	.tabs-container {
+		@include b-c($white);
 
-    .ant-tabs-bar {
-      @extend %m-0;
-    }
-  }
+		.ant-tabs-bar {
+			@extend %m-0;
+		}
+	}
 
-  .panel-body-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    border-radius: 2px;
-  }
+	.panel-body-container {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		border-radius: 2px;
+	}
 
-  .panel-body {
-    @extend %m-b-10, %m-t-10, %t-t-c;
-    padding: 5px 30px;
+	.panel-body {
+		@extend %m-b-10, %m-t-10, %t-t-c;
+		padding: 5px 30px;
 
-    .ant-row {
-      @extend %m-b-20;
+		.ant-row {
+			@extend %m-b-20;
 
-      .no-data {
-        @extend %t-t-n;
-        @include c($nodata);
-        text-align: center;
-        padding-top: 100px;
+			.no-data {
+				@extend %t-t-n;
+				@include c($nodata);
+				text-align: center;
+				padding-top: 100px;
 
-        .anticon {
-          @include c($nodata);
-          @include f-s(148px);
-        }
-      }
-    }
-  }
+				.anticon {
+					@include c($nodata);
+					@include f-s(148px);
+				}
+			}
+		}
+	}
 
-  .panel-1 {
-    @extend %col-1, %d-ib;
-    margin-right: 30px;
-  }
+	.panel-1 {
+		@extend %col-1, %d-ib;
+		margin-right: 30px;
+	}
 
-  .panel-2 {
-    @extend %col-2, %d-ib;
-  }
+	.panel-2 {
+		@extend %col-2, %d-ib;
+	}
 
-  .panel-3 {
-    @extend %d-ib, %m-t-10, %t-a-c;
-    @include w(25%);
-    border-right: 1px solid rgba(120, 130, 140, 0.13);
+	.panel-3 {
+		@extend %d-ib, %m-t-10, %t-a-c;
+		@include w(25%);
+		border-right: 1px solid rgba(120, 130, 140, 0.13);
 
-    .subtitle {
-      @include f-f($arimo);
-      @include f-s(14px);
-      @include l-h(30px);
-      letter-spacing: 2px;
-      margin-top: 0px;
-    }
+		.subtitle {
+			@include f-f($arimo);
+			@include f-s(14px);
+			@include l-h(30px);
+			letter-spacing: 2px;
+			margin-top: 0px;
+		}
 
-    .amount {
-      @include c($lightblue);
-      @include f-f($arimo);
-      @include f-s(36px);
-      @include f-w(300);
-      @include l-h(48px);
-      letter-spacing: 2px;
-    }
-  }
+		.amount {
+			@include c($lightblue);
+			@include f-f($arimo);
+			@include f-s(36px);
+			@include f-w(300);
+			@include l-h(48px);
+			letter-spacing: 2px;
+		}
+	}
 
-  .panel-4 {
-    @extend %col-4, %d-ib, .f-r;
-  }
+	.panel-4 {
+		@extend %col-4, %d-ib, .f-r;
+	}
 
-  .panel-6 {
-    @extend %col-6, %m-b-20, %p-0;
-  }
+	.panel-6 {
+		@extend %col-6, %m-b-20, %p-0;
+	}
 
-  .panel-7 {
-    @extend %d-ib;
-    @include w(58.33333333%);
-  }
+	.panel-7 {
+		@extend %d-ib;
+		@include w(58.33333333%);
+	}
 
-  .no-b-r {
-    border-right: 0 !important;
-  }
+	.no-b-r {
+		border-right: 0 !important;
+	}
 }
 
 .filter-container {
-  @extend %d-b, .f-r;
-  @include w(100%);
-  max-width: 350px;
+	@extend %d-b, .f-r;
+	@include w(100%);
+	max-width: 350px;
 
-  .form-90 {
-    @extend %d-ib, %m-r-5;
-    @include w(90%);
-  }
+	.form-90 {
+		@extend %d-ib, %m-r-5;
+		@include w(90%);
+	}
 
-  .form-05 {
-    @extend %d-ib;
-    @include w(5%);
-  }
+	.form-05 {
+		@extend %d-ib;
+		@include w(5%);
+	}
 }
