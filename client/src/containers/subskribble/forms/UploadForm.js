@@ -12,7 +12,7 @@ class UploadForm extends Component {
 		confirmLoading: false,
 		fileList: [],
 		imageUrl: '',
-		previewImage: false
+		previewImage: false,
 	};
 
 	// componentDidMount = () => {
@@ -22,51 +22,58 @@ class UploadForm extends Component {
 		serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
 	}
 
-	// beforeUpload = (file, fileList) => {
-	//   const isJPG = file.type === 'image/jpeg';
-	//   const isPNG = file.type === 'image/png';
-	//   const isLt2MB = file.size / 2048000 <= 1;
-	//
-	//   return new Promise((resolve, reject) => {
-	//     if ((isJPG || isPNG) && isLt2MB) {
-	//       this.getBase64(file, imageUrl => this.setState({ imageUrl }));
-	//       resolve();
-	//     } else {
-	//       this.props.serverErrorMessage(`Only 2MB jpg/png files are accepted! Instead, received a ${(file.size/1024000).toFixed(1)}MB (${file.type}).`)
-	//       reject(file);
-	//     }
-	//   });
-	// }
-
-	beforeUpload = (file, fileList) => {
-		const isJPG = file.type === 'image/jpeg';
-		const isPNG = file.type === 'image/png';
-		const isLt2MB = file.size / 2048000 <= 1;
-
-		if ((isJPG || isPNG) && isLt2MB) {
-			this.getBase64(file, imageUrl => this.setState({ imageUrl }))
-			return false
-		}
-
-		return new Promise((resolve, reject) => {
-			this.props.serverErrorMessage(`Only 2MB jpg/png files are accepted! Instead, received a ${(file.size/1024000).toFixed(1)}MB (${file.type}).`)
-			reject(file);
-		});
-	}
-
-	getBase64 = (img, callback) => {
-		const reader = new FileReader();
-		reader.addEventListener('load', () => this.setState({ imageUrl: reader.result }));
-		reader.readAsDataURL(img);
-	}
+	beforeUpload = (file, fileList) => (
+		new Promise((resolve, reject) => {
+			this.validateFile(file).then(imageUrl => {
+				this.setState({ imageUrl });
+				resolve(file);
+			})
+			.catch(({height, width}) => {
+				this.props.serverErrorMessage(`Only 10MB@256px/256px (image/jpg,png,bmp,gif) files are accepted! Instead, received a: ${(file.size/1024000).toFixed(2)}MB@${height ? height : '0'}px/${width ? width : 0}px (${file.type}).`)
+				reject(file);
+			})
+		})
+	)
 
 	handleCancel = () => this.setState({ previewImage: false })
+	handleFileChange = ({ file, fileList }) => file.status = 'done';
 	handlePreview = () => this.setState({ previewImage: true })
 	handleRemove = () => this.setState({ imageUrl: '' })
 
-	handleFormSubmit = ({ avatar }) => {
-		// this.setState({ confirmLoading: true })
-		console.log('avatar', avatar);
+	readFile = (file, resolve, reject) => {
+		const reader = new FileReader();
+		reader.addEventListener('load', () => {
+			let image = new Image();
+			image.src = reader.result;
+			image.onload = () => {
+				(image.height <= 256 || image.width <= 256)
+				? resolve(reader.result)
+				: reject({ height: image.height, width:image.width})
+			}
+		});
+		reader.readAsDataURL(file);
+	}
+
+	validateFile = (file) => (
+		new Promise((resolve, reject) => {
+			const isJPG = file.type === 'image/jpeg';
+			const isPNG = file.type === 'image/png';
+			const isGIF = file.type === 'image/gif';
+			const isBMP = file.type === 'image/bmp';
+			const isLt10MB = file.size / 10240000 <= 1;
+
+			((isJPG || isPNG || isGIF || isBMP) && isLt10MB)
+				? this.readFile(file, resolve, reject)
+				:	reject(null)
+		})
+	)
+
+	handleFormSubmit = ({ avatar: {file: {originFileObj} }}) => {
+		this.setState({ confirmLoading: true })
+		console.log('originFileObj', originFileObj);
+		const fd = new FormData();
+		fd.append('file', originFileObj);
+		this.props.uploadAvatar(fd);
 	}
 
 	render = () => (
@@ -81,6 +88,7 @@ class UploadForm extends Component {
 						handleCancel={this.handleCancel}
 						imageUrl={this.state.imageUrl}
 						loading={false}
+						onChange={this.handleFileChange}
 						onPreview={this.handlePreview}
 						onRemove={this.handleRemove}
 						previewImage={this.state.previewImage}

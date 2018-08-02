@@ -234,7 +234,7 @@ const AntUpload = ({
 				{ ...input }
 				{ ...props }
 				accept={'image/*'}
-				customRequest={null}
+				customRequest={() => null}
 				loading={false}
 				className="avatar-uploader"
 				listType="picture-card"
@@ -243,13 +243,18 @@ const AntUpload = ({
 				{ !imageUrl
 					? <div className="upload-container">
 							<i className="material-icons upload-icon">cloud_upload</i>
-							<div>File formats: JPEG, PNG, GIF (max size 256x256, 10MB)</div>
+							<div>File formats: JPEG, PNG, BMP, GIF (max size 256x256, 10MB)</div>
 						</div>
 					: null
 				}
 			</Upload>
-			<Modal visible={previewImage} footer={null} onCancel={handleCancel}>
-				<img src={imageUrl} width="100%" alt="example"/>
+			<Modal
+				onCancel={handleCancel}
+				visible={previewImage}
+				footer={null}
+				width={330}
+			>
+				<img src={imageUrl} alt="example"/>
 			</Modal>
 		</FormItem>
 	);

@@ -90,8 +90,8 @@
 			}
 
 			.user-icon {
-				@include c($white);
-				@include b-c($blue);
+				// @include c($white);
+				// @include b-c($blue);
 
 				&:hover {
 					@include b-c($lightblue);
@@ -272,7 +272,6 @@
 			@extend %p-r;
 			@include b-c($transparent);
 			@include c($white);
-			border: 1px solid $white;
 			top: -9px;
 
 			& i {

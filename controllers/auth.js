@@ -14,14 +14,14 @@ module.exports = app => {
 		// ALLOWS A USER TO LOG INTO THE APP
 		login: (req, res, next) => passport.authenticate('local-login', err => {
 			if (err || !req.session) return sendError(err || badCredentials, res, next);
-			const { id, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
-			res.status(201).json({ id, company, collapsesidenav, email, firstname, isgod, lastname });
+			const { avatarurl, id, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
+			res.status(201).json({ avatarurl, id, company, collapsesidenav, email, firstname, isgod, lastname });
 		})(req, res, next),
 		// ALLOWS A USER TO LOG INTO THE APP
 		loggedin: (req, res) => {
 			if (!req.session) return sendError(badCredentials, res, next);
-			const { id, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
-			res.status(201).json({ id, company, collapsesidenav, email, firstname, isgod, lastname });
+			const { avatarurl, id, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
+			res.status(201).json({ avatarurl, id, company, collapsesidenav, email, firstname, isgod, lastname });
 		},
 		// REMOVES USER FROM SESSION AND DELETES CLIENT COOKIE
 		logout: (req, res, next) => {

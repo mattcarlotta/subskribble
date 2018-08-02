@@ -11,13 +11,13 @@ const RIGHTNAVLINKS = [
 	// { icon: '', label: '', link: '/subskribble/logout' },
 ]
 
-export default ({ company, firstName, handleVisibleChange, lastName, loggedinUser, unauthorizeUser }) => {
+export default ({ avatarURL, company, firstName, handleVisibleChange, lastName, loggedinUser, unauthorizeUser }) => {
 	const closeMenu = () => handleVisibleChange(false);
 	return (
 		<Menu className="settings-tab-container">
 			<MenuItem style={{ height: 65 }}>
 				<Link className="my-profile-container" to="/subskribble/profile">
-					<Avatar className="popover-user" icon="user" />
+					<Avatar className="popover-user" icon="user" src={avatarURL} />
 					<div className="user-label">
 						<p className="user">{firstName} {lastName} ({company})</p>
 						<p className="email">{loggedinUser}</p>

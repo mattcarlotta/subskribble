@@ -1,4 +1,4 @@
-import app from './axiosConfig';
+import { app } from './axiosConfig';
 import * as types from './types';
 
 const fetchUserDetails = userid => dispatch => (

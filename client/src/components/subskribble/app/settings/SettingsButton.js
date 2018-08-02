@@ -5,10 +5,7 @@ import SettingsMenu from './settingsMenu';
 class SettingsButton extends PureComponent {
 	state = { visibleSettings: false, tipVisible: false };
 
-	handleVisibleChange = visible => {
-		console.log('visible', visible);
-		this.setState({ visibleSettings: visible });
-	}
+	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
 
 	unauthorizeUser = () => this.props.logoutUser();
 
@@ -29,7 +26,13 @@ class SettingsButton extends PureComponent {
 					trigger="click"
 					visible={this.state.visibleSettings}
 				>
-					<Avatar className="settings-icon user-icon" size="small" icon="user" />
+					<Avatar
+						className="settings-icon user-icon"
+						size="small"
+						src={this.props.avatarURL}
+						icon="user"
+						style={{ backgroundColor: !this.props.avatarURL ? "#1890ff" : null }}
+					/>
 				</Popover>
 			</Tooltip>
 		</div>

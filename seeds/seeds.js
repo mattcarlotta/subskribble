@@ -29,6 +29,8 @@ module.exports = app => {
 		lastName TEXT NOT NULL,
 		password VARCHAR NOT NULL UNIQUE,
 		company VARCHAR NOT NULL UNIQUE,
+		avatarURL TEXT DEFAULT NULL,
+		avatarFilePath TEXT DEFAULT NULL,
 		startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
 		${enddate},
 		credit INTEGER DEFAULT 0,

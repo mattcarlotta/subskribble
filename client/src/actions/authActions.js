@@ -1,8 +1,7 @@
-import { browserHistory } from 'react-router';
-import app from './axiosConfig';
+import { app } from './axiosConfig';
 import * as types from '../actions/types';
+import { browserHistory } from 'react-router';
 
-app.interceptors.response.use(response => (response), error => (Promise.reject(error.response.data.err)))
 //==========================================================================
 // Authorization
 //==========================================================================
