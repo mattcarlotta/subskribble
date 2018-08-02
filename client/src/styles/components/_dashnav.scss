@@ -64,7 +64,7 @@
 
 			.notifications-icon {
 				@include c($blue);
-				@include f-s(22px);
+				@include f-s(28px);
 
 				&:hover {
 					@include c($lightblue);

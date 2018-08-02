@@ -17,6 +17,11 @@
 
 				.ant-avatar {
 					border-radius: 8px;
+
+					.anticon-user {
+						@include f-s(50px);
+						margin-top: 40px;
+					}
 				}
 			}
 		}
