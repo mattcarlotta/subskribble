@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-// import { message } from 'antd';
+import { Col, Button, Icon } from 'antd';
 import { AntUpload } from '../app/formFields/antReduxFormFields';
 import { uploadAvatar } from '../../../actions/avatarActions';
 import { serverErrorMessage } from '../../../actions/appActions';
@@ -16,9 +16,9 @@ class UploadForm extends Component {
 	};
 
 	componentDidUpdate = (prevProps, prevState) => {
-		const { serverError, serverMessage } = this.props;
+		const { hideAvatarForm, serverError, serverMessage } = this.props;
 		serverError !== prevProps.serverError && serverError !== undefined && this.handleResetForm();
-		serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.handleResetForm();
+		serverMessage !== prevProps.serverMessage && serverMessage !== undefined && hideAvatarForm();
 	}
 
 	beforeUpload = (file, fileList) => (
@@ -99,14 +99,27 @@ class UploadForm extends Component {
 						validate={[isRequired, hasFileList]}
 					/>
 				</div>
-				<button
-					type="submit"
-					className="ant-btn ant-btn-primary"
-					style={{ width: 128 }}
-					disabled={this.props.submitting}
-					>
-						Upload
-				</button>
+				<div className="avatar-submit-container">
+					<Col span={12}>
+						<Button
+							type="button"
+							className="btn-cancel-warning"
+							onClick={this.props.hideAvatarForm}
+							shape="circle"
+							icon="close"
+						/>
+					</Col>
+					<Col span={12}>
+						<button
+							type="submit"
+							className="ant-btn ant-btn ant-btn-primary ant-btn-submit ant-btn-circle ant-btn-icon-only"
+							disabled={this.props.submitting}
+						>
+							<Icon type="upload" />
+						</button>
+					</Col>
+					<div className="clear-fix" />
+				</div>
 			</form>
 		</div>
 	)

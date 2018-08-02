@@ -40,6 +40,15 @@
 	}
 }
 
+.btn-cancel-warning {
+	&:hover {
+		@extend %no-link-focus;
+		@include c($darkyellow);
+		@include b-c($transparent);
+		border-color: $darkyellow;
+	}
+}
+
 .btn-danger {
 	background-color: $orange !important;
 
@@ -56,6 +65,17 @@
 		@extend %no-link-focus;
 		@include c($white);
 		@include b-c($darkwarmgrey !important);
+	}
+}
+
+.btn-warning {
+	&:hover {
+		@extend %b-0, %no-link-focus;
+		@include b-c($darkyellow !important);
+	}
+	&:focus {
+		@extend %no-link-focus;
+		@include b-c($transparent);
 	}
 }
 

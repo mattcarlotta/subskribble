@@ -1,6 +1,6 @@
 import { avatarAPI } from './axiosConfig';
 import * as types from './types';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router';
 
 // fetches avatar
 // const fetchAvatar = () => dispatch => (

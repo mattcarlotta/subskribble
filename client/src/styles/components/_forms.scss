@@ -299,6 +299,7 @@
 	@extend %t-t-n;
 
 	.upload-box-container > .ant-form-item { @include h(150px); }
+
 	.upload-container {
 		.upload-icon {
 			@include f-s(30px);
@@ -316,6 +317,11 @@
 			@include h(110px);
 			@include w(110px);
 		}
+	}
+
+	.avatar-submit-container {
+		@extend %t-a-c;
+		@include w(128px);
 	}
 
 	.select-container > .ant-form-item {

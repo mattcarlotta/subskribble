@@ -1,9 +1,34 @@
+.current-avatar-container {
+	@include h(182px);
+
+	.avatar-container {
+		@include h(150px);
+
+		.avatar-preview-container {
+			@include w(128px);
+			border-radius: 4px;
+			border: 1px dashed $readnoteborder;
+
+			.avatar-preview {
+				@include h(126px);
+				padding: 6px;
+    		border-radius: 4px;
+				transition: border-color .3s ease;
+
+				.ant-avatar {
+					border-radius: 8px;
+				}
+			}
+		}
+	}
+}
+
 .settings-container {
 	@extend %t-t-n;
 	@include b-c($white);
 	@include w(100%);
 	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
-	min-height: 1200px;
+	min-height: 800px;
 	padding: 10px 30px;
 
 	.delete-account, .profile-picture, .profile-settings {

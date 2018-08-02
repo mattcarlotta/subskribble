@@ -31,9 +31,8 @@
 
 	.right-nav {
 		@extend %d-ib, %p-f;
-		margin-top: 10px;
-		padding-right: 31px;
-		padding-left: 3px;
+		margin-top: 9px;
+		margin-right: 31px;
 		right: 5px;
 
 		.loggedin-user {
@@ -51,18 +50,21 @@
 
 			.ant-badge-count {
 				@include c($white);
+				@include h(18px);
+				min-width: 12px;
+				padding: 0 6px;
 				@include b-s(0 0 0 1px $white);
 			}
 
 			.ant-scroll-number-only > p {
-				@include f-f(sans-serif);
-				@include f-s(12px);
+				@include f-f($arimo);
+				@include f-s(10px);
 				@include l-h(20px);
 			}
 
 			.notifications-icon {
 				@include c($blue);
-				@include f-s(28px);
+				@include f-s(22px);
 
 				&:hover {
 					@include c($lightblue);
@@ -71,10 +73,16 @@
 		}
 
 		.settings-tab {
-			@extend %d-ib, .fix-cursor, %no-link-focus;
+			@extend .fix-cursor, %no-link-focus;
+			margin-left: 5px;
+
+			.current-user {
+				@extend %p-r;
+				margin-left: 7px;
+				top: 5px;
+			}
 
 			.signed-out {
-				// @extend %p-r;
 				@include c($lightwhite);
 				@include b-c($lightgrey);
 
@@ -84,39 +92,16 @@
 				}
 			}
 
-			.settings-icon {
-				@extend %p-r;
-				top: 4px;
-			}
+			.settings-icon { margin-top: 10px; }
 
 			.user-icon {
-				// @include c($white);
+				@include c($white);
 				// @include b-c($blue);
 
 				&:hover {
 					@include b-c($lightblue);
 				}
 			}
-
-			// .settings-icon {
-			// 	@extend %p-r;
-			// 	@include c($white);
-			//   @include b-c($blue);
-			// 	top: -10px;
-			//
-			//   &:hover {
-			//     @include b-c($lightblue);
-			//   }
-			//
-			//   .user-icon {
-			//     @include c($white);
-			//     @include b-c($blue);
-			//
-			//     &:hover {
-			//       @include b-c($lightblue);
-			//     }
-			//   }
-			// }
 
 			.menu-label {
 				@extend %pl-10, %p-r;
@@ -269,10 +254,11 @@
 		padding: 10px 15px 5px 15px;
 
 		.popover-user {
-			@extend %p-r;
+			// @extend %p-r;
 			@include b-c($transparent);
 			@include c($white);
-			top: -9px;
+			margin-top: -18px;
+			// top: -9px;
 
 			& i {
 				margin-right: 0;

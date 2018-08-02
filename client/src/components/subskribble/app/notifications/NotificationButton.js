@@ -32,7 +32,7 @@ export default class Notifications extends Component {
 		const { unreadNotifications, readNotifications } = this.props;
 
 		return(
-			<div className="notifications-container">
+			<span className="notifications-container">
 				<Tooltip
 					arrowPointAtCenter
 					placement="bottom"
@@ -42,7 +42,7 @@ export default class Notifications extends Component {
 				>
 					<Badge
 						count={unreadNotifications ? unreadNotifications.length : 0}
-						offset={[1,-2]}
+						offset={[2,-2]}
 						showZero={false}
 						overflowCount={99}
 					>
@@ -65,7 +65,7 @@ export default class Notifications extends Component {
 						</Popover>
 					</Badge>
 				</Tooltip>
-			</div>
+			</span>
 		)
 	}
 }
