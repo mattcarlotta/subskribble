@@ -235,7 +235,6 @@ const AntUpload = ({
 				{ ...props }
 				accept={'image/*'}
 				customRequest={() => null}
-				loading={false}
 				className="avatar-uploader"
 				listType="picture-card"
 				showUploadList={true}

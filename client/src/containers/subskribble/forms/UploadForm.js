@@ -15,11 +15,10 @@ class UploadForm extends Component {
 		previewImage: false,
 	};
 
-	// componentDidMount = () => {
-	// }
 	componentDidUpdate = (prevProps, prevState) => {
-		const { serverError } = this.props;
-		serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
+		const { serverError, serverMessage } = this.props;
+		serverError !== prevProps.serverError && serverError !== undefined && this.handleResetForm();
+		serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.handleResetForm();
 	}
 
 	beforeUpload = (file, fileList) => (
@@ -36,9 +35,13 @@ class UploadForm extends Component {
 	)
 
 	handleCancel = () => this.setState({ previewImage: false })
-	handleFileChange = ({ file, fileList }) => file.status = 'done';
+	handleFileChange = ({ file, fileList }) => {
+		file.status = 'done';
+		this.setState({ file, fileList })
+	}
 	handlePreview = () => this.setState({ previewImage: true })
 	handleRemove = () => this.setState({ imageUrl: '' })
+	handleResetForm = () => this.setState({ confirmLoading: false })
 
 	readFile = (file, resolve, reject) => {
 		const reader = new FileReader();
@@ -70,7 +73,7 @@ class UploadForm extends Component {
 
 	handleFormSubmit = ({ avatar: {file: {originFileObj} }}) => {
 		this.setState({ confirmLoading: true })
-		console.log('originFileObj', originFileObj);
+
 		const fd = new FormData();
 		fd.append('file', originFileObj);
 		this.props.uploadAvatar(fd);
@@ -87,6 +90,7 @@ class UploadForm extends Component {
 						component={AntUpload}
 						handleCancel={this.handleCancel}
 						imageUrl={this.state.imageUrl}
+						fileList={this.state.fileList}
 						loading={false}
 						onChange={this.handleFileChange}
 						onPreview={this.handlePreview}
@@ -110,4 +114,7 @@ class UploadForm extends Component {
 
 export default reduxForm({
 	form: 'UploadForm',
-})(connect(state => ({ serverError: state.server.error }), { uploadAvatar, serverErrorMessage })(UploadForm));
+})(connect(state => ({
+	serverError: state.server.error,
+	serverMessage: state.server.message
+}), { uploadAvatar, serverErrorMessage })(UploadForm));
