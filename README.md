@@ -88,7 +88,7 @@ module.exports = {
 		dbpassword: "postgres_db_password",
 		dbowner: "postgres_db_owner",
 		host: "localhost",
-		port: 5000,
+		port: 4000,
 		portal: "http://localhost:3000"
 	},
 	"staging": {
@@ -99,7 +99,7 @@ module.exports = {
 		dbpassword: "postgres_db_password",
 		dbowner: "postgres_db_owner",
 		host: "localhost",
-		port: 5000,
+		port: 4000,
 		portal: "http://staging-domain.com"
 	},
 	"testing": {
@@ -110,7 +110,7 @@ module.exports = {
 		dbpassword: "postgres_db_password",
 		dbowner: "postgres_db_owner",
 		host: "localhost",
-		port: 5000,
+		port: 4000,
 		portal: "http://testing-domain.com"
 	}
 }
