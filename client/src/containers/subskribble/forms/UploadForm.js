@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import { Col, Button, Icon } from 'antd';
+import { Col, Button, Icon, Tooltip } from 'antd';
 import { AntUpload } from '../app/formFields/antReduxFormFields';
-import { uploadAvatar } from '../../../actions/avatarActions';
-import { serverErrorMessage } from '../../../actions/appActions';
 import { hasFileList, isRequired } from '../app/formFields/validateFormFields';
 
 class UploadForm extends Component {
@@ -73,10 +70,10 @@ class UploadForm extends Component {
 
 	handleFormSubmit = ({ avatar: {file: {originFileObj} }}) => {
 		this.setState({ confirmLoading: true })
-
+		const { updateAvatar, uploadAvatar } = this.props;
 		const fd = new FormData();
 		fd.append('file', originFileObj);
-		this.props.uploadAvatar(fd);
+		!this.props.avatarURL ? uploadAvatar(fd) : updateAvatar(fd)
 	}
 
 	render = () => (
@@ -101,22 +98,34 @@ class UploadForm extends Component {
 				</div>
 				<div className="avatar-submit-container">
 					<Col span={12}>
-						<Button
-							type="button"
-							className="btn-cancel-warning"
-							onClick={this.props.hideAvatarForm}
-							shape="circle"
-							icon="close"
-						/>
+						<Tooltip
+							arrowPointAtCenter
+							placement="bottom"
+							title="Cancel"
+						>
+							<Button
+								type="button"
+								className="btn-cancel-warning"
+								onClick={this.props.hideAvatarForm}
+								shape="circle"
+								icon="close"
+							/>
+						</Tooltip>
 					</Col>
 					<Col span={12}>
-						<button
-							type="submit"
-							className="ant-btn ant-btn ant-btn-primary ant-btn-submit ant-btn-circle ant-btn-icon-only"
-							disabled={this.props.submitting}
+						<Tooltip
+							arrowPointAtCenter
+							placement="bottom"
+							title="Upload"
 						>
-							<Icon type="upload" />
-						</button>
+							<button
+								type="submit"
+								className="ant-btn ant-btn ant-btn-primary ant-btn-submit ant-btn-circle ant-btn-icon-only"
+								disabled={this.props.submitting}
+							>
+								<Icon type="upload" />
+							</button>
+						</Tooltip>
 					</Col>
 					<div className="clear-fix" />
 				</div>
@@ -125,9 +134,4 @@ class UploadForm extends Component {
 	)
 }
 
-export default reduxForm({
-	form: 'UploadForm',
-})(connect(state => ({
-	serverError: state.server.error,
-	serverMessage: state.server.message
-}), { uploadAvatar, serverErrorMessage })(UploadForm));
+export default reduxForm({ form: 'UploadForm' })(UploadForm);

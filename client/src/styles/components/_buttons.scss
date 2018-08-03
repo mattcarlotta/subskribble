@@ -50,11 +50,21 @@
 }
 
 .btn-danger {
+	@extend %b-0;
 	background-color: $orange !important;
 
 	&:hover, &:focus {
 		@extend %no-link-focus;
 		background-color: $red !important;
+	}
+}
+
+.btn-success {
+	@extend %b-0;
+
+	&:hover, &:focus {
+		@extend %no-link-focus;
+		background-color: $limegreen !important;
 	}
 }
 

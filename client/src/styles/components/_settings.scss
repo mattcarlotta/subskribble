@@ -1,6 +1,11 @@
 .current-avatar-container {
 	@include h(182px);
 
+	.avatar-actions-container {
+		@extend %t-a-c;
+		@include w(128px);
+	}
+
 	.avatar-container {
 		@include h(150px);
 
@@ -35,6 +40,10 @@
 	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
 	min-height: 800px;
 	padding: 10px 30px;
+
+	.profile-picture {
+		@include h(285px);
+	}
 
 	.delete-account, .profile-picture, .profile-settings {
 		@extend %m-b-20;
