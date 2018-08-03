@@ -117,11 +117,12 @@ module.exports = {
 
 ## Quickstart Linux:
 
-### 1. Install NodeJS
+### 1. Install NodeJS and Nodemon
 
 - `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
 - `sudo apt-get update`
 - `sudo apt-get install -y nodejs`
+- `sudo npm install -g nodemon`
 
 ### 2. Install and Configure PostgreSQL†
 - `sudo apt-get install postgresql postgresql-contrib`
@@ -155,10 +156,11 @@ module.exports = {
 
 - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-### 2. Install NodeJS and PostgreSQL
+### 2. Install NodeJS, Nodemon and PostgreSQL
 
 - `brew update`
 - `brew install node`
+- `brew install nodemon`
 - `brew install postgresql`
 
 ### 3. Configure PostgreSQL†
