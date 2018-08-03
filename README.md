@@ -4,7 +4,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 ⚠️ In order to run and use this app:
 - You **MUST** install and start the <a href="https://github.com/mattcarlotta/subskribble-avatar-microservice">subskribble-avatar-mircoservice</a> first.
 - You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f initDB.sql` while at the app root.
-- You **MUST** sign up with a valid email address (or use the beta test email).
+- You **MUST** sign up with a valid email address (or use the beta test email -- see notes below).
 - You **MUST** have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails).
 - You **MUST** create a config file: `subsrkibble/config/vars.js` that exports an object:
 <details>
