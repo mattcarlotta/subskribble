@@ -1,6 +1,120 @@
 # subskribble
 subskribble - an experimental app to create, manage, and send personalized updates to a lists of subscribers.
 
+⚠️ In order to run and use this app:
+- You **MUST** install and start the <a href="https://github.com/mattcarlotta/subskribble-avatar-microservice">subskribble-avatar-mircoservice</a> first.
+- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f initDB.sql` while at the app root.
+- You **MUST** sign up with a valid email address (or use the beta test email).
+- You **MUST** have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails).
+- You **MUST** create a config file: `subsrkibble/config/vars.js` that exports an object:
+<details>
+<summary>Example App Config</summary>
+<pre><code>
+module.exports = {
+	"development": {
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://localhost:3000/",
+		sendgridAPIKey: "sendgrid_api_key",
+		url: "http://localhost:5000/",
+	},
+	"production": {
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://project-domain.com",
+		sendgridAPIKey: "sendgrid_api_key",
+		url: "http://localhost:5000/",
+	},
+	"staging": {
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://staging-domain.com",
+		sendgridAPIKey: "sendgrid_api_key",
+		url: "http://localhost:5000/",
+	},
+	"testing": {
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://testing-domain.com",
+		sendgridAPIKey: "sendgrid_api_key",
+		url: "http://localhost:5000/",
+	}
+}
+</code></pre>
+</details>
+- You **MUST** create a config file: `subsrkibble-avatar-microservice/config/vars.js` that exports an object:
+<details>
+<summary>Example Avatar Microservice Config</summary>
+<pre><code>
+module.exports = {
+	"development": {
+		apiURL: "http://localhost:4000",
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 4000,
+		portal: "http://localhost:3000"
+	},
+	"production": {
+		apiURL: "http://avatar.project-domain.com",
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://localhost:3000"
+	},
+	"staging": {
+		apiURL: "http://avatar.staging-domain.com",
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://staging-domain.com"
+	},
+	"testing": {
+		apiURL: "http://avatar.testing-domain.com",
+		cookieKey: "unique_cookie_key",
+		database: "postgres_db_name",
+		dbport: postgres_db_port,
+		dbpassword: "postgres_db_password",
+		dbowner: "postgres_db_owner",
+		host: "localhost",
+		port: 5000,
+		portal: "http://testing-domain.com"
+	}
+}
+</code></pre>
+</details>
+
 ## Quickstart Linux:
 
 ### 1. Install NodeJS
@@ -30,7 +144,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 6. Seed DB and Run Node Server
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, otherwise `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then run `npm run seeds`)
 - `npm run dev`
 
 
@@ -67,7 +181,7 @@ subskribble - an experimental app to create, manage, and send personalized updat
 - `npm i && cd client && npm i`
 
 ### 7. Seed DB and Run Node Server
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, otherwise `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then run `npm run seeds`)
 - `npm run dev`
 
 
@@ -83,64 +197,3 @@ subskribble - an experimental app to create, manage, and send personalized updat
 login: betatester@subskribble.com
 password: password123
 ```
-
-⚠️ In order to run and use this app:
-- You **MUST** initialize the PostgreSQL database by executing `psql -U <username> -f initDB.sql` while at the app root.
-- You **MUST** sign up with a valid email address (or use the beta test email).
-- You **MUST** have a valid <a href="https://sendgrid.com/">SendGrid</a> API key (for sending/receiving emails).
-- You **MUST** create a single js config file that exports an object:
-<details>
-<summary>Example Config</summary>
-<pre><code>
-module.exports = {
-  "development": {
-    cookieKey: "unique_cookie_key",
-    database: "postgres_db_name",
-    dbport: postgres_db_port,
-    dbpassword: "postgres_db_password",
-    dbowner: "postgres_db_owner",
-    host: "localhost",
-    port: 5000,
-    portal: "http://localhost:3000/",
-    sendgridAPIKey: "sendgrid_api_key",
-    url: "http://localhost:5000/",
-  },
-  "production": {
-    cookieKey: "unique_cookie_key",
-    database: "postgres_db_name",
-    dbport: postgres_db_port,
-    dbpassword: "postgres_db_password",
-    dbowner: "postgres_db_owner",
-    host: "localhost",
-    port: 5000,
-    portal: "http://project-domain.com",
-    sendgridAPIKey: "sendgrid_api_key",
-    url: "http://localhost:5000/",
-  },
-  "staging": {
-    cookieKey: "unique_cookie_key",
-    database: "postgres_db_name",
-    dbport: postgres_db_port,
-    dbpassword: "postgres_db_password",
-    dbowner: "postgres_db_owner",
-    host: "localhost",
-    port: 5000,
-    portal: "http://staging-domain.com",
-    sendgridAPIKey: "sendgrid_api_key",
-    url: "http://localhost:5000/",
-  },
-  "testing": {
-    cookieKey: "unique_cookie_key",
-    database: "postgres_db_name",
-    dbport: postgres_db_port,
-    dbpassword: "postgres_db_password",
-    dbowner: "postgres_db_owner",
-    host: "localhost",
-    port: 5000,
-    portal: "http://testing-domain.com",
-    sendgridAPIKey: "sendgrid_api_key",
-    url: "http://localhost:5000/",
-  }
-}
-</code></pre>
-</details>
