@@ -62,6 +62,7 @@ module.exports = {
 }
 </code></pre>
 </details>
+
 - You **MUST** create a config file: `subsrkibble-avatar-microservice/config/vars.js` that exports an object:
 <details>
 <summary>Example Avatar Microservice Config</summary>
