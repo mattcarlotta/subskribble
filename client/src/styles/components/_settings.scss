@@ -33,6 +33,10 @@
 	}
 }
 
+.settings-adjust-tooltip {
+	top: 47px !important;
+}
+
 .settings-container {
 	@extend %t-t-n;
 	@include b-c($white);

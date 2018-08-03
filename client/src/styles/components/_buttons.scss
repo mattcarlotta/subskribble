@@ -23,10 +23,9 @@
 }
 
 .btn {
-	@extend %t-t-u;
+	@extend %b-0, %t-t-u;
 	@include f-f($arimo);
 	border-radius: 6px;
-	border: 0;
 }
 
 .btn-primary {
@@ -51,11 +50,22 @@
 
 .btn-danger {
 	@extend %b-0;
-	background-color: $orange !important;
+	@include b-c($orange !important);
 
 	&:hover, &:focus {
 		@extend %no-link-focus;
-		background-color: $red !important;
+		@include b-c($red !important);
+	}
+}
+
+.btn-disabled {
+	@extend %b-0;
+	@include c($darkerwhite !important);
+	@include b-c($disabledgrey !important);
+
+	&:hover, &:focus {
+		@extend %no-link-focus;
+		@include b-c($disabledgrey !important);
 	}
 }
 

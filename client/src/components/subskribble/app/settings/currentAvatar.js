@@ -23,10 +23,12 @@ export default ({ avatarURL, deleteAvatar, showAvatarForm }) => (
 			>
 				<Col span={12}>
 					<Button
-						className="btn-danger"
+						className={!avatarURL ? "btn-disabled" : "btn-danger"}
 						shape="circle"
 						icon="delete"
-						onClick={avatarURL ? deleteAvatar : null} />
+						disabled={!avatarURL ? true : false }
+						onClick={deleteAvatar}
+					/>
 				</Col>
 			</Tooltip>
 			<Tooltip
@@ -35,8 +37,8 @@ export default ({ avatarURL, deleteAvatar, showAvatarForm }) => (
 				title="Change Avatar"
 			>
 				<Col span={12}>
-					<Button 
-						className="btn-success"
+					<Button
+						type="primary"
 						shape="circle"
 						icon="retweet"
 						onClick={showAvatarForm}

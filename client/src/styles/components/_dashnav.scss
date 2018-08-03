@@ -257,10 +257,14 @@
 			// @extend %p-r;
 			@include b-c($transparent);
 			@include c($white);
+			@include h(40px);
+			@include w(40px);
+			border-radius: 20px;
 			margin-top: -18px;
 			// top: -9px;
 
 			& i {
+				@include f-s(28px);
 				margin-right: 0;
 			}
 		}

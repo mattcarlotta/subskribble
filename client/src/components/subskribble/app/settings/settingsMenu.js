@@ -17,7 +17,11 @@ export default ({ avatarURL, company, firstName, handleVisibleChange, lastName, 
 		<Menu className="settings-tab-container">
 			<MenuItem style={{ height: 65 }}>
 				<Link className="my-profile-container" to="/subskribble/profile">
-					<Avatar className="popover-user" icon="user" src={avatarURL} />
+					<Avatar
+						className="popover-user"
+						icon="user"
+						src={avatarURL} 
+					/>
 					<div className="user-label">
 						<p className="user">{firstName} {lastName} ({company})</p>
 						<p className="email">{loggedinUser}</p>

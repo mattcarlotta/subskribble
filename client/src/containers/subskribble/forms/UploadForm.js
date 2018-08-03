@@ -120,7 +120,7 @@ class UploadForm extends Component {
 						>
 							<button
 								type="submit"
-								className="ant-btn ant-btn ant-btn-primary ant-btn-submit ant-btn-circle ant-btn-icon-only"
+								className="ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only"
 								disabled={this.props.submitting}
 							>
 								<Icon type="upload" />

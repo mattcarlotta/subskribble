@@ -25,6 +25,7 @@ class SettingsButton extends PureComponent {
 					placement="bottomRight"
 					trigger="click"
 					visible={this.state.visibleSettings}
+					overlayClassName="settings-adjust-tooltip"
 				>
 					<Avatar
 						className="settings-icon user-icon"
