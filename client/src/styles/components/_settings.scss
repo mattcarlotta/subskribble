@@ -1,5 +1,11 @@
 .current-avatar-container {
-	@include h(182px);
+	// @include h(220px);
+	// @include w(100%);
+	// @include b-c($darkwhite);
+	// max-width: 900px;
+	// border-radius: 4px;
+	// padding: 20px;
+	// border: 1px dotted $softwarmgrey;
 
 	.avatar-actions-container {
 		@extend %t-a-c;
@@ -11,13 +17,14 @@
 
 		.avatar-preview-container {
 			@include w(128px);
+			@include b-c($white);
 			border-radius: 4px;
 			border: 1px dashed $readnoteborder;
 
 			.avatar-preview {
 				@include h(126px);
 				padding: 6px;
-    		border-radius: 4px;
+				border-radius: 4px;
 				transition: border-color .3s ease;
 
 				.ant-avatar {
@@ -44,15 +51,101 @@
 	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
 	min-height: 800px;
 	padding: 10px 30px;
+	margin-bottom: 40px;
+
+	.account-details-container {
+		@include h(400px);
+		@include w(100%);
+		@include b-c($darkwhite);
+		border: 1px dotted $softwarmgrey;
+		border-radius: 4px;
+		max-width: 900px;
+		margin-bottom: 30px;
+		padding: 20px;
+	}
+
+	.delete-account-settings {
+
+		.delete-account-details {
+			@include h(100px);
+			@include w(100%);
+			@include b-c($darkwhite);
+			border: 1px dotted $softwarmgrey;
+			border-radius: 4px;
+			max-width: 900px;
+			margin-bottom: 30px;
+			padding: 20px;
+
+			.delete-button-container {
+				@extend .f-l;
+				@include w(100px);
+			}
+
+			.delete-account-information {
+				@extend .f-l;
+				@include h(126px);
+				// @include w(70%);
+				// padding: 70px 20px;
+
+				.information {
+					@include f-f($arimo);
+					@include f-s(14px);
+					word-wrap: break-word;
+
+					.bold {
+						@include f-f($arimo-bold);
+						@include f-s(16px);
+					}
+				}
+			}
+		}
+	}
+
+	.subdescription {
+		@include f-f($arimo);
+		@include f-s(13px);
+	}
 
 	.profile-picture {
 		@include h(285px);
-	}
+		margin-top: 30px;
+		margin-bottom: 45px;
 
-	.delete-account, .profile-picture, .profile-settings {
-		@extend %m-b-20;
-		p {
-			@include f-s(12px);
+		.avatar-background-container {
+			@include h(220px);
+			@include w(100%);
+			@include b-c($darkwhite);
+			max-width: 900px;
+			border-radius: 4px;
+			padding: 20px;
+			border: 1px dotted $softwarmgrey;
+
+			.avatar-form {
+				@extend .f-l;
+				@include w(126px);
+				// min-width: 126px;
+			}
+		}
+
+		.upload-avatar-information {
+			@extend .f-l;
+			@include h(126px);
+			@include w(80%);
+			padding: 70px 20px;
+
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
+
+				.bold {
+					@include f-f($arimo-bold);
+				}
+			}
+		}
+
+		.new-form-container{
+			@extend .current-avatar-container;
 		}
 	}
 }

@@ -32,7 +32,7 @@ export default class Notifications extends Component {
 		const { unreadNotifications, readNotifications } = this.props;
 
 		return(
-			<span className="notifications-container">
+			<div className="notifications-container">
 				<Tooltip
 					arrowPointAtCenter
 					placement="bottom"
@@ -65,7 +65,7 @@ export default class Notifications extends Component {
 						</Popover>
 					</Badge>
 				</Tooltip>
-			</span>
+			</div>
 		)
 	}
 }

@@ -242,7 +242,7 @@ const AntUpload = ({
 				{ !imageUrl
 					? <div className="upload-container">
 							<i className="material-icons upload-icon">cloud_upload</i>
-							<div>File formats: JPEG, PNG, BMP, GIF (max size 256x256, 10MB)</div>
+							<div>(click here)</div>
 						</div>
 					: null
 				}

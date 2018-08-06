@@ -10,7 +10,7 @@ class SettingsButton extends PureComponent {
 	unauthorizeUser = () => this.props.logoutUser();
 
 	render = () => (
-		<span className="settings-tab">
+		<div className="settings-tab">
 			<Tooltip
 				arrowPointAtCenter
 				placement="bottom"
@@ -37,7 +37,7 @@ class SettingsButton extends PureComponent {
 					<span className="current-user">{this.props.firstName} {this.props.lastName}</span>
 				</Popover>
 			</Tooltip>
-		</span>
+		</div>
 	);
 }
 

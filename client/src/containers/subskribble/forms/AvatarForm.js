@@ -4,7 +4,7 @@ import { Col, Button, Icon, Tooltip } from 'antd';
 import { AntUpload } from '../app/formFields/antReduxFormFields';
 import { hasFileList, isRequired } from '../app/formFields/validateFormFields';
 
-class UploadForm extends Component {
+class AvatarForm extends Component {
 	state = {
 		confirmLoading: false,
 		fileList: [],
@@ -134,4 +134,4 @@ class UploadForm extends Component {
 	)
 }
 
-export default reduxForm({ form: 'UploadForm' })(UploadForm);
+export default reduxForm({ form: 'AvatarForm' })(AvatarForm);

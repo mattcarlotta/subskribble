@@ -46,7 +46,7 @@
 			@include c($white);
 			top: 5px;
 			left: 3px;
-			padding-right: 22px;
+			margin-right: 22px;
 
 			.ant-badge-count {
 				@include c($white);
@@ -73,7 +73,7 @@
 		}
 
 		.settings-tab {
-			@extend .fix-cursor, %no-link-focus;
+			@extend %d-ib, .fix-cursor, %no-link-focus;
 			margin-left: 5px;
 
 			.current-user {
@@ -97,10 +97,6 @@
 			.user-icon {
 				@include c($white);
 				// @include b-c($blue);
-
-				&:hover {
-					@include b-c($lightblue);
-				}
 			}
 
 			.menu-label {
