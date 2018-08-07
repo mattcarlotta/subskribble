@@ -9,23 +9,30 @@
 
 	.left-nav {
 		@extend %d-ib;
-		margin-top: 20px;
+		// margin-top: 20px;
 
 		.menu-collapse {
 			@extend %b-0;
+			@include h(66px);
+			@include w(63px);
+			padding: 0 24px;
+			margin-left: 0px;
+			border-radius: 0px;
 
 			& i {
 				@include c($tblack);
+				// @include c($tblack);
 				@include f-s(24px);
+				@include l-h(58px);
 			}
 
 			&:hover > i {
-				@include c($softwarmgrey);
+				@include c($tblack);
+				// @include c($softwarmgrey);
 			}
 
-			&:hover, &:focus {
-				@include b-c($transparent);
-			}
+			&:hover { @include b-c($paleformblue); }
+			&:focus { @include b-c($transparent); }
 		}
 	}
 

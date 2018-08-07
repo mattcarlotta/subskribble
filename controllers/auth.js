@@ -14,7 +14,7 @@ module.exports = app => {
 	const { badCredentials, companyAlreadyExists, emailAlreadyTaken, invalidToken, missingSidebarState, missingToken } = app.shared.authErrors;
 	const { passwordReset, passwordResetSuccess, passwordResetToken, thanksForReg } = app.shared.authSuccess;
 	const { createRandomToken } = app.shared.helpers;
-	const { mailer, emailTemplates: { newUser } } = app.services;
+	const { mailer, emailTemplates: { changedEmail } } = app.services;
 	const passport = app.get("passport");
 	const portal = app.get("portal");
 
@@ -111,13 +111,13 @@ module.exports = app => {
 
 					const token = createRandomToken(); // generate a token used for email verification
 					// update email; set verified to false; update token;
-					await db.none(updateEmailAddress(), [req.session.id, updatedEmail, token])
+					await db.none(updateEmailAddress(), [req.session.id, updatedEmail, token]);
 
 					const msg = {
 						to: `${updatedEmail}`,
 						from: `helpdesk@subskribble.com`,
 						subject: `Please verify your email address`,
-						html: newUser(portal, req.session.firstname, req.session.lastname, token)
+						html: changedEmail(portal, req.session.firstname, req.session.lastname, token)
 					}
 
 					// send a new verification email to the updated user

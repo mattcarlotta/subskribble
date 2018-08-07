@@ -7,6 +7,7 @@ export default ({ className, icon, link, onClickAction, tooltip }) => (
 		arrowPointAtCenter
 		placement="bottom"
 		title={tooltip}
+		overlayClassName="tooltip-placement"
 	>
 		<Button
 			className={`nav-button ${className}`}

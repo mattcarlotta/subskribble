@@ -6,7 +6,7 @@ class SettingsButton extends PureComponent {
 	state = { visibleSettings: false, tipVisible: false };
 
 	handleVisibleChange = visible => this.setState({ visibleSettings: visible });
-
+	showVisible = () => this.setState({ visibleSettings: true });
 	unauthorizeUser = () => this.props.logoutUser();
 
 	render = () => (
