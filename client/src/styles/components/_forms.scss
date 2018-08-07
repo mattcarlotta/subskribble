@@ -299,16 +299,21 @@
 	@extend %t-t-n;
 
 	.input-with-labels {
-		@include w(100%);
+		// @include w(100%);
+		display: flex;
 
 		.input-label {
-			@extend %d-ib;
-			@include w(90px);
+			display: flex;
+			@include w(100px);
 		}
 
 		.input-container {
-			@extend %d-ib;
-			@include w(89%);
+			display: flex;
+			@include w(100%);
+
+			.ant-form-item {
+				@include w(100%);
+			}
 		}
 	}
 

@@ -35,6 +35,8 @@ class AccountForm extends Component {
 				<form onSubmit={handleSubmit(this.handleFormSubmit)}>
 					<div className="account-details-container">
 						<AntFormFieldsWithLabels FIELDS={FIELDS} />
+					</div>
+					<div className="account-button-container">
 						<AntFormSubmit
 							column={24}
 							confirmLoading={confirmLoading}

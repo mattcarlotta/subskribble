@@ -113,7 +113,7 @@
 
 .sider-menu-container {
 	@extend %b-0;
-	@include c(#676b70);
+	@include c($menugrey);
 	@include b-c($blackblue);
 	@include h(100vh);
 

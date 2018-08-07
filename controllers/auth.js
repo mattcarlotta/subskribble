@@ -101,7 +101,7 @@ module.exports = app => {
 					req.session.lastname = updatedLastName;
 				}
 
-				//TODO: Update password 
+				//TODO: Update password
 
 				// check if the email was changed
 				if (currentEmail !== updatedEmail) {
@@ -124,7 +124,7 @@ module.exports = app => {
 					mailer.send(msg)
 						.then(() => {
 							res.status(201).json({
-								message: 'Successfully updated your account details. You must reverify your email address before logging into your account.'
+								message: 'Successfully updated your account details. You must reverify your email address before logging into your account again.'
 							});
 						})
 						.catch(err => (sendError(err, res, done)))

@@ -122,10 +122,10 @@ const AntFormFields = ({ FIELDS }) => (
 const AntFormFieldsWithLabels = ({ FIELDS }) => (
 	map(FIELDS, ({ component, className, label, selectOptions, style, ...props}, key) => (
 		<div className="input-with-labels" key={key}>
-			<span>
+			<span className="input-label">
 				{label}
 			</span>
-			<span>
+			<div className="input-container">
 				<Field
 					component={component || AntInput}
 					{...props}
@@ -133,8 +133,8 @@ const AntFormFieldsWithLabels = ({ FIELDS }) => (
 					hasFeedback
 					>
 						{selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
-				</Field>
-			</span>
+					</Field>
+				</div>
 		</div>
 	))
 )
