@@ -1,5 +1,5 @@
 module.exports = app => {
-	const { auth: { create, login, loggedin, logout, resetPassword, resetToken, saveSidebarState, verifyEmail } } = app.controllers;
+	const { auth: { create, login, loggedin, logout, resetPassword, resetToken, saveSidebarState, updateAccount, verifyEmail } } = app.controllers;
 	const { requireRelogin, requireAuth } = app.services.strategies;
 
 	app.post('/api/signup', create);
@@ -9,5 +9,6 @@ module.exports = app => {
 	app.put('/api/reset-password/verify?', resetPassword);
 	app.put('/api/reset-token', resetToken);
 	app.put('/api/save-sidebar-state?', requireAuth, saveSidebarState);
+	app.put('/api/update-account', requireAuth, updateAccount);
 	app.put(`/api/email/verify?`, verifyEmail);
 }

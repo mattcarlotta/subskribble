@@ -22,6 +22,13 @@ const authenticateUser = () => dispatch => (
 	})
 )
 
+// attempts to delete the user's account
+const deleteUserAccount = () => dispatch => {
+	app.delete(`delete-account`)
+	.then(() => dispatch(logoutUser))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+}
+
 // sets app loading state to false
 const doNotAuthUser = () => dispatch => {
 	dispatch({ type: types.NO_SIGNEDIN_USER });
@@ -81,6 +88,18 @@ const signupUser = props => dispatch => (
 	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 
+// attempts to update users account details
+const updateUserAccount = formProps => dispatch => (
+	app.put(`update-account`, { ...formProps })
+	.then(({data: {message, user}}) => {
+		!user
+			? dispatch(logoutUser())
+			: dispatch({ type: types.SET_SIGNEDIN_USER, payload: user })
+		dispatch({ type: types.SERVER_MESSAGE, payload: message })
+	})
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+);
+
 // attempts to verify user's email via token
 const verifyEmail = token => dispatch => (
 	app.put(`email/verify?token=${token}`)
@@ -93,6 +112,7 @@ const verifyEmail = token => dispatch => (
 
 export {
 	authenticateUser,
+	deleteUserAccount,
 	doNotAuthUser,
 	logoutUser,
 	missingPasswordToken,
@@ -102,5 +122,6 @@ export {
 	saveSidebarState,
 	signinUser,
 	signupUser,
+	updateUserAccount,
 	verifyEmail
 }

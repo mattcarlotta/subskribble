@@ -1,7 +1,7 @@
-const jwt = require('jwt-simple');
+// const jwt = require('jwt-simple');
 
 module.exports = app => {
-	const { db, query: { findUserByEmail } } = app.database;
+	const { db, query: { findUserByEmail, getUserDetails } } = app.database;
 	const { badCredentials, emailConfirmationReq } = app.shared.authErrors;
 	const bcrypt = app.get("bcrypt");
 	const cookieKey = app.get("cookieKey");
@@ -27,9 +27,12 @@ module.exports = app => {
 			const validPassword = await bcrypt.compare(password, existingUser.password);
 			if (!validPassword) return done(badCredentials, false);
 
-			const loggedinUser = { ...existingUser, token:  jwt.encode({ sub: existingUser.id, iat: new Date().getTime()}, cookieKey)}
+			const founderUser = await db.one(getUserDetails(), [email])
+			const loggedinUser = { ...founderUser }
 
+			console.log('loggedinUser', loggedinUser);
 			req.session = loggedinUser;
+			// return done(badCredentials, false);
 
 			return done(null, loggedinUser);
 		})

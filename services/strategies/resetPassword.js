@@ -26,7 +26,7 @@ module.exports = app => {
 				// hash password before attempting to create the user
 				const newPassword = await bcrypt.hash(password, 12)
 				// update user's password
-				await db.none(updateUserPassword(),[newPassword, existingUser.id])
+				await db.none(updateUserPassword(),[existingUser.id, newPassword])
 
 				return done(null, existingUser);
 			} catch (err) { return done(err, false) }

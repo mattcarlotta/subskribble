@@ -20,10 +20,10 @@ const authReducer = (state = {}, { payload, type }) => {
 			return {
 				...state,
 				avatarURL: payload.avatarurl,
+				company: payload.company,
 				loggedinUser: payload.email,
 				firstName: payload.firstname,
 				lastName: payload.lastname,
-				company: payload.company,
 				collapseSideNav: payload.collapsesidenav,
 				isGod: payload.isgod
 			};

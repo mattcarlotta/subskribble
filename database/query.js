@@ -7,13 +7,18 @@ module.exports = app => {
 
   const authQueries = {
     createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, company, token) VALUES ($1, $2, $3, $4, $5, $6)"),
+    getCurrentUserDetails: () => ("SELECT email, company, firstName, lastName FROM users WHERE id=$1"),
+    getUserDetails: () => ("SELECT id, avatarurl, company, collapsesidenav, email, firstname, isgod, lastname FROM users WHERE email=$1"),
     findCompany: () => ("SELECT company FROM users WHERE company=$1"),
-    findUserByEmail: () => ("SELECT * FROM users WHERE email=$1"),
+    findUserByEmail: () => ("SELECT id, email, firstName, lastName, password, verified FROM users WHERE email=$1"),
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),
     findUserByToken: () => ("SELECT * FROM users WHERE token=$1"),
     resetToken: () => ("UPDATE users SET token=$1 WHERE email=$2"),
-    updateUserPassword: () => ("UPDATE users SET password=$1 WHERE id=$2"),
-    updateSidebarState: () => ("UPDATE users SET collapseSideNav=$1 WHERE id=$2"),
+    updateCompanyName: () => ("UPDATE users SET company=$2 WHERE id=$1"),
+    updateEmailAddress: ()=> ("UPDATE users SET email=$2, token=$3, verified=false WHERE id=$1"),
+    updateUserName: () => ("UPDATE users SET firstName=$2, lastName=$3 WHERE id=$1"),
+    updateUserPassword: () => ("UPDATE users SET password=$2 WHERE id=$1"),
+    updateSidebarState: () => ("UPDATE users SET collapseSideNav=$2 WHERE id=$1"),
     verifyEmail: () => ("UPDATE users SET verified=true WHERE email=$1")
   }
 

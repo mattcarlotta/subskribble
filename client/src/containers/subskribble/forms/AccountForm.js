@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { AntFormFields, AntFormSubmit } from '../app/formFields/antReduxFormFields';
+import { AntFormFieldsWithLabels, AntFormSubmit } from '../app/formFields/antReduxFormFields';
 import FIELDS from '../app/formFields/accountDetailsFormFields';
 
 class AccountForm extends Component {
@@ -10,6 +10,12 @@ class AccountForm extends Component {
 		this.initializeForm();
 	}
 
+	componentDidUpdate = (prevProps, prevState) => {
+		const { serverError } = this.props;
+		serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false });
+		// serverMessage !== prevProps.serverMessage && serverMessage !== undefined && hideAvatarForm();
+	}
+
 	initializeForm = () => {
 		const { company, firstName, initialize, lastName, loggedinUser: email } = this.props;
 		initialize({ company, email, firstName, lastName })
@@ -17,6 +23,7 @@ class AccountForm extends Component {
 
 	handleFormSubmit = (formProps) => {
 		console.log(formProps);
+		this.props.updateUserAccount(formProps);
 	}
 
 	render = () => {
@@ -27,14 +34,13 @@ class AccountForm extends Component {
 			<div className="new-form-container">
 				<form onSubmit={handleSubmit(this.handleFormSubmit)}>
 					<div className="account-details-container">
-						<AntFormFields className="input-100" FIELDS={FIELDS} />
+						<AntFormFieldsWithLabels FIELDS={FIELDS} />
 						<AntFormSubmit
 							column={24}
 							confirmLoading={confirmLoading}
 							label="Update"
-							pristine={pristine}
-							submitting={submitting}
-							style={{ fontSize: 18, height: 45, marginTop: 5 }}
+							disabled={ submitting || pristine }
+							style={{ height: 38, width: 84, marginTop: 5 }}
 						/>
 					</div>
 				</form>

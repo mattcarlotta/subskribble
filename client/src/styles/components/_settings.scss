@@ -45,16 +45,18 @@
 }
 
 .settings-container {
-	@extend %t-t-n;
+	@extend %m-a, %t-t-n;
 	@include b-c($white);
 	@include w(100%);
 	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+	max-width: 1000px;
 	min-height: 800px;
 	padding: 10px 30px;
 	margin-bottom: 40px;
 
+	h2 { @include c($lightblue); }
+
 	.account-details-container {
-		@include h(400px);
 		@include w(100%);
 		@include b-c($darkwhite);
 		border: 1px dotted $softwarmgrey;

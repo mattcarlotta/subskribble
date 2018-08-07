@@ -46,6 +46,7 @@ const AntSubmitButton = ({ column, confirmLoading, disabled, icon, label, onClic
 	<Col span={column}>
 		<Button
 			type="primary"
+			className={(disabled) ? "btn-disabled" : null }
 			disabled={disabled}
 			htmlType={type}
 			loading={confirmLoading}
@@ -114,6 +115,26 @@ const AntFormFields = ({ FIELDS }) => (
 			>
 				{selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
 			</Field>
+		</div>
+	))
+)
+
+const AntFormFieldsWithLabels = ({ FIELDS }) => (
+	map(FIELDS, ({ component, className, label, selectOptions, style, ...props}, key) => (
+		<div className="input-with-labels" key={key}>
+			<span>
+				{label}
+			</span>
+			<span>
+				<Field
+					component={component || AntInput}
+					{...props}
+					style={{ fontSize: 15, ...style }}
+					hasFeedback
+					>
+						{selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
+				</Field>
+			</span>
 		</div>
 	))
 )
@@ -242,7 +263,7 @@ const AntUpload = ({
 				{ !imageUrl
 					? <div className="upload-container">
 							<i className="material-icons upload-icon">cloud_upload</i>
-							<div>(click here)</div>
+							<div>(click to browse)</div>
 						</div>
 					: null
 				}
@@ -267,6 +288,7 @@ export {
 	AntFormButtons,
 	AntFormSubmit,
 	AntFormFields,
+	AntFormFieldsWithLabels,
 	AntMonthPicker,
 	AntRadioGroupField,
 	AntRangePicker,
