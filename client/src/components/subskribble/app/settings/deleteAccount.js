@@ -6,7 +6,7 @@ export default () => (
 		<div className="delete-button-container">
 			<Link
 				className="ant-btn btn-danger"
-				to="/subkskribble/remove_my_account"
+				to="/subskribble/settings/delete-account"
 				style={{ fontSize: 15, height: 38, width: 84, marginTop: 5 }}
 				>
 					<span style={{ position: 'relative', top: 3 }}>

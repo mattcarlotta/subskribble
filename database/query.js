@@ -9,6 +9,7 @@ module.exports = app => {
     createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, company, token) VALUES ($1, $2, $3, $4, $5, $6)"),
     getCurrentUserDetails: () => ("SELECT email, company, firstName, lastName FROM users WHERE id=$1"),
     getUserDetails: () => ("SELECT id, avatarurl, company, collapsesidenav, email, firstname, isgod, lastname FROM users WHERE email=$1"),
+    getUserPassword: () => ("Select password FROM users WHERE id=$1"),
     findCompany: () => ("SELECT company FROM users WHERE company=$1"),
     findUserByEmail: () => ("SELECT id, email, firstName, lastName, password, verified FROM users WHERE email=$1"),
     findUserById: () => ("SELECT * FROM users WHERE id=$1"),

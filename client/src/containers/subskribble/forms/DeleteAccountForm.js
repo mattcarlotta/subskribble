@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { AntFormFieldsWithLabels, AntFormSubmit } from '../app/formFields/antReduxFormFields';
-import FIELDS from '../app/formFields/accountDetailsFormFields';
+import FIELDS from '../app/formFields/deleteAccountFormFields';
 
-class AccountForm extends Component {
+class DeleteAccountForm extends Component {
 	state = { confirmLoading: false };
 
-	componentDidMount = () => this.initializeForm();
+	componentDidMount = () => this.props.initialize({ company: this.props.company })
 
 	componentDidUpdate = (prevProps, prevState) => {
-		const { serverError, serverMessage } = this.props;
-		serverError !== prevProps.serverError && serverError !== undefined && this.resetLoading();
-		serverMessage !== prevProps.serverMessage && serverMessage !== undefined && this.initializeForm(true);
-	}
-
-	resetLoading = () => this.setState({ confirmLoading: false });
-
-	initializeForm = (resetConfirmLoading) => {
-		if (resetConfirmLoading) this.resetLoading();
-		const { company, firstName, initialize, lastName, loggedinUser: email } = this.props;
-		initialize({ company, email, firstName, lastName, currentPassword: '', updatedPassword: '' })
+		const { serverError } = this.props;
+		serverError !== prevProps.serverError && serverError !== undefined && this.setState({ confirmLoading: false })
 	}
 
 	handleFormSubmit = (formProps) => {
 		this.setState({ confirmLoading: true })
-		this.props.updateUserAccount(formProps);
+		// this.props.updateUserAccount(formProps);
 	}
 
 	render = () => {
@@ -34,14 +25,14 @@ class AccountForm extends Component {
 		return (
 			<div className="new-form-container">
 				<form onSubmit={handleSubmit(this.handleFormSubmit)}>
-					<div className="account-details-container">
+					<div className="delete-account-container">
 						<AntFormFieldsWithLabels FIELDS={FIELDS} />
 					</div>
-					<div className="account-button-container">
+					<div className="delete-button-container">
 						<AntFormSubmit
 							column={24}
 							confirmLoading={confirmLoading}
-							label="Update"
+							label="Delete My Account"
 							disabled={ submitting || pristine }
 							style={{ height: 38, width: 84, marginTop: 5 }}
 						/>
@@ -53,7 +44,7 @@ class AccountForm extends Component {
 };
 
 export default reduxForm({
-	form: 'AccountForm',
+	form: 'DeleteAccountForm',
 	enableReinitialize: true,
 	keepDirtyOnReinitialize: true
-})(AccountForm);
+})(DeleteAccountForm);

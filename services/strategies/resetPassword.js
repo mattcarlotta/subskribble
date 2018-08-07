@@ -28,7 +28,7 @@ module.exports = app => {
 				// update user's password
 				await db.none(updateUserPassword(),[existingUser.id, newPassword])
 
-				return done(null, existingUser);
+				return done(null, true);
 			} catch (err) { return done(err, false) }
 		})
 	);

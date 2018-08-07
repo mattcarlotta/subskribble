@@ -1,5 +1,3 @@
-// const jwt = require('jwt-simple');
-
 module.exports = app => {
 	const { db, query: { findUserByEmail, getUserDetails } } = app.database;
 	const { badCredentials, emailConfirmationReq } = app.shared.authErrors;
@@ -28,13 +26,9 @@ module.exports = app => {
 			if (!validPassword) return done(badCredentials, false);
 
 			const founderUser = await db.one(getUserDetails(), [email])
-			const loggedinUser = { ...founderUser }
+			req.session = { ...founderUser }
 
-			console.log('loggedinUser', loggedinUser);
-			req.session = loggedinUser;
-			// return done(badCredentials, false);
-
-			return done(null, loggedinUser);
+			return done(null, true);
 		})
 	);
 }

@@ -1,6 +1,7 @@
 module.exports = app => {
 	const { db, query: {
 		getCurrentUserDetails,
+		getUserPassword,
 		findCompany,
 		findUserByToken,
 		findUserByEmail,
@@ -8,13 +9,23 @@ module.exports = app => {
 		updateEmailAddress,
 		updateSidebarState,
 		updateUserName,
+		updateUserPassword,
 		verifyEmail
 	}} = app.database;
 	const { sendError } = app.shared.helpers;
-	const { badCredentials, companyAlreadyExists, emailAlreadyTaken, invalidToken, missingSidebarState, missingToken } = app.shared.authErrors;
+	const {
+		badCredentials,
+		companyAlreadyExists,
+		emailAlreadyTaken,
+		invalidToken,
+		missingSidebarState,
+		missingToken,
+		notUniquePassword
+	} = app.shared.authErrors;
 	const { passwordReset, passwordResetSuccess, passwordResetToken, thanksForReg } = app.shared.authSuccess;
 	const { createRandomToken } = app.shared.helpers;
 	const { mailer, emailTemplates: { changedEmail } } = app.services;
+	const bcrypt = app.get("bcrypt");
 	const passport = app.get("passport");
 	const portal = app.get("portal");
 
@@ -27,13 +38,11 @@ module.exports = app => {
 		// ALLOWS A USER TO LOG INTO THE APP
 		login: (req, res, done) => passport.authenticate('local-login', err => {
 			if (err || !req.session) return sendError(err || badCredentials, res, done);
-			// const { avatarurl, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
 			res.status(201).json({ ...req.session });
 		})(req, res, done),
 		// ALLOWS A USER TO LOG INTO THE APP
 		loggedin: (req, res) => {
 			if (!req.session) return sendError(badCredentials, res, done);
-			// const { avatarurl, company, collapsesidenav, email, firstname, isgod, lastname } = req.session;
 			res.status(201).json({ ...req.session });
 		},
 		// REMOVES USER FROM SESSION AND DELETES CLIENT COOKIE
@@ -55,7 +64,8 @@ module.exports = app => {
 		// SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
 		saveSidebarState: async (req, res, done) => {
 			if (!req.query) return sendError(missingSidebarState, res, done);
-			const updatedSidebarState = req.query.collapseSideNav === 'true' ? true : false;
+			const { collapseSideNav } = req.query;
+			const updatedSidebarState = collapseSideNav === 'true' ? true : false;
 
 			try {
 				await db.none(updateSidebarState(), [req.session.id, updatedSidebarState]);
@@ -72,7 +82,8 @@ module.exports = app => {
 				email: updatedEmail,
 				firstName: updatedFirstName,
 				lastName: updatedLastName,
-				password: updatedPassword
+				currentPassword: suppliedCurrentPassword,
+				updatedPassword
 			} = req.body;
 
 			try {
@@ -101,7 +112,25 @@ module.exports = app => {
 					req.session.lastname = updatedLastName;
 				}
 
-				//TODO: Update password
+				if (suppliedCurrentPassword || updatedPassword) {
+					if (!suppliedCurrentPassword || !updatedPassword) return sendError('You must supply both your current password and a new password.', res, done);
+
+					const { password } = await db.oneOrNone(getUserPassword(), [req.session.id]);
+
+					const validPassword = await bcrypt.compare(suppliedCurrentPassword, password);
+					console.log('validPassword', validPassword);
+					if (!validPassword) return sendError("The current password you've supplied does not match our records. Please try again.", res, done);
+
+					const isNotUniquePassword = await bcrypt.compare(updatedPassword, password);
+					if (isNotUniquePassword) return sendError(notUniquePassword, res, done);
+
+					try {
+						// hash password before attempting to create the user
+						const newPassword = await bcrypt.hash(updatedPassword, 12)
+						// update user password
+						await db.none(updateUserPassword(),[req.session.id, newPassword])
+					} catch (err) { return sendError(err, res, done) }
+				}
 
 				// check if the email was changed
 				if (currentEmail !== updatedEmail) {

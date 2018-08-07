@@ -9,5 +9,5 @@ module.exports = app => ({
   missingSidebarState: 'There was a problem updating the sidebar state.',
   missingToken: 'There was a problem authenticating your request.',
   notAdmin: 'You DO NOT have permission to do that.',
-  notUniquePassword: 'Your new password must not match the old password. Please try again.'
+  notUniquePassword: 'Your new password must not match your current password. Please try again.'
 })

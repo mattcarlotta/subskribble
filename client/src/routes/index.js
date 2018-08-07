@@ -4,6 +4,7 @@ import { IndexRoute, Redirect, Route } from 'react-router';
 import App from '../components/subskribble';
 import CustomerSignupForm from '../containers/subskribble/forms/CustomerSignupForm';
 // import Dashboard from '../components/subskribble/dashboard';
+import DeleteAccount from '../containers/subskribble/app/settings/DeleteAccount';
 // import Home from '../components/website/home';
 import Landing from '../components/subskribble/app/landing';
 import NotFound from '../components/subskribble/app/notfound/404';
@@ -38,6 +39,7 @@ export default (
 				<Route path="promotionals/create" component={PromosForm} />
 				<Route path="promotionals/edit/:id" component={PromosForm} />
 				<Route path="settings" component={Settings} />
+				<Route path="settings/delete-account" component={DeleteAccount} />
 				<Route path="subscribers" component={Subscribers} />
 				<Route path="subscribers/register" component={CustomerSignupForm} />
 				<Route path="templates" component={Templates} />
