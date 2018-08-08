@@ -50,11 +50,20 @@
 	@include w(100%);
 	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
 	max-width: 1000px;
-	min-height: 800px;
+	// min-height: 800px;
 	padding: 10px 30px;
 	margin-bottom: 40px;
 
 	h2 { @include c($lightblue); }
+
+	.title {
+		margin-top: 30px;
+	}
+
+	.subdescription {
+		@include f-f($arimo);
+		@include f-s(13px);
+	}
 
 	.account-details-container {
 		@include w(100%);
@@ -66,6 +75,10 @@
 		border-top-left-radius: 4px;
 		max-width: 900px;
 		padding: 20px;
+
+		.textarea-container {
+			@include h(240px);
+		}
 	}
 
 	.account-button-container {
@@ -82,40 +95,55 @@
 		padding-left: 20px;
 		padding-right: 20px;
 		margin-bottom: 30px;
+
+		.delete-account-information {
+			@extend .f-l;
+			@include h(126px);
+			// @include w(70%);
+			margin-left: 20px;
+
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
+
+				.bold {
+					@include f-f($arimo-bold);
+					@include f-s(16px);
+				}
+			}
+		}
 	}
 
-	.delete-account-settings {
+	.delete-account-details {
+		@include h(100px);
+		@include w(100%);
+		@include b-c($darkwhite);
+		border: 1px dotted $softwarmgrey;
+		border-radius: 4px;
+		max-width: 900px;
+		margin-bottom: 30px;
+		padding: 20px;
 
-		.delete-account-details {
-			@include h(100px);
-			@include w(100%);
-			@include b-c($darkwhite);
-			border: 1px dotted $softwarmgrey;
-			border-radius: 4px;
-			max-width: 900px;
-			margin-bottom: 30px;
-			padding: 20px;
+		.delete-button-container {
+			@extend .f-l;
+			@include w(100px);
+		}
 
-			.delete-button-container {
-				@extend .f-l;
-				@include w(100px);
-			}
+		.delete-account-information {
+			@extend .f-l;
+			@include h(126px);
+			// @include w(70%);
+			// padding: 70px 20px;
 
-			.delete-account-information {
-				@extend .f-l;
-				@include h(126px);
-				// @include w(70%);
-				// padding: 70px 20px;
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
 
-				.information {
-					@include f-f($arimo);
-					@include f-s(14px);
-					word-wrap: break-word;
-
-					.bold {
-						@include f-f($arimo-bold);
-						@include f-s(16px);
-					}
+				.bold {
+					@include f-f($arimo-bold);
+					@include f-s(16px);
 				}
 			}
 		}

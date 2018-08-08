@@ -14,7 +14,7 @@ export default class Profile extends Component {
 	render = () => (
 		<PageContainer>
 			<div className="settings-container">
-				<h2 className="title">Settings</h2>
+				<h2>Settings</h2>
 				<hr/>
 				<div className="profile-picture">
 					<h4>Profile Picture</h4>

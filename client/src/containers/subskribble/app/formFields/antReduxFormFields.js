@@ -125,12 +125,11 @@ const AntFormFieldsWithLabels = ({ FIELDS }) => (
 			<span className="input-label">
 				{label}
 			</span>
-			<div className="input-container">
+			<div className={`input-container ${className}`}>
 				<Field
 					component={component || AntInput}
 					{...props}
 					style={{ fontSize: 15, ...style }}
-					hasFeedback
 					>
 						{selectOptions && map(selectOptions, value => (<Option key={value} value={value}>{value}</Option>))}
 					</Field>
