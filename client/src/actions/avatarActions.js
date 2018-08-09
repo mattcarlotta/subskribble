@@ -4,10 +4,13 @@ import * as types from './types';
 // attempts to delete current avatar
 const deleteAvatar = () => dispatch => (
 	avatarAPI.delete(`avatar/delete`)
-	.then(({data: {message}}) => {
-		dispatch({ type: types.SET_CURRENT_AVATAR, payload: undefined })
-		dispatch({ type: types.SERVER_MESSAGE, payload: message })
-	})
+	.then(() => dispatch({ type: types.SET_CURRENT_AVATAR, payload: undefined }))
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
+// attempts to delete current a recently removed account's avatar
+const deleteAccountAvatar = (token, userid) => dispatch => (
+	avatarAPI.delete(`avatar/delete-account`, { data: { token, userid }})
 	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
@@ -33,6 +36,7 @@ const uploadAvatar = formData => dispatch => (
 
 export {
 	deleteAvatar,
+	deleteAccountAvatar,
 	updateAvatar,
 	uploadAvatar
 }

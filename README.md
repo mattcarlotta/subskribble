@@ -126,18 +126,22 @@ module.exports = {
 - `sudo apt-get install -y nodejs`
 - `sudo npm install -g nodemon`
 
-### 2. Install and Configure PostgreSQL†
-- `sudo apt-get install postgresql postgresql-contrib`
-- `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
+### 2. Install and Configure PostgreSQL (v10)†
+- `sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/pgdg.list'` (adds the PGDG APT source file)
+- `wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -` (adds the PostgreSQL Package Repository Key)
+- `sudo apt-get install postgresql postgresql-contrib` (installs postgres-10 with additional modules)
+- `sudo systemctl start postgresql` (starts PostgreSQL services)
+- `sudo -u postgres psql` (logs in to a PostgreSQL shell as super user postgres)
+- `psql`(logs into PostgreSQL DB)
 - `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
-- `\q` (exits postgresSQL shell)
+- `\q` (exits PostgreSQL shell)
 
 ### 3. Create a Custom PostgreSQL User (optional)
-- `psql -U postgres` (logs into PostgreSQL as "postgres")
+- `psql -U postgres` (logs into PostgreSQL DB as "postgres", enter newly created "postgres" password when prompted)
 - `CREATE ROLE <username> WITH LOGIN PASSWORD '<password>';` (creates a new user with a password)
 - `ALTER ROLE <username> CREATEDB;` (gives user limited ability to create DBs or `GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;`)
 - `\du` (shows active DB maintainers)
-- `\q` (exits postgresSQL shell)
+- `\q` (exits PostgreSQL shell)
 
 ### 4. Starting PostgreSQL on Boot (optional)
 - `sudo systemctl enable postgresql`
@@ -166,12 +170,13 @@ module.exports = {
 - `brew install postgresql`
 
 ### 3. Configure PostgreSQL†
-- `sudo -u postgres psql` (logs into PostgreSQL shell with default user "postgres")
+- `sudo -u postgres psql` (logs in to a PostgreSQL shell as super user postgres)
+- `psql`(logs into PostgreSQL DB)
 - `\password postgres` (will ask to set a password for "postgres"; after pressing enter, it'll prompt for the password)
 - `\q` (exits PostgreSQL shell)
 
-### 4. Create a Custom postgreSQL User (optional)
-- `psql -U postgres` (logs into postgreSQL as "postgres")
+### 4. Create a Custom PostgreSQL User (optional)
+- `psql -U postgres` (logs into PostgreSQL as "postgres", enter newly created postgres password when prompted)
 - `CREATE ROLE <username> WITH LOGIN PASSWORD '<password>';` (creates a new user with a password)
 - `ALTER ROLE <username> CREATEDB;` (gives user limited ability to create DBs or `GRANT ALL PRIVILEDGES ON DATABASE <dbname> TO <username>;`)
 - `\du` (shows active DB maintainers)

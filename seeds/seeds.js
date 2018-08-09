@@ -12,27 +12,17 @@ module.exports = app => {
 	const startStamp = currentDate.toString()
 	const endStamp = laterDate.toString()
 
-	const enddate = "endDate TEXT";
-	const id = "id UUID DEFAULT uuid_generate_v1mc()";
-	const key = "key SERIAL PRIMARY KEY";
-	const planName = "planName VARCHAR NOT NULL";
-	const userid = "userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE";
-	const startdate = "startDate TEXT NOT NULL";
-	const status = "status VARCHAR DEFAULT 'active'";
-
 	const userTableOptions = `(
-		${id} UNIQUE,
-		${key},
+		id UUID DEFAULT uuid_generate_v1mc() UNIQUE,
+		key SERIAL PRIMARY KEY,
 		verified BOOLEAN DEFAULT FALSE,
 		email VARCHAR NOT NULL UNIQUE,
 		firstName TEXT NOT NULL,
 		lastName TEXT NOT NULL,
 		password VARCHAR NOT NULL UNIQUE,
 		company VARCHAR NOT NULL UNIQUE,
-		avatarURL TEXT DEFAULT NULL,
-		avatarFilePath TEXT DEFAULT NULL,
 		startDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
-		${enddate},
+		endDate TEXT,
 		credit INTEGER DEFAULT 0,
 		token VARCHAR UNIQUE,
 		collapseSideNav BOOLEAN DEFAULT FALSE,
@@ -40,9 +30,9 @@ module.exports = app => {
 	)`
 
 	const noteTableOptions = `(
-		${id},
-		${key},
-		${userid},
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 		read BOOLEAN DEFAULT false,
 		deleted BOOLEAN DEFAULT false,
 		subscriber VARCHAR,
@@ -51,11 +41,11 @@ module.exports = app => {
 	)`;
 
 	const planTableOptions = `(
-		${id},
-		${key},
-		${userid},
-		${status},
-		${planName} UNIQUE,
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		status VARCHAR DEFAULT 'active',
+		planName VARCHAR NOT NULL UNIQUE,
 		description TEXT NOT NULL,
 		amount DECIMAL(12,2) NOT NULL,
 		setupFee DECIMAL(12,2),
@@ -65,29 +55,29 @@ module.exports = app => {
 	)`;
 
 	const promoTableOptions = `(
-		${id},
-		${key},
-		${userid},
-		${status},
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		status VARCHAR DEFAULT 'active',
 		plans TEXT ARRAY NOT NULL,
 		promoCode VARCHAR NOT NULL,
 		amount INTEGER NOT NULL,
 		discountType VARCHAR NOT NULL,
 		datestamps TEXT ARRAY NOT NULL,
-		${startdate},
-		${enddate} NOT NULL,
+		startDate TEXT NOT NULL,
+		endDate TEXT NOT NULL,
 		maxUsage INTEGER NOT NULL,
 		totalUsage INTEGER DEFAULT 0
 	)`;
 
 	const subTableOptions = `(
-		${id},
-		${key},
-		${userid},
-		${status},
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		status VARCHAR DEFAULT 'active',
 		email VARCHAR,
 		subscriber VARCHAR NOT NULL,
-		${planName},
+		planName VARCHAR NOT NULL,
 		amount DECIMAL(12,2),
 		billingAddress TEXT,
 		billingCity TEXT,
@@ -102,16 +92,16 @@ module.exports = app => {
 		contactPhone VARCHAR,
 		promoCode TEXT,
 		sameBillingAddress BOOLEAN,
-		${startdate},
-		${enddate},
+		startDate TEXT NOT NULL,
+		endDate TEXT,
 		FOREIGN KEY (planName) REFERENCES plans(planName) ON DELETE CASCADE
 	)`;
 
 	const templateTableOptions = `(
-		${id},
-		${key},
-		${userid},
-		${status},
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		status VARCHAR DEFAULT 'active',
 		fromSender VARCHAR NOT NULL,
 		subject VARCHAR NOT NULL,
 		templateName VARCHAR UNIQUE,
@@ -121,17 +111,33 @@ module.exports = app => {
 	)`;
 
 	const transTableOptions = `(
-		${id},
-		${key},
-		${userid},
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 		status VARCHAR,
 		invoice UUID DEFAULT uuid_generate_v1mc(),
-		${planName},
+		planName VARCHAR NOT NULL,
 		subscriber VARCHAR NOT NULL,
 		processor VARCHAR NOT NULL,
 		amount VARCHAR,
 		chargeDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
 		refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
+	)`;
+
+	const feedbackTableOptions = `(
+		id UUID DEFAULT uuid_generate_v1mc(),
+		key SERIAL PRIMARY KEY,
+		company VARCHAR NOT NULL,
+		email VARCHAR NOT NULL,
+		reason TEXT
+	)`;
+
+	const avatarTableOptions = `(
+		userid UUID NOT NULL,
+		key SERIAL PRIMARY KEY,
+		avatarURL TEXT DEFAULT NULL,
+		avatarFilePath TEXT DEFAULT NULL,
+		token VARCHAR UNIQUE
 	)`;
 
 	const noteProperties = `(userid, subscriber, message, read)`;
@@ -282,6 +288,8 @@ module.exports = app => {
 				DROP TABLE IF EXISTS transactions;
 				DROP TABLE IF EXISTS templates;
 				DROP TABLE IF EXISTS notifications;
+				DROP TABLE IF EXISTS avatars;
+				DROP TABLE IF EXISTS feedback;
 				CREATE TABLE users ${userTableOptions};
 				CREATE TABLE plans ${planTableOptions};
 				CREATE TABLE promotionals ${promoTableOptions};
@@ -289,6 +297,8 @@ module.exports = app => {
 				CREATE TABLE subscribers ${subTableOptions};
 				CREATE TABLE templates ${templateTableOptions};
 				CREATE TABLE transactions ${transTableOptions};
+				CREATE TABLE feedback ${feedbackTableOptions};
+				CREATE TABLE avatars ${avatarTableOptions};
 			`);
 
 			// create new user

@@ -1,4 +1,4 @@
-import { allowedTextAreaCharacters, isRequired, minPassword } from './validateFormFields';
+import { allowedTextAreaCharacters, isRequired } from './validateFormFields';
 import { AntTextArea } from './antReduxFormFields';
 
 export default [
@@ -18,10 +18,10 @@ export default [
 	},
   {
     label: 'Current Password',
-    name: 'currentPassword',
+    name: 'password',
     type: 'password',
     placeholder: 'Current Password',
-    validate: [isRequired, minPassword]
+    validate: [isRequired]
   },
 	{
     className: "textarea-container",

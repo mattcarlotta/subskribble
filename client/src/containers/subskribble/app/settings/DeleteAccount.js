@@ -23,4 +23,4 @@ export default connect(state => ({
   firstName: state.auth.firstName,
   lastName: state.auth.lastName,
   loggedinUser: state.auth.loggedinUser
-}), { deleteUserAccount})(DeleteAccount)
+}), { deleteUserAccount })(DeleteAccount)

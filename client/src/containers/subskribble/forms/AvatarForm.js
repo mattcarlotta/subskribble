@@ -4,6 +4,9 @@ import { Col, Button, Icon, Tooltip } from 'antd';
 import { AntUpload } from '../app/formFields/antReduxFormFields';
 import { hasFileList, isRequired } from '../app/formFields/validateFormFields';
 
+const activeButton = 'ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only';
+const inactiveButton = 'btn-disabled ant-btn ant-btn-circle';
+
 class AvatarForm extends Component {
 	state = {
 		confirmLoading: false,
@@ -120,7 +123,7 @@ class AvatarForm extends Component {
 						>
 							<button
 								type="submit"
-								className="ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only"
+								className={`${this.props.pristine ? inactiveButton : activeButton}`}
 								disabled={this.props.submitting}
 							>
 								<Icon type="upload" />

@@ -1,6 +1,7 @@
 import { app } from './axiosConfig';
-import * as types from '../actions/types';
+import * as types from './types';
 import { browserHistory } from 'react-router';
+import { deleteAccountAvatar } from './avatarActions';
 
 //==========================================================================
 // Authorization
@@ -23,9 +24,13 @@ const authenticateUser = () => dispatch => (
 )
 
 // attempts to delete the user's account
-const deleteUserAccount = () => dispatch => {
-	app.delete(`delete-account`)
-	.then(() => dispatch(logoutUser))
+const deleteUserAccount = (formProps) => dispatch => {
+	app.delete(`delete-account`, { data: { ...formProps }})
+	.then(({ data: { message, token, userid }}) => {
+		dispatch({ type: types.SERVER_MESSAGE, payload: message })
+		if(token && userid) dispatch(deleteAccountAvatar(token, userid))
+		dispatch(logoutUser())
+	})
 	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 }
 
@@ -53,7 +58,7 @@ const missingPasswordToken = () => ({
 	payload: 'Missing password token! Please check your email and click on the "Create New Password" button.'
 })
 
-// updates a user's password
+// updates a user'deleteUserAccounts password
 const resetUserPassword = (password, token) => dispatch => (
 	app.put(`reset-password/verify?token=${token}`, { email: 'helpdesk@subskribble.com', password })
 	.then(({data: {message}}) => dispatch({ type: types.SERVER_MESSAGE, payload: message }))

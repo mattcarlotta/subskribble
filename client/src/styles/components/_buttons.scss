@@ -62,6 +62,7 @@
 	@extend %b-0;
 	@include c($darkerwhite !important);
 	@include b-c($disabledgrey !important);
+	cursor: not-allowed;
 
 	&:hover, &:focus {
 		@extend %no-link-focus;

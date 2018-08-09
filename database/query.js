@@ -5,10 +5,15 @@ module.exports = app => {
     setUserAsAdmin: () => ("UPDATE users SET isGod=true WHERE id=$1")
   }
 
+  const avatarQueries = {
+    getAvatarToken: () => ("SELECT token,userid FROM avatars WHERE userid=$1")
+  }
+
   const authQueries = {
     createNewUser: () => ("INSERT INTO users(email, password, firstName, lastName, company, token) VALUES ($1, $2, $3, $4, $5, $6)"),
+    deleteUserAccount: () => ("DELETE FROM users WHERE id=$1 AND email=$2 AND company=$3 RETURNING *"),
     getCurrentUserDetails: () => ("SELECT email, company, firstName, lastName FROM users WHERE id=$1"),
-    getUserDetails: () => ("SELECT id, avatarurl, company, collapsesidenav, email, firstname, isgod, lastname FROM users WHERE email=$1"),
+    getUserDetails: () => ("SELECT id, company, collapsesidenav, email, firstname, isgod, lastname FROM users WHERE email=$1"),
     getUserPassword: () => ("Select password FROM users WHERE id=$1"),
     findCompany: () => ("SELECT company FROM users WHERE company=$1"),
     findUserByEmail: () => ("SELECT id, email, firstName, lastName, password, verified FROM users WHERE email=$1"),
@@ -21,6 +26,10 @@ module.exports = app => {
     updateUserPassword: () => ("UPDATE users SET password=$2 WHERE id=$1"),
     updateSidebarState: () => ("UPDATE users SET collapseSideNav=$2 WHERE id=$1"),
     verifyEmail: () => ("UPDATE users SET verified=true WHERE email=$1")
+  }
+
+  const feedbackQueries = {
+    userFeedback: () => ("INSERT INTO feedback(company, email, reason) VALUES ($1, $2, $3)")
   }
 
   const planQueries = {
@@ -110,7 +119,9 @@ module.exports = app => {
 
   return {
     ...adminQueries,
+    ...avatarQueries,
     ...authQueries,
+    ...feedbackQueries,
     ...notificationQueries,
     ...planQueries,
     ...promoQueries,

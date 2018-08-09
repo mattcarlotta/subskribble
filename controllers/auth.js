@@ -1,5 +1,7 @@
 module.exports = app => {
 	const { db, query: {
+		deleteUserAccount,
+		getAvatarToken,
 		getCurrentUserDetails,
 		getUserPassword,
 		findCompany,
@@ -10,6 +12,7 @@ module.exports = app => {
 		updateSidebarState,
 		updateUserName,
 		updateUserPassword,
+		userFeedback,
 		verifyEmail
 	}} = app.database;
 	const { sendError } = app.shared.helpers;
@@ -35,6 +38,29 @@ module.exports = app => {
 			if (err) return sendError(err, res, done);
 			res.status(201).json(thanksForReg(req.body.email, req.body.firstName, req.body.lastName))
 		})(req, res, done),
+		// DELETES USER ACCOUNT
+		deleteAccount: async (req, res, done) => {
+			if (!req.body) return sendError('Missing delete account parameters.', res, done);
+			const { company, reason, password: suppliedPassword, user: email } = req.body;
+
+			try {
+				const { password } = await db.oneOrNone(getUserPassword(), [req.session.id]);
+				const validPassword = await bcrypt.compare(suppliedPassword, password);
+				if (!validPassword) return sendError("The current password you've supplied does not match our records. Please try again.", res, done);
+
+				const avatar = await db.oneOrNone(getAvatarToken(), [req.session.id]);
+
+				const deletedUser = await db.result(deleteUserAccount(), [req.session.id, email, company]);
+				if (!deletedUser) return sendError('There was a problem deleting your account. Please try again or contact us at: helpdesk@subskribble.com', res, done);
+
+				await db.none(userFeedback(), [company, email, reason]);
+
+				res.status(201).json({
+					...avatar,
+					message: 'Your Subskribble account has been successfully removed. Thank you for using our services.',
+				});
+			} catch (err) { return sendError(err, res, done) }
+		},
 		// ALLOWS A USER TO LOG INTO THE APP
 		login: (req, res, done) => passport.authenticate('local-login', err => {
 			if (err || !req.session) return sendError(err || badCredentials, res, done);
@@ -74,6 +100,7 @@ module.exports = app => {
 				res.status(201).json({ collapseSideNav: updatedSidebarState });
 			} catch (err) { return sendError(err, res, done) }
 		},
+		// UPDATES USER ACCOUNT DETAILS (company, email, name, password)
 		updateAccount: async(req, res, done) => {
 			if (!req.body) return sendError('Missing account update parameters.', res, done);
 
@@ -116,9 +143,7 @@ module.exports = app => {
 					if (!suppliedCurrentPassword || !updatedPassword) return sendError('You must supply both your current password and a new password.', res, done);
 
 					const { password } = await db.oneOrNone(getUserPassword(), [req.session.id]);
-
 					const validPassword = await bcrypt.compare(suppliedCurrentPassword, password);
-					console.log('validPassword', validPassword);
 					if (!validPassword) return sendError("The current password you've supplied does not match our records. Please try again.", res, done);
 
 					const isNotUniquePassword = await bcrypt.compare(updatedPassword, password);
