@@ -12,12 +12,14 @@ const noDataToDisplay = ({ buttonIcon, buttonPushLocation, buttonPanel, cardTitl
 				<div style={{ display: visible ? "block" : "none", minHeight: 400 }} className="panel-body-container">
 					<div className="panel-body">
 						<div className="ant-row">
-							<CustomButton
-								className="f-r"
-								buttonIcon={buttonIcon}
-								onClickAction={() => browserHistory.push(`/subskribble/${buttonPushLocation}`)}
-								tipTitle={tipTitle}
-							/>
+							{ buttonPushLocation &&
+								<CustomButton
+									className="f-r"
+									buttonIcon={buttonIcon}
+									onClickAction={() => browserHistory.push(`/subskribble/${buttonPushLocation}`)}
+									tipTitle={tipTitle}
+								/>
+							}
 							<div className="no-data">
 								<Icon type="line-chart" />
 								<h2>No data to display.</h2>

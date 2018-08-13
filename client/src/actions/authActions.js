@@ -1,7 +1,7 @@
 import { app } from './axiosConfig';
 import * as types from './types';
 import { browserHistory } from 'react-router';
-import { deleteAccountAvatar } from './avatarActions';
+import { deleteAccountAvatar, fetchAvatarOnLogin } from './avatarActions';
 
 //==========================================================================
 // Authorization
@@ -78,7 +78,10 @@ const saveSidebarState = collapseSideNav => dispatch => (
 // attempts to sign user in, then sets jwt token to cookie if successful
 const signinUser = props => dispatch => (
 	app.post(`signin`, { ...props })
-	.then(({data}) => dispatch({ type: types.SET_SIGNEDIN_USER, payload: data }))
+	.then(({data}) => {
+		dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
+		dispatch(fetchAvatarOnLogin());
+	})
 	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 );
 

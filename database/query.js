@@ -1,5 +1,5 @@
 module.exports = app => {
-  const statusType = status => (status.length > 1 ? `WHERE status='${status[0]}' OR status='${status[1]}'` : `WHERE status='${status[0]}'`);
+  const statusType = (status, userid) => (status.length > 1 ? `WHERE status='${status[0]}' AND userid='${userid}' OR status='${status[1]}' AND userid='${userid}'` : `WHERE status='${status[0]}' AND userid='${userid}'`);
 
   const adminQueries = {
     setUserAsAdmin: () => ("UPDATE users SET isGod=true WHERE id=$1")
@@ -90,7 +90,7 @@ module.exports = app => {
       DELETE FROM subscribers WHERE userid=$1 AND id=$2 RETURNING *
     `),
     findSubscriberByEmail: () => ("SELECT planName FROM subscribers WHERE email=$1 and planName=$2"),
-    getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getSomeSubcribers: (userid, limit, offset, status) => (`SELECT * FROM subscribers ${statusType(status, userid)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getSubscriberCount: () => (
       "SELECT count(*) filter (WHERE status = 'active' AND userid=$1) AS active, count(*) filter (where status in ('inactive', 'suspended') and userid=$1) as inactive FROM subscribers;"
     ),
@@ -101,7 +101,7 @@ module.exports = app => {
     createTemplate: () => ( `INSERT INTO templates (userid, fromSender, plans, message, subject, templateName, uniqueTemplateName) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7)`),
     deleteOneTemplate: () => ("DELETE FROM templates WHERE id=$1 AND userid=$2 RETURNING *"),
     findTemplateById: () => ("SELECT * from templates WHERE userid=$1 AND id=$2"),
-    getSomeTemplates: (userid, limit, offset, status) => (`SELECT * FROM templates ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getSomeTemplates: (userid, limit, offset, status) => (`SELECT * FROM templates ${statusType(status, userid)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTemplateCount: () => (
       "SELECT count(*) filter (WHERE status='active' AND userid=$1) AS active, count(*) filter (where status='suspended' and userid=$1) as inactive FROM templates;"
     ),
@@ -112,7 +112,7 @@ module.exports = app => {
 
   const transactQueries = {
     deleteOneTransactaction: () => ("DELETE FROM transactions WHERE id=$1 AND userid=$2 RETURNING *"),
-    getSomeTransactactions: (userid, limit, offset, status) => (`SELECT * FROM transactions ${statusType(status)} AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
+    getSomeTransactactions: (userid, limit, offset, status) => (`SELECT * FROM transactions ${statusType(status, userid)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTransactactionCount: () => (
       "SELECT count(*) filter (where status in ('paid', 'due') AND userid=$1) AS charges, count(*) filter (where status in ('refund', 'credit') AND userid=$1) AS refunds FROM transactions;"
     ),

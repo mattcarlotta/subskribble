@@ -6,7 +6,7 @@ const { Item: MenuItem } = Menu;
 
 const RIGHTNAVLINKS = [
 	// { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
-	{ icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
+	// { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
 	{ icon: 'settings', label: 'Settings', link: '/subskribble/settings' },
 	// { icon: '', label: '', link: '/subskribble/logout' },
 ]
@@ -23,7 +23,7 @@ export default ({ avatarURL, company, firstName, handleVisibleChange, lastName, 
 						src={avatarURL}
 					/>
 					<div className="user-label">
-						<p className="user">{firstName} {lastName} ({company})</p>
+						<p className="user">{firstName} {lastName}</p>
 						<p className="email">{loggedinUser}</p>
 					</div>
 				</Link>

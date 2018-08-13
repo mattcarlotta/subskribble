@@ -14,6 +14,15 @@ const deleteAccountAvatar = (token, userid) => dispatch => (
 	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
 )
 
+// attempts to fetch
+const fetchAvatarOnLogin = () => dispatch => (
+	avatarAPI.get(`avatar/current-user`)
+	.then(({data: { avatarurl }}) => {
+		avatarurl && dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl })
+	})
+	.catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }))
+)
+
 // attempts to update current avatar
 const updateAvatar = formData => dispatch => (
 	avatarAPI.put(`avatar/update`, formData)
@@ -37,6 +46,7 @@ const uploadAvatar = formData => dispatch => (
 export {
 	deleteAvatar,
 	deleteAccountAvatar,
+	fetchAvatarOnLogin,
 	updateAvatar,
 	uploadAvatar
 }

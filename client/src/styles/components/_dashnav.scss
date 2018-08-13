@@ -248,13 +248,13 @@
 
 .settings-tab-container {
 	@extend %bb-none;
-	@include w(300px);
+	@include w(250px);
 	border-radius: 10px;
 
 	.my-profile-container {
 		@include c($white);
 		@include b-c($lightblue);
-		padding: 10px 15px 5px 15px;
+		padding: 10px 0 5px 7px;
 
 		.popover-user {
 			// @extend %p-r;
@@ -278,7 +278,13 @@
 
 			.user {
 				@extend %m-0;
-				font-weight: 600;
+				@include f-f($arimo-bold);
+			}
+
+			.company {
+				@extend %m-0;
+				@include f-f($arimo);
+				@include f-s(12px);
 			}
 
 			.email {
