@@ -6,7 +6,7 @@ import { AntInput, AntSelectField, AntStepFormButtons } from '../app/formFields/
 import Spinner from '../app/loading/Spinner';
 import planActions from '../../../actions/planActions';
 import { addNewPlan, editPlan } from '../../../actions/formActions';
-import { allowedCharacters, isRequired, isNotEmpty, isFloat, maxLength50 } from '../app/formFields/validateFormFields';
+import { allowedCharacters, isRequired, isNotEmpty, isFloat, maxLength40 } from '../app/formFields/validateFormFields';
 
 const { fetchPlan } = planActions;
 
@@ -37,7 +37,7 @@ class PlanForm extends Component {
 	handleFormSubmit = (formProps) => {
 		this.setState({ confirmLoading: true });
 		const { id } = this.props.location.query;
-		!id ? this.props.addNewPromo(formProps) : this.props.editPlan(id, formProps);
+		!id ? this.props.addNewPlan(formProps) : this.props.editPlan(id, formProps);
 	}
 
 	goBackPage = () => browserHistory.goBack();
@@ -62,7 +62,7 @@ class PlanForm extends Component {
 										name="planname"
 										component={AntInput}
 										placeholder="Unique Plan Name"
-										validate={[isRequired, allowedCharacters, maxLength50]}
+										validate={[isRequired, allowedCharacters, maxLength40]}
 									/>
 								</div>
 								<div className="input-100">
@@ -72,7 +72,7 @@ class PlanForm extends Component {
 										name="description"
 										component={AntInput}
 										placeholder="Plan Description"
-										validate={[isRequired, allowedCharacters, maxLength50]}
+										validate={[isRequired, allowedCharacters, maxLength40]}
 									/>
 								</div>
 								<div className="input-100">

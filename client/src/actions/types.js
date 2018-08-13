@@ -1,5 +1,4 @@
 // APP
-export const APP_LOADING_STATE = 'APP_LOADING_STATE';
 export const SET_NAVBAR_STATE = 'SET_NAVBAR_STATE';
 
 //AVATAR

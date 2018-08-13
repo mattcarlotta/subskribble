@@ -107,6 +107,13 @@
 	.no-b-r {
 		border-right: 0 !important;
 	}
+
+	.no-data-card {
+		.ant-card-head-title {
+			@include c($blue);
+			@include f-w(bold);
+		}
+	}
 }
 
 .filter-container {

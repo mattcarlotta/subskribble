@@ -4,13 +4,6 @@ import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
-const appReducer = (state = {}, { payload, type }) => {
-	switch (type) {
-		case types.APP_LOADING_STATE: return { ...state, isLoading: payload };
-		default: return state;
-	}
-}
-
 const authReducer = (state = {}, { payload, type }) => {
 	switch (type) {
 		case types.NO_SIGNEDIN_USER: return { ...state, loggedinUser: null };
@@ -26,15 +19,6 @@ const authReducer = (state = {}, { payload, type }) => {
 				lastName: payload.lastname,
 				collapseSideNav: payload.collapsesidenav,
 				isGod: payload.isgod
-			};
-		case types.UNAUTH_USER:
-		return {
-			...state,
-			loggedinUser: null,
-			firstName: null,
-			lastName: null,
-			collapseSideNav: null,
-			isGod: null
 			};
 		case types.USER_WAS_VERIFIED: return { ...state, userVerified: payload };
 		default: return state;
@@ -202,7 +186,6 @@ const formReducers = {
 }
 
 const rootReducer = combineReducers({
-	app: appReducer,
 	auth: authReducer,
 	notes: notificationsReducer,
 	plans: planReducer,
@@ -215,4 +198,9 @@ const rootReducer = combineReducers({
 	routing
 });
 
-export default rootReducer;
+
+export default (state, action) => (
+	action.type === 'UNAUTH_USER'
+		? rootReducer(undefined, action)
+		: rootReducer(state, action)
+)

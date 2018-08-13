@@ -45,7 +45,7 @@ module.exports = app => {
 		key SERIAL PRIMARY KEY,
 		userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 		status VARCHAR DEFAULT 'active',
-		planName VARCHAR NOT NULL UNIQUE,
+		planName VARCHAR NOT NULL,
 		description TEXT NOT NULL,
 		amount DECIMAL(12,2) NOT NULL,
 		setupFee DECIMAL(12,2),
@@ -93,8 +93,7 @@ module.exports = app => {
 		promoCode TEXT,
 		sameBillingAddress BOOLEAN,
 		startDate TEXT NOT NULL,
-		endDate TEXT,
-		FOREIGN KEY (planName) REFERENCES plans(planName) ON DELETE CASCADE
+		endDate TEXT
 	)`;
 
 	const templateTableOptions = `(

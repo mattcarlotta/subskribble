@@ -8,7 +8,7 @@ import TogglePanelVisibility from '../panels/TogglePanelVisibility';
 const noDataToDisplay = ({ buttonIcon, buttonPushLocation, buttonPanel, cardTitle, tipTitle, visible }) => (
 	<PageContainer>
 		<div className="panel-container">
-			<Card title={cardTitle} extra={buttonPanel()}>
+			<Card className="no-data-card" title={cardTitle} extra={buttonPanel()}>
 				<div style={{ display: visible ? "block" : "none", minHeight: 400 }} className="panel-body-container">
 					<div className="panel-body">
 						<div className="ant-row">

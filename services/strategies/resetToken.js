@@ -19,22 +19,25 @@ module.exports = app => {
 
 			// create a new token for email reset
 			const token = createRandomToken();
+			
 			try { await db.none(resetToken(), [token, email]) }
 			catch (err) { return done(err, false) }
 
-			// creates an email template for a password reset
-			const { firstname, lastname } = existingUser;
-			const msg = {
-				to: `${email}`,
-				from: `helpdesk@subskribble.com`,
-				subject: `Password Reset Confirmation`,
-				html: newToken(portal, firstname, lastname, token)
-			}
+			try {
+				// creates an email template for a password reset
+				const { firstname, lastname } = existingUser;
+				const msg = {
+					to: `${email}`,
+					from: `helpdesk@subskribble.com`,
+					subject: `Password Reset Confirmation`,
+					html: newToken(portal, firstname, lastname, token)
+				}
 
-			// attempts to send a verification email to newly created user
-			mailer.send(msg)
-				.then(() => (done(null, email)))
-				.catch(err => (done(err, false)))
+				// attempts to send a verification email to newly created user
+				await mailer.send(msg);
+
+				return done(null, email);
+			} catch (err) { return done(err, false) }
 		})
 	);
 }

@@ -14,12 +14,9 @@ const authenticateUser = () => dispatch => (
 		data
 			? dispatch({ type: types.SET_SIGNEDIN_USER, payload: data })
 			: dispatch({ type: types.NO_SIGNEDIN_USER})
-		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 	.catch(err => {
-		// dispatch({ type: types.SERVER_ERROR, payload: err })
 		dispatch({ type: types.NO_SIGNEDIN_USER });
-		dispatch({ type: types.APP_LOADING_STATE, payload: false })
 	})
 )
 
@@ -37,7 +34,6 @@ const deleteUserAccount = (formProps) => dispatch => {
 // sets app loading state to false
 const doNotAuthUser = () => dispatch => {
 	dispatch({ type: types.NO_SIGNEDIN_USER });
-	dispatch({ type: types.APP_LOADING_STATE, payload: false });
 }
 
 // removes current user from redux props and clears cookie

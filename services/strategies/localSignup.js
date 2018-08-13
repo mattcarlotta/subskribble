@@ -36,18 +36,20 @@ module.exports = app => {
 				await db.none(createNewUser(),[email, newPassword, firstName, lastName, company, token])
 			} catch (err) { return done(err, false) }
 
-			// creates an email template for a new user signup
-			const msg = {
-				to: `${email}`,
-				from: `helpdesk@subskribble.com`,
-				subject: `Please verify your email address`,
-				html: newUser(portal, firstName, lastName, token)
-			}
+			try {
+				// creates an email template for a new user signup
+				const msg = {
+					to: `${email}`,
+					from: `helpdesk@subskribble.com`,
+					subject: `Please verify your email address`,
+					html: newUser(portal, firstName, lastName, token)
+				}
 
-			// attempts to send a verification email to newly created user
-			mailer.send(msg)
-				.then(() => (done(null, true)))
-				.catch(err => (done(err, false)))
+				// attempts to send a verification email to newly created user
+				await mailer.send(msg);
+
+				return done(null,true);
+			} catch (err) { return done(err, false) }
 		})
 	)
 }

@@ -1,5 +1,14 @@
 module.exports = app => {
-	const { db, query: { createSubscriber, deleteOneSubcriber, findSubscriberByEmail, getSomeSubcribers, getSubscriberCount, updateOneSubscriber} } = app.database;
+	const { db, query: {
+		createSubscriber,
+		deleteOneSubcriber,
+		findSubscriberByEmail,
+		getSomeSubcribers,
+		getSubscriberCount,
+		selectPromotionDetails,
+		updateOneSubscriber,
+		updatePromotionUsage
+	} } = app.database;
 	const { parseStringToNum, sendError } = app.shared.helpers;
 	const moment = app.get("moment");
 
@@ -38,6 +47,11 @@ module.exports = app => {
 				if (existingUser) return sendError(`Can't create duplicate subscribers within the same plan. The provided email: ${contactEmail}, is already associated with the following plan: ${existingUser.planname}.`, res, next);
 
 				await db.none(createSubscriber(), [req.session.id, subscriber, amount, billingAddress, billingCity, billingState, billingUnit, billingZip, contactEmail, contactAddress, contactCity, contactPhone, contactState, contactUnit, contactZip, promoCode, sameBillingAddress, selectedPlan, startDate]);
+
+				if (promoCode) {
+					const promoIsValid = await db.oneOrNone(selectPromotionDetails(), [req.session.id, promoCode, [selectedPlan]]);
+					promoIsValid && await db.oneOrNone(updatePromotionUsage(), [req.session.id, promoCode, [selectedPlan]])
+				}
 
 				res.status(201).json({ message: `Succesfully added ${subscriber} to the ${selectedPlan} plan` });
 			} catch (err) { return sendError(err, res, next); }

@@ -10,6 +10,7 @@ const Promotionals = props => (
 		{...props}
 		buttonIcon="playlist_add"
 		buttonPushLocation="promotionals/create"
+		cardTitle="Promotionals"
 		CARDS={CARDS}
 		Panel={PromosPanel}
 	/>

@@ -60,7 +60,8 @@ module.exports = app => {
     updatePromotion: () => ("UPDATE promotionals SET amount=$3, dateStamps=$4, discountType=$5, endDate=$6, promoCode=$7, plans=$8, maxUsage=$9, startDate=$10 WHERE userid=$1 AND id=$2"),
     updatePromotionStatus: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode"),
     selectPromotionCode: () => ("SELECT promoCode FROM promotionals WHERE userid=$1 AND promoCode=$2"),
-    selectPromotionDetails: () => ("SELECT amount,discountType FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3 and status='active'")
+    selectPromotionDetails: () => ("SELECT amount,discountType FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3 and status='active'"),
+    updatePromotionUsage: () => ("UPDATE promotionals SET totalUsage = totalUsage+1 WHERE userid=$1 AND promoCode=$2 AND plans @> $3")
   }
 
   const notificationQueries = {

@@ -9,6 +9,7 @@ const Plans = props => (
 	<PanelLoader
 		buttonIcon="note_add"
 		buttonPushLocation="plans/create"
+		cardTitle="Plans"
 		CARDS={CARDS}
 		Panel={PlansPanel}
 		{...props}

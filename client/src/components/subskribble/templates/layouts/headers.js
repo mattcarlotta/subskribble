@@ -21,7 +21,11 @@ export default [
 		dataIndex: 'fromsender',
 		render: sender => <span className="lowercase">{sender}</span>
 	},
-	{ title: 'Subject', dataIndex: 'subject' },
+	{
+		title: 'Subject',
+		dataIndex: 'subject',
+		render: subject => <span style={{ textTransform: 'none' }}>{subject}</span>
+	},
 	{
 		title: 'Associated Plans',
 		dataIndex: 'plans',
