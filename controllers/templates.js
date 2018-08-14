@@ -6,33 +6,33 @@ module.exports = app => {
 
 	return {
 		// CREATES TEMPLATES RECORD
-		create: async (req, res, next) => {
-			if (!req.body) return sendError('Missing template creation parameters', res, next);
+		create: async (req, res, done) => {
+			if (!req.body) return sendError('Missing template creation parameters', res, done);
 
 			const { fromsender, plans, message, subject, templatename } = req.body;
 			const uniquetemplatename = createUniqueTemplateName(templatename);
 			try {
 				const templateExists = await db.oneOrNone(selectTemplate(), [req.session.id, uniquetemplatename]);
-				if (templateExists) return sendError('That template already exists. You must create a unique template name!', res, next);
+				if (templateExists) return sendError('That template already exists. You must create a unique template name!', res, done);
 
 				await db.none(createTemplate(), [req.session.id, fromsender, plans, message, subject, templatename, uniquetemplatename]);
 
 				res.status(201).json({ message: `Succesfully created '${templatename}' template.` });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// DELETES REQURESTED RECORD
-		deleteOne: async (req, res, next) => {
-			if (!req.params.id) return sendError('Missing template delete parameters', res, next);
+		deleteOne: async (req, res, done) => {
+			if (!req.params.id) return sendError('Missing template delete parameters', res, done);
 
 			try {
 				const name = await db.result(deleteOneTemplate(), [req.params.id, req.session.id]);
 
 				res.status(201).json({ message: `Succesfully deleted the '${name.rows[0].templatename}' template.` });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
-		fetchRecords: async (req, res, next) => {
-			if (!req.query) return sendError('Missing query fetch parameters', res, next);
+		fetchRecords: async (req, res, done) => {
+			if (!req.query) return sendError('Missing query fetch parameters', res, done);
 
 			let { table, limit, page } = req.query;
 			limit = parseStringToNum(limit);
@@ -46,10 +46,10 @@ module.exports = app => {
 				(table === "activetemplates") ? activetemplates = templates : inactivetemplates = templates;
 
 				res.status(201).json({ activetemplates, inactivetemplates });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// FETCHES TOTAL # OF RECORDS PER TABLE FOR CLIENT-SIDE PAGINATION
-		fetchCounts: async (req, res, next) => {
+		fetchCounts: async (req, res, done) => {
 			try {
 				const templates = await db.any(getTemplateCount(), [req.session.id]);
 
@@ -57,20 +57,20 @@ module.exports = app => {
 					activetemplatescount: parseStringToNum(templates[0].active),
 					inactivetemplatescount: parseStringToNum(templates[0].inactive)
 				});
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// SENDS FIRST 10 RECORDS
-		index: async (req, res, next) => {
+		index: async (req, res, done) => {
 			try {
 				const activetemplates = await db.any(getSomeTemplates(req.session.id, 10, 0, ['active']));
 				const inactivetemplates = await db.any(getSomeTemplates(req.session.id, 10, 0, ['suspended']));
 
 				res.status(201).json({ activetemplates, inactivetemplates });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// UPDATES A RECORD STATUS PER CLIENT-SIDE REQUEST
-		updateStatus: async (req, res, next) => {
-			if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, next);
+		updateStatus: async (req, res, done) => {
+			if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, done);
 			const { id } = req.params;
 			const { updateType, statusType } = req.body;
 			const endDate = updateType === 'suspended' ? moment().format("MMM DD, YYYY") : null;
@@ -79,11 +79,11 @@ module.exports = app => {
 				const template = await db.one(updateTemplateStatus(), [statusType, id, req.session.id])
 
 				res.status(201).json({ message: `Succesfully ${updateType} the '${template.templatename}' template.` });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
-		updateOne: async (req, res, next) => {
-			if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, next);
+		updateOne: async (req, res, done) => {
+			if (!req.body || !req.params.id) return sendError('Missing template update parameters', res, done);
 			const { fromsender, plans, message, subject, templatename } = req.body;
 			const uniquetemplatename = createUniqueTemplateName(templatename);
 
@@ -91,18 +91,18 @@ module.exports = app => {
 				const template = await db.one(updateTemplate(), [req.session.id, req.params.id, fromsender, plans, message, subject, templatename, uniquetemplatename])
 
 				res.status(201).json({ message: `Succesfully updated the '${template.templatename}' template.` });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 		// SELECTS A SINGLE RECORD
-		selectOne: async (req, res, next) => {
-			if (!req.query) return sendError('Missing template select parameters', res, next);
+		selectOne: async (req, res, done) => {
+			if (!req.query) return sendError('Missing template select parameters', res, done);
 
 			try {
 				const template = await db.oneOrNone(findTemplateById(), [req.session.id, req.query.id]);
-				if (!template) return sendError("Unable to locate the template!", res, next);
+				if (!template) return sendError("Unable to locate the template!", res, done);
 
 				res.status(201).json({ ...template });
-			} catch (err) { return sendError(err, res, next); }
+			} catch (err) { return sendError(err, res, done); }
 		},
 	}
 }

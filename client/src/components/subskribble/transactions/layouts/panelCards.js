@@ -1,4 +1,4 @@
-import TABLEHEADERS from './headers';
+import { CHARGEHEADERS, REFUNDHEADERS } from './headers';
 
 export default ({
 	activeitems,
@@ -11,7 +11,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Charges',
 		TABLECONTENTS: activeitems,
-		TABLEHEADERS,
+		TABLEHEADERS: CHARGEHEADERS,
 		TABLERECORDS: activeitemcount,
 		...rest
 	},
@@ -19,7 +19,7 @@ export default ({
 		SELECTFIELD: true,
 		TAB: 'Refunds',
 		TABLECONTENTS: inactiveitems,
-		TABLEHEADERS,
+		TABLEHEADERS: REFUNDHEADERS,
 		TABLERECORDS: inactiveitemcount,
 		...rest
 	}

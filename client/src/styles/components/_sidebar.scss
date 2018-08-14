@@ -1,0 +1,99 @@
+.logo-header {
+	@extend .logo-container;
+	@include b-c($blackblue);
+	@include w(100%);
+}
+
+.sider-menu-container {
+	@extend %b-0;
+	@include c($menugrey);
+	@include b-c($blackblue);
+	@include h(100vh);
+
+	.divider { @include b-c($tlightgrey); }
+
+	.divider-title {
+		@extend %m-t-10, %m-l-20, %t-t-u;
+		@include c(#647897);
+		@include f-f($arimo-bold);
+		@include f-s(14px);
+		@include f-w(600);
+	}
+
+	.ant-menu-item-group-title { @extend %p-0; }
+
+	.ant-menu-item-selected {
+		@include b-c($thoverblue !important);
+
+		&:hover {
+			@include c($blue !important);
+		}
+	}
+
+	.menu-icon {
+		@extend %m-r-10, %p-r;
+		top: 6px;
+	}
+
+	.menu-label {
+		@include f-s(16px);
+		@include l-h(24px);
+	}
+}
+
+.logo-container {
+	@extend %b-0, %d-ib;
+	@include b-c($blackblue);
+
+	&:hover {
+		@extend .fix-cursor;
+		@include b-c($hoverblue);
+	}
+
+	&:focus { @include b-c($transparent); }
+
+	.icon-logo {
+		@extend %p-r;
+		@include c($white);
+		@include f-s(36px);
+		margin-top: 8px;
+		margin-right: 5px;
+		margin-left: 11px;
+	}
+
+	.text-logo {
+		@extend %p-r;
+		@include c($white);
+		@include f-f($harabara);
+		@include f-s(24px);
+		letter-spacing: 1.5px;
+		top: -7px;
+		margin-right: 10px;
+	}
+}
+
+.sider-menu-header {
+	@include b-c($blackblue);
+	@include h(55px);
+	border-bottom: 1px solid $tlightgrey;
+
+	.logo-container:hover { @include b-c($transparent);}
+
+	.nav-button {
+		@include b-c($blackblue);
+		i {
+			@include c($white);
+		}
+
+		&:hover {
+			i {
+				@include c($blue);
+			}
+		}
+	}
+
+	.icon-logo,
+	.text-logo {
+		@include c($white);
+	}
+}

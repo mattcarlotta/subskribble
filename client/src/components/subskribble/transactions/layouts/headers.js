@@ -8,7 +8,7 @@ const PAYMENTS = {
 	refund: 'account_balance'
 };
 
-export default [
+const HEADERS = [
 	{
 		title: 'Status',
 		dataIndex: 'status',
@@ -37,6 +37,20 @@ export default [
 		title: 'Amount',
 		dataIndex: 'amount',
 		render: (amount, {status}) => <span className={`amount-${status}`}>${amount}</span>
-	},
-	{ title: 'Charge Date', dataIndex: 'chargedate' }
+	}
+]
+
+export const CHARGEHEADERS = [
+	...HEADERS,
+	{
+		title: 'Charge Date',
+		dataIndex: 'chargedate',
+		render: date => <span>{date ? date : '-'}</span>
+	}
+];
+
+
+export const REFUNDHEADERS = [
+	...HEADERS,
+	{ title: 'Refund Date', dataIndex: 'refunddate' }
 ];

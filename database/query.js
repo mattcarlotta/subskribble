@@ -37,6 +37,7 @@ module.exports = app => {
     deletePlanByName: () => ("DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *"),
     deleteOnePlan: () => ("DELETE FROM plans WHERE userid=$1 AND id=$2 RETURNING *"),
     findPlanById: () => ("SELECT amount, billEvery, planName, description, setupFee, trialPeriod from plans WHERE userid=$1 and id=$2"),
+    findPlanByName: () => ("SELECT amount,planName FROM plans WHERE userid=$1 and planName=$2"),
     getAllActivePlans: () => (`SELECT planName, description, amount FROM plans WHERE status='active' AND userid=$1 ORDER BY key ASC`),
     getAllPlans: (userid, limit, offset, status) => (`SELECT * FROM plans WHERE status='${status}' AND userid='${userid}' ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getPlanCount: () => (
@@ -60,7 +61,7 @@ module.exports = app => {
     updatePromotion: () => ("UPDATE promotionals SET amount=$3, dateStamps=$4, discountType=$5, endDate=$6, promoCode=$7, plans=$8, maxUsage=$9, startDate=$10 WHERE userid=$1 AND id=$2"),
     updatePromotionStatus: () => ("UPDATE promotionals SET status=$1 WHERE id=$2 AND userid=$3 RETURNING promoCode"),
     selectPromotionCode: () => ("SELECT promoCode FROM promotionals WHERE userid=$1 AND promoCode=$2"),
-    selectPromotionDetails: () => ("SELECT amount,discountType FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3 and status='active'"),
+    selectPromotionDetails: () => ("SELECT * FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans @> $3 and status='active'"),
     updatePromotionUsage: () => ("UPDATE promotionals SET totalUsage = totalUsage+1 WHERE userid=$1 AND promoCode=$2 AND plans @> $3")
   }
 
@@ -111,6 +112,10 @@ module.exports = app => {
   }
 
   const transactQueries = {
+    createTransaction:() => (`
+      INSERT INTO transactions(userid, status, planName, subscriber, processor, amount, chargeDate)
+      VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7);
+    `),
     deleteOneTransactaction: () => ("DELETE FROM transactions WHERE id=$1 AND userid=$2 RETURNING *"),
     getSomeTransactactions: (userid, limit, offset, status) => (`SELECT * FROM transactions ${statusType(status, userid)} ORDER BY key ASC LIMIT ${limit} OFFSET ${offset};`),
     getTransactactionCount: () => (

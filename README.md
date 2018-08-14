@@ -151,7 +151,7 @@ module.exports = {
 - `npm i && cd client && npm i`
 
 ### 6. Seed DB and Run Node Server
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then run `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seeds`)
 - `npm run dev`
 
 
@@ -190,7 +190,7 @@ module.exports = {
 - `npm i && cd client && npm i`
 
 ### 7. Seed DB and Run Node Server
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then run `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seeds`)
 - `npm run dev`
 
 

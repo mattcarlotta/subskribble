@@ -18,8 +18,6 @@ class ApplyPromotional extends Component {
 		const { applyPromo, plan } = this.props;
 		const { value } = this.state;
 		if (value) applyPromo(value, plan);
-		// console.log(this.props);
-		// console.log(this.state);
 	}
 
 	handleChange = e => this.setState({ value: e.target.value });

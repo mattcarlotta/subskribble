@@ -119,8 +119,8 @@ module.exports = app => {
 		subscriber VARCHAR NOT NULL,
 		processor VARCHAR NOT NULL,
 		amount VARCHAR,
-		chargeDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY'),
-		refundDate TEXT DEFAULT TO_CHAR(NOW(), 'Mon DD, YYYY')
+		chargeDate TEXT,
+		refundDate TEXT
 	)`;
 
 	const feedbackTableOptions = `(
@@ -144,7 +144,7 @@ module.exports = app => {
 	const promoProperties = `(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage, startDate, endDate, dateStamps)`;
 	const subProperties = `(userid, status, email, subscriber, contactPhone, planName, startDate, endDate, amount)`;
 	const templateProperties = `(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)`
-	const transProperties = `(userid, status, planName, subscriber, processor, amount)`;
+	const transProperties = `(userid, status, planName, subscriber, processor, amount, chargeDate, refundDate)`;
 
 	const planValues = id => (`
 	(${selectUserid(id)}, 'active', 'Carlotta Prime', 'Carlotta Subscription', 99.99, null, 'Monthly', null, 299),
@@ -239,30 +239,30 @@ module.exports = app => {
 	`)
 
 	const transValues = id => (`
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Sherry Waters', 'Paypal', 29.99),
-	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Parker Posey', '', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Bob Aronssen', 'Venmo', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Shaniqua Smith', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Tanya Ballschin', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Adam Oates', '', 29.99),
-	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Wes Walls', '', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Siemen Walker', 'Visa Checkout', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Jenny Tanks', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Adamn Vicks', '', 29.99),
-	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Mark Canelo', '', 29.99),
-	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Amber Lalampas', 'Paypal', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Mark Canelo', 'Paypal', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Axle Root', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Gary Pilkinson', 'Venmo', 29.99),
-	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Kelly Ullman', '', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Yasmin Rodrigues', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Adam Oates', '', 29.99),
-	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Wes Walls', '', 29.99),
-	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Kyle Teegue', '', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Alisha Tallis', 'Stripe', 29.99),
-	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Scott Parker', '', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99),
-	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99);
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Sherry Waters', 'Paypal', 29.99, '${startDate}', null),
+	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Parker Posey', '', 29.99, null, null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Bob Aronssen', 'Venmo', 29.99, '${startDate}', null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Shaniqua Smith', 'Stripe', 29.99, '${startDate}', null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Tanya Ballschin', 'Stripe', 29.99,'${startDate}', null),
+	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Adam Oates', '', 29.99, null, null),
+	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Wes Walls', '', 29.99, null, null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Siemen Walker', 'Visa Checkout', 29.99,'${startDate}', null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Jenny Tanks', 'Stripe', 29.99,'${startDate}', null),
+	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Adamn Vicks', '', 29.99, null, null),
+	(${selectUserid(id)}, 'due', 'Carlotta Prime', 'Mark Canelo', '', 29.99, null, null),
+	(${selectUserid(id)}, 'paid', 'Carlotta Prime', 'Amber Lalampas', 'Paypal', 29.99,'${startDate}', null),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Mark Canelo', 'Paypal', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Axle Root', 'Stripe', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Gary Pilkinson', 'Venmo', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Kelly Ullman', '', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Yasmin Rodrigues', 'Stripe', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Adam Oates', '', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Wes Walls', '', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Kyle Teegue', '', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Alisha Tallis', 'Stripe', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'credit', 'Carlotta Prime', 'Scott Parker', '', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Emily Voz', 'Visa Checkout', 29.99, null, '${startDate}'),
+	(${selectUserid(id)}, 'refund', 'Carlotta Prime', 'Carl Sagan', 'Paypal', 29.99, null, '${startDate}');
 	`);
 
 	const noteValues = id => (`

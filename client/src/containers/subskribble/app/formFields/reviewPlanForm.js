@@ -11,12 +11,12 @@ import CartTotalReview from '../../../../components/subskribble/customersignup/c
 const applyPromoToPrice = (amount, appliedPromoCode) => {
 	let adjustedPrice = 0.00;
 	if (appliedPromoCode) {
-		const discount = parseInt(appliedPromoCode.amount, 10);
+		const discount = parseFloat(appliedPromoCode.amount, 10);
 		adjustedPrice = (appliedPromoCode.discounttype === '%')
 			? (amount * (discount/100))
 			: discount
 	}
-	return adjustedPrice.toFixed(2);
+	return adjustedPrice;
 }
 
 const getAmountAndDescription = (finalValues, PLANSELECTIONS) => {
@@ -29,6 +29,8 @@ const ReviewPlanForm = ({ appliedPromoCode, finalValues, editStep, PLANSELECTION
 	const { amount, description } = getAmountAndDescription(finalValues, PLANSELECTIONS)
 	const adjustedPrice = applyPromoToPrice(amount, appliedPromoCode);
 	const price = amount - adjustedPrice;
+	const adjustedPrice2String = adjustedPrice.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+
 
 	return(
 		<div className="review-signup-container">
@@ -36,7 +38,7 @@ const ReviewPlanForm = ({ appliedPromoCode, finalValues, editStep, PLANSELECTION
 			<PaymentInfoReview {...finalValues} editStep={editStep}/>
 			<PlanInfoReview {...finalValues} displayPrice={amount} description={description} editStep={editStep} />
 			<CartTotalReview
-				adjustedPrice={adjustedPrice}
+				adjustedPrice={adjustedPrice2String}
 				appliedPromoCode={appliedPromoCode}
 				originalAmount={amount}
 				plan={finalValues.selectedPlan}
