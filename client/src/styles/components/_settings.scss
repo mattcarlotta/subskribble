@@ -1,0 +1,146 @@
+.current-avatar-container {
+	.avatar-actions-container { @extend %t-a-c; @include w(128px); }
+
+	.avatar-container {
+		@include h(150px);
+
+		.avatar-preview-container {
+			@include w(128px);
+			@include b-c($white);
+			border-radius: 4px;
+			border: 1px dashed $readnoteborder;
+
+			.avatar-preview {
+				@include h(126px);
+				@include trans(border-color .3s ease);
+				padding: 6px;
+				border-radius: 4px;
+
+				.ant-avatar {
+					border-radius: 8px;
+					.anticon-user { @include f-s(50px); margin-top: 40px;}
+				}
+			}
+		}
+	}
+}
+
+.settings-container {
+	@extend %m-a, %t-t-n;
+	@include b-c($white);
+	@include w(100%);
+	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+	max-width: 1000px;
+	padding: 10px 30px;
+	margin-bottom: 40px;
+
+	h2 { @include c($lightblue); }
+
+	.title { margin-top: 30px; }
+
+	.subdescription { @include f-f($arimo); @include f-s(13px); }
+
+	.account-details-container {
+		@include w(100%);
+		@include b-c($darkwhite);
+		border-top: 1px dotted $softwarmgrey;
+		border-left: 1px dotted $softwarmgrey;
+		border-right: 1px dotted $softwarmgrey;
+		border-top-right-radius: 4px;
+		border-top-left-radius: 4px;
+		max-width: 900px;
+		padding: 20px;
+
+		.textarea-container { @include h(240px);}
+	}
+
+	.account-button-container {
+		@include w(100%);
+		@include b-c($neutrallightgrey);
+		border: 1px dotted $softwarmgrey;
+		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: 4px;
+		max-width: 900px;
+		padding-top: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-bottom: 30px;
+
+		.delete-account-information {
+			@extend .f-l;
+			@include h(126px);
+			margin-left: 20px;
+
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
+
+				.bold { @include f-f($arimo-bold); @include f-s(16px); }
+			}
+		}
+	}
+
+	.delete-account-details {
+		@include h(100px);
+		@include w(100%);
+		@include b-c($darkwhite);
+		border: 1px dotted $softwarmgrey;
+		border-radius: 4px;
+		max-width: 900px;
+		margin-bottom: 30px;
+		padding: 20px;
+
+		.delete-button-container { @extend .f-l; @include w(100px); }
+
+		.delete-account-information {
+			@extend .f-l;
+			@include h(126px);
+
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
+
+				.bold { @include f-f($arimo-bold); @include f-s(16px); }
+			}
+		}
+	}
+
+	.subdescription { @include f-f($arimo); @include f-s(13px); }
+
+	.profile-picture {
+		@include h(285px);
+		margin-top: 30px;
+		margin-bottom: 45px;
+
+		.avatar-background-container {
+			@include h(220px);
+			@include w(100%);
+			@include b-c($darkwhite);
+			max-width: 900px;
+			border-radius: 4px;
+			padding: 20px;
+			border: 1px dotted $softwarmgrey;
+
+			.avatar-form { @extend .f-l; @include w(126px);}
+		}
+
+		.upload-avatar-information {
+			@extend .f-l;
+			@include h(126px);
+			@include w(80%);
+			padding: 70px 20px;
+
+			.information {
+				@include f-f($arimo);
+				@include f-s(14px);
+				word-wrap: break-word;
+
+				.bold { @include f-f($arimo-bold); }
+			}
+		}
+
+		.new-form-container { @extend .current-avatar-container; }
+	}
+}

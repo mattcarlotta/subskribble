@@ -1,0 +1,236 @@
+.dash-nav-container {
+	@extend %p-f;
+	@include b-c($white);
+	@include h(55px);
+	@include w(100%);
+	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.25));
+	z-index: 1000;
+	top: 0;
+
+	.left-nav {
+		@extend %d-ib;
+
+		.menu-collapse {
+			@extend %b-0;
+			@include h(66px);
+			@include w(63px);
+			padding: 0 24px;
+			margin-left: 0px;
+			border-radius: 0px;
+
+			& i {
+				@include c($tblack);
+				@include f-s(24px);
+				@include l-h(70px);
+			}
+
+			&:hover > i { @include c($tblack);}
+			&:hover { @include b-c($paleformblue); }
+			&:focus { @include b-c($transparent); }
+		}
+	}
+
+	.right-nav {
+		@extend %d-ib, %p-f;
+		// margin-top: 9px;
+		// margin-right: 31px;
+		right: 0px;
+
+		.loggedin-user {
+			@include c($white);
+			@include f-f($arimo);
+			@include f-s(15px);
+		}
+
+		.notifications-container {
+			@extend %d-ib, .fix-cursor, %p-r;
+			@include c($white);
+			top: 2px;
+			margin-right: 16px;
+
+			.ant-badge-count {
+				@include c($white);
+				@include h(18px);
+				@include b-s(0 0 0 1px $white);
+				min-width: 12px;
+				padding: 0 6px;
+			}
+
+			.ant-scroll-number-only > p {
+				@include f-f($arimo);
+				@include f-s(10px);
+				@include l-h(20px);
+			}
+
+			.notifications-icon {
+				@include c($blue);
+				@include f-s(28px);
+
+				&:hover {
+					@include c($lightblue);
+				}
+			}
+		}
+
+		.settings-tab {
+			@extend %d-ib, .fix-cursor, %no-link-focus;
+			margin-left: 5px;
+			// margin-right: 31px;
+
+			.setting-button {
+				@extend %b-0;
+				@include h(55px);
+				padding-right: 30px;
+				border-radius: 0;
+
+				&:hover {
+					@include b-c($paleformblue);
+					color: inherit;
+				}
+				&:focus {
+					@extend %no-link-focus;
+					@include b-c(transparent);
+					color: inherit;
+				}
+			}
+
+			.current-user {
+				// @extend %p-r;
+				margin-left: 7px;
+				// top: 5px;
+			}
+
+			.signed-out {
+				@include c($lightwhite);
+				@include b-c($lightgrey);
+
+				&:hover {
+					@include c($blue);
+					@include b-c($lightgrey);
+				}
+			}
+
+			// .settings-icon { margin-top: 10px; }
+
+			.user-icon {
+				@include c($white);
+				// @include b-c($blue);
+			}
+
+			.menu-label {
+				@extend %pl-10, %p-r;
+				top: -5px;
+			}
+		}
+	}
+}
+
+.dash-footer-container {
+	@include b-s(0px -1px 4px 1px rgba(0,0,0,0.08));
+}
+
+
+.user-header {
+	@include c($white);
+	@include b-c($rbblue);
+	padding: 5px 15px;
+
+	.user-name,
+	.user-email,
+	p {
+		@include f-f($arimo);
+	}
+
+	.user-name {
+		@include f-w(500);
+		margin-top: 15px;
+	}
+
+	p {
+		@extend %m-0;
+		@include l-h(15px);
+	}
+}
+
+.settings-tab-container {
+	@extend %bb-none;
+	@include w(250px);
+	border-radius: 10px;
+
+	.my-profile-container {
+		@include c($white);
+		@include b-c($lightblue);
+		padding: 10px 0 5px 7px;
+		cursor: default;
+
+		.popover-user {
+			// @extend %p-r;
+			@include b-c($transparent);
+			@include c($white);
+			@include h(40px);
+			@include w(40px);
+			border-radius: 20px;
+			margin-top: -18px;
+			// top: -9px;
+
+			& i {
+				@include f-s(28px);
+				margin-right: 0;
+			}
+		}
+
+		.user-label {
+			@extend %d-ib;
+			margin-left: 15px;
+
+			.user {
+				@extend %m-0;
+				@include f-f($arimo-bold);
+			}
+
+			.company {
+				@extend %m-0;
+				@include f-f($arimo);
+				@include f-s(12px);
+			}
+
+			.email {
+				@extend %p-0;
+				@include f-s(13px);
+				margin: -6px 0 0 0;
+				font-style: italic;
+			}
+		}
+
+		&:hover {
+			@include b-c($lightblue);
+			@include c($white);
+		}
+	}
+
+	.settings-label {
+		@extend %d-ib, %p-r;
+		top: -6px;
+		margin-left: 15px;
+
+
+		p {
+			@extend %no-margin;
+			@include l-h(16px);
+		}
+	}
+
+	.settings-icon { margin: 7px 15px; }
+
+	.ant-menu-item {
+		@extend %p-0, %no-margin;
+
+		.menu-options {
+			@include trans(0.5s);
+			&:hover {
+				@include c($tblack);
+				@include b-c($lightgrey);
+			}
+		}
+	}
+}

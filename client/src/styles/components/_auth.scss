@@ -1,0 +1,132 @@
+.auth-container {
+	.auth-logo {
+		@extend %d-b, %m-a;
+		@include w(275px);
+		padding: 20px 0px 10px 0px;
+	}
+
+	.auth-box-container {
+		@extend %m-0-a;
+		@include w(400px);
+
+		.auth-box { @extend %outline-none, %m-t-20; }
+
+		.auth-title {
+			@extend %t-a-c, %t-t-u;
+			@include c($black);
+			@include f-f($arimo);
+			@include f-s(16px);
+			@include f-w(500);
+			@include l-h(30px)
+			margin: 0px 0px 12px;
+		}
+
+		.auth-form {
+			@extend %m-b-20;
+
+			.forgot-password {
+				@extend %m-t-5;
+				a { @include c($warmgrey); }
+			}
+		}
+
+
+		.auth-link {
+			@extend %t-a-c;
+			@include c($warmgrey);
+			a {
+				@include c($lightblue);
+				@include f-w(500);
+
+				&:hover { @include c($darkblue);}
+			}
+		}
+
+	}
+}
+
+.verification-container {
+	@include w(100%);
+	border-collapse: separate !important;
+	border-spacing: 0;
+	overflow: hidden;
+
+	.empty-panel {
+		@extend %p-0;
+		@include f-s(16px);
+		vertical-align: top;
+	}
+
+	.status-container {
+		@extend %d-b, %m-0-a;
+		@include f-s(16px);
+		@include w(600px);
+		padding: 30px;
+		vertical-align: top;
+		max-width: 600px;
+
+		.subskribble-container {
+			margin-top: 30px;
+
+			.subskribble-logo { @include f-s(40px); }
+
+			.text-logo {
+				@extend %p-r;
+				@include f-f($harabara);
+				@include f-s(40px);
+				letter-spacing: 1.5px;
+				top: -7px;
+				margin-left: 2px;
+			}
+		}
+
+		.valid-container {
+			@include b-c($white);
+			border: 1px solid $darkwarmgrey;
+
+			.message-container {
+				@extend %d-b;
+				@include f-s(16px);
+				padding: 30px 60px;
+				vertical-align: top;
+
+				.validation-result {
+					@extend %d-b, %m-0-a, %m-b-0;
+
+					.message { @include f-s(16px); }
+
+					.validation-icon {
+						@extend %t-a-c;
+
+						.verified {
+							@extend %d-ib;
+							@include c($limegreen);
+							@include f-s(88px);
+						}
+
+						.unverified {
+							@extend %d-ib;
+							@include c($bloodred);
+							@include f-s(88px);
+						}
+					}
+
+					.login-link-container {
+						@extend %m-b-10;
+						@extend %t-a-c;
+						margin-top: 30px;
+
+						.link {
+							@extend %d-ib, %t-d-n;
+							@include c($white);
+							@include b-c($lightblue);
+							@include f-s(18px);
+							@include l-h(40px);
+							@include w(200px);
+						}
+					}
+				}
+			}
+		}
+	}
+}

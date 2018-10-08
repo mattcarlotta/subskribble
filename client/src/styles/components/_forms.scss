@@ -1,0 +1,434 @@
+.billing-switch-field {
+	@include h(40px !important);
+	@include w(100%);
+
+	.ant-form-item-label {
+		@extend .f-l;
+		@include l-h(39.9999px)
+		overflow: hidden;
+		white-space: nowrap;
+	}
+}
+
+.forms-container { @extend .page-container; }
+
+.customer-signup-bg {
+	@include h(100%);
+	margin: 40px;
+
+	.customer-signup-container {
+		@extend %m-b-20;
+		@include b-c($white);
+		@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+		padding-top: 10px;
+
+		.stepper-container { @extend %m-0-a; @include w(90%); }
+
+		.title {
+			@extend %t-a-c;
+			@include c($black);
+			margin: 30px 0 60px 0;
+		}
+
+		.form-container {
+			@extend %p-r;
+			@include c($black);
+			@include f-f($arimo);
+			margin: 50px 50px 0 50px;
+			min-height: 600px;
+
+			h3 {
+				@include f-f($arimo);
+				@include f-s(21px);
+				@include f-w(300);
+				@include l-h(30px);
+			}
+
+			h4 { @include f-w(300); @include l-h(30px); }
+
+			.ant-form-item { @include h(75px); }
+
+			.main-title {
+				@extend %t-a-c;
+				@include f-s(28px);
+				margin-bottom: 60px;
+			}
+
+			.contact-container { min-height: 422px; }
+
+			.plans-container {
+				margin-bottom: 20px;
+				border: 1px dotted $lightblue;
+
+				.plan-selection-container {
+					@extend %m-t-20, %t-a-c;
+					margin-right: 15px;
+					min-height: 550px;
+
+					.selection-container {
+						@extend %m-b-20;
+						@include h(250px);
+						@include w(100%);
+						max-width: 300px;
+						min-width: 200px;
+						border-top: 1px solid rgba(120, 130, 140, 0.23);
+						border-left: 1px solid rgba(120, 130, 140, 0.23);
+						border-right: 1px solid rgba(120, 130, 140, 0.23);
+						border-bottom: 5px solid rgba(120, 130, 140, 0.23);
+						padding: 30px 0px;
+						margin-left: 15px;
+
+						.header {
+							@extend %t-a-c;
+
+							.price {
+								@extend %p-r;
+								@include f-s(46px);
+								@include f-w(bold);
+								margin: 20px 0 10px;
+
+								.price-sign {
+									@extend %p-r;
+									@include f-s(15px);
+									top: -25px;
+									margin-left: -10px;
+								}
+							}
+
+							.plan-title { @include f-s(18px); @include l-h(22px); }
+						}
+
+						.body {
+							@extend %m-b-20, %t-a-c;
+							border-top: 1px solid rgba(120, 130, 140, 0.13);
+							border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+							padding: 20px 0;
+						}
+
+						.selection {
+							@extend %m-a;
+							width: 25px;
+							height: 50px;
+						}
+					}
+				}
+			}
+
+			.review-signup-container {
+				min-height: 422px;
+
+				h1,h2,h3,p { @include f-f($arimo);}
+				h2 { @include f-s(24px); }
+
+				.fa, .plan-icon { @include c($lightblue); @include f-s(22px); }
+
+				.head-title { @include f-s(26px); }
+
+				.edit-link {
+					@extend .fix-cursor, .f-r;
+					@include c($lightblue);
+					@include f-s(15px);
+					@include f-w(normal);
+				}
+
+				.price {
+					@include f-s(22px);
+					.month { @include f-s(12px); }
+					.price-sign { @extend .month, %p-r; top: -5px; }
+				}
+
+				.address { @extend %m-0, %t-t-c; }
+
+				.contact-info-container, .payment-info-container, .plan-info-container, .total-container {
+					@extend .f-l, %m-b-20;
+					@include h(380px);
+					@include w(23.5%);
+					padding: 30px 0px;
+					margin-left: 15px;
+
+					.details-container {
+						@include b-c($white);
+						@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+						@include f-f($arimo);
+						min-height: 230px;
+						padding: 16px;
+						margin-top: 2px;
+
+						.subtotal, .taxes {
+							@include h(30px);
+						}
+						.promo {
+							@include h(72px);
+						}
+					}
+				}
+			}
+
+			.plan-icon { @extend %p-r; top: 3px; }
+
+			.contact-info-container {
+				.name { @include f-s(16px); @include f-w(bold);}
+				.email, .phone { @extend %m-0;}
+			}
+
+			.payment-info-container {
+				.name, .address, .location { @extend %m-0; };
+
+				.details-container {
+					i {
+						@extend %m-r-10;
+						@include c($darkblue);
+						@include f-s(30px);
+					}
+
+					.credit-billing {
+						@extend %m-0;
+						@include f-w(600);
+						letter-spacing: 1px;
+					}
+
+					.creditcard {
+						@include f-s(25px);
+
+						.experiation {
+							@extend %m-l-10, %p-r;
+							@include f-s(12px);
+							top: -3px;
+							letter-spacing: 1px;
+						}
+
+						.stars {
+							@extend %p-r;
+							@include f-s(12px);
+							top: -2px;
+							margin-right: 1px;
+						}
+					}
+				}
+			}
+
+			.error-handlers {
+				@extend %t-a-c;
+				@include c($error);
+				@include trans(all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms);
+			}
+
+			.selected {
+				border-top: 1px solid $lightblue !important;
+				border-right: 2px solid $lightblue !important;
+				border-left: 2px solid $lightblue !important;
+				border-bottom: 5px solid $lightblue !important;
+			}
+		}
+	}
+}
+
+.input-fields { @extend %m-r-5; @include h(60px);}
+.input-10 { @extend .input-fields; @include w(10%); }
+.input-15 { @extend .input-fields; @include w(15%); }
+.input-16 { @extend .input-fields; @include w(16%); }
+.input-20 { @extend .input-fields; @include w(20%); }
+.input-25 { @extend .input-fields; @include w(25%); }
+.input-40 { @extend .input-fields; @include w(40%); }
+.input-50 { @extend .input-fields; @include w(50%); }
+.input-55 { @extend .input-fields; @include w(55%); }
+.input-60 { @extend .input-fields; @include w(60%); }
+.input-66 { @extend .input-fields; @include w(66%); }
+.input-70 { @extend .input-fields; @include w(70%); }
+.input-75 { @extend .input-fields; @include w(75%); }
+.input-85 { @extend .input-fields; @include w(85%); }
+.input-95 { @extend .input-fields; @include w(95%); }
+.input-100 { @extend .input-fields; @include w(100%); }
+
+.new-form-container {
+	@extend %t-t-n;
+
+	.disabled-inputs {
+		@extend %m-b-20;
+		@include b-c($disabled);
+		@include s(none);
+		@include trans(all .3s cubic-bezier(.645,.045,.355,1));
+		cursor: not-allowed;
+		color: rgba(0,0,0,.25);
+		padding: 5px 10px;
+		border-radius: 4px;
+		border: 1px solid $readnoteborder;
+		border-top-width: 1.02px;
+		max-height: 35px;
+		overflow-y: auto;
+
+		.tags {
+			@extend .f-l, %m-r-5;
+			@include c($white);
+			@include b-c($nodata);
+			margin-bottom: 2px;
+			border-radius: 10px;
+			padding: 0 15px;
+		}
+	}
+
+
+	.input-with-labels {
+		@extend %d-f;
+		.input-label { @extend %d-f; @include w(100px); }
+		.input-container {
+			@extend %d-f;
+			@include w(100%);
+			.ant-form-item { @include w(100%);}
+		}
+	}
+
+	.upload-box-container > .ant-form-item { @include h(150px); }
+
+	.upload-container {
+		.upload-icon { @include f-s(60px); }
+		@include f-s(11px);
+		@include f-f($arimo);
+	}
+
+	.avatar-uploader > .ant-upload, .ant-upload-list-picture-card .ant-upload-list-item {
+		@extend %m-0;
+		@include h(128px);
+		@include w(128px);
+
+		.ant-upload-list-item-thumbnail { @include h(110px); @include w(110px); }
+	}
+
+	.avatar-submit-container { @extend %t-a-c; @include w(128px); }
+
+	.type-container > .ant-form-item {
+		@include h(30px);
+		@include w(50px);
+		.ant-form-item-control { @include l-h(0); }
+		.ant-select { margin: 0px; }
+	}
+
+	.select-container > .ant-form-item {
+		@include h(30px);
+		@include w(150px);
+		.ant-form-item-control { @include l-h(0); }
+		.ant-select { margin: 0px; }
+	}
+
+	.form-box-container {
+		@extend %m-0-a;
+		@include b-c($white);
+		@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+		margin: 0 5px 0px 20px;
+		padding: 40px 80px;
+		margin-top: 30px;
+		margin-bottom: 30px;
+
+		.tag-container {
+			.ant-form-explain { margin-top: -15px; }
+
+			.has-error.has-feedback .ant-form-item-children:after, .has-success.has-feedback .ant-form-item-children:after, .has-warning.has-feedback .ant-form-item-children:after, .is-validating.has-feedback .ant-form-item-children:after {
+				top: -25%;
+				right: 10px;
+			}
+		}
+
+		.ant-select-selection--multiple {
+			@include h(30px);
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+	}
+
+	.editor-container {
+		@include w(100%);
+		@include h(400px);
+
+		.ql-container.ql-snow {
+			@include h(300px);
+			max-height: 300px;
+			overflow-x: hidden;
+		}
+
+		.has-error {
+			@include c($formerror);
+
+			.ql-toolbar.ql-snow {
+				border-top: 1px solid $formerror;
+				border-left: 1px solid $formerror;
+				border-right: 1px solid $formerror;
+			}
+
+			.ql-container.ql-snow {
+				border-bottom: 1px solid $formerror;
+				border-left: 1px solid $formerror;
+				border-right: 1px solid $formerror;
+			}
+		}
+	}
+
+	.preview-box-container {
+		@extend %m-0-a;
+		@include b-c($white);
+		@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+		@include h(881px);
+		margin: 0 20px 0px 5px;
+		padding: 40px;
+		margin-top: 30px;
+
+		.box-empty {
+			@extend %t-a-c;
+			@include b-c($hortizonalhr);
+			@include h(685px);
+			border: 1px dotted $lightcoolgrey;
+
+			.empty-icon { @extend %d-ib; margin-top: 300px; }
+		}
+
+		.box-container {
+			@include b-c(aliceblue);
+			@include h(685px);
+			border: 1px dotted $lightcoolgrey;
+			max-height: 685px;
+			padding: 0 10px;
+			overflow-y: auto;
+
+			.from-company { @include f-s(17px); @include f-w(600); }
+			.from-sender { @include f-s(12px);}
+			.to-addresse { @extend %m-b-20; @include f-s(11px); }
+			.preview { @extend %m-b-20; padding: 0 10px; }
+			.subject { @extend .f-l; }
+			.time {
+				@extend .f-r, %m-t-5;
+				@include f-s(12px);
+
+				.current-time { @extend %m-r-5; }
+
+				.message-icons {
+					@extend %m-r-5, %p-r;
+					@include f-s(13px);
+					top: 2px;
+				}
+			}
+		}
+	}
+}
+
+.promo-form {
+	.ant-tag { margin-right: 0px;}
+
+	.ant-tag .anticon-cross {
+		@extend %p-r;
+		@include c($white);
+		@include f-f($arimo-bold);
+		@include f-s(12px);
+		left: 3px;
+
+		&:hover { @include c($lightwhite); }
+	}
+
+	.tag {
+		@include c($white);
+		@include b-c($lightblue);
+		@include f-f($arimo-bold);
+		cursor: default;
+
+		&:hover { opacity: 1;}
+	}
+}

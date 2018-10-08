@@ -1,0 +1,130 @@
+.divider {
+	@extend %m-0;
+	@include b-c($hortizonalhr);
+	@include h(1px);
+	border: none;
+}
+
+.notifications-body {
+	padding: 0px 20px;
+
+	p { @extend %m-0; }
+
+	.delete-notication {
+		@extend .fix-cursor;
+		@include c($lightblue);
+		@include h(20px);
+		@include w(20px);
+	}
+
+	.hidden { @extend %d-n; }
+
+	.date {
+		@include c($darkwarmgrey);
+		@include f-s(10px);
+
+		.note-status { @extend .f-r; padding: 0 7px; }
+		.read {
+			@include b-c($cream);
+			@include c($tblack);
+			border: 1px solid $readnoteborder;
+			border-radius: 2px;
+		}
+
+		.unread {
+			@include b-c($verylightblue);
+			@include c($blue);
+			border: 1px solid $greyblue;
+			border-radius: 2px;
+		}
+	}
+
+	.note {
+		@extend %m-t-10;
+		border-bottom: 1px solid $hortizonalhr;
+	}
+
+	.link { @include c($lightblue); }
+
+	.title {
+		@include f-f($arimo);
+		@include f-s(13px);
+		@include w(299px);
+	}
+
+	.date {
+		@include c($darkblue);
+		@include f-f($arimo-italic);
+		@include f-s(11px);
+	}
+
+	.unread-message { @include f-w(600); }
+}
+
+.notifications-empty {
+	@include h(250px);
+
+	.empty-notes {
+		@extend %d-b, %m-0-a, %p-r;
+		top: 65px;
+		opacity: 0.10;
+	}
+
+	.empty-title {
+		@extend %p-r, %t-a-c;
+		@include f-s(12px);
+		top: 75px;
+		letter-spacing: .15px;
+
+		.icon-logo {
+			@include c($hortizonalhr);
+			@include f-s(46px);
+		}
+
+		.message {
+			@include c($readnoteborder);
+			@include f-f($arimo);
+			@include f-s(12px);
+		}
+
+		.text-logo {
+			@extend %p-r;
+			@include c($hortizonalhr);
+			@include f-f($harabara)
+			@include f-s(46px);
+			letter-spacing: 1.5px;
+			top: -2px;
+		}
+	}
+}
+
+.notifications-header {
+	@include b-c($lightblue);
+	@include c($white);
+	@include f-f($arimo-bold);
+	@include h(40px);
+	@include w(100%);
+	letter-spacing: .15px;
+	padding: 10px 15px;
+}
+
+.notifications-footer { @extend %t-a-c; @include b-c($paleformblue); }
+.notifications-popover { @include w(400px); }
+
+.note-10 {
+	@extend %d-ib, %p-r;
+	@include w(10%);
+	top: -10px;
+}
+
+.note-15 {
+	@extend %d-ib, .f-l;
+	@include h(50px);
+	@include w(15%);
+	margin-top: 3px;
+
+	.ant-avatar-string { @include f-f($arimo); left: calc(50% - 5px) !important; }
+}
+.note-75 { @extend %d-ib; @include w(75%);}
+.note-85 { @extend %d-ib, .f-l, %m-b-20; @include w(85%);}
+.note-100 { @extend %d-ib; @include w(100%);}

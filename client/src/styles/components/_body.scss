@@ -1,0 +1,70 @@
+html, body {
+	@extend %m-0, %p-0;
+	@include b-c($background);
+	@include h(100vh);
+	@include w(100%);
+	overflow: hidden;
+}
+body {
+	@extend %m-0;
+	@include c($darkwarmgrey);
+	@include f-s(14px);
+	@include f-f($arimo);
+	@include f-w(300);
+}
+a:link, a:visited, a:focus, a:hover, a:active { @extend %no-link-focus; }
+p {
+	@extend %brk-ww, %m-r-15;
+	@include f-w(200);
+	@include f-s(15px);
+	@include l-h(24px);
+}
+.ant-menu, .ant-notification, .ant-table, .ant-form-item, .ant-select, .ant-select-dropdown { @include f-f($arimo); }
+.ant-tabs { @include f-f($arimo); }
+.ant-menu-inline .ant-menu-item-selected:after {
+	border-right: none;
+	border-left: 3px solid $lightblue;
+	left: 1px;
+}
+.ant-menu-inline-collapsed .ant-menu-item-selected:after {
+	@include transY(1);
+	border-right: none;
+	border-left: 3px solid $lightblue;
+	left: 1px;
+	opacity: 1;
+}
+.ant-layout-sider { @include b-s(2px 0 6px rgba(0,21,41,.35)); }
+.ant-popover-placement-bottomRight>.ant-popover-content>.ant-popover-arrow { @include b-c($lightblue); }
+.ant-popover-arrow, .ant-popover-inner { margin-top: -4px;}
+.ant-notification { z-index: 999999 };
+.ant-btn:focus, .ant-btn:hover, .ant-btn.disabled, .ant-btn.disabled.active, .ant-btn.disabled:active, .ant-btn.disabled:focus, .ant-btn.disabled:hover, .ant-btn[disabled], .ant-btn[disabled].active, .ant-btn[disabled]:active, .ant-btn[disabled]:focus, .ant-btn[disabled]:hover {
+	@include b-c($lightblue);
+	@include c($white);
+}
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) .anticon { padding-right: 7px !important; }
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) { padding-left: 20px !important; }
+.ant-btn-clicked:after { animation: 0s !important; }
+.ant-form-item { @extend %m-b-0; @include h(60px); }
+.ant-modal-body { @include b-c($whiteblue);}
+.ant-popover-inner-content {
+	@extend %m-0, %p-0;
+	@include b-s(rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px);
+	@include w(100%);
+}
+.ant-select-selection--multiple .ant-select-selection__choice {
+	@include c($white);
+	@include b-c($lightblue);
+	border-radius: 10px;
+	padding: 0 25px 0 15px;
+	.ant-select-selection__choice__remove { @include c($white); @include w(20px); &:hover { @include c($lightgrey); } }
+}
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+	@include b-c($rbblue);
+	@include c($white);
+	border-color: $deepblue;
+}
+.scrollbar {
+	@include b-c($lightblue);
+	border-radius: 3px;
+	z-index: 1700;
+}

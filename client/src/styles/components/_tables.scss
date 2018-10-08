@@ -1,0 +1,59 @@
+.table-container {
+	margin: 10px 0;
+
+	.ant-table-content { white-space: nowrap; overflow-x: auto; }
+
+	.label {
+		@extend %t-a-c;
+		@include c($white);
+		@include b-c($lightblue);
+		border-radius: 5px;
+		padding: 4px 15px;
+	}
+
+	.active { @include c($tealgreen);}
+	.amount, .promo, .subscriber, .template-active { @extend .label; @include b-c($tealgreen);}
+
+	.due { @include c($darkyellow);}
+	.date, .plan, .amount-due, .invoice-due, .subscriber-due { @extend .label; @include b-c($darkyellow);}
+
+	.credit { @include c($darkblue);}
+	.amount-credit, .invoice-credit, .subscriber-credit { @extend .label; @include b-c($darkblue);}
+
+	.inactive { @include c($lightcoolgrey);}
+	.amount-inactive, .amount-refund, .amount-suspended, .bill-suspended, .enddate-inactive, .invoice-inactive, .plans-suspended, .max-usage-suspended, .subscriber-inactive { @extend .label; @include b-c($lightcoolgrey);}
+
+	.paid { @include c($limegreen);}
+	.amount-paid, .invoice-paid, .subscriber-paid { @extend .label; @include b-c($limegreen); }
+
+	.refund { @include c($redorange);}
+	.invoice-refund, .subscriber-refund { @extend .label; @include b-c($redorange);}
+
+	.bill, .total-usage { @extend .label; @include b-c($trueorange);}
+
+	.suspended { @include c($firered);}
+	.enddate-suspended, .invoice-suspended, .plan-suspended, .promo-suspended, .subscriber-suspended, .template-suspended,  .total-usage-suspended { @extend .label; @include b-c($firered);}
+
+	.plans-active, .plans-suspended { @extend %m-r-5; }
+
+	.lowercase { @extend %t-t-l;}
+	.max-usage, .plans-active, .subscription-count { @extend .label; @include b-c($lightblue);}
+
+	.table-status-action {
+		@extend %t-t-c;
+		i { @include f-s(18px); padding-top: 5px; }
+	}
+
+	.ant-table-tbody > tr > td, .ant-table-thead > tr> th { @extend %t-a-c; }
+
+	.override-table-style {
+		th { @include f-f($arimo); @include f-s(14px !important); }
+
+		td {
+			@extend %t-t-n;
+			@include c($black !important);
+			@include f-f($arimo);
+			@include f-s(13px !important);
+		}
+	}
+}
