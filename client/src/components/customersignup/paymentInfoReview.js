@@ -81,6 +81,6 @@ PaymentInfoReview.propTypes = {
   creditCard: PropTypes.string,
   creditCardExpMonth: PropTypes.string,
   creditCardExpYear: PropTypes.string,
-  editStep: PropTypes.func.isRequired,
+  editStep: PropTypes.func,
   sameBillingAddress: PropTypes.bool,
 };

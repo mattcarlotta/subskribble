@@ -1,4 +1,5 @@
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
@@ -23,7 +24,7 @@ const PromosPanel = ({ popularpromotionals, promotionals }) => (
       </div>
       <hr />
       <div className="details-container">
-        {promotionals && popularpromotionals ? (
+        {promotionals && !isEmpty(popularpromotionals) ? (
           <Row>
             <Col style={{ height: 319 }} span={8}>
               {/* eslint-disable */}
@@ -85,6 +86,6 @@ const PromosPanel = ({ popularpromotionals, promotionals }) => (
 export default PromosPanel;
 
 PromosPanel.propTypes = {
-  promotionals: PropTypes.string, // eslint-disable-line react/forbid-prop-types
-  popularpromotionals: PropTypes.string, // eslint-disable-line react/forbid-prop-types
+  promotionals: PropTypes.string,
+  popularpromotionals: PropTypes.arrayOf(PropTypes.object),
 };

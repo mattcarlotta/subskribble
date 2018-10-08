@@ -43,7 +43,7 @@ export default class Notifications extends Component {
         >
           <Badge
             count={unreadNotifications ? unreadNotifications.length : 0}
-            offset={[2, -4]}
+            offset={[-1, 2]}
             showZero={false}
             overflowCount={99}
           >

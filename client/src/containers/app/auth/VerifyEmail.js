@@ -44,5 +44,5 @@ VerifyEmail.propTypes = {
   }),
   missingVerificationToken: PropTypes.func.isRequired,
   verifyEmail: PropTypes.func.isRequired,
-  userVerified: PropTypes.bool.isRequired,
+  userVerified: PropTypes.string,
 };

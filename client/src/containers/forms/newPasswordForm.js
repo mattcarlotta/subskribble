@@ -71,8 +71,8 @@ NewPasswordForm.propTypes = {
   missingPasswordToken: PropTypes.func,
   resetUserPassword: PropTypes.func.isRequired,
   confirmLoading: PropTypes.bool.isRequired,
-  pristine: PropTypes.func.isRequired,
-  submitting: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
   showLoadingButton: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,

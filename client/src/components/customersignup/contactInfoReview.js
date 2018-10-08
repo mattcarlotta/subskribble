@@ -52,5 +52,5 @@ ContactInfoReview.propTypes = {
   contactUnit: PropTypes.string,
   contactState: PropTypes.string,
   contactZip: PropTypes.string,
-  editStep: PropTypes.func.isRequired,
+  editStep: PropTypes.func,
 };

@@ -1,4 +1,5 @@
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
@@ -23,7 +24,7 @@ const PlansPanel = ({ plans, popularplans }) => (
       </div>
       <hr />
       <div className="bar-chart-container">
-        {plans && popularplans ? (
+        {plans && !isEmpty(popularplans) ? (
           <Row>
             <Col style={{ height: 319 }} span={8}>
               {/* eslint-disable */}
@@ -94,5 +95,5 @@ export default PlansPanel;
 
 PlansPanel.propTypes = {
   plans: PropTypes.string,
-  popularplans: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  popularplans: PropTypes.arrayOf(PropTypes.object),
 };

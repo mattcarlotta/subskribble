@@ -77,13 +77,13 @@ RegisterPlanForm.propTypes = {
   CONTACTFIELDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   CREDITCARDFIELDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   handleSubmit: PropTypes.func.isRequired,
-  editStep: PropTypes.func.isRequired,
+  editStep: PropTypes.func,
   finished: PropTypes.bool,
   mainTitle: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   onClickBack: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
   plans: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   showContactInfo: PropTypes.bool,
   showPlans: PropTypes.bool,
-  submitting: PropTypes.func.isRequired,
 };

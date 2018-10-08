@@ -11,16 +11,18 @@
     url('assets/fonts/fontawesome-webfont.svg') format('svg');
 }
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('assets/fonts/MaterialIcons-Regular.eot') format('eot'),
-    url('assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
-    url('assets/fonts/MaterialIcons-Regular.woff') format('woff'),
-    url('assets/fonts/MaterialIcons-Regular.ttf') format('truetype'),
-    url('assets/fonts/MaterialIcons-Regular.svg') format('svg');
-}
+// @font-face {
+//   font-family: 'Material Icons';
+//   font-style: normal;
+//   font-weight: 400;
+//   src: url('assets/fonts/MaterialIcons-Regular.eot') format('eot'),
+//     url('assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+//     url('assets/fonts/MaterialIcons-Regular.woff') format('woff'),
+//     url('assets/fonts/MaterialIcons-Regular.ttf') format('truetype'),
+//     url('assets/fonts/MaterialIcons-Regular.svg') format('svg');
+// }
+
+$material-icons-font-path: '~material-icons/iconfont/';
 
 .material-icons {
   font-family: 'Material Icons';

@@ -109,7 +109,7 @@ const filterNotifications = (notifications, deletedNote) =>
 const notificationsReducer = (state = {}, { payload, type }) => {
   switch (type) {
     case types.RESET_NOTIFICATIONS:
-      return { ...state, readNotifications: '', unreadNotifications: '' };
+      return { ...state, readNotifications: [], unreadNotifications: [] };
     case types.SET_NOTIFICATIONS:
       return {
         ...state,

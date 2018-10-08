@@ -72,6 +72,6 @@ AuthForm.propTypes = {
   submitLabel: PropTypes.string.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
-  showForgotPassword: PropTypes.bool.isRequired,
+  showForgotPassword: PropTypes.bool,
   switchAuthForm: PropTypes.func.isRequired,
 };

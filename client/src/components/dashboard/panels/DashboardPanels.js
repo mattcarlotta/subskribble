@@ -10,7 +10,26 @@ import TemplatesPanel from './templatesPanel';
 import TransactionsPanel from './transactionsPanel';
 
 export default class Dashboard extends Component {
-  state = { isLoading: true };
+  state = {
+    isLoading: true,
+    subscribers: '',
+    inactivesubscribers: '',
+    plans: '',
+    popularplans: [],
+    popularpromotionals: [],
+    promotionals: '',
+    credits: '',
+    creditstotal: '',
+    dues: '',
+    duestotal: '',
+    charges: '',
+    chargestotal: '',
+    refunds: '',
+    refundstotal: '',
+    messages: '',
+    activetemplates: '',
+    inactivetemplates: '',
+  };
 
   componentDidMount = () =>
     this.props

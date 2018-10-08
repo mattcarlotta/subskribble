@@ -56,7 +56,7 @@ class PlanForm extends Component {
   handleFormSubmit = formProps => {
     const { id } = this.props.location.query;
     this.props.showButtonLoading();
-    if (id) {
+    if (!id) {
       this.props.addNewPlan(formProps);
     } else {
       this.props.editPlan(id, formProps);

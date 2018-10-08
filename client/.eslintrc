@@ -72,7 +72,16 @@
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
-    "babel/object-curly-spacing": 0
+    "babel/object-curly-spacing": 0,
+    "prefer-destructuring": [
+      "error",
+      {
+        "AssignmentExpression": {
+          "array": false,
+          "object": false
+        }
+      }
+    ]
   },
   "env": {
     "es6": true,

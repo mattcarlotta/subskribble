@@ -71,9 +71,8 @@ class PromoForm extends Component {
   handleFormSubmit = formProps => {
     const { id } = this.props.location.query;
     this.props.showButtonLoading();
-    const [startdate, enddate] = formProps;
-    formProps.startdate = startdate;
-    formProps.enddate = enddate;
+    formProps.startdate = formProps.dateStamps[0];
+    formProps.enddate = formProps.dateStamps[1];
     if (!id) {
       this.props.addNewPromo(formProps);
     } else {

@@ -66,5 +66,5 @@ export default EmailConfirmation;
 
 EmailConfirmation.propTypes = {
   status: PropTypes.string,
-  userVerified: PropTypes.bool.isRequired,
+  userVerified: PropTypes.string.isRequired,
 };

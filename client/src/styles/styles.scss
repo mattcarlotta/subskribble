@@ -5,10 +5,11 @@
 @import 'base/mixins';
 @import 'base/extensions';
 @import '~antd/dist/antd.min.css';
-// @import '~bootstrap/dist/css/bootstrap.min.css';
-// @import '~rc-drawer-menu/assets/index.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~rc-drawer-menu/assets/index.css';
 @import '~react-quill/dist/quill.snow.css';
 @import 'assets/css/font-awesome.min.css';
+@import '~material-icons/iconfont/material-icons.scss';
 
 // Components
 @import 'components/auth';

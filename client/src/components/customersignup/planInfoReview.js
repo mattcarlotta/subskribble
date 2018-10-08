@@ -39,7 +39,7 @@ const PlanInfoReview = ({
 export default PlanInfoReview;
 
 PlanInfoReview.propTypes = {
-  editStep: PropTypes.func.isRequired,
+  editStep: PropTypes.func,
   displayPrice: PropTypes.number,
   description: PropTypes.string,
   selectedPlan: PropTypes.string,

@@ -157,13 +157,13 @@ class AvatarForm extends Component {
 export default reduxForm({ form: 'AvatarForm' })(AvatarForm);
 
 AvatarForm.propTypes = {
-  avatarURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string,
   updateAvatar: PropTypes.func.isRequired,
   uploadAvatar: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   hideAvatarForm: PropTypes.func.isRequired,
   serverError: PropTypes.string,
-  serverErrorMessage: PropTypes.string,
+  serverErrorMessage: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };

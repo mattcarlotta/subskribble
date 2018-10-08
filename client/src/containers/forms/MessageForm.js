@@ -46,7 +46,7 @@ class MessageForm extends Component {
           ),
         });
       })
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   updateTemplatePreview = selectedTemplate => {
