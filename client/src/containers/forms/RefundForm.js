@@ -22,7 +22,7 @@ class RefundForm extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
-    if (id) {
+    if (!id) {
       this.props.handleGoBack();
     } else {
       this.fetchTransactionToRefund(id);
@@ -124,6 +124,6 @@ RefundForm.propTypes = {
   refundAction: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   confirmLoading: PropTypes.bool.isRequired,
-  pristine: PropTypes.func.isRequired,
-  submitting: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Divider } from 'antd';
 import { browserHistory } from 'react-router';
 import ActionButton from './actionButton';
@@ -94,3 +95,11 @@ export default class TableActions extends PureComponent {
     );
   };
 }
+
+TableActions.propTypes = {
+  deleteAction: PropTypes.func,
+  record: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  refund: PropTypes.bool,
+  editLocation: PropTypes.string,
+  updateAction: PropTypes.func,
+};

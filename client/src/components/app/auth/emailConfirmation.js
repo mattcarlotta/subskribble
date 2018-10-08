@@ -6,8 +6,8 @@ const verificationFailure = () => (
   <Fragment>
     <h1>Email Verification Error!</h1>
     <p className="message">
-      Oops! There was problem verifying your email. Please check your email and
-      click the "Verify Email" button or the link below it again.
+      {`Oops! There was problem verifying your email. Please check your email and
+      click the "Verify Email" button or the link below it again.`}
     </p>
     <p className="message">
       {`If you continue to receive this error, please contact us immediately at`}

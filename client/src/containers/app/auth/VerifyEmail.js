@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   missingVerificationToken,
@@ -12,7 +13,11 @@ class VerifyEmail extends Component {
     const { missingVerificationToken, verifyEmail, userVerified } = this.props;
     const { token } = this.props.location.query;
 
-    !userVerified && !token ? missingVerificationToken() : verifyEmail(token);
+    if (!userVerified && !token) {
+      missingVerificationToken();
+    } else {
+      verifyEmail(token);
+    }
   };
 
   render = () =>
@@ -30,3 +35,14 @@ export default connect(
   state => ({ userVerified: state.auth.userVerified }),
   { missingVerificationToken, verifyEmail },
 )(VerifyEmail);
+
+VerifyEmail.propTypes = {
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      token: PropTypes.string,
+    }),
+  }),
+  missingVerificationToken: PropTypes.func.isRequired,
+  verifyEmail: PropTypes.func.isRequired,
+  userVerified: PropTypes.bool.isRequired,
+};

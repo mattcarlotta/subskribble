@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import PieChart from '../../app/charts/PieChart';
 import CustomButton from '../../app/buttons/customButton';
 import NoData from './noData';
 
-export default ({ inactivesubscribers, subscribers }) => (
+const SubscribersPanel = ({ inactivesubscribers, subscribers }) => (
   <Col span={8}>
     <div className="mini-panel-container">
       <div className="tab-container">
@@ -47,3 +48,10 @@ export default ({ inactivesubscribers, subscribers }) => (
     </div>
   </Col>
 );
+
+export default SubscribersPanel;
+
+SubscribersPanel.propTypes = {
+  subscribers: PropTypes.string,
+  inactivesubscribers: PropTypes.string,
+};

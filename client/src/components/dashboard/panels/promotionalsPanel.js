@@ -1,11 +1,12 @@
 import map from 'lodash/map';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
 import BarChart from '../../app/charts/BarChart';
 import CustomButton from '../../app/buttons/customButton';
 import NoData from './noData';
 
-export default ({ popularpromotionals, promotionals }) => (
+const PromosPanel = ({ popularpromotionals, promotionals }) => (
   <Col span={8}>
     <div className="mini-panel-container">
       <div className="tab-container">
@@ -25,6 +26,7 @@ export default ({ popularpromotionals, promotionals }) => (
         {promotionals && popularpromotionals ? (
           <Row>
             <Col style={{ height: 319 }} span={8}>
+              {/* eslint-disable */}
               <BarChart
                 indexBy={'Promotionals'}
                 data={[
@@ -36,6 +38,7 @@ export default ({ popularpromotionals, promotionals }) => (
                 ]}
                 keys={['promotionals']}
               />
+              {/* eslint-enable */}
             </Col>
             <Col style={{ height: 250 }} span={16}>
               <h5 className="top-5-title">Most Used Promotionals</h5>
@@ -78,3 +81,10 @@ export default ({ popularpromotionals, promotionals }) => (
     </div>
   </Col>
 );
+
+export default PromosPanel;
+
+PromosPanel.propTypes = {
+  promotionals: PropTypes.string, // eslint-disable-line react/forbid-prop-types
+  popularpromotionals: PropTypes.string, // eslint-disable-line react/forbid-prop-types
+};

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Tooltip } from 'antd';
 
-export default ({ avatarURL, deleteAvatar, showAvatarForm }) => (
+const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
   <div className="current-avatar-container">
     <div className="avatar-container">
       <div className="avatar-preview-container">
@@ -26,7 +27,7 @@ export default ({ avatarURL, deleteAvatar, showAvatarForm }) => (
             className={!avatarURL ? 'btn-disabled' : 'btn-danger'}
             shape="circle"
             icon="delete"
-            disabled={!avatarURL ? true : false}
+            disabled={!avatarURL || false}
             onClick={deleteAvatar}
           />
         </Col>
@@ -44,3 +45,11 @@ export default ({ avatarURL, deleteAvatar, showAvatarForm }) => (
     </div>
   </div>
 );
+
+export default CurrentAvatar;
+
+CurrentAvatar.propTypes = {
+  avatarURL: PropTypes.string,
+  deleteAvatar: PropTypes.func.isRequired,
+  showAvatarForm: PropTypes.func.isRequired,
+};

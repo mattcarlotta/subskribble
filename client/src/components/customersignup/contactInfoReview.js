@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ContactInfoReview = ({
   contactAddress,
@@ -19,12 +20,14 @@ const ContactInfoReview = ({
     <div className="details-container">
       <p className="name">
         {contactFirstName} {contactLastName}
+        {/* eslint-disable */}
         <span
           className="edit-link"
           onClick={editStep ? () => editStep(0) : null}
         >
           Edit
         </span>
+        {/* eslint-enable */}
       </p>
       <p className="address">{contactAddress}</p>
       <p className="address">{contactUnit}</p>
@@ -38,3 +41,16 @@ const ContactInfoReview = ({
 );
 
 export default ContactInfoReview;
+
+ContactInfoReview.propTypes = {
+  contactAddress: PropTypes.string,
+  contactCity: PropTypes.string,
+  contactEmail: PropTypes.string,
+  contactFirstName: PropTypes.string,
+  contactLastName: PropTypes.string,
+  contactPhone: PropTypes.string,
+  contactUnit: PropTypes.string,
+  contactState: PropTypes.string,
+  contactZip: PropTypes.string,
+  editStep: PropTypes.func.isRequired,
+};

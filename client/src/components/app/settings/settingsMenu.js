@@ -1,9 +1,10 @@
 import map from 'lodash/map';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router';
 import { Avatar, Menu } from 'antd';
-const { Item: MenuItem } = Menu;
 
+const { Item: MenuItem } = Menu;
 const RIGHTNAVLINKS = [
   // { icon: 'person_outline', label: 'My Profile', link: '/subskribble/profile' },
   // { icon: 'mail_outline', label: 'Messages', link: '/subskribble/messages' },
@@ -11,9 +12,8 @@ const RIGHTNAVLINKS = [
   // { icon: '', label: '', link: '/subskribble/logout' },
 ];
 
-export default ({
+const SettingsMenu = ({
   avatarURL,
-  company,
   firstName,
   handleVisibleChange,
   lastName,
@@ -50,4 +50,15 @@ export default ({
       </MenuItem>
     </Menu>
   );
+};
+
+export default SettingsMenu;
+
+SettingsMenu.propTypes = {
+  avatarURL: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  loggedinUser: PropTypes.string,
+  handleVisibleChange: PropTypes.func.isRequired,
+  unauthorizeUser: PropTypes.func.isRequired,
 };

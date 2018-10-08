@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PlanInfoReview = ({
   displayPrice,
@@ -10,10 +11,11 @@ const PlanInfoReview = ({
     <h2 className="head-title">
       <i className="material-icons plan-icon" aria-hidden="true">
         content_paste
-      </i>{' '}
-      Plan
+      </i>
+      {' Plan'}
     </h2>
     <div className="details-container">
+      {/* eslint-disable */}
       <p className="plan">
         {selectedPlan}
         <span
@@ -23,6 +25,7 @@ const PlanInfoReview = ({
           Edit
         </span>
       </p>
+      {/* eslint-enable */}
       <p className="price">
         <span className="price-sign">$</span>
         {displayPrice}
@@ -34,3 +37,10 @@ const PlanInfoReview = ({
 );
 
 export default PlanInfoReview;
+
+PlanInfoReview.propTypes = {
+  editStep: PropTypes.func.isRequired,
+  displayPrice: PropTypes.number,
+  description: PropTypes.string,
+  selectedPlan: PropTypes.string,
+};

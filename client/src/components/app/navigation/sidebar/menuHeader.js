@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
-export default ({ collapseSideNav, handleLogoClick }) => (
+const MenuHeader = ({ collapseSideNav, handleLogoClick }) => (
   <div key="menu-header" className="sider-menu-header">
     <Button onClick={handleLogoClick} className="logo-container">
       <i className="material-icons icon-logo">wifi_tethering</i>
@@ -14,3 +15,10 @@ export default ({ collapseSideNav, handleLogoClick }) => (
     </Button>
   </div>
 );
+
+export default MenuHeader;
+
+MenuHeader.propTypes = {
+  collapseSideNav: PropTypes.bool.isRequired,
+  handleLogoClick: PropTypes.func.isRequired,
+};

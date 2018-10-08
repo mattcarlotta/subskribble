@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import PieChart from '../../app/charts/PieChart';
 import CustomButton from '../../app/buttons/customButton';
 import NoData from './noData';
 
-export default ({ activetemplates, inactivetemplates }) => (
+const TemplatesPanel = ({ activetemplates, inactivetemplates }) => (
   <Col span={8}>
     <div className="mini-panel-container">
       <div className="tab-container">
@@ -45,3 +46,10 @@ export default ({ activetemplates, inactivetemplates }) => (
     </div>
   </Col>
 );
+
+export default TemplatesPanel;
+
+TemplatesPanel.propTypes = {
+  activetemplates: PropTypes.string,
+  inactivetemplates: PropTypes.string,
+};

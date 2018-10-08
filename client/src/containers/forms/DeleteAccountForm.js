@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { AntFormFieldsWithLabels } from '../app/formFields/antReduxFormFields';
 import FIELDS from '../app/formFields/deleteAccountFormFields';
@@ -57,3 +58,13 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
 })(DeleteAccountForm);
+
+DeleteAccountForm.propTypes = {
+  company: PropTypes.string.isRequired,
+  loggedinUser: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
+  deleteUserAccount: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};

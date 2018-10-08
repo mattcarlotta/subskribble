@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Badge, Popover, Tooltip } from 'antd';
 
 import PopoverContent from './popoverContent';
@@ -18,7 +19,7 @@ export default class Notifications extends Component {
       const { visibleNotifications } = this.state;
       const { unreadNotifications, updateNotifications } = this.props;
 
-      !visibleNotifications && unreadNotifications && updateNotifications();
+      if (!visibleNotifications && unreadNotifications) updateNotifications();
     });
   };
 
@@ -46,6 +47,7 @@ export default class Notifications extends Component {
             showZero={false}
             overflowCount={99}
           >
+            {/* eslint-disable */}
             <Popover
               arrowPointAtCenter
               content={
@@ -61,6 +63,7 @@ export default class Notifications extends Component {
               visible={visibleNotifications}
               onVisibleChange={this.handleVisibleChange}
             >
+              {/* eslint-enable */}
               <i className="material-icons notifications-icon">notifications</i>
             </Popover>
           </Badge>
@@ -69,3 +72,11 @@ export default class Notifications extends Component {
     );
   }
 }
+
+Notifications.propTypes = {
+  removeAllNotifications: PropTypes.func.isRequired,
+  deleteNotification: PropTypes.func.isRequired,
+  updateNotifications: PropTypes.func.isRequired,
+  unreadNotifications: PropTypes.arrayOf(PropTypes.object),
+  readNotifications: PropTypes.arrayOf(PropTypes.object),
+};

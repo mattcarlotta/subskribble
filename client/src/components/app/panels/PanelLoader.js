@@ -19,7 +19,7 @@ export default class PanelLoader extends PureComponent {
     fetchItems();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = () => {
     const {
       activeitems,
       activeitemcount,

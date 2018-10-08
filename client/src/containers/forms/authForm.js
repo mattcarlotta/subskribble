@@ -69,9 +69,9 @@ AuthForm.propTypes = {
   FIELDS: PropTypes.arrayOf(
     PropTypes.object, // eslint-disable-line react/forbid-prop-types
   ).isRequired,
-  pristine: PropTypes.func.isRequired,
   submitLabel: PropTypes.string.isRequired,
-  submitting: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
   showForgotPassword: PropTypes.bool.isRequired,
   switchAuthForm: PropTypes.func.isRequired,
 };

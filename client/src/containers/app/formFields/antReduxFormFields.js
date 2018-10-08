@@ -1,3 +1,4 @@
+/* eslint-disable */
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
@@ -350,3 +351,4 @@ export {
   AntUpload,
   AntWeekPicker,
 };
+/* eslint-enable */

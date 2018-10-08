@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { GetCreditCardType } from './getCreditCardType';
 
 const PaymentInfoReview = ({
@@ -34,12 +35,14 @@ const PaymentInfoReview = ({
           <span className="experiation">
             Exp: {creditCardExpMonth}/{creditCardExpYear}
           </span>
+          {/* eslint-disable */}
           <span
             className="edit-link"
             onClick={editStep ? () => editStep(0) : null}
           >
             Edit
           </span>
+          {/* eslint-enable */}
         </p>
         <p className="credit-billing">Billing Address:</p>
         {sameBillingAddress ? (
@@ -66,3 +69,18 @@ const PaymentInfoReview = ({
 };
 
 export default PaymentInfoReview;
+
+PaymentInfoReview.propTypes = {
+  contactFirstName: PropTypes.string,
+  contactLastName: PropTypes.string,
+  billingAddress: PropTypes.string,
+  billingCity: PropTypes.string,
+  billingState: PropTypes.string,
+  billingUnit: PropTypes.string,
+  billingZip: PropTypes.string,
+  creditCard: PropTypes.string,
+  creditCardExpMonth: PropTypes.string,
+  creditCardExpYear: PropTypes.string,
+  editStep: PropTypes.func.isRequired,
+  sameBillingAddress: PropTypes.bool,
+};

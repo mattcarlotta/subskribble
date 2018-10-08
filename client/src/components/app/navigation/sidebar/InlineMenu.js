@@ -1,10 +1,11 @@
 import map from 'lodash/map';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Icon, Layout, Menu } from 'antd';
 import MenuHeader from './menuHeader';
+
 const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;
 const { Sider } = Layout;
-
 const TABS = [
   { icon: 'dashboard', key: 'dashboard', label: 'Dashboard' },
   { icon: 'people_outline', key: 'subscribers', label: 'Subscribers' },
@@ -25,7 +26,7 @@ const TABS = [
   { icon: 'view_module', key: 'templates', label: 'Templates' },
 ];
 
-export default ({ handleTabClick, collapseSideNav, selectedKey }) => (
+const InlineMenu = ({ handleTabClick, collapseSideNav, selectedKey }) => (
   <Sider collapsible collapsed={collapseSideNav} trigger={null} width={235}>
     <MenuHeader
       collapseSideNav={collapseSideNav}
@@ -64,3 +65,11 @@ export default ({ handleTabClick, collapseSideNav, selectedKey }) => (
     </Menu>
   </Sider>
 );
+
+export default InlineMenu;
+
+InlineMenu.propTypes = {
+  collapseSideNav: PropTypes.bool.isRequired,
+  handleTabClick: PropTypes.func.isRequired,
+  selectedKey: PropTypes.arrayOf(PropTypes.string),
+};

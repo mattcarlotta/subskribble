@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Col, Button, Icon, Tooltip } from 'antd';
 import { AntUpload } from '../app/formFields/antReduxFormFields';
@@ -15,17 +16,15 @@ class AvatarForm extends Component {
     previewImage: false,
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = prevProps => {
     const { avatarURL, hideAvatarForm, serverError } = this.props;
-    serverError !== prevProps.serverError &&
-      serverError !== undefined &&
+    if (serverError !== prevProps.serverError && serverError !== undefined)
       this.handleResetForm();
-    avatarURL !== prevProps.avatarURL &&
-      avatarURL !== undefined &&
+    if (avatarURL !== prevProps.avatarURL && avatarURL !== undefined)
       hideAvatarForm();
   };
 
-  beforeUpload = (file, fileList) =>
+  beforeUpload = file =>
     new Promise((resolve, reject) => {
       this.validateFile(file)
         .then(imageUrl => {
@@ -36,32 +35,36 @@ class AvatarForm extends Component {
           this.props.serverErrorMessage(
             `Only 10MB@256px/256px (image/jpg,png,bmp,gif) files are accepted! Instead, received a: ${(
               file.size / 1024000
-            ).toFixed(2)}MB@${height ? height : '0'}px/${
-              width ? width : 0
-            }px (${file.type}).`,
+            ).toFixed(2)}MB@${height || '0'}px/${width || 0}px (${file.type}).`,
           );
           reject(file);
         });
     });
 
-  handleCancel = () => this.setState({ previewImage: false });
+  onCancel = () => this.setState({ previewImage: false });
+
   handleFileChange = ({ file, fileList }) => {
     file.status = 'done';
-    this.setState({ file, fileList });
+    this.setState({ fileList });
   };
+
   handlePreview = () => this.setState({ previewImage: true });
+
   handleRemove = () => this.setState({ imageUrl: '' });
+
   handleResetForm = () => this.setState({ confirmLoading: false });
 
   readFile = (file, resolve, reject) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      let image = new Image();
+      const image = new Image();
       image.src = reader.result;
       image.onload = () => {
-        image.height <= 256 || image.width <= 256
-          ? resolve(reader.result)
-          : reject({ height: image.height, width: image.width });
+        if (image.height <= 256 || image.width <= 256) {
+          resolve(reader.result);
+        } else {
+          reject({ height: image.height, width: image.width });
+        }
       };
     });
     reader.readAsDataURL(file);
@@ -75,9 +78,11 @@ class AvatarForm extends Component {
       const isBMP = file.type === 'image/bmp';
       const isLt10MB = file.size / 10240000 <= 1;
 
-      (isJPG || isPNG || isGIF || isBMP) && isLt10MB
-        ? this.readFile(file, resolve, reject)
-        : reject(null);
+      if ((isJPG || isPNG || isGIF || isBMP) && isLt10MB) {
+        this.readFile(file, resolve, reject);
+      } else {
+        reject(null);
+      }
     });
 
   handleFormSubmit = ({
@@ -89,7 +94,11 @@ class AvatarForm extends Component {
     const { updateAvatar, uploadAvatar } = this.props;
     const fd = new FormData();
     fd.append('file', originFileObj);
-    !this.props.avatarURL ? uploadAvatar(fd) : updateAvatar(fd);
+    if (!this.props.avatarURL) {
+      uploadAvatar(fd);
+    } else {
+      updateAvatar(fd);
+    }
   };
 
   render = () => (
@@ -101,7 +110,7 @@ class AvatarForm extends Component {
             beforeUpload={this.beforeUpload}
             disabled={this.state.confirmLoading}
             component={AntUpload}
-            handleCancel={this.handleCancel}
+            handleCancel={this.onCancel}
             imageUrl={this.state.imageUrl}
             fileList={this.state.fileList}
             loading={false}
@@ -118,6 +127,7 @@ class AvatarForm extends Component {
               <Button
                 type="button"
                 className="btn-cancel-warning"
+                // eslint-disable-next-line
                 onClick={this.props.hideAvatarForm}
                 shape="circle"
                 icon="close"
@@ -145,3 +155,15 @@ class AvatarForm extends Component {
 }
 
 export default reduxForm({ form: 'AvatarForm' })(AvatarForm);
+
+AvatarForm.propTypes = {
+  avatarURL: PropTypes.string.isRequired,
+  updateAvatar: PropTypes.func.isRequired,
+  uploadAvatar: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  hideAvatarForm: PropTypes.func.isRequired,
+  serverError: PropTypes.string,
+  serverErrorMessage: PropTypes.string,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};

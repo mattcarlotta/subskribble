@@ -32,8 +32,8 @@ export default () => (
           <Link to="/subskribble/templates/create">here</Link>.
         </li>
         <li>
-          Send messages to your plan's subscribers by utilizing your
-          personalized templates by clicking{' '}
+          {`Send messages to your plan's subscribers by utilizing your
+          personalized templates by clicking `}
           <Link to="/subskribble/messages/create">here</Link>.
         </li>
         <li>

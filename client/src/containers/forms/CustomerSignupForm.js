@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Steps } from 'antd';
 import RegisterPlanForm from './RegisterPlanForm';
@@ -28,11 +29,13 @@ class CustomerPlanSignup extends Component {
     this.props
       .fetchAllActivePlans()
       .then(({ data: { activeplans } }) => {
-        activeplans
-          ? this.setState({ isLoading: false, plans: activeplans })
-          : this.props.goBack();
+        if (activeplans) {
+          this.setState({ isLoading: false, plans: activeplans });
+        } else {
+          this.props.handleGoBack();
+        }
       })
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   editStep = number =>
@@ -60,10 +63,12 @@ class CustomerPlanSignup extends Component {
   };
 
   handlePrev = () => {
-    const formKey = this.state.stepIndex - 1;
-    this.setState({
-      formFields: getCustomerFormFields(formKey),
-      stepIndex: formKey,
+    this.setState(prevState => {
+      const formKey = prevState.stepIndex - 1;
+      return {
+        formFields: getCustomerFormFields(formKey),
+        stepIndex: formKey,
+      };
     });
   };
 
@@ -99,11 +104,13 @@ class CustomerPlanSignup extends Component {
             confirmLoading={confirmLoading}
             finished={finished}
             editStep={!confirmLoading ? this.editStep : null}
-            onClickBack={stepIndex > 0 ? this.handlePrev : this.props.goBack}
+            onClickBack={
+              stepIndex > 0 ? this.handlePrev : this.props.handleGoBack
+            }
             onSubmit={finished ? this.handleFormSave : this.handleNext}
             plans={plans}
-            showPlans={stepIndex === 1 ? true : false}
-            showContactInfo={stepIndex === 0 ? true : false}
+            showPlans={stepIndex === 1 || false}
+            showContactInfo={stepIndex === 0 || false}
           />
         </div>
       </div>
@@ -115,3 +122,11 @@ export default connect(
   null,
   { fetchAllActivePlans, subRegisterToPlan },
 )(CustomerPlanSignup);
+
+CustomerPlanSignup.propTypes = {
+  handleGoBack: PropTypes.func.isRequired,
+  fetchAllActivePlans: PropTypes.func.isRequired,
+  subRegisterToPlan: PropTypes.func.isRequired,
+  confirmLoading: PropTypes.bool.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+};

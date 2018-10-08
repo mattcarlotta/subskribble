@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import {
   AntFormFieldsWithLabels,
@@ -11,13 +12,14 @@ class AccountForm extends Component {
 
   componentDidMount = () => this.initializeForm();
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = prevProps => {
     const { serverError, unreadNotifications } = this.props;
-    serverError !== prevProps.serverError &&
-      serverError !== undefined &&
+    if (serverError !== prevProps.serverError && serverError !== undefined)
       this.resetLoading();
-    unreadNotifications !== prevProps.unreadNotifications &&
-      unreadNotifications !== undefined &&
+    if (
+      unreadNotifications !== prevProps.unreadNotifications &&
+      unreadNotifications !== undefined
+    )
       this.initializeForm(true);
   };
 
@@ -77,3 +79,19 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
 })(AccountForm);
+
+AccountForm.propTypes = {
+  company: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  loggedinUser: PropTypes.string.isRequired,
+  updateUserAccount: PropTypes.func.isRequired,
+  unreadNotifications: PropTypes.arrayOf(
+    PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  ),
+  handleSubmit: PropTypes.func.isRequired,
+  serverError: PropTypes.string,
+  initialize: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};

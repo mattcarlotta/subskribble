@@ -6,14 +6,16 @@ export default class BasicPanelLoader extends PureComponent {
 
   componentDidMount = () => {
     const { itemcount, fetchItems, fetchItemCounts } = this.props;
+
     if (!itemcount) {
       fetchItemCounts();
-      fetchItems();
     }
+    fetchItems();
   };
 
   componentDidUpdate = () => {
     const { items, itemcount } = this.props;
+
     if (items && itemcount) this.setState({ isLoading: false });
   };
 

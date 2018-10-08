@@ -1,6 +1,8 @@
 import map from 'lodash/map';
 import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Select } from 'antd';
+
 const { Option } = Select;
 
 export default class SelectField extends PureComponent {
@@ -11,7 +13,9 @@ export default class SelectField extends PureComponent {
     fetchAction(TAB, 0, nextRecords);
   };
 
+  /* eslint-disable */
   handleBlur = () => this._select.blur();
+  /* eslint-enable */
 
   render = () => {
     const { OPTIONS, placeholder, sortByNum } = this.props;
@@ -19,6 +23,7 @@ export default class SelectField extends PureComponent {
     return (
       <Fragment>
         <span style={{ textTransform: 'none' }}>Items per page: </span>
+        {/* eslint-disable */}
         <Select
           placeholder={placeholder}
           onSelect={this.handleSortDataBy}
@@ -27,6 +32,7 @@ export default class SelectField extends PureComponent {
           ref={node => (this._select = node)}
           value={sortByNum}
         >
+          {/* eslint-enable */}
           {map(OPTIONS, value => (
             <Option key={value} value={value}>
               {value}
@@ -37,3 +43,13 @@ export default class SelectField extends PureComponent {
     );
   };
 }
+
+SelectField.propTypes = {
+  fetchAction: PropTypes.func.isRequired,
+  setSortByNum: PropTypes.func.isRequired,
+  selectCurrentPage: PropTypes.func.isRequired,
+  OPTIONS: PropTypes.arrayOf(PropTypes.number),
+  TAB: PropTypes.string,
+  placeholder: PropTypes.string,
+  sortByNum: PropTypes.number,
+};

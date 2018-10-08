@@ -7,7 +7,9 @@ export default () => {
   return (
     <div className="notfound-container">
       <h1>404 - Not Found!</h1>
-      <button onClick={handleGoBack}>Go Back</button>
+      <button type="button" onClick={handleGoBack}>
+        Go Back
+      </button>
     </div>
   );
 };

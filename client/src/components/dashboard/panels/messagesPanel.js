@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import moment from 'moment';
 import CustomButton from '../../app/buttons/customButton';
 import NoData from './noData';
 
-export default ({ messages }) => (
+const MessagesPanel = ({ messages }) => (
   <Col span={8}>
     <div className="mini-panel-container">
       <div className="tab-container">
@@ -33,3 +34,9 @@ export default ({ messages }) => (
     </div>
   </Col>
 );
+
+export default MessagesPanel;
+
+MessagesPanel.propTypes = {
+  messages: PropTypes.string,
+};

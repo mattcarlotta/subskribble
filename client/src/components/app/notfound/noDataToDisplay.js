@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 import { browserHistory } from 'react-router';
 import PageContainer from '../panels/pageContainer';
 import CustomButton from '../buttons/customButton';
 import TogglePanelVisibility from '../panels/TogglePanelVisibility';
 
-const noDataToDisplay = ({
+const NoDataToDisplay = ({
   buttonIcon,
   buttonPushLocation,
   buttonPanel,
@@ -48,4 +49,13 @@ const noDataToDisplay = ({
   </PageContainer>
 );
 
-export default TogglePanelVisibility(noDataToDisplay);
+export default TogglePanelVisibility(NoDataToDisplay);
+
+NoDataToDisplay.propTypes = {
+  buttonIcon: PropTypes.string,
+  buttonPushLocation: PropTypes.string,
+  buttonPanel: PropTypes.func.isRequired,
+  cardTitle: PropTypes.string,
+  tipTitle: PropTypes.string,
+  visible: PropTypes.bool,
+};

@@ -1,11 +1,11 @@
 import React from 'react';
-import ApplyPromotionalForm from '../../containers/forms/applyPromotionalForm';
+import PropTypes from 'prop-types';
 import { Col } from 'antd';
+import ApplyPromotionalForm from '../../containers/forms/applyPromotionalForm';
 
 const CartTotalReview = ({
   adjustedPrice,
   appliedPromoCode,
-  displayPrice,
   originalAmount,
   plan,
   price,
@@ -56,3 +56,25 @@ const CartTotalReview = ({
 };
 
 export default CartTotalReview;
+
+CartTotalReview.propTypes = {
+  adjustedPrice: PropTypes.string,
+  appliedPromoCode: PropTypes.objectOf({
+    amount: PropTypes.number,
+    discounttype: PropTypes.string,
+    enddate: PropTypes.string,
+    id: PropTypes.string,
+    key: PropTypes.number,
+    maxusage: PropTypes.number,
+    plans: PropTypes.arrayOf(PropTypes.string),
+    promocode: PropTypes.string,
+    startdate: PropTypes.string,
+    status: PropTypes.string,
+    totalusage: PropTypes.number,
+    userid: PropTypes.string,
+  }),
+  originalAmount: PropTypes.number,
+  plan: PropTypes.string,
+  price: PropTypes.number,
+  promoCode: PropTypes.string,
+};

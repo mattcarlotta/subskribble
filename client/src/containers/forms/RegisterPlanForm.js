@@ -79,9 +79,9 @@ RegisterPlanForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   editStep: PropTypes.func.isRequired,
   finished: PropTypes.bool,
-  mainTitle: PropTypes.string,
+  mainTitle: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   onClickBack: PropTypes.func.isRequired,
-  pristine: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
   plans: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   showContactInfo: PropTypes.bool,
   showPlans: PropTypes.bool,

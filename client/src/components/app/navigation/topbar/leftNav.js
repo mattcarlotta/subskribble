@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NavButton from './navButton';
 
-export default ({ collapseSideNav, handleMenuToggle }) => (
+const LeftNav = ({ collapseSideNav, handleMenuToggle }) => (
   <div className="left-nav">
     <NavButton
       className="menu-collapse"
@@ -11,3 +12,10 @@ export default ({ collapseSideNav, handleMenuToggle }) => (
     />
   </div>
 );
+
+export default LeftNav;
+
+LeftNav.propTypes = {
+  collapseSideNav: PropTypes.bool.isRequired,
+  handleMenuToggle: PropTypes.func.isRequired,
+};

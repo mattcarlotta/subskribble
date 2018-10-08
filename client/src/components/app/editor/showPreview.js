@@ -34,7 +34,9 @@ const ShowPreview = ({ company, fromsender, message, subject }) => (
       {fromsender && 'to Firstname Lastname <example@example.com>'}
     </div>
     {subject || fromsender ? <hr /> : null}
+    {/* eslint-disable */}
     <div className="preview" dangerouslySetInnerHTML={{ __html: message }} />
+    {/* eslint-enable */}
   </div>
 );
 

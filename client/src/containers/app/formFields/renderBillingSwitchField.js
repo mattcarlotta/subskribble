@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { AntSwitchField } from './antReduxFormFields';
@@ -33,3 +34,9 @@ export default connect(
   }),
   { resetBillingFieldValues, setBillingFieldValues },
 )(CustomerSwitchField);
+
+CustomerSwitchField.propTypes = {
+  resetBillingFieldValues: PropTypes.func.isRequired,
+  sameBillingAddress: PropTypes.bool,
+  setBillingFieldValues: PropTypes.func.isRequired,
+};

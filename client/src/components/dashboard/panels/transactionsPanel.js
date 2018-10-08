@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Icon, Col, Tooltip } from 'antd';
 import PieChart from '../../app/charts/PieChart';
 import NoData from './noData';
@@ -27,7 +28,7 @@ const transactionLegend = [
   },
 ];
 
-export default ({
+const TransactionsPanel = ({
   charges,
   chargestotal,
   credits,
@@ -105,4 +106,17 @@ export default ({
       </div>
     </Col>
   );
+};
+
+export default TransactionsPanel;
+
+TransactionsPanel.propTypes = {
+  charges: PropTypes.string,
+  chargestotal: PropTypes.string,
+  credits: PropTypes.string,
+  creditstotal: PropTypes.string,
+  dues: PropTypes.string,
+  duestotal: PropTypes.string,
+  refunds: PropTypes.string,
+  refundstotal: PropTypes.string,
 };

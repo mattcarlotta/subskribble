@@ -1,10 +1,11 @@
 import isEmpty from 'lodash/isEmpty';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
 import NotificationBody from './notificationBody';
 import NotificationEmpty from './notificationEmpty';
 
-export default ({
+const PopoverContent = ({
   handleClearNotes,
   handleDeleteNote,
   readNotifications,
@@ -38,3 +39,12 @@ export default ({
     )}
   </div>
 );
+
+export default PopoverContent;
+
+PopoverContent.propTypes = {
+  handleClearNotes: PropTypes.func.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
+  unreadNotifications: PropTypes.arrayOf(PropTypes.object),
+  readNotifications: PropTypes.arrayOf(PropTypes.object),
+};

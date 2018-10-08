@@ -206,8 +206,9 @@ const CustomerFormFields = [
   {
     mainTitle: [
       <span key="Checkout">
-        You're almost done. Please <strong>review</strong> the information below
-        and <strong>subscribe to the plan</strong>.
+        {`You're almost done. Please `} <strong>review</strong>
+        {` the information below and `}
+        <strong>subscribe to the plan.</strong>
       </span>,
     ],
   },

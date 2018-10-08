@@ -1,4 +1,5 @@
 import map from 'lodash/map';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import moment from 'moment';
 import { reduxForm, Field } from 'redux-form';
@@ -24,11 +25,15 @@ import {
 } from '../app/formFields/validateFormFields';
 
 class PromoForm extends Component {
-  state = { isLoading: true, selectOptions: [], dates: [] };
+  state = { isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
-    !id ? this.fetchPlans() : this.fetchPromoForEditing(id);
+    if (!id) {
+      this.fetchPlans();
+    } else {
+      this.fetchPromoForEditing(id);
+    }
   };
 
   fetchPromoForEditing = id => {
@@ -48,7 +53,7 @@ class PromoForm extends Component {
           },
         );
       })
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   fetchPlans = () => {
@@ -60,17 +65,20 @@ class PromoForm extends Component {
           selectOptions: map(activeplans, ({ planname }) => planname),
         }),
       )
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   handleFormSubmit = formProps => {
     const { id } = this.props.location.query;
     this.props.showButtonLoading();
-    formProps.startdate = formProps.dateStamps[0];
-    formProps.enddate = formProps.dateStamps[1];
-    !id
-      ? this.props.addNewPromo(formProps)
-      : this.props.editPromo(id, formProps);
+    const [startdate, enddate] = formProps;
+    formProps.startdate = startdate;
+    formProps.enddate = enddate;
+    if (!id) {
+      this.props.addNewPromo(formProps);
+    } else {
+      this.props.editPromo(id, formProps);
+    }
   };
 
   render = () => {
@@ -166,7 +174,7 @@ class PromoForm extends Component {
               backLabel="Back"
               backStyle={{ height: 50, float: 'left' }}
               confirmLoading={confirmLoading}
-              onClickBack={this.props.goBack}
+              onClickBack={this.props.handleGoBack}
               pristine={pristine}
               submitLabel="Submit"
               submitStyle={{ height: 50, float: 'right' }}
@@ -190,3 +198,22 @@ export default reduxForm({
     { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans },
   )(PromoForm),
 );
+
+PromoForm.propTypes = {
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  fetchPromo: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func.isRequired,
+  fetchAllActivePlans: PropTypes.func.isRequired,
+  addNewPromo: PropTypes.func.isRequired,
+  editPromo: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  confirmLoading: PropTypes.bool.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+};

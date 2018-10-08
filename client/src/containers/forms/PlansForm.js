@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import {
@@ -28,7 +29,11 @@ class PlanForm extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.location.query;
-    !id ? this.setState({ isLoading: false }) : this.fetchPlanForEditing(id);
+    if (!id) {
+      this.setState({ isLoading: false });
+    } else {
+      this.fetchPlanForEditing(id);
+    }
   };
 
   fetchPlanForEditing = id => {
@@ -45,13 +50,17 @@ class PlanForm extends Component {
           () => this.props.initialize({ ...data }),
         ),
       )
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   handleFormSubmit = formProps => {
     const { id } = this.props.location.query;
     this.props.showButtonLoading();
-    !id ? this.props.addNewPlan(formProps) : this.props.editPlan(id, formProps);
+    if (id) {
+      this.props.addNewPlan(formProps);
+    } else {
+      this.props.editPlan(id, formProps);
+    }
   };
 
   render = () => {
@@ -167,7 +176,7 @@ class PlanForm extends Component {
               backLabel="Back"
               backStyle={{ height: 50, float: 'left' }}
               confirmLoading={confirmLoading}
-              onClickBack={this.props.goBack}
+              onClickBack={this.props.handleGoBack}
               pristine={pristine}
               submitLabel="Submit"
               submitStyle={{ height: 50, float: 'right' }}
@@ -191,3 +200,21 @@ export default reduxForm({
     { addNewPlan, editPlan, fetchPlan },
   )(PlanForm),
 );
+
+PlanForm.propTypes = {
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  fetchPlan: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func.isRequired,
+  addNewPlan: PropTypes.func.isRequired,
+  editPlan: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  confirmLoading: PropTypes.bool.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+};

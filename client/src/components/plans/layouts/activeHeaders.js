@@ -41,7 +41,7 @@ export default [
   {
     title: 'Trial Period',
     dataIndex: 'trialperiod',
-    render: trial => <span>{trial ? trial : '-'}</span>,
+    render: trial => <span>{trial || '-'}</span>,
   },
   {
     title: 'Subscribers',

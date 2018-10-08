@@ -29,45 +29,43 @@ export default class NotificationButton extends Component {
       <div className="notifications-body">
         {map(
           this.props.notifications,
-          ({ icon, id, message, messagedate, messagetimestamp, read }, key) => {
-            return (
-              <div dataset-key={key} key={key} className="note bb-none">
-                <div className="note-15">
-                  <i
-                    className="material-icons"
-                    style={{ color: colorList[icon], padding: 5 }}
-                  >
-                    {icon}
-                  </i>
-                </div>
-                <div className="note-85">
-                  <p className="title">{message}</p>
-                  <p className="date">
-                    <span>{moment(messagedate).fromNow()}</span>
-                    <span>
-                      <Tooltip
-                        arrowPointAtCenter
-                        placement="bottom"
-                        title="Delete notification"
-                      >
-                        <Button
-                          data-id={id}
-                          className="remove-note-button"
-                          onClick={this.props.handleDeleteNote}
-                        >
-                          <i className="material-icons delete-button">delete</i>
-                        </Button>
-                      </Tooltip>
-                    </span>
-                    <span className={`note-status ${read ? null : 'unread'}`}>
-                      {read ? null : 'new'}
-                    </span>
-                  </p>
-                </div>
-                <div className="clear-fix" />
+          ({ icon, id, message, messagedate, read }, key) => (
+            <div dataset-key={key} key={key} className="note bb-none">
+              <div className="note-15">
+                <i
+                  className="material-icons"
+                  style={{ color: colorList[icon], padding: 5 }}
+                >
+                  {icon}
+                </i>
               </div>
-            );
-          },
+              <div className="note-85">
+                <p className="title">{message}</p>
+                <p className="date">
+                  <span>{moment(messagedate).fromNow()}</span>
+                  <span>
+                    <Tooltip
+                      arrowPointAtCenter
+                      placement="bottom"
+                      title="Delete notification"
+                    >
+                      <Button
+                        data-id={id}
+                        className="remove-note-button"
+                        onClick={this.props.handleDeleteNote}
+                      >
+                        <i className="material-icons delete-button">delete</i>
+                      </Button>
+                    </Tooltip>
+                  </span>
+                  <span className={`note-status ${read ? null : 'unread'}`}>
+                    {read ? null : 'new'}
+                  </span>
+                </p>
+              </div>
+              <div className="clear-fix" />
+            </div>
+          ),
         )}
       </div>
     </Scrollbars>

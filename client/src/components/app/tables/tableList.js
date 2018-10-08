@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import TableActions from './TableActions';
 
-export default ({
+const TableList = ({
   current,
   deleteAction,
   editLocation,
@@ -19,7 +20,7 @@ export default ({
   const handlePageChange = pagination => {
     let { current: limitCount } = pagination;
     selectCurrentPage(limitCount);
-    limitCount = limitCount - 1;
+    limitCount -= 1;
     fetchAction(TAB, limitCount, sortByNum);
   };
 
@@ -42,7 +43,7 @@ export default ({
             ),
           },
         ]}
-        bordered={true}
+        bordered={true} // eslint-disable-line react/jsx-boolean-value
         dataSource={TABLECONTENTS}
         onChange={handlePageChange}
         pagination={{
@@ -54,4 +55,21 @@ export default ({
       />
     </div>
   );
+};
+
+export default TableList;
+
+TableList.propTypes = {
+  current: PropTypes.number,
+  deleteAction: PropTypes.func,
+  editLocation: PropTypes.string,
+  fetchAction: PropTypes.func,
+  refund: PropTypes.bool,
+  selectCurrentPage: PropTypes.func,
+  sortByNum: PropTypes.number,
+  TAB: PropTypes.string,
+  TABLECONTENTS: PropTypes.arrayOf(PropTypes.object),
+  TABLEHEADERS: PropTypes.arrayOf(PropTypes.object),
+  TABLERECORDS: PropTypes.number,
+  updateAction: PropTypes.func,
 };

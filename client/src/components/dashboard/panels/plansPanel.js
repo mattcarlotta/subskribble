@@ -1,11 +1,12 @@
 import map from 'lodash/map';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
 import BarChart from '../../app/charts/BarChart';
 import CustomButton from '../../app/buttons/customButton';
 import NoData from './noData';
 
-export default ({ plans, popularplans }) => (
+const PlansPanel = ({ plans, popularplans }) => (
   <Col span={8}>
     <div className="mini-panel-container">
       <div className="tab-container">
@@ -25,6 +26,7 @@ export default ({ plans, popularplans }) => (
         {plans && popularplans ? (
           <Row>
             <Col style={{ height: 319 }} span={8}>
+              {/* eslint-disable */}
               <BarChart
                 indexBy={'plans'}
                 data={[
@@ -36,6 +38,7 @@ export default ({ plans, popularplans }) => (
                 ]}
                 keys={['Plans']}
               />
+              {/* eslint-enable */}
             </Col>
             <Col style={{ height: 250 }} span={16}>
               <h5 className="top-5-title">Most Popular Plans</h5>
@@ -86,3 +89,10 @@ export default ({ plans, popularplans }) => (
     </div>
   </Col>
 );
+
+export default PlansPanel;
+
+PlansPanel.propTypes = {
+  plans: PropTypes.string,
+  popularplans: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+};

@@ -5,10 +5,11 @@ export default WrappedComponent => {
   class TogglePanelVisibility extends Component {
     state = { visible: true };
 
-    switchVisibility = () => this.setState({ visible: !this.state.visible });
+    handleSwitchVisibility = () =>
+      this.setState(prevState => ({ visible: !prevState.visible }));
 
     buttonPanel = () => (
-      <Button className="panel-button" onClick={this.switchVisibility}>
+      <Button className="panel-button" onClick={this.handleSwitchVisibility}>
         <i className="material-icons">
           {this.state.visible ? 'remove' : 'add'}
         </i>
@@ -25,3 +26,5 @@ export default WrappedComponent => {
   }
   return TogglePanelVisibility;
 };
+
+// TogglePanelVisibility.propTypes = {};

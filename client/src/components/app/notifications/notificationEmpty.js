@@ -5,7 +5,8 @@ export default () => (
     <div className="empty-title">
       <i className="material-icons icon-logo">wifi_tethering</i>
       <span className="text-logo">subskribble</span>
-      <p className="message">{`No notifications. You're all caught up!`}</p>
+      {/* eslint-disable-next-line */}
+      <p className="message">No notifications. You're all caught up!</p>
     </div>
   </div>
 );

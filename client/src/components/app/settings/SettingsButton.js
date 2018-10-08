@@ -3,12 +3,15 @@ import { Avatar, Button, Popover, Tooltip } from 'antd';
 import SettingsMenu from './settingsMenu';
 
 class SettingsButton extends PureComponent {
-  state = { visibleSettings: false, tipVisible: false };
+  state = { visibleSettings: false };
 
   handleVisibleChange = visible => this.setState({ visibleSettings: visible });
+
   showVisible = () => this.setState({ visibleSettings: true });
+
   unauthorizeUser = () => this.props.logoutUser();
-  preventButtonFocus = e => e.target.blur();
+
+  handlePreventButtonFocus = e => e.target.blur();
 
   render = () => (
     <div className="settings-tab">
@@ -19,6 +22,7 @@ class SettingsButton extends PureComponent {
         overlayClassName="tooltip-placement"
         overlayStyle={{ display: this.state.visibleSettings ? 'none' : '' }}
       >
+        {/* eslint-disable */}
         <Popover
           arrowPointAtCenter
           content={
@@ -34,7 +38,11 @@ class SettingsButton extends PureComponent {
           visible={this.state.visibleSettings}
           overlayClassName="settings-adjust-tooltip"
         >
-          <Button className="setting-button" onFocus={this.preventButtonFocus}>
+          {/* eslint-enable */}
+          <Button
+            className="setting-button"
+            onFocus={this.handlePreventButtonFocus}
+          >
             <Avatar
               className="settings-icon user-icon"
               size="medium"
