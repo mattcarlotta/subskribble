@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import MenuHeader from './menuHeader';
 
 const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;
@@ -55,9 +55,9 @@ const InlineMenu = ({ handleTabClick, collapseSideNav, selectedKey }) => (
           }
         >
           <MenuItem style={{ margin: 0 }} key={key}>
-            <Icon>
+            <i className="anticon anticon-undefined">
               <i className="material-icons menu-icon">{icon}</i>
-            </Icon>
+            </i>
             <span className="menu-label">{label}</span>
           </MenuItem>
         </MenuItemGroup>

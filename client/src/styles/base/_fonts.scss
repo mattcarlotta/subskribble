@@ -1,15 +1,15 @@
 /// --FONTS-- ///
 
-@font-face {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  src: url('assets/fonts/fontawesome-webfont.eot') format('eot'),
-    url('assets/fonts/fontawesome-webfont.woff2') format('woff2'),
-    url('assets/fonts/fontawesome-webfont.woff') format('woff'),
-    url('assets/fonts/fontawesome-webfont.ttf') format('truetype'),
-    url('assets/fonts/fontawesome-webfont.svg') format('svg');
-}
+// @font-face {
+//   font-family: 'FontAwesome';
+//   font-weight: normal;
+//   font-style: normal;
+//   src: url('assets/fonts/fontawesome-webfont.eot') format('eot'),
+//     url('assets/fonts/fontawesome-webfont.woff2') format('woff2'),
+//     url('assets/fonts/fontawesome-webfont.woff') format('woff'),
+//     url('assets/fonts/fontawesome-webfont.ttf') format('truetype'),
+//     url('assets/fonts/fontawesome-webfont.svg') format('svg');
+// }
 
 // @font-face {
 //   font-family: 'Material Icons';
@@ -56,33 +56,33 @@ $material-icons-font-path: '~material-icons/iconfont/';
   src: url('assets/fonts/Harabara.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Arimo Regular';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/Arimo-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Arimo Italic';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/Arimo-Italic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Arimo Bold';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/Arimo-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Arimo Bold Italic';
-  font-style: normal;
-  font-weight: 700;
-  src: url('assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'Arimo Regular';
+//   font-style: normal;
+//   font-weight: 700;
+//   src: url('assets/fonts/Arimo-Regular.ttf') format('truetype');
+// }
+//
+// @font-face {
+//   font-family: 'Arimo Italic';
+//   font-style: normal;
+//   font-weight: 700;
+//   src: url('assets/fonts/Arimo-Italic.ttf') format('truetype');
+// }
+//
+// @font-face {
+//   font-family: 'Arimo Bold';
+//   font-style: normal;
+//   font-weight: 700;
+//   src: url('assets/fonts/Arimo-Bold.ttf') format('truetype');
+// }
+//
+// @font-face {
+//   font-family: 'Arimo Bold Italic';
+//   font-style: normal;
+//   font-weight: 700;
+//   src: url('assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
+// }
 
 $harabara: 'Harabara', sans-serif;
 $arimo: 'Arimo Regular', sans-serif;

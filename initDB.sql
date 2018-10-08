@@ -121,7 +121,7 @@ CREATE TABLE transactions (
 	subscriber VARCHAR NOT NULL,
 	email VARCHAR,
 	processor VARCHAR NOT NULL,
-	amount VARCHAR,
+	amount DECIMAL(12,2),
 	chargeDate TEXT,
 	refundDate TEXT
 );
