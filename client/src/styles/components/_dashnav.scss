@@ -56,16 +56,16 @@
 
       .ant-badge-count {
         @include c($white);
-        @include h(18px);
+        // @include h(18px);
         @include b-s(0 0 0 1px $white);
-        @include w(23px);
+        // @include w(px);
         // min-width: 12px;
         padding: 0 6px;
       }
 
       .ant-scroll-number-only > p {
         @include f-f($arimo);
-        @include f-s(10px);
+        @include f-s(9px);
         @include l-h(20px);
       }
 
