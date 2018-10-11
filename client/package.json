@@ -6,12 +6,11 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production webpack",
-    "format": "prettier --write 'packages/**/*.js'",
     "test": "jest --watchAll --coverage",
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,css}": [
+    "*.{js,jsx,scss}": [
       "prettier --write --single-quote",
       "eslint --fix"
     ]

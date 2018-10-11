@@ -5,7 +5,7 @@ import {
   missingVerificationToken,
   verifyEmail,
 } from '../../../actions/authActions';
-import EmailConfirmation from '../../../components/app/auth/emailConfirmation';
+import EmailConfirmation from '../../../components/app/auth/Email/emailConfirmation';
 import Spinner from '../../../components/app/loading/Spinner';
 
 class VerifyEmail extends Component {

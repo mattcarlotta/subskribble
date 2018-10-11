@@ -1,0 +1,5 @@
+.settingsTab {
+  @extend .fix-cursor, %no-link-focus;
+  display: inline-block;
+  margin-left: 5px;
+}

@@ -1,0 +1,175 @@
+body,
+html {
+  @extend %m-0, %p-0;
+  background-color: $background;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  @extend %m-0;
+  color: $darkwarmgrey;
+  font-size: 14px;
+  font-family: $arimo;
+  font-weight: 300;
+}
+
+a:active,
+a:focus,
+a:hover,
+a:link,
+a:visited {
+  @extend %no-link-focus;
+}
+
+p {
+  @extend %brk-ww, %m-r-15;
+  font-weight: 200;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.anticon {
+  vertical-align: 0;
+}
+
+.ant-form-item,
+.ant-menu,
+.ant-notification,
+.ant-select,
+.ant-select-dropdown,
+.ant-table {
+  font-family: $arimo;
+}
+
+.ant-tabs {
+  font-family: $arimo;
+}
+
+.ant-menu-inline .ant-menu-item-selected:after {
+  border-right: none;
+  border-left: 3px solid $lightblue;
+  left: 1px;
+}
+
+.ant-menu-inline-collapsed .ant-menu-item-selected:after {
+  @include transY(1);
+  border-right: none;
+  border-left: 3px solid $lightblue;
+  left: 1px;
+  opacity: 1;
+}
+
+.ant-layout-sider {
+  @include b-s(2px 0 6px rgba(0, 21, 41, 0.35));
+}
+
+.ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  background-color: $lightblue;
+}
+
+.ant-popover-arrow,
+.ant-popover-inner {
+  margin-top: -4px;
+}
+
+.ant-notification {
+  z-index: 999999;
+}
+
+.ant-btn.disabled,
+.ant-btn.disabled.active,
+.ant-btn.disabled:active,
+.ant-btn.disabled:focus,
+.ant-btn.disabled:hover,
+.ant-btn:focus,
+.ant-btn:hover,
+.ant-btn[disabled],
+.ant-btn[disabled].active,
+.ant-btn[disabled]:active,
+.ant-btn[disabled]:focus,
+.ant-btn[disabled]:hover {
+  background-color: $lightblue;
+  color: $white;
+}
+
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) .anticon {
+  padding-right: 7px !important;
+}
+
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
+  padding-left: 20px !important;
+}
+
+.ant-btn-clicked:after {
+  animation: 0s !important;
+}
+
+.ant-form-item {
+  @extend %m-b-0;
+  height: 60px;
+}
+
+.ant-modal-body {
+  background-color: $whiteblue;
+}
+
+.ant-popover-inner-content {
+  @extend %m-0, %p-0;
+  @include b-s(rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px);
+  width: 100%;
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice {
+  color: $white;
+  background-color: $lightblue;
+  border-radius: 10px;
+  padding: 0 25px 0 15px;
+
+  .ant-select-selection__choice__remove {
+    color: $white;
+    width: 20px;
+
+    &:hover {
+      color: $lightgrey;
+    }
+  }
+}
+
+.btn-primary:not([disabled]):not(.disabled).active,
+.btn-primary:not([disabled]):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: $rbblue;
+  color: $white;
+  border-color: $deepblue;
+}
+
+.materialIcons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.scrollbar {
+  background-color: $lightblue;
+  border-radius: 3px;
+  z-index: 1700;
+}

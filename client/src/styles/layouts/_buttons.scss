@@ -1,0 +1,238 @@
+.adjustPosition {
+  position: relative;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.btn {
+  border: 0;
+  text-transform: uppercase;
+  font-family: $arimo;
+  border-radius: 6px;
+}
+
+.btnPrimary {
+  border: 0;
+  background-color: $lightblue;
+  height: 35px;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    background-color: $skyblue;
+  }
+}
+
+.btnCancelWarning {
+  &:hover {
+    @extend %no-link-focus;
+    color: $darkyellow;
+    background-color: $transparent;
+    border-color: $darkyellow;
+  }
+}
+
+.btnDanger {
+  border: 0;
+  background-color: $orange !important;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    background-color: $red !important;
+  }
+}
+
+.btnDisabled {
+  border: 0;
+  color: $darkerwhite !important;
+  background-color: $disabledgrey !important;
+  cursor: not-allowed;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    background-color: $disabledgrey !important;
+  }
+}
+
+.btn-success {
+  border: 0;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    background-color: $limegreen !important;
+  }
+}
+
+.btnTertiary {
+  background-color: $darkwarmgrey !important;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    color: $white;
+    background-color: $darkwarmgrey !important;
+  }
+}
+
+.btnWarning {
+  &:hover {
+    @extend %no-link-focus;
+    border: 0;
+    background-color: $darkyellow !important;
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    background-color: $transparent;
+  }
+}
+
+.centered {
+  display: block;
+  margin: 0 auto;
+}
+
+.clearNotifications {
+  border: 0;
+  padding: 0;
+  color: $white;
+  height: 24px;
+  width: 100%;
+  background-color: $transparent;
+  border-radius: 0;
+  margin-right: -5px;
+
+  &:hover {
+    @extend %no-link-focus;
+    color: $lightcoolgrey;
+    background-color: $transparent;
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    color: $white;
+    background-color: $transparent;
+  }
+}
+
+.deleteButton {
+  font-size: 14px;
+}
+
+.hideButton {
+  @extend .fix-cursor;
+  border: 0;
+  color: $transparent;
+  background-color: $transparent;
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+  }
+}
+
+.lockIcon {
+  position: relative;
+  top: 5px;
+}
+
+.navButton {
+  border: 0;
+  margin-left: 10px;
+  position: relative;
+  background-color: $transparent;
+  height: 40px;
+  width: 40px;
+  top: -11px;
+}
+
+.navButtonIcon {
+  @extend .fix-cursor;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 20px;
+  position: relative;
+  color: $blackblue;
+  font-size: 22px;
+  top: 4px;
+  right: 26.5px;
+}
+
+.panelButton {
+  @extend %b-0, %m-r-10;
+  border: 0;
+  margin-right: 10px;
+  color: $darkwarmgrey;
+  height: 25px;
+  width: 30px;
+  margin-top: 11px;
+
+  i {
+    position: relative;
+    right: 12px;
+  }
+
+  &:focus,
+  &:hover {
+    @extend %no-link-focus;
+    color: $lightblue;
+    background-color: $transparent;
+  }
+}
+
+.resetField {
+  border: 0;
+  position: relative;
+  color: $darkwarmgrey;
+  top: 3px;
+
+  i {
+    position: relative;
+    right: 12px;
+  }
+
+  &:hover {
+    i {
+      color: $lightblue;
+    }
+    background-color: $transparent;
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    background-color: $transparent;
+  }
+}
+
+.removeNoteButton {
+  border: 0;
+  margin-left: 5px;
+  position: relative;
+  color: $tlightblack;
+  height: 16px;
+  padding: 0 2px;
+  top: 3px;
+
+  &:hover {
+    color: $blue;
+    background-color: $transparent;
+  }
+
+  &:focus {
+    color: $tlightblack;
+    background-color: $transparent;
+  }
+}
+
+.resetFieldIcon {
+  @extend .fix-cursor;
+  display: inline-block;
+  position: relative;
+  color: $lightgrey;
+  font-size: 22px;
+  top: 2px;
+  padding-left: 1px;
+}

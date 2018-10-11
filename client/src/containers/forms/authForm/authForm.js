@@ -5,7 +5,8 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFields,
   AntFormSubmit,
-} from '../app/formFields/antReduxFormFields';
+} from '../../app/formFields/antReduxFormFields';
+import styles from './authForm.scss';
 
 const AuthForm = ({
   confirmLoading,
@@ -17,16 +18,18 @@ const AuthForm = ({
   submitting,
   switchAuthForm,
 }) => (
-  <div className="auth-box-container">
-    <div className="auth-box">
-      <div className="auth-form">
+  <div className={styles.authBoxContainer}>
+    <div className={styles.authBox}>
+      <div className={styles.authForm}>
         <form onSubmit={handleSubmit}>
           <AntFormFields FIELDS={FIELDS} />
           {showForgotPassword && (
-            <div className="forgot-password">
+            <div className={styles.forgotPassword}>
               <Link data-formid={1} onClick={switchAuthForm}>
-                <i className="material-icons lock-icon">lock_open</i> Forgot
-                your password?
+                <i className={`${styles.materialIcons} ${styles.lockIcon}`}>
+                  lock_open
+                </i>
+                {`Forgot your password?`}
               </Link>
             </div>
           )}
@@ -40,18 +43,26 @@ const AuthForm = ({
           />
         </form>
       </div>
-      <p className="auth-link">
+      <p className={styles.authLink}>
         {showForgotPassword ? (
           <span>
             {`Don't have an account?`}
-            <Link className="m-l-5" data-formid={2} onClick={switchAuthForm}>
+            <Link
+              style={{ marginLeft: 5 }}
+              data-formid={2}
+              onClick={switchAuthForm}
+            >
               Sign Up
             </Link>
           </span>
         ) : (
           <span>
             {`Already have an account?`}
-            <Link className="m-l-5" data-formid={0} onClick={switchAuthForm}>
+            <Link
+              style={{ marginLeft: 5 }}
+              data-formid={0}
+              onClick={switchAuthForm}
+            >
               Log In
             </Link>
           </span>

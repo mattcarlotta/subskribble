@@ -1,0 +1,95 @@
+@import '../../../../styles/index.scss';
+
+.emptyPanel {
+  padding: 0;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.link {
+  display: inline-block;
+  color: $white;
+  background-color: $lightblue;
+  font-size: 18px;
+  line-height: 40px;
+  width: 200px;
+  text-decoration: none;
+}
+
+.loginLinkContainer {
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.messageContainer {
+  display: block;
+  font-size: 16px;
+  padding: 30px 60px;
+  vertical-align: top;
+}
+
+.message {
+  font-size: 16px;
+}
+
+.statusContainer {
+  display: block;
+  margin: 0 auto;
+  font-size: 16px;
+  width: 600px;
+  padding: 30px;
+  vertical-align: top;
+  max-width: 600px;
+}
+
+.subskribbleContainer {
+  margin-top: 30px;
+}
+
+.subskribbleLogo {
+  @extend .materialIcons;
+  font-size: 40px;
+}
+
+.textLogo {
+  position: relative;
+  font-family: $harabara;
+  font-size: 40px;
+  letter-spacing: 1.5px;
+  top: -7px;
+  margin-left: 2px;
+}
+
+.unverified {
+  display: inline-block;
+  color: $bloodred;
+  font-size: 88px;
+}
+
+.validContainer {
+  background-color: $white;
+  border: 1px solid $darkwarmgrey;
+}
+
+.validationIcon {
+  text-align: center;
+}
+
+.validationResult {
+  display: block;
+  margin: 0 auto;
+}
+
+.verified {
+  display: inline-block;
+  color: $limegreen;
+  font-size: 88px;
+}
+
+.verificationContainer {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  overflow: hidden;
+}

@@ -1,0 +1,53 @@
+.authLogo {
+  display: block;
+  margin: auto;
+  width: 275px;
+  padding: 20px 0 10px;
+}
+
+.authBoxContainer {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.authBox {
+  @extend %outline-none;
+  margin-top: 20px;
+}
+
+.authTitle {
+  text-align: center;
+  text-transform: uppercase;
+  color: $black;
+  font-family: $arimo;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0 0 12px;
+}
+
+.authForm {
+  margin-bottom: 20px;
+}
+
+.forgotPassword {
+  margin-top: 5px;
+
+  a {
+    color: $warmgrey;
+  }
+}
+
+.authLink {
+  text-align: center;
+  color: $warmgrey;
+
+  a {
+    color: $lightblue;
+    font-weight: 500;
+
+    &:hover {
+      color: $darkblue;
+    }
+  }
+}

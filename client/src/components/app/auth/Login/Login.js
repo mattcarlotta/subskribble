@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import AsyncModal from '../../../containers/app/modals/asyncModal';
-import LoginForm from '../../../containers/forms/loginForm';
-import ResetForm from '../../../containers/forms/resetpasswordForm';
-import SignupForm from '../../../containers/forms/signupForm';
+import AsyncModal from '../../../../containers/app/modals/asyncModal';
+import LoginForm from '../../../../containers/forms/LoginForm/loginForm';
+import ResetForm from '../../../../containers/forms/resetpasswordForm';
+import SignupForm from '../../../../containers/forms/signupForm';
+import { settingsTab } from './Login.scss';
 
 const forms = [LoginForm, ResetForm, SignupForm];
 const titles = ['Log In', 'Reset Password', 'Sign Up'];
@@ -20,7 +21,7 @@ export default class Login extends Component {
   }) => this.setState({ selectedForm: forms[formid], title: titles[formid] });
 
   render = () => (
-    <div className="settings-tab">
+    <div className={settingsTab}>
       <AsyncModal
         {...this.state}
         {...this.props}
