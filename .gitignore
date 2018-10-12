@@ -5,7 +5,7 @@
 client/build
 client/etc
 client/src/styles/fonts
-client/src/styles/styles.css
+client/src/styles/assets
 client/scripts
 client/src/images
 client/node_modules
