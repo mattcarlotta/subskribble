@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import styles from './sidebar.scss';
 
 const MenuHeader = ({ collapseSideNav, handleLogoClick }) => (
-  <div key="menu-header" className="sider-menu-header">
-    <Button onClick={handleLogoClick} className="logo-container">
-      <i className="material-icons icon-logo">wifi_tethering</i>
+  <div key="menu-header" className={styles.siderMenuHeader}>
+    <Button onClick={handleLogoClick} className={styles.logoContainer}>
+      <i className={`${styles.materialIcons} ${styles.iconLogo}`}>
+        wifi_tethering
+      </i>
       <span
         style={{ display: collapseSideNav ? 'none' : '' }}
-        className="text-logo"
+        className={styles.textLogo}
       >
         subskribble
       </span>

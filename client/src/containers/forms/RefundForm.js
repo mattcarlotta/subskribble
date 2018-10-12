@@ -9,7 +9,7 @@ import {
   AntStepFormButtons,
 } from '../app/formFields/antReduxFormFields';
 
-import Spinner from '../../components/app/loading/Spinner';
+import Spinner from '../../components/app/loading/Spinner/Spinner';
 import FIELDS from '../app/formFields/refundTransactionFormFields';
 import { isFloat, isRequired } from '../app/formFields/validateFormFields';
 import {

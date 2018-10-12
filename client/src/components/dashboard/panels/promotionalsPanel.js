@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
 import BarChart from '../../app/charts/BarChart';
-import CustomButton from '../../app/buttons/customButton';
+import CustomButton from '../../app/buttons/CustomButton/customButton';
 import NoData from './noData';
 
 const PromosPanel = ({ popularpromotionals, promotionals }) => (

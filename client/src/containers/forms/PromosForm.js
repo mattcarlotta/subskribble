@@ -12,7 +12,7 @@ import {
   AntStepFormButtons,
 } from '../app/formFields/antReduxFormFields';
 
-import Spinner from '../../components/app/loading/Spinner';
+import Spinner from '../../components/app/loading/Spinner/Spinner';
 import { fetchPromo } from '../../actions/promoActions';
 import { addNewPromo, editPromo } from '../../actions/formActions';
 import { fetchAllActivePlans } from '../../actions/planActions';

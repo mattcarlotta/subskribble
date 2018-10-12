@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import PieChart from '../../app/charts/PieChart';
-import CustomButton from '../../app/buttons/customButton';
+import CustomButton from '../../app/buttons/CustomButton/customButton';
 import NoData from './noData';
 
 const TemplatesPanel = ({ activetemplates, inactivetemplates }) => (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Spinner from './Spinner';
-import Login from '../auth/Login/Login';
+import Spinner from '../Spinner/Spinner';
+import Login from '../../auth/Login/Login';
 
 export default class AppLoading extends Component {
   state = { requestTimeout: false };

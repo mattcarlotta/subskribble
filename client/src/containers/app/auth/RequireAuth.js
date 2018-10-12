@@ -5,7 +5,7 @@ import {
   saveSidebarState,
 } from '../../../actions/authActions';
 import App from '../../../components/app';
-import AppLoading from '../../../components/app/loading/AppLoading';
+import AppLoading from '../../../components/app/loading/AppLoading/AppLoading';
 
 class RequireAuth extends Component {
   componentDidMount = () => {

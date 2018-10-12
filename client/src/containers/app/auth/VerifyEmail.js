@@ -6,7 +6,7 @@ import {
   verifyEmail,
 } from '../../../actions/authActions';
 import EmailConfirmation from '../../../components/app/auth/Email/emailConfirmation';
-import Spinner from '../../../components/app/loading/Spinner';
+import Spinner from '../../../components/app/loading/Spinner/Spinner';
 
 class VerifyEmail extends Component {
   componentDidMount = () => {

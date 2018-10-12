@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 import { browserHistory } from 'react-router';
 import PageContainer from '../panels/pageContainer';
-import CustomButton from '../buttons/customButton';
+import CustomButton from '../buttons/CustomButton/customButton';
 import TogglePanelVisibility from '../panels/TogglePanelVisibility';
 
 const NoDataToDisplay = ({

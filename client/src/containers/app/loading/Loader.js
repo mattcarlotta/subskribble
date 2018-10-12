@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spinner from '../../../components/app/loading/Spinner';
+import Spinner from '../../../components/app/loading/Spinner/Spinner';
 import NoDataToDisplay from '../../../components/app/notfound/noDataToDisplay';
 
 class Loader extends Component {

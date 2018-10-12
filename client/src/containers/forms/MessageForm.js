@@ -10,9 +10,9 @@ import {
   AntStepFormButtons,
 } from '../app/formFields/antReduxFormFields';
 
-import Spinner from '../../components/app/loading/Spinner';
-import TemplatePreview from '../../components/app/editor/templatePreview';
-import DisabledFields from '../../components/app/formFields/disabledFields';
+import Spinner from '../../components/app/loading/Spinner/Spinner';
+import TemplatePreview from '../../components/app/editor/TemplatePreview/templatePreview';
+import DisabledFields from '../../components/app/formFields/DisabledFields/disabledFields';
 import { sendMessageToSubs } from '../../actions/formActions';
 import { fetchAllActiveTemplates } from '../../actions/templateActions';
 import { isNotEmpty } from '../app/formFields/validateFormFields';

@@ -1,0 +1,104 @@
+@import '../../../../styles/index.scss';
+
+.logoHeader {
+  @extend .logoContainer;
+  background-color: $blackblue;
+  width: 100%;
+}
+
+.siderMenuContainer {
+  border: 0 !important;
+  color: $menugrey !important;
+  background-color: $blackblue !important;
+  height: 100vh !important;
+}
+
+.menuDivider {
+  background-color: $tlightgrey;
+}
+
+.menuDividerTitle {
+  margin-top: 10px;
+  margin-left: 20px;
+  text-transform: uppercase;
+  color: #647897;
+  font-family: $arimo-bold;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menuIcon {
+  margin-right: 10px;
+  position: relative;
+  top: 6px;
+}
+
+.menuLabel {
+  font-family: $arimo;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.logoContainer {
+  height: 100% !important;
+  width: 100% !important;
+  border: 0 !important;
+  display: inline-block !important;
+  background-color: $blackblue !important;
+  border-radius: 0 !important;
+
+  &:hover {
+    @extend .fix-cursor;
+    background-color: $hoverblue !important;
+  }
+
+  &:focus {
+    background-color: $transparent !important;
+  }
+}
+
+.iconLogo {
+  position: relative;
+  color: $white;
+  font-size: 36px;
+  margin-top: 8px;
+  margin-right: 5px;
+  margin-left: 11px;
+}
+
+.textLogo {
+  position: relative;
+  color: $white;
+  font-family: $harabara;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  top: -7px;
+  margin-right: 10px;
+}
+
+.siderMenuHeader {
+  background-color: $blackblue;
+  height: 55px;
+  border-bottom: 1px solid $tlightgrey;
+
+  .logo-container:hover {
+    background-color: $transparent;
+  }
+}
+
+.nav-button {
+  background-color: $blackblue;
+  i {
+    color: $white;
+  }
+  &:hover {
+    i {
+      color: $blue;
+    }
+  }
+}
+
+.iconLogo,
+.textLogo {
+  color: $white;
+}

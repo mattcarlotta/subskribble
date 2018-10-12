@@ -9,9 +9,9 @@ import {
   AntStepFormButtons,
 } from '../app/formFields/antReduxFormFields';
 
-import Spinner from '../../components/app/loading/Spinner';
+import Spinner from '../../components/app/loading/Spinner/Spinner';
 import QuillEditor from '../app/formFields/QuillEditor';
-import TemplatePreview from '../../components/app/editor/templatePreview';
+import TemplatePreview from '../../components/app/editor/TemplatePreview/templatePreview';
 import FIELDS from '../app/formFields/templateFormFields';
 import { isNotEmpty } from '../app/formFields/validateFormFields';
 

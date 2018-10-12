@@ -1,0 +1,14 @@
+@import '../../../../styles/index.scss';
+
+.spinnerContainer {
+  @include trans(ease-in-out);
+  margin: 0 auto;
+  position: absolute;
+  height: 125px;
+  width: 525px;
+  top: 32%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: fadeIn 1s 0s ease-in-out forwards;
+}

@@ -1,0 +1,50 @@
+@import '../../../../styles/index.scss';
+
+.boxContainer {
+  background-color: aliceblue;
+  height: 685px;
+  border: 1px dotted $lightcoolgrey;
+  max-height: 685px;
+  padding: 0 10px;
+  overflow-y: auto;
+}
+
+.fromCompany {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.fromSender {
+  font-size: 12px;
+}
+
+.toAddresse {
+  margin-bottom: 20px;
+  font-size: 11px;
+}
+
+.preview {
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.subject {
+  float: left;
+}
+
+.time {
+  float: right;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.currentTime {
+  margin-right: 5px;
+}
+
+.messageIcons {
+  margin-right: 5px;
+  position: relative;
+  font-size: 13px;
+  top: 2px;
+}

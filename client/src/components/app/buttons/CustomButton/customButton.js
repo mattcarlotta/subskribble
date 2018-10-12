@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
 import { browserHistory } from 'react-router';
+import { adjustPosition, materialIcons } from '../../../../styles/index.scss';
 
 const CustomButton = ({
   buttonIcon,
@@ -25,7 +26,7 @@ const CustomButton = ({
         onClick={onClickAction || pushToLocation}
         style={style}
       >
-        <i className="material-icons adjust-position">{buttonIcon}</i>
+        <i className={`${materialIcons} ${adjustPosition}`}>{buttonIcon}</i>
       </Button>
     </Tooltip>
   );

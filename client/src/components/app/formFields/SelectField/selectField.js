@@ -13,9 +13,7 @@ export default class SelectField extends PureComponent {
     fetchAction(TAB, 0, nextRecords);
   };
 
-  /* eslint-disable */
-  handleBlur = () => this._select.blur();
-  /* eslint-enable */
+  handleBlur = () => this._select.blur(); // eslint-disable-line  no-underscore-dangle
 
   render = () => {
     const { OPTIONS, placeholder, sortByNum } = this.props;
@@ -23,16 +21,14 @@ export default class SelectField extends PureComponent {
     return (
       <Fragment>
         <span style={{ textTransform: 'none' }}>Items per page: </span>
-        {/* eslint-disable */}
         <Select
           placeholder={placeholder}
           onSelect={this.handleSortDataBy}
           style={{ width: '100%', maxWidth: '68px' }}
           onChange={this.handleBlur}
-          ref={node => (this._select = node)}
+          ref={node => (this._select = node)} // eslint-disable-line  no-underscore-dangle
           value={sortByNum}
         >
-          {/* eslint-enable */}
           {map(OPTIONS, value => (
             <Option key={value} value={value}>
               {value}

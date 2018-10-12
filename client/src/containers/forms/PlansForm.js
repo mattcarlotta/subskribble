@@ -8,7 +8,7 @@ import {
   AntStepFormButtons,
 } from '../app/formFields/antReduxFormFields';
 
-import Spinner from '../../components/app/loading/Spinner';
+import Spinner from '../../components/app/loading/Spinner/Spinner';
 import { fetchPlan } from '../../actions/planActions';
 import { addNewPlan, editPlan } from '../../actions/formActions';
 import {

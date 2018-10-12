@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Menu } from 'antd';
 import MenuHeader from './menuHeader';
+import styles from './sidebar.scss';
 
 const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;
 const { Sider } = Layout;
@@ -34,7 +35,7 @@ const InlineMenu = ({ handleTabClick, collapseSideNav, selectedKey }) => (
     />
     <Menu
       key="menu-container"
-      className="sider-menu-container"
+      className={styles.siderMenuContainer}
       mode="inline"
       selectedKeys={selectedKey}
       onSelect={handleTabClick}
@@ -45,20 +46,22 @@ const InlineMenu = ({ handleTabClick, collapseSideNav, selectedKey }) => (
           title={
             dividerLabel && (
               <span
-                className="divider"
+                className={styles.menuDivider}
                 style={{ display: collapseSideNav ? 'none' : '' }}
               >
-                <hr className="divider" />
-                <h6 className="divider-title">{dividerLabel}</h6>
+                <hr className={styles.menuDivider} />
+                <h6 className={styles.menuDividerTitle}>{dividerLabel}</h6>
               </span>
             )
           }
         >
           <MenuItem style={{ margin: 0 }} key={key}>
             <i className="anticon anticon-undefined">
-              <i className="material-icons menu-icon">{icon}</i>
+              <i className={`${styles.materialIcons} ${styles.menuIcon}`}>
+                {icon}
+              </i>
             </i>
-            <span className="menu-label">{label}</span>
+            <span className={styles.menuLabel}>{label}</span>
           </MenuItem>
         </MenuItemGroup>
       ))}

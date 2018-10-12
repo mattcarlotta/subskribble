@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CustomButton from '../buttons/customButton';
-import SelectField from '../formFields/selectField';
+import CustomButton from '../buttons/CustomButton/customButton';
+import SelectField from '../formFields/SelectField/selectField';
 import TableList from '../tables/tableList';
 
 export default class extends Component {
