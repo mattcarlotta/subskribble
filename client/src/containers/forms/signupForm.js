@@ -15,6 +15,7 @@ const SignupForm = ({ showLoadingButton, signupUser, ...props }) => {
       <AuthForm
         {...props}
         form="SignupForm"
+        iconType="team"
         onSubmit={handleFormSubmit}
         FIELDS={FIELDS}
         formTitle="Sign Up"

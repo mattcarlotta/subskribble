@@ -26,6 +26,7 @@ export default class Login extends Component {
         {...this.state}
         {...this.props}
         closable={false}
+        iconType="login"
         maskClosable={false}
         FORM={this.state.selectedForm}
         resetSelectedForm={this.resetSelectedForm}

@@ -16,6 +16,7 @@ const ResetPasswordForm = ({ resetUserToken, showLoadingButton, ...props }) => {
       <AuthForm
         {...props}
         form="ResetPasswordForm"
+        iconType="retweet"
         onSubmit={handleFormSubmit}
         FIELDS={FIELDS}
         formTitle="Reset Password"

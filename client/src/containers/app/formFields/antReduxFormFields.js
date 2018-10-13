@@ -63,6 +63,7 @@ const AntSubmitButton = ({
   confirmLoading,
   disabled,
   icon,
+  iconType,
   label,
   onClick,
   style,
@@ -71,7 +72,7 @@ const AntSubmitButton = ({
   <Col span={column}>
     <Button
       type="primary"
-      className={disabled ? 'btn-disabled' : null}
+      className={disabled ? 'btn btn-disabled' : null}
       disabled={disabled}
       htmlType={type}
       loading={confirmLoading}
@@ -80,11 +81,19 @@ const AntSubmitButton = ({
     >
       {icon === 'left' ? (
         <Fragment>
-          <Icon type={icon} /> {label}
+          <Icon type={icon || type} /> {label}
         </Fragment>
       ) : (
         <Fragment>
-          {label} <Icon type={icon} />
+          {!iconType ? (
+            <Fragment>
+              {label} <Icon type={icon} />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Icon type={iconType} /> {label}
+            </Fragment>
+          )}
         </Fragment>
       )}
     </Button>

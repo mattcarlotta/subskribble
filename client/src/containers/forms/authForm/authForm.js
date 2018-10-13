@@ -11,6 +11,7 @@ import styles from './authForm.scss';
 const AuthForm = ({
   confirmLoading,
   handleSubmit,
+  iconType,
   FIELDS,
   pristine,
   submitLabel,
@@ -35,6 +36,7 @@ const AuthForm = ({
           )}
           <AntFormSubmit
             column={24}
+            iconType={iconType}
             confirmLoading={confirmLoading}
             label={submitLabel}
             pristine={pristine}
@@ -77,6 +79,7 @@ export default reduxForm({ form: '' })(AuthForm);
 AuthForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  iconType: PropTypes.string.isRequired,
   FIELDS: PropTypes.arrayOf(
     PropTypes.object, // eslint-disable-line react/forbid-prop-types
   ).isRequired,
