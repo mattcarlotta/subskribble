@@ -11,31 +11,31 @@ $material-icons-font-path: '~material-icons/iconfont/';
   font-family: 'Harabara';
   font-style: normal;
   font-weight: 300;
-  src: url("../assets/fonts/Harabara.ttf") format('truetype');
+  src: url('../assets/fonts/Harabara.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Regular';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Regular.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Italic';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Italic.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Italic.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Bold.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Bold.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold Italic';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-BoldItalic.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
 }
 /*  --ANTD OVERRIDES-- */
 .anticon {
@@ -120,7 +120,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
   color: #ffffff;
 }
 
-.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) .anticon {
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only)
+  .anticon {
   padding-right: 7px !important;
 }
 
@@ -129,6 +130,11 @@ $material-icons-font-path: '~material-icons/iconfont/';
 }
 
 .ant-btn-clicked:after {
+  animation: 0s !important;
+}
+
+[ant-click-animating-without-extra-node]:after,
+.ant-click-animating-node {
   animation: 0s !important;
 }
 
@@ -143,7 +149,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
 
 .ant-popover-inner-content {
   -moz-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px,
+    rgba(0, 0, 0, 0.12) 0 1px 4px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
   margin: 0;
   padding: 0;
@@ -172,4 +179,10 @@ $material-icons-font-path: '~material-icons/iconfont/';
   background-color: #3b89b5;
   color: #ffffff;
   border-color: #005cbf;
+}
+
+.clear-fix {
+  content: '';
+  display: table;
+  clear: both;
 }

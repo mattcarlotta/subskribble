@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Tooltip } from 'antd';
+import styles from './currentAvatar.scss';
 
 const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
-  <div className="current-avatar-container">
-    <div className="avatar-container">
-      <div className="avatar-preview-container">
-        <div className="avatar-preview">
+  <Fragment>
+    <div className={styles.avatarContainer}>
+      <div className={styles.avatarPreviewContainer}>
+        <div className={styles.avatarPreview}>
           <Avatar
-            className="avatar-icon"
             src={avatarURL}
             icon="user"
             style={{
@@ -20,7 +20,7 @@ const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
         </div>
       </div>
     </div>
-    <div className="avatar-actions-container">
+    <div className={styles.avatarActionsContainer}>
       <Tooltip arrowPointAtCenter placement="bottom" title="Delete Avatar">
         <Col span={12}>
           <Button
@@ -43,7 +43,7 @@ const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
         </Col>
       </Tooltip>
     </div>
-  </div>
+  </Fragment>
 );
 
 export default CurrentAvatar;

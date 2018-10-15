@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 import { browserHistory } from 'react-router';
-import PageContainer from '../panels/pageContainer';
-import CustomButton from '../buttons/CustomButton/customButton';
-import TogglePanelVisibility from '../panels/TogglePanelVisibility';
+import PageContainer from '../../panels/pageContainer';
+import CustomButton from '../../buttons/CustomButton/customButton';
+import TogglePanelVisibility from '../../panels/TogglePanelVisibility';
+import styles from './noDataToDisplay.scss';
 
 const NoDataToDisplay = ({
   buttonIcon,
@@ -15,17 +16,21 @@ const NoDataToDisplay = ({
   visible,
 }) => (
   <PageContainer>
-    <div className="panel-container">
-      <Card className="no-data-card" title={cardTitle} extra={buttonPanel()}>
+    <div className={styles.panelContainer}>
+      <Card
+        className={styles.noDataCard}
+        title={cardTitle}
+        extra={buttonPanel()}
+      >
         <div
           style={{ display: visible ? 'block' : 'none', minHeight: 400 }}
           className="panel-body-container"
         >
-          <div className="panel-body">
-            <div className="ant-row">
+          <div className={styles.panelBody}>
+            <div className={styles.panelSpacer}>
               {buttonPushLocation && (
                 <CustomButton
-                  className="f-r"
+                  style={{ float: 'right' }}
                   buttonIcon={buttonIcon}
                   onClickAction={() =>
                     browserHistory.push(`/subskribble/${buttonPushLocation}`)
@@ -33,7 +38,7 @@ const NoDataToDisplay = ({
                   tipTitle={tipTitle}
                 />
               )}
-              <div className="no-data">
+              <div className={styles.noData}>
                 <Icon type="line-chart" />
                 <h2>No data to display.</h2>
                 <p>

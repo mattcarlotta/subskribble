@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AuthForm from './authForm/authForm';
+import AuthForm from './AuthForm/authForm';
 import FIELDS from '../app/formFields/passwordResetFormFields';
 import { resetUserToken } from '../../actions/authActions';
 

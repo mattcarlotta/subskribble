@@ -1,0 +1,33 @@
+@import '../../../../styles/index.scss';
+
+.deleteAccountDetails {
+  height: 100px;
+  width: 100%;
+  background-color: $darkwhite;
+  border: 1px dotted $softwarmgrey;
+  border-radius: 4px;
+  max-width: 900px;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.deleteButtonContainer {
+  float: left;
+  width: 100px;
+}
+
+.deleteAccountInformation {
+  float: left;
+  width: 126px;
+}
+
+.information {
+  font-family: $arimo;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.bold {
+  font-family: $arimo-bold;
+  font-size: 16px;
+}

@@ -13,16 +13,10 @@ import routes from '../routes';
 
 // injectTapEventPlugin();
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = composeWithDevTools({
-  // Specify here name, actionsBlacklist, actionsCreators and other options
-});
-/* eslint-enable */
-
-const configureMiddleware = reducer =>
-  createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-
-const store = configureMiddleware(rootReducer);
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 const history = syncHistoryWithStore(browserHistory, store);
 
 export default () => (

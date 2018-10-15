@@ -1,0 +1,11 @@
+.settingsAdjustTooltip {
+  top: 57px !important;
+}
+.tableTooltip {
+  & .ant-popover-inner-content {
+    padding: 12px 16px;
+  }
+}
+.tooltipPlacement {
+  top: 52px !important;
+}

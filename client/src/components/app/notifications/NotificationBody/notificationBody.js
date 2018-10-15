@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Tooltip } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import moment from 'moment';
+import styles from './notificationBody.scss';
 
 const colorList = {
   people_outline: '#00A896',
@@ -24,24 +25,26 @@ export default class NotificationButton extends Component {
       autoHideTimeout={500}
       autoHideDuration={200}
       style={{ height: 250 }}
-      renderThumbVertical={props => <div {...props} className="scrollbar" />}
+      renderThumbVertical={props => (
+        <div {...props} className={styles.scrollbar} />
+      )}
     >
-      <div className="notifications-body">
+      <div className={styles.notificationsBody}>
         {map(
           this.props.notifications,
           ({ icon, id, message, messagedate, read }, key) => (
-            <div dataset-key={key} key={key} className="note bb-none">
-              <div className="note-15">
+            <div dataset-key={key} key={key} className={styles.note}>
+              <div className={styles.note15}>
                 <i
-                  className="material-icons"
+                  className={styles.materialIcons}
                   style={{ color: colorList[icon], padding: 5 }}
                 >
                   {icon}
                 </i>
               </div>
-              <div className="note-85">
-                <p className="title">{message}</p>
-                <p className="date">
+              <div className={styles.note85}>
+                <p className={styles.noteTitle}>{message}</p>
+                <p className={styles.noteDate}>
                   <span>{moment(messagedate).fromNow()}</span>
                   <span>
                     <Tooltip
@@ -51,14 +54,24 @@ export default class NotificationButton extends Component {
                     >
                       <Button
                         data-id={id}
-                        className="remove-note-button"
+                        className={styles.removeNoteButton}
                         onClick={this.props.handleDeleteNote}
                       >
-                        <i className="material-icons delete-button">delete</i>
+                        <i
+                          className={`${styles.materialIcons} ${
+                            styles.deleteButton
+                          }`}
+                        >
+                          delete
+                        </i>
                       </Button>
                     </Tooltip>
                   </span>
-                  <span className={`note-status ${read ? null : 'unread'}`}>
+                  <span
+                    className={`${styles.noteStatus} ${
+                      read ? null : styles.unreadNote
+                    }`}
+                  >
                     {read ? null : 'new'}
                   </span>
                 </p>

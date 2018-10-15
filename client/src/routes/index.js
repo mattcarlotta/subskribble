@@ -9,7 +9,7 @@ import DeleteAccount from '../containers/app/settings/DeleteAccount';
 // import Home from '../components/website/home';
 import Landing from '../components/landing';
 import MessageForm from '../containers/forms/MessageForm';
-import NotFound from '../components/app/notfound/404';
+import NotFound from '../components/app/notfound/404/404';
 import Plans from '../containers/plans';
 import PlansForm from '../containers/forms/PlansForm';
 import Promos from '../containers/promos';

@@ -1,0 +1,27 @@
+@import '../../../../styles/index.scss';
+
+.notificationsHeader {
+  background-color: $lightblue;
+  color: $white;
+  font-family: $arimo-bold;
+  height: 40px;
+  width: 100%;
+  letter-spacing: 0.15px;
+  padding: 10px 15px;
+}
+
+.notificationsFooter {
+  text-align: center;
+  background-color: $paleformblue;
+}
+
+.notificationsPopover {
+  width: 400px;
+}
+
+.noteDivider {
+  margin: 0;
+  background-color: $hortizonalhr;
+  height: 1px;
+  border: none;
+}

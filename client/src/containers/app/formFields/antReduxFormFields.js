@@ -91,7 +91,11 @@ const AntSubmitButton = ({
             </Fragment>
           ) : (
             <Fragment>
-              <Icon type={iconType} /> {label}
+              {!confirmLoading ? (
+                <Fragment>
+                  <Icon type={iconType} /> {label}
+                </Fragment>
+              ) : null}
             </Fragment>
           )}
         </Fragment>

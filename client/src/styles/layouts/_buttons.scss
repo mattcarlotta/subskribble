@@ -96,25 +96,25 @@
 }
 
 .clearNotifications {
-  border: 0;
-  padding: 0;
-  color: $white;
-  height: 24px;
-  width: 100%;
-  background-color: $transparent;
-  border-radius: 0;
-  margin-right: -5px;
+  border: 0 !important;
+  padding: 0 !important;
+  color: $white !important;
+  height: 24px !important;
+  width: 100% !important;
+  background-color: $transparent !important;
+  border-radius: 0 !important;
+  margin-right: -5px !important;
 
   &:hover {
     @extend %no-link-focus;
-    color: $lightcoolgrey;
-    background-color: $transparent;
+    color: $lightcoolgrey !important;
+    background-color: $transparent !important;
   }
 
   &:focus {
     @extend %no-link-focus;
-    color: $white;
-    background-color: $transparent;
+    color: $white !important;
+    background-color: $transparent !important;
   }
 }
 
@@ -142,8 +142,8 @@
 .navButton {
   border: 0;
   margin-left: 10px;
-  position: relative;
-  background-color: $transparent;
+  position: relative !important;
+  background-color: $transparent !important;
   height: 40px;
   width: 40px;
   top: -11px;
@@ -208,22 +208,22 @@
 }
 
 .removeNoteButton {
-  border: 0;
+  border: 0 !important;
   margin-left: 5px;
-  position: relative;
-  color: $tlightblack;
-  height: 16px;
-  padding: 0 2px;
+  position: relative !important;
+  color: $tlightblack !important;
+  height: 16px !important;
+  padding: 0 2px !important;
   top: 3px;
 
   &:hover {
-    color: $blue;
-    background-color: $transparent;
+    color: $blue !important;
+    background-color: $transparent !important;
   }
 
   &:focus {
-    color: $tlightblack;
-    background-color: $transparent;
+    color: $tlightblack !important;
+    background-color: $transparent !important;
   }
 }
 

@@ -2,8 +2,9 @@ import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
-import NotificationBody from './notificationBody';
-import NotificationEmpty from './notificationEmpty';
+import NotificationBody from '../NotificationBody/notificationBody';
+import NotificationEmpty from '../NotificationEmpty/notificationEmpty';
+import styles from './popoverContent.scss';
 
 const PopoverContent = ({
   handleClearNotes,
@@ -11,13 +12,16 @@ const PopoverContent = ({
   readNotifications,
   unreadNotifications,
 }) => (
-  <div className="notifications-popover">
-    <div className="notifications-header">
-      <div className="f-l">Notifications</div>
-      <div className="f-r">
+  <div className={styles.notificationsPopover}>
+    <div className={styles.notificationsHeader}>
+      <div style={{ float: 'left' }}>Notifications</div>
+      <div style={{ float: 'right' }}>
         <Tooltip placement="bottom" title="Remove All Notifications">
-          <Button onClick={handleClearNotes} className="clear-notifications">
-            <i className="material-icons" style={{ fontSize: 21 }}>
+          <Button
+            onClick={handleClearNotes}
+            className={styles.clearNotifications}
+          >
+            <i className={styles.materialIcons} style={{ fontSize: 21 }}>
               delete_forever
             </i>
           </Button>
@@ -25,7 +29,7 @@ const PopoverContent = ({
       </div>
       <div className="clear-fix" />
     </div>
-    <hr className="divider" />
+    <hr className={styles.noteDivider} />
     {isEmpty(unreadNotifications) && isEmpty(readNotifications) ? (
       <NotificationEmpty />
     ) : (

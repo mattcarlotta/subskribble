@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Avatar, Button, Popover, Tooltip } from 'antd';
-import SettingsMenu from './settingsMenu';
+import SettingsMenu from '../SettingsMenu/settingsMenu';
 
 class SettingsButton extends PureComponent {
   state = { visibleSettings: false };

@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
+import {
+  deleteAccountDetails,
+  deleteButtonContainer,
+  deleteAccountInformation,
+  information,
+  bold,
+} from './deleteAccount.scss';
 
 export default () => (
-  <div className="delete-account-details">
-    <div className="delete-button-container">
+  <div className={deleteAccountDetails}>
+    <div className={deleteButtonContainer}>
       <Link
         className="ant-btn btn-danger"
         to="/subskribble/settings/delete-account"
@@ -12,9 +19,9 @@ export default () => (
         <span style={{ position: 'relative', top: 3 }}>Delete</span>
       </Link>
     </div>
-    <div className="delete-account-information">
-      <p className="information">
-        <span className="bold">
+    <div className={deleteAccountInformation}>
+      <p className={information}>
+        <span className={bold}>
           Warning! Deleting your account is irreversible.
         </span>
         <br />

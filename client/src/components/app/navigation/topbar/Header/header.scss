@@ -1,0 +1,11 @@
+@import '../../../../../styles/index.scss';
+
+.dashNavContainer {
+  @include b-s(0px -1px 4px 1px rgba(0, 0, 0, 0.25));
+  position: fixed;
+  background-color: $white;
+  height: 55px;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+}

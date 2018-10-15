@@ -1,0 +1,65 @@
+@import '../../../../styles/index.scss';
+
+.note {
+  margin-top: 10px;
+  // border: none !important;
+  border-bottom: 1px solid $hortizonalhr;
+}
+
+.note15 {
+  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 15%;
+  margin-top: 3px;
+
+  & .ant-avatar-string {
+    font-family: $arimo;
+    left: calc(50% - 5px) !important;
+  }
+}
+
+.note85 {
+  display: inline-block;
+  float: left;
+  margin-bottom: 20px;
+  width: 85%;
+}
+
+.noteDate {
+  color: $darkblue;
+  font-family: $arimo-italic;
+  font-size: 11px;
+}
+
+.noteDivider {
+  margin: 0;
+  background-color: $hortizonalhr;
+  height: 1px;
+  border: none;
+}
+
+.noteTitle {
+  font-family: $arimo;
+  font-size: 13px;
+  width: 299px;
+}
+
+.noteStatus {
+  float: right;
+  padding: 0 7px;
+}
+
+.notificationsBody {
+  padding: 0px 20px;
+  p {
+    @extend %m-0;
+  }
+}
+
+.unreadNote {
+  background-color: $verylightblue;
+  color: $blue;
+  border: 1px solid $greyblue;
+  border-radius: 2px;
+}

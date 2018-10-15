@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import MyProfile from '../../../components/app/settings/MyProfile';
+import MyProfile from '../../../components/app/settings/MyProfile/MyProfile';
 import * as actions from '../../../actions/avatarActions';
 import { serverErrorMessage } from '../../../actions/appActions';
 import { updateUserAccount } from '../../../actions/authActions';

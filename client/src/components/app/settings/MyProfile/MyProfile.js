@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PageContainer from '../panels/pageContainer';
-import AvatarForm from '../../../containers/forms/AvatarForm';
-import AccountForm from '../../../containers/forms/AccountForm';
-import CurrentAvatar from './currentAvatar';
-import DeleteAccount from './deleteAccount';
+import PageContainer from '../../panels/pageContainer';
+import AvatarForm from '../../../../containers/forms/AvatarForm';
+import AccountForm from '../../../../containers/forms/AccountForm';
+import CurrentAvatar from '../CurrentAvatar/currentAvatar';
+import DeleteAccount from '../DeleteAccount/deleteAccount';
 
 export default class Profile extends Component {
   state = { avatarFormVisible: false };

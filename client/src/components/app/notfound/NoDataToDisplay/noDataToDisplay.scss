@@ -1,0 +1,16 @@
+@import '../../../../styles/index.scss';
+
+.noDataCard {
+  & .ant-card-head-title {
+    color: $blue;
+    font-weight: bold;
+  }
+}
+
+.noData {
+  text-align: center;
+  text-transform: none;
+  color: $nodata;
+  font-family: $arimo;
+  padding-top: 100px;
+}

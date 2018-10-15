@@ -21,11 +21,13 @@ const deleteAccountAvatar = (token, userid) => dispatch =>
 const fetchAvatarOnLogin = () => dispatch =>
   avatarAPI
     .get(`avatar/current-user`)
-    .then(
-      ({ data: { avatarurl } }) =>
-        avatarurl &&
-        dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl }),
-    )
+    .then(res => {
+      if (res && res.data && res.data.avatarurl)
+        dispatch({
+          type: types.SET_CURRENT_AVATAR,
+          payload: res.data.avatarurl,
+        });
+    })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 
 // attempts to update current avatar

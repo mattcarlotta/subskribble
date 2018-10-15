@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Popover, Tooltip } from 'antd';
-
-import PopoverContent from './popoverContent';
+import PopoverContent from '../NotificationPopover/popoverContent';
+import styles from './NotificationButton.scss';
 
 export default class Notifications extends Component {
   state = { visibleNotifications: false };
@@ -33,12 +33,12 @@ export default class Notifications extends Component {
     const { unreadNotifications, readNotifications } = this.props;
 
     return (
-      <div className="notifications-container">
+      <div className={styles.notificationsContainer}>
         <Tooltip
           arrowPointAtCenter
           placement="bottom"
           title="Notifications"
-          overlayClassName="tooltip-placement"
+          overlayClassName={styles.tooltipPlacement}
           overlayStyle={{ display: visibleNotifications ? 'none' : '' }}
         >
           <Badge
@@ -64,7 +64,13 @@ export default class Notifications extends Component {
               onVisibleChange={this.handleVisibleChange}
             >
               {/* eslint-enable */}
-              <i className="material-icons notifications-icon">notifications</i>
+              <i
+                className={`${styles.materialIcons} ${
+                  styles.notificationsIcon
+                }`}
+              >
+                notifications
+              </i>
             </Popover>
           </Badge>
         </Tooltip>

@@ -1,0 +1,32 @@
+@import '../../../../../styles/index.scss';
+
+.leftNav {
+  display: inline-block;
+}
+
+.menuButtonCollapse {
+  border: 0;
+  height: 66px !important;
+  width: 63px;
+  padding: 0 24px !important;
+  margin-left: 0px;
+  border-radius: 0px !important;
+  border-color: $transparent !important;
+  top: -11px;
+
+  & i {
+    color: $tblack;
+    font-size: 24px;
+    line-height: 70px;
+  }
+
+  &:hover > i {
+    color: $tblack;
+  }
+  &:hover {
+    background-color: $paleformblue !important;
+  }
+  &:focus {
+    background-color: $transparent !important;
+  }
+}

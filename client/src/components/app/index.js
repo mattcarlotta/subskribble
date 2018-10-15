@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { browserHistory, withRouter } from 'react-router';
 import { Layout } from 'antd';
 import CustomScrollbars from './scrollbars/CustomScrollbars';
-import Header from './navigation/topbar/header';
+import Header from './navigation/topbar/Header/header';
 import InlineMenu from './navigation/sidebar/InlineMenu';
 
 const { Content } = Layout;

@@ -1,0 +1,31 @@
+@import '../../../../styles/index.scss';
+
+.notificationsContainer {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  color: $white;
+  top: 12px;
+  margin-right: 16px;
+
+  & .ant-badge-count {
+    @include b-s(0 0 0 1px $white);
+    color: $white;
+    padding: 0 6px;
+  }
+
+  & .ant-scroll-number-only > p {
+    font-family: $arimo;
+    font-size: 9px;
+    line-height: 9px;
+  }
+}
+
+.notificationsIcon {
+  color: $blue;
+  font-size: 28px;
+
+  &:hover {
+    color: $lightblue;
+  }
+}

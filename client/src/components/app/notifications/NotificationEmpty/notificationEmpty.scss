@@ -1,0 +1,39 @@
+@import '../../../../styles/index.scss';
+
+.notificationsEmpty {
+  height: 250px;
+}
+
+.emptyNotes {
+  @extend %d-b, %m-0-a, %p-r;
+  top: 65px;
+  opacity: 0.1;
+}
+
+.emptyTitle {
+  position: relative;
+  text-align: center;
+  font-size: 12px;
+  top: 75px;
+  letter-spacing: 0.15px;
+}
+
+.iconLogo {
+  color: $hortizonalhr;
+  font-size: 46px;
+}
+
+.message {
+  color: $readnoteborder;
+  font-family: $arimo;
+  font-size: 12px;
+}
+
+.textLogo {
+  position: relative;
+  color: $hortizonalhr;
+  font-family: $harabara;
+  font-size: 46px;
+  letter-spacing: 1.5px;
+  top: -2px;
+}

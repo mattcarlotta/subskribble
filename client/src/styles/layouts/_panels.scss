@@ -1,0 +1,23 @@
+.panelContainer {
+  @include b-s(
+    rgba(0, 0, 0, 0.12) 0px 1px 6px,
+    rgba(0, 0, 0, 0.12) 0px 1px 4px
+  );
+  height: 100%;
+  margin: 30px 0;
+}
+
+.panelBodyContainer {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  border-radius: 2px;
+}
+
+.panelBody {
+  margin: 10px 0;
+  text-transform: capitalize;
+  padding: 5px 30px;
+}
+
+.panelSpacer {
+  margin-bottom: 20px;
+}
