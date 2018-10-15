@@ -1,0 +1,32 @@
+@import '../../../../styles/index.scss';
+
+.settingsTab {
+  @extend .fix-cursor, %no-link-focus;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.settingButton {
+  border: 0 !important;
+  height: 55px !important;
+  padding-right: 30px !important;
+  border-radius: 0 !important;
+
+  &:hover {
+    background-color: $paleformblue !important;
+    color: inherit !important;
+  }
+  &:focus {
+    @extend %no-link-focus;
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+}
+
+.settingsIcon {
+  color: $white;
+}
+
+.currentUser {
+  margin-left: 7px;
+}

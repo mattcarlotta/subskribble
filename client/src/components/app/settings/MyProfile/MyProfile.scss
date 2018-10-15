@@ -1,0 +1,62 @@
+@import '../../../../styles/index.scss';
+
+.avatarBackgroundContainer {
+  height: 220px;
+  width: 100%;
+  background-color: $darkwhite;
+  max-width: 900px;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px dotted $softwarmgrey;
+}
+
+.bold {
+  font-family: $arimo-bold;
+}
+
+.avatarForm {
+  float: left;
+  width: 126px;
+}
+
+.information {
+  font-family: $arimo;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.profilePicture {
+  height: 285px;
+  margin-top: 30px;
+  margin-bottom: 45px;
+}
+
+.settingsContainer {
+  @include b-s(
+    rgba(0, 0, 0, 0.12) 0px 1px 6px,
+    rgba(0, 0, 0, 0.12) 0px 1px 4px
+  );
+  margin: auto;
+  text-transform: none;
+  background-color: $white;
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px 30px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin-top: 30px;
+}
+
+.subdescription {
+  font-family: $arimo;
+  font-size: 13px;
+}
+
+.uploadAvatarInformation {
+  float: left;
+  height: 126px;
+  width: 80%;
+  padding: 70px 20px;
+}

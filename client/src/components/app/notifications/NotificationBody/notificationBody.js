@@ -16,7 +16,10 @@ const colorList = {
 };
 
 export default class NotificationButton extends Component {
-  componentDidUpdate = () => this.refs.scrollbars.scrollTop(0);
+  componentDidUpdate = nextProps => {
+    if (this.props.visibleNotifications !== nextProps.visibleNotifications)
+      this.refs.scrollbars.scrollTop(0);
+  };
 
   render = () => (
     <Scrollbars

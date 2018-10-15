@@ -4,6 +4,7 @@ import AvatarForm from '../../../../containers/forms/AvatarForm';
 import AccountForm from '../../../../containers/forms/AccountForm';
 import CurrentAvatar from '../CurrentAvatar/currentAvatar';
 import DeleteAccount from '../DeleteAccount/deleteAccount';
+import styles from './MyProfile.scss';
 
 export default class Profile extends Component {
   state = { avatarFormVisible: false };
@@ -14,14 +15,14 @@ export default class Profile extends Component {
 
   render = () => (
     <PageContainer>
-      <div className="settings-container">
-        <h2>Settings</h2>
+      <div className={styles.settingsContainer}>
+        <h2 style={{ color: '#03a9f3' }}>Settings</h2>
         <hr />
-        <div className="profile-picture">
+        <div className={styles.profilePicture}>
           <h4>Profile Picture</h4>
-          <p className="subdescription">Update Your Profile Picture</p>
-          <div className="avatar-background-container">
-            <div className="avatar-form">
+          <p className={styles.subdescription}>Update Your Profile Picture</p>
+          <div className={styles.avatarBackgroundContainer}>
+            <div className={styles.avatarForm}>
               {!this.state.avatarFormVisible ? (
                 <CurrentAvatar
                   {...this.props}
@@ -34,10 +35,10 @@ export default class Profile extends Component {
                 />
               )}
             </div>
-            <div className="upload-avatar-information">
-              <p className="information">
-                <span className="bold">Accepted file formats:</span> JPEG, PNG,
-                GIF, and BMP (max resolution of 256x256, 10mb)
+            <div className={styles.uploadAvatarInformation}>
+              <p className={styles.information}>
+                <span className={styles.bold}>Accepted file formats:</span>{' '}
+                JPEG, PNG, GIF, and BMP (max resolution of 256x256, 10mb)
               </p>
             </div>
           </div>
@@ -45,12 +46,12 @@ export default class Profile extends Component {
         <div className="clear-fix" />
         <div className="account-settings">
           <h4>Account Settings</h4>
-          <p className="subdescription">Change Your Account Details</p>
+          <p className={styles.subdescription}>Change Your Account Details</p>
           <AccountForm {...this.props} />
         </div>
         <div className="delete-account-settings">
           <h4>Deleting Your Subskribble Account</h4>
-          <p className="subdescription">
+          <p className={styles.subdescription}>
             Completely Deactivate and Remove Your Account
           </p>
           <DeleteAccount />

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Avatar, Button, Popover, Tooltip } from 'antd';
 import SettingsMenu from '../SettingsMenu/settingsMenu';
+import styles from './SettingsButton.scss';
 
 class SettingsButton extends PureComponent {
   state = { visibleSettings: false };
@@ -14,12 +15,12 @@ class SettingsButton extends PureComponent {
   handlePreventButtonFocus = e => e.target.blur();
 
   render = () => (
-    <div className="settings-tab">
+    <div className={styles.settingsTab}>
       <Tooltip
         arrowPointAtCenter
         placement="bottom"
         title="My Account"
-        overlayClassName="tooltip-placement"
+        overlayClassName={styles.tooltipPlacement}
         overlayStyle={{ display: this.state.visibleSettings ? 'none' : '' }}
       >
         {/* eslint-disable */}
@@ -36,15 +37,15 @@ class SettingsButton extends PureComponent {
           placement="bottomRight"
           trigger="click"
           visible={this.state.visibleSettings}
-          overlayClassName="settings-adjust-tooltip"
+          overlayClassName={styles.settingsAdjustTooltip}
         >
           {/* eslint-enable */}
           <Button
-            className="setting-button"
+            className={styles.settingButton}
             onFocus={this.handlePreventButtonFocus}
           >
             <Avatar
-              className="settings-icon user-icon"
+              className={styles.settingsIcon}
               size="medium"
               src={this.props.avatarURL}
               icon="user"
@@ -52,7 +53,7 @@ class SettingsButton extends PureComponent {
                 backgroundColor: !this.props.avatarURL ? '#1890ff' : null,
               }}
             />
-            <span className="current-user">
+            <span className={styles.currentUser}>
               {this.props.firstName} {this.props.lastName}
             </span>
           </Button>

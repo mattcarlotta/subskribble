@@ -56,6 +56,7 @@ export default class Notifications extends Component {
                   handleDeleteNote={this.handleDeleteNote}
                   unreadNotifications={unreadNotifications}
                   readNotifications={readNotifications}
+                  visibleNotifications={visibleNotifications}
                 />
               }
               placement="bottomRight"

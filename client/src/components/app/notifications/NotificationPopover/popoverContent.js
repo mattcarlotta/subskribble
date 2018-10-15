@@ -11,6 +11,7 @@ const PopoverContent = ({
   handleDeleteNote,
   readNotifications,
   unreadNotifications,
+  visibleNotifications,
 }) => (
   <div className={styles.notificationsPopover}>
     <div className={styles.notificationsHeader}>
@@ -39,6 +40,7 @@ const PopoverContent = ({
           ...(unreadNotifications || []),
           ...(readNotifications || []),
         ]}
+        visibleNotifications={visibleNotifications}
       />
     )}
   </div>
@@ -51,4 +53,5 @@ PopoverContent.propTypes = {
   handleDeleteNote: PropTypes.func.isRequired,
   unreadNotifications: PropTypes.arrayOf(PropTypes.object),
   readNotifications: PropTypes.arrayOf(PropTypes.object),
+  visibleNotifications: PropTypes.bool.isRequired,
 };
