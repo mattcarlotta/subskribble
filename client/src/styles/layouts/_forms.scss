@@ -39,6 +39,14 @@
   overflow-y: auto;
 }
 
+.editLink {
+  cursor: pointer;
+  float: right;
+  color: $lightblue;
+  font-size: 15px;
+  font-weight: normal;
+}
+
 .disabledTags {
   float: left;
   margin-right: 5px;
@@ -47,4 +55,22 @@
   margin-bottom: 2px;
   border-radius: 10px;
   padding: 0 15px;
+}
+
+.reviewContainer {
+  float: left;
+  margin-bottom: 20px;
+  height: 380px;
+  width: 23.5%;
+  padding: 30px 0;
+  margin-left: 15px;
+}
+
+.reviewDetailsContainer {
+  @include b-s(rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px);
+  background-color: $white;
+  font-family: $arimo;
+  min-height: 230px;
+  padding: 16px;
+  margin-top: 2px;
 }

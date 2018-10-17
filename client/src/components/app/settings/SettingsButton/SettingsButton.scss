@@ -1,7 +1,8 @@
 @import '../../../../styles/index.scss';
 
 .settingsTab {
-  @extend .fix-cursor, %no-link-focus;
+  @extend %no-link-focus;
+  cursor: pointer;
   display: inline-block;
   margin-left: 5px;
 }

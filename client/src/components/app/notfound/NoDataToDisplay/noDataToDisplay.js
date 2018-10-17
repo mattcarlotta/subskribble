@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 import { browserHistory } from 'react-router';
-import PageContainer from '../../panels/pageContainer';
+import PageContainer from '../../panels/PageContainer/pageContainer';
 import CustomButton from '../../buttons/CustomButton/customButton';
-import TogglePanelVisibility from '../../panels/TogglePanelVisibility';
+import TogglePanelVisibility from '../../panels/TogglePanelVisibility/TogglePanelVisibility';
 import styles from './noDataToDisplay.scss';
 
 const NoDataToDisplay = ({

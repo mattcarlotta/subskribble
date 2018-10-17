@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/templateActions';
 import CARDS from '../../components/templates/layouts/panelCards';
-import PanelLoader from '../../components/app/panels/PanelLoader';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
 import TemplatePanel from '../../components/templates/panels/templatePanels';
 
 const Templates = props => (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageContainer from '../../panels/pageContainer';
+import PageContainer from '../../panels/PageContainer/pageContainer';
 import AvatarForm from '../../../../containers/forms/AvatarForm';
 import AccountForm from '../../../../containers/forms/AccountForm';
 import CurrentAvatar from '../CurrentAvatar/currentAvatar';

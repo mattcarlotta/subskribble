@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import ContactInfoReview from '../../../components/customersignup/contactInfoReview';
-import PaymentInfoReview from '../../../components/customersignup/paymentInfoReview';
-import PlanInfoReview from '../../../components/customersignup/planInfoReview';
-import CartTotalReview from '../../../components/customersignup/cartTotalReview';
+import ContactInfoReview from '../../../components/customersignup/ContactInfoReview/contactInfoReview';
+import PaymentInfoReview from '../../../components/customersignup/PaymentInfoReview/paymentInfoReview';
+import PlanInfoReview from '../../../components/customersignup/PlanInfoReview/planInfoReview';
+import CartTotalReview from '../../../components/customersignup/CartTotalReview/cartTotalReview';
 
 const applyPromoToPrice = (amount, appliedPromoCode) => {
   let adjustedPrice = 0.0;

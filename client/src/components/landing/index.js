@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import PageContainer from '../app/panels/pageContainer';
+import PageContainer from '../app/panels/PageContainer/pageContainer';
 
 export default () => (
   <PageContainer>

@@ -11,35 +11,40 @@ $material-icons-font-path: '~material-icons/iconfont/';
   font-family: 'Harabara';
   font-style: normal;
   font-weight: 300;
-  src: url('../assets/fonts/Harabara.ttf') format('truetype');
+  src: url("../assets/fonts/Harabara.ttf") format('truetype');
 }
 @font-face {
   font-family: 'Arimo Regular';
   font-style: normal;
   font-weight: 700;
-  src: url('../assets/fonts/Arimo-Regular.ttf') format('truetype');
+  src: url("../assets/fonts/Arimo-Regular.ttf") format('truetype');
 }
 @font-face {
   font-family: 'Arimo Italic';
   font-style: normal;
   font-weight: 700;
-  src: url('../assets/fonts/Arimo-Italic.ttf') format('truetype');
+  src: url("../assets/fonts/Arimo-Italic.ttf") format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold';
   font-style: normal;
   font-weight: 700;
-  src: url('../assets/fonts/Arimo-Bold.ttf') format('truetype');
+  src: url("../assets/fonts/Arimo-Bold.ttf") format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold Italic';
   font-style: normal;
   font-weight: 700;
-  src: url('../assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
+  src: url("../assets/fonts/Arimo-BoldItalic.ttf") format('truetype');
 }
 /*  --ANTD OVERRIDES-- */
 .anticon {
   vertical-align: 0;
+}
+
+.ant-card-head-title {
+  color: #1890ff !important;
+  font-family: 'Arimo Regular', sans-serif;
 }
 
 .ant-form-item,
@@ -51,8 +56,22 @@ $material-icons-font-path: '~material-icons/iconfont/';
   font-family: 'Arimo Regular', sans-serif;
 }
 
+.ant-table-content {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.ant-tabs-bar {
+  margin: 0 !important;
+}
+
 .ant-tabs {
+  text-transform: uppercase;
   font-family: 'Arimo Regular', sans-serif;
+}
+
+.ant-tabs-nav-wrap {
+  padding: 0 20px;
 }
 
 .ant-menu-item-selected {
@@ -120,8 +139,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
   color: #ffffff;
 }
 
-.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only)
-  .anticon {
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) .anticon {
   padding-right: 7px !important;
 }
 
@@ -133,8 +151,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
   animation: 0s !important;
 }
 
-[ant-click-animating-without-extra-node]:after,
-.ant-click-animating-node {
+.ant-click-animating-node,
+[ant-click-animating-without-extra-node]:after {
   animation: 0s !important;
 }
 
@@ -149,8 +167,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
 
 .ant-popover-inner-content {
   -moz-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px,
-    rgba(0, 0, 0, 0.12) 0 1px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
   margin: 0;
   padding: 0;

@@ -162,11 +162,10 @@
 }
 
 .panelButton {
-  @extend %b-0, %m-r-10;
-  border: 0;
+  border: 0 !important;
   margin-right: 10px;
-  color: $darkwarmgrey;
-  height: 25px;
+  color: $darkwarmgrey !important;
+  height: 25px !important;
   width: 30px;
   margin-top: 11px;
 
@@ -175,11 +174,15 @@
     right: 12px;
   }
 
-  &:focus,
   &:hover {
     @extend %no-link-focus;
-    color: $lightblue;
-    background-color: $transparent;
+    color: $lightblue !important;
+    background-color: $transparent !important;
+  }
+
+  &:focus {
+    @extend %no-link-focus;
+    background-color: $transparent !important;
   }
 }
 

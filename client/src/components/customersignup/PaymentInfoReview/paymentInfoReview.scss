@@ -1,0 +1,29 @@
+@import '../../../styles/index';
+
+.creditBilling {
+  margin: 0 !important;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.experation {
+  margin-left: 10px;
+  position: relative;
+  font-size: 12px;
+  top: -3px;
+  letter-spacing: 1px;
+}
+
+.stars {
+  position: relative;
+  font-size: 12px;
+  top: -2px;
+  margin-right: 1px;
+}
+
+.address,
+.name,
+.location {
+  margin: 0 !important;
+  text-transform: capitalize;
+}

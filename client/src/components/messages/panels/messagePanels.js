@@ -1,6 +1,6 @@
 import React from 'react';
-import BasicPanel from '../../app/panels/basicPanel';
-import PageContainer from '../../app/panels/pageContainer';
+import BasicPanel from '../../app/panels/BasicPanel/basicPanel';
+import PageContainer from '../../app/panels/PageContainer/pageContainer';
 
 export default ({ CARDS, ...rest }) => (
   <PageContainer>
