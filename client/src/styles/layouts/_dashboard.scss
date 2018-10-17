@@ -1,0 +1,116 @@
+.dashActive {
+  background-color: $darkblue !important;
+  color: $white;
+}
+
+.dashDetailsContainer {
+  height: 300px;
+}
+
+.dashName {
+  flex: 1 1;
+  margin-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.dashMessages {
+  text-align: center;
+  color: $darkblue;
+
+  h5 {
+    font-family: $arimo;
+  }
+}
+
+.dashNumber {
+  margin: 0 auto;
+  text-align: center;
+  background-color: $bluegreen;
+  color: $white;
+  font-size: 220px;
+  line-height: 270px;
+  width: 220px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: $arimo;
+}
+
+.dashPromo {
+  text-align: center;
+  color: $darkblue;
+  background-color: $darkerwhite;
+  height: 20px;
+  width: 100%;
+  line-height: 20px;
+  font-family: $arimo;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.dashRank {
+  display: inline-block;
+  text-align: center;
+  background-color: $darkerwhite;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  font-family: $arimo;
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 1.5px 16px 5px 0;
+  padding-left: 2px;
+}
+
+.top5 {
+  list-style-type: none;
+  margin: 0;
+  vertical-align: middle;
+  padding: 0 10px;
+
+  & > li {
+    display: flex;
+  }
+}
+
+.top5Title {
+  text-align: center;
+  color: $darkblue;
+  font-size: 20px;
+}
+
+.dashTotal {
+  text-align: center;
+  color: $darkblue;
+  background-color: $darkerwhite;
+  height: 20px;
+  width: 26px;
+  line-height: 20px;
+  font-family: $arimo;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.topRank {
+  color: $white !important;
+  background-color: $lightorange !important;
+}
+
+.topRankUsage {
+  color: $white !important;
+  background-color: $lightblue !important;
+}
+
+.transactionNumbers {
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+
+  & > li {
+    display: inline;
+    margin-right: 10px;
+  }
+}
