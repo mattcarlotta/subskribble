@@ -5,7 +5,7 @@ import styles from './sidebar.scss';
 
 const MenuHeader = ({ collapseSideNav, handleLogoClick }) => (
   <div key="menu-header" className={styles.siderMenuHeader}>
-    <Button onClick={handleLogoClick} className={styles.logoContainer}>
+    <Button onClick={handleLogoClick} className={styles.siderLogoContainer}>
       <i className={`${styles.materialIcons} ${styles.iconLogo}`}>
         wifi_tethering
       </i>

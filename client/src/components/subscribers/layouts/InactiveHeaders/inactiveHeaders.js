@@ -1,9 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import moment from 'moment';
+import { upperCase } from '../../../../utils';
 import styles from '../../../../styles/index.scss';
-
-const upperCase = str => str.replace(/^\w/, c => c.toUpperCase());
 
 const SUB = {
   active: 'person',

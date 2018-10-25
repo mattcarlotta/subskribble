@@ -1,78 +1,75 @@
-const webpack = require('webpack');
+const HotModuleReplacementPlugin = require('webpack')
+  .HotModuleReplacementPlugin;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
-const { globalCSS, outputPath } = require('./paths');
+const { outputPath, publicPath } = require('./paths');
+const { PORT } = require('./envs');
 
+// =============================================================== //
+// DEVELOPMENT VARIABLES                                           //
+// =============================================================== //
+/* output file name */
+const filename = '[name].js';
+
+/* webpack compile output options */
+const output = {
+  filename,
+  path: outputPath,
+  chunkFilename: filename,
+  publicPath,
+};
+
+/* webpack dev server options */
+const devServer = {
+  /* where to host */
+  host: 'localhost',
+  /* current port to host on */
+  port: PORT,
+  /* suppresses compiled information */
+  quiet: true,
+  /* allows webpack to fallback to react-router if route isn't found */
+  historyApiFallback: true,
+  /* shows on-screen errors before reloading */
+  inline: true,
+  /* allows files to be replaced without refreshing the browser */
+  hot: true,
+  /* opens the default browser on load */
+  open: true,
+  /* enable gzip compression for everything served */
+  compress: true,
+  watchOptions: {
+    poll: false,
+  },
+  stats: 'minimal',
+};
+
+/* webpack dev server options */
+const plugins = [
+  /* in console error */
+  new FriendlyErrorsWebpackPlugin({
+    compilationSuccessInfo: {
+      messages: [
+        `Your application is running on \x1b[1mhttp://localhost:${PORT}\x1b[0m`,
+      ],
+      notes: [
+        `Note that the development build is not optimized.`,
+        `To create a staging build, use \x1b[1m\x1b[32mnpm run staging\x1b[0m.`,
+        `To create a production build, use \x1b[1m\x1b[32mnpm run build\x1b[0m.\n`,
+      ],
+    },
+    clearConsole: true,
+  }),
+  /* in browser error overlay */
+  new ErrorOverlayPlugin(),
+  /* hot-module plugin to update files without refreshing the page */
+  new HotModuleReplacementPlugin(),
+];
+
+// =============================================================== //
+// DEVELOPMENT CONFIG                                              //
+// =============================================================== //
 module.exports = {
-  mode: 'development',
-  output: {
-    filename: '[name].js',
-    path: outputPath,
-    chunkFilename: '[name].js',
-    publicPath: '/',
-  },
-  devServer: {
-    host: 'localhost',
-    port: 3000,
-    quiet: true,
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    open: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.s?css$/,
-        exclude: [globalCSS],
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              localIdentName: '[local]___[hash:base64:5]',
-            },
-          },
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.s?css$/,
-        include: [globalCSS],
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              camelCase: true,
-              localIdentName: '[local]___[hash:base64:5]',
-            },
-          },
-          'sass-loader',
-        ],
-      },
-    ],
-  },
-  plugins: [
-    new FriendlyErrorsWebpackPlugin({
-      compilationSuccessInfo: {
-        messages: [
-          `Your application is running on \x1b[1mhttp://localhost:3000\x1b[0m`,
-        ],
-        notes: [
-          `Note that the development build is not optimized.`,
-          `To create a production build, use \x1b[1m\x1b[32mnpm run build\x1b[0m.\n`,
-        ],
-      },
-      clearConsole: true,
-      additionalFormatters: [],
-      additionalTransformers: [],
-    }),
-    new ErrorOverlayPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-  devtool: 'source-map',
+  output,
+  devServer,
+  plugins,
 };

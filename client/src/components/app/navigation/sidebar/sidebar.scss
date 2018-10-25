@@ -1,7 +1,6 @@
 @import '../../../../styles/index.scss';
 
 .logoHeader {
-  @extend .logoContainer;
   background-color: $blackblue;
   width: 100%;
 }
@@ -39,7 +38,7 @@
   line-height: 24px;
 }
 
-.logoContainer {
+.siderLogoContainer {
   height: 100% !important;
   width: 100% !important;
   border: 0 !important;
@@ -48,7 +47,7 @@
   border-radius: 0 !important;
 
   &:hover {
-    @extend .fix-cursor;
+    cursor: pointer;
     background-color: $hoverblue !important;
   }
 

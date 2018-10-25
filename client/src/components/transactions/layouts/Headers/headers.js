@@ -1,6 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import moment from 'moment';
+import { upperCase } from '../../../../utils';
+import styles from '../../../../styles/index.scss';
 
 const PAYMENTS = {
   credit: 'local_atm',
@@ -15,7 +17,9 @@ const HEADERS = [
     dataIndex: 'status',
     render: status => (
       <Tooltip placement="bottom" title={status}>
-        <i className={`material-icons ${status}`}>{PAYMENTS[status]}</i>
+        <i className={`${styles.materialIcons} ${styles[status]}`}>
+          {PAYMENTS[status]}
+        </i>
       </Tooltip>
     ),
   },
@@ -23,7 +27,10 @@ const HEADERS = [
     title: 'Invoice #',
     dataIndex: 'invoice',
     render: (invoice, { status }) => (
-      <span style={{ textTransform: 'none' }} className={`invoice-${status}`}>
+      <span
+        style={{ textTransform: 'none' }}
+        className={styles[`invoice${upperCase(status)}`]}
+      >
         {invoice}
       </span>
     ),
@@ -40,7 +47,9 @@ const HEADERS = [
     title: 'Subscriber',
     dataIndex: 'subscriber',
     render: (subscriber, { status }) => (
-      <span className={`subscriber-${status}`}>{subscriber}</span>
+      <span className={styles[`subscriber${upperCase(status)}`]}>
+        {subscriber}
+      </span>
     ),
   },
   {
@@ -52,7 +61,7 @@ const HEADERS = [
     title: 'Amount',
     dataIndex: 'amount',
     render: (amount, { status }) => (
-      <span className={`amount-${status}`}>${amount}</span>
+      <span className={styles[`amount${upperCase(status)}`]}>${amount}</span>
     ),
   },
 ];

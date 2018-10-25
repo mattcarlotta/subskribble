@@ -1,6 +1,8 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
+import { upperCase } from '../../../../utils';
+import styles from '../../../../styles/index.scss';
 
 export default [
   {
@@ -8,7 +10,9 @@ export default [
     dataIndex: 'status',
     render: status => (
       <Tooltip placement="bottom" title={status}>
-        <i className={`material-icons ${status}`}>content_copy</i>
+        <i className={`${styles.materialIcons} ${styles[status]}`}>
+          content_copy
+        </i>
       </Tooltip>
     ),
   },
@@ -16,13 +20,15 @@ export default [
     title: 'Template Name',
     dataIndex: 'templatename',
     render: (template, { status }) => (
-      <span className={`template-${status}`}>{template}</span>
+      <span className={styles[`template${upperCase(status)}`]}>{template}</span>
     ),
   },
   {
     title: 'From Sender',
     dataIndex: 'fromsender',
-    render: sender => <span className="lowercase">{sender}</span>,
+    render: sender => (
+      <span style={{ textTransform: 'lowercase' }}>{sender}</span>
+    ),
   },
   {
     title: 'Subject',
@@ -38,7 +44,7 @@ export default [
           plans,
           (name, key) =>
             name ? (
-              <span className={`plans-${status}`} key={key}>
+              <span className={styles[`plans${upperCase(status)}`]} key={key}>
                 {name}
               </span>
             ) : (
