@@ -6,7 +6,7 @@
     "React": true,
     "document": true,
     "window": true,
-    "jQuery": true,
+    "jQuery": false,
     "$": true,
     "localStorage": true,
     "fetch": true

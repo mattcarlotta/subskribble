@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/messageActions';
-import CARDS from '../../components/messages/layouts/panelCards';
+import CARDS from '../../components/messages/layouts/PanelCards/panelCards';
 import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader';
 import MessagePanel from '../../components/messages/panels/messagePanels';
 

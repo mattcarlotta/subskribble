@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/promoActions';
-import CARDS from '../../components/promos/layouts/panelCards';
+import CARDS from '../../components/promos/layouts/PanelCards/panelCards';
 import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
 import PromosPanel from '../../components/promos/panels/promosPanels';
 

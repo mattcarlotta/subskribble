@@ -2,7 +2,6 @@ $material-icons-font-path: '~material-icons/iconfont/';
 /* --MODULES-- */
 @import '~antd/dist/antd.min.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~rc-drawer-menu/assets/index.css';
 @import '~react-quill/dist/quill.snow.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~material-icons/iconfont/material-icons.scss';
@@ -11,40 +10,54 @@ $material-icons-font-path: '~material-icons/iconfont/';
   font-family: 'Harabara';
   font-style: normal;
   font-weight: 300;
-  src: url("../assets/fonts/Harabara.ttf") format('truetype');
+  src: url('../assets/fonts/Harabara.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Regular';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Regular.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Italic';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Italic.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Italic.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-Bold.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-Bold.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Arimo Bold Italic';
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/Arimo-BoldItalic.ttf") format('truetype');
+  src: url('../assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
 }
 /*  --ANTD OVERRIDES-- */
 .anticon {
   vertical-align: 0;
 }
 
+.ant-card-extra {
+  padding: 0px;
+}
+
+.ant-card-head,
 .ant-card-head-title {
-  color: #1890ff !important;
+  color: #1890ff;
   font-family: 'Arimo Regular', sans-serif;
+  font-size: 14px;
+  height: 45px;
+  min-height: 45px;
+  padding-left: 32px;
+  text-transform: uppercase;
+}
+
+.ant-card-wider-padding .ant-card-head {
+  padding: 0;
 }
 
 .ant-form-item,
@@ -54,6 +67,11 @@ $material-icons-font-path: '~material-icons/iconfont/';
 .ant-select-dropdown,
 .ant-table {
   font-family: 'Arimo Regular', sans-serif;
+}
+
+.ant-table-tbody > tr > td,
+.ant-table-thead > tr > th {
+  text-align: center;
 }
 
 .ant-table-content {
@@ -139,7 +157,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
   color: #ffffff;
 }
 
-.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) .anticon {
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only)
+  .anticon {
   padding-right: 7px !important;
 }
 
@@ -167,7 +186,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
 
 .ant-popover-inner-content {
   -moz-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px,
+    rgba(0, 0, 0, 0.12) 0 1px 4px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
   margin: 0;
   padding: 0;

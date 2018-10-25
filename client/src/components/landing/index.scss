@@ -1,0 +1,47 @@
+@import '../../styles/index';
+
+.landingContainer {
+  @include b-s(
+    rgba(0, 0, 0, 0.12) 0px 1px 6px,
+    rgba(0, 0, 0, 0.12) 0px 1px 4px
+  );
+  text-transform: none;
+  height: 100%;
+  background-color: $white;
+  min-height: 815px;
+  padding: 10px 30px;
+
+  hr {
+    margin-top: -5px;
+  }
+}
+
+.landingLogo {
+  color: $lightblue;
+}
+.landingIcon {
+  font-size: 44px;
+}
+
+.landingText {
+  position: relative;
+  font-family: $harabara;
+  font-size: 44px;
+  letter-spacing: 1.5px;
+  top: -7px;
+  margin-left: 2px;
+}
+
+.landingSubtitle {
+  font-family: $arimo-italic;
+  font-size: 14px;
+}
+
+.landingInstructionsSubtitle {
+  @extend .landingSubtitle;
+  margin-top: -10px;
+}
+
+.landingInstructionsList {
+  list-style-type: none;
+}

@@ -1,0 +1,13 @@
+@import '../../../styles/index';
+
+.noData {
+  text-align: center;
+  text-transform: none;
+  color: $nodata;
+  padding-top: 30px;
+
+  & > .anticon {
+    color: $nodata;
+    font-size: 148px;
+  }
+}

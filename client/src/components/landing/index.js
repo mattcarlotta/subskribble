@@ -1,20 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PageContainer from '../app/panels/PageContainer/pageContainer';
+import styles from './index.scss';
 
 export default () => (
   <PageContainer>
-    <div className="landing-container">
-      <div className="logo">
-        <i className="material-icons icon">wifi_tethering</i>
-        <span className="text">subskribble</span>
+    <div className={styles.landingContainer}>
+      <div className={styles.landingLogo}>
+        <i className={`${styles.materialIcons} ${styles.landingIcon}`}>
+          wifi_tethering
+        </i>
+        <span className={styles.landingText}>subskribble</span>
       </div>
       <hr />
-      <h2 className="instructions">Getting Started</h2>
-      <p className="instructions-subtitle">
+      <h2>Getting Started</h2>
+      <p className={styles.landingInstructionsSubtitle}>
         Follow these simple steps to get up and running.
       </p>
-      <ul className="instructions-list">
+      <ul className={styles.landingInstructionsList}>
         <li>
           Create a plan for your subscribers to register to by clicking{' '}
           <Link to="/subskribble/plans/create">here</Link>.

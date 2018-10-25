@@ -1,0 +1,133 @@
+.tableContainer {
+  margin: 10px 0;
+}
+
+%label {
+  text-align: center;
+  color: $whiteblue;
+  background-color: $blue;
+  border-radius: 5px;
+  padding: 4px 15px;
+}
+
+.active {
+  color: $tealgreen;
+}
+.amount,
+.promo,
+.subscriber,
+.templateActive {
+  @extend %label;
+  background-color: $tealgreen;
+}
+
+.due {
+  color: $darkyellow;
+}
+.date,
+.plan,
+.amountDue,
+.invoiceDue,
+.subscriberDue {
+  @extend %label;
+  background-color: $darkyellow;
+}
+
+.credit {
+  color: $darkblue;
+}
+.amountCredit,
+.invoiceCredit,
+.subscriberCredit {
+  @extend %label;
+  background-color: $darkblue;
+}
+
+.inactive {
+  color: $lightcoolgrey;
+}
+.amountInactive,
+.amountRefund,
+.amountSuspended,
+.billSuspended,
+.enddateInactive,
+.invoiceInactive,
+.plansSuspended,
+.maxUsageSuspended,
+.subscriberInactive {
+  @extend %label;
+  background-color: $lightcoolgrey;
+}
+
+.paid {
+  color: $limegreen;
+}
+.amountPaid,
+.invoicePaid,
+.subscriberPaid {
+  @extend %label;
+  background-color: $limegreen;
+}
+
+.refund {
+  color: $redorange;
+}
+.invoiceRefund,
+.subscriberRefund {
+  @extend %label;
+  background-color: $redorange;
+}
+
+.bill,
+.totalUsage {
+  @extend %label;
+  background-color: $trueorange;
+}
+
+.suspended {
+  color: $firered;
+}
+.enddateSuspended,
+.invoiceSuspended,
+.planSuspended,
+.promoSuspended,
+.subscriberSuspended,
+.templateSuspended,
+.totalUsageSuspended {
+  @extend %label;
+  background-color: $firered;
+}
+
+.plansActive,
+.plansSuspended {
+  margin-right: 5px;
+}
+
+.maxUsage,
+.plansActive,
+.subscriptionCount {
+  @extend %label;
+  background-color: $lightblue;
+}
+
+.tableStatusAction {
+  text-transform: capitalize;
+  i {
+    font-size: 18px;
+    padding-top: 5px;
+  }
+}
+
+.overrideTableStyle {
+  th {
+    font-family: $arimo;
+    font-size: 14px !important;
+  }
+
+  td {
+    font-family: $arimo;
+    text-decoration: none;
+    color: $black !important;
+    font-size: 13px !important;
+  }
+}

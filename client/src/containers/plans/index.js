@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/planActions';
-import CARDS from '../../components/plans/layouts/panelCards';
+import CARDS from '../../components/plans/layouts/PanelCards/panelCards';
 import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
 import PlansPanel from '../../components/plans/panels/plansPanel';
 
