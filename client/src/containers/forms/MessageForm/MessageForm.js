@@ -8,14 +8,14 @@ import { Row, Col } from 'antd';
 import {
   AntSelectField,
   AntStepFormButtons,
-} from '../app/formFields/antReduxFormFields';
-
-import Spinner from '../../components/app/loading/Spinner/Spinner';
-import TemplatePreview from '../../components/app/editor/TemplatePreview/templatePreview';
-import DisabledFields from '../../components/app/formFields/DisabledFields/disabledFields';
-import { sendMessageToSubs } from '../../actions/formActions';
-import { fetchAllActiveTemplates } from '../../actions/templateActions';
-import { isNotEmpty } from '../app/formFields/validateFormFields';
+} from '../../app/formFields/antReduxFormFields';
+import Spinner from '../../../components/app/loading/Spinner/Spinner';
+import TemplatePreview from '../../../components/app/editor/TemplatePreview/templatePreview';
+import DisabledFields from '../../../components/app/formFields/DisabledFields/disabledFields';
+import { sendMessageToSubs } from '../../../actions/formActions';
+import { fetchAllActiveTemplates } from '../../../actions/templateActions';
+import { isNotEmpty } from '../../app/formFields/validateFormFields';
+import { formBoxContainer } from '../../../styles';
 
 class MessageForm extends Component {
   state = {
@@ -72,37 +72,35 @@ class MessageForm extends Component {
     ) : (
       <Row>
         <Col span={12}>
-          <div className="new-form-container">
-            <div style={{ height: 881 }} className="form-box-container">
-              <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
-                Send Message
-              </h1>
-              <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-                <div className="input-100">
-                  <AntSelectField
-                    disabled={confirmLoading}
-                    name="template"
-                    placeholder="Click to select a template."
-                    style={{ width: '100%' }}
-                    selectOptions={selectTemplateOptions}
-                    tokenSeparators={[',']}
-                    validate={[isNotEmpty]}
-                  />
-                </div>
-                <DisabledFields {...this.state.previewTemplate} />
-                <hr />
-                <AntStepFormButtons
-                  backLabel="Back"
-                  backStyle={{ height: 50, float: 'left' }}
-                  confirmLoading={confirmLoading}
-                  onClickBack={this.props.handleGoBack}
-                  pristine={pristine}
-                  submitLabel="Submit"
-                  submitStyle={{ height: 50, float: 'right' }}
-                  submitting={submitting}
+          <div style={{ height: 881 }} className={formBoxContainer}>
+            <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
+              Send Message
+            </h1>
+            <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+              <div className="input-100">
+                <AntSelectField
+                  disabled={confirmLoading}
+                  name="template"
+                  placeholder="Click to select a template."
+                  style={{ width: '100%' }}
+                  selectOptions={selectTemplateOptions}
+                  tokenSeparators={[',']}
+                  validate={[isNotEmpty]}
                 />
-              </form>
-            </div>
+              </div>
+              <DisabledFields {...this.state.previewTemplate} />
+              <hr />
+              <AntStepFormButtons
+                backLabel="Back"
+                backStyle={{ height: 50, float: 'left' }}
+                confirmLoading={confirmLoading}
+                onClickBack={this.props.handleGoBack}
+                pristine={pristine}
+                submitLabel="Submit"
+                submitStyle={{ height: 50, float: 'right' }}
+                submitting={submitting}
+              />
+            </form>
           </div>
         </Col>
         <Col span={12}>

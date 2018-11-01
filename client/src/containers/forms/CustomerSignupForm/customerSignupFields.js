@@ -1,5 +1,5 @@
 import React from 'react';
-import { AntSelect } from './antReduxFormFields';
+import { AntSelect } from '../../app/formFields/antReduxFormFields';
 import {
   allowedCharacters,
   isNumber,
@@ -12,7 +12,7 @@ import {
   isValidState,
   isValidYear,
   isValidZip,
-} from './validateFormFields';
+} from '../../app/formFields/validateFormFields';
 import {
   formatCreditCard,
   formatCVV,
@@ -20,7 +20,8 @@ import {
   formatState,
   formatYear,
   formatZip,
-} from './formatFields';
+} from '../../app/formFields/formatFields';
+import styles from './customerFields.scss';
 
 const MENUITEMS = [
   '01',
@@ -39,27 +40,27 @@ const MENUITEMS = [
 
 const BILLINGADDRESSFIELDS = [
   {
-    className: 'input-50 f-l',
+    className: `${styles.input50} f-l`,
     name: 'billingAddress',
     placeholder: 'Billing Address',
     type: 'text',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-25 f-l',
+    className: `${styles.input25} f-l`,
     name: 'billingUnit',
     placeholder: 'Billing Unit, Apt, or Suite #',
     type: 'text',
   },
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'billingCity',
     placeholder: 'Billing City',
     type: 'text',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     name: 'billingState',
     placeholder: 'Billing State',
     normalize: formatState,
@@ -67,7 +68,7 @@ const BILLINGADDRESSFIELDS = [
     validate: [isRequired, isValidState, allowedCharacters],
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     name: 'billingZip',
     placeholder: 'Billing Zip Code',
     normalize: formatZip,
@@ -78,7 +79,7 @@ const BILLINGADDRESSFIELDS = [
 
 const CREDITCARDFIELDS = [
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'creditCard',
     placeholder: 'Credit Card',
     normalize: formatCreditCard,
@@ -86,7 +87,7 @@ const CREDITCARDFIELDS = [
     validate: [isRequired, isValidCC],
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     component: AntSelect,
     name: 'creditCardExpMonth',
     placeholder: 'Exp. Month',
@@ -95,7 +96,7 @@ const CREDITCARDFIELDS = [
     validate: isValidExpMonth,
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     name: 'creditCardExpYear',
     placeholder: 'Exp. Year',
     normalize: formatYear,
@@ -103,7 +104,7 @@ const CREDITCARDFIELDS = [
     validate: [isRequired, isValidYear, isNumber],
   },
   {
-    className: 'input-10 f-l',
+    className: `${styles.input10} f-l`,
     name: 'creditCardCVV',
     placeholder: 'CVV',
     normalize: formatCVV,
@@ -114,60 +115,60 @@ const CREDITCARDFIELDS = [
 
 const CONTACTFIELDS = [
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'contactFirstName',
     placeholder: 'First Name',
     type: 'text',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'contactLastName',
     placeholder: 'Last Name',
     type: 'text',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-55 f-l',
+    className: `${styles.input55} f-l`,
     name: 'contactAddress',
     placeholder: 'Address',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-25 f-l',
+    className: `${styles.input25} f-l`,
     name: 'contactUnit',
     placeholder: 'Unit, Apt, or Suite #',
     style: { width: '100%' },
   },
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'contactCity',
     placeholder: 'City',
     validate: [isRequired, allowedCharacters],
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     name: 'contactState',
     placeholder: 'State',
     normalize: formatState,
     validate: [isRequired, isValidState, allowedCharacters],
   },
   {
-    className: 'input-20 f-l',
+    className: `${styles.input20} f-l`,
     name: 'contactZip',
     placeholder: 'Zip Code',
     normalize: formatZip,
     validate: [isRequired, isValidZip, isNumber],
   },
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'contactEmail',
     placeholder: 'Email Address',
     type: 'text',
     validate: [isRequired, isValidEmail],
   },
   {
-    className: 'input-40 f-l',
+    className: `${styles.input40} f-l`,
     name: 'contactPhone',
     placeholder: 'Phone Number (optional)',
     normalize: formatPhone,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
 import { browserHistory } from 'react-router';
-import { adjustPosition, materialIcons } from '../../../../styles/index.scss';
+import { adjustPosition, materialIcons } from '../../../../styles';
 
 const CustomButton = ({
   buttonIcon,

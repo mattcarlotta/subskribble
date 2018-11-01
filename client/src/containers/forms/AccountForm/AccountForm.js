@@ -4,8 +4,9 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFieldsWithLabels,
   AntFormSubmit,
-} from '../app/formFields/antReduxFormFields';
-import FIELDS from '../app/formFields/accountDetailsFormFields';
+} from '../../app/formFields/antReduxFormFields';
+import FIELDS from './accountDetailsFormFields';
+import styles from '../../../styles';
 
 class AccountForm extends Component {
   state = { confirmLoading: false };
@@ -54,22 +55,20 @@ class AccountForm extends Component {
     const { confirmLoading } = this.state;
 
     return (
-      <div className="new-form-container">
-        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-          <div className="account-details-container">
-            <AntFormFieldsWithLabels FIELDS={FIELDS} />
-          </div>
-          <div className="account-button-container">
-            <AntFormSubmit
-              column={24}
-              confirmLoading={confirmLoading}
-              label="Update"
-              disabled={submitting || pristine}
-              style={{ height: 38, width: 84, marginTop: 5 }}
-            />
-          </div>
-        </form>
-      </div>
+      <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+        <div className={styles.accountDetailsContainer}>
+          <AntFormFieldsWithLabels FIELDS={FIELDS} />
+        </div>
+        <div className={styles.accountButtonContainer}>
+          <AntFormSubmit
+            column={24}
+            confirmLoading={confirmLoading}
+            label="Update"
+            disabled={submitting || pristine}
+            style={{ height: 38, width: 84, marginTop: 5 }}
+          />
+        </div>
+      </form>
     );
   };
 }

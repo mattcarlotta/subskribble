@@ -3,7 +3,7 @@ import {
   isRequired,
   isValidEmail,
   minPassword,
-} from './validateFormFields';
+} from '../../app/formFields/validateFormFields';
 
 export default [
   {

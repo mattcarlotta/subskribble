@@ -3,7 +3,7 @@ import AsyncModal from '../../../../containers/app/modals/asyncModal';
 import LoginForm from '../../../../containers/forms/LoginForm/loginForm';
 import ResetForm from '../../../../containers/forms/resetpasswordForm';
 import SignupForm from '../../../../containers/forms/signupForm';
-import { settingsTab } from '../../../../styles/index.scss';
+import { settingsTab } from '../../../../styles';
 
 const forms = [LoginForm, ResetForm, SignupForm];
 const titles = ['Log In', 'Reset Password', 'Sign Up'];

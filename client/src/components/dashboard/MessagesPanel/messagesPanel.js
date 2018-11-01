@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import MiniPanel from '../MiniPanel/miniPanel';
 import NoData from '../NoData/noData';
-import styles from '../../../styles/index.scss';
+import styles from '../../../styles';
 
 const MessagesPanel = ({ messages }) => (
   <MiniPanel

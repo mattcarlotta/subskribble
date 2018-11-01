@@ -37,6 +37,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
   src: url('../assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
 }
 /*  --ANTD OVERRIDES-- */
+
 .anticon {
   vertical-align: 0;
 }
@@ -67,6 +68,13 @@ $material-icons-font-path: '~material-icons/iconfont/';
 .ant-select-dropdown,
 .ant-table {
   font-family: 'Arimo Regular', sans-serif;
+}
+
+.ant-scroll-number-only > p {
+  font-family: 'Arimo Regular', sans-serif;
+  font-size: 12px;
+  top: -2px;
+  position: relative;
 }
 
 .ant-table-tbody > tr > td,
@@ -222,4 +230,23 @@ $material-icons-font-path: '~material-icons/iconfont/';
   content: '';
   display: table;
   clear: both;
+}
+
+.fix-cursor {
+  cursor: pointer;
+}
+
+.f-l {
+  float: left;
+}
+
+.select-container > .ant-form-item {
+  height: 30px;
+  width: 150px;
+  .ant-form-item-control {
+    line-height: 0;
+  }
+  .ant-select {
+    margin: 0px;
+  }
 }

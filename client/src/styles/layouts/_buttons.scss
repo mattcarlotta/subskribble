@@ -12,20 +12,22 @@
 }
 
 .btnPrimary {
-  border: 0;
+  border: 0 !important;
   background-color: $lightblue;
   height: 35px;
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $skyblue;
   }
 }
 
 .btnCancelWarning {
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     color: $darkyellow;
     background-color: $transparent;
     border-color: $darkyellow;
@@ -33,25 +35,30 @@
 }
 
 .btnDanger {
-  border: 0;
+  border: 0 !important;
+  color: $white !important;
   background-color: $orange !important;
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    border: 0 !important;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $red !important;
   }
 }
 
 .btnDisabled {
-  border: 0;
+  border: 0 !important;
   color: $darkerwhite !important;
   background-color: $disabledgrey !important;
   cursor: not-allowed;
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    border: 0 !important;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $disabledgrey !important;
   }
 }
@@ -61,7 +68,8 @@
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $limegreen !important;
   }
 }
@@ -71,7 +79,8 @@
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     color: $white;
     background-color: $darkwarmgrey !important;
   }
@@ -79,13 +88,15 @@
 
 .btnWarning {
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     border: 0;
     background-color: $darkyellow !important;
   }
 
   &:focus {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $transparent;
   }
 }
@@ -106,13 +117,15 @@
   margin-right: -5px !important;
 
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     color: $lightcoolgrey !important;
     background-color: $transparent !important;
   }
 
   &:focus {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     color: $white !important;
     background-color: $transparent !important;
   }
@@ -123,14 +136,15 @@
 }
 
 .hideButton {
-  @extend .fix-cursor;
+  cursor: pointer;
   border: 0;
   color: $transparent;
   background-color: $transparent;
 
   &:focus,
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
   }
 }
 
@@ -150,7 +164,7 @@
 }
 
 .navButtonIcon {
-  @extend .fix-cursor;
+  cursor: pointer;
   display: inline-block;
   margin-right: 10px;
   margin-left: 20px;
@@ -175,13 +189,15 @@
   }
 
   &:hover {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     color: $lightblue !important;
     background-color: $transparent !important;
   }
 
   &:focus {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $transparent !important;
   }
 }
@@ -205,7 +221,8 @@
   }
 
   &:focus {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none !important;
     background-color: $transparent;
   }
 }
@@ -231,7 +248,7 @@
 }
 
 .resetFieldIcon {
-  @extend .fix-cursor;
+  cursor: pointer;
   display: inline-block;
   position: relative;
   color: $lightgrey;

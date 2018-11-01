@@ -6,7 +6,7 @@ import {
   AntFormFields,
   AntFormSubmit,
 } from '../../app/formFields/antReduxFormFields';
-import styles from './authForm.scss';
+import styles from '../../../styles';
 
 const AuthForm = ({
   confirmLoading,

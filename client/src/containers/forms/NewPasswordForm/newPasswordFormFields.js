@@ -1,4 +1,7 @@
-import { isRequired, minPassword } from './validateFormFields';
+import {
+  isRequired,
+  minPassword,
+} from '../../app/formFields/validateFormFields';
 
 export default [
   {

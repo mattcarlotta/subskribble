@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageContainer from '../../panels/PageContainer/pageContainer';
-import AvatarForm from '../../../../containers/forms/AvatarForm';
-import AccountForm from '../../../../containers/forms/AccountForm';
+import AvatarForm from '../../../../containers/forms/AvatarForm/AvatarForm';
+import AccountForm from '../../../../containers/forms/AccountForm/AccountForm';
 import CurrentAvatar from '../CurrentAvatar/currentAvatar';
 import DeleteAccount from '../DeleteAccount/deleteAccount';
 import styles from './MyProfile.scss';

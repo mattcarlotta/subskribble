@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import {
+  btnDanger,
   deleteAccountDetails,
   deleteButtonContainer,
   deleteAccountInformation,
@@ -12,7 +13,7 @@ export default () => (
   <div className={deleteAccountDetails}>
     <div className={deleteButtonContainer}>
       <Link
-        className="ant-btn btn-danger"
+        className={`ant-btn ${btnDanger}`}
         to="/subskribble/settings/delete-account"
         style={{ fontSize: 15, height: 38, width: 84, marginTop: 5 }}
       >

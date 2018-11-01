@@ -1,0 +1,22 @@
+@import '../../../styles';
+
+.textareaContainer {
+  height: 240px;
+}
+
+.deleteAccountInformation {
+  float: left;
+  height: 126px;
+  margin-left: 20px;
+}
+
+.information {
+  font-family: $arimo;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.bold {
+  font-family: $arimo-bold;
+  font-size: 16px;
+}

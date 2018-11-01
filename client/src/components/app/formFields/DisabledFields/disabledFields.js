@@ -1,7 +1,7 @@
 import map from 'lodash/map';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { disabledInputs, disabledTags } from '../../../../styles/index.scss';
+import { disabledInputs, disabledTags } from '../../../../styles';
 
 const DisabledFields = ({ fromsender, plans, subject }) => (
   <Fragment>

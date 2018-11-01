@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import styles from '../../../../styles/index.scss';
+import styles from '../../../../styles';
 
 export default [
   {

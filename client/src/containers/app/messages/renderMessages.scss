@@ -1,0 +1,24 @@
+@import '../../../styles';
+
+.iconMessageContainer {
+  position: relative;
+  height: 100vh;
+  width: 60px;
+  top: -16px;
+  left: -30px;
+}
+
+.icon {
+  padding: 10px 17px 15px 17px;
+  i {
+    color: $white;
+    font-size: 30px;
+  }
+}
+
+.error {
+  background-color: $red;
+}
+.success {
+  background-color: $green;
+}

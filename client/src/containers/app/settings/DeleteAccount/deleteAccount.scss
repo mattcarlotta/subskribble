@@ -1,0 +1,28 @@
+@import '../../../../styles';
+
+.settingsContainer {
+  @include b-s(
+    rgba(0, 0, 0, 0.12) 0px 1px 6px,
+    rgba(0, 0, 0, 0.12) 0px 1px 4px
+  );
+  margin: auto;
+  text-transform: none;
+  background-color: $white;
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px 30px;
+  margin-bottom: 40px;
+
+  h2 {
+    color: $lightblue;
+  }
+}
+
+.title {
+  margin-top: 30px;
+}
+
+.subdescription {
+  font-family: $arimo;
+  font-size: 13px;
+}

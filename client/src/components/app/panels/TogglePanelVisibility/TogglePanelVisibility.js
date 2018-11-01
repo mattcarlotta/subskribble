@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import { panelButton, materialIcons } from '../../../../styles/index.scss';
+import { panelButton, materialIcons } from '../../../../styles';
 
 export default WrappedComponent => {
   class TogglePanelVisibility extends Component {

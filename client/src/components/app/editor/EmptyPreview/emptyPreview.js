@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  boxEmpty,
-  emptyIcon,
-  materialIcons,
-} from '../../../../styles/index.scss';
+import { boxEmpty, emptyIcon, materialIcons } from '../../../../styles';
 
 const EmptyPreview = ({ text }) => (
   <div className={boxEmpty}>

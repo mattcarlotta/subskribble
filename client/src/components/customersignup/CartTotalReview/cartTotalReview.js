@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
-import ApplyPromotionalForm from '../../../containers/forms/applyPromotionalForm';
+import ApplyPromotionalForm from '../../../containers/forms/ApplyPromotionalForm/applyPromotionalForm';
 import {
   promo,
   reviewContainer,

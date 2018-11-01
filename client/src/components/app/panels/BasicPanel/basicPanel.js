@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'antd';
 import PanelBody from '../PanelBody/panelBody';
 import TogglePanelVisibility from '../TogglePanelVisibility/TogglePanelVisibility';
-import styles from '../../../../styles/index.scss';
+import styles from '../../../../styles';
 
 const BasicPanel = ({ buttonPanel, CARDS, cardTitle, visible, ...rest }) => (
   <div className={styles.panelContainer}>

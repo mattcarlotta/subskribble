@@ -3,11 +3,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Steps } from 'antd';
-import RegisterPlanForm from './RegisterPlanForm';
-
-import { subRegisterToPlan } from '../../actions/formActions';
-import { getCustomerFormFields } from '../app/formFields/customerSignupFields';
-import { fetchAllActivePlans } from '../../actions/planActions';
+import RegisterPlanForm from '../RegisterPlanForm';
+import { subRegisterToPlan } from '../../../actions/formActions';
+import { getCustomerFormFields } from './customerSignupFields';
+import { fetchAllActivePlans } from '../../../actions/planActions';
+import {
+  customerSignupBG,
+  customerSignupContainer,
+  stepperContainer,
+  materialIcons,
+  title,
+} from './customerFields.scss';
 
 const { Step } = Steps;
 const stepLabels = [
@@ -77,17 +83,17 @@ class CustomerPlanSignup extends Component {
     const { formFields, isLoading, plans, stepIndex, wasReviewed } = this.state;
     const finished = stepIndex === 2;
     return isLoading ? null : (
-      <div className="customer-signup-bg">
-        <div className="customer-signup-container">
-          <div className="stepper-container">
-            <div className="title">
+      <div className={customerSignupBG}>
+        <div className={customerSignupContainer}>
+          <div className={stepperContainer}>
+            <div className={title}>
               <h1>Subscriber Registration</h1>
             </div>
             <Steps current={stepIndex}>
               {map(stepLabels, ({ title, icon }, key) => (
                 <Step
                   className={wasReviewed ? 'fix-cursor' : ''}
-                  icon={<i className="material-icons">{icon}</i>}
+                  icon={<i className={materialIcons}>{icon}</i>}
                   key={key}
                   onClick={
                     wasReviewed && !confirmLoading

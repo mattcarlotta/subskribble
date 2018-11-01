@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import {
   missingVerificationToken,
   verifyEmail,
-} from '../../../actions/authActions';
-import EmailConfirmation from '../../../components/app/auth/Email/emailConfirmation';
-import Spinner from '../../../components/app/loading/Spinner/Spinner';
+} from '../../../../actions/authActions';
+import EmailConfirmation from '../../../../components/app/auth/Email/emailConfirmation';
+import Spinner from '../../../../components/app/loading/Spinner/Spinner';
 
 class VerifyEmail extends Component {
   componentDidMount = () => {

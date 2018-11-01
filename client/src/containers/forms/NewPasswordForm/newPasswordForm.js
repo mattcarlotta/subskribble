@@ -5,13 +5,14 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFields,
   AntFormSubmit,
-} from '../app/formFields/antReduxFormFields';
+} from '../../app/formFields/antReduxFormFields';
 
-import FIELDS from '../app/formFields/newPasswordFormFields';
+import FIELDS from './newPasswordFormFields';
 import {
   missingPasswordToken,
   resetUserPassword,
-} from '../../actions/authActions';
+} from '../../../actions/authActions';
+import styles from '../../../styles';
 
 class NewPasswordForm extends Component {
   handleFormSubmit = ({ password }) => {
@@ -31,26 +32,24 @@ class NewPasswordForm extends Component {
   };
 
   render = () => (
-    <div className="auth-container">
-      <div className="auth-box-container">
-        <div className="auth-box">
-          <div className="auth-form">
-            <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-              <AntFormFields FIELDS={FIELDS} />
-              <AntFormSubmit
-                confirmLoading={this.props.confirmLoading}
-                label="Update"
-                pristine={this.props.pristine}
-                submitting={this.props.submitting}
-                style={{
-                  fontSize: 18,
-                  height: 45,
-                  marginTop: 5,
-                  width: '100%',
-                }}
-              />
-            </form>
-          </div>
+    <div className={styles.authBoxContainer}>
+      <div className={styles.authBox}>
+        <div className={styles.authForm}>
+          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+            <AntFormFields FIELDS={FIELDS} />
+            <AntFormSubmit
+              confirmLoading={this.props.confirmLoading}
+              label="Update"
+              pristine={this.props.pristine}
+              submitting={this.props.submitting}
+              style={{
+                fontSize: 18,
+                height: 45,
+                marginTop: 5,
+                width: '100%',
+              }}
+            />
+          </form>
         </div>
       </div>
     </div>

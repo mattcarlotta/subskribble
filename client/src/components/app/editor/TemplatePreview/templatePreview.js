@@ -1,7 +1,7 @@
 import React from 'react';
 import EmptyPreview from '../EmptyPreview/emptyPreview';
 import ShowPreview from '../ShowPreview/showPreview';
-import { previewBoxContainer } from '../../../../styles/index.scss';
+import { previewBoxContainer } from '../../../../styles';
 
 export default props => (
   <div className={previewBoxContainer}>

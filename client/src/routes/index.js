@@ -3,27 +3,27 @@ import { IndexRoute, Redirect, Route } from 'react-router';
 
 import App from '../components';
 import ButtonLoading from '../containers/app/buttons/ButtonLoading';
-import CustomerSignupForm from '../containers/forms/CustomerSignupForm';
+import CustomerSignupForm from '../containers/forms/CustomerSignupForm/CustomerSignupForm';
 import Dashboard from '../containers/dashboard';
-import DeleteAccount from '../containers/app/settings/DeleteAccount';
+import DeleteAccount from '../containers/app/settings/DeleteAccount/DeleteAccount';
 // import Home from '../components/website/home';
 import Landing from '../components/landing';
-import MessageForm from '../containers/forms/MessageForm';
+import MessageForm from '../containers/forms/MessageForm/MessageForm';
 import NotFound from '../components/app/notfound/404/404';
 import Plans from '../containers/plans';
-import PlansForm from '../containers/forms/PlansForm';
+import PlansForm from '../containers/forms/PlansForm/PlansForm';
 import Promos from '../containers/promos';
 import PromosForm from '../containers/forms/PromosForm';
 import Messages from '../containers/messages';
 import RefundForm from '../containers/forms/RefundForm';
-import RequireAuth from '../containers/app/auth/RequireAuth';
-import ResetPassword from '../containers/app/auth/ResetPassword';
-import Settings from '../containers/app/settings/Settings';
+import RequireAuth from '../containers/app/auth/RequireAuth/RequireAuth';
+import ResetPassword from '../containers/app/auth/ResetPassword/ResetPassword';
+import Settings from '../containers/app/settings/Settings/Settings';
 import Subscribers from '../containers/subscribers';
 import Templates from '../containers/templates';
 import TemplateForm from '../containers/forms/TemplateForm';
 import Transactions from '../containers/transactions';
-import VerifyEmail from '../containers/app/auth/VerifyEmail';
+import VerifyEmail from '../containers/app/auth/VerifyEmail/VerifyEmail';
 
 // CONFIG APP ROUTE VIEWS
 export default (

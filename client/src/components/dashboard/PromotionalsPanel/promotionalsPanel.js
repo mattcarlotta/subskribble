@@ -6,7 +6,7 @@ import { Col, Row, Tooltip } from 'antd';
 import MiniPanel from '../MiniPanel/miniPanel';
 import BarChart from '../../app/charts/BarChart';
 import NoData from '../NoData/noData';
-import styles from '../../../styles/index.scss';
+import styles from '../../../styles';
 
 const PromosPanel = ({ popularpromotionals, promotionals }) => (
   <MiniPanel
