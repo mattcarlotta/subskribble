@@ -53,8 +53,61 @@ p {
   font-feature-settings: 'liga';
 }
 
-.scrollBar {
-  background-color: $lightblue;
-  border-radius: 3px;
-  z-index: 1700;
+.planSelectionContainer {
+  margin-top: 20px;
+  text-align: center;
+  margin-right: 15px;
+  min-height: 550px;
+}
+
+.radioBody {
+  margin-bottom: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(120, 130, 140, 0.13);
+  border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+  padding: 20px 0;
+}
+
+.radioHeader {
+  text-align: center;
+}
+
+.radioPlanTitle {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.radioPrice {
+  position: relative;
+  font-size: 46px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.radioPriceSign {
+  position: relative;
+  font-size: 15px;
+  top: -25px;
+  margin-left: -10px;
+}
+
+.radioSelected {
+  border-top: 1px solid $lightblue !important;
+  border-right: 2px solid $lightblue !important;
+  border-left: 2px solid $lightblue !important;
+  border-bottom: 5px solid $lightblue !important;
+}
+
+.radioSelectionContainer {
+  margin-bottom: 20px !important;
+  height: 250px !important;
+  width: 100%;
+  max-width: 300px;
+  min-width: 200px;
+  border-top: 1px solid rgba(120, 130, 140, 0.23);
+  border-left: 1px solid rgba(120, 130, 140, 0.23);
+  border-right: 1px solid rgba(120, 130, 140, 0.23);
+  border-bottom: 5px solid rgba(120, 130, 140, 0.23);
+  padding: 30px 0px !important;
+  margin-left: 15px !important;
 }

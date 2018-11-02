@@ -10,6 +10,7 @@ import {
   location,
   reviewContainer,
   reviewDetailsContainer,
+  stars,
 } from './paymentInfoReview.scss';
 
 const PaymentInfoReview = ({
@@ -40,7 +41,7 @@ const PaymentInfoReview = ({
             }
             aria-hidden="true"
           />
-          <span className="stars">****</span>
+          <span className={stars}>****</span>
           {creditCard.slice(-4)}
           <span className={experation}>
             Exp: {creditCardExpMonth}/{creditCardExpYear}

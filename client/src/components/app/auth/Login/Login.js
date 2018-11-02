@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AsyncModal from '../../../../containers/app/modals/asyncModal';
 import LoginForm from '../../../../containers/forms/LoginForm/loginForm';
-import ResetForm from '../../../../containers/forms/resetpasswordForm';
-import SignupForm from '../../../../containers/forms/signupForm';
+import ResetForm from '../../../../containers/forms/ResetPasswordForm/resetpasswordForm';
+import SignupForm from '../../../../containers/forms/SignupForm/signupForm';
 import { settingsTab } from '../../../../styles';
 
 const forms = [LoginForm, ResetForm, SignupForm];

@@ -18,6 +18,7 @@ import {
   Switch,
   Upload,
 } from 'antd';
+import styles from '../../../styles';
 
 const FormItem = Form.Item;
 const { Button: RadioButton, Group: RadioGroup } = Radio;
@@ -87,7 +88,7 @@ const AntSubmitButton = ({
         <Fragment>
           {!iconType ? (
             <Fragment>
-              {label} <Icon type={icon} />
+              {label} <Icon type={icon || type} />
             </Fragment>
           ) : (
             <Fragment>
@@ -201,26 +202,26 @@ const AntFormFieldsWithLabels = ({ FIELDS }) =>
   );
 
 const AntRadioGroupField = ({ FIELDS, value, ...props }) => (
-  <div className="plan-selection-container">
+  <div className={styles.planSelectionContainer}>
     <Field {...props} value={value} component={AntRadioGroup}>
       {map(FIELDS, ({ description, planname, amount }, key) => (
         <RadioButton
-          className={`selection-container ${
-            planname === value ? 'selected' : ''
+          className={`${styles.radioSelectionContainer} ${
+            planname === value ? styles.radioSelected : ''
           }`}
           key={key}
           value={planname}
         >
-          <div className="header">
-            <h3 className="plan-title">{planname}</h3>
-            <h2 className="price">
-              <span className="price-sign">$</span>
+          <div className={styles.radioHeader}>
+            <h3 className={styles.radioplanTitle}>{planname}</h3>
+            <h2 className={styles.radioPrice}>
+              <span className={styles.radioPriceSign}>$</span>
               {amount}
             </h2>
             <p>per month</p>
           </div>
-          <div className="body">
-            <div className="description">{description}</div>
+          <div className={styles.radioBody}>
+            <div>{description}</div>
           </div>
         </RadioButton>
       ))}

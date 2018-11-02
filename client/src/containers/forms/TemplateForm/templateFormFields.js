@@ -2,13 +2,13 @@ import {
   allowedCharacters,
   isRequired,
   isValidEmail,
-} from './validateFormFields';
+} from '../../app/formFields/validateFormFields';
 
 export default [
   {
-    name: 'promocode',
+    name: 'templatename',
     type: 'text',
-    placeholder: 'Unique promo code',
+    placeholder: 'Unique template name',
     validate: [isRequired, allowedCharacters],
   },
   {

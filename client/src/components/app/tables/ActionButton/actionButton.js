@@ -14,7 +14,7 @@ const ActionButton = ({ button, buttonAction, title, popTitle }) => (
     title={popTitle}
     okText="Yes"
     onConfirm={buttonAction}
-    overlayClassName={tableTooltip}
+    overlayClassName={`${tableTooltip} table-action`}
   >
     <Tooltip arrowPointAtCenter placement="bottom" title={title}>
       <Button className={tableStatusAction}>

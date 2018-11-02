@@ -3,18 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
 import { resetServerMessages } from '../../../actions/appActions';
-import {
-  iconMessageContainer,
-  icon,
-  materialIcons,
-} from './renderMessages.scss';
+import styles from './renderMessages.scss';
 
 notification.config({ placement: 'topRight', top: 50, duration: 7 });
 
 const descriptionLayout = noteType => (
-  <div className={`${iconMessageContainer} ${noteType}`}>
-    <div className={icon}>
-      <i className={materialIcons}>
+  <div className={`${styles.iconMessageContainer} ${styles[noteType]}`}>
+    <div className={styles.icon}>
+      <i className={`${styles.materialIcons}`}>
         {noteType === 'error' ? 'error' : 'check'}
       </i>
     </div>

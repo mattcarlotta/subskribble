@@ -8,9 +8,6 @@ import {
   isRequired,
 } from '../../app/formFields/validateFormFields';
 
-const activeButton = 'ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only';
-const inactiveButton = 'btn-disabled ant-btn ant-btn-circle';
-
 class AvatarForm extends Component {
   state = {
     confirmLoading: false,
@@ -105,55 +102,53 @@ class AvatarForm extends Component {
   };
 
   render = () => (
-    <div className="new-form-container">
-      <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-        <div className="upload-box-container">
-          <Field
-            name="avatar"
-            beforeUpload={this.beforeUpload}
-            disabled={this.state.confirmLoading}
-            component={AntUpload}
-            handleCancel={this.onCancel}
-            imageUrl={this.state.imageUrl}
-            fileList={this.state.fileList}
-            loading={false}
-            onChange={this.handleFileChange}
-            onPreview={this.handlePreview}
-            onRemove={this.handleRemove}
-            previewImage={this.state.previewImage}
-            validate={[isRequired, hasFileList]}
-          />
-        </div>
-        <div className="avatar-submit-container">
-          <Col span={12}>
-            <Tooltip arrowPointAtCenter placement="bottom" title="Cancel">
-              <Button
-                type="button"
-                className="btn-cancel-warning"
-                // eslint-disable-next-line
-                onClick={this.props.hideAvatarForm}
-                shape="circle"
-                icon="close"
-              />
-            </Tooltip>
-          </Col>
-          <Col span={12}>
-            <Tooltip arrowPointAtCenter placement="bottom" title="Upload">
-              <button
-                type="submit"
-                className={`${
-                  this.props.pristine ? inactiveButton : activeButton
-                }`}
-                disabled={this.props.submitting}
-              >
-                <Icon type="upload" />
-              </button>
-            </Tooltip>
-          </Col>
-          <div className="clear-fix" />
-        </div>
-      </form>
-    </div>
+    <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+      <div style={{ height: 150 }}>
+        <Field
+          name="avatar"
+          beforeUpload={this.beforeUpload}
+          disabled={this.state.confirmLoading}
+          component={AntUpload}
+          handleCancel={this.onCancel}
+          imageUrl={this.state.imageUrl}
+          fileList={this.state.fileList}
+          loading={false}
+          onChange={this.handleFileChange}
+          onPreview={this.handlePreview}
+          onRemove={this.handleRemove}
+          previewImage={this.state.previewImage}
+          validate={[isRequired, hasFileList]}
+        />
+      </div>
+      <div className="avatar-submit-container">
+        <Col span={12}>
+          <Tooltip arrowPointAtCenter placement="bottom" title="Cancel">
+            <Button
+              type="button"
+              className="ant-btn ant-btn-danger"
+              // eslint-disable-next-line
+              onClick={this.props.hideAvatarForm}
+              shape="circle"
+              icon="close"
+            />
+          </Tooltip>
+        </Col>
+        <Col span={12}>
+          <Tooltip arrowPointAtCenter placement="bottom" title="Upload">
+            <button
+              type="submit"
+              className={`ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only ${
+                this.props.pristine ? 'disabled' : null
+              }`}
+              disabled={this.props.submitting}
+            >
+              <Icon type="upload" />
+            </button>
+          </Tooltip>
+        </Col>
+        <div className="clear-fix" />
+      </div>
+    </form>
   );
 }
 

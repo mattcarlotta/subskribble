@@ -21,7 +21,7 @@ import ResetPassword from '../containers/app/auth/ResetPassword/ResetPassword';
 import Settings from '../containers/app/settings/Settings/Settings';
 import Subscribers from '../containers/subscribers';
 import Templates from '../containers/templates';
-import TemplateForm from '../containers/forms/TemplateForm';
+import TemplateForm from '../containers/forms/TemplateForm/TemplateForm';
 import Transactions from '../containers/transactions';
 import VerifyEmail from '../containers/app/auth/VerifyEmail/VerifyEmail';
 

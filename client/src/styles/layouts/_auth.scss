@@ -11,7 +11,7 @@
 }
 
 .authBox {
-  @extend %outline-none;
+  outline: 0 !important;
   margin-top: 20px;
 }
 
