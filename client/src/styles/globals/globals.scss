@@ -232,6 +232,15 @@ $material-icons-font-path: '~material-icons/iconfont/';
   }
 }
 
+.avatar-svg-container {
+  svg {
+    width: 112px;
+    height: 60px;
+    top: 25px;
+    position: relative;
+  }
+}
+
 .avatar-uploader > .ant-upload,
 .ant-upload-list-picture-card .ant-upload-list-item {
   margin: 0;

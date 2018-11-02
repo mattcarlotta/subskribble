@@ -9,7 +9,7 @@ export default props => (
     {...props}
     pixelRatio={1}
     innerRadius={0.5}
-    padAngle={1.4}
+    padAngle={0.7}
     cornerRadius={3}
     colors="paired"
     colorBy={colorByIndex}

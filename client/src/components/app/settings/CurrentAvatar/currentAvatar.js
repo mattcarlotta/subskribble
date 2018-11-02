@@ -16,6 +16,7 @@ const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
               height: 115,
               width: 115,
             }}
+            className="avatar-svg-container"
           />
         </div>
       </div>
