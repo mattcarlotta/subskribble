@@ -1,4 +1,7 @@
-import { isRequired, isValidEmail } from './validateFormFields';
+import {
+  isRequired,
+  isValidEmail,
+} from '../../app/formFields/validateFormFields';
 
 export default [
   {

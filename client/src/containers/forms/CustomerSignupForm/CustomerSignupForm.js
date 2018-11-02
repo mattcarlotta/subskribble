@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Steps } from 'antd';
-import RegisterPlanForm from '../RegisterPlanForm';
+import RegisterPlanForm from '../RegisterPlanForm/RegisterPlanForm';
 import { subRegisterToPlan } from '../../../actions/formActions';
 import { getCustomerFormFields } from './customerSignupFields';
 import { fetchAllActivePlans } from '../../../actions/planActions';

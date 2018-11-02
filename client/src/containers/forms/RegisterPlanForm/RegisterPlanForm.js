@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { AntStepFormButtons } from '../app/formFields/antReduxFormFields';
-import RenderPlanSelection from '../app/formFields/renderPlanSelection';
-import ReviewPlanForm from '../app/formFields/reviewPlanForm';
+import { AntStepFormButtons } from '../../app/formFields/antReduxFormFields';
+import RenderPlanSelection from './renderPlanSelection';
+import ReviewPlanForm from './reviewPlanForm';
 import RenderFormFields from './renderFormFields';
+import styles from './registerForm';
 
 const RegisterPlanForm = ({
   BILLINGADDRESSFIELDS,
@@ -22,11 +23,11 @@ const RegisterPlanForm = ({
   showPlans,
   submitting,
 }) => (
-  <div className="form-container">
-    {mainTitle && <h2 className="main-title"> {mainTitle}</h2>}
+  <div className={styles.formContainer}>
+    {mainTitle && <h2 className={styles.mainTitle}> {mainTitle}</h2>}
     <form onSubmit={handleSubmit}>
       {showContactInfo && (
-        <div className="contact-container">
+        <div className={styles.contactContainer}>
           <RenderFormFields
             fields={CONTACTFIELDS}
             title="Contact Information"

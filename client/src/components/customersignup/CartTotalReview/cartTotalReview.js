@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Col } from 'antd';
 import ApplyPromotionalForm from '../../../containers/forms/ApplyPromotionalForm/applyPromotionalForm';
 import {
-  promo,
+  promoCodeField,
   reviewContainer,
   reviewDetailsContainer,
   subtotal,
@@ -38,7 +38,7 @@ const CartTotalReview = ({
             <strong style={{ float: 'right' }}>${tax}</strong>
           </Col>
         </div>
-        <div className={promo}>
+        <div className={promoCodeField}>
           {appliedPromoCode && <Col span={5}>Promo:</Col>}
           <Col span={appliedPromoCode ? 19 : 24}>
             <ApplyPromotionalForm
@@ -66,7 +66,7 @@ export default CartTotalReview;
 
 CartTotalReview.propTypes = {
   adjustedPrice: PropTypes.string,
-  appliedPromoCode: PropTypes.objectOf({
+  appliedPromoCode: PropTypes.shape({
     amount: PropTypes.number,
     discounttype: PropTypes.string,
     enddate: PropTypes.string,

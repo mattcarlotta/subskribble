@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { isSelected } from './validateFormFields';
-import { AntRadioGroupField } from './antReduxFormFields';
+import { isSelected } from '../../app/formFields/validateFormFields';
+import { AntRadioGroupField } from '../../app/formFields/antReduxFormFields';
 import CustomScrollbars from '../../../components/app/scrollbars/CustomScrollbars';
+import { plansContainer } from './registerForm';
 
 class RenderPlanSelection extends PureComponent {
   render = () => (
-    <div className="plans-container">
+    <div className={plansContainer}>
       <CustomScrollbars minHeight={400} top={0}>
         <AntRadioGroupField
           name="selectedPlan"

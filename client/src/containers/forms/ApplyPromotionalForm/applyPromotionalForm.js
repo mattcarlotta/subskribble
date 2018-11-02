@@ -84,7 +84,7 @@ export default connect(
 
 ApplyPromotional.propTypes = {
   adjustedPrice: PropTypes.string.isRequired,
-  appliedPromoCode: PropTypes.objectOf({
+  appliedPromoCode: PropTypes.shape({
     amount: PropTypes.number,
     discounttype: PropTypes.string,
     enddate: PropTypes.string,

@@ -226,6 +226,18 @@ $material-icons-font-path: '~material-icons/iconfont/';
   border-color: #005cbf;
 }
 
+.billing-switch-field {
+  height: 40px !important;
+  width: 100%;
+
+  .ant-form-item-label {
+    float: left;
+    line-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
 .clear-fix {
   content: '';
   display: table;
@@ -248,5 +260,30 @@ $material-icons-font-path: '~material-icons/iconfont/';
   }
   .ant-select {
     margin: 0px;
+  }
+}
+
+.type-container > .ant-form-item {
+  height: 30px;
+  width: 50px;
+  .ant-form-item-control {
+    line-height: 32px;
+  }
+  .ant-select {
+    margin: 0px;
+  }
+}
+
+.tag-container {
+  .ant-form-explain {
+    margin-top: -15px;
+  }
+
+  .has-error.has-feedback .ant-form-item-children:after,
+  .has-success.has-feedback .ant-form-item-children:after,
+  .has-warning.has-feedback .ant-form-item-children:after,
+  .is-validating.has-feedback .ant-form-item-children:after {
+    top: -25%;
+    right: 10px;
   }
 }

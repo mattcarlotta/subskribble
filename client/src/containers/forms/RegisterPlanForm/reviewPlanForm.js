@@ -2,11 +2,11 @@ import filter from 'lodash/filter';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-
 import ContactInfoReview from '../../../components/customersignup/ContactInfoReview/contactInfoReview';
 import PaymentInfoReview from '../../../components/customersignup/PaymentInfoReview/paymentInfoReview';
 import PlanInfoReview from '../../../components/customersignup/PlanInfoReview/planInfoReview';
 import CartTotalReview from '../../../components/customersignup/CartTotalReview/cartTotalReview';
+import { reviewSignupContainer } from './registerForm';
 
 const applyPromoToPrice = (amount, appliedPromoCode) => {
   let adjustedPrice = 0.0;
@@ -45,7 +45,7 @@ const ReviewPlanForm = ({
     .match(/^-?\d+(?:\.\d{0,2})?/)[0];
 
   return (
-    <div className="review-signup-container">
+    <div className={reviewSignupContainer}>
       <ContactInfoReview {...finalValues} editStep={editStep} />
       <PaymentInfoReview {...finalValues} editStep={editStep} />
       <PlanInfoReview

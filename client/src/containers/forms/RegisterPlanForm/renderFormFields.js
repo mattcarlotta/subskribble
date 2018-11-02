@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
-import { AntFormFields } from '../app/formFields/antReduxFormFields';
-import BillingSwitchField from '../app/formFields/renderBillingSwitchField';
+import { AntFormFields } from '../../app/formFields/antReduxFormFields';
+import BillingSwitchField from './renderBillingSwitchField';
+import { input100 } from '../../../styles';
 
 const RenderFormFields = ({ billingSwitch, fields, title }) => (
   <Col span={12}>
     <h3>
       {title} {billingSwitch && <BillingSwitchField />}
     </h3>
-    <div className="input-100">
+    <div className={input100}>
       <AntFormFields FIELDS={fields} />
     </div>
   </Col>
