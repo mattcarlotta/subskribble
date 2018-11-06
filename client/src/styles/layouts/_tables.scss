@@ -13,6 +13,7 @@
 .active {
   color: $tealgreen;
 }
+
 .amount,
 .promo,
 .subscriber,
@@ -24,6 +25,7 @@
 .due {
   color: $darkyellow;
 }
+
 .date,
 .plan,
 .amountDue,
@@ -36,6 +38,7 @@
 .credit {
   color: $darkblue;
 }
+
 .amountCredit,
 .invoiceCredit,
 .subscriberCredit {
@@ -46,6 +49,7 @@
 .inactive {
   color: $lightcoolgrey;
 }
+
 .amountInactive,
 .amountRefund,
 .amountSuspended,
@@ -62,6 +66,7 @@
 .paid {
   color: $limegreen;
 }
+
 .amountPaid,
 .invoicePaid,
 .subscriberPaid {
@@ -72,6 +77,7 @@
 .refund {
   color: $redorange;
 }
+
 .invoiceRefund,
 .subscriberRefund {
   @extend %label;
@@ -87,6 +93,7 @@
 .suspended {
   color: $firered;
 }
+
 .enddateSuspended,
 .invoiceSuspended,
 .planSuspended,
@@ -112,6 +119,7 @@
 
 .tableStatusAction {
   text-transform: capitalize;
+
   i {
     font-size: 18px;
     padding-top: 5px;

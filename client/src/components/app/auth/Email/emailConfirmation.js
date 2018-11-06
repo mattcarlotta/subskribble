@@ -42,7 +42,9 @@ const EmailConfirmation = ({ status, userVerified }) => (
   <div className={styles.verificationContainer}>
     <div className={styles.statusContainer}>
       <div className={styles.subskribbleContainer}>
-        <i className={styles.subskribbleLogo}>wifi_tethering</i>
+        <i className={`${styles.materialIcons} ${styles.subskribbleLogo}`}>
+          wifi_tethering
+        </i>
         <span className={styles.textLogo}>subskribble</span>
       </div>
       <div className={styles.validContainer}>

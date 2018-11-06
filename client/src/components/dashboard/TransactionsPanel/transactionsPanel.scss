@@ -1,17 +1,17 @@
 @import '../../../styles';
 
-.caret {
+%caret {
   margin-right: 5px;
   font-size: 11px;
 }
 
 .caretUpCharges {
-  @extend .caret;
+  @extend %caret;
   color: $charges;
 }
 
 .caretDownRefunds {
-  @extend .caret;
+  @extend %caret;
   color: $redorange;
 }
 

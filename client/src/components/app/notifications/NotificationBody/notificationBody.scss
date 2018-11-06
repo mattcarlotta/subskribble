@@ -2,7 +2,6 @@
 
 .note {
   margin-top: 10px;
-  // border: none !important;
   border-bottom: 1px solid $hortizonalhr;
 }
 
@@ -36,7 +35,7 @@
   margin: 0;
   background-color: $hortizonalhr;
   height: 1px;
-  border: none;
+  border: 0;
 }
 
 .noteTitle {
@@ -52,6 +51,7 @@
 
 .notificationsBody {
   padding: 0px 20px;
+
   p {
     @extend %m-0;
   }

@@ -87,9 +87,11 @@
 
 .nav-button {
   background-color: $blackblue;
+
   i {
     color: $white;
   }
+
   &:hover {
     i {
       color: $blue;

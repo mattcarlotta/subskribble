@@ -1,7 +1,8 @@
 @import '../../../../styles';
 
 .settingsTab {
-  @extend %no-link-focus;
+  outline: none !important;
+  text-decoration: none;
   cursor: pointer;
   display: inline-block;
   margin-left: 5px;
@@ -17,8 +18,10 @@
     background-color: $paleformblue !important;
     color: inherit !important;
   }
+
   &:focus {
-    @extend %no-link-focus;
+    outline: none !important;
+    text-decoration: none;
     background-color: transparent !important;
     color: inherit !important;
   }

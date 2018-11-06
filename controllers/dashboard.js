@@ -1,14 +1,9 @@
-module.exports = app => {
+module.exports = (app) => {
   const {
     db,
-    query: { getAllDashboardDetails }
+    query: { getAllDashboardDetails },
   } = app.database;
-  const {
-    beginofMonth,
-    endofMonth,
-    parseStringToNum,
-    sendError
-  } = app.shared.helpers;
+  const { beginofMonth, endofMonth, sendError } = app.shared.helpers;
 
   return {
     // GETS ALL DASHBOARD DATA
@@ -20,13 +15,13 @@ module.exports = app => {
         const dashboard = await db.many(getAllDashboardDetails, [
           req.session.id,
           beginMonth,
-          endMonth
+          endMonth,
         ]);
 
-        return res.status(201).send(...dashboard);
+        res.status(201).send(...dashboard);
       } catch (err) {
         return sendError(err, res, done);
       }
-    }
+    },
   };
 };

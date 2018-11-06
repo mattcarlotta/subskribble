@@ -16,12 +16,10 @@
 
 .previewBoxContainer {
   @include b-s(rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px);
-  margin: 0 auto;
   background-color: $white;
   height: 881px;
-  margin: 0 20px 0 5px;
+  margin: 30px 20px 0 5px;
   padding: 40px;
-  margin-top: 30px;
 }
 
 .disabledInputs {
@@ -84,7 +82,6 @@
     rgba(0, 0, 0, 0.12) 0px 1px 6px,
     rgba(0, 0, 0, 0.12) 0px 1px 4px
   );
-  margin: 0 auto;
   background-color: $white;
   margin: 0 5px 0px 20px;
   padding: 40px 80px;
@@ -95,65 +92,78 @@
 %input-fields {
   margin-right: 5px;
   height: 60px;
-  // float: left;
 }
 
 .input10 {
   @extend %input-fields;
   width: 10%;
 }
+
 .input15 {
   @extend %input-fields;
   width: 15%;
 }
+
 .input16 {
   @extend %input-fields;
   width: 16%;
 }
+
 .input20 {
   @extend %input-fields;
   width: 20%;
 }
+
 .input25 {
   @extend %input-fields;
   width: 25%;
 }
+
 .input40 {
   @extend %input-fields;
   width: 40%;
 }
+
 .input50 {
   @extend %input-fields;
   width: 50%;
 }
+
 .input55 {
   @extend %input-fields;
   width: 55%;
 }
+
 .input60 {
   @extend %input-fields;
   width: 60%;
 }
+
 .input66 {
   @extend %input-fields;
   width: 66%;
 }
+
 .input70 {
   @extend %input-fields;
   width: 70%;
 }
+
 .input75 {
   @extend %input-fields;
   width: 75%;
 }
+
 .input85 {
   @extend %input-fields;
   width: 85%;
 }
+
 .input95 {
   @extend %input-fields;
   width: 95%;
 }
+
 .input100 {
   @extend %input-fields;
   width: 100%;

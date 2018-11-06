@@ -1,7 +1,7 @@
 @import '../../../../styles';
 
 .settingsTabContainer {
-  border: none !important;
+  border: 0 !important;
   width: 250px;
   border-radius: 10px;
 }
@@ -19,6 +19,7 @@
 
 .menuOptions {
   @include trans(0.5s);
+
   &:hover {
     color: $tblack;
     background-color: $lightgrey;

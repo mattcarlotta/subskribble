@@ -25,7 +25,9 @@
 }
 
 .settingsTab {
-  @extend .fix-cursor, %no-link-focus;
+  outline: none !important;
+  text-decoration: none;
+  cursor: pointer;
   display: inline-block;
   margin-left: 5px;
 }

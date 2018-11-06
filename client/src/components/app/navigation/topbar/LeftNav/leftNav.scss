@@ -23,9 +23,11 @@
   &:hover > i {
     color: $tblack;
   }
+
   &:hover {
     background-color: $paleformblue !important;
   }
+
   &:focus {
     background-color: $transparent !important;
   }

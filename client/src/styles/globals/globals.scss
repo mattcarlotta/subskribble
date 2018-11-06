@@ -1,10 +1,12 @@
 $material-icons-font-path: '~material-icons/iconfont/';
+
 /* --MODULES-- */
 @import '~antd/dist/antd.min.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~react-quill/dist/quill.snow.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~material-icons/iconfont/material-icons.scss';
+
 /*  --FONTS-- */
 @font-face {
   font-family: 'Harabara';
@@ -36,8 +38,8 @@ $material-icons-font-path: '~material-icons/iconfont/';
   font-weight: 700;
   src: url('../assets/fonts/Arimo-BoldItalic.ttf') format('truetype');
 }
-/*  --ANTD OVERRIDES-- */
 
+/*  --ANTD OVERRIDES-- */
 .anticon {
   vertical-align: 0;
 }
@@ -113,7 +115,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
 }
 
 .ant-menu-inline .ant-menu-item-selected:after {
-  border-right: none;
+  border-right: 0;
   border-left: 3px solid #03a9f3;
   left: 1px;
 }
@@ -124,7 +126,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
   -moz-transform: scaleY(1);
   -webkit-transform: scaleY(1);
   transform: scaleY(1);
-  border-right: none;
+  border-right: 0;
   border-left: 3px solid #03a9f3;
   left: 1px;
   opacity: 1;
@@ -136,38 +138,21 @@ $material-icons-font-path: '~material-icons/iconfont/';
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 }
 
-.ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
-  bottom: 10px;
-  background-color: #03a9f3;
-}
-
 .ant-popover-arrow,
 .ant-popover-inner {
   margin-top: -4px;
+}
+
+.ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  bottom: 10px;
+  background-color: #03a9f3;
 }
 
 .ant-notification {
   z-index: 999999;
 }
 
-// .ant-btn.disabled,
-// .ant-btn.disabled.active,
-// .ant-btn.disabled:active,
-// .ant-btn.disabled:focus,
-// .ant-btn.disabled:hover,
-// .ant-btn:focus,
-// .ant-btn:hover,
-// .ant-btn[disabled],
-// .ant-btn[disabled].active,
-// .ant-btn[disabled]:active,
-// .ant-btn[disabled]:focus,
-// .ant-btn[disabled]:hover {
-//   background-color: #e8e8e8;
-//   color: #f5f5f5;
-// }
-
-.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only)
-  .anticon {
+.ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only).anticon {
   padding-right: 7px !important;
 }
 
@@ -292,6 +277,17 @@ $material-icons-font-path: '~material-icons/iconfont/';
   float: left;
 }
 
+.tag {
+  color: #ffffff;
+  background-color: #03a9f3;
+  font-family: 'Arimo-Bold', sans-serif;
+  cursor: default;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .promo-form {
   .tag {
     margin-right: 0px !important;
@@ -311,9 +307,11 @@ $material-icons-font-path: '~material-icons/iconfont/';
 .select-container > .ant-form-item {
   height: 30px;
   width: 150px;
+
   .ant-form-item-control {
     line-height: 0;
   }
+
   .ant-select {
     margin: 0px;
   }
@@ -328,22 +326,13 @@ $material-icons-font-path: '~material-icons/iconfont/';
 .type-container > .ant-form-item {
   height: 30px;
   width: 50px;
+
   .ant-form-item-control {
     line-height: 32px;
   }
+
   .ant-select {
     margin: 0px;
-  }
-}
-
-.tag {
-  color: #ffffff;
-  background-color: #03a9f3;
-  font-family: 'Arimo-Bold', sans-serif;
-  cursor: default;
-
-  &:hover {
-    opacity: 1;
   }
 }
 
