@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router';
-import { app } from './axiosConfig';
-import * as types from './types';
+import { app } from '../utils';
+import * as types from '../types';
 import { fetchNotifications } from './notificationActions';
 
 // Fetches initial 10 active/inactive transactions from DB

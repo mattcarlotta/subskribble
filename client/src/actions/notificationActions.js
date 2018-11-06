@@ -1,5 +1,5 @@
-import { app } from './axiosConfig';
-import * as types from './types';
+import { app } from '../utils';
+import * as types from '../types';
 
 // Deletes notifications from DB
 const deleteNotification = id => dispatch =>

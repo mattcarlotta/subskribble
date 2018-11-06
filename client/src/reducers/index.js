@@ -2,7 +2,7 @@ import filter from 'lodash/filter';
 import { routerReducer as routing } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
-import * as types from '../actions/types';
+import * as types from '../types';
 
 const authReducer = (state = {}, { payload, type }) => {
   switch (type) {

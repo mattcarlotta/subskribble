@@ -1,5 +1,5 @@
-import { avatarAPI } from './axiosConfig';
-import * as types from './types';
+import { avatarAPI } from '../utils';
+import * as types from '../types';
 import { fetchNotifications } from './notificationActions';
 
 // attempts to delete current avatar

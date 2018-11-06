@@ -1,8 +1,8 @@
 import { browserHistory } from 'react-router';
-import { app } from './axiosConfig';
+import { app } from '../utils';
 import { deleteAccountAvatar, fetchAvatarOnLogin } from './avatarActions';
 import { fetchNotifications } from './notificationActions';
-import * as types from './types';
+import * as types from '../types';
 
 // ==========================================================================
 // Authorization
