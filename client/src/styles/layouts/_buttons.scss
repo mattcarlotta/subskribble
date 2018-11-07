@@ -13,8 +13,11 @@
 
 .btnPrimary {
   border: 0 !important;
+  color: $white;
   background-color: $lightblue;
   height: 35px;
+  cursor: pointer;
+  border-radius: 4px;
 
   &:focus,
   &:hover {

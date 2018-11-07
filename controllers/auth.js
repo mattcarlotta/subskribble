@@ -1,8 +1,7 @@
-module.exports = app => {
+module.exports = (app) => {
   const {
     db,
     query: {
-      createNotification,
       deleteUserAccount,
       getAvatarToken,
       getCurrentUserDetails,
@@ -16,8 +15,8 @@ module.exports = app => {
       updateUserName,
       updateUserPassword,
       userFeedback,
-      verifyEmail
-    }
+      verifyEmail,
+    },
   } = app.database;
 
   const {
@@ -31,47 +30,44 @@ module.exports = app => {
     missingToken,
     notUniquePassword,
     unableLocatePass,
-    unableToRemove
+    unableToRemove,
   } = app.shared.authErrors;
 
   const {
-    passwordReset,
     passwordResetSuccess,
     passwordResetToken,
     removedAccountSuccess,
     thanksForReg,
     updatedAccount,
-    updatedAccountDetails
+    updatedAccountDetails,
   } = app.shared.authSuccess;
 
-  const { currentDate, sendError, createRandomToken } = app.shared.helpers;
+  const { sendError, createRandomToken } = app.shared.helpers;
   const { missingDeletionParams, missingUpdateParams } = app.shared.errors;
   const {
     mailer,
-    emailTemplates: { changedEmail }
+    emailTemplates: { changedEmail },
   } = app.services;
-  const bcrypt = app.get("bcrypt");
-  const passport = app.get("passport");
-  const portal = app.get("portal");
+  const bcrypt = app.get('bcrypt');
+  const passport = app.get('passport');
+  const portal = app.get('portal');
 
   return {
     // CREATES A NEW USER
-    create: (req, res, done) =>
-      passport.authenticate(
-        "local-signup",
-        err =>
-          err
-            ? sendError(err, res, done)
-            : res
-                .status(201)
-                .json(
-                  thanksForReg(
-                    req.body.email,
-                    req.body.firstName,
-                    req.body.lastName
-                  )
-                )
-      )(req, res, done),
+    create: (req, res, done) => passport.authenticate(
+      'local-signup',
+      err => (err
+        ? sendError(err, res, done)
+        : res
+          .status(201)
+          .json(
+            thanksForReg(
+              req.body.email,
+              req.body.firstName,
+              req.body.lastName,
+            ),
+          )),
+    )(req, res, done),
     // DELETES USER ACCOUNT
     deleteAccount: async (req, res, done) => {
       if (!req.body) return sendError(missingDeletionParams, res, done);
@@ -79,30 +75,30 @@ module.exports = app => {
         company,
         reason,
         password: suppliedPassword,
-        user: email
+        user: email,
       } = req.body;
 
       try {
-        await db.task("delete-account", async dbtask => {
+        await db.task('delete-account', async (dbtask) => {
           const user = await dbtask.oneOrNone(getUserPassword, [
-            req.session.id
+            req.session.id,
           ]);
           if (!user) return sendError(unableLocatePass, res, done);
 
           const validPassword = await bcrypt.compare(
             suppliedPassword,
-            user.password
+            user.password,
           );
           if (!validPassword) return sendError(invalidPassword, res, done);
 
           const avatar = await dbtask.oneOrNone(getAvatarToken, [
-            req.session.id
+            req.session.id,
           ]);
 
           const deletedUser = await dbtask.result(deleteUserAccount, [
             req.session.id,
             email,
-            company
+            company,
           ]);
           if (!deletedUser) return sendError(unableToRemove, res, done);
 
@@ -115,55 +111,48 @@ module.exports = app => {
       }
     },
     // ALLOWS A USER TO LOG INTO THE APP
-    login: (req, res, done) =>
-      passport.authenticate(
-        "local-login",
-        err =>
-          err || !req.session
-            ? sendError(err || badCredentials, res, done)
-            : res.status(201).json({ ...req.session })
-      )(req, res, done),
+    login: (req, res, done) => passport.authenticate(
+      'local-login',
+      err => (err || !req.session
+        ? sendError(err || badCredentials, res, done)
+        : res.status(201).json({ ...req.session })),
+    )(req, res, done),
     // ALLOWS A USER TO LOG INTO THE APP ON REFRESH
-    loggedin: (req, res, done) =>
-      !req.session
-        ? sendError(badCredentials, res, done)
-        : res.status(202).json({ ...req.session }),
+    loggedin: (req, res, done) => (!req.session
+      ? sendError(badCredentials, res, done)
+      : res.status(202).json({ ...req.session })),
     // REMOVES USER FROM SESSION AND DELETES CLIENT COOKIE
-    logout: (req, res, done) => {
+    logout: (req, res) => {
       req.session = null;
       res
-        .clearCookie("Authorization", { path: "/" })
+        .clearCookie('Authorization', { path: '/' })
         .status(200)
-        .send("Cookie deleted.");
+        .send('Cookie deleted.');
     },
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
-    resetPassword: (req, res, done) =>
-      passport.authenticate(
-        "reset-password",
-        (err, email) =>
-          err || !email
-            ? sendError(err || "No user found!", res, done)
-            : res.status(201).json(passwordResetSuccess(email))
-      )(req, res, done),
+    resetPassword: (req, res, done) => passport.authenticate(
+      'reset-password',
+      (err, email) => (err || !email
+        ? sendError(err || 'No user found!', res, done)
+        : res.status(201).json({ message: passwordResetSuccess(email) })),
+    )(req, res, done),
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD
-    resetToken: (req, res, done) =>
-      passport.authenticate(
-        "reset-token",
-        (err, email) =>
-          err || !email
-            ? sendError(err || "No user found!", res, done)
-            : res.status(201).json(passwordResetToken(email))
-      )(req, res, done),
+    resetToken: (req, res, done) => passport.authenticate(
+      'reset-token',
+      (err, email) => (err || !email
+        ? sendError(err || 'No user found!', res, done)
+        : res.status(201).json(passwordResetToken(email))),
+    )(req, res, done),
     // SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
     saveSidebarState: async (req, res, done) => {
       if (!req.query) return sendError(missingSidebarState, res, done);
       const { collapseSideNav } = req.query;
-      const updatedSidebarState = collapseSideNav === "true" ? true : false;
+      const updatedSidebarState = collapseSideNav === 'true';
 
       try {
         await db.none(updateSidebarState, [
           req.session.id,
-          updatedSidebarState
+          updatedSidebarState,
         ]);
         req.session.collapsesidenav = updatedSidebarState;
 
@@ -182,43 +171,41 @@ module.exports = app => {
         firstName: updatedFirstName,
         lastName: updatedLastName,
         currentPassword: suppliedPassword,
-        updatedPassword
+        updatedPassword,
       } = req.body;
-      const date = currentDate();
       const token = createRandomToken();
 
       try {
-        await db.task("update-account", async dbtask => {
+        await db.task('update-account', async (dbtask) => {
           const {
             email: currentEmail,
             company: currentCompany,
             firstname: currentFirstName,
-            lastname: currentLastName
+            lastname: currentLastName,
           } = await dbtask.one(getCurrentUserDetails, [req.session.id]);
 
           if (currentCompany !== updatedCompany) {
             const existingCompany = await dbtask.oneOrNone(findCompany, [
-              updatedCompany
+              updatedCompany,
             ]);
-            if (existingCompany)
-              return sendError(companyAlreadyExists, res, done);
+            if (existingCompany) return sendError(companyAlreadyExists, res, done);
 
             await dbtask.none(updateCompanyName, [
               req.session.id,
-              updatedCompany
+              updatedCompany,
             ]);
 
             req.session.company = updatedCompany;
           }
 
           if (
-            currentFirstName !== updatedFirstName ||
-            currentLastName !== updatedLastName
+            currentFirstName !== updatedFirstName
+            || currentLastName !== updatedLastName
           ) {
             await dbtask.none(updateUserName, [
               req.session.id,
               updatedFirstName,
-              updatedLastName
+              updatedLastName,
             ]);
 
             req.session.firstname = updatedFirstName;
@@ -226,71 +213,69 @@ module.exports = app => {
           }
 
           if (suppliedPassword || updatedPassword) {
-            if (!suppliedPassword || !updatedPassword)
+            if (!suppliedPassword || !updatedPassword) {
               return sendError(missingPasswords, res, done);
+            }
 
             const user = await dbtask.oneOrNone(getUserPassword, [
-              req.session.id
+              req.session.id,
             ]);
             if (!user) return sendError(unableLocatePass, res, done);
 
             const validPassword = await bcrypt.compare(
               suppliedPassword,
-              user.password
+              user.password,
             );
             if (!validPassword) return sendError(invalidPassword, res, done);
 
             const isNotUniquePassword = await bcrypt.compare(
               updatedPassword,
-              user.password
+              user.password,
             );
-            if (isNotUniquePassword)
-              return sendError(notUniquePassword, res, done);
+            if (isNotUniquePassword) return sendError(notUniquePassword, res, done);
 
             const newPassword = await bcrypt.hash(updatedPassword, 12);
             await dbtask.none(updateUserPassword, [
               req.session.id,
-              newPassword
+              newPassword,
             ]);
           }
 
           if (currentEmail !== updatedEmail) {
             const existingUser = await dbtask.oneOrNone(findUserByEmail, [
-              updatedEmail
+              updatedEmail,
             ]);
             if (existingUser) return sendError(emailAlreadyTaken, res, done);
 
             await dbtask.none(updateEmailAddress, [
               req.session.id,
               updatedEmail,
-              token
+              token,
             ]);
 
             const msg = {
               to: `${updatedEmail}`,
-              from: `helpdesk@subskribble.com`,
-              subject: `Please verify your email address`,
+              from: 'helpdesk@subskribble.com',
+              subject: 'Please verify your email address',
               html: changedEmail(
                 portal,
                 req.session.firstname,
                 req.session.lastname,
-                token
-              )
+                token,
+              ),
             };
 
             await mailer.send(msg);
 
             res.status(201).json({ message: updatedAccount });
           } else {
-            await dbtask.none(createNotification, [
-              req.session.id,
-              "settings",
-              updatedAccountDetails,
-              date
-            ]);
-            res
-              .status(201)
-              .json({ user: { ...req.session }, fetchnotifications: true });
+            res.status(201).json({
+              user: !suppliedPassword ? { ...req.session } : '',
+              fetchnotifications: true,
+              message: !suppliedPassword
+                ? updatedAccountDetails
+                : passwordResetSuccess(updatedEmail),
+            });
           }
         });
       } catch (err) {
@@ -303,11 +288,14 @@ module.exports = app => {
       if (!token) return sendError(missingToken, res, done);
 
       try {
-        await db.task("verify-email", async dbtask => {
+        await db.task('verify-email', async (dbtask) => {
           const existingUser = await dbtask.oneOrNone(findUserByToken, [token]); // check if token is valid
-          if (!existingUser) return sendError(invalidToken, res, done);
-          if (existingUser.verified)
+          if (!existingUser) {
+            return sendError(invalidToken, res, done);
+          }
+          if (existingUser.verified) {
             return res.status(201).json({ email: existingUser.email });
+          }
 
           await dbtask.none(verifyEmail, [existingUser.email]); // sets user to verification status to true
 
@@ -316,6 +304,6 @@ module.exports = app => {
       } catch (err) {
         return sendError(err, res, done);
       }
-    }
+    },
   };
 };

@@ -243,6 +243,11 @@ $material-icons-font-path: '~material-icons/iconfont/';
   width: 128px;
 }
 
+.btn-primary.focus,
+.btn-primary:focus {
+  box-shadow: none !important;
+}
+
 .btn-primary:not([disabled]):not(.disabled).active,
 .btn-primary:not([disabled]):not(.disabled):active,
 .show > .btn-primary.dropdown-toggle {

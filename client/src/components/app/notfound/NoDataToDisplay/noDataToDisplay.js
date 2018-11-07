@@ -17,14 +17,10 @@ const NoDataToDisplay = ({
 }) => (
   <PageContainer>
     <div className={styles.panelContainer}>
-      <Card
-        className={styles.noDataCard}
-        title={cardTitle}
-        extra={buttonPanel()}
-      >
+      <Card title={cardTitle} extra={buttonPanel()}>
         <div
           style={{ display: visible ? 'block' : 'none', minHeight: 400 }}
-          className="panel-body-container"
+          className={styles.panelBodyContainer}
         >
           <div className={styles.panelBody}>
             <div className={styles.panelSpacer}>

@@ -7,10 +7,7 @@ export default () => (
   <PageContainer>
     <div className={styles.landingContainer}>
       <div className={styles.landingLogo}>
-        <i className={`${styles.materialIcons} ${styles.landingIcon}`}>
-          wifi_tethering
-        </i>
-        <span className={styles.landingText}>subskribble</span>
+        <h2>Welcome to subskribble!</h2>
       </div>
       <hr />
       <h2>Getting Started</h2>

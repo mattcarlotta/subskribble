@@ -7,12 +7,13 @@ export default class AppLoading extends Component {
 
   componentDidMount = () => this.setTimer();
 
-  componentDidUpdate = nextProps =>
-    this.props.serverError !== nextProps.serverError && this.noDataWasFound();
+  componentDidUpdate = nextProps => {
+    if (this.props.serverError !== nextProps.serverError) this.notAuthed();
+  };
 
   componentWillUnmount = () => this.clearTimer();
 
-  noDataWasFound = () =>
+  notAuthed = () =>
     this.setState({ requestTimeout: true }, () => this.clearTimer());
 
   clearTimer = () => clearTimeout(this.timeout);

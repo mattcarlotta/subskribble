@@ -133,10 +133,15 @@ const notificationsReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const serverReducer = (state = {}, { payload, type }) => {
+const serverInitialState = {
+  error: '',
+  message: '',
+};
+
+const serverReducer = (state = serverInitialState, { payload, type }) => {
   switch (type) {
     case types.RESET_SERVER_MESSAGES:
-      return { ...state, error: undefined, message: undefined };
+      return { ...state, error: '', message: '' };
     case types.SERVER_ERROR:
       return { ...state, error: payload };
     case types.SERVER_MESSAGE:

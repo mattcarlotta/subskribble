@@ -14,14 +14,9 @@ class AccountForm extends Component {
   componentDidMount = () => this.initializeForm();
 
   componentDidUpdate = prevProps => {
-    const { serverError, unreadNotifications } = this.props;
-    if (serverError !== prevProps.serverError && serverError !== undefined)
-      this.resetLoading();
-    if (
-      unreadNotifications !== prevProps.unreadNotifications &&
-      unreadNotifications !== undefined
-    )
-      this.initializeForm(true);
+    const { serverError, serverMessage } = this.props;
+    if (serverError !== prevProps.serverError) this.resetLoading();
+    if (serverMessage !== prevProps.serverMessage) this.initializeForm(true);
   };
 
   resetLoading = () => this.setState({ confirmLoading: false });
@@ -85,11 +80,9 @@ AccountForm.propTypes = {
   lastName: PropTypes.string.isRequired,
   loggedinUser: PropTypes.string.isRequired,
   updateUserAccount: PropTypes.func.isRequired,
-  unreadNotifications: PropTypes.arrayOf(
-    PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  ),
   handleSubmit: PropTypes.func.isRequired,
   serverError: PropTypes.string,
+  serverMessage: PropTypes.string,
   initialize: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,

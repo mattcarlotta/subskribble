@@ -115,12 +115,12 @@ const updateUserAccount = formProps => dispatch =>
   app
     .put(`update-account`, { ...formProps })
     .then(({ data: { fetchnotifications, message, user } }) => {
-      if (user) {
+      if (!user) {
         dispatch(logoutUser());
       } else {
         dispatch({ type: types.SET_SIGNEDIN_USER, payload: user });
       }
-      if (message) dispatch({ type: types.SERVER_MESSAGE, payload: message });
+      dispatch({ type: types.SERVER_MESSAGE, payload: message });
       if (fetchnotifications) dispatch(fetchNotifications());
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
