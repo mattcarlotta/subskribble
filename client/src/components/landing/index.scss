@@ -16,10 +16,17 @@
   }
 }
 
-.landingLogo {
-  color: $lightblue;
-  font-family: $harabara;
-  letter-spacing: 1.5px;
+.landingGettingStarted {
+  text-align: center;
+  font-family: $arimo-bold;
+}
+
+.landingInstructionsList {
+  width: 100%;
+  max-width: 1170px;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding: 15px 15px 0 15px;
 }
 
 .landingInstructionsSubtitle {
@@ -28,6 +35,8 @@
   margin-top: -10px;
 }
 
-.landingInstructionsList {
-  list-style-type: none;
+.landingLogo {
+  color: $lightblue;
+  font-family: $harabara;
+  letter-spacing: 1.5px;
 }

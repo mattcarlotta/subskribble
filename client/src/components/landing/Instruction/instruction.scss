@@ -1,0 +1,41 @@
+@import '../../../styles';
+
+.landingDivider {
+  margin-top: 0 !important;
+}
+
+.landingImage {
+  border: 1px solid $bluegrey;
+  border-radius: 4px;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.landingImageContainer {
+  padding: 4px;
+  background-color: $verylightblue;
+  border: 1px solid $bluegrey;
+  border-radius: 4px;
+  display: inline-block;
+  height: auto;
+  float: right;
+}
+
+.landingInstruction {
+  font-family: $arimo;
+  font-size: 15px;
+}
+
+.landingInstructionContainer {
+  text-align: left;
+  width: 100%;
+  height: 320px;
+}
+
+.landingTitle {
+  font-family: $harabara;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  display: inline-block;
+}

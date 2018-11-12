@@ -6,12 +6,9 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import routes from '../routes';
-
-// injectTapEventPlugin();
 
 const store = createStore(
   rootReducer,

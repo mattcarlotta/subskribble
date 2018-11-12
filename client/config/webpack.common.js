@@ -54,7 +54,7 @@ const rules = [
 ];
 
 /* utilizes source mapping */
-const devtool = requiresSourceMap ? 'source-map' : false;
+const devtool = requiresSourceMap ? 'cheap-module-source-map' : false;
 
 /* current webpack environment */
 const mode = inDevelopment ? 'development' : 'production';
