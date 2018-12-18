@@ -9,7 +9,7 @@
     "client": "npm run start --prefix client",
     "lint-front": "npm run pre-commit --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seeds": "NODE_ENV=development node seeds.js",
+    "seed": "NODE_ENV=development node seedDB.js",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
     "lint-back": "lint-staged"
   },

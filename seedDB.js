@@ -4,7 +4,7 @@ const app = express();
 const consign = require('consign');
 
 consign({ locale: 'en-us', verbose: false })
-  .include('libs/middlewares.js')
+  .include('middlewares')
   .then('shared')
   .then('database')
   .then('seeds')

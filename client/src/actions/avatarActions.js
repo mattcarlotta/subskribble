@@ -9,26 +9,31 @@ const deleteAvatar = () => dispatch =>
     .then(() =>
       dispatch({ type: types.SET_CURRENT_AVATAR, payload: undefined }),
     )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({ type: types.SERVER_ERROR, payload: err.toString() }),
+    );
 
 // attempts to delete current a recently removed account's avatar
 const deleteAccountAvatar = (token, userid) => dispatch =>
   avatarAPI
     .delete(`avatar/delete-account`, { data: { token, userid } })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({ type: types.SERVER_ERROR, payload: err.toString() }),
+    );
 
 // attempts to fetch
 const fetchAvatarOnLogin = () => dispatch =>
   avatarAPI
     .get(`avatar/current-user`)
-    .then(res => {
-      if (res && res.data && res.data.avatarurl)
-        dispatch({
-          type: types.SET_CURRENT_AVATAR,
-          payload: res.data.avatarurl,
-        });
+    .then(({ data: { avatarurl } }) => {
+      dispatch({
+        type: types.SET_CURRENT_AVATAR,
+        payload: avatarurl,
+      });
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({ type: types.SERVER_ERROR, payload: err.toString() }),
+    );
 
 // attempts to update current avatar
 const updateAvatar = formData => dispatch =>
@@ -38,7 +43,9 @@ const updateAvatar = formData => dispatch =>
       dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl });
       dispatch(fetchNotifications());
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({ type: types.SERVER_ERROR, payload: err.toString() }),
+    );
 
 // attempts to upload avatar
 const uploadAvatar = formData => dispatch =>
@@ -48,7 +55,9 @@ const uploadAvatar = formData => dispatch =>
       dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl });
       dispatch(fetchNotifications());
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({ type: types.SERVER_ERROR, payload: err.toString() }),
+    );
 
 export {
   deleteAvatar,
