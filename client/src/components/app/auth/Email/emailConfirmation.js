@@ -5,7 +5,7 @@ import styles from './emailConfirmation.scss';
 
 const verificationFailure = () => (
   <Fragment>
-    <h1>Email Verification Error!</h1>
+    <h1 data-test="component-verificationFailure">Email Verification Error!</h1>
     <p className={styles.message}>
       {`Oops! There was problem verifying your email. Please check your email and
       click the "Verify Email" button or the link below it again.`}
@@ -26,8 +26,8 @@ const verificationFailure = () => (
 
 const verificationSuccess = userVerified => (
   <Fragment>
-    <h1>Email Address Verified</h1>
-    <p className={styles.message}>
+    <h1 data-test="component-verificationSuccess">Email Address Verified</h1>
+    <p data-test="userVerified" className={styles.message}>
       {`${userVerified} has been verified! Please log in to begin using your account.`}
     </p>
     <div className={styles.loginLinkContainer}>
@@ -39,7 +39,10 @@ const verificationSuccess = userVerified => (
 );
 
 const EmailConfirmation = ({ status, userVerified }) => (
-  <div className={styles.verificationContainer}>
+  <div
+    data-test="component-emailConfirmation"
+    className={styles.verificationContainer}
+  >
     <div className={styles.statusContainer}>
       <div className={styles.subskribbleContainer}>
         <i className={`${styles.materialIcons} ${styles.subskribbleLogo}`}>

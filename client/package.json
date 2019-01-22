@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=production webpack",
-    "test": "jest --watchAll --coverage",
+    "test": "jest --watchAll --verbose",
     "pre-commit": "lint-staged",
     "stylelint": "stylelint **/*.scss"
   },
@@ -25,8 +25,8 @@
       "node_modules"
     ],
     "moduleNameMapper": {
-      "\\.(css|scss)$": "<rootDir>/src/tests/__mocks__/styleMock.js",
-      "\\.(jpg|gif|ttf|eot|svg)$": "<rootDir>/src/tests/__mocks__/fileMock.js"
+      "\\.(jpg|gif|ttf|eot|svg)$": "<rootDir>/src/tests/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
     },
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest",
@@ -100,6 +100,7 @@
     "babel-plugin-styled-components": "^1.8.0",
     "babel-preset-env": "^1.7.0",
     "browserslist": "4.1.2",
+    "check-prop-types": "^1.1.2",
     "clean-webpack-plugin": "0.1.19",
     "css-loader": "1.0.0",
     "enzyme": "3.6.0",

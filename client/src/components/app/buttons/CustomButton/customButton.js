@@ -1,36 +1,33 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
 import { browserHistory } from 'react-router';
 import { adjustPosition, materialIcons } from '../../../../styles';
 
-const CustomButton = ({
-  buttonIcon,
-  buttonPushLocation,
-  className,
-  onClickAction,
-  style,
-  tipTitle,
-}) => {
-  const pushToLocation = () =>
-    browserHistory.push(`/subskribble/${buttonPushLocation}`);
-  return (
+class CustomButton extends PureComponent {
+  pushToLocation = () =>
+    browserHistory.push(`/subskribble/${this.props.buttonPushLocation}`);
+
+  render = () => (
     <Tooltip
       arrowPointAtCenter
       placement="bottom"
       trigger="hover"
-      title={tipTitle}
+      title={this.props.tipTitle}
     >
       <Button
-        className={`btn-primary ${className}`}
-        onClick={onClickAction || pushToLocation}
-        style={style}
+        data-test="component-customButton"
+        className={`btn-primary ${this.props.className}`}
+        onClick={this.props.onClickAction || this.pushToLocation}
+        style={this.props.style}
       >
-        <i className={`${materialIcons} ${adjustPosition}`}>{buttonIcon}</i>
+        <i className={`${materialIcons} ${adjustPosition}`}>
+          {this.props.buttonIcon}
+        </i>
       </Button>
     </Tooltip>
   );
-};
+}
 
 export default CustomButton;
 

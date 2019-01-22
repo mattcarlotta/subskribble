@@ -8,6 +8,7 @@ const {
   fontsFolder,
   globalCSS,
   localCSS,
+  nodeModules,
   templatePath,
 } = require('./paths');
 const { inDevelopment, requiresSourceMap } = require('./envs');
@@ -50,7 +51,7 @@ const rules = [
     modules: true,
   }),
   /* handles SCSS imports that are global only */
-  defineSCSSRule({ include: [globalCSS] }),
+  defineSCSSRule({ include: [globalCSS, nodeModules] }),
 ];
 
 /* utilizes source mapping */

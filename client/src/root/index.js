@@ -10,16 +10,15 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import routes from '../routes';
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+export const middlewares = applyMiddleware(thunk);
+
+const store = createStore(rootReducer, composeWithDevTools(middlewares));
 const history = syncHistoryWithStore(browserHistory, store);
 
 export default () => (
   <LocaleProvider locale={enUS}>
     <Provider store={store}>
-      <Router history={history} routes={routes} />
+      <Router history={history}>{routes}</Router>
     </Provider>
   </LocaleProvider>
 );

@@ -6,7 +6,7 @@ import ContactInfoReview from '../../../components/customersignup/ContactInfoRev
 import PaymentInfoReview from '../../../components/customersignup/PaymentInfoReview/paymentInfoReview';
 import PlanInfoReview from '../../../components/customersignup/PlanInfoReview/planInfoReview';
 import CartTotalReview from '../../../components/customersignup/CartTotalReview/cartTotalReview';
-import { reviewSignupContainer } from './registerForm';
+import { reviewSignupContainer } from './registerForm.scss';
 
 const applyPromoToPrice = (amount, appliedPromoCode) => {
   let adjustedPrice = 0.0;
