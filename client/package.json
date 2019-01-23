@@ -52,7 +52,7 @@
   "dependencies": {
     "@nivo/bar": "^0.49.1",
     "@nivo/pie": "^0.49.0",
-    "antd": "^3.10.2",
+    "antd": "^3.12.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "font-awesome": "^4.7.0",

@@ -152,6 +152,10 @@ $material-icons-font-path: '~material-icons/iconfont/';
   z-index: 999999;
 }
 
+.ant-btn {
+  font-size: 15px;
+}
+
 .ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only).anticon {
   padding-right: 7px !important;
 }

@@ -17,7 +17,9 @@ const MessagesPanel = ({ messages }) => (
     {messages ? (
       <div className={styles.dashMessages}>
         <h5>Messages Sent ({moment().format('MMMM')})</h5>
-        <p className={styles.dashNumber}>{messages}</p>
+        <p className={styles.dashNumber}>
+          {parseInt(messages, 10) <= 99 ? messages : '99+'}
+        </p>
       </div>
     ) : (
       <NoData />
