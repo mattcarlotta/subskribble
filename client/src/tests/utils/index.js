@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStore } from 'redux';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import checkPropTypes from 'check-prop-types';
 import rootReducer from '../../reducers';
 import { middlewares } from '../../root';
@@ -16,7 +16,7 @@ export const storeFactory = initialState =>
   createStore(rootReducer, initialState, middlewares);
 
 /**
- * Factory function to create a ShallowWrapper for the Home component
+ * Factory function to create a ShallowWrapper for a component
  * @function setup
  * @param {node} Component - Component to be shallowed
  * @param {object} props - Component props specific to this setup.
@@ -25,6 +25,20 @@ export const storeFactory = initialState =>
  */
 export const setup = (Component, props = {}, state = null) => {
   const wrapper = shallow(<Component {...props} />);
+  if (state) wrapper.setState(state);
+  return wrapper;
+};
+
+/**
+ * Factory function to create a MountedWrapper for a component
+ * @function setupMount
+ * @param {node} Component - Component to be shallowed
+ * @param {object} props - Component props specific to this setup.
+ * @param {object} state - initial state for setup.
+ * @returns {MountedWrapper}
+ */
+export const setupMount = (Component, props = {}, state = null) => {
+  const wrapper = mount(<Component {...props} />);
   if (state) wrapper.setState(state);
   return wrapper;
 };

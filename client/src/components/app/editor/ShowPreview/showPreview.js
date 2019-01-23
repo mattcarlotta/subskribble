@@ -9,12 +9,10 @@ const icons = ['star_border', 'reply', 'more_vert'];
 const timeStamp = moment().format('LLLL');
 
 const ShowPreview = ({ company, fromSender, message, subject }) => (
-  <div data-test="component-showPreview" className={styles.boxContainer}>
+  <div className={styles.boxContainer}>
     <Row style={{ marginBottom: 10 }}>
       <Col span={13}>
-        <h4 data-test="showPreview-subject" className={styles.subject}>
-          {subject && subject}
-        </h4>
+        <h4 className={styles.subject}>{subject && subject}</h4>
       </Col>
       <Col span={11}>
         {subject && (
@@ -33,10 +31,8 @@ const ShowPreview = ({ company, fromSender, message, subject }) => (
       </Col>
     </Row>
     <div>
-      <span data-test="showPreview-company" className={styles.fromCompany}>
-        {fromSender ? company : null}
-      </span>
-      <span data-test="showPreview-fromSender" className={styles.fromSender}>
+      <span className={styles.fromCompany}>{fromSender ? company : null}</span>
+      <span className={styles.fromSender}>
         {fromSender && `<${fromSender}>`}
       </span>
     </div>
@@ -46,7 +42,6 @@ const ShowPreview = ({ company, fromSender, message, subject }) => (
     {subject || fromSender ? <hr /> : null}
     {/* eslint-disable */}
     <div
-      data-test="showPreview-message"
       className={styles.preview}
       dangerouslySetInnerHTML={{ __html: message }}
     />

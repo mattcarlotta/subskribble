@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import EmptyPreview from '../EmptyPreview/emptyPreview';
 import ShowPreview from '../ShowPreview/showPreview.js';
-import { previewBoxContainer } from '../../../../styles';
+import { previewBoxContainer } from '../../../../styles/index.scss';
 
 const TemplatePreview = ({ company, fromsender, message, subject }) => (
-  <div data-test="component-templatePreview" className={previewBoxContainer}>
+  <div className={previewBoxContainer}>
     <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Template Preview</h1>
     {!fromsender && !subject && (message === '<p><br></p>' || !message) ? (
       <EmptyPreview />

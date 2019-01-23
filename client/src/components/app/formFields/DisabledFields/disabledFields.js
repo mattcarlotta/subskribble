@@ -1,12 +1,15 @@
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { disabledInputs, disabledTags } from '../../../../styles';
+import { disabledInputs, disabledTags } from '../../../../styles/index.scss';
 
 const DisabledFields = ({ fromsender, plans, subject }) => (
-  <Fragment>
-    <div className={disabledInputs}>
-      {plans ? (
+  <div className="disabledOptions">
+    <div className={`plans ${disabledInputs}`}>
+      {isEmpty(plans) ? (
+        'Template plans.'
+      ) : (
         <Fragment>
           {map(plans, (plan, key) => (
             <div key={key} className={disabledTags}>
@@ -14,15 +17,15 @@ const DisabledFields = ({ fromsender, plans, subject }) => (
             </div>
           ))}
         </Fragment>
-      ) : (
-        'Template plans.'
       )}
     </div>
-    <div className={disabledInputs}>
+    <div className={`fromsender ${disabledInputs}`}>
       {fromsender || 'Template sender email address.'}
     </div>
-    <div className={disabledInputs}>{subject || 'Template subject.'}</div>
-  </Fragment>
+    <div className={`subject ${disabledInputs}`}>
+      {subject || 'Template subject.'}
+    </div>
+  </div>
 );
 
 export default DisabledFields;

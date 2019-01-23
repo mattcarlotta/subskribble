@@ -72,7 +72,7 @@ class MessageForm extends Component {
     ) : (
       <Row>
         <Col span={12}>
-          <div style={{ height: 881 }} className={formBoxContainer}>
+          <div style={{ height: 910 }} className={formBoxContainer}>
             <h1 style={{ textAlign: 'center', marginBottom: 30 }}>
               Send Message
             </h1>
@@ -89,6 +89,7 @@ class MessageForm extends Component {
                 />
               </div>
               <DisabledFields {...this.state.previewTemplate} />
+              <div style={{ marginBottom: 460 }} />
               <hr />
               <AntStepFormButtons
                 backLabel="Back"

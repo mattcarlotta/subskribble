@@ -1,6 +1,4 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { checkProps, findByTestAttr } from '../../../../tests/utils';
+import { setupMount, checkProps } from '../../../../tests/utils';
 import TemplatePreview from './templatePreview.js';
 
 const initialProps = {
@@ -21,11 +19,8 @@ describe('Template Preview', () => {
   let wrapper;
   let templatePreviewComponent;
   beforeEach(() => {
-    wrapper = mount(<TemplatePreview {...initialProps} />); // set wrapper with initialState
-    templatePreviewComponent = findByTestAttr(
-      wrapper,
-      'component-templatePreview',
-    ); // get template preview component
+    wrapper = setupMount(TemplatePreview, initialProps, null); // mount component wrapper with initialProps
+    templatePreviewComponent = wrapper.find('div.previewBoxContainer');
   });
 
   it('renders without errors', () =>
@@ -35,10 +30,7 @@ describe('Template Preview', () => {
     checkProps(TemplatePreview, initialProps));
 
   it('renders an empty preview message if initial props are empty', () => {
-    const emptyPreviewComponent = findByTestAttr(
-      wrapper,
-      'component-emptyPreview',
-    ); // get empty template preview component
+    const emptyPreviewComponent = wrapper.find('div.boxEmpty');
     expect(emptyPreviewComponent).toHaveLength(1);
   });
 
@@ -49,34 +41,27 @@ describe('Template Preview', () => {
     });
 
     it('renders without errors', () => {
-      const showPreviewComponent = findByTestAttr(
-        wrapper,
-        'component-showPreview',
-      ); // get template preview component
+      const showPreviewComponent = wrapper.find('div.boxContainer');
       expect(showPreviewComponent).toHaveLength(1);
     });
 
     it('renders the filled in subject', () => {
-      const showPreviewSubject = findByTestAttr(
-        wrapper,
-        'showPreview-subject',
-      ).text(); // get template preview subject
+      const showPreviewSubject = wrapper.find('h4.subject').text();
       expect(showPreviewSubject).toContain(nextProps.subject);
     });
 
     it('renders the filled in company', () => {
-      const showPreviewCompany = findByTestAttr(
-        wrapper,
-        'showPreview-company',
-      ).text(); // get template preview company
+      const showPreviewCompany = wrapper.find('span.fromCompany').text();
       expect(showPreviewCompany).toContain(nextProps.company);
     });
 
+    it('renders the filled in fromSender', () => {
+      const showPreviewFromSender = wrapper.find('span.fromSender').text();
+      expect(showPreviewFromSender).toContain(nextProps.fromsender);
+    });
+
     it('renders the filled in message', () => {
-      const showPreviewMessage = findByTestAttr(
-        wrapper,
-        'showPreview-message',
-      ).text(); // get template preview fromsender
+      const showPreviewMessage = wrapper.find('div.preview').text();
       expect(showPreviewMessage).toContain(nextProps.message);
     });
   });
