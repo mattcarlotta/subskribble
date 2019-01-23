@@ -1,17 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import EmptyPreview from '../EmptyPreview/emptyPreview';
-import ShowPreview from '../ShowPreview/showPreview';
+import ShowPreview from '../ShowPreview/showPreview.js';
 import { previewBoxContainer } from '../../../../styles';
 
-export default props => (
-  <div className={previewBoxContainer}>
+const TemplatePreview = ({ company, fromsender, message, subject }) => (
+  <div data-test="component-templatePreview" className={previewBoxContainer}>
     <h1 style={{ textAlign: 'center', marginBottom: 30 }}>Template Preview</h1>
-    {!props.fromSender &&
-    !props.subject &&
-    (props.message === '<p><br></p>' || !props.message) ? (
-      <EmptyPreview {...props} />
+    {!fromsender && !subject && (message === '<p><br></p>' || !message) ? (
+      <EmptyPreview />
     ) : (
-      <ShowPreview {...props} />
+      <ShowPreview
+        company={company}
+        fromSender={fromsender}
+        message={message}
+        subject={subject}
+      />
     )}
   </div>
 );
+
+export default TemplatePreview;
+
+TemplatePreview.propTypes = {
+  company: PropTypes.string,
+  fromsender: PropTypes.string,
+  message: PropTypes.string,
+  subject: PropTypes.string,
+};

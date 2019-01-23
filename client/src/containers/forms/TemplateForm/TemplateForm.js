@@ -108,10 +108,7 @@ class TemplateForm extends Component {
           </div>
         </Col>
         <Col span={12}>
-          <TemplatePreview
-            {...this.props}
-            text="Fill in the fields to update this preview!"
-          />
+          <TemplatePreview {...this.props} />
         </Col>
       </Row>
     );

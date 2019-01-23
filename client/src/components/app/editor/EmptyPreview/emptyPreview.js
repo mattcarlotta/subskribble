@@ -1,18 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { boxEmpty, emptyIcon, materialIcons } from '../../../../styles';
+import {
+  boxEmpty,
+  emptyIcon,
+  materialIcons,
+} from '../../../../styles/index.scss';
 
-const EmptyPreview = ({ text }) => (
-  <div className={boxEmpty}>
+const EmptyPreview = () => (
+  <div data-test="component-emptyPreview" className={boxEmpty}>
     <div className={emptyIcon}>
       <i className={materialIcons}>create</i>
-      <div>{text}</div>
+      <div>Fill in the fields to update this preview!</div>
     </div>
   </div>
 );
 
 export default EmptyPreview;
-
-EmptyPreview.propTypes = {
-  text: PropTypes.string,
-};

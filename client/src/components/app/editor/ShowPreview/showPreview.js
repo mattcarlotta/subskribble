@@ -8,11 +8,13 @@ import styles from './showPreview.scss';
 const icons = ['star_border', 'reply', 'more_vert'];
 const timeStamp = moment().format('LLLL');
 
-const ShowPreview = ({ company, fromsender, message, subject }) => (
-  <div className={styles.boxContainer}>
+const ShowPreview = ({ company, fromSender, message, subject }) => (
+  <div data-test="component-showPreview" className={styles.boxContainer}>
     <Row style={{ marginBottom: 10 }}>
       <Col span={13}>
-        <h4 className={styles.subject}>{subject && subject}</h4>
+        <h4 data-test="showPreview-subject" className={styles.subject}>
+          {subject && subject}
+        </h4>
       </Col>
       <Col span={11}>
         {subject && (
@@ -31,17 +33,23 @@ const ShowPreview = ({ company, fromsender, message, subject }) => (
       </Col>
     </Row>
     <div>
-      <span className={styles.fromCompany}>{fromsender ? company : null}</span>
-      <span className={styles.fromSender}>
-        {fromsender && `<${fromsender}>`}
+      <span data-test="showPreview-company" className={styles.fromCompany}>
+        {fromSender ? company : null}
+      </span>
+      <span data-test="showPreview-fromSender" className={styles.fromSender}>
+        {fromSender && `<${fromSender}>`}
       </span>
     </div>
     <div className={styles.toAddresse}>
-      {fromsender && 'to Firstname Lastname <example@example.com>'}
+      {fromSender && 'to Firstname Lastname <example@example.com>'}
     </div>
-    {subject || fromsender ? <hr /> : null}
+    {subject || fromSender ? <hr /> : null}
     {/* eslint-disable */}
-    <div className={styles.preview} dangerouslySetInnerHTML={{ __html: message }} />
+    <div
+      data-test="showPreview-message"
+      className={styles.preview}
+      dangerouslySetInnerHTML={{ __html: message }}
+    />
     {/* eslint-enable */}
   </div>
 );
@@ -50,7 +58,7 @@ export default ShowPreview;
 
 ShowPreview.propTypes = {
   company: PropTypes.string,
-  fromsender: PropTypes.string,
+  fromSender: PropTypes.string,
   message: PropTypes.string,
   subject: PropTypes.string,
 };
