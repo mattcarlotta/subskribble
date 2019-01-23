@@ -1,4 +1,4 @@
-import { setup, checkProps, findByTestAttr } from '../../../../tests/utils';
+import { setup, checkProps } from '../../../../tests/utils';
 import EmailConfirmation from './emailConfirmation.js';
 
 describe('Email Confirmation', () => {
@@ -13,10 +13,9 @@ describe('Email Confirmation', () => {
   });
 
   it('renders without errors', () => {
-    const emailConfirmationComponent = findByTestAttr(
-      wrapper,
-      'component-emailConfirmation',
-    ); // get email confirmation component
+    const emailConfirmationComponent = wrapper.find(
+      'div.verificationContainer',
+    );
     expect(emailConfirmationComponent).toHaveLength(1);
   });
 
@@ -24,9 +23,8 @@ describe('Email Confirmation', () => {
     checkProps(EmailConfirmation, initialProps));
 
   it('renders a failed verification message if email was invalid', () => {
-    const verificationFailureComponent = findByTestAttr(
-      wrapper,
-      'component-verificationFailure',
+    const verificationFailureComponent = wrapper.find(
+      'div.verificationFailure',
     ); // get failed verification message component
     expect(verificationFailureComponent).toHaveLength(1);
   });
@@ -37,11 +35,10 @@ describe('Email Confirmation', () => {
       userVerified: 'email@test.com',
     };
     wrapper = setup(EmailConfirmation, initialProps, null); // set wrapper with initialState
-    const verificationFailureComponent = findByTestAttr(
-      wrapper,
-      'component-verificationSuccess',
+    const verificationFailureComponent = wrapper.find(
+      'div.verificationSuccess',
     ); // get success verification message component
-    const userVerified = findByTestAttr(wrapper, 'userVerified').text(); // get userVerified email
+    const userVerified = wrapper.find('p.message').text(); // get userVerified email
     expect(verificationFailureComponent).toHaveLength(1);
     expect(userVerified).toContain(initialProps.userVerified);
   });
