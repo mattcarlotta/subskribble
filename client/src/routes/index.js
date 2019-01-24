@@ -7,7 +7,7 @@ import CustomerSignupForm from '../containers/forms/CustomerSignupForm/CustomerS
 import Dashboard from '../containers/dashboard';
 import DeleteAccount from '../containers/app/settings/DeleteAccount/DeleteAccount';
 // import Home from '../components/website/home';
-import Landing from '../components/landing';
+import Landing from '../components/landing/index.js';
 import MessageForm from '../containers/forms/MessageForm/MessageForm';
 import NotFound from '../components/app/notfound/404/404';
 import Plans from '../containers/plans';

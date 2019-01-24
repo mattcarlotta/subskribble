@@ -18,7 +18,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 export default () => (
   <LocaleProvider locale={enUS}>
     <Provider store={store}>
-      <Router history={history}>{routes}</Router>
+      <Router history={history} routes={routes} />
     </Provider>
   </LocaleProvider>
 );
