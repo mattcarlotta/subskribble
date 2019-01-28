@@ -28,7 +28,13 @@ const TABS = [
 ];
 
 const InlineMenu = ({ handleTabClick, collapseSideNav, selectedKey }) => (
-  <Sider collapsible collapsed={collapseSideNav} trigger={null} width={235}>
+  <Sider
+    className="siderMenu"
+    collapsible
+    collapsed={collapseSideNav}
+    trigger={null}
+    width={235}
+  >
     <MenuHeader
       collapseSideNav={collapseSideNav}
       handleLogoClick={handleTabClick}

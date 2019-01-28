@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CustomButton from '../../buttons/CustomButton/customButton';
-import SelectField from '../../formFields/SelectField/selectField';
+import CustomButton from '../../buttons/CustomButton/customButton.js';
+import SelectField from '../../formFields/SelectField/selectField.js';
 import TableList from '../../tables/TableList/tableList';
 import { panelBodyContainer, panelBody } from './panelBody.scss';
 
