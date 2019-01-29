@@ -1,9 +1,18 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import checkPropTypes from 'check-prop-types';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import rootReducer from '../../reducers';
 import { middlewares } from '../../root';
+
+/**
+ * Create a mocked store with middleware(s).
+ * globals: middlewares
+ */
+export const mockStore = configureMockStore([thunk]);
 
 /**
  * Create a testing store with imported reducers, initial state, and middleware(s).
@@ -39,6 +48,30 @@ export const setup = (Component, props = {}, state = null) => {
  */
 export const setupMount = (Component, props = {}, state = null) => {
   const wrapper = mount(<Component {...props} />);
+  if (state) wrapper.setState(state);
+  return wrapper;
+};
+
+/**
+ * Factory function to create a ConnectedMountedWrapper for a component
+ * @function setupConnectedMount
+ * @param {node} Component - Component to be shallowed
+ * @param {object} props - Component props specific to this setup.
+ * @param {object} state - initial state for setup.
+ * @param {object} store - initial store for setup.
+ * @returns {ConnectedMountedWrapper}
+ */
+export const setupConnectedMount = (
+  Component,
+  props = {},
+  state = null,
+  store = {},
+) => {
+  const wrapper = mount(
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>,
+  );
   if (state) wrapper.setState(state);
   return wrapper;
 };

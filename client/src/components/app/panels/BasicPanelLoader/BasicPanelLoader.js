@@ -1,7 +1,9 @@
-import React, { PureComponent } from 'react';
-import Loader from '../../../../containers/app/loading/Loader';
+import React, { Component } from 'react';
+import BasicPanel from '../BasicPanel/basicPanel.js';
+import PageContainer from '../PageContainer/pageContainer.js';
+import PanelLoader from '../../../../containers/app/loading/Loader.js';
 
-export default class BasicPanelLoader extends PureComponent {
+class BasicPanelLoader extends Component {
   state = { isLoading: true };
 
   componentDidMount = () => {
@@ -13,19 +15,25 @@ export default class BasicPanelLoader extends PureComponent {
     fetchItems();
   };
 
-  componentDidUpdate = () => {
+  componentDidUpdate = nextProps => {
     const { items, itemcount } = this.props;
 
-    if (items && itemcount) this.setState({ isLoading: false });
+    if (items !== nextProps.items || itemcount !== nextProps.itemcount)
+      this.setState({ isLoading: false });
   };
 
   render = () =>
     this.state.isLoading ? (
-      <Loader {...this.props} />
+      <PanelLoader {...this.props} />
     ) : (
-      <this.props.Panel
-        {...this.props}
-        CARDS={this.props.CARDS({ ...this.props })}
-      />
+      <PageContainer>
+        <BasicPanel
+          TABLECONTENTS={this.props.items}
+          TABLERECORDS={this.props.itemcount}
+          {...this.props}
+        />
+      </PageContainer>
     );
 }
+
+export default BasicPanelLoader;

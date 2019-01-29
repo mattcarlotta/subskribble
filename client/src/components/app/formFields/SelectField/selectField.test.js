@@ -24,7 +24,7 @@ describe('Select Field', () => {
   it('does not not throw PropType warnings', () =>
     checkProps(SelectField, initialProps));
 
-  it('calls handleSortDataBy method when an option is selected, which calls setSortByNum, selectCurrentPage and fetchAction', () => {
+  it('when an option is selected, sets setSortByNum, resets the current page and fetches new data', () => {
     const nextRecords = 20;
     const spy = jest.spyOn(wrapper.instance(), 'handleSortDataBy');
     wrapper.instance().forceUpdate();

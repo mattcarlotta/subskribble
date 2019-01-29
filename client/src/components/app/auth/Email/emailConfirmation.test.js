@@ -29,7 +29,7 @@ describe('Email Confirmation', () => {
     expect(verificationFailureComponent).toHaveLength(1);
   });
 
-  it("renders a success verification message and displays the user's email", () => {
+  it('renders a success verification message and displays the authenticated email', () => {
     initialProps = {
       status: 'verified',
       userVerified: 'email@test.com',

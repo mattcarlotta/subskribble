@@ -6,7 +6,9 @@ import NoDataToDisplay from '../../../components/app/notfound/NoDataToDisplay/no
 class Loader extends Component {
   state = { requestTimeout: false };
 
-  componentDidMount = () => this.setTimer();
+  componentDidMount = () => {
+    this.setTimer();
+  };
 
   componentDidUpdate = nextProps => {
     const {

@@ -23,7 +23,7 @@ describe('Inline Menu and Menu Header', () => {
     checkProps(InlineMenu, initialProps);
   });
 
-  it('calls handleTabClick when a menu tab has been selected', () => {
+  it('updates the page URL when a menu tab has been selected', () => {
     const menuItem = wrapper.find('MenuItem').first();
     menuItem.simulate('click');
     expect(handleTabClick.mock.calls).toHaveLength(1);

@@ -20,7 +20,7 @@ describe('Custom Button', () => {
   it('does not not throw PropType warnings', () =>
     checkProps(CustomButton, initialProps));
 
-  it('calls pushToLocation method if onClickAction is missing', () => {
+  it('pushes to a new page if onClickAction is missing', () => {
     const spy = jest.spyOn(wrapper.instance(), 'pushToLocation');
     wrapper.instance().forceUpdate();
     customButtonComponent = wrapper.find('Button'); // get custom button component

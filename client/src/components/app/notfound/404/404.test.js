@@ -8,7 +8,7 @@ describe('404 Not Found', () => {
     expect(notfoundComponent).toHaveLength(1);
   });
 
-  it('calls handleGoBack method when button is clicked', () => {
+  it('goes back to the previous page when button is clicked', () => {
     const spy = jest.spyOn(wrapper.instance(), 'handleGoBack');
     wrapper.instance().forceUpdate();
     const button = wrapper.find('button');

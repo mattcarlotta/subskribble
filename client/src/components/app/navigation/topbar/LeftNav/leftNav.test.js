@@ -19,13 +19,13 @@ describe('Left Side Navigation', () => {
     checkProps(LeftNav, initialProps);
   });
 
-  it('calls handleMenuToggle method when the logo has been clicked', () => {
+  it('pushes to the landing page when the logo has been clicked', () => {
     const logoButton = wrapper.find('Button');
     logoButton.simulate('click');
     expect(handleMenuToggle.mock.calls).toHaveLength(1);
   });
 
-  it('calls handlePreventButtonFocus method when the logo attempts to be focused', () => {
+  it('prevents the logo from being focused', () => {
     const spy = jest.spyOn(wrapper.instance(), 'handlePreventButtonFocus');
     wrapper.instance().forceUpdate();
     const logoButton = wrapper.find('Button');

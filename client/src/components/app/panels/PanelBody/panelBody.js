@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CustomButton from '../../buttons/CustomButton/customButton.js';
 import SelectField from '../../formFields/SelectField/selectField.js';
-import TableList from '../../tables/TableList/tableList';
+import TableList from '../../tables/TableList/tableList.js';
 import { panelBodyContainer, panelBody } from './panelBody.scss';
 
 export default class extends Component {
@@ -29,6 +29,7 @@ export default class extends Component {
       fetchAction,
       GRAPH,
       SELECTFIELD,
+      style,
       TAB,
       TABLECONTENTS,
     } = this.props;
@@ -40,7 +41,7 @@ export default class extends Component {
         className={panelBodyContainer}
       >
         {CARDBODY && <CARDBODY />}
-        <div className={panelBody}>
+        <div style={{ ...style }} className={panelBody}>
           <div style={{ marginBottom: 20 }} className="ant-row">
             <div className="ant-col-12">
               {SELECTFIELD && (

@@ -62,7 +62,7 @@ describe('Notification Button and Popover (when visible)', () => {
   });
 
   describe('contains unread or read notifications', () => {
-    it('clicking on the notification button in the navbar calls handleVisibleChange method, which closes the popover and calls updateNotifications', () => {
+    it('clicking on the notification button in the navbar closes the popover and updates all notifications as read', () => {
       const visible = false;
       const spy = jest.spyOn(wrapper.instance(), 'handleVisibleChange');
       wrapper.instance().forceUpdate();
@@ -73,7 +73,7 @@ describe('Notification Button and Popover (when visible)', () => {
       spy.mockClear();
     });
 
-    it('clicking on the top bar trash can button calls handleClearNotes method, which calls removeAllNotifications', () => {
+    it('clicking on the top bar trash can button clears all notifications', () => {
       const spy = jest.spyOn(wrapper.instance(), 'handleClearNotes');
       wrapper.instance().forceUpdate();
       const clearNotificationsButton = wrapper.find(
@@ -85,7 +85,7 @@ describe('Notification Button and Popover (when visible)', () => {
       spy.mockClear();
     });
 
-    it('clicking on a trash can button inside of a notification calls handleDeleteNote method, which calls deleteNotification', () => {
+    it('clicking on a trash can button inside of a notification deletes the notification', () => {
       wrapper.setProps({ unreadNotifications, readNotifications });
       wrapper.update();
 

@@ -8,7 +8,7 @@ import refundTrans from '../../images/refundTrans.png';
 import sendMessage from '../../images/sendMessage.png';
 import subRegister from '../../images/subRegister.png';
 import Instruction from './Instruction/instruction.js';
-import styles from './index.scss';
+import styles from './landing.scss';
 
 export default () => (
   <PageContainer>

@@ -2,38 +2,40 @@ import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
-import PanelBody from '../PanelBody/panelBody';
-import TogglePanelVisibility from '../TogglePanelVisibility/TogglePanelVisibility';
+import PanelBody from '../PanelBody/panelBody.js';
+import TogglePanelVisibility from '../TogglePanelVisibility/TogglePanelVisibility.js';
 import { panelContainer, tabsContainer } from './tabPanel.scss';
 
 const { TabPane } = Tabs;
 
-const TabPanel = ({ buttonPanel, CARDS, visible, serverMessage }) => (
+const TabPanel = ({ CARDS, serverMessage }) => (
   <div className={panelContainer}>
-    <Tabs
-      className={tabsContainer}
-      tabBarStyle={{ border: !visible ? 0 : null }}
-      tabBarExtraContent={buttonPanel()}
-    >
-      {map(CARDS, props => (
-        <TabPane tab={props.TAB} key={props.TAB}>
-          <PanelBody
-            serverMessage={serverMessage}
-            visible={visible}
-            {...props}
-          />
-        </TabPane>
-      ))}
-    </Tabs>
+    <TogglePanelVisibility>
+      {(visible, buttonPanel) => (
+        <Tabs
+          className={tabsContainer}
+          tabBarStyle={{ border: !visible ? 0 : null }}
+          tabBarExtraContent={buttonPanel()}
+        >
+          {map(CARDS, props => (
+            <TabPane tab={props.TAB} key={props.TAB}>
+              <PanelBody
+                serverMessage={serverMessage}
+                visible={visible}
+                {...props}
+              />
+            </TabPane>
+          ))}
+        </Tabs>
+      )}
+    </TogglePanelVisibility>
   </div>
 );
 
-export default TogglePanelVisibility(TabPanel);
+export default TabPanel;
 
 TabPanel.propTypes = {
-  buttonPanel: PropTypes.func.isRequired,
   CARDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   TAB: PropTypes.string,
-  visible: PropTypes.bool,
   serverMessage: PropTypes.string,
 };

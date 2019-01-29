@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'antd';
-import { panelButton, materialIcons } from '../../../../styles';
+import { panelButton, materialIcons } from '../../../../styles/index.scss';
 
-export default WrappedComponent => {
-  class TogglePanelVisibility extends Component {
-    state = { visible: true };
+class TogglePanelVisibility extends Component {
+  state = { visible: true };
 
-    handleSwitchVisibility = () =>
-      this.setState(prevState => ({ visible: !prevState.visible }));
+  handleSwitchVisibility = () =>
+    this.setState(prevState => ({ visible: !prevState.visible }));
 
-    buttonPanel = () => (
-      <Button className={panelButton} onClick={this.handleSwitchVisibility}>
-        <i className={materialIcons}>{this.state.visible ? 'remove' : 'add'}</i>
-      </Button>
-    );
+  buttonPanel = () => (
+    <Button className={panelButton} onClick={this.handleSwitchVisibility}>
+      <i className={materialIcons}>{this.state.visible ? 'remove' : 'add'}</i>
+    </Button>
+  );
 
-    render = () => (
-      <WrappedComponent
-        {...this.props}
-        buttonPanel={this.buttonPanel}
-        visible={this.state.visible}
-      />
-    );
-  }
-  return TogglePanelVisibility;
+  render = () => (
+    <Fragment>
+      {this.props.children(this.state.visible, this.buttonPanel)}
+    </Fragment>
+  );
+}
+
+export default TogglePanelVisibility;
+
+TogglePanelVisibility.propTypes = {
+  children: PropTypes.func,
 };
