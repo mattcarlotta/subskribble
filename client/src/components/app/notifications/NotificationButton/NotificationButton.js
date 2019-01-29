@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Popover, Tooltip } from 'antd';
-import PopoverContent from '../NotificationPopover/popoverContent';
+import PopoverContent from '../NotificationPopover/popoverContent.js';
 import styles from './NotificationButton.scss';
 
 export default class Notifications extends Component {
@@ -10,7 +10,7 @@ export default class Notifications extends Component {
   handleClearNotes = () => this.props.removeAllNotifications();
 
   handleDeleteNote = e => {
-    const note = e.target.dataset.id;
+    const note = e.target.value;
     this.props.deleteNotification(note);
   };
 
@@ -21,11 +21,6 @@ export default class Notifications extends Component {
 
       if (!visibleNotifications && unreadNotifications) updateNotifications();
     });
-  };
-
-  handleNotificationAsRead = e => {
-    const note = e.target.dataset.id;
-    this.props.updateNotifications(note);
   };
 
   render() {

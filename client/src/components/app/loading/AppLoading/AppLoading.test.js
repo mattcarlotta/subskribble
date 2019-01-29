@@ -23,7 +23,7 @@ describe('App Loader', () => {
     expect(spinnerComponent).toHaveLength(1);
   });
 
-  it('renders a login screen after a 1 second timeout and no user login session', () => {
+  it('renders a login screen after a 1 second timeout and user login session is absent', () => {
     wrapper.setState({ requestTimeout: true });
     wrapper.update();
     const loginComponent = wrapper.find(Login).dive('div.settingsTab');

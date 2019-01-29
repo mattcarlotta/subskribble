@@ -24,16 +24,16 @@ describe('Select Field', () => {
   it('does not not throw PropType warnings', () =>
     checkProps(SelectField, initialProps));
 
-  it('calls handleSortDataBy onSelect, which calls setSortByNum, selectCurrentPage and fetchAction', () => {
+  it('calls handleSortDataBy method when an option is selected, which calls setSortByNum, selectCurrentPage and fetchAction', () => {
     const nextRecords = 20;
     const spy = jest.spyOn(wrapper.instance(), 'handleSortDataBy');
     wrapper.instance().forceUpdate();
-    const menuItem = wrapper.find('Select');
-    menuItem.simulate('select', nextRecords);
+    const selectMenu = wrapper.find('Select');
+    selectMenu.simulate('select', nextRecords);
     expect(spy).toHaveBeenCalled();
-    expect(setSortByNum).toHaveBeenCalledWith(nextRecords);
-    expect(selectCurrentPage).toHaveBeenCalledWith(1);
-    expect(fetchAction).toHaveBeenCalledWith('Subscribers', 0, nextRecords);
+    expect(setSortByNum).toBeCalledWith(nextRecords);
+    expect(selectCurrentPage).toBeCalledWith(1);
+    expect(fetchAction).toBeCalledWith('Subscribers', 0, nextRecords);
     spy.mockClear();
   });
 });

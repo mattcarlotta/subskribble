@@ -56,7 +56,7 @@ export default class NotificationButton extends Component {
                       title="Delete notification"
                     >
                       <Button
-                        data-id={id}
+                        value={id}
                         className={styles.removeNoteButton}
                         onClick={this.props.handleDeleteNote}
                       >
