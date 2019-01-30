@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/transactionActions';
 import CARDS from '../../components/transactions/layouts/PanelCards/panelCards';
-import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Transactions = props => (
-  <BasicPanelLoader
+  <PanelLoader
     {...props}
     cardTitle="Transactions"
     CARDS={CARDS}

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/promoActions';
 import CARDS from '../../components/promos/layouts/PanelCards/panelCards';
-import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Promotionals = props => (
-  <BasicPanelLoader
+  <PanelLoader
     buttonIcon="playlist_add"
     buttonPushLocation="promotionals/create"
     cardTitle="Promotionals"

@@ -5,7 +5,7 @@ import PageContainer from '../PageContainer/pageContainer.js';
 import PanelLoading from '../../loading/PanelLoading/PanelLoading.js';
 import TabPanel from '../TabPanel/tabPanel.js';
 
-class BasicPanelLoader extends Component {
+class PanelLoader extends Component {
   state = { isLoading: true };
 
   componentDidMount = () => {
@@ -49,9 +49,6 @@ class BasicPanelLoader extends Component {
         (!isEmpty(inactiveitems) ||
           inactiveitemcount !== nextProps.inactiveitemcount));
 
-    console.log('items', items);
-    console.log('nextItems', nextProps.items);
-    console.log('loadedBasic', items !== nextProps.items);
     if (loadedBasic || loadedTab) this.setState({ isLoading: false });
   };
 
@@ -73,4 +70,4 @@ class BasicPanelLoader extends Component {
     );
 }
 
-export default BasicPanelLoader;
+export default PanelLoader;

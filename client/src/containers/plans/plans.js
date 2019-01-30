@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/planActions';
 import CARDS from '../../components/plans/layouts/PanelCards/panelCards';
-import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Plans = props => (
-  <BasicPanelLoader
+  <PanelLoader
     buttonIcon="note_add"
     buttonPushLocation="plans/create"
     cardTitle="Plans"

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/subscriberActions';
 import CARDS from '../../components/subscribers/layouts/PanelCards/panelCards';
-import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Subscribers = props => (
-  <BasicPanelLoader
+  <PanelLoader
     buttonIcon="person_add"
     buttonPushLocation="subscribers/register"
     cardTitle="Subscribers"

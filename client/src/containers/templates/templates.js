@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/templateActions';
 import CARDS from '../../components/templates/layouts/PanelCards/panelCards';
-import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
+import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Templates = props => (
-  <BasicPanelLoader
+  <PanelLoader
     buttonIcon="library_add"
     buttonPushLocation="templates/create"
     cardTitle="Templates"
