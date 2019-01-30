@@ -2,21 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/planActions';
 import CARDS from '../../components/plans/layouts/PanelCards/panelCards';
-import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
-import PlansPanel from '../../components/plans/panels/plansPanel';
+import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
 
 const Plans = props => (
-  <PanelLoader
+  <BasicPanelLoader
     buttonIcon="note_add"
     buttonPushLocation="plans/create"
     cardTitle="Plans"
     CARDS={CARDS}
-    Panel={PlansPanel}
+    panelType="tab"
+    tipTitle="Add Plan"
     {...props}
   />
 );
 
 export default connect(
-  state => ({ serverMessage: state.server.message, ...state.plans }),
+  state => ({
+    serverError: state.server.error,
+    serverMessage: state.server.message,
+    ...state.plans,
+  }),
   { ...actions },
 )(Plans);

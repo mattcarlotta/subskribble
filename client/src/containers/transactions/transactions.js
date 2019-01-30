@@ -2,19 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/transactionActions';
 import CARDS from '../../components/transactions/layouts/PanelCards/panelCards';
-import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
-import TransactionsPanel from '../../components/transactions/panels/transactionsPanels';
+import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
 
 const Transactions = props => (
-  <PanelLoader
+  <BasicPanelLoader
+    {...props}
     cardTitle="Transactions"
     CARDS={CARDS}
-    Panel={TransactionsPanel}
-    {...props}
+    panelType="tab"
   />
 );
 
 export default connect(
-  state => ({ serverMessage: state.server.message, ...state.transactions }),
+  state => ({
+    serverError: state.server.error,
+    serverMessage: state.server.message,
+    ...state.transactions,
+  }),
   { ...actions },
 )(Transactions);

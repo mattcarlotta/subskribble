@@ -22,7 +22,10 @@ const NoDataToDisplay = ({
               style={{ display: visible ? 'block' : 'none', minHeight: 400 }}
               className={styles.panelBodyContainer}
             >
-              <div className={styles.panelBody}>
+              <div
+                style={{ padding: 0, margin: 0 }}
+                className={styles.panelBody}
+              >
                 <div className={styles.panelSpacer}>
                   {buttonPushLocation && (
                     <CustomButton

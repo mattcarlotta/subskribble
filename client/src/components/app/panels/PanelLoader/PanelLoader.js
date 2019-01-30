@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
-import Loader from '../../../../containers/app/loading/Loader';
+// import Loader from '../../../../containers/app/loading/Loader';
+import PanelLoading from '../../loading/PanelLoading/PanelLoading.js';
+import PageContainer from '../PageContainer/pageContainer.js';
+import TabPanel from '../TabPanel/tabPanel.js';
 
 export default class PanelLoader extends PureComponent {
   state = { isLoading: true };
@@ -35,8 +38,10 @@ export default class PanelLoader extends PureComponent {
 
   render = () =>
     this.state.isLoading ? (
-      <Loader {...this.props} />
+      <PanelLoading {...this.props} />
     ) : (
-      <this.props.Panel CARDS={this.props.CARDS({ ...this.props })} />
+      <PageContainer>
+        <TabPanel CARDS={this.props.CARDS({ ...this.props })} />
+      </PageContainer>
     );
 }

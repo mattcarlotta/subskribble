@@ -70,6 +70,7 @@ describe('Notification Button and Popover (when visible)', () => {
       notificationButton.simulate('click', visible);
       expect(spy).toHaveBeenCalledWith(visible);
       expect(wrapper.state('visibleNotifications')).toBeFalsy();
+      expect(updateNotifications).toHaveBeenCalled();
       spy.mockClear();
     });
 
@@ -81,7 +82,7 @@ describe('Notification Button and Popover (when visible)', () => {
       );
       clearNotificationsButton.simulate('click');
       expect(spy).toHaveBeenCalled();
-      expect(removeAllNotifications).toBeCalled();
+      expect(removeAllNotifications).toHaveBeenCalled();
       spy.mockClear();
     });
 
@@ -96,7 +97,9 @@ describe('Notification Button and Popover (when visible)', () => {
         .first();
       deleteNotificationButton.simulate('click');
       expect(spy).toHaveBeenCalled();
-      expect(deleteNotification).toBeCalledWith(unreadNotifications[0].id);
+      expect(deleteNotification).toHaveBeenCalledWith(
+        unreadNotifications[0].id,
+      );
       spy.mockClear();
     });
   });
