@@ -15,7 +15,6 @@ export default ({
     TABLECONTENTS: activeitems,
     TABLEHEADERS: ACTIVETABLEHEADERS,
     TABLERECORDS: activeitemcount,
-    tipTitle: 'Create New Promotional',
     ...rest,
   },
   {

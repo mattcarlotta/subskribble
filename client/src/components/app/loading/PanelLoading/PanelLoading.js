@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../Spinner/Spinner.js';
 import NoDataToDisplay from '../../notfound/NoDataToDisplay/noDataToDisplay.js';
 
-class PanelLoader extends Component {
+class PanelLoading extends Component {
   state = { requestTimeout: false };
 
   componentDidMount = () => {
@@ -46,4 +46,4 @@ class PanelLoader extends Component {
     );
 }
 
-export default PanelLoader;
+export default PanelLoading;

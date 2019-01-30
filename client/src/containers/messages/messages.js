@@ -6,7 +6,7 @@ import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/Basic
 
 const Messages = props => (
   <BasicPanelLoader
-    {...props}
+    panelType="basic"
     SELECTFIELD
     TABLEHEADERS={TABLEHEADERS}
     buttonIcon="markunread_mailbox"
@@ -14,10 +14,15 @@ const Messages = props => (
     cardTitle="Messages"
     tipTitle="Send Messages"
     TAB="Messages"
+    {...props}
   />
 );
 
 export default connect(
-  state => ({ ...state.server, ...state.messages }),
+  state => ({
+    serverError: state.server.error,
+    serverMessage: state.server.message,
+    ...state.messages,
+  }),
   { ...actions },
 )(Messages);

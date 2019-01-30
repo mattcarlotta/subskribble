@@ -15,7 +15,6 @@ export default ({
     TABLECONTENTS: activeitems,
     TABLEHEADERS: ACTIVETABLEHEADERS,
     TABLERECORDS: activeitemcount,
-    tipTitle: 'Add Plan',
     ...rest,
   },
   {

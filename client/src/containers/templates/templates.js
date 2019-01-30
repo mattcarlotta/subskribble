@@ -2,22 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/templateActions';
 import CARDS from '../../components/templates/layouts/PanelCards/panelCards';
-import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader';
-import TemplatePanel from '../../components/templates/panels/templatePanels';
+import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
 
 const Templates = props => (
-  <PanelLoader
-    {...props}
+  <BasicPanelLoader
     buttonIcon="library_add"
     buttonPushLocation="templates/create"
     cardTitle="Templates"
     CARDS={CARDS}
-    Panel={TemplatePanel}
+    panelType="tab"
     tipTitle="Create New Template"
+    {...props}
   />
 );
 
 export default connect(
-  state => ({ serverMessage: state.server.message, ...state.templates }),
+  state => ({
+    serverError: state.server.error,
+    serverMessage: state.server.message,
+    ...state.templates,
+  }),
   { ...actions },
 )(Templates);

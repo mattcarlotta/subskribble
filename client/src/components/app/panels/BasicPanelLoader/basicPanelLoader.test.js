@@ -1,5 +1,7 @@
 import { setupMount } from '../../../../tests/utils';
 import BasicPanelLoader from './BasicPanelLoader.js';
+import MESSAGETABLEHEADERS from '../../../messages/layouts/Headers/headers.js';
+import PLANCARDS from '../../../plans/layouts/PanelCards/panelCards.js';
 
 const initialState = {
   isLoading: true,
@@ -22,7 +24,8 @@ const failProps = {
   serverError: '404 - Not Found',
 };
 
-const dataProps = {
+const basicProps = {
+  panelType: 'basic',
   SELECTFIELD: true,
   TAB: 'Messages',
   items: [
@@ -38,38 +41,60 @@ const dataProps = {
     },
   ],
   itemcount: 1,
-  TABLEHEADERS: [
-    {
-      title: 'Transaction #',
-      dataIndex: 'id',
-    },
-    {
-      title: 'Template',
-      dataIndex: 'template',
-    },
-    {
-      title: 'From Sender',
-      dataIndex: 'fromsender',
-    },
-    {
-      title: 'Subject',
-      dataIndex: 'subject',
-    },
-    {
-      title: 'Sent Date',
-      dataIndex: 'sentdate',
-    },
-  ],
+  TABLEHEADERS: MESSAGETABLEHEADERS,
 };
 
-describe('Basic Panel Loader', () => {
+const tabProps = {
+  CARDS: PLANCARDS,
+  activeitemcount: 1,
+  activeitems: [
+    {
+      amount: '0.00',
+      billevery: 'Weekly',
+      description: 'Carlotta Subscription',
+      id: '123',
+      key: 12,
+      planname: 'Example plan',
+      setupfee: null,
+      startdate: '2018-12-18T22:06:40.976Z',
+      status: 'active',
+      subscribers: 8,
+      trialperiod: null,
+      userid: '88',
+    },
+  ],
+  buttonIcon: 'note_add',
+  buttonPushLocation: 'plans/create',
+  cardTitle: 'Plans',
+  inactiveitemcount: 1,
+  inactiveitems: [
+    {
+      amount: '0.00',
+      billevery: 'Monthly',
+      description: 'Example Subscription',
+      id: '124',
+      key: 24,
+      planname: 'Example Plan Assoc.',
+      setupfee: null,
+      startdate: '2018-12-18T22:06:40.976Z',
+      status: 'suspended',
+      subscribers: 5,
+      trialperiod: '1 Month',
+      userid: '88',
+    },
+  ],
+  serverError: '',
+  serverMessage: '',
+};
+
+describe('Panel Loader', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setupMount(BasicPanelLoader, initialProps, initialState);
   });
 
   it('renders a loader without errors', () => {
-    const loaderComponent = wrapper.find('PanelLoader');
+    const loaderComponent = wrapper.find('PanelLoading');
     expect(loaderComponent).toHaveLength(1);
   });
 
@@ -81,9 +106,9 @@ describe('Basic Panel Loader', () => {
     expect(noDataToDisplayComponent).toHaveLength(1);
   });
 
-  describe('when data is present, renders a BasicPanel', () => {
+  describe('when data is present and panelType is basic, renders a BasicPanel', () => {
     beforeEach(() => {
-      wrapper.setProps({ ...dataProps });
+      wrapper.setProps({ ...basicProps });
       wrapper.setState({ isLoading: false });
       wrapper.update();
     });
@@ -91,6 +116,39 @@ describe('Basic Panel Loader', () => {
     it('renders a panel body without errors', () => {
       const panelBodyComponent = wrapper.find('div.panelBody');
       expect(panelBodyComponent).toHaveLength(1);
+    });
+
+    it('renders an items per page selection', () => {
+      const selectFieldComponent = wrapper.find('div.selectField');
+      expect(selectFieldComponent).toHaveLength(1);
+    });
+
+    it('renders a CustomButton', () => {
+      const customButtonComponent = wrapper.find('CustomButton');
+      expect(customButtonComponent).toHaveLength(1);
+    });
+
+    it('renders a TableList', () => {
+      const tableListComponent = wrapper.find('TableList');
+      expect(tableListComponent).toHaveLength(1);
+    });
+  });
+
+  describe('when data is present and panelType is tab, renders a TabPanel', () => {
+    beforeEach(() => {
+      wrapper.setProps({ ...tabProps });
+      wrapper.setState({ isLoading: false });
+      wrapper.update();
+    });
+
+    it('renders a panel body without errors', () => {
+      const panelBodyComponent = wrapper.find('div.panelBody');
+      expect(panelBodyComponent).toHaveLength(1);
+    });
+
+    it('contains 2 separate tabs', () => {
+      const tabPanes = wrapper.find('TabPane');
+      expect(tabPanes).toHaveLength(2);
     });
 
     it('renders an items per page selection', () => {
