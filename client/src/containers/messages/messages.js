@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/messageActions';
-// import CARDS from '../../components/messages/layouts/PanelCards/panelCards';
 import TABLEHEADERS from '../../components/messages/layouts/Headers/headers.js';
 import BasicPanelLoader from '../../components/app/panels/BasicPanelLoader/BasicPanelLoader.js';
 
@@ -19,6 +18,6 @@ const Messages = props => (
 );
 
 export default connect(
-  state => ({ serverMessage: state.server.message, ...state.messages }),
+  state => ({ ...state.server, ...state.messages }),
   { ...actions },
 )(Messages);

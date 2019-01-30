@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BasicPanel from '../BasicPanel/basicPanel.js';
 import PageContainer from '../PageContainer/pageContainer.js';
-import PanelLoader from '../../../../containers/app/loading/Loader.js';
+import PanelLoader from '../../loading/PanelLoader/PanelLoader.js';
 
 class BasicPanelLoader extends Component {
   state = { isLoading: true };

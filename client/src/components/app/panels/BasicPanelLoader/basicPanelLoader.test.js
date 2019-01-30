@@ -1,6 +1,5 @@
-import { setup } from '../../../../tests/utils';
+import { setupMount } from '../../../../tests/utils';
 import BasicPanelLoader from './BasicPanelLoader.js';
-import BasicPanel from '../BasicPanel/basicPanel.js';
 
 const initialState = {
   isLoading: true,
@@ -11,11 +10,19 @@ const fetchAction = jest.fn();
 const fetchItemCounts = jest.fn();
 const fetchItems = jest.fn();
 
-const nextProps = {
+const initialProps = {
+  buttonPushLocation: '/subskribble',
   deleteAction,
   fetchAction,
   fetchItemCounts,
   fetchItems,
+};
+
+const failProps = {
+  serverError: '404 - Not Found',
+};
+
+const dataProps = {
   SELECTFIELD: true,
   TAB: 'Messages',
   items: [
@@ -58,19 +65,47 @@ const nextProps = {
 describe('Basic Panel Loader', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup(BasicPanelLoader, null, initialState);
+    wrapper = setupMount(BasicPanelLoader, initialProps, initialState);
   });
 
   it('renders a loader without errors', () => {
-    const loaderComponent = wrapper.find('Connect(Loader)');
+    const loaderComponent = wrapper.find('PanelLoader');
     expect(loaderComponent).toHaveLength(1);
   });
 
-  it('when data is present, renders a BasicPanel without errors', () => {
-    wrapper.setProps({ ...nextProps });
-    wrapper.setState({ isLoading: false });
+  it('renders a no data found panel on error', () => {
+    wrapper.setProps({ ...failProps });
     wrapper.update();
-    const basicPanelComponent = wrapper.find(BasicPanel);
-    expect(basicPanelComponent).toHaveLength(1);
+
+    const noDataToDisplayComponent = wrapper.find('NoDataToDisplay');
+    expect(noDataToDisplayComponent).toHaveLength(1);
+  });
+
+  describe('when data is present, renders a BasicPanel', () => {
+    beforeEach(() => {
+      wrapper.setProps({ ...dataProps });
+      wrapper.setState({ isLoading: false });
+      wrapper.update();
+    });
+
+    it('renders a panel body without errors', () => {
+      const panelBodyComponent = wrapper.find('div.panelBody');
+      expect(panelBodyComponent).toHaveLength(1);
+    });
+
+    it('renders an items per page selection', () => {
+      const selectFieldComponent = wrapper.find('div.selectField');
+      expect(selectFieldComponent).toHaveLength(1);
+    });
+
+    it('renders a CustomButton', () => {
+      const customButtonComponent = wrapper.find('CustomButton');
+      expect(customButtonComponent).toHaveLength(1);
+    });
+
+    it('renders a TableList', () => {
+      const tableListComponent = wrapper.find('TableList');
+      expect(tableListComponent).toHaveLength(1);
+    });
   });
 });

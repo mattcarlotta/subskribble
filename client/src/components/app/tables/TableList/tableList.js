@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
-import TableActions from '../TableActions/TableActions';
+import TableActions from '../TableActions/TableActions.js';
 
 const TableList = ({
   current,
