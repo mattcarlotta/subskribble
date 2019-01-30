@@ -1,28 +1,28 @@
 import React, { Fragment } from 'react';
 import { IndexRoute, Redirect, Route } from 'react-router';
 
-import App from '../components/app.js';
-import ButtonLoading from '../containers/app/buttons/ButtonLoading.js';
-import CustomerSignupForm from '../containers/forms/CustomerSignupForm/CustomerSignupForm.js';
+import App from '../components';
+import ButtonLoading from '../containers/app/buttons/ButtonLoading';
+import CustomerSignupForm from '../containers/forms/CustomerSignupForm/CustomerSignupForm';
 import Dashboard from '../containers/dashboard/dashboard.js';
-import DeleteAccount from '../containers/app/settings/DeleteAccount/DeleteAccount.js';
+import DeleteAccount from '../containers/app/settings/DeleteAccount/DeleteAccount';
 import Landing from '../components/landing/landing.js';
-import MessageForm from '../containers/forms/MessageForm/MessageForm.js';
+import MessageForm from '../containers/forms/MessageForm/MessageForm';
 import NotFound from '../components/app/notfound/404/404.js';
 import Plans from '../containers/plans/plans.js';
-import PlansForm from '../containers/forms/PlansForm/PlansForm.js';
+import PlansForm from '../containers/forms/PlansForm/PlansForm';
 import Promos from '../containers/promos/promos.js';
-import PromosForm from '../containers/forms/PromosForm/PromosForm.js';
+import PromosForm from '../containers/forms/PromosForm/PromosForm';
 import Messages from '../containers/messages/messages.js';
-import RefundForm from '../containers/forms/RefundForm/RefundForm.js';
-import RequireAuth from '../containers/app/auth/RequireAuth/RequireAuth.js';
-import ResetPassword from '../containers/app/auth/ResetPassword/ResetPassword.js';
-import Settings from '../containers/app/settings/Settings/Settings.js';
+import RefundForm from '../containers/forms/RefundForm/RefundForm';
+import RequireAuth from '../containers/app/auth/RequireAuth/RequireAuth';
+import ResetPassword from '../containers/app/auth/ResetPassword/ResetPassword';
+import Settings from '../containers/app/settings/Settings/Settings';
 import Subscribers from '../containers/subscribers/subscribers.js';
 import Templates from '../containers/templates/templates.js';
-import TemplateForm from '../containers/forms/TemplateForm/TemplateForm.js';
+import TemplateForm from '../containers/forms/TemplateForm/TemplateForm';
 import Transactions from '../containers/transactions/transactions.js';
-import VerifyEmail from '../containers/app/auth/VerifyEmail/VerifyEmail.js';
+import VerifyEmail from '../containers/app/auth/VerifyEmail/VerifyEmail';
 
 // CONFIG APP ROUTE VIEWS
 export default (
