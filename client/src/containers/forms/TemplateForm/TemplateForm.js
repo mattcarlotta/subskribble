@@ -39,7 +39,7 @@ class TemplateForm extends Component {
           selectOptions: map(activeplans, ({ planname }) => planname),
         }),
       )
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   fetchTemplateForEditing = id => {
@@ -51,7 +51,7 @@ class TemplateForm extends Component {
           this.fetchPlans();
         });
       })
-      .catch(() => this.props.goBack());
+      .catch(() => this.props.handleGoBack());
   };
 
   handleFormSubmit = formProps => {

@@ -1,3 +1,4 @@
+import isEmpty from 'lodash';
 import React, { Component } from 'react';
 import BasicPanel from '../BasicPanel/basicPanel.js';
 import PageContainer from '../PageContainer/pageContainer.js';
@@ -40,13 +41,17 @@ class BasicPanelLoader extends Component {
 
     const loadedBasic =
       panelType === 'basic' &&
-      (items !== nextProps.items || itemcount !== nextProps.itemcount);
+      (!isEmpty(items) || itemcount !== nextProps.itemcount);
     const loadedTab =
       panelType === 'tab' &&
-      (activeitems !== nextProps.activeitems ||
+      (!isEmpty(activeitems) ||
         activeitemcount !== nextProps.activeitemcount ||
-        (inactiveitems !== nextProps.inactiveitems ||
+        (!isEmpty(inactiveitems) ||
           inactiveitemcount !== nextProps.inactiveitemcount));
+
+    console.log('items', items);
+    console.log('nextItems', nextProps.items);
+    console.log('loadedBasic', items !== nextProps.items);
     if (loadedBasic || loadedTab) this.setState({ isLoading: false });
   };
 

@@ -6,6 +6,7 @@ module.exports = (app) => {
       createTemplate,
       deleteOneTemplate,
       findTemplateById,
+      getAllActivePlans,
       getAllActiveTemplates,
       getSomeTemplates,
       getTemplateCount,
@@ -21,6 +22,7 @@ module.exports = (app) => {
     sendError,
   } = app.shared.helpers;
   const {
+    createPlanFirst,
     createTemplateFirst,
     itemAlreadyExists,
     missingCreationParams,
@@ -105,6 +107,9 @@ module.exports = (app) => {
     // FETCHES ACTIVE PLAN AND TEMPLATE RECORDS
     fetchAllActiveRecords: async (req, res, done) => {
       try {
+        const activeplans = await db.any(getAllActivePlans, [req.session.id]);
+        if (isEmpty(activeplans)) return sendError(createPlanFirst, res, done);
+
         const activetemplates = await db.any(getAllActiveTemplates, [
           req.session.id,
         ]);

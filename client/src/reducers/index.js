@@ -42,7 +42,19 @@ const dashboardReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const messagesReducer = (state = {}, { payload, type }) => {
+const initialBasicPanelProps = {
+  items: [],
+  itemcount: 0,
+};
+
+const initialTabPanelProps = {
+  activeitems: [],
+  activeitemcount: 0,
+  inactiveitems: [],
+  inactiveitemcount: 0,
+};
+
+const messagesReducer = (state = initialBasicPanelProps, { payload, type }) => {
   switch (type) {
     case types.SET_MESSAGES:
       return { ...state, items: payload };
@@ -55,7 +67,7 @@ const messagesReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const planReducer = (state = {}, { payload, type }) => {
+const planReducer = (state = initialTabPanelProps, { payload, type }) => {
   switch (type) {
     case types.SET_ACTIVE_PLANS:
       return { ...state, activeitems: payload };
@@ -78,7 +90,7 @@ const planReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const promoReducer = (state = {}, { payload, type }) => {
+const promoReducer = (state = initialTabPanelProps, { payload, type }) => {
   switch (type) {
     case types.APPLY_PROMO_CODE:
       return { ...state, appliedPromoCode: payload };
@@ -151,7 +163,7 @@ const serverReducer = (state = serverInitialState, { payload, type }) => {
   }
 };
 
-const subscriberReducer = (state = {}, { payload, type }) => {
+const subscriberReducer = (state = initialTabPanelProps, { payload, type }) => {
   switch (type) {
     case types.SET_ACTIVE_SUBS:
       return { ...state, activeitems: payload };
@@ -174,7 +186,7 @@ const subscriberReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const templateReducer = (state = {}, { payload, type }) => {
+const templateReducer = (state = initialTabPanelProps, { payload, type }) => {
   switch (type) {
     case types.SET_ACTIVE_TEMPLATES:
       return { ...state, activeitems: payload };
@@ -197,7 +209,10 @@ const templateReducer = (state = {}, { payload, type }) => {
   }
 };
 
-const transactionReducer = (state = {}, { payload, type }) => {
+const transactionReducer = (
+  state = initialTabPanelProps,
+  { payload, type },
+) => {
   switch (type) {
     case types.SET_CHARGES:
       return { ...state, activeitems: payload };
