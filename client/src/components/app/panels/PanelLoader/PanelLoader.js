@@ -41,12 +41,17 @@ class PanelLoader extends Component {
 
     const loadedBasic =
       panelType === 'basic' &&
-      (!isEmpty(items) || itemcount !== nextProps.itemcount);
+      (!isEmpty(items) ||
+        (items.length !== 0 && items !== nextProps.items) ||
+        itemcount !== nextProps.itemcount);
     const loadedTab =
       panelType === 'tab' &&
       (!isEmpty(activeitems) ||
+        (activeitems.length !== 0 && activeitems !== nextProps.activeitems) ||
         activeitemcount !== nextProps.activeitemcount ||
         (!isEmpty(inactiveitems) ||
+          (inactiveitems.length !== 0 &&
+            inactiveitems !== nextProps.inactiveitems) ||
           inactiveitemcount !== nextProps.inactiveitemcount));
 
     if (loadedBasic || loadedTab) this.setState({ isLoading: false });
