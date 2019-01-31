@@ -118,6 +118,14 @@ describe('Panel Loader', () => {
       expect(panelBodyComponent).toHaveLength(1);
     });
 
+    it('hides the panel when the minimize button is clicked', () => {
+      const panelButton = wrapper.find('button.panelButton');
+      panelButton.simulate('click');
+
+      const panelBodyComponent = wrapper.find('div.panelBody');
+      expect(panelBodyComponent).toHaveLength(0);
+    });
+
     it('renders an items per page selection', () => {
       const selectFieldComponent = wrapper.find('div.selectField');
       expect(selectFieldComponent).toHaveLength(1);
@@ -144,6 +152,14 @@ describe('Panel Loader', () => {
     it('renders a panel body without errors', () => {
       const panelBodyComponent = wrapper.find('div.panelBody');
       expect(panelBodyComponent).toHaveLength(1);
+    });
+
+    it('hides the panel when the minimize button is clicked', () => {
+      const panelButton = wrapper.find('button.panelButton');
+      panelButton.simulate('click');
+
+      const panelBodyComponent = wrapper.find('div.panelBody');
+      expect(panelBodyComponent).toHaveLength(0);
     });
 
     it('contains 2 separate tabs', () => {

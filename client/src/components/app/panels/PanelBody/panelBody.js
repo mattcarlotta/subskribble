@@ -35,11 +35,8 @@ export default class extends Component {
     } = this.props;
     const tabTitle = TAB.toLowerCase().replace(/\s/g, '');
 
-    return (
-      <div
-        style={{ display: this.props.visible ? 'block' : 'none' }}
-        className={panelBodyContainer}
-      >
+    return this.props.visible ? (
+      <div className={panelBodyContainer}>
         {CARDBODY && <CARDBODY />}
         <div style={{ ...style }} className={panelBody}>
           <div style={{ marginBottom: 20 }} className="ant-row">
@@ -85,6 +82,6 @@ export default class extends Component {
           )}
         </div>
       </div>
-    );
+    ) : null;
   };
 }

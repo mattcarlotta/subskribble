@@ -9,7 +9,11 @@ const BasicPanel = ({ cardTitle, ...props }) => (
   <div className={styles.panelContainer}>
     <TogglePanelVisibility>
       {(visible, buttonPanel) => (
-        <Card title={cardTitle} extra={buttonPanel()}>
+        <Card
+          bodyStyle={{ display: visible ? 'block' : 'none' }}
+          title={cardTitle}
+          extra={buttonPanel()}
+        >
           <PanelBody
             style={{ margin: 0, padding: 0 }}
             visible={visible}
