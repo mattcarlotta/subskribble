@@ -8,7 +8,7 @@ import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers/reducers.js';
-import Routes from '../routes/routes.js';
+import routes from '../routes/routes.js';
 
 export const middlewares = applyMiddleware(thunk);
 
@@ -18,9 +18,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 export default () => (
   <LocaleProvider locale={enUS}>
     <Provider store={store}>
-      <Router history={history}>
-        <Routes />
-      </Router>
+      <Router history={history} routes={routes} />
     </Provider>
   </LocaleProvider>
 );
