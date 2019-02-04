@@ -1,8 +1,8 @@
 import {
   allowedTextAreaCharacters,
   isRequired,
-} from '../../app/formFields/validateFormFields';
-import { AntTextArea } from '../../app/formFields/antReduxFormFields';
+} from '../../app/formFields/validateFormFields.js';
+import { AntTextArea } from '../../app/formFields/antReduxFormFields.js';
 
 export default [
   {

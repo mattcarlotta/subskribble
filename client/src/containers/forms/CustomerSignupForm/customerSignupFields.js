@@ -1,5 +1,5 @@
 import React from 'react';
-import { AntSelect } from '../../app/formFields/antReduxFormFields';
+import { AntSelect } from '../../app/formFields/antReduxFormFields.js';
 import {
   allowedCharacters,
   isNumber,
@@ -12,7 +12,7 @@ import {
   isValidState,
   isValidYear,
   isValidZip,
-} from '../../app/formFields/validateFormFields';
+} from '../../app/formFields/validateFormFields.js';
 import {
   formatCreditCard,
   formatCVV,
@@ -20,7 +20,7 @@ import {
   formatState,
   formatYear,
   formatZip,
-} from '../../app/formFields/formatFields';
+} from '../../app/formFields/formatFields.js';
 import styles from './customerFields.scss';
 
 const MENUITEMS = [

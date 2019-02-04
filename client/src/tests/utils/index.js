@@ -1,12 +1,10 @@
-import React from 'react';
 import { createStore } from 'redux';
 import { shallow, mount } from 'enzyme';
-import { Provider } from 'react-redux';
 import checkPropTypes from 'check-prop-types';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import rootReducer from '../../reducers';
-import { middlewares } from '../../root';
+import rootReducer from '../../reducers/reducers.js';
+import { middlewares } from '../../root/root.js';
 
 /**
  * Create a mocked store with middleware(s).
@@ -26,64 +24,30 @@ export const storeFactory = initialState =>
 
 /**
  * Factory function to create a ShallowWrapper for a component
- * @function setup
+ * @function shallowComponent
  * @param {node} Component - Component to be shallowed
- * @param {object} props - Component props specific to this setup.
  * @param {object} state - initial state for setup.
  * @returns {ShallowWrapper}
  */
-export const setup = (Component, props = {}, state = null) => {
-  const wrapper = shallow(<Component {...props} />);
+export const shallowComponent = (Component, state = null) => {
+  const wrapper = shallow(Component);
   if (state) wrapper.setState(state);
   return wrapper;
 };
 
 /**
  * Factory function to create a MountedWrapper for a component
- * @function setupMount
+ * @function mountComponent
  * @param {node} Component - Component to be shallowed
  * @param {object} props - Component props specific to this setup.
  * @param {object} state - initial state for setup.
  * @returns {MountedWrapper}
  */
-export const setupMount = (Component, props = {}, state = null) => {
-  const wrapper = mount(<Component {...props} />);
+export const mountComponent = (Component, state = null) => {
+  const wrapper = mount(Component);
   if (state) wrapper.setState(state);
   return wrapper;
 };
-
-/**
- * Factory function to create a ConnectedMountedWrapper for a component
- * @function setupConnectedMount
- * @param {node} Component - Component to be shallowed
- * @param {object} props - Component props specific to this setup.
- * @param {object} state - initial state for setup.
- * @param {object} store - initial store for setup.
- * @returns {ConnectedMountedWrapper}
- */
-export const setupConnectedMount = (
-  Component,
-  props = {},
-  state = null,
-  store = {},
-) => {
-  const wrapper = mount(
-    <Provider store={store}>
-      <Component {...props} />
-    </Provider>,
-  );
-  if (state) wrapper.setState(state);
-  return wrapper;
-};
-
-/**
- * Return ShallowWrapper containing node(s) with the given data-test val.
- * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within.
- * @param {string} val - Value of data-test attribute for search.
- * @returns {ShallowWrapper}
- */
-export const findByTestAttr = (wrapper, val) =>
-  wrapper.find(`[data-test="${val}"]`);
 
 /**
  * Component PropType error checking

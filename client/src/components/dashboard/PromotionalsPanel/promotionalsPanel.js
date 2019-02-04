@@ -3,10 +3,10 @@ import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Tooltip } from 'antd';
-import MiniPanel from '../MiniPanel/miniPanel';
-import BarChart from '../../app/charts/BarChart';
-import NoData from '../NoData/noData';
-import styles from '../../../styles';
+import MiniPanel from '../MiniPanel/miniPanel.js';
+import BarChart from '../../app/charts/BarChart.js';
+import NoData from '../NoData/noData.js';
+import styles from '../../../styles/styles.scss';
 
 const PromosPanel = ({ popularpromotionals, promotionals }) => (
   <MiniPanel

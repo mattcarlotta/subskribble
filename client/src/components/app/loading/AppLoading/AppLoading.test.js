@@ -1,4 +1,5 @@
-import { setup } from '../../../../tests/utils';
+import React from 'react';
+import { shallowComponent } from '../../../../tests/utils';
 import AppLoading from './AppLoading.js';
 import Spinner from '../Spinner/Spinner.js';
 import Login from '../../auth/Login/Login.js';
@@ -15,7 +16,7 @@ const initialProps = {
 describe('App Loader', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup(AppLoading, initialProps, initialState); // mount component
+    wrapper = shallowComponent(<AppLoading {...initialProps} />, initialState); // mount component
   });
 
   it('renders a spinner when the app initially loads', () => {

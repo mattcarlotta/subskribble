@@ -1,5 +1,5 @@
-import ACTIVETABLEHEADERS from '../ActiveHeaders/activeHeaders';
-import INACTIVETABLEHEADERS from '../InactiveHeaders/inactiveHeaders';
+import ACTIVETABLEHEADERS from '../ActiveHeaders/activeHeaders.js';
+import INACTIVETABLEHEADERS from '../InactiveHeaders/inactiveHeaders.js';
 
 export default ({
   activeitems,

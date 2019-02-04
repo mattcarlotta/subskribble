@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AntSwitchField } from '../../app/formFields/antReduxFormFields';
+import { AntSwitchField } from '../../app/formFields/antReduxFormFields.js';
 import {
   resetBillingFieldValues,
   setBillingFieldValues,
-} from '../../../actions/formActions';
+} from '../../../actions/formActions.js';
 
 class CustomerSwitchField extends Component {
   state = {

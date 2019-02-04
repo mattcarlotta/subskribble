@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { disabledInputs, disabledTags } from '../../../../styles/index.scss';
+import { disabledInputs, disabledTags } from '../../../../styles/styles.scss';
 
 const DisabledFields = ({ fromsender, plans, subject }) => (
   <div className="disabledOptions">

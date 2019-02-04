@@ -1,4 +1,4 @@
-import { CHARGEHEADERS, REFUNDHEADERS } from '../Headers/headers';
+import { CHARGEHEADERS, REFUNDHEADERS } from '../Headers/headers.js';
 
 export default ({
   activeitems,

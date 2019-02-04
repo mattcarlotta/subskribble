@@ -1,6 +1,6 @@
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router';
 import { Avatar, Menu } from 'antd';
 import styles from './settingsMenu.scss';
@@ -13,51 +13,60 @@ const RIGHTNAVLINKS = [
   // { icon: '', label: '', link: '/subskribble/logout' },
 ];
 
-const SettingsMenu = ({
-  avatarURL,
-  firstName,
-  handleVisibleChange,
-  lastName,
-  loggedinUser,
-  unauthorizeUser,
-}) => {
-  const closeMenu = () => handleVisibleChange(false);
-  return (
-    <Menu className={styles.settingsTabContainer} selectedKeys={[]}>
-      <MenuItem className={styles.headerContainer}>
-        <div className={styles.myProfileContainer}>
-          <Avatar className={styles.popoverUser} icon="user" src={avatarURL} />
-          <div className={styles.userLabel}>
-            <p className={styles.user}>
-              {firstName} {lastName}
-            </p>
-            <p className={styles.email}>{loggedinUser}</p>
+class SettingsMenu extends PureComponent {
+  handleCloseMenu = () => this.props.handleVisibleChange(false);
+
+  render = () => {
+    const {
+      avatarURL,
+      firstName,
+      lastName,
+      loggedinUser,
+      unauthorizeUser,
+    } = this.props;
+    return (
+      <Menu className={styles.settingsTabContainer} selectedKeys={[]}>
+        <MenuItem className={styles.headerContainer}>
+          <div className={styles.myProfileContainer}>
+            <Avatar
+              className={styles.popoverUser}
+              icon="user"
+              src={avatarURL}
+            />
+            <div className={styles.userLabel}>
+              <p className={styles.user}>
+                {firstName} {lastName}
+              </p>
+              <p className={styles.email}>{loggedinUser}</p>
+            </div>
           </div>
-        </div>
-      </MenuItem>
-      {map(RIGHTNAVLINKS, ({ icon, label, link }, key) => (
-        <MenuItem className={styles.linkContainer} key={key}>
-          <Link onClick={closeMenu} className={styles.menuOptions} to={link}>
+        </MenuItem>
+        {map(RIGHTNAVLINKS, ({ icon, label, link }, key) => (
+          <MenuItem className={styles.linkContainer} key={key}>
+            <Link
+              onClick={this.handleCloseMenu}
+              className={styles.menuOptions}
+              to={link}
+            >
+              <i className={`${styles.materialIcons} ${styles.settingsIcon}`}>
+                {icon}
+              </i>
+              <span className={styles.settingsLabel}>{label}</span>
+            </Link>
+          </MenuItem>
+        ))}
+        <MenuItem className={styles.linkContainer}>
+          <Link className={styles.menuOptions} onClick={unauthorizeUser}>
             <i className={`${styles.materialIcons} ${styles.settingsIcon}`}>
-              {icon}
+              exit_to_app
             </i>
-            <span className={styles.settingsLabel}>{label}</span>
+            <span className={styles.settingsLabel}>Logout</span>
           </Link>
         </MenuItem>
-      ))}
-      <MenuItem className={styles.linkContainer}>
-        <Link className={styles.menuOptions} onClick={unauthorizeUser}>
-          <i className={`${styles.materialIcons} ${styles.settingsIcon}`}>
-            exit_to_app
-          </i>
-          <span className={styles.settingsLabel}>Logout</span>
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-};
-
-export default SettingsMenu;
+      </Menu>
+    );
+  };
+}
 
 SettingsMenu.propTypes = {
   avatarURL: PropTypes.string,
@@ -67,3 +76,5 @@ SettingsMenu.propTypes = {
   handleVisibleChange: PropTypes.func.isRequired,
   unauthorizeUser: PropTypes.func.isRequired,
 };
+
+export default SettingsMenu;

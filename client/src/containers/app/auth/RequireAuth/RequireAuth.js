@@ -5,7 +5,7 @@ import {
   saveSidebarState,
 } from '../../../../actions/authActions';
 import App from '../../../../components/app';
-import AppLoading from '../../../../components/app/loading/AppLoading/AppLoading';
+import AppLoading from '../../../../components/app/loading/AppLoading/AppLoading.js';
 
 class RequireAuth extends Component {
   componentDidMount = () => {
@@ -13,12 +13,15 @@ class RequireAuth extends Component {
     if (!loggedinUser) authenticateUser();
   };
 
-  render = () =>
-    !this.props.loggedinUser ? (
-      <AppLoading {...this.props} />
-    ) : (
-      <App {...this.props} />
-    );
+  render = () => (
+    <div className="app">
+      {!this.props.loggedinUser ? (
+        <AppLoading {...this.props} />
+      ) : (
+        <App {...this.props} />
+      )}
+    </div>
+  );
 }
 
 export default connect(

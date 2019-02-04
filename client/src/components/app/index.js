@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { browserHistory, withRouter } from 'react-router';
 import { Layout } from 'antd';
-import CustomScrollbars from './scrollbars/CustomScrollbars';
-import Header from './navigation/topbar/Header/header';
-import InlineMenu from './navigation/sidebar/InlineMenu';
+import CustomScrollbars from './scrollbars/CustomScrollbars.js';
+import Header from './navigation/topbar/Header/header.js';
+import InlineMenu from './navigation/sidebar/InlineMenu.js';
 
 const { Content } = Layout;
 const TABS = [

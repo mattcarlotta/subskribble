@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AuthForm from '../AuthForm/authForm';
-import FIELDS from './passwordResetFormFields';
-import { resetUserToken } from '../../../actions/authActions';
+import AuthForm from '../AuthForm/authForm.js';
+import FIELDS from './passwordResetFormFields.js';
+import { resetUserToken } from '../../../actions/authActions.js';
 
 const ResetPasswordForm = ({ resetUserToken, showLoadingButton, ...props }) => {
   const handleFormSubmit = ({ email }) => {

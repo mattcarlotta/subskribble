@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/planActions';
-import CARDS from '../../components/plans/layouts/PanelCards/panelCards';
+import * as actions from '../../actions/planActions.js';
+import CARDS from '../../components/plans/layouts/PanelCards/panelCards.js';
 import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Plans = props => (

@@ -10,20 +10,20 @@ import {
   AntRangePicker,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields';
+} from '../../app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner';
-import { fetchPromo } from '../../../actions/promoActions';
-import { addNewPromo, editPromo } from '../../../actions/formActions';
-import { fetchAllActivePlans } from '../../../actions/planActions';
+import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
+import { fetchPromo } from '../../../actions/promoActions.js';
+import { addNewPromo, editPromo } from '../../../actions/formActions.js';
+import { fetchAllActivePlans } from '../../../actions/planActions.js';
 import {
   allowedCharacters,
   hasDates,
   isRequired,
   isNotEmpty,
   isNumber,
-} from '../../app/formFields/validateFormFields';
-import { formBoxContainer, input100 } from '../../../styles';
+} from '../../app/formFields/validateFormFields.js';
+import { formBoxContainer, input100 } from '../../../styles/styles.scss';
 
 class PromoForm extends Component {
   state = { isLoading: true, selectOptions: [] };

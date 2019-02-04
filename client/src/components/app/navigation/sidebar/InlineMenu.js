@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Menu } from 'antd';
-import MenuHeader from './menuHeader';
+import MenuHeader from './menuHeader.js';
 import styles from './sidebar.scss';
 
 const { Item: MenuItem, ItemGroup: MenuItemGroup } = Menu;

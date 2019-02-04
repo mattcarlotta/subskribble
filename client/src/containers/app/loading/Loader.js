@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spinner from '../../../components/app/loading/Spinner/Spinner';
-import NoDataToDisplay from '../../../components/app/notfound/NoDataToDisplay/noDataToDisplay';
+import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
+import NoDataToDisplay from '../../../components/app/notfound/NoDataToDisplay/noDataToDisplay.js';
 
 class Loader extends Component {
   state = { requestTimeout: false };

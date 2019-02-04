@@ -1,4 +1,5 @@
-import { checkProps, setup } from '../../../../tests/utils';
+import React from 'react';
+import { checkProps, shallowComponent } from '../../../../tests/utils';
 import CustomButton from './customButton.js';
 
 const initialProps = {
@@ -10,10 +11,15 @@ const initialProps = {
 };
 
 const fakeOnClickAction = jest.fn();
-let wrapper = setup(CustomButton, initialProps, null); // set wrapper with initialState
-let customButtonComponent = wrapper.find('Button'); // get custom button component
 
 describe('Custom Button', () => {
+  let wrapper;
+  let customButtonComponent;
+  beforeEach(() => {
+    wrapper = shallowComponent(<CustomButton {...initialProps} />); // set wrapper with initialState
+    customButtonComponent = wrapper.find('Button'); // get custom button component
+  });
+
   it('renders without errors', () =>
     expect(customButtonComponent).toHaveLength(1));
 
@@ -23,19 +29,18 @@ describe('Custom Button', () => {
   it('pushes to a new page if onClickAction is missing', () => {
     const spy = jest.spyOn(wrapper.instance(), 'pushToLocation');
     wrapper.instance().forceUpdate();
-    customButtonComponent = wrapper.find('Button'); // get custom button component
+
+    customButtonComponent = wrapper.find('Button');
     customButtonComponent.simulate('click');
     expect(spy).toHaveBeenCalled();
     spy.mockClear();
   });
 
   it('calls supplied onClickAction function', () => {
-    wrapper = setup(
-      CustomButton,
-      { ...initialProps, onClickAction: fakeOnClickAction },
-      null,
-    ); // set wrapper with initialState
-    customButtonComponent = wrapper.find('Button'); // get custom button component
+    wrapper.setProps({ onClickAction: fakeOnClickAction });
+    wrapper.update();
+
+    customButtonComponent = wrapper.find('Button');
     customButtonComponent.simulate('click');
     expect(fakeOnClickAction).toHaveBeenCalled();
   });

@@ -1,4 +1,5 @@
-import { checkProps, setup } from '../../../../tests/utils';
+import React from 'react';
+import { checkProps, shallowComponent } from '../../../../tests/utils';
 import SelectField from './selectField.js';
 
 const fetchAction = jest.fn();
@@ -13,7 +14,7 @@ const initialProps = {
   sortByNum: 10,
 };
 
-const wrapper = setup(SelectField, initialProps, null);
+const wrapper = shallowComponent(<SelectField {...initialProps} />);
 
 describe('Select Field', () => {
   it('renders without errors', () => {

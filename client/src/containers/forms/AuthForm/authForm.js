@@ -5,8 +5,8 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFields,
   AntFormSubmit,
-} from '../../app/formFields/antReduxFormFields';
-import styles from '../../../styles';
+} from '../../app/formFields/antReduxFormFields.js';
+import styles from '../../../styles/styles.scss';
 
 const AuthForm = ({
   confirmLoading,

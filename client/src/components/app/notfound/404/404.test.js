@@ -1,7 +1,8 @@
-import { setup } from '../../../../tests/utils';
+import React from 'react';
+import { shallowComponent } from '../../../../tests/utils';
 import NotFound from './404.js';
 
-const wrapper = setup(NotFound);
+const wrapper = shallowComponent(<NotFound />);
 describe('404 Not Found', () => {
   it('renders without errors', () => {
     const notfoundComponent = wrapper.find('div.notfoundContainer');

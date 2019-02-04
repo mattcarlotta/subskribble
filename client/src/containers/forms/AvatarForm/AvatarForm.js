@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Col, Button, Icon, Tooltip } from 'antd';
-import { AntUpload } from '../../app/formFields/antReduxFormFields';
+import { AntUpload } from '../../app/formFields/antReduxFormFields.js';
 import {
   hasFileList,
   isRequired,
-} from '../../app/formFields/validateFormFields';
+} from '../../app/formFields/validateFormFields.js';
 
 class AvatarForm extends Component {
   state = {

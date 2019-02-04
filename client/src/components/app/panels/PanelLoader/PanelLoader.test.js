@@ -1,4 +1,5 @@
-import { setupMount } from '../../../../tests/utils';
+import React from 'react';
+import { mountComponent } from '../../../../tests/utils';
 import PanelLoader from './PanelLoader.js';
 import MESSAGETABLEHEADERS from '../../../messages/layouts/Headers/headers.js';
 import PLANCARDS from '../../../plans/layouts/PanelCards/panelCards.js';
@@ -90,7 +91,7 @@ const tabProps = {
 describe('Panel Loader', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setupMount(PanelLoader, initialProps, initialState);
+    wrapper = mountComponent(<PanelLoader {...initialProps} />, initialState);
   });
 
   it('renders a loader without errors', () => {

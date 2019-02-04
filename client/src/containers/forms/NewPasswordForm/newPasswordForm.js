@@ -5,14 +5,14 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFields,
   AntFormSubmit,
-} from '../../app/formFields/antReduxFormFields';
+} from '../../app/formFields/antReduxFormFields.js';
 
-import FIELDS from './newPasswordFormFields';
+import FIELDS from './newPasswordFormFields.js';
 import {
   missingPasswordToken,
   resetUserPassword,
-} from '../../../actions/authActions';
-import styles from '../../../styles';
+} from '../../../actions/authActions.js';
+import styles from '../../../styles/styles.scss';
 
 class NewPasswordForm extends Component {
   handleFormSubmit = ({ password }) => {

@@ -1,4 +1,5 @@
-import { setupMount, checkProps } from '../../../../tests/utils';
+import React from 'react';
+import { mountComponent, checkProps } from '../../../../tests/utils';
 import TemplatePreview from './templatePreview.js';
 
 const initialProps = {
@@ -19,7 +20,7 @@ describe('Template Preview', () => {
   let wrapper;
   let templatePreviewComponent;
   beforeEach(() => {
-    wrapper = setupMount(TemplatePreview, initialProps, null); // mount component wrapper with initialProps
+    wrapper = mountComponent(<TemplatePreview {...initialProps} />); // mount component wrapper with initialProps
     templatePreviewComponent = wrapper.find('div.previewBoxContainer');
   });
 

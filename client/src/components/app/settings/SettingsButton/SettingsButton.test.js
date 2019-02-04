@@ -1,4 +1,5 @@
-import { setupMount } from '../../../../tests/utils';
+import React from 'react';
+import { mountComponent } from '../../../../tests/utils';
 import SettingsButton from './SettingsButton.js';
 
 const initialState = { visibleSettings: false };
@@ -16,7 +17,10 @@ describe('Navbar Settings Button', () => {
   let wrapper;
   let settingButton;
   beforeEach(() => {
-    wrapper = setupMount(SettingsButton, initialProps, initialState);
+    wrapper = mountComponent(
+      <SettingsButton {...initialProps} />,
+      initialState,
+    );
     settingButton = wrapper.find('button.settingButton');
   });
 

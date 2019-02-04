@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EmptyPreview from '../EmptyPreview/emptyPreview';
+import EmptyPreview from '../EmptyPreview/emptyPreview.js';
 import ShowPreview from '../ShowPreview/showPreview.js';
-import { previewBoxContainer } from '../../../../styles/index.scss';
+import { previewBoxContainer } from '../../../../styles/styles.scss';
 
 const TemplatePreview = ({ company, fromsender, message, subject }) => (
   <div className={previewBoxContainer}>

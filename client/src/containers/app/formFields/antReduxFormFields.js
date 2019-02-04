@@ -18,7 +18,7 @@ import {
   Switch,
   Upload,
 } from 'antd';
-import styles from '../../../styles';
+import styles from '../../../styles/styles.scss';
 
 const FormItem = Form.Item;
 const { Button: RadioButton, Group: RadioGroup } = Radio;

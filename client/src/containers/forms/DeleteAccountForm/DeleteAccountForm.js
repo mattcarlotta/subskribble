@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { AntFormFieldsWithLabels } from '../../app/formFields/antReduxFormFields';
-import FIELDS from './deleteAccountFormFields';
+import { AntFormFieldsWithLabels } from '../../app/formFields/antReduxFormFields.js';
+import FIELDS from './deleteAccountFormFields.js';
 import styles from './deleteAccount.scss';
 
 class DeleteAccountForm extends Component {

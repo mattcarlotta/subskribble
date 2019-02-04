@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import { Field } from 'redux-form';
-import RenderFormErrors from './renderFormErrors';
-import { isRequired, missingInput } from './validateFormFields';
+import RenderFormErrors from './renderFormErrors.js';
+import { isRequired, missingInput } from './validateFormFields.js';
 
 const modules = {
   toolbar: [

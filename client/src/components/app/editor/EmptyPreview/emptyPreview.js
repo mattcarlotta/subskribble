@@ -3,7 +3,7 @@ import {
   boxEmpty,
   emptyIcon,
   materialIcons,
-} from '../../../../styles/index.scss';
+} from '../../../../styles/styles.scss';
 
 const EmptyPreview = () => (
   <div className={boxEmpty}>

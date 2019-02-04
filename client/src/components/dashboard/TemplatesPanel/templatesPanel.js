@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PieChart from '../../app/charts/PieChart';
-import MiniPanel from '../MiniPanel/miniPanel';
-import NoData from '../NoData/noData';
+import PieChart from '../../app/charts/PieChart.js';
+import MiniPanel from '../MiniPanel/miniPanel.js';
+import NoData from '../NoData/noData.js';
 
 const TemplatesPanel = ({ activetemplates, inactivetemplates }) => (
   <MiniPanel

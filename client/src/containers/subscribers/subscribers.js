@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/subscriberActions';
-import CARDS from '../../components/subscribers/layouts/PanelCards/panelCards';
+import * as actions from '../../actions/subscriberActions.js';
+import CARDS from '../../components/subscribers/layouts/PanelCards/panelCards.js';
 import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 
 const Subscribers = props => (

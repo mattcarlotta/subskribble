@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
 
-import PageContainer from '../../app/panels/PageContainer/pageContainer';
-import MessagesPanel from '../MessagesPanel/messagesPanel';
-import PlansPanel from '../PlansPanel/plansPanel';
-import PromotionalsPanel from '../PromotionalsPanel/promotionalsPanel';
-import SubcribersPanel from '../SubscribersPanel/subscribersPanel';
-import TemplatesPanel from '../TemplatesPanel/templatesPanel';
-import TransactionsPanel from '../TransactionsPanel/transactionsPanel';
+import PageContainer from '../../app/panels/PageContainer/pageContainer.js';
+import MessagesPanel from '../MessagesPanel/messagesPanel.js';
+import PlansPanel from '../PlansPanel/plansPanel.js';
+import PromotionalsPanel from '../PromotionalsPanel/promotionalsPanel.js';
+import SubcribersPanel from '../SubscribersPanel/subscribersPanel.js';
+import TemplatesPanel from '../TemplatesPanel/templatesPanel.js';
+import TransactionsPanel from '../TransactionsPanel/transactionsPanel.js';
 
 export default class Dashboard extends Component {
   state = {

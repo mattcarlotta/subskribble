@@ -7,18 +7,20 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
-import routes from '../routes';
+import rootReducer from '../reducers/reducers.js';
+import Routes from '../routes/routes.js';
 
 export const middlewares = applyMiddleware(thunk);
 
-const store = createStore(rootReducer, composeWithDevTools(middlewares));
+export const store = createStore(rootReducer, composeWithDevTools(middlewares));
 const history = syncHistoryWithStore(browserHistory, store);
 
 export default () => (
   <LocaleProvider locale={enUS}>
     <Provider store={store}>
-      <Router history={history} routes={routes} />
+      <Router history={history}>
+        <Routes />
+      </Router>
     </Provider>
   </LocaleProvider>
 );

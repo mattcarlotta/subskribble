@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/messageActions';
+import * as actions from '../../actions/messageActions.js';
 import TABLEHEADERS from '../../components/messages/layouts/Headers/headers.js';
 import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
 

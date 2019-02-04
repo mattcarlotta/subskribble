@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { AntStepFormButtons } from '../../app/formFields/antReduxFormFields';
-import RenderPlanSelection from './renderPlanSelection';
-import ReviewPlanForm from './reviewPlanForm';
-import RenderFormFields from './renderFormFields';
-import styles from './registerForm';
+import { AntStepFormButtons } from '../../app/formFields/antReduxFormFields.js';
+import RenderPlanSelection from './renderPlanSelection.js';
+import ReviewPlanForm from './reviewPlanForm.js';
+import RenderFormFields from './renderFormFields.js';
+import styles from './registerForm.scss';
 
 const RegisterPlanForm = ({
   BILLINGADDRESSFIELDS,

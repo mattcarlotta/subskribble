@@ -1,7 +1,7 @@
 import {
   isRequired,
   isValidEmail,
-} from '../../app/formFields/validateFormFields';
+} from '../../app/formFields/validateFormFields.js';
 
 export default [
   {

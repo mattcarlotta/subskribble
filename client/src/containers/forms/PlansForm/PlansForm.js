@@ -6,19 +6,19 @@ import {
   AntInput,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields';
+} from '../../app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner';
-import { fetchPlan } from '../../../actions/planActions';
-import { addNewPlan, editPlan } from '../../../actions/formActions';
+import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
+import { fetchPlan } from '../../../actions/planActions.js';
+import { addNewPlan, editPlan } from '../../../actions/formActions.js';
 import {
   allowedCharacters,
   isRequired,
   isNotEmpty,
   isFloat,
   maxLength40,
-} from '../../app/formFields/validateFormFields';
-import { formBoxContainer, input100 } from '../../../styles';
+} from '../../app/formFields/validateFormFields.js';
+import { formBoxContainer, input100 } from '../../../styles/styles.scss';
 
 class PlanForm extends Component {
   state = {

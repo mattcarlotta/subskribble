@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
 import moment from 'moment';
-import styles from '../../../../styles';
+import styles from '../../../../styles/styles.scss';
 
 export default [
   {
@@ -26,22 +26,20 @@ export default [
     dataIndex: 'plans',
     render: plans => (
       <span>
-        {map(
-          plans,
-          (name, key) =>
-            name ? (
-              <span key={key}>
-                {name}
-                {key < plans.length - 1 && ', '}
-              </span>
-            ) : (
-              <span
-                key={key}
-                style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}
-              >
-                (none)
-              </span>
-            ),
+        {map(plans, (name, key) =>
+          name ? (
+            <span key={key}>
+              {name}
+              {key < plans.length - 1 && ', '}
+            </span>
+          ) : (
+            <span
+              key={key}
+              style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}
+            >
+              (none)
+            </span>
+          ),
         )}
       </span>
     ),

@@ -1,4 +1,5 @@
-import { checkProps, setupMount } from '../../../../tests/utils';
+import React from 'react';
+import { checkProps, mountComponent } from '../../../../tests/utils';
 import NotificationButton from './NotificationButton.js';
 
 const removeAllNotifications = jest.fn();
@@ -42,7 +43,10 @@ const initialState = {
 describe('Notification Button and Popover (when visible)', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setupMount(NotificationButton, initialProps, initialState);
+    wrapper = mountComponent(
+      <NotificationButton {...initialProps} />,
+      initialState,
+    );
     wrapper.setState({ visibleNotifications: true });
     wrapper.update();
   });

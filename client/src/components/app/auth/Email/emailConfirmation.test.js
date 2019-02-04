@@ -1,4 +1,5 @@
-import { setup, checkProps } from '../../../../tests/utils';
+import React from 'react';
+import { shallowComponent, checkProps } from '../../../../tests/utils';
 import EmailConfirmation from './emailConfirmation.js';
 
 describe('Email Confirmation', () => {
@@ -9,7 +10,7 @@ describe('Email Confirmation', () => {
   };
 
   beforeEach(() => {
-    wrapper = setup(EmailConfirmation, initialProps, null); // set wrapper with initialState
+    wrapper = shallowComponent(<EmailConfirmation {...initialProps} />); // set wrapper with initialState
   });
 
   it('renders without errors', () => {
@@ -34,7 +35,8 @@ describe('Email Confirmation', () => {
       status: 'verified',
       userVerified: 'email@test.com',
     };
-    wrapper = setup(EmailConfirmation, initialProps, null); // set wrapper with initialState
+    wrapper.setProps({ ...initialProps });
+    wrapper.update();
     const verificationFailureComponent = wrapper.find(
       'div.verificationSuccess',
     ); // get success verification message component

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import AsyncModal from '../../modals/asyncModal';
-import NewPasswordForm from '../../../forms/NewPasswordForm/newPasswordForm';
+import AsyncModal from '../../modals/asyncModal.js';
+import NewPasswordForm from '../../../forms/NewPasswordForm/newPasswordForm.js';
 
 const resetSelectedForm = () => browserHistory.push('/');
 

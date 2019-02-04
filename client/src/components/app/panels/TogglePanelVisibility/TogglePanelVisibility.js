@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
-import { panelButton, materialIcons } from '../../../../styles/index.scss';
+import { panelButton, materialIcons } from '../../../../styles/styles.scss';
 
 class TogglePanelVisibility extends Component {
   state = { visible: true };

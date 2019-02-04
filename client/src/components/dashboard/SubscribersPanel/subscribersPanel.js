@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MiniPanel from '../MiniPanel/miniPanel';
-import PieChart from '../../app/charts/PieChart';
-import NoData from '../NoData/noData';
+import MiniPanel from '../MiniPanel/miniPanel.js';
+import PieChart from '../../app/charts/PieChart.js';
+import NoData from '../NoData/noData.js';
 
 const SubscribersPanel = ({ inactivesubscribers, subscribers }) => (
   <MiniPanel

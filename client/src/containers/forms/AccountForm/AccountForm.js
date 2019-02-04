@@ -4,9 +4,9 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFieldsWithLabels,
   AntFormSubmit,
-} from '../../app/formFields/antReduxFormFields';
-import FIELDS from './accountDetailsFormFields';
-import styles from '../../../styles';
+} from '../../app/formFields/antReduxFormFields.js';
+import FIELDS from './accountDetailsFormFields.js';
+import styles from '../../../styles/styles.scss';
 
 class AccountForm extends Component {
   state = { confirmLoading: false };

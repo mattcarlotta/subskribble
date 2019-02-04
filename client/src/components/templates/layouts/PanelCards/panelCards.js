@@ -1,4 +1,4 @@
-import TABLEHEADERS from '../Headers/headers';
+import TABLEHEADERS from '../Headers/headers.js';
 
 export default ({
   activeitems,
