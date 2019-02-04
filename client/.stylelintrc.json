@@ -1,7 +1,6 @@
 {
   "plugins": ["stylelint-scss"],
   "extends": "stylelint-config-recommended",
-  "ignoreFiles": "**/*.js",
   "rules": {
     "indentation": 2,
     "number-leading-zero": "always",
