@@ -12,7 +12,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,scss}": [
-      "prettier --write --single-quote",
+      "prettier --write --single-quote --fix",
       "eslint --fix",
       "stylelint **/*.scss",
       "git add"
