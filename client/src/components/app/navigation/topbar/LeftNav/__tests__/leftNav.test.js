@@ -1,6 +1,4 @@
-import React from 'react';
-import { checkProps, shallowComponent } from '../../../../../tests/utils';
-import LeftNav from './leftNav.js';
+import LeftNav from '../leftNav.js';
 
 const handleMenuToggle = jest.fn();
 const initialProps = {
@@ -8,7 +6,7 @@ const initialProps = {
   handleMenuToggle,
 };
 
-const wrapper = shallowComponent(<LeftNav {...initialProps} />);
+const wrapper = shallow(<LeftNav {...initialProps} />);
 
 describe('Left Side Navigation', () => {
   it('renders without errors', () => {

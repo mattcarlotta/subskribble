@@ -10,6 +10,7 @@ import styles from '../../../styles/styles.scss';
 
 const AuthForm = ({
   confirmLoading,
+  form,
   handleSubmit,
   iconType,
   FIELDS,
@@ -22,7 +23,7 @@ const AuthForm = ({
   <div className={styles.authBoxContainer}>
     <div className={styles.authBox}>
       <div className={styles.authForm}>
-        <form onSubmit={handleSubmit}>
+        <form className={form} onSubmit={handleSubmit}>
           <AntFormFields FIELDS={FIELDS} />
           {showForgotPassword && (
             <div className={styles.forgotPassword}>
@@ -78,6 +79,7 @@ export default reduxForm({ form: '' })(AuthForm);
 
 AuthForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
+  form: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   iconType: PropTypes.string.isRequired,
   FIELDS: PropTypes.arrayOf(

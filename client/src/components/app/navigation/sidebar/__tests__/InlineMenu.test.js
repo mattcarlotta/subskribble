@@ -1,6 +1,4 @@
-import React from 'react';
-import { mountComponent, checkProps } from '../../../../tests/utils';
-import InlineMenu from './InlineMenu.js';
+import InlineMenu from '../InlineMenu.js';
 
 const handleTabClick = jest.fn();
 const initialProps = {
@@ -12,7 +10,7 @@ const initialProps = {
 describe('Inline Menu and Menu Header', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mountComponent(<InlineMenu {...initialProps} />);
+    wrapper = mount(<InlineMenu {...initialProps} />);
   });
 
   it('renders without errors', () => {

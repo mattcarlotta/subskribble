@@ -1,32 +1,12 @@
-import React from 'react';
-import { checkProps, mountComponent } from '../../../../tests/utils';
-import NotificationButton from './NotificationButton.js';
+import NotificationButton from '../NotificationButton.js';
+import {
+  readNotifications,
+  unreadNotifications,
+} from '../__mocks__/notificationButton.mocks.js';
 
 const removeAllNotifications = jest.fn();
 const deleteNotification = jest.fn();
 const updateNotifications = jest.fn();
-const unreadNotifications = [
-  {
-    icon: 'new_releases',
-    id: '123',
-    key: 10,
-    message: 'Example message',
-    messagedate: '2018-12-18T15:06:40.976-07:00',
-    read: false,
-    userid: '88',
-  },
-];
-const readNotifications = [
-  {
-    icon: 'new_releases',
-    id: '122',
-    key: 9,
-    message: 'Example message',
-    messagedate: '2018-12-18T15:06:40.976-07:00',
-    read: true,
-    userid: '88',
-  },
-];
 
 const initialProps = {
   removeAllNotifications,
@@ -43,10 +23,7 @@ const initialState = {
 describe('Notification Button and Popover (when visible)', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mountComponent(
-      <NotificationButton {...initialProps} />,
-      initialState,
-    );
+    wrapper = mount(<NotificationButton {...initialProps} />, initialState);
     wrapper.setState({ visibleNotifications: true });
     wrapper.update();
   });
@@ -66,20 +43,24 @@ describe('Notification Button and Popover (when visible)', () => {
   });
 
   describe('contains unread or read notifications', () => {
+    let spy;
+    afterEach(() => {
+      spy.mockClear();
+    });
+
     it('clicking on the notification button in the navbar closes the popover and updates all notifications as read', () => {
       const visible = false;
-      const spy = jest.spyOn(wrapper.instance(), 'handleVisibleChange');
+      spy = jest.spyOn(wrapper.instance(), 'handleVisibleChange');
       wrapper.instance().forceUpdate();
       const notificationButton = wrapper.find('Popover');
       notificationButton.simulate('click', visible);
       expect(spy).toHaveBeenCalledWith(visible);
       expect(wrapper.state('visibleNotifications')).toBeFalsy();
       expect(updateNotifications).toHaveBeenCalled();
-      spy.mockClear();
     });
 
     it('clicking on the top bar trash can button clears all notifications', () => {
-      const spy = jest.spyOn(wrapper.instance(), 'handleClearNotes');
+      spy = jest.spyOn(wrapper.instance(), 'handleClearNotes');
       wrapper.instance().forceUpdate();
       const clearNotificationsButton = wrapper.find(
         'button.clearNotifications',
@@ -87,14 +68,13 @@ describe('Notification Button and Popover (when visible)', () => {
       clearNotificationsButton.simulate('click');
       expect(spy).toHaveBeenCalled();
       expect(removeAllNotifications).toHaveBeenCalled();
-      spy.mockClear();
     });
 
     it('clicking on a trash can button inside of a notification deletes the notification', () => {
       wrapper.setProps({ unreadNotifications, readNotifications });
       wrapper.update();
 
-      const spy = jest.spyOn(wrapper.instance(), 'handleDeleteNote');
+      spy = jest.spyOn(wrapper.instance(), 'handleDeleteNote');
       wrapper.instance().forceUpdate();
       const deleteNotificationButton = wrapper
         .find('button.removeNoteButton')
@@ -104,7 +84,6 @@ describe('Notification Button and Popover (when visible)', () => {
       expect(deleteNotification).toHaveBeenCalledWith(
         unreadNotifications[0].id,
       );
-      spy.mockClear();
     });
   });
 });

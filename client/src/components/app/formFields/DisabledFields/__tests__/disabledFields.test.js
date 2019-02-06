@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallowComponent, checkProps } from '../../../../tests/utils';
-import DisabledFields from './disabledFields.js';
+import DisabledFields from '../disabledFields.js';
 
 const initialProps = {
   fromsender: '',
@@ -14,7 +12,7 @@ const nextProps = {
   subject: 'Test Subject',
 };
 
-const wrapper = shallowComponent(<DisabledFields {...initialProps} />); // set wrapper with initialProps
+const wrapper = shallow(<DisabledFields {...initialProps} />); // set wrapper with initialProps
 
 describe('Disabled Template Fields', () => {
   it('renders without errors', () => {

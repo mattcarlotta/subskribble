@@ -1,6 +1,4 @@
-import React from 'react';
-import { checkProps, shallowComponent } from '../../../../tests/utils';
-import CustomButton from './customButton.js';
+import CustomButton from '../customButton.js';
 
 const initialProps = {
   buttonIcon: 'test',
@@ -10,14 +8,14 @@ const initialProps = {
   tipTitle: 'Test Button',
 };
 
-const fakeOnClickAction = jest.fn();
+const onClickAction = jest.fn();
 
 describe('Custom Button', () => {
   let wrapper;
   let customButtonComponent;
   beforeEach(() => {
-    wrapper = shallowComponent(<CustomButton {...initialProps} />); // set wrapper with initialState
-    customButtonComponent = wrapper.find('Button'); // get custom button component
+    wrapper = shallow(<CustomButton {...initialProps} />);
+    customButtonComponent = wrapper.find('Button');
   });
 
   it('renders without errors', () =>
@@ -37,11 +35,10 @@ describe('Custom Button', () => {
   });
 
   it('calls supplied onClickAction function', () => {
-    wrapper.setProps({ onClickAction: fakeOnClickAction });
-    wrapper.update();
+    wrapper.setProps({ onClickAction });
 
     customButtonComponent = wrapper.find('Button');
     customButtonComponent.simulate('click');
-    expect(fakeOnClickAction).toHaveBeenCalled();
+    expect(onClickAction).toHaveBeenCalled();
   });
 });

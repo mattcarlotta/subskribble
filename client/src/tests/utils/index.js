@@ -24,12 +24,12 @@ export const storeFactory = initialState =>
 
 /**
  * Factory function to create a ShallowWrapper for a component
- * @function shallowComponent
+ * @function shallowWrap
  * @param {node} Component - Component to be shallowed
  * @param {object} state - initial state for setup.
  * @returns {ShallowWrapper}
  */
-export const shallowComponent = (Component, state = null) => {
+export const shallowWrap = (Component, state = null) => {
   const wrapper = shallow(Component);
   if (state) wrapper.setState(state);
   return wrapper;
@@ -37,13 +37,13 @@ export const shallowComponent = (Component, state = null) => {
 
 /**
  * Factory function to create a MountedWrapper for a component
- * @function mountComponent
+ * @function mountWrap
  * @param {node} Component - Component to be shallowed
  * @param {object} props - Component props specific to this setup.
  * @param {object} state - initial state for setup.
  * @returns {MountedWrapper}
  */
-export const mountComponent = (Component, state = null) => {
+export const mountWrap = (Component, state = null) => {
   const wrapper = mount(Component);
   if (state) wrapper.setState(state);
   return wrapper;

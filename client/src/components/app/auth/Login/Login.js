@@ -5,8 +5,8 @@ import ResetForm from '../../../../containers/forms/ResetPasswordForm/resetpassw
 import SignupForm from '../../../../containers/forms/SignupForm/signupForm.js';
 import { settingsTab } from '../../../../styles/styles.scss';
 
-const forms = [LoginForm, ResetForm, SignupForm];
-const titles = ['Log In', 'Reset Password', 'Sign Up'];
+export const forms = [LoginForm, ResetForm, SignupForm];
+export const titles = ['Log In', 'Reset Password', 'Sign Up'];
 
 export default class Login extends Component {
   state = { visible: true, selectedForm: forms[0], title: titles[0] };

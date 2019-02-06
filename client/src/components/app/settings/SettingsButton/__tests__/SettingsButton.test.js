@@ -1,6 +1,4 @@
-import React from 'react';
-import { mountComponent } from '../../../../tests/utils';
-import SettingsButton from './SettingsButton.js';
+import SettingsButton from '../SettingsButton.js';
 
 const initialState = { visibleSettings: false };
 
@@ -17,8 +15,13 @@ describe('Navbar Settings Button', () => {
   let wrapper;
   let settingButton;
   beforeEach(() => {
-    wrapper = mountComponent(
-      <SettingsButton {...initialProps} />,
+    wrapper = mount(
+      <Router history={browserHistory}>
+        <Route
+          path="/"
+          component={() => <SettingsButton {...initialProps} />}
+        />
+      </Router>,
       initialState,
     );
     settingButton = wrapper.find('button.settingButton');
@@ -52,6 +55,15 @@ describe('Navbar Settings Button', () => {
       const logoutItem = menuItems.at(1).text();
       expect(settingsItem).toBe('Settings');
       expect(logoutItem).toBe('Logout');
+    });
+
+    it('clicking on the Logout menu item logs out the user', () => {
+      wrapper
+        .find('Link.menuOptions')
+        .at(1)
+        .simulate('click');
+
+      expect(logoutUser).toHaveBeenCalled();
     });
   });
 });
