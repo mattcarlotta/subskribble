@@ -15,6 +15,7 @@
       "prettier --write --single-quote --fix",
       "eslint --fix",
       "stylelint **/*.scss",
+      "jest /src",
       "git add"
     ]
   },
