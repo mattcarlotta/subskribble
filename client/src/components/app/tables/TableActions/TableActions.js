@@ -49,12 +49,13 @@ export default class TableActions extends PureComponent {
       statusType === 'activate' ? 'settings_backup_restore' : 'do_not_disturb';
 
     return (
-      <Fragment>
+      <span className="tableActions">
         {updateAction && (
           <Fragment>
             <ActionButton
               buttonAction={this.updateItem}
               button={buttonIcon}
+              className="update"
               popTitle={`Are you sure you want to ${statusType} this item?`}
               title={statusType}
             />
@@ -66,6 +67,7 @@ export default class TableActions extends PureComponent {
             <ActionButton
               buttonAction={this.editItem}
               button="create"
+              className="edit"
               popTitle="Are you sure you want to edit this item?"
               title="edit"
             />
@@ -77,6 +79,7 @@ export default class TableActions extends PureComponent {
             <ActionButton
               buttonAction={this.refundItem}
               button="monetization_on"
+              className="refund"
               popTitle="Are you sure you want to refund/credit this item?"
               title="refund/credit"
             />
@@ -87,11 +90,12 @@ export default class TableActions extends PureComponent {
           <ActionButton
             buttonAction={this.deleteItem}
             button="delete"
+            className="delete"
             popTitle="Are you sure you want to delete this item?"
             title="delete"
           />
         )}
-      </Fragment>
+      </span>
     );
   };
 }

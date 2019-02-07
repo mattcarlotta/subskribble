@@ -125,7 +125,7 @@ class AvatarForm extends Component {
           <Tooltip arrowPointAtCenter placement="bottom" title="Cancel">
             <Button
               type="button"
-              className="ant-btn ant-btn-danger"
+              className="ant-btn ant-btn-danger cancel"
               // eslint-disable-next-line
               onClick={this.props.hideAvatarForm}
               shape="circle"

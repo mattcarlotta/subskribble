@@ -25,7 +25,7 @@ const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
       <Tooltip arrowPointAtCenter placement="bottom" title="Delete Avatar">
         <Col span={12}>
           <Button
-            className={!avatarURL ? 'btn-disabled' : 'btn-danger'}
+            className={!avatarURL ? 'btn-disabled delete' : 'btn-danger delete'}
             shape="circle"
             icon="delete"
             disabled={!avatarURL || false}
@@ -36,6 +36,7 @@ const CurrentAvatar = ({ avatarURL, deleteAvatar, showAvatarForm }) => (
       <Tooltip arrowPointAtCenter placement="bottom" title="Change Avatar">
         <Col span={12}>
           <Button
+            className="change"
             type="primary"
             shape="circle"
             icon="retweet"

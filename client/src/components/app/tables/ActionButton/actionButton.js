@@ -7,7 +7,7 @@ import {
   tableTooltip,
 } from './actionButton.scss';
 
-const ActionButton = ({ button, buttonAction, title, popTitle }) => (
+const ActionButton = ({ button, buttonAction, className, title, popTitle }) => (
   <Popconfirm
     arrowPointAtCenter
     cancelText="No"
@@ -17,7 +17,7 @@ const ActionButton = ({ button, buttonAction, title, popTitle }) => (
     overlayClassName={`${tableTooltip} table-action`}
   >
     <Tooltip arrowPointAtCenter placement="bottom" title={title}>
-      <Button className={tableStatusAction}>
+      <Button className={`${className} ${tableStatusAction}`}>
         <i className={materialIcons}>{button}</i>
       </Button>
     </Tooltip>
@@ -29,6 +29,7 @@ export default ActionButton;
 ActionButton.propTypes = {
   button: PropTypes.string,
   buttonAction: PropTypes.func,
+  className: PropTypes.string,
   title: PropTypes.string,
   popTitle: PropTypes.string,
 };
