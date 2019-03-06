@@ -27,8 +27,8 @@ const MessagesPanel = ({ messages }) => (
   </MiniPanel>
 );
 
-export default MessagesPanel;
-
 MessagesPanel.propTypes = {
   messages: PropTypes.string,
 };
+
+export default MessagesPanel;

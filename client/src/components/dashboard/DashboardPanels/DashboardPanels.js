@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row } from 'antd';
 
 import PageContainer from '../../app/panels/PageContainer/pageContainer.js';
@@ -9,7 +10,7 @@ import SubcribersPanel from '../SubscribersPanel/subscribersPanel.js';
 import TemplatesPanel from '../TemplatesPanel/templatesPanel.js';
 import TransactionsPanel from '../TransactionsPanel/transactionsPanel.js';
 
-export default class Dashboard extends Component {
+class DashboardPanels extends Component {
   state = {
     isLoading: true,
     subscribers: '',
@@ -31,10 +32,20 @@ export default class Dashboard extends Component {
     inactivetemplates: '',
   };
 
-  componentDidMount = () =>
+  componentDidMount = () => this.fetchData();
+
+  fetchData = () => {
     this.props
       .getDashboardData()
-      .then(({ data }) => this.setState({ ...data, isLoading: false }));
+      .then(({ data }) => {
+        this.setState({ ...data, isLoading: false });
+      })
+      .catch(() =>
+        this.setState({
+          isLoading: false,
+        }),
+      );
+  };
 
   render = () =>
     this.state.isLoading ? null : (
@@ -50,3 +61,9 @@ export default class Dashboard extends Component {
       </PageContainer>
     );
 }
+
+DashboardPanels.propTypes = {
+  getDashboardData: PropTypes.func.isRequired,
+};
+
+export default DashboardPanels;

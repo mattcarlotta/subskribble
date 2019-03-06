@@ -36,9 +36,9 @@ const TemplatesPanel = ({ activetemplates, inactivetemplates }) => (
   </MiniPanel>
 );
 
-export default TemplatesPanel;
-
 TemplatesPanel.propTypes = {
   activetemplates: PropTypes.string,
   inactivetemplates: PropTypes.string,
 };
+
+export default TemplatesPanel;

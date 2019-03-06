@@ -36,9 +36,9 @@ const SubscribersPanel = ({ inactivesubscribers, subscribers }) => (
   </MiniPanel>
 );
 
-export default SubscribersPanel;
-
 SubscribersPanel.propTypes = {
   subscribers: PropTypes.string,
   inactivesubscribers: PropTypes.string,
 };
+
+export default SubscribersPanel;

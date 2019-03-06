@@ -62,8 +62,6 @@ const CartTotalReview = ({
   );
 };
 
-export default CartTotalReview;
-
 CartTotalReview.propTypes = {
   adjustedPrice: PropTypes.string,
   appliedPromoCode: PropTypes.shape({
@@ -85,3 +83,5 @@ CartTotalReview.propTypes = {
   price: PropTypes.number,
   promoCode: PropTypes.string,
 };
+
+export default CartTotalReview;

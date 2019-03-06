@@ -35,8 +35,6 @@ const MiniPanel = ({
   </Col>
 );
 
-export default MiniPanel;
-
 MiniPanel.propTypes = {
   buttonIcon: PropTypes.string,
   buttonPushLocation: PropTypes.string,
@@ -46,3 +44,5 @@ MiniPanel.propTypes = {
   titleColor: PropTypes.string.isRequired,
   titleIcon: PropTypes.string.isRequired,
 };
+
+export default MiniPanel;

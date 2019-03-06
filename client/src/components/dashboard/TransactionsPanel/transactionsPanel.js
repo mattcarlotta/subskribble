@@ -101,8 +101,6 @@ const TransactionsPanel = ({
   );
 };
 
-export default TransactionsPanel;
-
 TransactionsPanel.propTypes = {
   charges: PropTypes.string,
   chargestotal: PropTypes.string,
@@ -113,3 +111,5 @@ TransactionsPanel.propTypes = {
   refunds: PropTypes.string,
   refundstotal: PropTypes.string,
 };
+
+export default TransactionsPanel;

@@ -9,8 +9,8 @@ const App = ({ children }) => (
   </Fragment>
 );
 
-export default App;
-
 App.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default App;

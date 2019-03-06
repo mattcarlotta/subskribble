@@ -1,6 +1,8 @@
 import TableActions from '../TableActions.js';
 import { initialProps } from '../__mocks__/TableActions.mocks.js';
 
+const { deleteAction, updateAction } = initialProps;
+
 describe('Table Actions', () => {
   let wrapper;
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('Table Actions', () => {
       .find('button')
       .at(1)
       .simulate('click');
-    expect(initialProps.updateAction).toHaveBeenCalled();
+    expect(updateAction).toHaveBeenCalled();
   });
 
   it('edits an item on click', () => {
@@ -43,6 +45,6 @@ describe('Table Actions', () => {
       .find('button')
       .at(1)
       .simulate('click');
-    expect(initialProps.deleteAction).toHaveBeenCalled();
+    expect(deleteAction).toHaveBeenCalled();
   });
 });

@@ -38,7 +38,7 @@ export const shallowWrap = (Component, state = null) => {
 /**
  * Factory function to create a MountedWrapper for a component
  * @function mountWrap
- * @param {node} Component - Component to be shallowed
+ * @param {node} Component - Component to be mounted
  * @param {object} props - Component props specific to this setup.
  * @param {object} state - initial state for setup.
  * @returns {MountedWrapper}

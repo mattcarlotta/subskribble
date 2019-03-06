@@ -1,6 +1,5 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Divider } from 'antd';
 import { browserHistory } from 'react-router';
 import ActionButton from '../ActionButton/actionButton.js';
 
@@ -51,47 +50,37 @@ export default class TableActions extends PureComponent {
     return (
       <span className="tableActions">
         {updateAction && (
-          <Fragment>
-            <ActionButton
-              buttonAction={this.updateItem}
-              button={buttonIcon}
-              className="update"
-              popTitle={`Are you sure you want to ${statusType} this item?`}
-              title={statusType}
-            />
-            <Divider type="vertical" />
-          </Fragment>
+          <ActionButton
+            buttonAction={this.updateItem}
+            button={buttonIcon}
+            className="update"
+            title={statusType}
+            divider
+          />
         )}
         {editLocation && (
-          <Fragment>
-            <ActionButton
-              buttonAction={this.editItem}
-              button="create"
-              className="edit"
-              popTitle="Are you sure you want to edit this item?"
-              title="edit"
-            />
-            <Divider type="vertical" />
-          </Fragment>
+          <ActionButton
+            buttonAction={this.editItem}
+            button="create"
+            className="edit"
+            title="edit"
+            divider
+          />
         )}
         {refund && (
-          <Fragment>
-            <ActionButton
-              buttonAction={this.refundItem}
-              button="monetization_on"
-              className="refund"
-              popTitle="Are you sure you want to refund/credit this item?"
-              title="refund/credit"
-            />
-            <Divider type="vertical" />
-          </Fragment>
+          <ActionButton
+            buttonAction={this.refundItem}
+            button="monetization_on"
+            className="refund"
+            title="refund/credit"
+            divider
+          />
         )}
         {deleteAction && (
           <ActionButton
             buttonAction={this.deleteItem}
             button="delete"
             className="delete"
-            popTitle="Are you sure you want to delete this item?"
             title="delete"
           />
         )}

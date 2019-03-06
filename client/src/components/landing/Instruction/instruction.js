@@ -18,11 +18,11 @@ const Instruction = ({ description, imgSrc, link, title }) => (
   </Fragment>
 );
 
-export default Instruction;
-
 Instruction.propTypes = {
   description: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
+
+export default Instruction;

@@ -22,7 +22,7 @@ const PlansPanel = ({ plans, popularplans }) => (
         <Col style={{ height: 319 }} span={8}>
           {/* eslint-disable */}
           <BarChart
-            indexBy={'plans'}
+            indexBy="plans"
             data={[
               {
                 plans: 'Active Plans',
@@ -86,9 +86,9 @@ const PlansPanel = ({ plans, popularplans }) => (
   </MiniPanel>
 );
 
-export default PlansPanel;
-
 PlansPanel.propTypes = {
   plans: PropTypes.string,
   popularplans: PropTypes.arrayOf(PropTypes.object),
 };
+
+export default PlansPanel;

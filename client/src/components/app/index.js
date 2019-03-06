@@ -67,8 +67,6 @@ class App extends Component {
   );
 }
 
-export default withRouter(App);
-
 App.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
@@ -80,3 +78,5 @@ App.propTypes = {
   saveSidebarState: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
+
+export default withRouter(App);

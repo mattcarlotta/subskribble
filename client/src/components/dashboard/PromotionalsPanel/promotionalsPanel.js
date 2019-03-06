@@ -78,9 +78,9 @@ const PromosPanel = ({ popularpromotionals, promotionals }) => (
   </MiniPanel>
 );
 
-export default PromosPanel;
-
 PromosPanel.propTypes = {
   promotionals: PropTypes.string,
   popularpromotionals: PropTypes.arrayOf(PropTypes.object),
 };
+
+export default PromosPanel;
