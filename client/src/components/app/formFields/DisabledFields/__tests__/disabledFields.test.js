@@ -20,9 +20,6 @@ describe('Disabled Template Fields', () => {
     expect(disabledFieldsComponent).toHaveLength(1);
   });
 
-  it('does not not throw PropType warnings', () =>
-    checkProps(DisabledFields, initialProps));
-
   it('contains disabled fields with default text', () => {
     const disabledPlans = wrapper.find('div.plans').text();
     const disabledFromSender = wrapper.find('div.fromsender').text();

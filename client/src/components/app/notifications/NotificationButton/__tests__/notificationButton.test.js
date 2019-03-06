@@ -33,10 +33,6 @@ describe('Notification Button and Popover (when visible)', () => {
     expect(notificationsComponent).toHaveLength(1);
   });
 
-  it('does not throw PropType warnings', () => {
-    checkProps(NotificationButton, initialProps);
-  });
-
   it('displays an empty preview if notifications are absent', () => {
     const emptyNotificationPreview = wrapper.find('div.notificationEmpty');
     expect(emptyNotificationPreview).toHaveLength(1);

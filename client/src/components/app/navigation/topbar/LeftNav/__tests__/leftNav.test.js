@@ -14,10 +14,6 @@ describe('Left Side Navigation', () => {
     expect(leftNavComponent).toHaveLength(1);
   });
 
-  it('does not throw PropType warnings', () => {
-    checkProps(LeftNav, initialProps);
-  });
-
   it('pushes to the landing page when the logo has been clicked', () => {
     const logoButton = wrapper.find('Button');
     logoButton.simulate('click');

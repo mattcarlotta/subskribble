@@ -21,9 +21,6 @@ describe('Custom Button', () => {
   it('renders without errors', () =>
     expect(customButtonComponent).toHaveLength(1));
 
-  it('does not not throw PropType warnings', () =>
-    checkProps(CustomButton, initialProps));
-
   it('pushes to a new page if onClickAction is missing', () => {
     const spy = jest.spyOn(wrapper.instance(), 'pushToLocation');
     wrapper.instance().forceUpdate();

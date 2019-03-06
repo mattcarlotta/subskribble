@@ -1,20 +1,28 @@
 import { JSDOM } from 'jsdom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { checkProps, mountWrap, shallowWrap } from './tests/utils';
+import { createStoreFactory, mountWrap, shallowWrap } from './tests/utils';
 
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
-global.fetch = require('jest-fetch-mock');
 
+/*
+THE BELOW ARE ACCESSIBLE AND PREDEFINED FOR ALL *.TEST.JS FILES
+WARNING: Due to the below being accessible to the global DOM,
+         all *.test.js files will have custom rules for ESLint.
+         Otherwise, ESLint will throw errors that the functions/
+         modules are undefined because they are not explictly
+         imported! See "overrides" in ".eslintrc" for more
+         information.
+*/
 const exposedProperties = ['window', 'navigator', 'document'];
 const { document } = new JSDOM('').window;
 global.document = document;
 global.window = document.defaultView;
 global.HTMLElement = window.HTMLElement;
 global.HTMLAnchorElement = window.HTMLAnchorElement;
+global.createStoreFactory = createStoreFactory;
 global.shallow = shallowWrap;
 global.mount = mountWrap;
-global.checkProps = checkProps;
 global.React = require('react');
 global.LocaleProvider = require('antd').LocaleProvider;
 global.enUS = require('antd/lib/locale-provider/en_US');

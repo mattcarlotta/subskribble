@@ -18,10 +18,6 @@ describe('Inline Menu and Menu Header', () => {
     expect(inlineMenuComponent).toHaveLength(1);
   });
 
-  it('does not throw PropType warnings', () => {
-    checkProps(InlineMenu, initialProps);
-  });
-
   it('updates the page URL when a menu tab has been selected', () => {
     const menuItem = wrapper.find('MenuItem').first();
     menuItem.simulate('click');

@@ -18,9 +18,6 @@ describe('Email Confirmation', () => {
     expect(emailConfirmationComponent).toHaveLength(1);
   });
 
-  it('does not not throw PropType warnings', () =>
-    checkProps(EmailConfirmation, initialProps));
-
   it('renders a failed verification message if email was invalid', () => {
     const verificationFailureComponent = wrapper.find(
       'div.verificationFailure',

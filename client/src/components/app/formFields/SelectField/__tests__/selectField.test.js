@@ -20,9 +20,6 @@ describe('Select Field', () => {
     expect(selectFieldComponent).toHaveLength(1);
   });
 
-  it('does not not throw PropType warnings', () =>
-    checkProps(SelectField, initialProps));
-
   it('when an option is selected, sets setSortByNum, resets the current page and fetches new data', () => {
     const nextRecords = 20;
     const spy = jest.spyOn(wrapper.instance(), 'handleSortDataBy');

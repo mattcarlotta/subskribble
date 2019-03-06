@@ -16,10 +16,6 @@ describe('CurrentAvatar', () => {
     expect(currentAvatarComponent).toHaveLength(1);
   });
 
-  it('does not throw PropType warnings', () => {
-    checkProps(CurrentAvatar, initialProps);
-  });
-
   it('changes to AvatarForm when clicking on the change button', () => {
     wrapper.find('Button.change').simulate('click');
     expect(showAvatarForm).toHaveBeenCalled();

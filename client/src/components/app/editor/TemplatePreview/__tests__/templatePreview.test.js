@@ -25,9 +25,6 @@ describe('Template Preview', () => {
   it('renders without errors', () =>
     expect(templatePreviewComponent).toHaveLength(1));
 
-  it('does not not throw PropType warnings', () =>
-    checkProps(TemplatePreview, initialProps));
-
   it('renders an empty preview message if initial props are empty', () => {
     const emptyPreviewComponent = wrapper.find('div.boxEmpty');
     expect(emptyPreviewComponent).toHaveLength(1);
