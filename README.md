@@ -1,6 +1,6 @@
 # subskribble
 
-subskribble - an experimental app to create, manage, and send personalized updates to a list of subscribers.
+an experimental app to create, manage, and send personalized updates to a list of subscribers.
 
 ## Quick Links
 
