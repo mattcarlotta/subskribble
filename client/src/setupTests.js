@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createStoreFactory, mountWrap, shallowWrap } from './tests/utils';
+import { mockApp, mockAPI } from './tests/mocks/axios';
 
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 
@@ -20,6 +21,8 @@ global.document = document;
 global.window = document.defaultView;
 global.HTMLElement = window.HTMLElement;
 global.HTMLAnchorElement = window.HTMLAnchorElement;
+global.mockApp = mockApp;
+global.mockAPI = mockAPI;
 global.createStoreFactory = createStoreFactory;
 global.shallow = shallowWrap;
 global.mount = mountWrap;

@@ -1,7 +1,9 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { shallow, mount } from 'enzyme';
+import thunk from 'redux-thunk';
 import rootReducer from '../../reducers/reducers.js';
-import { middlewares } from '../../root/root.js';
+
+const middlewares = applyMiddleware(thunk);
 
 /**
  * Create a testing store with imported reducers, initial state, and middleware(s).

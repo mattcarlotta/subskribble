@@ -2,6 +2,7 @@ import { resetServerMessages, serverErrorMessage } from '../appActions.js';
 
 const initialState = {
   error: '',
+  message: '',
 };
 
 describe('App Actions', () => {

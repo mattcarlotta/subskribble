@@ -29,8 +29,6 @@ class CustomButton extends PureComponent {
   );
 }
 
-export default CustomButton;
-
 CustomButton.propTypes = {
   buttonIcon: PropTypes.string,
   buttonPushLocation: PropTypes.string,
@@ -39,3 +37,5 @@ CustomButton.propTypes = {
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   tipTitle: PropTypes.string,
 };
+
+export default CustomButton;
