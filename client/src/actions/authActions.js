@@ -29,7 +29,12 @@ const logoutUser = () => dispatch => {
       dispatch({ type: types.UNAUTH_USER });
       browserHistory.push('/');
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to log out of the session.',
+      }),
+    );
 };
 
 // attempts to delete the user's account
@@ -41,7 +46,12 @@ const deleteUserAccount = formProps => dispatch => {
       if (token && userid) dispatch(deleteAccountAvatar(token, userid));
       dispatch(logoutUser());
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to delete account.',
+      }),
+    );
 };
 
 // sets app loading state to false
@@ -61,7 +71,7 @@ const missingPasswordToken = () => ({
     'Missing password token! Please check your email and click on the "Create New Password" button.',
 });
 
-// updates a user'deleteUserAccounts password
+// updates a user's password
 const resetUserPassword = (password, token) => dispatch =>
   app
     .put(`reset-password/verify?token=${token}`, {
@@ -71,7 +81,12 @@ const resetUserPassword = (password, token) => dispatch =>
     .then(({ data: { message } }) =>
       dispatch({ type: types.SERVER_MESSAGE, payload: message }),
     )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to save the new password.',
+      }),
+    );
 
 // emails user a token to reset password
 const resetUserToken = email => dispatch =>
@@ -80,7 +95,12 @@ const resetUserToken = email => dispatch =>
     .then(({ data: { message } }) =>
       dispatch({ type: types.SERVER_MESSAGE, payload: message }),
     )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to reset token.',
+      }),
+    );
 
 // will save the state of the sidebar (collapsed or visible)
 const saveSidebarState = collapseSideNav => dispatch =>
@@ -89,7 +109,12 @@ const saveSidebarState = collapseSideNav => dispatch =>
     .then(({ data: { collapseSideNav } }) =>
       dispatch({ type: types.SET_NAVBAR_STATE, payload: collapseSideNav }),
     )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to save sidebar status.',
+      }),
+    );
 
 // attempts to sign user in, then sets jwt token to cookie if successful
 const signinUser = props => dispatch =>
@@ -99,16 +124,26 @@ const signinUser = props => dispatch =>
       dispatch({ type: types.SET_SIGNEDIN_USER, payload: data });
       dispatch(fetchAvatarOnLogin());
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err => {
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to sign in.',
+      });
+    });
 
 // attempts to sign up a new user
 const signupUser = props => dispatch =>
   app
     .post(`signup`, { ...props })
-    .then(({ data: { message } }) =>
-      dispatch({ type: types.SERVER_MESSAGE, payload: message }),
+    .then(({ data }) =>
+      dispatch({ type: types.SERVER_MESSAGE, payload: data.message }),
     )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to sign up.',
+      }),
+    );
 
 // attempts to update users account details
 const updateUserAccount = formProps => dispatch =>
@@ -123,7 +158,12 @@ const updateUserAccount = formProps => dispatch =>
       dispatch({ type: types.SERVER_MESSAGE, payload: message });
       if (fetchnotifications) dispatch(fetchNotifications());
     })
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+    .catch(err =>
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to update user account.',
+      }),
+    );
 
 // attempts to verify user's email via token
 const verifyEmail = token => dispatch =>
@@ -134,7 +174,10 @@ const verifyEmail = token => dispatch =>
     )
     .catch(err => {
       dispatch({ type: types.USER_WAS_VERIFIED, payload: false });
-      dispatch({ type: types.SERVER_ERROR, payload: err });
+      dispatch({
+        type: types.SERVER_ERROR,
+        payload: err ? err.toString() : 'Unable to verify token.',
+      });
     });
 
 export {
