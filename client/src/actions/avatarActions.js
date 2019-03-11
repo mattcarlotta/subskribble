@@ -41,8 +41,8 @@ const fetchAvatarOnLogin = () => dispatch =>
 const updateAvatar = formData => dispatch =>
   avatarAPI
     .put(`avatar/update`, formData)
-    .then(({ data: { avatarurl } }) => {
-      dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl });
+    .then(({ data }) => {
+      dispatch({ type: types.SET_CURRENT_AVATAR, payload: data.avatarurl });
       dispatch(fetchNotifications());
     })
     .catch(err =>
@@ -53,8 +53,8 @@ const updateAvatar = formData => dispatch =>
 const uploadAvatar = formData => dispatch =>
   avatarAPI
     .post(`avatar/create`, formData)
-    .then(({ data: { avatarurl } }) => {
-      dispatch({ type: types.SET_CURRENT_AVATAR, payload: avatarurl });
+    .then(({ data }) => {
+      dispatch({ type: types.SET_CURRENT_AVATAR, payload: data.avatarurl });
       dispatch(fetchNotifications());
     })
     .catch(err =>
