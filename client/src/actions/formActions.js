@@ -44,8 +44,8 @@ const resetPromo = () => dispatch => {
 const applyPromo = (promocode, plan) => dispatch =>
   app
     .get(`promotionals/apply-promotion?promocode=${promocode}&plan=${plan}`)
-    .then(({ data: { promotional } }) =>
-      dispatch({ type: types.APPLY_PROMO_CODE, payload: promotional }),
+    .then(({ data }) =>
+      dispatch({ type: types.APPLY_PROMO_CODE, payload: data.promotional }),
     )
     .catch(err => {
       dispatch(resetPromo());
@@ -116,13 +116,13 @@ const sendMessageToSubs = formProps => dispatch =>
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 
 // Send email to support
-const sendSupportEmail = ({ name, email, message }) => dispatch =>
-  app
-    .post(`send-support-email`, { name, email, message })
-    .then(({ data: { message } }) =>
-      dispatch({ type: types.SERVER_MESSAGE, payload: message }),
-    )
-    .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
+// const sendSupportEmail = ({ name, email, message }) => dispatch =>
+//   app
+//     .post(`send-support-email`, { name, email, message })
+//     .then(({ data: { message } }) =>
+//       dispatch({ type: types.SERVER_MESSAGE, payload: message }),
+//     )
+//     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 
 // Registers a new subscriber to a plan
 const subRegisterToPlan = ({
@@ -154,6 +154,6 @@ export {
   resetPromo,
   setBillingFieldValues,
   sendMessageToSubs,
-  sendSupportEmail,
+  // sendSupportEmail,
   subRegisterToPlan,
 };

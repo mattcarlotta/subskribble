@@ -11,7 +11,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "NODE_ENV=development node seedDB.js",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
-    "lint-back": "lint-staged"
+    "lint-back": "lint-staged",
+    "test:front": "npm run test --prefix client"
   },
   "lint-staged": {
     "*.js": [
