@@ -17,7 +17,6 @@ describe('Form Actions', () => {
 
   afterAll(() => {
     mockApp.restore();
-    mockAPI.restore();
   });
 
   describe('Add Plan', () => {

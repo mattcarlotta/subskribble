@@ -10,6 +10,17 @@ export const billingFields = {
   billingZip: '5555',
 };
 
+export const messages = {
+  fromsender: 'test@test.com',
+  id: '1234-1234-1234-1234',
+  key: 1,
+  plans: ['Test Plan'],
+  sentdate: `${new Date('April 21, 2019 23:15:30')}`,
+  subject: 'Test Subject',
+  template: 'Test Template',
+  userid: '88',
+};
+
 export const newSub = {
   ...billingFields,
   contactAddress: '5555 Test Way',

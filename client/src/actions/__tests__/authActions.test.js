@@ -9,6 +9,7 @@ describe('Auth Actions', () => {
 
   afterEach(() => {
     mockApp.reset();
+    mockAPI.reset();
   });
 
   afterAll(() => {

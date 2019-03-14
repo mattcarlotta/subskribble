@@ -13,6 +13,7 @@ describe('Avatar Actions', () => {
 
   afterEach(() => {
     mockApp.reset();
+    mockAPI.reset();
   });
 
   afterAll(() => {
