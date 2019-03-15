@@ -1,5 +1,5 @@
 import * as actions from '../notificationActions.js';
-import * as mocked from '../__mocks__/authActions.mocks.js';
+import * as mocked from '../__mocks__/actions.mocks.js';
 
 const unreadnotifications = [mocked.unreadNotifications];
 const readnotifications = [mocked.readNotifications];

@@ -1,5 +1,8 @@
 import * as actions from '../messageActions.js';
-import * as mocked from '../__mocks__/authActions.mocks.js';
+import * as mocked from '../__mocks__/actions.mocks.js';
+
+const unreadnotifications = [mocked.unreadNotifications];
+const readnotifications = [mocked.readNotifications];
 
 describe('Message Actions', () => {
   let store;
@@ -94,17 +97,24 @@ describe('Message Actions', () => {
       jest.runAllTimers();
     });
 
-    it('deletes a message and gets current messages and messages count', async () => {
+    it('deletes a message, gets current messages, gets messages counts, and fetches notifications', async () => {
       mockApp.onDelete(`messages/delete/${id}`).reply(200);
       mockApp.onGet('messagecounts').reply(200, { messagecounts });
       mockApp.onGet('messages').reply(200, { messages: mocked.messages });
+      mockApp
+        .onGet('notifications')
+        .reply(200, { readnotifications, unreadnotifications });
       await Promise.resolve(store.dispatch(actions.deleteAction(id)));
 
       setTimeout(() => {
-        const { messages } = store.getState();
+        const { messages, notes } = store.getState();
         expect(messages).toEqual({
           items: { ...mocked.messages },
           itemcount: messagecounts,
+        });
+        expect(notes).toEqual({
+          unreadNotifications: unreadnotifications,
+          readNotifications: readnotifications,
         });
       }, 1000);
     });

@@ -1,15 +1,15 @@
-import * as actions from '../planActions.js';
+import * as actions from '../subscriberActions.js';
 import * as mocked from '../__mocks__/actions.mocks.js';
 
-const allactiveplans = [
-  [{ ...mocked.inactiveplans[0], status: 'active' }],
-  ...mocked.activeplans,
+const allactivesubs = [
+  [{ ...mocked.inactivesubscribers[0], status: 'active' }],
+  ...mocked.activesubscribers,
 ];
 
 const unreadnotifications = [mocked.unreadNotifications];
 const readnotifications = [mocked.readNotifications];
 
-describe('Plan Actions', () => {
+describe('Subscriber Actions', () => {
   let store;
   beforeEach(() => {
     store = createStoreFactory();
@@ -25,7 +25,7 @@ describe('Plan Actions', () => {
     mockAPI.restore();
   });
 
-  describe('Fetch Plans', () => {
+  describe('Fetch Subscribers', () => {
     beforeEach(() => {
       jest.useFakeTimers();
     });
@@ -34,19 +34,19 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches initial plan records', async () => {
-      mockApp.onGet('plans').reply(200, {
-        activeplans: mocked.activeplans,
-        inactiveplans: mocked.inactiveplans,
+    it('fetches initial subscriber records', async () => {
+      mockApp.onGet('subscribers').reply(200, {
+        activesubscribers: mocked.activesubscribers,
+        inactivesubscribers: mocked.inactivesubscribers,
       });
       await Promise.resolve(store.dispatch(actions.fetchItems()));
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
+        const { subs } = store.getState();
+        expect(subs).toEqual({
+          activeitems: mocked.activesubscribers,
           activeitemcount: 0,
-          inactiveitems: mocked.inactiveplans,
+          inactiveitems: mocked.inactivesubscribers,
           inactiveitemcount: 0,
         });
       }, 1000);
@@ -54,19 +54,19 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onGet('plans').reply(404, { err });
+      mockApp.onGet('subscribers').reply(404, { err });
       await Promise.resolve(store.dispatch(actions.fetchItems()));
       const { server } = store.getState();
       expect(server.error).toEqual(err);
     });
   });
 
-  describe('Fetch Plans Counts', () => {
-    let activeplancount;
-    let inactiveplancount;
+  describe('Fetch Subscriber Counts', () => {
+    let activesubscriberscount;
+    let inactivesubscriberscount;
     beforeEach(() => {
-      activeplancount = 5;
-      inactiveplancount = 5;
+      activesubscriberscount = 5;
+      inactivesubscriberscount = 5;
       jest.useFakeTimers();
     });
 
@@ -74,41 +74,43 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches active and inactive plan counts', async () => {
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+    it('fetches active and inactive subs counts', async () => {
+      mockApp.onGet('subscribercounts').reply(200, {
+        activesubscriberscount,
+        inactivesubscriberscount,
       });
       await Promise.resolve(store.dispatch(actions.fetchItemCounts()));
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
+        const { subs } = store.getState();
+        expect(subs).toEqual({
           activeitems: [],
-          activeitemcount: activeplancount,
+          activeitemcount: activesubscriberscount,
           inactiveitems: [],
-          inactiveitemcount: inactiveplancount,
+          inactiveitemcount: inactivesubscriberscount,
         });
       }, 1000);
     });
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onGet('plancounts').reply(404, { err });
+      mockApp.onGet('subscribercounts').reply(404, { err });
       await Promise.resolve(store.dispatch(actions.fetchItemCounts()));
       const { server } = store.getState();
       expect(server.error).toEqual(err);
     });
   });
 
-  describe('Delete Plans', () => {
-    let id;
-    let activeplancount;
-    let inactiveplancount;
+  describe('Delete Subcriber', () => {
+    let subscriberid;
+    let planName;
+    let activesubscriberscount;
+    let inactivesubscriberscount;
     beforeEach(() => {
-      id = '1234-1234-1234-1234';
-      activeplancount = 5;
-      inactiveplancount = 5;
+      subscriberid = '1234-1234-1234-1234';
+      planName = 'Test Plan';
+      activesubscriberscount = 5;
+      inactivesubscriberscount = 5;
       jest.useFakeTimers();
     });
 
@@ -116,28 +118,34 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('deletes a plan and gets current plans and plans count', async () => {
-      mockApp.onDelete(`plans/delete/${id}`).reply(200);
-      mockApp.onGet('plans').reply(200, {
-        activeplans: mocked.activeplans,
-        inactiveplans: mocked.inactiveplans,
+    it('deletes a sub and gets current subs and subs count', async () => {
+      mockApp
+        .onDelete(
+          `subscribers/delete?subscriberid=${subscriberid}&planname=${planName}`,
+        )
+        .reply(200);
+      mockApp.onGet('subscribers').reply(200, {
+        activesubscribers: mocked.activesubscribers,
+        inactivesubscribers: mocked.inactivesubscribers,
       });
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+      mockApp.onGet('subscribercounts').reply(200, {
+        activesubscriberscount,
+        inactivesubscriberscount,
       });
       mockApp
         .onGet('notifications')
         .reply(200, { readnotifications, unreadnotifications });
-      await Promise.resolve(store.dispatch(actions.deleteAction(id)));
+      await Promise.resolve(
+        store.dispatch(actions.deleteAction(subscriberid, planName)),
+      );
 
       setTimeout(() => {
-        const { plans, notes } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
-          activeitemcount: activeplancount,
-          inactiveitems: mocked.inactiveplans,
-          inactiveitemcount: inactiveplancount,
+        const { subs, notes } = store.getState();
+        expect(subs).toEqual({
+          activeitems: mocked.activesubscribers,
+          activeitemcount: activesubscriberscount,
+          inactiveitems: mocked.inactivesubscribers,
+          inactiveitemcount: inactivesubscriberscount,
         });
         expect(notes).toEqual({
           unreadNotifications: unreadnotifications,
@@ -148,19 +156,25 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onDelete(`plans/delete/${id}`).reply(404, { err });
-      await Promise.resolve(store.dispatch(actions.deleteAction(id)));
+      mockApp
+        .onDelete(
+          `subscribers/delete?subscriberid=${subscriberid}&planname=${planName}`,
+        )
+        .reply(404, { err });
+      await Promise.resolve(
+        store.dispatch(actions.deleteAction(subscriberid, planName)),
+      );
       const { server } = store.getState();
       expect(server.error).toEqual(err);
     });
   });
 
-  describe('Fetch Next/Prev Plans', () => {
+  describe('Fetch Next/Prev Subscribers', () => {
     let table;
     let page;
     let sortByNum;
     beforeEach(() => {
-      table = 'Active Plans';
+      table = 'Active Subscribers';
       page = 1;
       sortByNum = 10;
       jest.useFakeTimers();
@@ -170,20 +184,22 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches next or previous plan records', async () => {
+    it('fetches next or previous subs records', async () => {
       mockApp
-        .onGet(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
+        .onGet(
+          `subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`,
+        )
         .reply(200, {
-          activeplans: mocked.activeplans,
+          activesubscribers: mocked.activesubscribers,
         });
       await Promise.resolve(
         store.dispatch(actions.fetchAction(table, page, sortByNum)),
       );
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
+        const { subs } = store.getState();
+        expect(subs).toEqual({
+          activeitems: mocked.activesubscribers,
           activeitemcount: 0,
           inactiveitems: [],
           inactiveitemcount: 0,
@@ -194,7 +210,9 @@ describe('Plan Actions', () => {
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
       mockApp
-        .onGet(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
+        .onGet(
+          `subscribers/records?table=${table}&page=${page}&limit=${sortByNum}`,
+        )
         .reply(404, { err });
       await Promise.resolve(
         store.dispatch(actions.fetchAction(table, page, sortByNum)),
@@ -204,15 +222,15 @@ describe('Plan Actions', () => {
     });
   });
 
-  describe('Updates Plan Status', () => {
-    let activeplancount;
-    let inactiveplancount;
+  describe('Updates Subsriber Status', () => {
+    let activesubscriberscount;
+    let inactivesubscriberscount;
     let id;
     let updateType;
     let statusType;
     beforeEach(() => {
-      activeplancount = 2;
-      inactiveplancount = 0;
+      activesubscriberscount = 2;
+      inactivesubscriberscount = 0;
       id = '1235-1235-1235-1235';
       updateType = 'activate';
       statusType = 'activated';
@@ -223,15 +241,15 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('updates a plan record status, gets current plans, gets plans counts, and fetches notifications', async () => {
-      mockApp.onPut(`plans/update/${id}`).reply(200);
-      mockApp.onGet('plans').reply(200, {
-        activeplans: allactiveplans,
-        inactiveplans: [],
+    it('updates a subscriber record status, gets current subs, gets promos subs, and fetches notifications', async () => {
+      mockApp.onPut(`subscribers/update/${id}`).reply(200);
+      mockApp.onGet('subscribers').reply(200, {
+        activesubscribers: allactivesubs,
+        inactivesubscribers: [],
       });
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+      mockApp.onGet('subscribercounts').reply(200, {
+        activesubscriberscount,
+        inactivesubscriberscount,
       });
       mockApp
         .onGet('notifications')
@@ -241,12 +259,12 @@ describe('Plan Actions', () => {
       );
 
       setTimeout(() => {
-        const { plans, notes } = store.getState();
-        expect(plans).toEqual({
-          activeitems: allactiveplans,
-          activeitemcount: activeplancount,
+        const { subs, notes } = store.getState();
+        expect(subs).toEqual({
+          activeitems: allactivesubs,
+          activeitemcount: activesubscriberscount,
           inactiveitems: [],
-          inactiveitemcount: inactiveplancount,
+          inactiveitemcount: inactivesubscriberscount,
         });
         expect(notes).toEqual({
           unreadNotifications: unreadnotifications,
@@ -257,7 +275,7 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onPut(`plans/update/${id}`).reply(404, { err });
+      mockApp.onPut(`subscribers/update/${id}`).reply(404, { err });
       await Promise.resolve(
         store.dispatch(actions.updateAction(updateType, statusType, id)),
       );

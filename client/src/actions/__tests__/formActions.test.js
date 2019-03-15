@@ -1,5 +1,5 @@
 import * as actions from '../formActions';
-import * as mocked from '../__mocks__/authActions.mocks.js';
+import * as mocked from '../__mocks__/actions.mocks.js';
 
 describe('Form Actions', () => {
   let store;

@@ -55,9 +55,9 @@ const fetchAction = (table, page, sortByNum) => dispatch =>
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 
 // Sets subscribers status to active or suspended
-const updateAction = (updateType, statusType, subscriberid) => dispatch =>
+const updateAction = (updateType, statusType, id) => dispatch =>
   app
-    .put(`subscribers/update/${subscriberid}`, { statusType, updateType })
+    .put(`subscribers/update/${id}`, { statusType, updateType })
     .then(() => {
       dispatch(fetchItemCounts());
       dispatch(fetchItems());

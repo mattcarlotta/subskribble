@@ -1,15 +1,15 @@
-import * as actions from '../planActions.js';
+import * as actions from '../promoActions.js';
 import * as mocked from '../__mocks__/actions.mocks.js';
 
-const allactiveplans = [
-  [{ ...mocked.inactiveplans[0], status: 'active' }],
-  ...mocked.activeplans,
+const allactivepromos = [
+  [{ ...mocked.inactivepromos[0], status: 'active' }],
+  ...mocked.activepromos,
 ];
 
 const unreadnotifications = [mocked.unreadNotifications];
 const readnotifications = [mocked.readNotifications];
 
-describe('Plan Actions', () => {
+describe('Promo Actions', () => {
   let store;
   beforeEach(() => {
     store = createStoreFactory();
@@ -25,7 +25,7 @@ describe('Plan Actions', () => {
     mockAPI.restore();
   });
 
-  describe('Fetch Plans', () => {
+  describe('Fetch Promos', () => {
     beforeEach(() => {
       jest.useFakeTimers();
     });
@@ -34,19 +34,19 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches initial plan records', async () => {
-      mockApp.onGet('plans').reply(200, {
-        activeplans: mocked.activeplans,
-        inactiveplans: mocked.inactiveplans,
+    it('fetches initial promos records', async () => {
+      mockApp.onGet('promotionals').reply(200, {
+        activepromos: mocked.activepromos,
+        inactivepromos: mocked.inactivepromos,
       });
       await Promise.resolve(store.dispatch(actions.fetchItems()));
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
+        const { promos } = store.getState();
+        expect(promos).toEqual({
+          activeitems: mocked.activepromos,
           activeitemcount: 0,
-          inactiveitems: mocked.inactiveplans,
+          inactiveitems: mocked.inactivepromos,
           inactiveitemcount: 0,
         });
       }, 1000);
@@ -54,7 +54,7 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onGet('plans').reply(404, { err });
+      mockApp.onGet('promotionals').reply(404, { err });
       await Promise.resolve(store.dispatch(actions.fetchItems()));
       const { server } = store.getState();
       expect(server.error).toEqual(err);
@@ -62,11 +62,11 @@ describe('Plan Actions', () => {
   });
 
   describe('Fetch Plans Counts', () => {
-    let activeplancount;
-    let inactiveplancount;
+    let activepromocount;
+    let inactivepromocount;
     beforeEach(() => {
-      activeplancount = 5;
-      inactiveplancount = 5;
+      activepromocount = 5;
+      inactivepromocount = 5;
       jest.useFakeTimers();
     });
 
@@ -74,41 +74,41 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches active and inactive plan counts', async () => {
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+    it('fetches active and inactive promos counts', async () => {
+      mockApp.onGet('promotionalcounts').reply(200, {
+        activepromocount,
+        inactivepromocount,
       });
       await Promise.resolve(store.dispatch(actions.fetchItemCounts()));
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
+        const { promos } = store.getState();
+        expect(promos).toEqual({
           activeitems: [],
-          activeitemcount: activeplancount,
+          activeitemcount: activepromocount,
           inactiveitems: [],
-          inactiveitemcount: inactiveplancount,
+          inactiveitemcount: inactivepromocount,
         });
       }, 1000);
     });
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onGet('plancounts').reply(404, { err });
+      mockApp.onGet('promotionalcounts').reply(404, { err });
       await Promise.resolve(store.dispatch(actions.fetchItemCounts()));
       const { server } = store.getState();
       expect(server.error).toEqual(err);
     });
   });
 
-  describe('Delete Plans', () => {
+  describe('Delete Promo', () => {
     let id;
-    let activeplancount;
-    let inactiveplancount;
+    let activepromocount;
+    let inactivepromocount;
     beforeEach(() => {
       id = '1234-1234-1234-1234';
-      activeplancount = 5;
-      inactiveplancount = 5;
+      activepromocount = 5;
+      inactivepromocount = 5;
       jest.useFakeTimers();
     });
 
@@ -116,15 +116,15 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('deletes a plan and gets current plans and plans count', async () => {
-      mockApp.onDelete(`plans/delete/${id}`).reply(200);
-      mockApp.onGet('plans').reply(200, {
-        activeplans: mocked.activeplans,
-        inactiveplans: mocked.inactiveplans,
+    it('deletes a promo and gets current promos and promos count', async () => {
+      mockApp.onDelete(`promotionals/delete/${id}`).reply(200);
+      mockApp.onGet('promotionals').reply(200, {
+        activepromos: mocked.activepromos,
+        inactivepromos: mocked.inactivepromos,
       });
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+      mockApp.onGet('promotionalcounts').reply(200, {
+        activepromocount,
+        inactivepromocount,
       });
       mockApp
         .onGet('notifications')
@@ -132,12 +132,12 @@ describe('Plan Actions', () => {
       await Promise.resolve(store.dispatch(actions.deleteAction(id)));
 
       setTimeout(() => {
-        const { plans, notes } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
-          activeitemcount: activeplancount,
-          inactiveitems: mocked.inactiveplans,
-          inactiveitemcount: inactiveplancount,
+        const { promos, notes } = store.getState();
+        expect(promos).toEqual({
+          activeitems: mocked.activepromos,
+          activeitemcount: activepromocount,
+          inactiveitems: mocked.inactivepromos,
+          inactiveitemcount: inactivepromocount,
         });
         expect(notes).toEqual({
           unreadNotifications: unreadnotifications,
@@ -148,19 +148,19 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onDelete(`plans/delete/${id}`).reply(404, { err });
+      mockApp.onDelete(`promotionals/delete/${id}`).reply(404, { err });
       await Promise.resolve(store.dispatch(actions.deleteAction(id)));
       const { server } = store.getState();
       expect(server.error).toEqual(err);
     });
   });
 
-  describe('Fetch Next/Prev Plans', () => {
+  describe('Fetch Next/Prev Promos', () => {
     let table;
     let page;
     let sortByNum;
     beforeEach(() => {
-      table = 'Active Plans';
+      table = 'Active Promos';
       page = 1;
       sortByNum = 10;
       jest.useFakeTimers();
@@ -170,20 +170,22 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('fetches next or previous plan records', async () => {
+    it('fetches next or previous promo records', async () => {
       mockApp
-        .onGet(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
+        .onGet(
+          `promotionals/records?table=${table}&page=${page}&limit=${sortByNum}`,
+        )
         .reply(200, {
-          activeplans: mocked.activeplans,
+          activepromos: mocked.activepromos,
         });
       await Promise.resolve(
         store.dispatch(actions.fetchAction(table, page, sortByNum)),
       );
 
       setTimeout(() => {
-        const { plans } = store.getState();
-        expect(plans).toEqual({
-          activeitems: mocked.activeplans,
+        const { promos } = store.getState();
+        expect(promos).toEqual({
+          activeitems: mocked.activepromos,
           activeitemcount: 0,
           inactiveitems: [],
           inactiveitemcount: 0,
@@ -194,7 +196,9 @@ describe('Plan Actions', () => {
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
       mockApp
-        .onGet(`plans/records?table=${table}&page=${page}&limit=${sortByNum}`)
+        .onGet(
+          `promotionals/records?table=${table}&page=${page}&limit=${sortByNum}`,
+        )
         .reply(404, { err });
       await Promise.resolve(
         store.dispatch(actions.fetchAction(table, page, sortByNum)),
@@ -204,15 +208,15 @@ describe('Plan Actions', () => {
     });
   });
 
-  describe('Updates Plan Status', () => {
-    let activeplancount;
-    let inactiveplancount;
+  describe('Updates Promo Status', () => {
+    let activepromocount;
+    let inactivepromocount;
     let id;
     let updateType;
     let statusType;
     beforeEach(() => {
-      activeplancount = 2;
-      inactiveplancount = 0;
+      activepromocount = 2;
+      inactivepromocount = 0;
       id = '1235-1235-1235-1235';
       updateType = 'activate';
       statusType = 'activated';
@@ -223,15 +227,15 @@ describe('Plan Actions', () => {
       jest.runAllTimers();
     });
 
-    it('updates a plan record status, gets current plans, gets plans counts, and fetches notifications', async () => {
-      mockApp.onPut(`plans/update/${id}`).reply(200);
-      mockApp.onGet('plans').reply(200, {
-        activeplans: allactiveplans,
-        inactiveplans: [],
+    it('updates a promo record status, gets current promos, gets promos counts, and fetches notifications', async () => {
+      mockApp.onPut(`promotionals/update/${id}`).reply(200);
+      mockApp.onGet('promotionals').reply(200, {
+        activepromos: allactivepromos,
+        inactivepromos: [],
       });
-      mockApp.onGet('plancounts').reply(200, {
-        activeplancount,
-        inactiveplancount,
+      mockApp.onGet('promotionalcounts').reply(200, {
+        activepromocount,
+        inactivepromocount,
       });
       mockApp
         .onGet('notifications')
@@ -241,12 +245,12 @@ describe('Plan Actions', () => {
       );
 
       setTimeout(() => {
-        const { plans, notes } = store.getState();
-        expect(plans).toEqual({
-          activeitems: allactiveplans,
-          activeitemcount: activeplancount,
+        const { promos, notes } = store.getState();
+        expect(promos).toEqual({
+          activeitems: allactivepromos,
+          activeitemcount: activepromocount,
           inactiveitems: [],
-          inactiveitemcount: inactiveplancount,
+          inactiveitemcount: inactivepromocount,
         });
         expect(notes).toEqual({
           unreadNotifications: unreadnotifications,
@@ -257,7 +261,7 @@ describe('Plan Actions', () => {
 
     it('displays an error if unsuccessful', async () => {
       const err = 'Unable to complete that request!';
-      mockApp.onPut(`plans/update/${id}`).reply(404, { err });
+      mockApp.onPut(`promotionals/update/${id}`).reply(404, { err });
       await Promise.resolve(
         store.dispatch(actions.updateAction(updateType, statusType, id)),
       );
