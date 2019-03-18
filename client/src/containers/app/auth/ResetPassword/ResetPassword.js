@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import AsyncModal from '../../modals/asyncModal.js';
+import Modal from '../../modals/asyncModal.js';
 import NewPasswordForm from '../../../forms/NewPasswordForm/newPasswordForm.js';
 
 const resetSelectedForm = () => browserHistory.push('/');
 
-const ResetPassword = props => (
-  <AsyncModal
+export const ResetPassword = props => (
+  <Modal
     {...props}
     closable={false}
     location={props.location}

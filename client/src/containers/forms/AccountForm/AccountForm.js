@@ -8,7 +8,7 @@ import {
 import FIELDS from './accountDetailsFormFields.js';
 import styles from '../../../styles/styles.scss';
 
-class AccountForm extends Component {
+export class AccountForm extends Component {
   state = { confirmLoading: false };
 
   componentDidMount = () => this.initializeForm();
@@ -68,12 +68,6 @@ class AccountForm extends Component {
   };
 }
 
-export default reduxForm({
-  form: 'AccountForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-})(AccountForm);
-
 AccountForm.propTypes = {
   company: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
@@ -87,3 +81,9 @@ AccountForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({
+  form: 'AccountForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+})(AccountForm);

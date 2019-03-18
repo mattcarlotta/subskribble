@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'antd';
 
-class AsyncModal extends Component {
+export class AsyncModal extends Component {
   state = { confirmLoading: false };
 
   componentDidUpdate = prevProps => {

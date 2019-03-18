@@ -7,7 +7,7 @@ import {
 import App from '../../../../components/app';
 import AppLoading from '../../../../components/app/loading/AppLoading/AppLoading.js';
 
-class RequireAuth extends Component {
+export class RequireAuth extends Component {
   componentDidMount = () => {
     const { authenticateUser, loggedinUser } = this.props;
     if (!loggedinUser) authenticateUser();
