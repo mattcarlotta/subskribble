@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import AuthForm from '../AuthForm/authForm.js';
+import Form from '../AuthForm/authForm.js';
 import FIELDS from './loginFormFields.js';
 import { signinUser } from '../../../actions/authActions.js';
 
-export const LoginForm = ({ showLoadingButton, signinUser, ...props }) => {
-  const handleFormSubmit = values => {
+export class LoginForm extends PureComponent {
+  handleFormSubmit = values => {
+    const { showLoadingButton, signinUser } = this.props;
     showLoadingButton();
     signinUser(values);
   };
-  return (
-    <AuthForm
-      {...props}
+
+  render = () => (
+    <Form
+      {...this.props}
       form="LoginForm"
-      onSubmit={handleFormSubmit}
+      onSubmit={this.handleFormSubmit}
       FIELDS={FIELDS}
       formTitle="Log In"
       showForgotPassword
       submitLabel="Login"
     />
   );
-};
+}
 
 export default connect(
   null,

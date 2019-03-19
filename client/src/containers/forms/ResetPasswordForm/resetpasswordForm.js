@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import AuthForm from '../AuthForm/authForm.js';
+import Form from '../AuthForm/authForm.js';
 import FIELDS from './passwordResetFormFields.js';
 import { resetUserToken } from '../../../actions/authActions.js';
 
-const ResetPasswordForm = ({ resetUserToken, showLoadingButton, ...props }) => {
-  const handleFormSubmit = ({ email }) => {
+export class ResetPasswordForm extends PureComponent {
+  handleFormSubmit = ({ email }) => {
+    const { resetUserToken, showLoadingButton } = this.props;
     showLoadingButton();
     resetUserToken(email);
   };
 
-  return (
-    <AuthForm
-      {...props}
+  render = () => (
+    <Form
+      {...this.props}
       form="ResetPasswordForm"
       iconType="retweet"
-      onSubmit={handleFormSubmit}
+      onSubmit={this.handleFormSubmit}
       FIELDS={FIELDS}
       formTitle="Reset Password"
       submitLabel="Reset Password"
     />
   );
-};
+}
 
 export default connect(
   null,
