@@ -5,7 +5,7 @@ import { AntFormFieldsWithLabels } from 'containers/app/formFields/antReduxFormF
 import FIELDS from './deleteAccountFormFields.js';
 import styles from './deleteAccount.scss';
 
-class DeleteAccountForm extends Component {
+export class DeleteAccountForm extends Component {
   componentDidMount = () =>
     this.props.initialize({
       company: this.props.company,
@@ -15,7 +15,10 @@ class DeleteAccountForm extends Component {
   handleFormSubmit = formProps => this.props.deleteUserAccount(formProps);
 
   render = () => (
-    <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+    <form
+      className="delete-account"
+      onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
+    >
       <div className={styles.accountDetailsContainer}>
         <AntFormFieldsWithLabels FIELDS={FIELDS} />
       </div>
@@ -52,12 +55,6 @@ class DeleteAccountForm extends Component {
   );
 }
 
-export default reduxForm({
-  form: 'DeleteAccountForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-})(DeleteAccountForm);
-
 DeleteAccountForm.propTypes = {
   company: PropTypes.string.isRequired,
   loggedinUser: PropTypes.string.isRequired,
@@ -67,3 +64,9 @@ DeleteAccountForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({
+  form: 'DeleteAccountForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+})(DeleteAccountForm);

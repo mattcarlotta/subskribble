@@ -185,18 +185,6 @@ class PromoForm extends Component {
   };
 }
 
-export default reduxForm({
-  form: 'PromoForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { discounttype: '$' },
-})(
-  connect(
-    null,
-    { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans },
-  )(PromoForm),
-);
-
 PromoForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -215,3 +203,15 @@ PromoForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   showButtonLoading: PropTypes.func.isRequired,
 };
+
+export default reduxForm({
+  form: 'PromoForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { discounttype: '$' },
+})(
+  connect(
+    null,
+    { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans },
+  )(PromoForm),
+);

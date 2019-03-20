@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
@@ -18,7 +19,7 @@ import { fetchTemplate } from 'actions/templateActions.js';
 import { formBoxContainer } from 'styles/styles.scss';
 import FIELDS from './templateFormFields.js';
 
-class TemplateForm extends Component {
+export class TemplateForm extends Component {
   state = { isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
@@ -114,6 +115,28 @@ class TemplateForm extends Component {
     );
   };
 }
+
+TemplateForm.propTypes = {
+  addNewTemplate: PropTypes.func.isRequired,
+  company: PropTypes.string,
+  confirmLoading: PropTypes.bool.isRequired,
+  editTemplate: PropTypes.func.isRequired,
+  fetchAllActivePlans: PropTypes.func.isRequired,
+  fetchTemplate: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  message: PropTypes.string,
+  fromsender: PropTypes.string,
+  pristine: PropTypes.bool.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  subject: PropTypes.string,
+};
 
 const selector = formValueSelector('NewTemplate');
 export default reduxForm({ form: 'NewTemplate' })(

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -14,7 +14,7 @@ import {
 import styles from 'styles/styles.scss';
 import FIELDS from './newPasswordFormFields.js';
 
-class NewPasswordForm extends Component {
+export class NewPasswordForm extends PureComponent {
   handleFormSubmit = ({ password }) => {
     const {
       missingPasswordToken,
@@ -56,15 +56,6 @@ class NewPasswordForm extends Component {
   );
 }
 
-export default reduxForm({
-  form: 'NewPasswordForm',
-})(
-  connect(
-    null,
-    { missingPasswordToken, resetUserPassword },
-  )(NewPasswordForm),
-);
-
 NewPasswordForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   missingPasswordToken: PropTypes.func,
@@ -80,3 +71,12 @@ NewPasswordForm.propTypes = {
     }),
   }).isRequired,
 };
+
+export default reduxForm({
+  form: 'NewPasswordForm',
+})(
+  connect(
+    null,
+    { missingPasswordToken, resetUserPassword },
+  )(NewPasswordForm),
+);

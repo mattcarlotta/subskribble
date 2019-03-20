@@ -99,17 +99,6 @@ class RefundForm extends Component {
     );
 }
 
-export default reduxForm({
-  form: 'RefundForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-})(
-  connect(
-    null,
-    { fetchTransaction, refundAction },
-  )(RefundForm),
-);
-
 RefundForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -126,3 +115,14 @@ RefundForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({
+  form: 'RefundForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+})(
+  connect(
+    null,
+    { fetchTransaction, refundAction },
+  )(RefundForm),
+);

@@ -65,13 +65,6 @@ const RegisterPlanForm = ({
   </div>
 );
 
-export default reduxForm({
-  form: 'CustomerPlanSignup',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { creditCardExpMonth: 'Exp. Month' },
-})(RegisterPlanForm);
-
 RegisterPlanForm.propTypes = {
   BILLINGADDRESSFIELDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   confirmLoading: PropTypes.bool.isRequired,
@@ -88,3 +81,10 @@ RegisterPlanForm.propTypes = {
   showContactInfo: PropTypes.bool,
   showPlans: PropTypes.bool,
 };
+
+export default reduxForm({
+  form: 'CustomerPlanSignup',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { creditCardExpMonth: 'Exp. Month' },
+})(RegisterPlanForm);

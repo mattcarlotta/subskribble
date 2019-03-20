@@ -188,18 +188,6 @@ class PlanForm extends Component {
   };
 }
 
-export default reduxForm({
-  form: 'PlanForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { billevery: 'Weekly' },
-})(
-  connect(
-    null,
-    { addNewPlan, editPlan, fetchPlan },
-  )(PlanForm),
-);
-
 PlanForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -217,3 +205,15 @@ PlanForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   showButtonLoading: PropTypes.func.isRequired,
 };
+
+export default reduxForm({
+  form: 'PlanForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { billevery: 'Weekly' },
+})(
+  connect(
+    null,
+    { addNewPlan, editPlan, fetchPlan },
+  )(PlanForm),
+);
