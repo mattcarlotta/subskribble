@@ -40,19 +40,21 @@ export default [
     dataIndex: 'plans',
     render: (plans, { status }) => (
       <span>
-        {map(plans, (name, key) =>
-          name ? (
-            <span className={styles[`plans${upperCase(status)}`]} key={key}>
-              {name}
-            </span>
-          ) : (
-            <span
-              key={key}
-              style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}
-            >
-              (none)
-            </span>
-          ),
+        {map(
+          plans,
+          (name, key) =>
+            name ? (
+              <span className={styles[`plans${upperCase(status)}`]} key={key}>
+                {name}
+              </span>
+            ) : (
+              <span
+                key={key}
+                style={{ textTransform: 'lowercase', color: 'rgba(0,0,0,.45)' }}
+              >
+                (none)
+              </span>
+            ),
         )}
       </span>
     ),
