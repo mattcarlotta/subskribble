@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  boxEmpty,
-  emptyIcon,
-  materialIcons,
-} from '../../../../styles/styles.scss';
+import { boxEmpty, emptyIcon, materialIcons } from 'styles/styles.scss';
 
 const EmptyPreview = () => (
   <div className={boxEmpty}>

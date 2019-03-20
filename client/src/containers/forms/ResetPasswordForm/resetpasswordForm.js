@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import Form from '../AuthForm/authForm.js';
+import Form from 'containers/forms/AuthForm/authForm.js';
+import { resetUserToken } from 'actions/authActions.js';
 import FIELDS from './passwordResetFormFields.js';
-import { resetUserToken } from '../../../actions/authActions.js';
 
 export class ResetPasswordForm extends PureComponent {
   handleFormSubmit = ({ email }) => {

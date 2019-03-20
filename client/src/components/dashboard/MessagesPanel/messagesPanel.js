@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import MiniPanel from '../MiniPanel/miniPanel.js';
-import NoData from '../NoData/noData.js';
-import styles from '../../../styles/styles.scss';
+import MiniPanel from 'components/dashboard/MiniPanel/miniPanel.js';
+import NoData from 'components/dashboard/NoData/noData.js';
+import styles from 'styles/styles.scss';
 
 const MessagesPanel = ({ messages }) => (
   <MiniPanel

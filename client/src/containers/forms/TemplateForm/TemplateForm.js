@@ -7,16 +7,16 @@ import {
   AntFormFields,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import QuillEditor from '../../app/formFields/QuillEditor.js';
-import TemplatePreview from '../../../components/app/editor/TemplatePreview/templatePreview.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import QuillEditor from 'containers/app/formFields/QuillEditor.js';
+import TemplatePreview from 'components/app/editor/TemplatePreview/templatePreview.js';
+import { isNotEmpty } from 'containers/app/formFields/validateFormFields.js';
+import { addNewTemplate, editTemplate } from 'actions/formActions.js';
+import { fetchAllActivePlans } from 'actions/planActions.js';
+import { fetchTemplate } from 'actions/templateActions.js';
+import { formBoxContainer } from 'styles/styles.scss';
 import FIELDS from './templateFormFields.js';
-import { isNotEmpty } from '../../app/formFields/validateFormFields.js';
-import { addNewTemplate, editTemplate } from '../../../actions/formActions.js';
-import { fetchAllActivePlans } from '../../../actions/planActions.js';
-import { fetchTemplate } from '../../../actions/templateActions.js';
-import { formBoxContainer } from '../../../styles/styles.scss';
 
 class TemplateForm extends Component {
   state = { isLoading: true, selectOptions: [] };

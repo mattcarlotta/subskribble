@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import moment from 'moment';
-import { upperCase } from '../../../../utils';
-import styles from '../../../../styles/styles.scss';
+import { upperCase } from 'utils';
+import styles from 'styles/styles.scss';
 
 const SUB = {
   active: 'person',

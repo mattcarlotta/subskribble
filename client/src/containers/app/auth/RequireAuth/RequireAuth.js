@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  authenticateUser,
-  saveSidebarState,
-} from '../../../../actions/authActions';
-import App from '../../../../components/app';
-import AppLoading from '../../../../components/app/loading/AppLoading/AppLoading.js';
+import { authenticateUser, saveSidebarState } from 'actions/authActions';
+import App from 'components/app';
+import AppLoading from 'components/app/loading/AppLoading/AppLoading.js';
 
 export class RequireAuth extends Component {
   componentDidMount = () => {

@@ -32,6 +32,26 @@ const rules = [
     options: {
       cacheDirectory: inDevelopment,
       cacheCompression: false,
+      plugins: [
+        [
+          'module-resolver',
+          {
+            root: ['./src'],
+            alias: {
+              actions: './src/actions',
+              components: './src/components',
+              containers: './src/containers',
+              images: './src/images',
+              reducers: './src/reducers',
+              root: './src/root',
+              routes: './src/routes',
+              styles: './src/styles',
+              types: './src/types',
+              utils: './src/utils',
+            },
+          },
+        ],
+      ],
     },
   }),
   /* handle image assets */
@@ -63,7 +83,6 @@ const mode = inDevelopment ? 'development' : 'production';
 /* webpack resolves component/module imports with extensions */
 const resolve = {
   modules: ['src', 'node_modules'],
-  extensions: ['*', '.js', '.jsx', '.css', '.scss'],
 };
 
 /* webpack plugins */

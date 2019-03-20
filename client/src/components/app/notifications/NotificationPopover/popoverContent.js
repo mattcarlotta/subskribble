@@ -2,8 +2,8 @@ import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
-import NotificationBody from '../NotificationBody/notificationBody.js';
-import NotificationEmpty from '../NotificationEmpty/notificationEmpty.js';
+import NotificationBody from 'components/app/notifications/NotificationBody/notificationBody.js';
+import NotificationEmpty from 'components/app/notifications/NotificationEmpty/notificationEmpty.js';
 import styles from './popoverContent.scss';
 
 const PopoverContent = ({

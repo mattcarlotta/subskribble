@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { AntStepFormButtons } from '../../app/formFields/antReduxFormFields.js';
+import { AntStepFormButtons } from 'containers/app/formFields/antReduxFormFields.js';
 import RenderPlanSelection from './renderPlanSelection.js';
 import ReviewPlanForm from './reviewPlanForm.js';
 import RenderFormFields from './renderFormFields.js';

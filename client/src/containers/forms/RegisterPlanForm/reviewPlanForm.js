@@ -2,10 +2,10 @@ import filter from 'lodash/filter';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import ContactInfoReview from '../../../components/customersignup/ContactInfoReview/contactInfoReview.js';
-import PaymentInfoReview from '../../../components/customersignup/PaymentInfoReview/paymentInfoReview.js';
-import PlanInfoReview from '../../../components/customersignup/PlanInfoReview/planInfoReview.js';
-import CartTotalReview from '../../../components/customersignup/CartTotalReview/cartTotalReview.js';
+import ContactInfoReview from 'components/customersignup/ContactInfoReview/contactInfoReview.js';
+import PaymentInfoReview from 'components/customersignup/PaymentInfoReview/paymentInfoReview.js';
+import PlanInfoReview from 'components/customersignup/PlanInfoReview/planInfoReview.js';
+import CartTotalReview from 'components/customersignup/CartTotalReview/cartTotalReview.js';
 import { reviewSignupContainer } from './registerForm.scss';
 
 const applyPromoToPrice = (amount, appliedPromoCode) => {

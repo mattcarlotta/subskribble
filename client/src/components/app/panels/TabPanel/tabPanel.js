@@ -2,8 +2,8 @@ import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
-import PanelBody from '../PanelBody/panelBody.js';
-import TogglePanelVisibility from '../TogglePanelVisibility/TogglePanelVisibility.js';
+import PanelBody from 'components/app/panels/PanelBody/panelBody.js';
+import TogglePanelVisibility from 'components/app/panels/TogglePanelVisibility/TogglePanelVisibility.js';
 import { panelContainer, tabsContainer } from './tabPanel.scss';
 
 const { TabPane } = Tabs;

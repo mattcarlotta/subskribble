@@ -1,4 +1,4 @@
-import * as types from '../types';
+import * as types from 'types';
 
 const AuthReducer = (state = {}, { payload, type }) => {
   switch (type) {

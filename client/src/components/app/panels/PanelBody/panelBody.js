@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CustomButton from '../../buttons/CustomButton/customButton.js';
-import SelectField from '../../formFields/SelectField/selectField.js';
-import TableList from '../../tables/TableList/tableList.js';
+import CustomButton from 'components/app/buttons/CustomButton/customButton.js';
+import SelectField from 'components/app/formFields/SelectField/selectField.js';
+import TableList from 'components/app/tables/TableList/tableList.js';
 import { panelBodyContainer, panelBody } from './panelBody.scss';
 
 export default class extends Component {

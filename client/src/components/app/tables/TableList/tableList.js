@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
-import TableActions from '../TableActions/TableActions.js';
+import TableActions from 'components/app/tables/TableActions/TableActions.js';
 
 class TableList extends PureComponent {
   static propTypes = {

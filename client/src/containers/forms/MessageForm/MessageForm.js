@@ -8,14 +8,14 @@ import { Row, Col } from 'antd';
 import {
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import TemplatePreview from '../../../components/app/editor/TemplatePreview/templatePreview.js';
-import DisabledFields from '../../../components/app/formFields/DisabledFields/disabledFields.js';
-import { sendMessageToSubs } from '../../../actions/formActions.js';
-import { fetchAllActiveTemplates } from '../../../actions/templateActions.js';
-import { isNotEmpty } from '../../app/formFields/validateFormFields.js';
-import { formBoxContainer } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/antReduxFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import TemplatePreview from 'components/app/editor/TemplatePreview/templatePreview.js';
+import DisabledFields from 'components/app/formFields/DisabledFields/disabledFields.js';
+import { sendMessageToSubs } from 'actions/formActions.js';
+import { fetchAllActiveTemplates } from 'actions/templateActions.js';
+import { isNotEmpty } from 'containers/app/formFields/validateFormFields.js';
+import { formBoxContainer } from 'styles/styles.scss';
 
 class MessageForm extends Component {
   state = {

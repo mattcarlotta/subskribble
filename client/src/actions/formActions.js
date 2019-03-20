@@ -1,8 +1,8 @@
 import { formValueSelector } from 'redux-form';
 import { browserHistory } from 'react-router';
-import { app } from '../utils';
-import * as types from '../types';
-import { fetchNotifications } from './notificationActions';
+import { app } from 'utils';
+import * as types from 'types';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // Add new plan
 const addNewPlan = formProps => dispatch =>

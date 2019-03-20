@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/promoActions.js';
-import CARDS from '../../components/promos/layouts/PanelCards/panelCards.js';
-import PanelLoader from '../../components/app/panels/PanelLoader/PanelLoader.js';
+import * as actions from 'actions/promoActions.js';
+import CARDS from 'components/promos/layouts/PanelCards/panelCards.js';
+import PanelLoader from 'components/app/panels/PanelLoader/PanelLoader.js';
 
 const Promotionals = props => (
   <PanelLoader

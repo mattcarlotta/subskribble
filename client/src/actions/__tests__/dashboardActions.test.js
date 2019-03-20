@@ -1,4 +1,4 @@
-import { getDashboardData } from '../dashboardActions';
+import { getDashboardData } from 'actions/dashboardActions';
 
 const store = createStoreFactory();
 const err = 'Unable to get dashboard data.';

@@ -1,6 +1,6 @@
-import { avatarAPI } from '../utils';
-import * as types from '../types';
-import { fetchNotifications } from './notificationActions';
+import { avatarAPI } from 'utils';
+import * as types from 'types';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // attempts to delete current avatar
 const deleteAvatar = () => dispatch =>

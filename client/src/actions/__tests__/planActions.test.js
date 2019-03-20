@@ -1,5 +1,5 @@
-import * as actions from '../planActions.js';
-import * as mocked from '../__mocks__/actions.mocks.js';
+import * as actions from 'actions/planActions.js';
+import * as mocked from 'actions/__mocks__/actions.mocks.js';
 
 const allactiveplans = [
   [{ ...mocked.inactiveplans[0], status: 'active' }],

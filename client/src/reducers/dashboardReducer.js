@@ -1,4 +1,4 @@
-import * as types from '../types';
+import * as types from 'types';
 
 const DashboardReducer = (state = {}, { payload, type }) => {
   switch (type) {

@@ -1,5 +1,5 @@
 import { reducer as formReducer } from 'redux-form';
-import * as types from '../types';
+import * as types from 'types';
 
 const formReducers = {
   form: formReducer.plugin({

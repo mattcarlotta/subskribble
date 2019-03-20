@@ -1,8 +1,8 @@
 import { browserHistory } from 'react-router';
-import { app } from '../utils';
-import { deleteAccountAvatar, fetchAvatarOnLogin } from './avatarActions';
-import { fetchNotifications } from './notificationActions';
-import * as types from '../types';
+import { app } from 'utils';
+import * as types from 'types';
+import { deleteAccountAvatar, fetchAvatarOnLogin } from 'actions/avatarActions';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // ==========================================================================
 // Authorization

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row } from 'antd';
-import PageContainer from '../app/panels/PageContainer/pageContainer';
-import createPlan from '../../images/createPlan.png';
-import createPromo from '../../images/createPromo.png';
-import createTemplate from '../../images/createTemplate.png';
-import refundTrans from '../../images/refundTrans.png';
-import sendMessage from '../../images/sendMessage.png';
-import subRegister from '../../images/subRegister.png';
+import PageContainer from 'components/app/panels/PageContainer/pageContainer';
+import createPlan from 'images/createPlan.png';
+import createPromo from 'images/createPromo.png';
+import createTemplate from 'images/createTemplate.png';
+import refundTrans from 'images/refundTrans.png';
+import sendMessage from 'images/sendMessage.png';
+import subRegister from 'images/subRegister.png';
 import Instruction from './Instruction/instruction.js';
 import styles from './landing.scss';
 

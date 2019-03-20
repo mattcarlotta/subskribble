@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GetCreditCardType } from '../GetCreditCardType/getCreditCardType.js';
+import { GetCreditCardType } from 'components/customersignup/GetCreditCardType/getCreditCardType.js';
 import {
   address,
   creditBilling,

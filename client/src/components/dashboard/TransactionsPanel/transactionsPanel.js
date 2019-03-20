@@ -2,9 +2,9 @@ import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Tooltip } from 'antd';
-import PieChart from '../../app/charts/PieChart.js';
-import MiniPanel from '../MiniPanel/miniPanel.js';
-import NoData from '../NoData/noData.js';
+import MiniPanel from 'components/dashboard/MiniPanel/miniPanel.js';
+import NoData from 'components/dashboard/NoData/noData.js';
+import PieChart from 'components/app/charts/PieChart.js';
 import styles from './transactionsPanel.scss';
 
 const transactionLegend = [

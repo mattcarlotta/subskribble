@@ -1,4 +1,4 @@
-import { resetServerMessages, serverErrorMessage } from '../appActions.js';
+import { resetServerMessages, serverErrorMessage } from 'actions/appActions.js';
 
 const initialState = {
   error: '',

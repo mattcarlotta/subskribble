@@ -7,19 +7,16 @@ import {
   AntFormFields,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import FIELDS from './refundTransactionFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
 import {
   isFloat,
   isRequired,
-} from '../../app/formFields/validateFormFields.js';
-import {
-  fetchTransaction,
-  refundAction,
-} from '../../../actions/transactionActions.js';
-import { formBoxContainer, input100 } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/validateFormFields.js';
+import { fetchTransaction, refundAction } from 'actions/transactionActions.js';
+import { formBoxContainer, input100 } from 'styles/styles.scss';
+import FIELDS from './refundTransactionFormFields.js';
 
 class RefundForm extends Component {
   state = { isLoading: true };

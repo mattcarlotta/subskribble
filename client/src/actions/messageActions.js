@@ -1,6 +1,6 @@
-import { app } from '../utils';
-import * as types from '../types';
-import { fetchNotifications } from './notificationActions';
+import { app } from 'utils';
+import * as types from 'types';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // Fetches initial 10 messages from DB
 const fetchItems = () => dispatch =>

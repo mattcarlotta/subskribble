@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import styles from '../../../../styles/styles.scss';
+import styles from 'styles/styles.scss';
 
 export default [
   {

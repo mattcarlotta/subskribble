@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { isSelected } from '../../app/formFields/validateFormFields.js';
-import { AntRadioGroupField } from '../../app/formFields/antReduxFormFields.js';
-import CustomScrollbars from '../../../components/app/scrollbars/CustomScrollbars.js';
+import { isSelected } from 'containers/app/formFields/validateFormFields.js';
+import { AntRadioGroupField } from 'containers/app/formFields/antReduxFormFields.js';
+import CustomScrollbars from 'components/app/scrollbars/CustomScrollbars.js';
 import { plansContainer } from './registerForm.scss';
 
 class RenderPlanSelection extends PureComponent {

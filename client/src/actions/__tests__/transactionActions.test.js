@@ -1,5 +1,5 @@
-import * as actions from '../transactionActions.js';
-import * as mocked from '../__mocks__/actions.mocks.js';
+import * as actions from 'actions/transactionActions.js';
+import * as mocked from 'actions/__mocks__/actions.mocks.js';
 
 const formProps = {
   amount: '5.00',

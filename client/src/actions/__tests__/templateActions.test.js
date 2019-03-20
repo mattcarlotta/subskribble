@@ -1,5 +1,5 @@
-import * as actions from '../templateActions.js';
-import * as mocked from '../__mocks__/actions.mocks.js';
+import * as actions from 'actions/templateActions.js';
+import * as mocked from 'actions/__mocks__/actions.mocks.js';
 
 const allactivetemplates = [
   [{ ...mocked.inactivetemplates[0], status: 'active' }],

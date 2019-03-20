@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PageContainer from '../../panels/PageContainer/pageContainer.js';
-import AvatarForm from '../../../../containers/forms/AvatarForm/AvatarForm.js';
-import AccountForm from '../../../../containers/forms/AccountForm/AccountForm.js';
-import CurrentAvatar from '../CurrentAvatar/currentAvatar.js';
-import DeleteAccount from '../DeleteAccount/deleteAccount.js';
+import PageContainer from 'components/app/panels/PageContainer/pageContainer.js';
+import AvatarForm from 'containers/forms/AvatarForm/AvatarForm.js';
+import AccountForm from 'containers/forms/AccountForm/AccountForm.js';
+import CurrentAvatar from 'components/app/settings/CurrentAvatar/currentAvatar.js';
+import DeleteAccount from 'components/app/settings/DeleteAccount/deleteAccount.js';
 import styles from './MyProfile.scss';
 
 export default class Profile extends Component {

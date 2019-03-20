@@ -1,5 +1,5 @@
-import * as actions from '../avatarActions';
-import * as types from '../../types';
+import * as actions from 'actions/avatarActions';
+import * as types from 'types';
 
 const avatarurl = 'http://test.com/test.png';
 const updAvatarURL = 'http://test.com/test2.png';

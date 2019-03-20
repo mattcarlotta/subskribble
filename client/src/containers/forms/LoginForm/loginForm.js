@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import Form from '../AuthForm/authForm.js';
+import Form from 'containers/forms/AuthForm/authForm.js';
+import { signinUser } from 'actions/authActions.js';
 import FIELDS from './loginFormFields.js';
-import { signinUser } from '../../../actions/authActions.js';
 
 export class LoginForm extends PureComponent {
   handleFormSubmit = values => {

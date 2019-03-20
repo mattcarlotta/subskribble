@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { shallow, mount } from 'enzyme';
 import thunk from 'redux-thunk';
-import rootReducer from '../../reducers/reducers.js';
+import rootReducer from 'reducers/reducers.js';
 
 const middlewares = applyMiddleware(thunk);
 

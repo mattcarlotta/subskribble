@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Col, Tag } from 'antd';
-import { AntInput } from '../../app/formFields/antReduxFormFields.js';
-import { applyPromo, resetPromo } from '../../../actions/formActions.js';
-import { allowedCharacters } from '../../app/formFields/validateFormFields.js';
+import { AntInput } from 'containers/app/formFields/antReduxFormFields.js';
+import { applyPromo, resetPromo } from 'actions/formActions.js';
+import { allowedCharacters } from 'containers/app/formFields/validateFormFields.js';
 
 export class ApplyPromotional extends Component {
   state = { value: '' };

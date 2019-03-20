@@ -1,8 +1,8 @@
 import {
   isRequired,
   isValidEmail,
-} from '../../app/formFields/validateFormFields.js';
-import { AntInput } from '../../app/formFields/antReduxFormFields.js';
+} from 'containers/app/formFields/validateFormFields.js';
+import { AntInput } from 'containers/app/formFields/antReduxFormFields.js';
 
 export default [
   {

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  missingVerificationToken,
-  verifyEmail,
-} from '../../../../actions/authActions.js';
-import EmailConfirmation from '../../../../components/app/auth/Email/emailConfirmation.js';
-import Spinner from '../../../../components/app/loading/Spinner/Spinner.js';
+import { missingVerificationToken, verifyEmail } from 'actions/authActions.js';
+import EmailConfirmation from 'components/app/auth/Email/emailConfirmation.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
 
 export class VerifyEmail extends Component {
   componentDidMount = () => {

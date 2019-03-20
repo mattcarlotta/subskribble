@@ -1,5 +1,5 @@
-import * as actions from '../subscriberActions.js';
-import * as mocked from '../__mocks__/actions.mocks.js';
+import * as actions from 'actions/subscriberActions.js';
+import * as mocked from 'actions/__mocks__/actions.mocks.js';
 
 const allactivesubs = [
   [{ ...mocked.inactivesubscribers[0], status: 'active' }],
