@@ -1,8 +1,8 @@
 import { browserHistory } from 'react-router';
-import { app } from '../utils';
-import { deleteAccountAvatar, fetchAvatarOnLogin } from './avatarActions';
-import { fetchNotifications } from './notificationActions';
-import * as types from '../types';
+import { app } from 'utils';
+import * as types from 'types';
+import { deleteAccountAvatar, fetchAvatarOnLogin } from 'actions/avatarActions';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // ==========================================================================
 // Authorization
@@ -41,9 +41,11 @@ const logoutUser = () => dispatch => {
 const deleteUserAccount = formProps => dispatch => {
   app
     .delete(`delete-account`, { data: { ...formProps } })
-    .then(({ data: { message, token, userid } }) => {
-      dispatch({ type: types.SERVER_MESSAGE, payload: message });
-      if (token && userid) dispatch(deleteAccountAvatar(token, userid));
+    .then(({ data }) => {
+      dispatch({ type: types.SERVER_MESSAGE, payload: data.message });
+      if (data.token && data.userid) {
+        dispatch(deleteAccountAvatar(data.token, data.userid));
+      }
       dispatch(logoutUser());
     })
     .catch(err =>
@@ -78,8 +80,8 @@ const resetUserPassword = (password, token) => dispatch =>
       email: 'helpdesk@subskribble.com',
       password,
     })
-    .then(({ data: { message } }) =>
-      dispatch({ type: types.SERVER_MESSAGE, payload: message }),
+    .then(({ data }) =>
+      dispatch({ type: types.SERVER_MESSAGE, payload: data.message }),
     )
     .catch(err =>
       dispatch({

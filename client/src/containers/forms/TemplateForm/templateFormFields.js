@@ -2,7 +2,7 @@ import {
   allowedCharacters,
   isRequired,
   isValidEmail,
-} from '../../app/formFields/validateFormFields.js';
+} from 'containers/app/formFields/validateFormFields.js';
 
 export default [
   {

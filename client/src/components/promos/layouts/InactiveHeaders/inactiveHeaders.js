@@ -2,7 +2,7 @@ import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
 import moment from 'moment';
-import styles from '../../../../styles/styles.scss';
+import styles from 'styles/styles.scss';
 
 export default [
   {

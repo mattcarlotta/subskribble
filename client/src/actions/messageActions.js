@@ -1,13 +1,16 @@
-import { app } from '../utils';
-import * as types from '../types';
-import { fetchNotifications } from './notificationActions';
+import { app } from 'utils';
+import * as types from 'types';
+import { fetchNotifications } from 'actions/notificationActions';
 
 // Fetches initial 10 messages from DB
 const fetchItems = () => dispatch =>
   app
     .get('messages')
-    .then(({ data: { messages } }) =>
-      dispatch({ type: types.SET_INITIAL_MESSAGES, payload: { messages } }),
+    .then(({ data }) =>
+      dispatch({
+        type: types.SET_INITIAL_MESSAGES,
+        payload: { messages: data.messages },
+      }),
     )
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 
@@ -15,10 +18,10 @@ const fetchItems = () => dispatch =>
 const fetchItemCounts = () => dispatch =>
   app
     .get('messagecounts')
-    .then(({ data: { messagecounts } }) =>
+    .then(({ data }) =>
       dispatch({
         type: types.SET_INITIAL_MESSAGECOUNTS,
-        payload: messagecounts,
+        payload: data.messagecounts,
       }),
     )
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
@@ -38,8 +41,9 @@ const deleteAction = id => dispatch =>
 const fetchAction = (table, page, sortByNum) => dispatch =>
   app
     .get(`messages/records?table=${table}&page=${page}&limit=${sortByNum}`)
-    .then(({ data: { messages } }) => {
-      if (messages) dispatch({ type: types.SET_MESSAGES, payload: messages });
+    .then(({ data }) => {
+      if (data && data.messages)
+        dispatch({ type: types.SET_MESSAGES, payload: data.messages });
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 

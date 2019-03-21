@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Col, Button, Icon, Tooltip } from 'antd';
-import { AntUpload } from '../../app/formFields/antReduxFormFields.js';
+import { AntUpload } from 'containers/app/formFields/antReduxFormFields.js';
 import {
   hasFileList,
   isRequired,
-} from '../../app/formFields/validateFormFields.js';
+} from 'containers/app/formFields/validateFormFields.js';
 
-class AvatarForm extends Component {
+export class AvatarForm extends Component {
   state = {
     confirmLoading: false,
     fileList: [],
@@ -102,7 +102,10 @@ class AvatarForm extends Component {
   };
 
   render = () => (
-    <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+    <form
+      className="avatar-form"
+      onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
+    >
       <div style={{ height: 150 }}>
         <Field
           name="avatar"
@@ -152,8 +155,6 @@ class AvatarForm extends Component {
   );
 }
 
-export default reduxForm({ form: 'AvatarForm' })(AvatarForm);
-
 AvatarForm.propTypes = {
   avatarURL: PropTypes.string,
   updateAvatar: PropTypes.func.isRequired,
@@ -165,3 +166,5 @@ AvatarForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({ form: 'AvatarForm' })(AvatarForm);

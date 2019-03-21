@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Steps } from 'antd';
-import RegisterPlanForm from '../RegisterPlanForm/RegisterPlanForm.js';
-import { subRegisterToPlan } from '../../../actions/formActions.js';
+import RegisterPlanForm from 'containers/forms/RegisterPlanForm/RegisterPlanForm.js';
+import { subRegisterToPlan } from 'actions/formActions.js';
+import { fetchAllActivePlans } from 'actions/planActions.js';
 import { getCustomerFormFields } from './customerSignupFields.js';
-import { fetchAllActivePlans } from '../../../actions/planActions.js';
 import {
   customerSignupBG,
   customerSignupContainer,
@@ -22,7 +22,7 @@ const stepLabels = [
   { title: 'Review', icon: 'shopping_cart' },
 ];
 
-class CustomerPlanSignup extends Component {
+export class CustomerPlanSignup extends Component {
   state = {
     formFields: getCustomerFormFields(),
     isLoading: true,
@@ -34,9 +34,9 @@ class CustomerPlanSignup extends Component {
   componentDidMount = () => {
     this.props
       .fetchAllActivePlans()
-      .then(({ data: { activeplans } }) => {
-        if (activeplans) {
-          this.setState({ isLoading: false, plans: activeplans });
+      .then(({ data }) => {
+        if (data) {
+          this.setState({ isLoading: false, plans: data.activeplans });
         } else {
           this.props.handleGoBack();
         }
@@ -124,11 +124,6 @@ class CustomerPlanSignup extends Component {
   }
 }
 
-export default connect(
-  null,
-  { fetchAllActivePlans, subRegisterToPlan },
-)(CustomerPlanSignup);
-
 CustomerPlanSignup.propTypes = {
   handleGoBack: PropTypes.func.isRequired,
   fetchAllActivePlans: PropTypes.func.isRequired,
@@ -136,3 +131,8 @@ CustomerPlanSignup.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   showButtonLoading: PropTypes.func.isRequired,
 };
+
+export default connect(
+  null,
+  { fetchAllActivePlans, subRegisterToPlan },
+)(CustomerPlanSignup);

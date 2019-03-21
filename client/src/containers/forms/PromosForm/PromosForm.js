@@ -10,22 +10,22 @@ import {
   AntRangePicker,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import { fetchPromo } from '../../../actions/promoActions.js';
-import { addNewPromo, editPromo } from '../../../actions/formActions.js';
-import { fetchAllActivePlans } from '../../../actions/planActions.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import { fetchPromo } from 'actions/promoActions.js';
+import { addNewPromo, editPromo } from 'actions/formActions.js';
+import { fetchAllActivePlans } from 'actions/planActions.js';
 import {
   allowedCharacters,
   hasDates,
   isRequired,
   isNotEmpty,
   isNumber,
-} from '../../app/formFields/validateFormFields.js';
-import { formBoxContainer, input100 } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/validateFormFields.js';
+import { formBoxContainer, input100 } from 'styles/styles.scss';
 
-class PromoForm extends Component {
+export class PromoForm extends Component {
   state = { isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
@@ -185,18 +185,6 @@ class PromoForm extends Component {
   };
 }
 
-export default reduxForm({
-  form: 'PromoForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { discounttype: '$' },
-})(
-  connect(
-    null,
-    { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans },
-  )(PromoForm),
-);
-
 PromoForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -215,3 +203,15 @@ PromoForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   showButtonLoading: PropTypes.func.isRequired,
 };
+
+export default reduxForm({
+  form: 'PromoForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { discounttype: '$' },
+})(
+  connect(
+    null,
+    { addNewPromo, editPromo, fetchPromo, fetchAllActivePlans },
+  )(PromoForm),
+);

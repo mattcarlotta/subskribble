@@ -1,5 +1,5 @@
 import React from 'react';
-import { AntSelect } from '../../app/formFields/antReduxFormFields.js';
+import { AntSelect } from 'containers/app/formFields/antReduxFormFields.js';
 import {
   allowedCharacters,
   isNumber,
@@ -12,7 +12,7 @@ import {
   isValidState,
   isValidYear,
   isValidZip,
-} from '../../app/formFields/validateFormFields.js';
+} from 'containers/app/formFields/validateFormFields.js';
 import {
   formatCreditCard,
   formatCVV,
@@ -20,7 +20,7 @@ import {
   formatState,
   formatYear,
   formatZip,
-} from '../../app/formFields/formatFields.js';
+} from 'containers/app/formFields/formatFields.js';
 import styles from './customerFields.scss';
 
 const MENUITEMS = [
@@ -38,7 +38,7 @@ const MENUITEMS = [
   '12',
 ];
 
-const BILLINGADDRESSFIELDS = [
+export const BILLINGADDRESSFIELDS = [
   {
     className: `${styles.input50} f-l`,
     name: 'billingAddress',
@@ -77,7 +77,7 @@ const BILLINGADDRESSFIELDS = [
   },
 ];
 
-const CREDITCARDFIELDS = [
+export const CREDITCARDFIELDS = [
   {
     className: `${styles.input40} f-l`,
     name: 'creditCard',
@@ -113,7 +113,7 @@ const CREDITCARDFIELDS = [
   },
 ];
 
-const CONTACTFIELDS = [
+export const CONTACTFIELDS = [
   {
     className: `${styles.input40} f-l`,
     name: 'contactFirstName',
@@ -177,7 +177,7 @@ const CONTACTFIELDS = [
   },
 ];
 
-const CustomerFormFields = [
+export const CustomerFormFields = [
   {
     BILLINGADDRESSFIELDS,
     CONTACTFIELDS,

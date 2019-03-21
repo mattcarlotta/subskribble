@@ -6,21 +6,21 @@ import {
   AntInput,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import { fetchPlan } from '../../../actions/planActions.js';
-import { addNewPlan, editPlan } from '../../../actions/formActions.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import { fetchPlan } from 'actions/planActions.js';
+import { addNewPlan, editPlan } from 'actions/formActions.js';
 import {
   allowedCharacters,
   isRequired,
   isNotEmpty,
   isFloat,
   maxLength40,
-} from '../../app/formFields/validateFormFields.js';
-import { formBoxContainer, input100 } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/validateFormFields.js';
+import { formBoxContainer, input100 } from 'styles/styles.scss';
 
-class PlanForm extends Component {
+export class PlanForm extends Component {
   state = {
     billEveryDefault: 'Weekly',
     isEditing: false,
@@ -188,18 +188,6 @@ class PlanForm extends Component {
   };
 }
 
-export default reduxForm({
-  form: 'PlanForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { billevery: 'Weekly' },
-})(
-  connect(
-    null,
-    { addNewPlan, editPlan, fetchPlan },
-  )(PlanForm),
-);
-
 PlanForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -217,3 +205,15 @@ PlanForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   showButtonLoading: PropTypes.func.isRequired,
 };
+
+export default reduxForm({
+  form: 'PlanForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { billevery: 'Weekly' },
+})(
+  connect(
+    null,
+    { addNewPlan, editPlan, fetchPlan },
+  )(PlanForm),
+);

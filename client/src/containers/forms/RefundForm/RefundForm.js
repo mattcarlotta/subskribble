@@ -7,21 +7,18 @@ import {
   AntFormFields,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
 
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import FIELDS from './refundTransactionFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
 import {
   isFloat,
   isRequired,
-} from '../../app/formFields/validateFormFields.js';
-import {
-  fetchTransaction,
-  refundAction,
-} from '../../../actions/transactionActions.js';
-import { formBoxContainer, input100 } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/validateFormFields.js';
+import { fetchTransaction, refundAction } from 'actions/transactionActions.js';
+import { formBoxContainer, input100 } from 'styles/styles.scss';
+import FIELDS from './refundTransactionFormFields.js';
 
-class RefundForm extends Component {
+export class RefundForm extends Component {
   state = { isLoading: true };
 
   componentDidMount = () => {
@@ -36,11 +33,11 @@ class RefundForm extends Component {
   fetchTransactionToRefund = id => {
     this.props
       .fetchTransaction(id)
-      .then(({ data }) =>
+      .then(({ data }) => {
         this.setState({ isLoading: false }, () =>
           this.props.initialize({ ...data, transactiontype: 'Refund' }),
-        ),
-      )
+        );
+      })
       .catch(() => this.props.handleGoBack());
   };
 
@@ -102,17 +99,6 @@ class RefundForm extends Component {
     );
 }
 
-export default reduxForm({
-  form: 'RefundForm',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-})(
-  connect(
-    null,
-    { fetchTransaction, refundAction },
-  )(RefundForm),
-);
-
 RefundForm.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -129,3 +115,14 @@ RefundForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({
+  form: 'RefundForm',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+})(
+  connect(
+    null,
+    { fetchTransaction, refundAction },
+  )(RefundForm),
+);

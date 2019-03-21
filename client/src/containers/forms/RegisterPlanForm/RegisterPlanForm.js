@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
-import { AntStepFormButtons } from '../../app/formFields/antReduxFormFields.js';
+import { AntStepFormButtons } from 'containers/app/formFields/antReduxFormFields.js';
 import RenderPlanSelection from './renderPlanSelection.js';
 import ReviewPlanForm from './reviewPlanForm.js';
 import RenderFormFields from './renderFormFields.js';
 import styles from './registerForm.scss';
 
-const RegisterPlanForm = ({
+export const RegisterPlanForm = ({
   BILLINGADDRESSFIELDS,
   confirmLoading,
   CONTACTFIELDS,
@@ -65,13 +65,6 @@ const RegisterPlanForm = ({
   </div>
 );
 
-export default reduxForm({
-  form: 'CustomerPlanSignup',
-  enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
-  initialValues: { creditCardExpMonth: 'Exp. Month' },
-})(RegisterPlanForm);
-
 RegisterPlanForm.propTypes = {
   BILLINGADDRESSFIELDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   confirmLoading: PropTypes.bool.isRequired,
@@ -88,3 +81,10 @@ RegisterPlanForm.propTypes = {
   showContactInfo: PropTypes.bool,
   showPlans: PropTypes.bool,
 };
+
+export default reduxForm({
+  form: 'CustomerPlanSignup',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  initialValues: { creditCardExpMonth: 'Exp. Month' },
+})(RegisterPlanForm);

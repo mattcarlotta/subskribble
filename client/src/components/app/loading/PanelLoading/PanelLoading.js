@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Spinner from '../Spinner/Spinner.js';
-import NoDataToDisplay from '../../notfound/NoDataToDisplay/noDataToDisplay.js';
+import PropTypes from 'prop-types';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import NoDataToDisplay from 'components/app/notfound/NoDataToDisplay/noDataToDisplay.js';
 
 class PanelLoading extends Component {
   state = { requestTimeout: false };
@@ -45,5 +46,12 @@ class PanelLoading extends Component {
       <Spinner />
     );
 }
+
+PanelLoading.propTypes = {
+  activeitemcount: PropTypes.number,
+  inactiveitemcount: PropTypes.number,
+  itemcount: PropTypes.number,
+  serverError: PropTypes.string,
+};
 
 export default PanelLoading;

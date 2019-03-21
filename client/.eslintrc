@@ -9,7 +9,8 @@
     "jQuery": false,
     "$": true,
     "localStorage": true,
-    "fetch": true
+    "fetch": true,
+    "shallow": true
   },
   "root": true,
   "overrides": [
@@ -27,6 +28,7 @@
     "indent": 0,
     "no-param-reassign": 0,
     "no-return-assign": 0,
+    "import/no-named-as-default": 0,
     "no-shadow": 0,
     "react/no-string-refs": 0,
     "react/prefer-stateless-function": "warn",

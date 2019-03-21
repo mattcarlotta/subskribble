@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'antd';
-import PanelBody from '../PanelBody/panelBody.js';
-import TogglePanelVisibility from '../TogglePanelVisibility/TogglePanelVisibility.js';
-import styles from '../../../../styles/styles.scss';
+import styles from 'styles/styles.scss';
+import PanelBody from 'components/app/panels/PanelBody/panelBody.js';
+import TogglePanelVisibility from 'components/app/panels/TogglePanelVisibility/TogglePanelVisibility.js';
 
 const BasicPanel = ({ cardTitle, ...props }) => (
   <div className={styles.panelContainer}>

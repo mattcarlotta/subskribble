@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { notification } from 'antd';
-import { resetServerMessages } from '../../../actions/appActions.js';
+import { resetServerMessages } from 'actions/appActions.js';
 import styles from './renderMessages.scss';
 
 notification.config({ placement: 'topRight', top: 50, duration: 7 });

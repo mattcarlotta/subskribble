@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'antd';
 
-import PageContainer from '../../app/panels/PageContainer/pageContainer.js';
-import MessagesPanel from '../MessagesPanel/messagesPanel.js';
-import PlansPanel from '../PlansPanel/plansPanel.js';
-import PromotionalsPanel from '../PromotionalsPanel/promotionalsPanel.js';
-import SubcribersPanel from '../SubscribersPanel/subscribersPanel.js';
-import TemplatesPanel from '../TemplatesPanel/templatesPanel.js';
-import TransactionsPanel from '../TransactionsPanel/transactionsPanel.js';
+import PageContainer from 'components/app/panels/PageContainer/pageContainer.js';
+import MessagesPanel from 'components/dashboard/MessagesPanel/messagesPanel.js';
+import PlansPanel from 'components/dashboard/PlansPanel/plansPanel.js';
+import PromotionalsPanel from 'components/dashboard/PromotionalsPanel/promotionalsPanel.js';
+import SubcribersPanel from 'components/dashboard/SubscribersPanel/subscribersPanel.js';
+import TemplatesPanel from 'components/dashboard/TemplatesPanel/templatesPanel.js';
+import TransactionsPanel from 'components/dashboard/TransactionsPanel/transactionsPanel.js';
 
 class DashboardPanels extends Component {
   state = {

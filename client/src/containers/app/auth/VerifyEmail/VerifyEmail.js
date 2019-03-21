@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  missingVerificationToken,
-  verifyEmail,
-} from '../../../../actions/authActions.js';
-import EmailConfirmation from '../../../../components/app/auth/Email/emailConfirmation.js';
-import Spinner from '../../../../components/app/loading/Spinner/Spinner.js';
+import { missingVerificationToken, verifyEmail } from 'actions/authActions.js';
+import EmailConfirmation from 'components/app/auth/Email/emailConfirmation.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
 
-class VerifyEmail extends Component {
+export class VerifyEmail extends Component {
   componentDidMount = () => {
     const { missingVerificationToken, verifyEmail, userVerified } = this.props;
     const { token } = this.props.location.query;
@@ -31,11 +28,6 @@ class VerifyEmail extends Component {
     );
 }
 
-export default connect(
-  state => ({ userVerified: state.auth.userVerified }),
-  { missingVerificationToken, verifyEmail },
-)(VerifyEmail);
-
 VerifyEmail.propTypes = {
   location: PropTypes.shape({
     query: PropTypes.shape({
@@ -46,3 +38,8 @@ VerifyEmail.propTypes = {
   verifyEmail: PropTypes.func.isRequired,
   userVerified: PropTypes.string,
 };
+
+export default connect(
+  state => ({ userVerified: state.auth.userVerified }),
+  { missingVerificationToken, verifyEmail },
+)(VerifyEmail);

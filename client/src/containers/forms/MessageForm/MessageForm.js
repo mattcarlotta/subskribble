@@ -2,22 +2,23 @@ import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import filter from 'lodash/filter';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 import {
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import TemplatePreview from '../../../components/app/editor/TemplatePreview/templatePreview.js';
-import DisabledFields from '../../../components/app/formFields/DisabledFields/disabledFields.js';
-import { sendMessageToSubs } from '../../../actions/formActions.js';
-import { fetchAllActiveTemplates } from '../../../actions/templateActions.js';
-import { isNotEmpty } from '../../app/formFields/validateFormFields.js';
-import { formBoxContainer } from '../../../styles/styles.scss';
+} from 'containers/app/formFields/antReduxFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import TemplatePreview from 'components/app/editor/TemplatePreview/templatePreview.js';
+import DisabledFields from 'components/app/formFields/DisabledFields/disabledFields.js';
+import { sendMessageToSubs } from 'actions/formActions.js';
+import { fetchAllActiveTemplates } from 'actions/templateActions.js';
+import { isNotEmpty } from 'containers/app/formFields/validateFormFields.js';
+import { formBoxContainer } from 'styles/styles.scss';
 
-class MessageForm extends Component {
+export class MessageForm extends Component {
   state = {
     availableTemplates: [],
     isLoading: true,
@@ -117,6 +118,18 @@ class MessageForm extends Component {
     );
   };
 }
+
+MessageForm.propTypes = {
+  company: PropTypes.string.isRequired,
+  fetchAllActiveTemplates: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  selectedTemplate: PropTypes.string,
+  sendMessageToSubs: PropTypes.func.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
 
 const selector = formValueSelector('MessageForm');
 export default reduxForm({

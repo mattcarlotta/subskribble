@@ -1,5 +1,5 @@
 import filter from 'lodash/filter';
-import * as types from '../types';
+import * as types from 'types';
 
 const filterNotifications = (notifications, deletedNote) =>
   filter(notifications, notification => notification.id !== deletedNote);

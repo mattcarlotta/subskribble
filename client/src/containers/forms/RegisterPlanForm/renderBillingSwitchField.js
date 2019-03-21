@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AntSwitchField } from '../../app/formFields/antReduxFormFields.js';
+import { AntSwitchField } from 'containers/app/formFields/antReduxFormFields.js';
 import {
   resetBillingFieldValues,
   setBillingFieldValues,
-} from '../../../actions/formActions.js';
+} from 'actions/formActions.js';
 
 class CustomerSwitchField extends Component {
   state = {
@@ -38,12 +38,12 @@ class CustomerSwitchField extends Component {
   );
 }
 
-export default connect(
-  null,
-  { resetBillingFieldValues, setBillingFieldValues },
-)(CustomerSwitchField);
-
 CustomerSwitchField.propTypes = {
   resetBillingFieldValues: PropTypes.func.isRequired,
   setBillingFieldValues: PropTypes.func.isRequired,
 };
+
+export default connect(
+  null,
+  { resetBillingFieldValues, setBillingFieldValues },
+)(CustomerSwitchField);

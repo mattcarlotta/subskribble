@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DeleteAccountForm from '../../../forms/DeleteAccountForm/DeleteAccountForm.js';
-import { deleteUserAccount } from '../../../../actions/authActions.js';
-import PageContainer from '../../../../components/app/panels/PageContainer/pageContainer.js';
+import DeleteAccountForm from 'containers/forms/DeleteAccountForm/DeleteAccountForm.js';
+import { deleteUserAccount } from 'actions/authActions.js';
+import PageContainer from 'components/app/panels/PageContainer/pageContainer.js';
 import { settingsContainer, title, subdescription } from './deleteAccount.scss';
 
-const DeleteAccount = props => (
+export const DeleteAccount = props => (
   <PageContainer>
     <div className={settingsContainer}>
       <h2>Delete Account</h2>

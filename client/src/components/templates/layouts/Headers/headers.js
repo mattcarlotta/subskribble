@@ -1,8 +1,8 @@
 import map from 'lodash/map';
 import React from 'react';
 import { Tooltip } from 'antd';
-import { upperCase } from '../../../../utils';
-import styles from '../../../../styles/styles.scss';
+import { upperCase } from 'utils';
+import styles from 'styles/styles.scss';
 
 export default [
   {

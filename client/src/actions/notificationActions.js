@@ -1,5 +1,5 @@
-import { app } from '../utils';
-import * as types from '../types';
+import { app } from 'utils';
+import * as types from 'types';
 
 // Deletes notifications from DB
 const deleteNotification = id => dispatch =>
@@ -13,10 +13,12 @@ const fetchNotifications = () => dispatch =>
   app
     .get(`notifications`)
     .then(({ data: { unreadnotifications, readnotifications } }) => {
-      dispatch({
-        type: types.SET_NOTIFICATIONS,
-        payload: { unreadnotifications, readnotifications },
-      });
+      if (unreadnotifications || readnotifications) {
+        dispatch({
+          type: types.SET_NOTIFICATIONS,
+          payload: { unreadnotifications, readnotifications },
+        });
+      }
     })
     .catch(err => dispatch({ type: types.SERVER_ERROR, payload: err }));
 

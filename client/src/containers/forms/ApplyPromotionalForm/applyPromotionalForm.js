@@ -1,13 +1,14 @@
+import isEmpty from 'lodash/isEmpty';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Col, Tag } from 'antd';
-import { AntInput } from '../../app/formFields/antReduxFormFields.js';
-import { applyPromo, resetPromo } from '../../../actions/formActions.js';
-import { allowedCharacters } from '../../app/formFields/validateFormFields.js';
+import { AntInput } from 'containers/app/formFields/antReduxFormFields.js';
+import { applyPromo, resetPromo } from 'actions/formActions.js';
+import { allowedCharacters } from 'containers/app/formFields/validateFormFields.js';
 
-class ApplyPromotional extends Component {
+export class ApplyPromotional extends Component {
   state = { value: '' };
 
   componentDidMount = () => {
@@ -18,7 +19,7 @@ class ApplyPromotional extends Component {
   handlePromoSubmit = () => {
     const { applyPromo, plan } = this.props;
     const { value } = this.state;
-    if (value) applyPromo(value, plan);
+    if (value && plan) applyPromo(value, plan);
   };
 
   handleChange = e => this.setState({ value: e.target.value });
@@ -38,8 +39,8 @@ class ApplyPromotional extends Component {
       style={{ float: this.props.appliedPromoCode ? 'right' : 'none' }}
       className="promo-form"
     >
-      {!this.props.appliedPromoCode ? (
-        <span>
+      {isEmpty(this.props.appliedPromoCode) ? (
+        <span className="apply-promo-form">
           <Col span={18} style={{ paddingRight: '5px', marginTop: '-3px' }}>
             <Field
               name="promoCode"
@@ -63,7 +64,7 @@ class ApplyPromotional extends Component {
           </Col>
         </span>
       ) : (
-        <span>
+        <span className="applied-promo">
           <Tag className="tag" closable onClose={this.handleRemoveAppliedPromo}>
             {`${this.showAppliedPromo()} OFF`}
           </Tag>
@@ -76,11 +77,6 @@ class ApplyPromotional extends Component {
     </div>
   );
 }
-
-export default connect(
-  null,
-  { applyPromo, resetPromo },
-)(ApplyPromotional);
 
 ApplyPromotional.propTypes = {
   adjustedPrice: PropTypes.string.isRequired,
@@ -103,3 +99,8 @@ ApplyPromotional.propTypes = {
   plan: PropTypes.string,
   resetPromo: PropTypes.func.isRequired,
 };
+
+export default connect(
+  null,
+  { applyPromo, resetPromo },
+)(ApplyPromotional);

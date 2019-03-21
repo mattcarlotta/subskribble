@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Avatar, Button, Popover, Tooltip } from 'antd';
-import SettingsMenu from '../SettingsMenu/settingsMenu.js';
+import SettingsMenu from 'components/app/settings/SettingsMenu/settingsMenu.js';
 import styles from './SettingsButton.scss';
 
 class SettingsButton extends PureComponent {

@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
@@ -7,18 +8,18 @@ import {
   AntFormFields,
   AntSelectField,
   AntStepFormButtons,
-} from '../../app/formFields/antReduxFormFields.js';
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import QuillEditor from '../../app/formFields/QuillEditor.js';
-import TemplatePreview from '../../../components/app/editor/TemplatePreview/templatePreview.js';
+} from 'containers/app/formFields/antReduxFormFields.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import QuillEditor from 'containers/app/formFields/QuillEditor.js';
+import TemplatePreview from 'components/app/editor/TemplatePreview/templatePreview.js';
+import { isNotEmpty } from 'containers/app/formFields/validateFormFields.js';
+import { addNewTemplate, editTemplate } from 'actions/formActions.js';
+import { fetchAllActivePlans } from 'actions/planActions.js';
+import { fetchTemplate } from 'actions/templateActions.js';
+import { formBoxContainer } from 'styles/styles.scss';
 import FIELDS from './templateFormFields.js';
-import { isNotEmpty } from '../../app/formFields/validateFormFields.js';
-import { addNewTemplate, editTemplate } from '../../../actions/formActions.js';
-import { fetchAllActivePlans } from '../../../actions/planActions.js';
-import { fetchTemplate } from '../../../actions/templateActions.js';
-import { formBoxContainer } from '../../../styles/styles.scss';
 
-class TemplateForm extends Component {
+export class TemplateForm extends Component {
   state = { isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {
@@ -114,6 +115,29 @@ class TemplateForm extends Component {
     );
   };
 }
+
+TemplateForm.propTypes = {
+  addNewTemplate: PropTypes.func.isRequired,
+  company: PropTypes.string,
+  confirmLoading: PropTypes.bool.isRequired,
+  editTemplate: PropTypes.func.isRequired,
+  fetchAllActivePlans: PropTypes.func.isRequired,
+  fetchTemplate: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  message: PropTypes.string,
+  fromsender: PropTypes.string,
+  pristine: PropTypes.bool.isRequired,
+  showButtonLoading: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  subject: PropTypes.string,
+};
 
 const selector = formValueSelector('NewTemplate');
 export default reduxForm({ form: 'NewTemplate' })(

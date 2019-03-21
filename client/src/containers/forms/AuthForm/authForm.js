@@ -5,10 +5,10 @@ import { reduxForm } from 'redux-form';
 import {
   AntFormFields,
   AntFormSubmit,
-} from '../../app/formFields/antReduxFormFields.js';
-import styles from '../../../styles/styles.scss';
+} from 'containers/app/formFields/antReduxFormFields.js';
+import styles from 'styles/styles.scss';
 
-const AuthForm = ({
+export const AuthForm = ({
   confirmLoading,
   form,
   handleSubmit,
@@ -48,7 +48,7 @@ const AuthForm = ({
       </div>
       <p className={styles.authLink}>
         {showForgotPassword ? (
-          <span>
+          <span className="no-account">
             {`Don't have an account?`}
             <Link
               style={{ marginLeft: 5 }}
@@ -59,7 +59,7 @@ const AuthForm = ({
             </Link>
           </span>
         ) : (
-          <span>
+          <span className="login">
             {`Already have an account?`}
             <Link
               style={{ marginLeft: 5 }}
@@ -75,8 +75,6 @@ const AuthForm = ({
   </div>
 );
 
-export default reduxForm({ form: '' })(AuthForm);
-
 AuthForm.propTypes = {
   confirmLoading: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
@@ -91,3 +89,5 @@ AuthForm.propTypes = {
   showForgotPassword: PropTypes.bool,
   switchAuthForm: PropTypes.func.isRequired,
 };
+
+export default reduxForm({ form: '' })(AuthForm);

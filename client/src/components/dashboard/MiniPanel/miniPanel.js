@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
-import CustomButton from '../../app/buttons/CustomButton/customButton.js';
+import CustomButton from 'components/app/buttons/CustomButton/customButton.js';
 import styles from './miniPanel.scss';
 
 const MiniPanel = ({

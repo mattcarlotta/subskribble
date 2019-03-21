@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
-import ActionButton from '../ActionButton/actionButton.js';
+import ActionButton from 'components/app/tables/ActionButton/actionButton.js';
 
 const getStatusType = status =>
   status === 'inactive' || status === 'suspended' ? 'activate' : 'suspend';

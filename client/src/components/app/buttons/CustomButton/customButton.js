@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tooltip } from 'antd';
 import { browserHistory } from 'react-router';
-import { adjustPosition, materialIcons } from '../../../../styles/styles.scss';
+import { adjustPosition, materialIcons } from 'styles/styles.scss';
 
 class CustomButton extends PureComponent {
   pushToLocation = () =>

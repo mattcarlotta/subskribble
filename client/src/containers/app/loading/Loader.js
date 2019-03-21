@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../../../components/app/loading/Spinner/Spinner.js';
-import NoDataToDisplay from '../../../components/app/notfound/NoDataToDisplay/noDataToDisplay.js';
+import Spinner from 'components/app/loading/Spinner/Spinner.js';
+import NoDataToDisplay from 'components/app/notfound/NoDataToDisplay/noDataToDisplay.js';
 
-class Loader extends Component {
+export class Loader extends Component {
   state = { requestTimeout: false };
 
   componentDidMount = () => {
@@ -46,5 +47,12 @@ class Loader extends Component {
       <Spinner />
     );
 }
+
+Loader.propTypes = {
+  activeitemcount: PropTypes.number,
+  inactiveitemcount: PropTypes.number,
+  itemcount: PropTypes.number,
+  serverError: PropTypes.string,
+};
 
 export default connect(state => ({ serverError: state.server.error }))(Loader);

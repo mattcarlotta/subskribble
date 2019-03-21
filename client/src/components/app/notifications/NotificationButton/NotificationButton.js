@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Popover, Tooltip } from 'antd';
-import PopoverContent from '../NotificationPopover/popoverContent.js';
+import PopoverContent from 'components/app/notifications/NotificationPopover/popoverContent.js';
 import styles from './NotificationButton.scss';
 
 export default class Notifications extends Component {

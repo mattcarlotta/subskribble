@@ -1,9 +1,9 @@
 import isEmpty from 'lodash';
 import React, { Component } from 'react';
-import BasicPanel from '../BasicPanel/basicPanel.js';
-import PageContainer from '../PageContainer/pageContainer.js';
-import PanelLoading from '../../loading/PanelLoading/PanelLoading.js';
-import TabPanel from '../TabPanel/tabPanel.js';
+import BasicPanel from 'components/app/panels/BasicPanel/basicPanel.js';
+import PageContainer from 'components/app/panels/PageContainer/pageContainer.js';
+import PanelLoading from 'components/app/loading/PanelLoading/PanelLoading.js';
+import TabPanel from 'components/app/panels/TabPanel/tabPanel.js';
 
 class PanelLoader extends Component {
   state = { isLoading: true };

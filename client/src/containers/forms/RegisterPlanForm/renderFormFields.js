@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'antd';
-import { AntFormFields } from '../../app/formFields/antReduxFormFields.js';
+import { AntFormFields } from 'containers/app/formFields/antReduxFormFields.js';
+import { input100 } from 'styles/styles.scss';
 import BillingSwitchField from './renderBillingSwitchField.js';
-import { input100 } from '../../../styles/styles.scss';
 
 const RenderFormFields = ({ billingSwitch, fields, title }) => (
   <Col span={12}>
@@ -16,10 +16,10 @@ const RenderFormFields = ({ billingSwitch, fields, title }) => (
   </Col>
 );
 
-export default RenderFormFields;
-
 RenderFormFields.propTypes = {
   billingSwitch: PropTypes.bool,
   title: PropTypes.string,
   fields: PropTypes.array, // eslint-disable-line react/forbid-prop-types
 };
+
+export default RenderFormFields;
