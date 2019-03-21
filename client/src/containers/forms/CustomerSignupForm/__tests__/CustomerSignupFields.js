@@ -1,4 +1,3 @@
-/* global shallow */
 import { CustomerPlanSignup } from '../CustomerSignupForm.js';
 import { getCustomerFormFields } from '../customerSignupFields.js';
 
