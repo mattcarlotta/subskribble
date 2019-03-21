@@ -7,7 +7,7 @@ import ReviewPlanForm from './reviewPlanForm.js';
 import RenderFormFields from './renderFormFields.js';
 import styles from './registerForm.scss';
 
-const RegisterPlanForm = ({
+export const RegisterPlanForm = ({
   BILLINGADDRESSFIELDS,
   confirmLoading,
   CONTACTFIELDS,

@@ -20,7 +20,7 @@ import {
 } from 'containers/app/formFields/validateFormFields.js';
 import { formBoxContainer, input100 } from 'styles/styles.scss';
 
-class PlanForm extends Component {
+export class PlanForm extends Component {
   state = {
     billEveryDefault: 'Weekly',
     isEditing: false,

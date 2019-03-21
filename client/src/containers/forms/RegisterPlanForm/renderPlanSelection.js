@@ -24,11 +24,11 @@ class RenderPlanSelection extends PureComponent {
   );
 }
 
-export default connect(state => ({
-  selectedPlan: formValueSelector('CustomerPlanSignup')(state, 'selectedPlan'),
-}))(RenderPlanSelection);
-
 RenderPlanSelection.propTypes = {
   PLANSELECTIONFIELDS: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   selectedPlan: PropTypes.string,
 };
+
+export default connect(state => ({
+  selectedPlan: formValueSelector('CustomerPlanSignup')(state, 'selectedPlan'),
+}))(RenderPlanSelection);

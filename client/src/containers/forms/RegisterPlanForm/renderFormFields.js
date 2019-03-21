@@ -16,10 +16,10 @@ const RenderFormFields = ({ billingSwitch, fields, title }) => (
   </Col>
 );
 
-export default RenderFormFields;
-
 RenderFormFields.propTypes = {
   billingSwitch: PropTypes.bool,
   title: PropTypes.string,
   fields: PropTypes.array, // eslint-disable-line react/forbid-prop-types
 };
+
+export default RenderFormFields;

@@ -25,7 +25,7 @@ import {
 } from 'containers/app/formFields/validateFormFields.js';
 import { formBoxContainer, input100 } from 'styles/styles.scss';
 
-class PromoForm extends Component {
+export class PromoForm extends Component {
   state = { isLoading: true, selectOptions: [] };
 
   componentDidMount = () => {

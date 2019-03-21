@@ -38,7 +38,7 @@ const MENUITEMS = [
   '12',
 ];
 
-const BILLINGADDRESSFIELDS = [
+export const BILLINGADDRESSFIELDS = [
   {
     className: `${styles.input50} f-l`,
     name: 'billingAddress',
@@ -77,7 +77,7 @@ const BILLINGADDRESSFIELDS = [
   },
 ];
 
-const CREDITCARDFIELDS = [
+export const CREDITCARDFIELDS = [
   {
     className: `${styles.input40} f-l`,
     name: 'creditCard',
@@ -113,7 +113,7 @@ const CREDITCARDFIELDS = [
   },
 ];
 
-const CONTACTFIELDS = [
+export const CONTACTFIELDS = [
   {
     className: `${styles.input40} f-l`,
     name: 'contactFirstName',
@@ -177,7 +177,7 @@ const CONTACTFIELDS = [
   },
 ];
 
-const CustomerFormFields = [
+export const CustomerFormFields = [
   {
     BILLINGADDRESSFIELDS,
     CONTACTFIELDS,

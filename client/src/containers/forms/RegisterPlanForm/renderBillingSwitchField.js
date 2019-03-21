@@ -38,12 +38,12 @@ class CustomerSwitchField extends Component {
   );
 }
 
-export default connect(
-  null,
-  { resetBillingFieldValues, setBillingFieldValues },
-)(CustomerSwitchField);
-
 CustomerSwitchField.propTypes = {
   resetBillingFieldValues: PropTypes.func.isRequired,
   setBillingFieldValues: PropTypes.func.isRequired,
 };
+
+export default connect(
+  null,
+  { resetBillingFieldValues, setBillingFieldValues },
+)(CustomerSwitchField);

@@ -18,7 +18,7 @@ import { fetchTransaction, refundAction } from 'actions/transactionActions.js';
 import { formBoxContainer, input100 } from 'styles/styles.scss';
 import FIELDS from './refundTransactionFormFields.js';
 
-class RefundForm extends Component {
+export class RefundForm extends Component {
   state = { isLoading: true };
 
   componentDidMount = () => {
@@ -33,11 +33,11 @@ class RefundForm extends Component {
   fetchTransactionToRefund = id => {
     this.props
       .fetchTransaction(id)
-      .then(({ data }) =>
+      .then(({ data }) => {
         this.setState({ isLoading: false }, () =>
           this.props.initialize({ ...data, transactiontype: 'Refund' }),
-        ),
-      )
+        );
+      })
       .catch(() => this.props.handleGoBack());
   };
 

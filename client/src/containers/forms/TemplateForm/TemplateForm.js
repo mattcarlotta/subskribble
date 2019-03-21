@@ -124,6 +124,7 @@ TemplateForm.propTypes = {
   fetchAllActivePlans: PropTypes.func.isRequired,
   fetchTemplate: PropTypes.func.isRequired,
   handleGoBack: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   initialize: PropTypes.func.isRequired,
   location: PropTypes.shape({
     query: PropTypes.shape({
