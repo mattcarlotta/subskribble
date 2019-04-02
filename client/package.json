@@ -12,7 +12,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,scss}": [
-      "prettier --write --single-quote --fix",
       "eslint --fix",
       "stylelint **/*.scss",
       "jest /src",

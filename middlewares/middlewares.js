@@ -12,32 +12,39 @@ const morgan = require('morgan');
 const passport = require('passport');
 const promiseEach = require('bluebird').each;
 const random = require('lodash/random');
+const request = require('supertest');
 const config = require('../env/config.js');
 
 const env = process.env.NODE_ENV;
-const currentENV = () => {
-  const envirnoment = config[env];
-  const keys = Object.keys(envirnoment);
-  const values = Object.values(envirnoment);
+const inTesting = env === 'test';
 
-  let variables = '';
-  for (let i = 0; i < keys.length; i += 1) {
-    variables += `\x1b[33m• ${keys[i].toUpperCase()}\x1b[0m: ${values[i]} \n `;
-  }
-  return variables;
-};
+if (!inTesting) {
+  const currentENV = () => {
+    const envirnoment = config[env];
+    const keys = Object.keys(envirnoment);
+    const values = Object.values(envirnoment);
 
-// eslint-disable-next-line no-console
-console.log(
-  `\n[ \x1b[1m${env.toUpperCase()} ENVIRONMENT\x1b[0m ]\n ${currentENV()}`,
-);
-
-if (env !== 'development') {
+    let variables = '';
+    for (let i = 0; i < keys.length; i += 1) {
+      variables += `\x1b[33m• ${keys[i].toUpperCase()}\x1b[0m: ${
+        values[i]
+      } \n `;
+    }
+    return variables;
+  };
   // eslint-disable-next-line no-console
   console.log(
-    `\n\x1b[1mYour application is running on: ${config[env].portal}\x1b[0m`,
+    `\n[ \x1b[1m${env.toUpperCase()} ENVIRONMENT\x1b[0m ]\n ${currentENV()}`,
   );
+
+  if (env !== 'development') {
+    // eslint-disable-next-line no-console
+    console.log(
+      `\n\x1b[1mYour application is running on: ${config[env].portal}\x1b[0m`,
+    );
+  }
 }
+
 //= ===========================================================//
 /* APP MIDDLEWARE */
 //= ===========================================================//
@@ -58,6 +65,7 @@ module.exports = (app) => {
   app.set('lorem', lorem); // fake text
   app.set('promiseEach', promiseEach); // bluebird promise-based each function
   app.set('random', random); // random number func
+  app.set('request', request); // random number func
 
   // / FRAMEWORKS ///
   app.set('bcrypt', bcrypt); // framework for hashing/salting passwords
@@ -71,7 +79,7 @@ module.exports = (app) => {
       origin: config[env].portal,
     }),
   ); // allows receiving of cookies from front-end
-  app.use(morgan('tiny')); // logging framework
+  if (!inTesting) app.use(morgan('tiny')); // logging framework
   app.use(bodyParser.json()); // parses header requests (req.body)
   app.use(bodyParser.urlencoded({ extended: true })); // allows objects and arrays to be URL-encoded
   app.use(cookieParser()); // parses header cookies

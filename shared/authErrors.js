@@ -4,7 +4,7 @@ module.exports = () => ({
   badCredentials:
     'There was a problem with your login credentials. Please make sure your username and password are correct.',
   companyAlreadyExists:
-    'That company has already been registered and is associated with an active account',
+    'That company has already been registered and is associated with an active account.',
   emailAlreadyTaken:
     'That email is already in use and is associated with an active account.',
   emailConfirmationReq:

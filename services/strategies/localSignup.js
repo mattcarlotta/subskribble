@@ -10,7 +10,7 @@ module.exports = (app) => {
   const {
     companyAlreadyExists,
     emailAlreadyTaken,
-    missingCredentials,
+    // missingCredentials,
   } = app.shared.authErrors;
   const { createRandomToken, currentDate } = app.shared.helpers;
   const portal = app.get('portal');
@@ -32,9 +32,9 @@ module.exports = (app) => {
         const token = createRandomToken(); // a token used for email verification
 
         // check to see if both an email and password were supplied
-        if (!email || !password || !firstName || !lastName || !company) {
-          return done(missingCredentials, false);
-        }
+        // if (!email || !password || !firstName || !lastName || !company) {
+        //   return done(missingCredentials, false);
+        // }
 
         // check to see if the email is already in use
         try {

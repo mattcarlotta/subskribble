@@ -14,7 +14,7 @@ describe('Inline Menu and Menu Header', () => {
   });
 
   it('renders without errors', () => {
-    const inlineMenuComponent = wrapper.find('div.siderMenu');
+    const inlineMenuComponent = wrapper.find('Sider');
     expect(inlineMenuComponent).toHaveLength(1);
   });
 

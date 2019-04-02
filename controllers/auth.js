@@ -25,6 +25,7 @@ module.exports = (app) => {
     emailAlreadyTaken,
     invalidPassword,
     invalidToken,
+    missingCredentials,
     missingPasswords,
     missingSidebarState,
     missingToken,
@@ -54,9 +55,16 @@ module.exports = (app) => {
 
   return {
     // CREATES A NEW USER
-    create: (req, res, done) => passport.authenticate(
-      'local-signup',
-      err => (err
+    create: (req, res, done) => {
+      const {
+        email, password, firstName, lastName, company,
+      } = req.body;
+
+      if (!email || !password || !firstName || !lastName || !company) {
+        return sendError(missingCredentials, res, done);
+      }
+
+      passport.authenticate('local-signup', err => (err
         ? sendError(err, res, done)
         : res
           .status(201)
@@ -66,8 +74,8 @@ module.exports = (app) => {
               req.body.firstName,
               req.body.lastName,
             ),
-          )),
-    )(req, res, done),
+          )))(req, res, done);
+    },
     // DELETES USER ACCOUNT
     deleteAccount: async (req, res, done) => {
       if (!req.body) return sendError(missingDeletionParams, res, done);
@@ -111,12 +119,9 @@ module.exports = (app) => {
       }
     },
     // ALLOWS A USER TO LOG INTO THE APP
-    login: (req, res, done) => passport.authenticate(
-      'local-login',
-      err => (err || !req.session
-        ? sendError(err || badCredentials, res, done)
-        : res.status(201).json({ ...req.session })),
-    )(req, res, done),
+    login: (req, res, done) => passport.authenticate('local-login', err => (err || !req.session
+      ? sendError(err || badCredentials, res, done)
+      : res.status(201).json({ ...req.session })))(req, res, done),
     // ALLOWS A USER TO LOG INTO THE APP ON REFRESH
     loggedin: (req, res, done) => (!req.session
       ? sendError(badCredentials, res, done)
@@ -130,19 +135,13 @@ module.exports = (app) => {
         .send('Cookie deleted.');
     },
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
-    resetPassword: (req, res, done) => passport.authenticate(
-      'reset-password',
-      (err, email) => (err || !email
-        ? sendError(err || 'No user found!', res, done)
-        : res.status(201).json({ message: passwordResetSuccess(email) })),
-    )(req, res, done),
+    resetPassword: (req, res, done) => passport.authenticate('reset-password', (err, email) => (err || !email
+      ? sendError(err || 'No user found!', res, done)
+      : res.status(201).json({ message: passwordResetSuccess(email) })))(req, res, done),
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD
-    resetToken: (req, res, done) => passport.authenticate(
-      'reset-token',
-      (err, email) => (err || !email
-        ? sendError(err || 'No user found!', res, done)
-        : res.status(201).json(passwordResetToken(email))),
-    )(req, res, done),
+    resetToken: (req, res, done) => passport.authenticate('reset-token', (err, email) => (err || !email
+      ? sendError(err || 'No user found!', res, done)
+      : res.status(201).json(passwordResetToken(email))))(req, res, done),
     // SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
     saveSidebarState: async (req, res, done) => {
       if (!req.query) return sendError(missingSidebarState, res, done);
@@ -289,7 +288,7 @@ module.exports = (app) => {
 
       try {
         await db.task('verify-email', async (dbtask) => {
-          const existingUser = await dbtask.oneOrNone(findUserByToken, [token]); // check if token is valid
+          const existingUser = await dbtask.oneOrNone(findUserByToken, [token]);
           if (!existingUser) {
             return sendError(invalidToken, res, done);
           }
@@ -297,7 +296,7 @@ module.exports = (app) => {
             return res.status(201).json({ email: existingUser.email });
           }
 
-          await dbtask.none(verifyEmail, [existingUser.email]); // sets user to verification status to true
+          await dbtask.none(verifyEmail, [existingUser.email]);
 
           res.status(201).json({ email: existingUser.email });
         });
