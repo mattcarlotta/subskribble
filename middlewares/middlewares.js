@@ -65,7 +65,7 @@ module.exports = (app) => {
   app.set('lorem', lorem); // fake text
   app.set('promiseEach', promiseEach); // bluebird promise-based each function
   app.set('random', random); // random number func
-  app.set('request', request); // random number func
+  app.set('request', request); // supertest testing func
 
   // / FRAMEWORKS ///
   app.set('bcrypt', bcrypt); // framework for hashing/salting passwords

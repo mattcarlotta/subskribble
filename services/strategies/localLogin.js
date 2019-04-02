@@ -22,7 +22,7 @@ module.exports = (app) => {
         passReqToCallback: true,
       },
       async (req, email, password, done) => {
-        if (!email || !password) return done(badCredentials, false);
+        // if (!email || !password) return done(badCredentials, false);
 
         try {
           await db.task('local-login', async (dbtask) => {

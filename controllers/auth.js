@@ -52,6 +52,7 @@ module.exports = (app) => {
   const bcrypt = app.get('bcrypt');
   const passport = app.get('passport');
   const portal = app.get('portal');
+  const isEmpty = app.get('isEmpty');
 
   return {
     // CREATES A NEW USER
@@ -119,13 +120,19 @@ module.exports = (app) => {
       }
     },
     // ALLOWS A USER TO LOG INTO THE APP
-    login: (req, res, done) => passport.authenticate('local-login', err => (err || !req.session
-      ? sendError(err || badCredentials, res, done)
-      : res.status(201).json({ ...req.session })))(req, res, done),
+    login: (req, res, done) => {
+      const { email, password } = req.body;
+      if (!email || !password) return sendError(badCredentials, res, done);
+
+      passport.authenticate('local-login', err => (err || !req.session || isEmpty(req.session)
+        ? sendError(err || badCredentials, res, done)
+        : res.status(201).json({ ...req.session })))(req, res, done);
+    },
     // ALLOWS A USER TO LOG INTO THE APP ON REFRESH
-    loggedin: (req, res, done) => (!req.session
+    loggedin: (req, res, done) => (!req.session || isEmpty(req.session)
       ? sendError(badCredentials, res, done)
-      : res.status(202).json({ ...req.session })),
+      : res.status(201).json({ ...req.session })),
+
     // REMOVES USER FROM SESSION AND DELETES CLIENT COOKIE
     logout: (req, res) => {
       req.session = null;
@@ -135,9 +142,19 @@ module.exports = (app) => {
         .send('Cookie deleted.');
     },
     // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
-    resetPassword: (req, res, done) => passport.authenticate('reset-password', (err, email) => (err || !email
-      ? sendError(err || 'No user found!', res, done)
-      : res.status(201).json({ message: passwordResetSuccess(email) })))(req, res, done),
+    resetPassword: (req, res, done) => {
+      const { token } = req.query;
+      if (!token) return sendError(missingToken, res, done);
+
+      const { email, password } = req.body;
+      if (!email || !password) return sendError(invalidPassword, res, done);
+
+      passport.authenticate('reset-password', (err, existingEmail) => (err || !existingEmail
+        ? sendError(err || 'No user found!', res, done)
+        : res
+          .status(201)
+          .json({ message: passwordResetSuccess(existingEmail) })))(req, res, done);
+    },
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD
     resetToken: (req, res, done) => passport.authenticate('reset-token', (err, email) => (err || !email
       ? sendError(err || 'No user found!', res, done)

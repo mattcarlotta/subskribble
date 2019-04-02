@@ -3,11 +3,7 @@ module.exports = (app) => {
     db,
     query: { findUserByToken, updateUserPassword },
   } = app.database;
-  const {
-    invalidToken,
-    missingToken,
-    notUniquePassword,
-  } = app.shared.authErrors;
+  const { invalidToken, notUniquePassword } = app.shared.authErrors;
   const bcrypt = app.get('bcrypt');
   const LocalStrategy = app.get('LocalStrategy');
   const passport = app.get('passport');
@@ -21,14 +17,11 @@ module.exports = (app) => {
         passReqToCallback: true, // allows us to send request to the callback
       },
       async (req, email, password, done) => {
-        const { token } = req.query;
-        if (!token) return done(missingToken, false);
-
         try {
           await db.task('reset-password', async (dbtask) => {
             // check to see if email exists in the db
             const existingUser = await dbtask.oneOrNone(findUserByToken, [
-              token,
+              req.query.token,
             ]);
             if (!existingUser) return done(invalidToken, false);
 
