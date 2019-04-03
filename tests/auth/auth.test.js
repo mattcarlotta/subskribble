@@ -107,6 +107,7 @@ module.exports = (app) => {
 
     afterEach(async () => {
       await db.none('TRUNCATE users CASCADE');
+      await db.none('TRUNCATE feedback RESTART IDENTITY');
     });
 
     describe('Sign Up', () => {
