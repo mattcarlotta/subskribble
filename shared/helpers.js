@@ -47,7 +47,7 @@ module.exports = (app) => {
     parseStringToFloat: str => parseFloat(str),
     parseStringToNum: str => parseInt(str, 10),
     sendError: (err, res, done) => {
-      return res.status(500).json({ err: err.toString() });
+      return res.status(400).json({ err: err.toString() });
       done(); /* eslint-disable-line no-unreachable */
     },
   };

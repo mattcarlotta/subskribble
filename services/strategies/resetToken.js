@@ -20,8 +20,6 @@ module.exports = (app) => {
         usernameField: 'email',
       },
       async (email, password, done) => {
-        if (!email) return done(missingEmailCreds, false);
-
         try {
           await db.task('reset-token', async (dbtask) => {
             // check to see if email exists in the db

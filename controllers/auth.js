@@ -26,7 +26,7 @@ module.exports = (app) => {
     invalidPassword,
     invalidToken,
     missingCredentials,
-    missingPasswords,
+    missingEmailCreds,
     missingSidebarState,
     missingToken,
     notUniquePassword,
@@ -79,13 +79,15 @@ module.exports = (app) => {
     },
     // DELETES USER ACCOUNT
     deleteAccount: async (req, res, done) => {
-      if (!req.body) return sendError(missingDeletionParams, res, done);
       const {
         company,
         reason,
         password: suppliedPassword,
         user: email,
       } = req.body;
+      if (!company || !suppliedPassword || !email) {
+        return sendError(missingDeletionParams, res, done);
+      }
 
       try {
         await db.task('delete-account', async (dbtask) => {
@@ -113,7 +115,7 @@ module.exports = (app) => {
 
           await dbtask.none(userFeedback, [company, email, reason]);
 
-          res.status(201).json({ ...avatar, message: removedAccountSuccess });
+          res.status(202).json({ ...avatar, message: removedAccountSuccess });
         });
       } catch (err) {
         return sendError(err, res, done);
@@ -156,20 +158,24 @@ module.exports = (app) => {
           .json({ message: passwordResetSuccess(existingEmail) })))(req, res, done);
     },
     // EMAILS A USER A TOKEN TO RESET THEIR PASSWORD
-    resetToken: (req, res, done) => passport.authenticate('reset-token', (err, email) => (err || !email
-      ? sendError(err || 'No user found!', res, done)
-      : res.status(201).json(passwordResetToken(email))))(req, res, done),
+    resetToken: (req, res, done) => {
+      const { email } = req.body;
+      if (!email) return sendError(missingEmailCreds, res, done);
+
+      passport.authenticate('reset-token', (err, existingEmail) => (err || !existingEmail
+        ? sendError(err || 'No user found!', res, done)
+        : res.status(201).json(passwordResetToken(email))))(req, res, done);
+    },
     // SAVES THE SIDEBAR STATE (COLLAPSED OR VISIBLE);
     saveSidebarState: async (req, res, done) => {
-      if (!req.query) return sendError(missingSidebarState, res, done);
       const { collapseSideNav } = req.query;
-      const updatedSidebarState = collapseSideNav === 'true';
+      if (!collapseSideNav) return sendError(missingSidebarState, res, done);
+
+      const { id } = req.session;
+      const updatedSidebarState = !!collapseSideNav;
 
       try {
-        await db.none(updateSidebarState, [
-          req.session.id,
-          updatedSidebarState,
-        ]);
+        await db.none(updateSidebarState, [id, updatedSidebarState]);
         req.session.collapsesidenav = updatedSidebarState;
 
         res.status(201).json({ collapseSideNav: updatedSidebarState });
@@ -179,8 +185,6 @@ module.exports = (app) => {
     },
     // UPDATES USER ACCOUNT DETAILS (company, email, name, password)
     updateAccount: async (req, res, done) => {
-      if (!req.body) return sendError(missingUpdateParams, res, done);
-
       const {
         company: updatedCompany,
         email: updatedEmail,
@@ -189,6 +193,14 @@ module.exports = (app) => {
         currentPassword: suppliedPassword,
         updatedPassword,
       } = req.body;
+      if (
+        !updatedCompany
+        || !updatedEmail
+        || !updatedFirstName
+        || !updatedLastName
+        || !suppliedPassword
+      ) return sendError(missingUpdateParams, res, done);
+
       const token = createRandomToken();
 
       try {
@@ -228,11 +240,7 @@ module.exports = (app) => {
             req.session.lastname = updatedLastName;
           }
 
-          if (suppliedPassword || updatedPassword) {
-            if (!suppliedPassword || !updatedPassword) {
-              return sendError(missingPasswords, res, done);
-            }
-
+          if (suppliedPassword && updatedPassword) {
             const user = await dbtask.oneOrNone(getUserPassword, [
               req.session.id,
             ]);
@@ -286,9 +294,9 @@ module.exports = (app) => {
             res.status(201).json({ message: updatedAccount });
           } else {
             res.status(201).json({
-              user: !suppliedPassword ? { ...req.session } : '',
+              user: !updatedPassword ? { ...req.session } : '',
               fetchnotifications: true,
-              message: !suppliedPassword
+              message: !updatedPassword
                 ? updatedAccountDetails
                 : passwordResetSuccess(updatedEmail),
             });
