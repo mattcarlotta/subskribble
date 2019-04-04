@@ -1,17 +1,14 @@
 const request = require('supertest');
-const db = require('../../../database/db');
+// const db = require('../../../database/db');
 const { badCredentials } = require('../../../shared/authErrors');
-const { seedUser, signIn } = require('../../../utils/__mocks__');
+const { cleanDB, seedUser, signIn } = require('../../../utils/__mocks__');
 
 describe('Sign In', () => {
   let cookies;
   beforeAll(async () => {
+    await cleanDB();
     await seedUser();
     cookies = await signIn();
-  });
-
-  afterAll(async () => {
-    await db.none('TRUNCATE users RESTART IDENTITY CASCADE');
   });
 
   it('handles invalid sign in requests', async () => {

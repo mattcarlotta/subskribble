@@ -1,11 +1,12 @@
 const request = require('supertest');
-const db = require('../../../database/db');
+// const db = require('../../../database/db');
 const mailer = require('../../../services/mailer');
 const {
   companyAlreadyExists,
   emailAlreadyTaken,
   missingCredentials,
 } = require('../../../shared/authErrors');
+const { cleanDB } = require('../../../utils/__mocks__');
 
 const signupProps = {
   company: 'Carlotta Corp',
@@ -24,13 +25,13 @@ const signUp = async () => {
 
 describe('Sign Up', () => {
   beforeAll(async () => {
-    await db.none('TRUNCATE users RESTART IDENTITY CASCADE');
+    await cleanDB();
     await signUp();
   });
 
-  // afterAll(async () => {
-  //   await db.none("TRUNCATE users RESTART IDENTITY CASCADE");
-  // });
+  afterAll(() => {
+    mailer.resetMocks();
+  });
 
   it('handles invalid signup requests', async () => {
     // missing signupProps

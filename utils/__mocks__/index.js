@@ -43,7 +43,10 @@ const signIn = async () => {
   return cookies;
 };
 
+const cleanDB = () => db.none('TRUNCATE users RESTART IDENTITY CASCADE');
+
 module.exports = {
+  cleanDB,
   email,
   token,
   seedUser,

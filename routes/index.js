@@ -1,11 +1,21 @@
+const authRoutes = require('./auth');
+const dashboardRoutes = require('./dashboard');
+const messageRoutes = require('./messages');
+const notifcationRoutes = require('./notifications');
+const planRoutes = require('./plans');
+const promotionalRoutes = require('./promotionals');
+const subcriberRoutes = require('./subscribers');
+const templateRoutes = require('./templates');
+const transactionRoutes = require('./transactions');
+
 module.exports = (app) => {
-  require('./auth')(app);
-  require('./dashboard')(app);
-  require('./messages')(app);
-  require('./notifications')(app);
-  require('./plans')(app);
-  require('./promotionals')(app);
-  require('./subscribers')(app);
-  require('./templates')(app);
-  require('./transactions')(app);
+  authRoutes(app);
+  dashboardRoutes(app);
+  messageRoutes(app);
+  notifcationRoutes(app);
+  planRoutes(app);
+  promotionalRoutes(app);
+  subcriberRoutes(app);
+  templateRoutes(app);
+  transactionRoutes(app);
 };
