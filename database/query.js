@@ -17,6 +17,7 @@ const authQueries = {
     'INSERT INTO users(email, password, firstName, lastName, company, token, startDate) VALUES ($1, $2, $3, $4, $5, $6, $7)',
   deleteUserAccount:
     'DELETE FROM users WHERE id=$1 AND email=$2 AND company=$3 RETURNING *',
+  getTokenByEmail: 'SELECT token FROM users WHERE email=$1',
   getCurrentUserDetails:
     'SELECT email, company, firstName, lastName FROM users WHERE id=$1',
   getUserDetails:

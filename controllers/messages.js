@@ -1,5 +1,6 @@
 const { isEmpty, each } = require('lodash');
 const promiseEach = require('bluebird').each;
+const mailer = require('@sendgrid/mail');
 const db = require('../database/db');
 const {
   createMessageTransaction,
@@ -22,7 +23,6 @@ const {
   missingQueryParams,
   unableToLocate,
 } = require('../shared/errors');
-const mailer = require('../services/mailer');
 
 module.exports = {
   create: async (req, res, done) => {

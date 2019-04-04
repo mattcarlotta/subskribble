@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
+const mailer = require('@sendgrid/mail');
 const db = require('../../database/db');
 const {
   createNewUser,
@@ -12,7 +13,6 @@ const {
   companyAlreadyExists,
   emailAlreadyTaken,
 } = require('../../shared/authErrors');
-const mailer = require('../mailer');
 const newUser = require('../emailTemplates/newUser');
 const config = require('../../env');
 

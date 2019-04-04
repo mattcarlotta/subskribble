@@ -1,10 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
+const mailer = require('@sendgrid/mail');
 const db = require('../../database/db');
 const { findUserByEmail, resetToken } = require('../../database/query');
 const { createRandomToken } = require('../../shared/helpers');
 const { missingEmailCreds } = require('../../shared/authErrors');
-const mailer = require('../mailer');
 const newToken = require('../emailTemplates/newToken');
 const config = require('../../env');
 

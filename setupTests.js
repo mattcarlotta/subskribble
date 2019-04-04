@@ -1,26 +1,6 @@
-const express = require('express');
+jest.mock('@sendgrid/mail');
 
-const app = express();
-
-jest.mock('./services/mailer.js', () => ({
-  send: jest.fn(),
-}));
-
-// jest.mock("./database/db", () => {
-//   ...require.requireActual('pgp'),
-//   one: (req) => new Promise(resolve, reject) => {
-//     resolve();
-//   }),
-//   oneOrNone:  => new Promise(resolve, reject) => {
-//     resolve();
-//   }),
-//   none: (req)  => new Promise(resolve, reject) => {
-//     resolve();
-//   }),
-//   task: ()
-// })
-
-global.app = app;
-
-require('./middlewares')(app);
-require('./routes')(app);
+global.app = require('./utils/testApp');
+global.getCookie = require('./utils/getCookie');
+global.db = require('./database/db');
+global.request = require('supertest');

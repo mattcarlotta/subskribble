@@ -1,36 +1,43 @@
-const request = require('supertest');
-// const db = require('../../../database/db');
-const mailer = require('../../../services/mailer');
+const mailer = require('@sendgrid/mail');
 const {
   companyAlreadyExists,
   emailAlreadyTaken,
   missingCredentials,
 } = require('../../../shared/authErrors');
-const { cleanDB } = require('../../../utils/__mocks__');
+const {
+  removeNewUser,
+  signupNewUser,
+} = require('../../__mocks__/auth.mocks.js');
+
+const newSignupEmail = 'signup@test.com';
+const newCompany = 'New Signup User';
 
 const signupProps = {
-  company: 'Carlotta Corp',
-  firstName: 'Matt',
-  lastName: 'Carlotta',
-  email: 'carlotta.matt@gmail.com',
-  password: 'password',
+  password: 'password123',
+  firstName: 'New',
+  lastName: 'Signup',
 };
 
-const signUp = async () => {
-  await request(app)
-    .post('/api/signup')
-    .send(signupProps)
-    .expect(201);
+const emailExists = {
+  email: 'betatester@subskribble.com', // email from seeds
+  company: 'Brand New Company',
+  ...signupProps,
+};
+
+const companyExists = {
+  email: 'test@example.com',
+  company: 'Subskribble', // company from seeds
+  ...signupProps,
 };
 
 describe('Sign Up', () => {
-  beforeAll(async () => {
-    await cleanDB();
-    await signUp();
+  beforeAll(async (done) => {
+    await signupNewUser(newSignupEmail, newCompany, done);
   });
 
-  afterAll(() => {
-    mailer.resetMocks();
+  afterAll(async () => {
+    await removeNewUser(newSignupEmail, db);
+    jest.clearAllMocks();
   });
 
   it('handles invalid signup requests', async () => {
@@ -45,7 +52,7 @@ describe('Sign Up', () => {
     // email already exists
     await request(app)
       .post('/api/signup')
-      .send(signupProps)
+      .send(emailExists)
       .then((res) => {
         expect(res.statusCode).toEqual(400);
         expect(res.body.err).toEqual(emailAlreadyTaken);
@@ -54,7 +61,7 @@ describe('Sign Up', () => {
     // company name already exists
     await request(app)
       .post('/api/signup')
-      .send({ ...signupProps, email: 'test@test.com' })
+      .send(companyExists)
       .then((res) => {
         expect(res.statusCode).toEqual(400);
         expect(res.body.err).toEqual(companyAlreadyExists);

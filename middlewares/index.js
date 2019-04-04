@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session');
 const cors = require('cors');
 const morgan = require('morgan');
 const passport = require('passport');
+const mailer = require('@sendgrid/mail');
 const strategies = require('../services/strategies');
 const config = require('../env');
 
@@ -42,6 +43,7 @@ if (!inTesting) {
 //= ===========================================================//
 module.exports = app => {
   strategies();
+  mailer.setApiKey(config[env].sendgridAPIKey);
   app.use(
     cors({
       credentials: true,

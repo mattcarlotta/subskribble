@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const isEmpty = require('lodash/isEmpty');
+const mailer = require('@sendgrid/mail');
 const db = require('../database/db');
 const {
   deleteUserAccount,
@@ -45,7 +46,7 @@ const {
   missingDeletionParams,
   missingUpdateParams,
 } = require('../shared/errors');
-const mailer = require('../services/mailer');
+
 const changedEmail = require('../services/emailTemplates/changedEmail');
 const config = require('../env');
 
