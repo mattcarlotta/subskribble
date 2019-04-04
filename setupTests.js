@@ -1,18 +1,26 @@
 const express = require('express');
 
 const app = express();
-const consign = require('consign');
 
 jest.mock('./services/mailer.js', () => ({
   send: jest.fn(),
 }));
 
-consign({ cwd: process.cwd(), locale: 'en-us', verbose: false })
-  .include('middlewares')
-  .then('database')
-  .then('shared')
-  .then('services')
-  .then('controllers')
-  .then('routes')
-  .then('tests')
-  .into(app);
+// jest.mock("./database/db", () => {
+//   ...require.requireActual('pgp'),
+//   one: (req) => new Promise(resolve, reject) => {
+//     resolve();
+//   }),
+//   oneOrNone:  => new Promise(resolve, reject) => {
+//     resolve();
+//   }),
+//   none: (req)  => new Promise(resolve, reject) => {
+//     resolve();
+//   }),
+//   task: ()
+// })
+
+global.app = app;
+
+require('./middlewares')(app);
+require('./routes')(app);

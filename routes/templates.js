@@ -1,19 +1,17 @@
-module.exports = (app) => {
-  const {
-    templates: {
-      create,
-      index,
-      deleteOne,
-      fetchAllActiveRecords,
-      fetchCounts,
-      fetchRecords,
-      selectOne,
-      updateOne,
-      updateStatus,
-    },
-  } = app.controllers;
-  const { requireAuth } = app.services.strategies;
+const {
+  create,
+  index,
+  deleteOne,
+  fetchAllActiveRecords,
+  fetchCounts,
+  fetchRecords,
+  selectOne,
+  updateOne,
+  updateStatus,
+} = require('../controllers/templates');
+const requireAuth = require('../services/strategies/requireAuth');
 
+module.exports = (app) => {
   app.post('/api/templates/create', requireAuth, create);
   app.get('/api/templates/template?', requireAuth, selectOne);
   app.get('/api/templates', requireAuth, index);

@@ -1,11 +1,13 @@
-module.exports = (app) => {
-  const {
-    messages: {
-      create, index, deleteOne, fetchCounts, fetchRecords,
-    },
-  } = app.controllers;
-  const { requireAuth } = app.services.strategies;
+const {
+  create,
+  index,
+  deleteOne,
+  fetchCounts,
+  fetchRecords,
+} = require('../controllers/messages');
+const requireAuth = require('../services/strategies/requireAuth');
 
+module.exports = (app) => {
   app.post('/api/messages/create', requireAuth, create);
   app.get('/api/messages', requireAuth, index);
   app.get('/api/messagecounts', requireAuth, fetchCounts);

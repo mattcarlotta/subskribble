@@ -3,17 +3,21 @@ const monitor = require('pg-monitor');
 
 const initOptions = { promiseLib: promise }; // Database options
 const pgp = require('pg-promise')(initOptions); // initialize pg-promise w/options
+
+const config = require('../env');
+
+const env = process.env.NODE_ENV;
 // Database connection logger
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   monitor.attach(initOptions, ['query', 'error']);
 } else {
   monitor.attach(initOptions, ['error']);
 }
 
-module.exports = app => pgp({
-  host: app.get('host'),
-  password: app.get('dbpassword'),
-  port: app.get('dbport'),
-  user: app.get('dbowner'),
-  database: app.get('database'),
+module.exports = pgp({
+  host: config[env].host,
+  password: config[env].dbpassword,
+  port: config[env].dbport,
+  user: config[env].dbowner,
+  database: config[env].database,
 });

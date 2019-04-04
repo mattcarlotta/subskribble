@@ -1,4 +1,4 @@
-module.exports = () => ({
+module.exports = {
   createPlanFirst: 'You must create a plan first!',
   createTemplateFirst: 'You must create a template first!',
   duplicateSub: (email, plan) => `Can't create duplicate subscribers within the same plan. The provided email: ${email}, is already associated with the following plan: ${plan}.`,
@@ -13,4 +13,4 @@ module.exports = () => ({
   missingUpdateParams: 'Missing update parameters',
   itemAlreadyExists: item => `A ${item} with that name already exists. Please use another unique name.`,
   unableToLocate: item => `Unable to locate the ${item}.`,
-});
+};

@@ -1,20 +1,19 @@
-module.exports = (app) => {
-  const {
-    auth: {
-      create,
-      deleteAccount,
-      login,
-      loggedin,
-      logout,
-      resetPassword,
-      resetToken,
-      saveSidebarState,
-      updateAccount,
-      verifyEmail,
-    },
-  } = app.controllers;
-  const { requireRelogin, requireAuth } = app.services.strategies;
+const {
+  create,
+  deleteAccount,
+  login,
+  loggedin,
+  logout,
+  resetPassword,
+  resetToken,
+  saveSidebarState,
+  updateAccount,
+  verifyEmail,
+} = require('../controllers/auth');
+const requireRelogin = require('../services/strategies/requireRelogin');
+const requireAuth = require('../services/strategies/requireAuth');
 
+module.exports = (app) => {
   app.post('/api/signup', create);
   app.post('/api/signin', login);
   app.get('/api/loggedin', requireRelogin, loggedin);
