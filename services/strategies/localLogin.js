@@ -9,7 +9,7 @@ const {
   emailConfirmationReq,
 } = require('../../shared/authErrors');
 
-passport.use(
+module.exports = passport.use(
   'local-login',
   new LocalStrategy(
     {

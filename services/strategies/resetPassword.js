@@ -5,7 +5,7 @@ const db = require('../../database/db');
 const { findUserByToken, updateUserPassword } = require('../../database/query');
 const { invalidToken, notUniquePassword } = require('../../shared/authErrors');
 
-passport.use(
+module.exports = passport.use(
   'reset-password',
   new LocalStrategy(
     {

@@ -24,12 +24,13 @@ const signUp = async () => {
 
 describe('Sign Up', () => {
   beforeAll(async () => {
+    await db.none('TRUNCATE users RESTART IDENTITY CASCADE');
     await signUp();
   });
 
-  afterAll(async () => {
-    await db.none('TRUNCATE users RESTART IDENTITY CASCADE');
-  });
+  // afterAll(async () => {
+  //   await db.none("TRUNCATE users RESTART IDENTITY CASCADE");
+  // });
 
   it('handles invalid signup requests', async () => {
     // missing signupProps

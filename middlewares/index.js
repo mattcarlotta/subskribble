@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session');
 const cors = require('cors');
 const morgan = require('morgan');
 const passport = require('passport');
+const strategies = require('../services/strategies');
 const config = require('../env');
 
 const env = process.env.NODE_ENV;
@@ -36,39 +37,11 @@ if (!inTesting) {
   }
 }
 /* eslint enable */
-
 //= ===========================================================//
 /* APP MIDDLEWARE */
 //= ===========================================================//
 module.exports = app => {
-  require('../services/strategies/localLogin');
-  require('../services/strategies/localSignup');
-  require('../services/strategies/resetPassword');
-  require('../services/strategies/resetToken');
-  // / CONFIGS ///
-  // app.set('env', env); // sets current env mode (development, production or test)
-  // app.set('host', config[env].host); // sets localhost or remote host
-  // app.set('dbpassword', config[env].dbpassword); // sets database password
-  // app.set('dbport', config[env].dbport); // sets database port
-  // app.set('dbowner', config[env].dbowner); // sets owner of database
-  // app.set('database', config[env].database); // sets database name
-  // app.set('port', config[env].port); // current listening port
-  // app.set('portal', config[env].portal); // sets current front-end url
-
-  // // / HELPER FUNCTIONS ///
-  // app.set('each', each); // lodash each function
-  // app.set('isEmpty', isEmpty); // check if obj/arr is empty
-  // app.set('lorem', lorem); // fake text
-  // app.set('promiseEach', promiseEach); // bluebird promise-based each function
-  // app.set('random', random); // random number func
-  // app.set('request', request); // supertest testing func
-
-  // // / FRAMEWORKS ///
-  // app.set('bcrypt', bcrypt); // framework for hashing/salting passwords
-  // app.set('LocalStrategy', LocalStrategy); // passport framework for handling local authentication
-  // app.set('moment', moment); // framework for managing time
-  // app.set('passport', passport); // framework for authenticating users
-  // app.set('sendgridAPIKey', config[env].sendgridAPIKey); // SendGrid API key for sending emails
+  strategies();
   app.use(
     cors({
       credentials: true,

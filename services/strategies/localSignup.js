@@ -19,7 +19,7 @@ const config = require('../../env');
 const env = process.env.NODE_ENV;
 const { portal } = config[env];
 
-passport.use(
+module.exports = passport.use(
   'local-signup',
   new LocalStrategy(
     {
