@@ -36,7 +36,7 @@ describe('Sign Up', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid signup apps', async () => {
+  it('handles invalid signup requests', async () => {
     // missing signupProps
     await app()
       .post('/api/signup')
@@ -64,7 +64,7 @@ describe('Sign Up', () => {
       });
   });
 
-  it('handles valid signup apps and sends out an email', () => {
+  it('handles valid signup requests and sends out an email', () => {
     expect(mailer.send).toHaveBeenCalled();
   });
 });

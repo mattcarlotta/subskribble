@@ -1,7 +1,7 @@
 const { badCredentials } = require('../../../shared/authErrors');
 
 describe('Auth Routes and Controllers', () => {
-  it('should handle invalid dashboard apps', async () => {
+  it('should handle invalid dashboard requests', async () => {
     // not logged in
     await app()
       .get('/api/dashboard')
@@ -11,7 +11,7 @@ describe('Auth Routes and Controllers', () => {
       });
   });
 
-  it('should handle valid dashboard apps', async () => {
+  it('should handle valid dashboard requests', async () => {
     const cookie = await getCookie();
 
     await app()

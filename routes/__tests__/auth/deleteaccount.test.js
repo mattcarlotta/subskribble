@@ -15,7 +15,7 @@ describe('Delete Account', () => {
     await signupNewUser(newSignupEmail, newCompany, done);
   });
 
-  it('handles invalid delete account apps', async () => {
+  it('handles invalid delete account requests', async () => {
     // not logged in
     await app()
       .delete('/api/delete-account')
@@ -50,7 +50,7 @@ describe('Delete Account', () => {
       });
   });
 
-  it('handles valid delete account apps', async () => {
+  it('handles valid delete account requests', async () => {
     const cookie = await getCookie(newSignupEmail, newSignupPassword);
     await app()
       .delete('/api/delete-account')

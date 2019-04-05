@@ -5,6 +5,7 @@ const {
   getSomeNotifications,
   setReadNotifications,
 } = require('../database/query');
+const { missingDeletionParams } = require('../shared/errors');
 const { sendError } = require('../shared/helpers');
 
 module.exports = {
@@ -23,17 +24,21 @@ module.exports = {
     try {
       await db.oneOrNone(setReadNotifications, [req.session.id]);
 
-      res.status(201).json({});
+      res.status(201).send(null);
     } catch (err) {
       return sendError(err, res, done);
     }
   },
   // DELETES ONE NOTIFICATION
   deleteOne: async (req, res, done) => {
+    const { id } = req.query;
+
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+
     try {
       await db.result(deleteOneNotification, [req.session.id, req.query.id]);
 
-      res.status(201).json({});
+      res.status(201).send(null);
     } catch (err) {
       return sendError(err, res, done);
     }
@@ -43,7 +48,7 @@ module.exports = {
     try {
       await db.result(deleteAllNotifications, [req.session.id]);
 
-      res.status(201).json({});
+      res.status(201).send(null);
     } catch (err) {
       return sendError(err, res, done);
     }

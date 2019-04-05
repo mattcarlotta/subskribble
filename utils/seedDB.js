@@ -47,7 +47,8 @@ const noteTableOptions = `(
     read BOOLEAN DEFAULT false,
     icon VARCHAR,
     messageDate TEXT NOT NULL,
-    message TEXT NOT NULL
+    message TEXT NOT NULL,
+    deleted BOOLEAN DEFAULT false
   )`;
 
 const planTableOptions = `(

@@ -50,7 +50,7 @@ describe('Update Account', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid update account apps', async () => {
+  it('handles invalid update account requests', async () => {
     // not logged in
     await app()
       .put('/api/update-account')
@@ -70,7 +70,7 @@ describe('Update Account', () => {
       });
   });
 
-  it('handles valid account update apps', async () => {
+  it('handles valid account update requests', async () => {
     // updates company, first name and lastname
     let cookie = await getCookie(newSignupEmail, newSignupPassword);
     await app()

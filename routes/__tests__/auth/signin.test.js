@@ -1,7 +1,7 @@
 const { badCredentials } = require('../../../shared/authErrors');
 
 describe('Sign In', () => {
-  it('handles invalid sign in apps', async () => {
+  it('handles invalid sign in requests', async () => {
     await app()
       .post('/api/signin')
       .then((res) => {
@@ -10,7 +10,7 @@ describe('Sign In', () => {
       });
   });
 
-  it('handles valid sign in apps', async () => {
+  it('handles valid sign in requests', async () => {
     await app()
       .post('/api/signin')
       .send({

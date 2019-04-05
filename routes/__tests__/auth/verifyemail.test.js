@@ -11,7 +11,7 @@ describe('Email Verification', () => {
     await signupNewUser(newSignupEmail, newCompany, done);
   });
 
-  it('handles invalid email verification apps', async () => {
+  it('handles invalid email verification requests', async () => {
     // missing token
     await app()
       .put('/api/email/verify?')
@@ -29,7 +29,7 @@ describe('Email Verification', () => {
       });
   });
 
-  it('handles valid email verification apps', async () => {
+  it('handles valid email verification requests', async () => {
     const response = await db.one(getTokenByEmail, [newSignupEmail]);
     await app()
       .put(`/api/email/verify?token=${response.token}`)

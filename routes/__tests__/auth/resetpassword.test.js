@@ -21,7 +21,7 @@ describe('Reset Password', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid reset password apps', async () => {
+  it('handles invalid reset password requests', async () => {
     // missing token
     await app()
       .put('/api/reset-password/verify')
@@ -58,7 +58,7 @@ describe('Reset Password', () => {
       });
   });
 
-  it('handles valid reset password apps', async () => {
+  it('handles valid reset password requests', async () => {
     const response = await db.one(getTokenByEmail, [newSignupEmail]);
     await app()
       .put(`/api/reset-password/verify?token=${response.token}`)

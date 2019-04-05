@@ -1,16 +1,21 @@
+const mailer = require('@sendgrid/mail');
 const { badCredentials } = require('../../../shared/authErrors');
 const {
   missingCreationParams,
   unableToLocate,
 } = require('../../../shared/errors');
 
-describe('Auth Routes and Controllers', () => {
+describe('Create Message', () => {
   let cookie;
   beforeAll(async () => {
     cookie = await getCookie();
   });
 
-  it('should handle invalid dashboard apps', async () => {
+  afterAll(async () => {
+    jest.clearAllMocks();
+  });
+
+  it('should handle invalid create message requests', async () => {
     // not logged in
     await app()
       .post('/api/messages/create')
@@ -39,32 +44,15 @@ describe('Auth Routes and Controllers', () => {
       });
   });
 
-  it('should handle invalid dashboard apps', async () => {
-    // not logged in
-    await app()
-      .post('/api/messages/create')
-      .then((res) => {
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.err).toEqual(badCredentials);
-      });
-
-    // logged in but missing create params
-    await app()
-      .post('/api/messages/create')
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingCreationParams);
-      });
-
+  it('should handle valid create message requests', async () => {
     // invalid template
     await app()
       .post('/api/messages/create')
-      .send({ template: 'Bad Template' })
+      .send({ template: 'Partners Template' })
       .set('Cookie', cookie)
       .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(unableToLocate('template'));
+        expect(res.statusCode).toEqual(201);
+        expect(mailer.sendMultiple).toHaveBeenCalled();
       });
   });
 });

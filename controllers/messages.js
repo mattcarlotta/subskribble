@@ -101,12 +101,13 @@ module.exports = {
   },
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.params.id) return sendError(missingDeletionParams, res, done);
+    const { id } = req.params;
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
     const date = currentDate();
 
     try {
       await db.task('delete-message', async (dbtask) => {
-        await dbtask.none(deleteOneMessage, [req.session.id, req.params.id]);
+        await dbtask.none(deleteOneMessage, [req.session.id, id]);
 
         await dbtask.none(createNotification, [
           req.session.id,
@@ -125,9 +126,11 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { page } = req.query;
     let { limit } = req.query;
+
+    if (!page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
 

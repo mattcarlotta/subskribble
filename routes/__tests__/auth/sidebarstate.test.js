@@ -21,7 +21,7 @@ describe('Sidebar State', () => {
     await setSidebarState(cookie, false);
   });
 
-  it('handles invalid sidebar save state apps', async () => {
+  it('handles invalid sidebar save state requests', async () => {
     // not logged in
     await app()
       .put('/api/save-sidebar-state?')
@@ -40,7 +40,7 @@ describe('Sidebar State', () => {
       });
   });
 
-  it('handles valid sidebar save state apps', async () => {
+  it('handles valid sidebar save state requests', async () => {
     await setSidebarState(cookie, true);
   });
 });

@@ -93,6 +93,7 @@ const messageQueries = {
   createMessageTransaction:
     'INSERT INTO messages(userid, template, fromSender, subject, sentDate, plans) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6)',
   deleteOneMessage: 'DELETE FROM messages WHERE userid=$1 AND id=$2',
+  getMessageByKey: 'SELECT id FROM messages WHERE key=$1',
   getMessageCount: 'SELECT count(*) FROM messages WHERE userid=$1',
   getSomeMessages:
     'SELECT * FROM messages WHERE userid=$1 ORDER BY key DESC LIMIT $2 OFFSET $3',
@@ -101,11 +102,14 @@ const messageQueries = {
 const notificationQueries = {
   createNotification:
     'INSERT INTO notifications(userid, icon, message, messageDate) VALUES ((SELECT id FROM users WHERE id=$1), $2, $3, $4)',
-  deleteAllNotifications: 'DELETE FROM notifications WHERE userid=$1',
-  deleteOneNotification: 'DELETE FROM notifications WHERE userid=$1 AND id=$2',
+  deleteAllNotifications:
+    'UPDATE notifications SET deleted=true WHERE deleted=false AND userid=$1',
+  deleteOneNotification:
+    'UPDATE notifications SET deleted=true WHERE userid=$1 AND id=$2',
+  getNotifcationByKey: 'SELECT id FROM notifications WHERE key=$1',
   getSomeNotifications: `
-      SELECT * FROM (SELECT json_agg(x) as unreadNotifications FROM (SELECT * FROM notifications WHERE userid=$1 AND READ = false ORDER BY key DESC LIMIT 99) as x ) x
-      CROSS JOIN (SELECT json_agg(y) as readNotifications FROM (SELECT * FROM notifications WHERE userid=$1 AND READ = true ORDER BY key DESC LIMIT 99) as y) y
+      SELECT * FROM (SELECT json_agg(x) as unreadNotifications FROM (SELECT * FROM notifications WHERE userid=$1 AND read = false AND deleted = false ORDER BY key DESC LIMIT 99) as x ) x
+      CROSS JOIN (SELECT json_agg(y) as readNotifications FROM (SELECT * FROM notifications WHERE userid=$1 AND read = false AND deleted = false ORDER BY key DESC LIMIT 99) as y) y
     `,
   setReadNotifications:
     'UPDATE notifications SET read=true WHERE read=false AND userid=$1',
