@@ -1,4 +1,4 @@
-module.exports = () => (portal, firstname, lastname, token) => `
+module.exports = (portal, firstName, lastName, token) => `
   <html>
     <body>
       <div style="overflow: hidden;">
@@ -10,7 +10,7 @@ module.exports = () => (portal, firstname, lastname, token) => `
             <div style="background-color: #FFFFFF; border: 1px solid #f0f0f0;">
               <div style="font-size: 16px; padding: 30px; vertical-align: top; display: block;">
                 <h2 style="margin-bottom: 30px; color: #03a9f3;">
-                  Forgot your password, ${firstname} ${lastname}?
+                  Forgot your password, ${firstName} ${lastName}?
                 </h2>
                 <p style="font-size: 16px; margin-bottom: 30px; color: #000000;">
                   Please click the button below to set up a new password.

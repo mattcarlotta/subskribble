@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import axios from 'axios';
 
 export const app = axios.create({
@@ -15,7 +16,11 @@ export const avatarAPI = axios.create({
 });
 avatarAPI.interceptors.response.use(
   response => response,
-  error => Promise.reject(error.response.data.err),
+  error => {
+    const err = get(error, ['response', 'data', 'err']);
+
+    return err ? Promise.reject(err) : Promise.reject(error.message);
+  },
 );
 
 export const upperCase = str => str.replace(/^\w/, c => c.toUpperCase());

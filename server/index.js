@@ -1,8 +1,9 @@
 const path = require('path');
 const express = require('express');
+const config = require('../env');
 
 module.exports = (app) => {
-  const env = app.get('env');
+  const env = process.env.NODE_ENV;
   //= ===========================================================//
   /* PRODUCTION CONFIGS */
   //= ===========================================================//
@@ -17,5 +18,5 @@ module.exports = (app) => {
   //= ===========================================================//
   /* CREATE EXPRESS SERVER */
   //= ===========================================================//
-  app.listen(app.get('port'));
+  app.listen(config[env].port);
 };

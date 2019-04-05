@@ -5,6 +5,17 @@
   },
   "root": true,
   "rules": {
-    "consistent-return": 0
-  }
+    "consistent-return": 0,
+    "global-require": 0,
+    "max-len": 0,
+    "no-unused-expressions": 0
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "no-undef": 0
+      }
+    }
+  ]
 }
