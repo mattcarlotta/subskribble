@@ -1,6 +1,4 @@
 /* global app */
-
-const request = require('supertest');
 const db = require('../../database/db');
 const { thanksForReg } = require('../../shared/authSuccess');
 const { verifyEmail } = require('../../database/query');
@@ -9,7 +7,7 @@ const removeNewUser = (existingEmail, task) => task.oneOrNone(`DELETE FROM users
 
 const signupNewUser = (email, company, done) => db.task('setup-signup', async (dbtask) => {
   await removeNewUser(email, db);
-  await request(app)
+  await app()
     .post('/api/signup')
     .send({
       email,

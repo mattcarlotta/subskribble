@@ -3,7 +3,7 @@ const {
   missingSidebarState,
 } = require('../../../shared/authErrors');
 
-const setSidebarState = (cookie, state) => request(app)
+const setSidebarState = (cookie, state) => app()
   .put(`/api/save-sidebar-state?collapseSideNav=${state}`)
   .set('Cookie', cookie)
   .then((res) => {
@@ -21,9 +21,9 @@ describe('Sidebar State', () => {
     await setSidebarState(cookie, false);
   });
 
-  it('handles invalid sidebar save state requests', async () => {
+  it('handles invalid sidebar save state apps', async () => {
     // not logged in
-    await request(app)
+    await app()
       .put('/api/save-sidebar-state?')
       .then((res) => {
         expect(res.statusCode).toEqual(401);
@@ -31,7 +31,7 @@ describe('Sidebar State', () => {
       });
 
     // missing state query
-    await request(app)
+    await app()
       .put('/api/save-sidebar-state?')
       .set('Cookie', cookie)
       .then((res) => {
@@ -40,7 +40,7 @@ describe('Sidebar State', () => {
       });
   });
 
-  it('handles valid sidebar save state requests', async () => {
+  it('handles valid sidebar save state apps', async () => {
     await setSidebarState(cookie, true);
   });
 });

@@ -25,9 +25,9 @@ describe('Reset Password', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid reset password requests', async () => {
+  it('handles invalid reset password apps', async () => {
     // missing token
-    await request(app)
+    await app()
       .put('/api/reset-password/verify')
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -35,7 +35,7 @@ describe('Reset Password', () => {
       });
 
     // missing email and/or password
-    await request(app)
+    await app()
       .put(`/api/reset-password/verify?token=${createRandomToken()}`)
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -43,7 +43,7 @@ describe('Reset Password', () => {
       });
 
     // invalid token
-    await request(app)
+    await app()
       .put(`/api/reset-password/verify?token=${createRandomToken()}`)
       .send({ email: newSignupEmail, password: 'newpassword' })
       .then((res) => {
@@ -53,7 +53,7 @@ describe('Reset Password', () => {
 
     // password is the same
     const response = await db.one(getTokenByEmail, [newSignupEmail]);
-    await request(app)
+    await app()
       .put(`/api/reset-password/verify?token=${response.token}`)
       .send({ email: newSignupEmail, password: 'password123' })
       .then((res) => {
@@ -62,9 +62,9 @@ describe('Reset Password', () => {
       });
   });
 
-  it('handles valid reset password requests', async () => {
+  it('handles valid reset password apps', async () => {
     const response = await db.one(getTokenByEmail, [newSignupEmail]);
-    await request(app)
+    await app()
       .put(`/api/reset-password/verify?token=${response.token}`)
       .send({ email: newSignupEmail, password: 'newpassword' })
       .expect(201)

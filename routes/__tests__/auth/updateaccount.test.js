@@ -54,9 +54,9 @@ describe('Update Account', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid update account requests', async () => {
+  it('handles invalid update account apps', async () => {
     // not logged in
-    await request(app)
+    await app()
       .put('/api/update-account')
       .then((res) => {
         expect(res.statusCode).toEqual(401);
@@ -65,7 +65,7 @@ describe('Update Account', () => {
 
     // logged in but missing update query params
     const cookie = await getCookie(newSignupEmail, newSignupPassword);
-    await request(app)
+    await app()
       .put('/api/update-account')
       .set('Cookie', cookie)
       .then((res) => {
@@ -74,10 +74,10 @@ describe('Update Account', () => {
       });
   });
 
-  it('handles valid account update requests', async () => {
+  it('handles valid account update apps', async () => {
     // updates company, first name and lastname
     let cookie = await getCookie(newSignupEmail, newSignupPassword);
-    await request(app)
+    await app()
       .put('/api/update-account')
       .send(updateNonEssentialAcctDetails)
       .set('Cookie', cookie)
@@ -96,7 +96,7 @@ describe('Update Account', () => {
         expect(res.body.message).toEqual(updatedAccountDetails);
       });
 
-    await request(app)
+    await app()
       .put('/api/update-account')
       .send(changeAcctPassword)
       .set('Cookie', cookie)
@@ -109,7 +109,7 @@ describe('Update Account', () => {
 
     // updates email (requires reverification and relogin)
     cookie = await getCookie(newSignupEmail, updatedPassword);
-    await request(app)
+    await app()
       .put('/api/update-account')
       .send(changeAcctEmail)
       .set('Cookie', cookie)

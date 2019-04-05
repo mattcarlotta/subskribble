@@ -19,9 +19,9 @@ describe('Reset Token', () => {
     jest.clearAllMocks();
   });
 
-  it('handles invalid reset token requests', async () => {
+  it('handles invalid reset token apps', async () => {
     // missing email creds
-    await request(app)
+    await app()
       .put('/api/reset-token')
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -29,7 +29,7 @@ describe('Reset Token', () => {
       });
 
     // invalid email creds
-    await request(app)
+    await app()
       .put('/api/reset-token')
       .send({ email: 'test@test.com', password: 'reset-token' })
       .then((res) => {
@@ -38,8 +38,8 @@ describe('Reset Token', () => {
       });
   });
 
-  it('handles valid reset token requests', async () => {
-    await request(app)
+  it('handles valid reset token apps', async () => {
+    await app()
       .put('/api/reset-token')
       .send({ email: newSignupEmail, password: 'reset-token' })
       .then((res) => {

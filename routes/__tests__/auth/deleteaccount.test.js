@@ -22,9 +22,9 @@ describe('Delete Account', () => {
     await removeNewUser(newSignupEmail, db);
   });
 
-  it('handles invalid delete account requests', async () => {
+  it('handles invalid delete account apps', async () => {
     // not logged in
-    await request(app)
+    await app()
       .delete('/api/delete-account')
       .then((res) => {
         expect(res.statusCode).toEqual(401);
@@ -34,7 +34,7 @@ describe('Delete Account', () => {
     const cookie = await getCookie(newSignupEmail, newSignupPassword);
 
     // logged in but missing params
-    await request(app)
+    await app()
       .delete('/api/delete-account')
       .set('Cookie', cookie)
       .then((res) => {
@@ -43,7 +43,7 @@ describe('Delete Account', () => {
       });
 
     // invalid supplied password
-    await request(app)
+    await app()
       .delete('/api/delete-account')
       .send({
         company: 'Test',
@@ -57,9 +57,9 @@ describe('Delete Account', () => {
       });
   });
 
-  it('handles valid delete account requests', async () => {
+  it('handles valid delete account apps', async () => {
     const cookie = await getCookie(newSignupEmail, newSignupPassword);
-    await request(app)
+    await app()
       .delete('/api/delete-account')
       .send({
         company: newCompany,

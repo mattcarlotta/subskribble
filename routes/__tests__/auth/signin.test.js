@@ -1,8 +1,8 @@
 const { badCredentials } = require('../../../shared/authErrors');
 
 describe('Sign In', () => {
-  it('handles invalid sign in requests', async () => {
-    await request(app)
+  it('handles invalid sign in apps', async () => {
+    await app()
       .post('/api/signin')
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -10,8 +10,8 @@ describe('Sign In', () => {
       });
   });
 
-  it('handles valid sign in requests', async () => {
-    await request(app)
+  it('handles valid sign in apps', async () => {
+    await app()
       .post('/api/signin')
       .send({
         email: 'betatester@subskribble.com',

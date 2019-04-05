@@ -18,9 +18,9 @@ describe('Email Verification', () => {
     await removeNewUser(newSignupEmail, db);
   });
 
-  it('handles invalid email verification requests', async () => {
+  it('handles invalid email verification apps', async () => {
     // missing token
-    await request(app)
+    await app()
       .put('/api/email/verify?')
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -28,7 +28,7 @@ describe('Email Verification', () => {
       });
 
     // invalid token
-    await request(app)
+    await app()
       .put(`/api/email/verify?token=${createRandomToken()}`)
       .then((res) => {
         expect(res.statusCode).toEqual(400);
@@ -36,9 +36,9 @@ describe('Email Verification', () => {
       });
   });
 
-  it('handles valid email verification requests', async () => {
+  it('handles valid email verification apps', async () => {
     const response = await db.one(getTokenByEmail, [newSignupEmail]);
-    await request(app)
+    await app()
       .put(`/api/email/verify?token=${response.token}`)
       .then((res) => {
         expect(res.statusCode).toEqual(201);

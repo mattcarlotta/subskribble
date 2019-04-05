@@ -1,9 +1,8 @@
-const request = require('supertest');
-const app = require('./testApp');
+const app = require('./request');
 
 module.exports = async (suppliedEmail, suppliedPassword) => {
   let cookie;
-  await request(app)
+  await app()
     .post('/api/signin')
     .send({
       email: suppliedEmail,

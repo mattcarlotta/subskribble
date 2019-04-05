@@ -1,9 +1,9 @@
 const { badCredentials } = require('../../../shared/authErrors');
 
 describe('Auth Routes and Controllers', () => {
-  it('should handle invalid dashboard requests', async () => {
+  it('should handle invalid dashboard apps', async () => {
     // not logged in
-    await request(app)
+    await app()
       .get('/api/dashboard')
       .then((res) => {
         expect(res.statusCode).toEqual(401);
@@ -11,10 +11,10 @@ describe('Auth Routes and Controllers', () => {
       });
   });
 
-  it('should handle valid dashboard requests', async () => {
+  it('should handle valid dashboard apps', async () => {
     const cookie = await getCookie('betatester@subskribble.com', 'password123');
 
-    await request(app)
+    await app()
       .get('/api/dashboard')
       .set('Cookie', cookie)
       .then((res) => {
