@@ -4,10 +4,7 @@ const {
 } = require('../../../shared/authErrors');
 const { missingDeletionParams } = require('../../../shared/errors');
 const { removedAccountSuccess } = require('../../../shared/authSuccess');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'deleteduser@test.com';
 const newSignupPassword = 'password123';
@@ -16,10 +13,6 @@ const newCompany = 'Delete Handlers LLC';
 describe('Delete Account', () => {
   beforeAll(async (done) => {
     await signupNewUser(newSignupEmail, newCompany, done);
-  });
-
-  afterAll(async () => {
-    await removeNewUser(newSignupEmail, db);
   });
 
   it('handles invalid delete account apps', async () => {

@@ -1,6 +1,9 @@
 const app = require('./request');
 
-module.exports = async (suppliedEmail, suppliedPassword) => {
+module.exports = async (
+  suppliedEmail = 'betatester@subskribble.com',
+  suppliedPassword = 'password123',
+) => {
   let cookie;
   await app()
     .post('/api/signin')

@@ -6,10 +6,7 @@ const {
   updatedAccount,
   updatedAccountDetails,
 } = require('../../../shared/authSuccess');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'updateaccount@test.com';
 const newSignupPassword = 'password123';
@@ -50,7 +47,6 @@ describe('Update Account', () => {
   });
 
   afterAll(async () => {
-    await removeNewUser(updatedEmail, db);
     jest.clearAllMocks();
   });
 

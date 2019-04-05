@@ -26,8 +26,10 @@ const {
 
 module.exports = {
   create: async (req, res, done) => {
-    if (!req.body) return sendError(missingCreationParams, res, done);
-    const uniquetemplatename = createUniqueTemplateName(req.body.template);
+    const { template } = req.body;
+    if (!template) return sendError(missingCreationParams, res, done);
+
+    const uniquetemplatename = createUniqueTemplateName(template);
     const date = currentDate();
 
     try {

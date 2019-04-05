@@ -159,11 +159,11 @@ an experimental app to create, manage, and send personalized updates to a list o
 
 ### 5. Install App Dependencies
 
-- `npm i && cd client && npm i`
+- `npm run initialize`
 
 ### 6. Seed DB and Run Node Server
 
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seed` for a `development` DB or `npm run seed:test` for a `test` DB.)
 - `npm run dev` (while at the root directory)
 
 ## Quickstart MacOS
@@ -200,11 +200,11 @@ an experimental app to create, manage, and send personalized updates to a list o
 
 ### 6. Install App Dependencies
 
-- `npm i && cd client && npm i`
+- `npm run initialize`
 
 ### 7. Seed DB and Run Node Server
 
-- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seeds`)
+- `psql -U <username> -f initDB.sql` (only required to initialize the DB, then you can optionally run `npm run seed` for a `development` DB or `npm run seed:test` for a `test` DB.)
 - `npm run dev` (while at the root directory)
 
 ## Compile For Production

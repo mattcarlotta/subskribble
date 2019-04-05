@@ -11,8 +11,10 @@
     "client": "npm run start --prefix client",
     "lint-front": "npm run pre-commit --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seed": "NODE_ENV=development node seedDB.js",
-    "seed:test": "NODE_ENV=test node seedDB.js",
+    "seed": "NODE_ENV=development SEED=true node ./utils/seedDB.js",
+    "seed:test": "NODE_ENV=test SEED=true node ./utils/seedDB.js",
+    "teardown": "NODE_ENV=development TEARDOWN=true node ./utils/teardownDB.js",
+    "teardown:test": "NODE_ENV=test TEARDOWN=true node ./utils/teardownDB.js",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
     "lint-back": "lint-staged",
     "test:front": "npm run test --prefix client",
@@ -47,7 +49,9 @@
     "testPathIgnorePatterns": [
       "<rootDir>/client/",
       "<rootDir>/node_modules/"
-    ]
+    ],
+    "globalSetup": "<rootDir>/utils/seedDB.js",
+    "globalTeardown": "<rootDir>/utils/teardownDB.js"
   },
   "author": "",
   "license": "ISC",

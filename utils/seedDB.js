@@ -1,18 +1,18 @@
 /* eslint-disable */
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const db = require('./database/db');
+const db = require('../database/db');
 const {
   createNewUser,
   findUserByEmail,
   setUserAsAdmin,
   verifyEmail
-} = require('./database/query');
+} = require('../database/query');
 const {
   currentDate,
   createRandomText,
   createRandomToken
-} = require('./shared/helpers');
+} = require('../shared/helpers');
 
 const fakeText = () => createRandomText();
 const selectUserid = id => `(SELECT id FROM users WHERE id='${id}')`;
@@ -21,6 +21,8 @@ const endDate = moment()
   .add(30, 'days')
   .toISOString(true);
 const startDate = currentDate();
+
+const SEED = process.env.SEED;
 
 const userTableOptions = `(
     id UUID DEFAULT uuid_generate_v1mc() UNIQUE,
@@ -552,33 +554,23 @@ const messageValues = id => `
   )}, 'General Newsletter Template', 'betatester@subskribble.com', 'General Newsletter Template Subject', '${startDate}', ARRAY ['Carlotta Cars Magazine', 'Carlotta Sports']);
   `;
 
-(async () => {
+const seedDB = async () => {
   try {
     await db.task('seed-database', async dbtask => {
       // create DB tables
       await dbtask.none(`
-          CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-          DROP TABLE IF EXISTS users CASCADE;
-          DROP TABLE IF EXISTS subscribers;
-          DROP TABLE IF EXISTS plans;
-          DROP TABLE IF EXISTS promotionals;
-          DROP TABLE IF EXISTS transactions;
-          DROP TABLE IF EXISTS templates;
-          DROP TABLE IF EXISTS notifications;
-          DROP TABLE IF EXISTS messages;
-          DROP TABLE IF EXISTS avatars;
-          DROP TABLE IF EXISTS feedback;
-          CREATE TABLE users ${userTableOptions};
-          CREATE TABLE plans ${planTableOptions};
-          CREATE TABLE promotionals ${promoTableOptions};
-          CREATE TABLE notifications ${noteTableOptions};
-          CREATE TABLE subscribers ${subTableOptions};
-          CREATE TABLE templates ${templateTableOptions};
-          CREATE TABLE transactions ${transTableOptions};
-          CREATE TABLE messages ${messageTableOptions};
-          CREATE TABLE feedback ${feedbackTableOptions};
-          CREATE TABLE avatars ${avatarTableOptions};
-        `);
+            CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+            CREATE TABLE users ${userTableOptions};
+            CREATE TABLE plans ${planTableOptions};
+            CREATE TABLE promotionals ${promoTableOptions};
+            CREATE TABLE notifications ${noteTableOptions};
+            CREATE TABLE subscribers ${subTableOptions};
+            CREATE TABLE templates ${templateTableOptions};
+            CREATE TABLE transactions ${transTableOptions};
+            CREATE TABLE messages ${messageTableOptions};
+            CREATE TABLE feedback ${feedbackTableOptions};
+            CREATE TABLE avatars ${avatarTableOptions};
+          `);
 
       // create new user
       const token = createRandomToken(); // a token used for email verification
@@ -612,23 +604,44 @@ const messageValues = id => `
 
       // inset fake data into created tables
       await dbtask.none(`
-          INSERT INTO plans ${planProperties} VALUES ${planValues(id)};
-          INSERT INTO notifications ${noteProperties} VALUES ${noteValues(id)};
-          INSERT INTO promotionals ${promoProperties} VALUES ${promoValues(id)};
-          INSERT INTO subscribers ${subProperties} VALUES ${subValues(id)};
-          INSERT INTO templates ${templateProperties} VALUES ${templateValues(
+            INSERT INTO plans ${planProperties} VALUES ${planValues(id)};
+            INSERT INTO notifications ${noteProperties} VALUES ${noteValues(
         id
       )};
-          INSERT INTO transactions ${transProperties} VALUES ${transValues(id)};
-          INSERT INTO messages ${messageProperties} VALUES ${messageValues(id)};
-          `);
+            INSERT INTO promotionals ${promoProperties} VALUES ${promoValues(
+        id
+      )};
+            INSERT INTO subscribers ${subProperties} VALUES ${subValues(id)};
+            INSERT INTO templates ${templateProperties} VALUES ${templateValues(
+        id
+      )};
+            INSERT INTO transactions ${transProperties} VALUES ${transValues(
+        id
+      )};
+            INSERT INTO messages ${messageProperties} VALUES ${messageValues(
+        id
+      )};
+            `);
 
-      return console.log('--[SUCCESS]-- Seeded database!');
+      return console.log(
+        '\n\x1b[7m\x1b[32;1m PASS \x1b[0m \x1b[2mutils/\x1b[0m\x1b[1mseedDB.js'
+      );
     });
   } catch (err) {
-    return console.log('--[ERROR]-- ', err.toString());
+    return console.log(
+      '\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n' +
+        err.toString() +
+        '\x1b[0m'
+    );
   } finally {
-    process.exit(0);
+    if (SEED) {
+      process.exit(0);
+    }
   }
-})();
+};
+
+if (SEED) seedDB();
+
+module.exports = seedDB;
+
 /* eslint-enable */

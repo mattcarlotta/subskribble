@@ -1,10 +1,7 @@
 const { getTokenByEmail } = require('../../../database/query');
 const { createRandomToken } = require('../../../shared/helpers');
 const { invalidToken, missingToken } = require('../../../shared/authErrors');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'verification@example.com';
 const newCompany = 'Verification Corp';
@@ -12,10 +9,6 @@ const newCompany = 'Verification Corp';
 describe('Email Verification', () => {
   beforeAll(async (done) => {
     await signupNewUser(newSignupEmail, newCompany, done);
-  });
-
-  afterAll(async () => {
-    await removeNewUser(newSignupEmail, db);
   });
 
   it('handles invalid email verification apps', async () => {

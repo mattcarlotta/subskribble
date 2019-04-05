@@ -3,10 +3,7 @@ const db = require('../../database/db');
 const { thanksForReg } = require('../../shared/authSuccess');
 const { verifyEmail } = require('../../database/query');
 
-const removeNewUser = (existingEmail, task) => task.oneOrNone(`DELETE FROM users WHERE email='${existingEmail}'`);
-
 const signupNewUser = (email, company, done) => db.task('setup-signup', async (dbtask) => {
-  await removeNewUser(email, db);
   await app()
     .post('/api/signup')
     .send({
@@ -27,6 +24,5 @@ const signupNewUser = (email, company, done) => db.task('setup-signup', async (d
 });
 
 module.exports = {
-  removeNewUser,
   signupNewUser,
 };

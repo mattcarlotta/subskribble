@@ -12,7 +12,7 @@ describe('Auth Routes and Controllers', () => {
   });
 
   it('should handle valid dashboard apps', async () => {
-    const cookie = await getCookie('betatester@subskribble.com', 'password123');
+    const cookie = await getCookie();
 
     await app()
       .get('/api/dashboard')

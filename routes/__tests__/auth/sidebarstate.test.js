@@ -14,7 +14,7 @@ const setSidebarState = (cookie, state) => app()
 describe('Sidebar State', () => {
   let cookie;
   beforeAll(async () => {
-    cookie = await getCookie('betatester@subskribble.com', 'password123');
+    cookie = await getCookie();
   });
 
   afterAll(async () => {

@@ -7,10 +7,7 @@ const {
   notUniquePassword,
 } = require('../../../shared/authErrors');
 const { passwordResetSuccess } = require('../../../shared/authSuccess');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'newuser@test.com';
 const newCompany = 'New User Corp';
@@ -21,7 +18,6 @@ describe('Reset Password', () => {
   });
 
   afterAll(async () => {
-    await removeNewUser(newSignupEmail, db);
     jest.clearAllMocks();
   });
 

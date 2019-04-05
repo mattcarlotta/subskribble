@@ -1,10 +1,7 @@
 const mailer = require('@sendgrid/mail');
 const { missingEmailCreds } = require('../../../shared/authErrors');
 const { passwordResetToken } = require('../../../shared/authSuccess');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'reset@example.com';
 const newCompany = 'Reset Token Corp';
@@ -15,7 +12,6 @@ describe('Reset Token', () => {
   });
 
   afterAll(async () => {
-    await removeNewUser(newSignupEmail, db);
     jest.clearAllMocks();
   });
 

@@ -6,7 +6,7 @@ describe('Logged In', () => {
   });
 
   it('handles valid logged in session apps', async () => {
-    const cookie = await getCookie('betatester@subskribble.com', 'password123');
+    const cookie = await getCookie();
     await app()
       .get('/api/loggedin')
       .set('Cookie', cookie)

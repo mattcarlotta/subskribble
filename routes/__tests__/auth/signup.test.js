@@ -4,10 +4,7 @@ const {
   emailAlreadyTaken,
   missingCredentials,
 } = require('../../../shared/authErrors');
-const {
-  removeNewUser,
-  signupNewUser,
-} = require('../../__mocks__/auth.mocks.js');
+const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'signup@test.com';
 const newCompany = 'New Signup User';
@@ -36,7 +33,6 @@ describe('Sign Up', () => {
   });
 
   afterAll(async () => {
-    await removeNewUser(newSignupEmail, db);
     jest.clearAllMocks();
   });
 
