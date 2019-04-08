@@ -137,6 +137,7 @@ const planQueries = {
   updatePlanSubCount:
     'UPDATE plans SET subscribers=(SELECT count(*) FROM subscribers WHERE planName=$2) WHERE planName=$2',
   selectPlan: 'SELECT * FROM plans WHERE userid=$1 AND planName=$2',
+  selectPlanByKey: 'SELECT * FROM plans WHERE key=$1',
 };
 
 const promoQueries = {
@@ -154,6 +155,7 @@ const promoQueries = {
     'UPDATE promotionals SET status=$3 WHERE userid=$1 AND id=$2 RETURNING *',
   selectPromotionCode:
     'SELECT promoCode FROM promotionals WHERE userid=$1 AND promoCode=$2',
+  selectPromotionCodeByKey: 'SELECT * FROM promotionals WHERE key=$1',
   selectPromotionDetails:
     "SELECT * FROM promotionals WHERE userid=$1 AND promoCode=$2 AND plans@>$3 AND status='active' AND startDate<=$4 AND endDate>=$4",
   updatePromotionUsage:

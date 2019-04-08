@@ -1,3 +1,4 @@
+const isEmpty = require('lodash/isEmpty');
 const db = require('../database/db');
 const {
   createNotification,
@@ -31,8 +32,9 @@ const {
 module.exports = {
   // LOOKS UP PROMOCODE PER CLIENT-SIDE REQUEST
   apply: async (req, res, done) => {
-    if (!req.query) return sendError(missingUpdateParams, res, done);
     const { promocode, plan } = req.query;
+
+    if (!promocode || !plan) return sendError(missingUpdateParams, res, done);
     const date = currentDate();
 
     try {
@@ -51,8 +53,6 @@ module.exports = {
   },
   // CREATES PROMO RECORD
   create: async (req, res, done) => {
-    if (!req.body) return sendError(missingCreationParams, res, done);
-
     const {
       amount,
       discounttype,
@@ -62,6 +62,16 @@ module.exports = {
       maxusage,
       startdate,
     } = req.body;
+
+    if (
+      !amount
+      || !discounttype
+      || !enddate
+      || !promocode
+      || isEmpty(plans)
+      || !startdate
+    ) return sendError(missingCreationParams, res, done);
+
     const allowedUsage = maxusage ? parseStringToNum(maxusage) : 2147483647;
     const startDateISO = convertDateToISO(startdate);
     const endDateISO = convertDateToISO(enddate);
@@ -103,14 +113,15 @@ module.exports = {
   },
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.params.id) return sendError(missingDeletionParams, res, done);
+    const { id } = req.params;
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
     const date = currentDate();
 
     try {
       await db.task('delete-promo', async (dbtask) => {
         const name = await dbtask.result(deleteOnePromotion, [
           req.session.id,
-          req.params.id,
+          id,
         ]);
 
         await dbtask.none(createNotification, [
@@ -130,9 +141,11 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { table, page } = req.query;
     let { limit } = req.query;
+
+    if (!table || !page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
     const status = table === 'activepromotionals' ? 'active' : 'suspended';
@@ -159,6 +172,7 @@ module.exports = {
   fetchCounts: async (req, res, done) => {
     try {
       const promos = await db.any(getPromotionCount, [req.session.id]);
+      if (isEmpty(promos)) return sendError('Unable to fetch promotional counts', res, done);
 
       res.status(201).json({
         activepromocount: parseStringToNum(promos[0].active),
@@ -187,7 +201,7 @@ module.exports = {
   },
   // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
   updateOne: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
 
     const {
       amount,
@@ -198,6 +212,18 @@ module.exports = {
       maxusage,
       startdate,
     } = req.body;
+
+    if (
+      !amount
+      || !discounttype
+      || !enddate
+      || !promocode
+      || isEmpty(plans)
+      || !startdate
+      || !id
+      || id === 'null'
+    ) return sendError(missingUpdateParams, res, done);
+
     const allowedUsage = maxusage ? parseStringToNum(maxusage) : 2147483647;
     const startDateISO = convertDateToISO(startdate);
     const endDateISO = convertDateToISO(enddate);
@@ -207,7 +233,7 @@ module.exports = {
       await db.task('update-promo-record', async (dbtask) => {
         await dbtask.none(updatePromotion, [
           req.session.id,
-          req.params.id,
+          id,
           amount,
           allowedUsage,
           discounttype,
@@ -232,15 +258,18 @@ module.exports = {
   },
   // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
   updateStatus: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
     const { updateType, statusType } = req.body;
+
+    if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+
     const date = currentDate();
 
     try {
       await db.task('update-promo-status', async (dbtask) => {
         const name = await dbtask.one(updatePromotionStatus, [
           req.session.id,
-          req.params.id,
+          id,
           statusType,
         ]);
 
@@ -266,12 +295,13 @@ module.exports = {
   },
   // SELECTS A SINGLE RECORD
   selectOne: async (req, res, done) => {
-    if (!req.query) return sendError(missingSelectParams, res, done);
+    const { id } = req.query;
+    if (!id || id === 'null') return sendError(missingSelectParams, res, done);
 
     try {
       const promotional = await db.oneOrNone(findPromoById, [
         req.session.id,
-        req.query.id,
+        id,
       ]);
       if (!promotional) return sendError(unableToLocate('promotional'), res, done);
 

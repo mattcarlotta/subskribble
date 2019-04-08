@@ -1,4 +1,4 @@
-const { isEmpty } = require('lodash');
+const isEmpty = require('lodash/isEmpty');
 const db = require('../database/db');
 const {
   createNotification,
@@ -31,10 +31,11 @@ const {
 module.exports = {
   // CREATES A PLAN PER CLIENT-SIDE REQUEST
   create: async (req, res, done) => {
-    if (!req.body) return sendError(missingCreationParams, res, done);
     const {
       amount, billevery, planname, description, setupfee,
     } = req.body;
+    if (!amount || !billevery || !planname || !description) return sendError(missingCreationParams, res, done);
+
     const date = currentDate();
 
     try {
@@ -70,15 +71,13 @@ module.exports = {
   },
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.params.id) return sendError(missingDeletionParams, res, done);
+    const { id } = req.params;
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
     const date = currentDate();
 
     try {
       await db.task('delete-plan', async (dbtask) => {
-        const name = await dbtask.result(deleteOnePlan, [
-          req.session.id,
-          req.params.id,
-        ]);
+        const name = await dbtask.result(deleteOnePlan, [req.session.id, id]);
 
         await dbtask.none(createNotification, [
           req.session.id,
@@ -95,7 +94,6 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchAllActiveRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     try {
       const activeplans = await db.any(getAllActivePlans, [req.session.id]);
       if (isEmpty(activeplans)) return sendError(createPlanFirst, res, done);
@@ -107,9 +105,10 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { table, page } = req.query;
     let { limit } = req.query;
+    if (!table || !page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
     const status = table === 'activeplans' ? 'active' : 'suspended';
@@ -136,6 +135,7 @@ module.exports = {
   fetchCounts: async (req, res, done) => {
     try {
       const plans = await db.any(getPlanCount, [req.session.id]);
+      if (isEmpty(plans)) return sendError('Unable to fetch plan counts', res, done);
 
       res.status(201).json({
         activeplancount: parseStringToNum(plans[0].active),
@@ -164,12 +164,21 @@ module.exports = {
   },
   // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
   updateOne: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
-
+    const { id } = req.params;
     const {
       amount, billevery, planname, description,
     } = req.body;
     let { setupfee, trialperiod } = req.body;
+
+    if (
+      !amount
+      || !billevery
+      || !planname
+      || !description
+      || !id
+      || id === 'null'
+    ) return sendError(missingUpdateParams, res, done);
+
     trialperiod = trialperiod === '(none)' ? undefined : trialperiod;
     setupfee = setupfee === '' ? undefined : setupfee;
     const date = currentDate();
@@ -178,7 +187,7 @@ module.exports = {
       await db.task('update-plan-record', async (dbtask) => {
         await dbtask.none(updatePlan, [
           req.session.id,
-          req.params.id,
+          id,
           amount,
           billevery,
           planname,
@@ -202,15 +211,18 @@ module.exports = {
   },
   // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
   updateStatus: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
     const { updateType, statusType } = req.body;
+
+    if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+
     const date = currentDate();
 
     try {
       await db.task('update-plan-status', async (dbtask) => {
         const name = await dbtask.one(updatePlanStatus, [
           req.session.id,
-          req.params.id,
+          id,
           statusType,
         ]);
 
@@ -230,13 +242,11 @@ module.exports = {
   },
   // SELECTS A SINGLE RECORD
   selectOne: async (req, res, done) => {
-    if (!req.query) return sendError(missingSelectParams, res, done);
+    const { id } = req.query;
+    if (!id || id === 'null') return sendError(missingSelectParams, res, done);
 
     try {
-      const plan = await db.oneOrNone(findPlanById, [
-        req.session.id,
-        req.query.id,
-      ]);
+      const plan = await db.oneOrNone(findPlanById, [req.session.id, id]);
       if (!plan) return sendError(unableToLocate('plan'), res, done);
 
       res.status(201).json({ ...plan });
