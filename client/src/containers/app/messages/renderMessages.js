@@ -5,7 +5,7 @@ import { notification } from 'antd';
 import { resetServerMessages } from 'actions/appActions.js';
 import styles from './renderMessages.scss';
 
-notification.config({ placement: 'topRight', top: 50, duration: 6000 });
+notification.config({ placement: 'topRight', top: 50, duration: 7 });
 
 const descriptionLayout = noteType => (
   <div className={`${styles.iconMessageContainer} ${styles[noteType]}`}>

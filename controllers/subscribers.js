@@ -32,8 +32,6 @@ const {
 module.exports = {
   // CREATES SUBSCRIBER RECORD
   create: async (req, res, done) => {
-    if (!req.body) return sendError(missingCreationParams, res, done);
-
     const {
       billingAddress,
       billingCity,
@@ -47,15 +45,27 @@ module.exports = {
       contactState,
       contactUnit,
       contactZip,
-      // creditCard,
-      // creditCardExpMonth,
-      // creditCardExpYear,
-      // creditCardCVV,
       promoCode,
       sameBillingAddress,
       selectedPlan,
       subscriber,
     } = req.body;
+
+    if (
+      !billingAddress
+      || !billingCity
+      || !billingState
+      || !billingZip
+      || !contactAddress
+      || !contactCity
+      || !contactEmail
+      || !contactPhone
+      || !contactState
+      || !contactZip
+      || !selectedPlan
+      || !subscriber
+    ) return sendError(missingCreationParams, res, done);
+
     const date = currentDate();
 
     try {
@@ -166,8 +176,9 @@ module.exports = {
   },
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.query) return sendError(missingDeletionParams, res, done);
     const { planname, subscriberid } = req.query;
+
+    if (!planname || !subscriberid || subscriberid === 'null') return sendError(missingDeletionParams, res, done);
     const date = currentDate();
 
     try {
@@ -195,9 +206,11 @@ module.exports = {
   },
   // FETCHES done SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { table, page } = req.query;
     let { limit } = req.query;
+
+    if (!table || !page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
     const status = table === 'activesubscribers' ? ['active'] : ['inactive', 'suspended'];
@@ -250,8 +263,11 @@ module.exports = {
   },
   // UPDATES A RECORD PER CLIENT-SIDE REQUEST (SUSPEND OR ACTIVATE)
   updateStatus: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
     const { updateType, statusType } = req.body;
+
+    if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+
     const date = currentDate();
     const endDate = updateType === 'suspended' ? date : null;
 
