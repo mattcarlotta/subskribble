@@ -34,10 +34,11 @@ const {
 module.exports = {
   // CREATES TEMPLATES RECORD
   create: async (req, res, done) => {
-    if (!req.body) return sendError(missingCreationParams, res, done);
     const {
       fromsender, plans, message, subject, templatename,
     } = req.body;
+    if (!fromsender || isEmpty(plans) || !message || !subject || !templatename) return sendError(missingCreationParams, res, done);
+
     const uniquetemplatename = createUniqueTemplateName(templatename);
     const date = currentDate();
 
@@ -76,14 +77,16 @@ module.exports = {
   },
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.params.id) return sendError(missingDeletionParams, res, done);
+    const { id } = req.params;
+
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
     const date = currentDate();
 
     try {
       await db.task('delete-template', async (dbtask) => {
         const name = await dbtask.result(deleteOneTemplate, [
           req.session.id,
-          req.params.id,
+          id,
         ]);
 
         await dbtask.none(createNotification, [
@@ -119,9 +122,11 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { table, page } = req.query;
     let { limit } = req.query;
+
+    if (!table || !page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
     const status = table === 'activetemplates' ? ['active'] : ['inactive', 'suspended'];
@@ -176,10 +181,21 @@ module.exports = {
   },
   // UPDATES ENTIRE RECORD PER CLIENT-SIDE REQUEST
   updateOne: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
     const {
       fromsender, plans, message, subject, templatename,
     } = req.body;
+
+    if (
+      !fromsender
+      || isEmpty(plans)
+      || !message
+      || !subject
+      || !templatename
+      || !id
+      || id === 'null'
+    ) return sendError(missingUpdateParams, res, done);
+
     const uniquetemplatename = createUniqueTemplateName(templatename);
     const date = currentDate();
 
@@ -187,7 +203,7 @@ module.exports = {
       await db.task('update-template-record', async (dbtask) => {
         const template = await dbtask.one(updateTemplate, [
           req.session.id,
-          req.params.id,
+          id,
           fromsender,
           plans,
           message,
@@ -213,15 +229,18 @@ module.exports = {
   },
   // UPDATES A RECORD STATUS PER CLIENT-SIDE REQUEST
   updateStatus: async (req, res, done) => {
-    if (!req.body || !req.params.id) return sendError(missingUpdateParams, res, done);
+    const { id } = req.params;
     const { updateType, statusType } = req.body;
+
+    if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+
     const date = currentDate();
 
     try {
       await db.task('update-template-status', async (dbtask) => {
         const template = await dbtask.one(updateTemplateStatus, [
           req.session.id,
-          req.params.id,
+          id,
           statusType,
         ]);
 
@@ -247,12 +266,13 @@ module.exports = {
   },
   // SELECTS A SINGLE RECORD
   selectOne: async (req, res, done) => {
-    if (!req.query) return sendError(missingSelectParams, res, done);
+    const { id } = req.query;
+    if (!id || id === 'null') return sendError(missingSelectParams, res, done);
 
     try {
       const template = await db.oneOrNone(findTemplateById, [
         req.session.id,
-        req.query.id,
+        id,
       ]);
       if (!template) return sendError(unableToLocate('template'), res, done);
 

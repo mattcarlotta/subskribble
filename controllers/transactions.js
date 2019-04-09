@@ -20,14 +20,17 @@ const {
 module.exports = {
   // DELETES REQURESTED RECORD
   deleteOne: async (req, res, done) => {
-    if (!req.params.id) return sendError(missingDeletionParams, res, done);
+    const { id } = req.params;
+
+    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+
     const date = currentDate();
 
     try {
       await db.task('delete-transaction', async (dbtask) => {
         const name = await dbtask.result(deleteOneTransactaction, [
           req.session.id,
-          req.params.id,
+          id,
         ]);
 
         await dbtask.none(createNotification, [
@@ -62,12 +65,14 @@ module.exports = {
   },
   // FETCHES A SINGLE RECORD
   fetchOne: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
+    const { id } = req.query;
+
+    if (!id || id === 'null') return sendError(missingQueryParams, res, done);
 
     try {
       const transaction = await db.oneOrNone(selectTransactionById, [
         req.session.id,
-        req.query.id,
+        id,
       ]);
       if (!transaction) return sendError(unableToLocate('transaction'), res, done);
 
@@ -78,9 +83,11 @@ module.exports = {
   },
   // FETCHES NEXT SET OF RECORDS DETERMINED BY CURRENT TABLE AND OFFSET
   fetchRecords: async (req, res, done) => {
-    if (!req.query) return sendError(missingQueryParams, res, done);
     const { table, page } = req.query;
     let { limit } = req.query;
+
+    if (!table || !page || !limit) return sendError(missingQueryParams, res, done);
+
     limit = parseStringToNum(limit);
     const offset = parseStringToNum(page) * limit;
     const status = table === 'charges' ? ['paid', 'due'] : ['refund', 'credit'];
@@ -122,7 +129,6 @@ module.exports = {
   },
   // REFUNDS OR CREDITS A TRANSACTION
   refundOne: async (req, res, done) => {
-    if (!req.body) return sendError(missingUpdateParams, res, done);
     const {
       amount,
       email,
@@ -131,10 +137,31 @@ module.exports = {
       subscriber,
       transactiontype,
     } = req.body;
+
+    if (
+      !amount
+      || !email
+      || !planname
+      || !processor
+      || !subscriber
+      || !transactiontype
+    ) return sendError(missingUpdateParams, res, done);
+
     const date = currentDate();
 
     try {
       await db.task('refund-transaction', async (dbtask) => {
+        await dbtask.none(refundTransaction, [
+          req.session.id,
+          transactiontype,
+          planname,
+          email,
+          subscriber,
+          processor,
+          amount,
+          date,
+        ]);
+
         if (transactiontype === 'credit') {
           const user = await dbtask.oneOrNone(getSubscriberId, [
             req.session.id,
@@ -148,17 +175,6 @@ module.exports = {
             amount,
           ]);
         }
-
-        await dbtask.none(refundTransaction, [
-          req.session.id,
-          transactiontype,
-          planname,
-          email,
-          subscriber,
-          processor,
-          amount,
-          date,
-        ]);
 
         await dbtask.none(createNotification, [
           req.session.id,

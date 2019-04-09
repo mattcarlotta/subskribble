@@ -208,6 +208,7 @@ const templateQueries = {
     'UPDATE templates SET status=$3 WHERE userid=$1 AND id=$2 RETURNING templateName,plans',
   selectTemplate:
     'SELECT templateName FROM templates WHERE userid=$1 AND uniqueTemplateName=$2',
+  selectTemplateByKey: 'SELECT * FROM templates WHERE key=$1',
 };
 
 const transactQueries = {
@@ -225,6 +226,7 @@ const transactQueries = {
     'INSERT INTO transactions(userid, status, planName, email, subscriber, processor, amount, refundDate) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7, $8);',
   selectTransactionById:
     'SELECT email,planname,processor,subscriber FROM transactions WHERE userid=$1 AND id=$2',
+  selectTransactionByKey: 'SELECT * FROM transactions WHERE key=$1',
 };
 
 module.exports = {
