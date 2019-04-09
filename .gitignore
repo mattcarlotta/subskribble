@@ -19,6 +19,7 @@ uploads/
 scrap/
 prod.json
 flightplan.js
+backup
 
 # Config
 /config

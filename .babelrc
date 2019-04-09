@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "controllers": "./controllers",
+          "db": "./database/db",
+          "queries": "./database/queries",
+          "env": "./env",
+          "middlewares": "./middlewares",
+          "routes": "./routes",
+          "server": "./server",
+          "emailTemplates": "./services/emailTemplates",
+          "strategies": "./services/strategies",
+          "authErrors": "./shared/authErrors",
+          "authSuccess": "./shared/authSuccess",
+          "errors": "./shared/errors",
+          "helpers": "./shared/helpers",
+          "utils": "./utils"
+        }
+      }
+    ]
+  ]
+}

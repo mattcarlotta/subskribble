@@ -1,19 +1,17 @@
-module.exports = (app) => {
-  const {
-    plans: {
-      create,
-      deleteOne,
-      fetchAllActiveRecords,
-      fetchCounts,
-      fetchRecords,
-      index,
-      updateOne,
-      updateStatus,
-      selectOne,
-    },
-  } = app.controllers;
-  const { requireAuth } = app.services.strategies;
+const {
+  create,
+  deleteOne,
+  fetchAllActiveRecords,
+  fetchCounts,
+  fetchRecords,
+  index,
+  updateOne,
+  updateStatus,
+  selectOne,
+} = require('controllers/plans');
+const requireAuth = require('strategies/requireAuth');
 
+module.exports = (app) => {
   app.post('/api/plans/create', requireAuth, create);
   app.get('/api/plans/plan?', requireAuth, selectOne);
   app.delete('/api/plans/delete/:id', requireAuth, deleteOne);

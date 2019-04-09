@@ -1,4 +1,4 @@
-module.exports = () => (portal, firstName, lastName, token) => `
+module.exports = (portal, firstName, lastName, token) => `
   <html>
     <body>
       <div style="overflow: hidden;">

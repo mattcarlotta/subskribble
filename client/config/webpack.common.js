@@ -1,3 +1,4 @@
+const map = require('lodash/map');
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { defineJSRule, defineMediaRule, defineSCSSRule } = require('./rules');
@@ -16,6 +17,23 @@ const { inDevelopment, requiresSourceMap } = require('./envs');
 // =============================================================== //
 // COMMON RULES                                                    //
 // =============================================================== //
+const folders = [
+  'actions',
+  'components',
+  'containers',
+  'images',
+  'reducers',
+  'root',
+  'routes',
+  'styles',
+  'types',
+  'utils',
+];
+
+const aliasedFolders = map(folders, folder => ({
+  [folder]: `./src/${folder}`,
+}));
+
 /* webpack module rules */
 const rules = [
   /* lints JS files on compilation */
@@ -38,16 +56,7 @@ const rules = [
           {
             root: ['./src'],
             alias: {
-              actions: './src/actions',
-              components: './src/components',
-              containers: './src/containers',
-              images: './src/images',
-              reducers: './src/reducers',
-              root: './src/root',
-              routes: './src/routes',
-              styles: './src/styles',
-              types: './src/types',
-              utils: './src/utils',
+              ...aliasedFolders,
             },
           },
         ],

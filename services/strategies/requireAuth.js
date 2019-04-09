@@ -1,5 +1,9 @@
-module.exports = app => (req, res, next) => {
-  const { badCredentials } = app.shared.authErrors;
-  if (!req.session.id) return res.status(401).send({ err: badCredentials });
+const isEmpty = require('lodash/isEmpty');
+const { badCredentials } = require('authErrors');
+
+module.exports = (req, res, next) => {
+  if (isEmpty(req.session) || !req.session.id) {
+    return res.status(401).send({ err: badCredentials });
+  }
   next();
 };

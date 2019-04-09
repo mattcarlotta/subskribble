@@ -1,16 +1,14 @@
-module.exports = (app) => {
-  const {
-    transactions: {
-      index,
-      deleteOne,
-      fetchCounts,
-      fetchOne,
-      fetchRecords,
-      refundOne,
-    },
-  } = app.controllers;
-  const { requireAuth } = app.services.strategies;
+const {
+  index,
+  deleteOne,
+  fetchCounts,
+  fetchOne,
+  fetchRecords,
+  refundOne,
+} = require('controllers/transactions');
+const requireAuth = require('strategies/requireAuth');
 
+module.exports = (app) => {
   app.delete('/api/transactions/delete/:id', requireAuth, deleteOne);
   app.get('/api/transaction/record?', requireAuth, fetchOne);
   app.get('/api/transactioncounts', requireAuth, fetchCounts);

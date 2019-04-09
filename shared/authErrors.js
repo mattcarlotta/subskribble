@@ -1,10 +1,10 @@
-module.exports = () => ({
+module.exports = {
   alreadyLoggedIn:
     'It looks like you are already logged in to another session. Please refresh your browser.',
   badCredentials:
     'There was a problem with your login credentials. Please make sure your username and password are correct.',
   companyAlreadyExists:
-    'That company has already been registered and is associated with an active account',
+    'That company has already been registered and is associated with an active account.',
   emailAlreadyTaken:
     'That email is already in use and is associated with an active account.',
   emailConfirmationReq:
@@ -28,4 +28,4 @@ module.exports = () => ({
     'Unable to verify current password. Please try again or contact us at: helpdesk@subskribble.com',
   unableToRemove:
     'There was a problem deleting your account. Please try again or contact us at: helpdesk@subskribble.com',
-});
+};

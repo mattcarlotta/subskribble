@@ -1,19 +1,17 @@
-module.exports = (app) => {
-  const {
-    promotionals: {
-      apply,
-      create,
-      index,
-      deleteOne,
-      fetchCounts,
-      fetchRecords,
-      updateOne,
-      updateStatus,
-      selectOne,
-    },
-  } = app.controllers;
-  const { requireAuth } = app.services.strategies;
+const {
+  apply,
+  create,
+  index,
+  deleteOne,
+  fetchCounts,
+  fetchRecords,
+  updateOne,
+  updateStatus,
+  selectOne,
+} = require('controllers/promotionals');
+const requireAuth = require('strategies/requireAuth');
 
+module.exports = (app) => {
   app.get('/api/promotionals/apply-promotion?', requireAuth, apply);
   app.post('/api/promotionals/create', requireAuth, create);
   app.get('/api/promotionals/promotional?', requireAuth, selectOne);

@@ -1,11 +1,11 @@
 @import '../../../styles/styles.scss';
 
 .iconMessageContainer {
-  position: relative;
+  position: absolute;
   height: 100vh;
   width: 60px;
-  top: -16px;
-  left: -30px;
+  top: 0px;
+  left: 0px;
 }
 
 .icon {
