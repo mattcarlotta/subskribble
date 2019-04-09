@@ -1,6 +1,6 @@
-const { selectPromotionCodeByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingUpdateParams } = require('../../../shared/errors');
+const { selectPromotionCodeByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingUpdateParams } = require('errors');
 
 describe('Update A promotional Status', () => {
   let cookie;

@@ -3,8 +3,8 @@ const {
   deleteAll,
   deleteOne,
   updateAll,
-} = require('../controllers/notifications');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/notifications');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.delete('/api/notifications/deleteall', requireAuth, deleteAll);

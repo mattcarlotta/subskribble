@@ -1,24 +1,25 @@
 /* eslint-disable */
-const bcrypt = require('bcrypt');
-const moment = require('moment');
-const db = require('../database/db');
+require("@babel/register");
+const bcrypt = require("bcrypt");
+const moment = require("moment");
+const db = require("../database/db");
 const {
   createNewUser,
   findUserByEmail,
   setUserAsAdmin,
   verifyEmail
-} = require('../database/query');
+} = require("../database/queries");
 const {
   currentDate,
   createRandomText,
   createRandomToken
-} = require('../shared/helpers');
+} = require("../shared/helpers");
 
 const fakeText = () => createRandomText();
 const selectUserid = id => `(SELECT id FROM users WHERE id='${id}')`;
 const endDate = moment()
   .utcOffset(-7)
-  .add(30, 'days')
+  .add(30, "days")
   .toISOString(true);
 const startDate = currentDate();
 
@@ -163,19 +164,19 @@ const avatarTableOptions = `(
     token VARCHAR UNIQUE
   )`;
 
-const noteProperties = '(userid, icon, message, read, messageDate)';
+const noteProperties = "(userid, icon, message, read, messageDate)";
 const planProperties =
-  '(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, startDate, subscribers)';
+  "(userid, status, planName, description, amount, setupFee, billEvery, trialPeriod, startDate, subscribers)";
 const promoProperties =
-  '(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage, startDate, endDate)';
+  "(userid, status, plans, promoCode, amount, discountType, maxUsage, totalUsage, startDate, endDate)";
 const subProperties =
-  '(userid, status, email, subscriber, contactPhone, planName, startDate, endDate, amount)';
+  "(userid, status, email, subscriber, contactPhone, planName, startDate, endDate, amount)";
 const templateProperties =
-  '(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)';
+  "(userid, status, templateName, uniqueTemplateName, fromSender, subject, message, plans)";
 const transProperties =
-  '(userid, status, planName, email, subscriber, processor, amount, chargeDate, refundDate)';
+  "(userid, status, planName, email, subscriber, processor, amount, chargeDate, refundDate)";
 const messageProperties =
-  '(userid, template, fromSender, subject, sentDate, plans)';
+  "(userid, template, fromSender, subject, sentDate, plans)";
 
 const planValues = id => `
   (${selectUserid(
@@ -557,7 +558,7 @@ const messageValues = id => `
 
 const seedDB = async () => {
   try {
-    await db.task('seed-database', async dbtask => {
+    await db.task("seed-database", async dbtask => {
       // create DB tables
       await dbtask.none(`
             CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -575,24 +576,24 @@ const seedDB = async () => {
 
       // create new user
       const token = createRandomToken(); // a token used for email verification
-      const newPassword = await bcrypt.hash('password123', 12); // hash password before attempting to create the user
+      const newPassword = await bcrypt.hash("password123", 12); // hash password before attempting to create the user
       await dbtask.none(createNewUser, [
-        'betatester@subskribble.com',
+        "betatester@subskribble.com",
         newPassword,
-        'Beta',
-        'Tester',
-        'Subskribble',
+        "Beta",
+        "Tester",
+        "Subskribble",
         token,
         startDate
       ]);
 
       // get newly created user info
       const existingUser = await dbtask.oneOrNone(findUserByEmail, [
-        'betatester@subskribble.com'
+        "betatester@subskribble.com"
       ]);
       if (!existingUser) {
         return console.log(
-          '\n--[ERROR]-- Seed FAILED to find the newly created user! Process has been terminated.'
+          "\n--[ERROR]-- Seed FAILED to find the newly created user! Process has been terminated."
         );
       }
 
@@ -625,14 +626,14 @@ const seedDB = async () => {
             `);
 
       return console.log(
-        '\n\x1b[7m\x1b[32;1m PASS \x1b[0m \x1b[2mutils/\x1b[0m\x1b[1mseedDB.js'
+        "\n\x1b[7m\x1b[32;1m PASS \x1b[0m \x1b[2mutils/\x1b[0m\x1b[1mseedDB.js"
       );
     });
   } catch (err) {
     return console.log(
-      '\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n' +
+      "\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n" +
         err.toString() +
-        '\x1b[0m'
+        "\x1b[0m"
     );
   } finally {
     if (SEED) {

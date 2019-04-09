@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Notification Index Records', () => {
   let cookie;

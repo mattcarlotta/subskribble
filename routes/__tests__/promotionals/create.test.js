@@ -1,8 +1,5 @@
-const { badCredentials } = require('../../../shared/authErrors');
-const {
-  itemAlreadyExists,
-  missingCreationParams,
-} = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { itemAlreadyExists, missingCreationParams } = require('errors');
 
 describe('Create Promotional', () => {
   let cookie;

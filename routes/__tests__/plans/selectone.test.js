@@ -1,9 +1,6 @@
-const { selectPlanByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const {
-  missingSelectParams,
-  unableToLocate,
-} = require('../../../shared/errors');
+const { selectPlanByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingSelectParams, unableToLocate } = require('errors');
 
 describe('Select A Plan', () => {
   let cookie;
@@ -52,8 +49,8 @@ describe('Select A Plan', () => {
           billevery: expect.any(String),
           planname: expect.any(String),
           description: expect.any(String),
-          setupfee: expect.toBeNullOrType(String),
-          trialperiod: expect.toBeNullOrType(String),
+          setupfee: expect.toBeNullOrType(typeof 'String'),
+          trialperiod: expect.toBeNullOrType(typeof 'String'),
         });
       });
   });

@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('db');
 const {
   createNotification,
   deleteOneTransactaction,
@@ -8,18 +8,14 @@ const {
   refundTransaction,
   selectTransactionById,
   updateSubscriberCredits,
-} = require('../database/query');
-const {
-  currentDate,
-  parseStringToNum,
-  sendError,
-} = require('../shared/helpers');
+} = require('queries');
+const { currentDate, parseStringToNum, sendError } = require('helpers');
 const {
   missingDeletionParams,
   missingQueryParams,
   missingUpdateParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   // DELETES REQURESTED RECORD

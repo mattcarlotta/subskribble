@@ -1,5 +1,5 @@
-const { badCredentials } = require('../../../shared/authErrors');
-const { invalidPromo, missingUpdateParams } = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { invalidPromo, missingUpdateParams } = require('errors');
 
 describe('Apply Promotional To Plan', () => {
   let cookie;

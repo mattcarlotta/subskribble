@@ -1,7 +1,7 @@
 const { isEmpty, each } = require('lodash');
 const promiseEach = require('bluebird').each;
 const mailer = require('@sendgrid/mail');
-const db = require('../database/db');
+const db = require('db');
 const {
   createMessageTransaction,
   createNotification,
@@ -10,19 +10,19 @@ const {
   getAllEmailsByPlan,
   getSomeMessages,
   getMessageCount,
-} = require('../database/query');
+} = require('queries');
 const {
   currentDate,
   createUniqueTemplateName,
   parseStringToNum,
   sendError,
-} = require('../shared/helpers');
+} = require('helpers');
 const {
   missingCreationParams,
   missingDeletionParams,
   missingQueryParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   create: async (req, res, done) => {

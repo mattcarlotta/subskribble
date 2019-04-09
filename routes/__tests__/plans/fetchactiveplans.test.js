@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Fetch All Active Plans', () => {
   let cookie;

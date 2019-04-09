@@ -1,9 +1,6 @@
-const { selectPromotionCodeByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const {
-  missingSelectParams,
-  unableToLocate,
-} = require('../../../shared/errors');
+const { selectPromotionCodeByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingSelectParams, unableToLocate } = require('errors');
 
 describe('Select A Promotional', () => {
   let cookie;

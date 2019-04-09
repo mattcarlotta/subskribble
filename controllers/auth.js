@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const isEmpty = require('lodash/isEmpty');
 const mailer = require('@sendgrid/mail');
-const db = require('../database/db');
+const db = require('db');
 const {
   deleteUserAccount,
   getAvatarToken,
@@ -18,7 +18,7 @@ const {
   updateUserPassword,
   userFeedback,
   verifyEmail,
-} = require('../database/query');
+} = require('queries');
 const {
   badCredentials,
   companyAlreadyExists,
@@ -32,7 +32,7 @@ const {
   notUniquePassword,
   unableLocatePass,
   unableToRemove,
-} = require('../shared/authErrors');
+} = require('authErrors');
 const {
   passwordResetSuccess,
   passwordResetToken,
@@ -40,15 +40,12 @@ const {
   thanksForReg,
   updatedAccount,
   updatedAccountDetails,
-} = require('../shared/authSuccess');
-const { sendError, createRandomToken } = require('../shared/helpers');
-const {
-  missingDeletionParams,
-  missingUpdateParams,
-} = require('../shared/errors');
+} = require('authSuccess');
+const { sendError, createRandomToken } = require('helpers');
+const { missingDeletionParams, missingUpdateParams } = require('errors');
 
-const changedEmail = require('../services/emailTemplates/changedEmail');
-const config = require('../env');
+const changedEmail = require('emailTemplates/changedEmail');
+const config = require('env');
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];

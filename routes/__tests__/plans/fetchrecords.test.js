@@ -1,5 +1,5 @@
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingQueryParams } = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { missingQueryParams } = require('errors');
 
 describe('Active/Inactive Plan Records', () => {
   let cookie;
@@ -41,9 +41,9 @@ describe('Active/Inactive Plan Records', () => {
               planname: expect.any(String),
               description: expect.any(String),
               amount: expect.any(String),
-              setupfee: expect.toBeNullOrType(String),
+              setupfee: expect.toBeNullOrType(typeof 'String'),
               billevery: expect.any(String),
-              trialperiod: expect.toBeNullOrType(String),
+              trialperiod: expect.toBeNullOrType(typeof 'String'),
               status: expect.any(String),
               startdate: expect.any(String),
               subscribers: expect.any(Number),

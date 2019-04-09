@@ -1,11 +1,11 @@
 const mailer = require('@sendgrid/mail');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingUpdateParams } = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { missingUpdateParams } = require('errors');
 const {
   passwordResetSuccess,
   updatedAccount,
   updatedAccountDetails,
-} = require('../../../shared/authSuccess');
+} = require('authSuccess');
 const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'updateaccount@test.com';

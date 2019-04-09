@@ -9,9 +9,9 @@ const {
   saveSidebarState,
   updateAccount,
   verifyEmail,
-} = require('../controllers/auth');
-const requireRelogin = require('../services/strategies/requireRelogin');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/auth');
+const requireRelogin = require('strategies/requireRelogin');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.post('/api/signup', create);

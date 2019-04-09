@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Message Counts', () => {
   let cookie;

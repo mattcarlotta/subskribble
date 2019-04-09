@@ -1,4 +1,4 @@
-const db = require('../database/db');
+const db = require('db');
 const {
   createNotification,
   createTransaction,
@@ -11,13 +11,13 @@ const {
   selectPromotionDetails,
   updateOneSubscriber,
   updatePromotionUsage,
-} = require('../database/query');
+} = require('queries');
 const {
   currentDate,
   parseStringToFloat,
   parseStringToNum,
   sendError,
-} = require('../shared/helpers');
+} = require('helpers');
 const {
   duplicateSub,
   invalidPromo,
@@ -27,7 +27,7 @@ const {
   missingQueryParams,
   missingUpdateParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   // CREATES SUBSCRIBER RECORD

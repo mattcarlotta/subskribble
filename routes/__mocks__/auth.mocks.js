@@ -1,7 +1,7 @@
 /* global app */
-const db = require('../../database/db');
-const { thanksForReg } = require('../../shared/authSuccess');
-const { verifyEmail } = require('../../database/query');
+const db = require('db');
+const { thanksForReg } = require('authSuccess');
+const { verifyEmail } = require('queries');
 
 const signupNewUser = (email, company, done) => db.task('setup-signup', async (dbtask) => {
   await app()

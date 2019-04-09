@@ -1,6 +1,6 @@
-const { selectSubscriberByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingUpdateParams } = require('../../../shared/errors');
+const { selectSubscriberByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingUpdateParams } = require('errors');
 
 describe('Update A subscriber Status', () => {
   let cookie;

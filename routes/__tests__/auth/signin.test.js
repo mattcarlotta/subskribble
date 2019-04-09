@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Sign In', () => {
   it('handles invalid sign in requests', async () => {

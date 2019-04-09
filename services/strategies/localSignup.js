@@ -2,19 +2,12 @@ const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const mailer = require('@sendgrid/mail');
-const db = require('../../database/db');
-const {
-  createNewUser,
-  findCompany,
-  findUserByEmail,
-} = require('../../database/query');
-const { createRandomToken, currentDate } = require('../../shared/helpers');
-const {
-  companyAlreadyExists,
-  emailAlreadyTaken,
-} = require('../../shared/authErrors');
-const newUser = require('../emailTemplates/newUser');
-const config = require('../../env');
+const db = require('db');
+const { createNewUser, findCompany, findUserByEmail } = require('queries');
+const { createRandomToken, currentDate } = require('helpers');
+const { companyAlreadyExists, emailAlreadyTaken } = require('authErrors');
+const newUser = require('emailTemplates/newUser');
+const config = require('env');
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];

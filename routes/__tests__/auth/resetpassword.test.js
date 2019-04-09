@@ -1,12 +1,12 @@
-const { getTokenByEmail } = require('../../../database/query');
-const { createRandomToken } = require('../../../shared/helpers');
+const { getTokenByEmail } = require('queries');
+const { createRandomToken } = require('helpers');
 const {
   invalidPassword,
   invalidToken,
   missingToken,
   notUniquePassword,
-} = require('../../../shared/authErrors');
-const { passwordResetSuccess } = require('../../../shared/authSuccess');
+} = require('authErrors');
+const { passwordResetSuccess } = require('authSuccess');
 const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'newuser@test.com';

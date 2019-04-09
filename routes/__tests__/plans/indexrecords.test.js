@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Plan Index Records', () => {
   let cookie;
@@ -31,9 +31,9 @@ describe('Plan Index Records', () => {
               planname: expect.any(String),
               description: expect.any(String),
               amount: expect.any(String),
-              setupfee: expect.toBeNullOrType(String),
+              setupfee: expect.toBeNullOrType(typeof 'String'),
               billevery: expect.any(String),
-              trialperiod: expect.toBeNullOrType(String),
+              trialperiod: expect.toBeNullOrType(typeof 'String'),
               status: expect.any(String),
               startdate: expect.any(String),
               subscribers: expect.any(Number),
@@ -49,9 +49,9 @@ describe('Plan Index Records', () => {
               planname: expect.any(String),
               description: expect.any(String),
               amount: expect.any(String),
-              setupfee: expect.toBeNullOrType(String),
+              setupfee: expect.toBeNullOrType(typeof 'String'),
               billevery: expect.any(String),
-              trialperiod: expect.toBeNullOrType(String),
+              trialperiod: expect.toBeNullOrType(typeof 'String'),
               status: expect.any(String),
               startdate: expect.any(String),
               subscribers: expect.any(Number),

@@ -3,7 +3,7 @@ const {
   companyAlreadyExists,
   emailAlreadyTaken,
   missingCredentials,
-} = require('../../../shared/authErrors');
+} = require('authErrors');
 const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'signup@test.com';

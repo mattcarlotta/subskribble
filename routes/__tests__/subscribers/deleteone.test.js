@@ -1,6 +1,6 @@
-const { selectSubscriberByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingDeletionParams } = require('../../../shared/errors');
+const { selectSubscriberByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingDeletionParams } = require('errors');
 
 describe('Delete A Subscriber', () => {
   let cookie;

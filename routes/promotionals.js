@@ -8,8 +8,8 @@ const {
   updateOne,
   updateStatus,
   selectOne,
-} = require('../controllers/promotionals');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/promotionals');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.get('/api/promotionals/apply-promotion?', requireAuth, apply);

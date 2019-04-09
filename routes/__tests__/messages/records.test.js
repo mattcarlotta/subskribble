@@ -1,5 +1,5 @@
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingQueryParams } = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { missingQueryParams } = require('errors');
 
 describe('Message Records', () => {
   let cookie;

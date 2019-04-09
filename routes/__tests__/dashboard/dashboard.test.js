@@ -1,4 +1,4 @@
-const { badCredentials } = require('../../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 describe('Auth Routes and Controllers', () => {
   it('should handle invalid dashboard requests', async () => {

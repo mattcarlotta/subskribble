@@ -1,12 +1,12 @@
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const mailer = require('@sendgrid/mail');
-const db = require('../../database/db');
-const { findUserByEmail, resetToken } = require('../../database/query');
-const { createRandomToken } = require('../../shared/helpers');
-const { missingEmailCreds } = require('../../shared/authErrors');
-const newToken = require('../emailTemplates/newToken');
-const config = require('../../env');
+const db = require('db');
+const { findUserByEmail, resetToken } = require('queries');
+const { createRandomToken } = require('helpers');
+const { missingEmailCreds } = require('authErrors');
+const newToken = require('emailTemplates/newToken');
+const config = require('env');
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];

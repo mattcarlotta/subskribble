@@ -1,4 +1,4 @@
-const app = require('./request');
+const app = require('./setup');
 
 module.exports = async (
   suppliedEmail = 'betatester@subskribble.com',

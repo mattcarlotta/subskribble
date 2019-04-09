@@ -1,9 +1,6 @@
-const {
-  badCredentials,
-  invalidPassword,
-} = require('../../../shared/authErrors');
-const { missingDeletionParams } = require('../../../shared/errors');
-const { removedAccountSuccess } = require('../../../shared/authSuccess');
+const { badCredentials, invalidPassword } = require('authErrors');
+const { missingDeletionParams } = require('errors');
+const { removedAccountSuccess } = require('authSuccess');
 const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'deleteduser@test.com';

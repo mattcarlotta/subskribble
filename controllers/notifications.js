@@ -1,12 +1,12 @@
-const db = require('../database/db');
+const db = require('db');
 const {
   deleteAllNotifications,
   deleteOneNotification,
   getSomeNotifications,
   setReadNotifications,
-} = require('../database/query');
-const { missingDeletionParams } = require('../shared/errors');
-const { sendError } = require('../shared/helpers');
+} = require('queries');
+const { missingDeletionParams } = require('errors');
+const { sendError } = require('helpers');
 
 module.exports = {
   // COLLECTS/SENDS ALL NOTIFICATIONS FOR USER

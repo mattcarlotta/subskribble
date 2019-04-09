@@ -1,5 +1,5 @@
 const isEmpty = require('lodash/isEmpty');
-const db = require('../database/db');
+const db = require('db');
 const {
   createNotification,
   createTemplate,
@@ -12,13 +12,13 @@ const {
   updateTemplate,
   updateTemplateStatus,
   selectTemplate,
-} = require('../database/query');
+} = require('queries');
 const {
   createUniqueTemplateName,
   currentDate,
   parseStringToNum,
   sendError,
-} = require('../shared/helpers');
+} = require('helpers');
 const {
   createPlanFirst,
   createTemplateFirst,
@@ -29,7 +29,7 @@ const {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   // CREATES TEMPLATES RECORD

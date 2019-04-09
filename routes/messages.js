@@ -4,8 +4,8 @@ const {
   deleteOne,
   fetchCounts,
   fetchRecords,
-} = require('../controllers/messages');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/messages');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.post('/api/messages/create', requireAuth, create);

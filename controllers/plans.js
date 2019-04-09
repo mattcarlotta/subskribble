@@ -1,5 +1,5 @@
 const isEmpty = require('lodash/isEmpty');
-const db = require('../database/db');
+const db = require('db');
 const {
   createNotification,
   createPlan,
@@ -11,12 +11,8 @@ const {
   updatePlan,
   updatePlanStatus,
   selectPlan,
-} = require('../database/query');
-const {
-  currentDate,
-  parseStringToNum,
-  sendError,
-} = require('../shared/helpers');
+} = require('queries');
+const { currentDate, parseStringToNum, sendError } = require('helpers');
 const {
   createPlanFirst,
   itemAlreadyExists,
@@ -26,7 +22,7 @@ const {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   // CREATES A PLAN PER CLIENT-SIDE REQUEST

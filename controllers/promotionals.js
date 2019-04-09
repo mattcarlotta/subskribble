@@ -1,5 +1,5 @@
 const isEmpty = require('lodash/isEmpty');
-const db = require('../database/db');
+const db = require('db');
 const {
   createNotification,
   createPromotion,
@@ -11,13 +11,13 @@ const {
   updatePromotionStatus,
   selectPromotionCode,
   selectPromotionDetails,
-} = require('../database/query');
+} = require('queries');
 const {
   currentDate,
   convertDateToISO,
   parseStringToNum,
   sendError,
-} = require('../shared/helpers');
+} = require('helpers');
 const {
   invalidPromo,
   itemAlreadyExists,
@@ -27,7 +27,7 @@ const {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} = require('../shared/errors');
+} = require('errors');
 
 module.exports = {
   // LOOKS UP PROMOCODE PER CLIENT-SIDE REQUEST

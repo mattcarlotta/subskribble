@@ -1,5 +1,5 @@
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingQueryParams } = require('../../../shared/errors');
+const { badCredentials } = require('authErrors');
+const { missingQueryParams } = require('errors');
 
 describe('Active/Inactive Subscriber Records', () => {
   let cookie;
@@ -42,22 +42,22 @@ describe('Active/Inactive Subscriber Records', () => {
               planname: expect.any(String),
               credits: expect.any(String),
               amount: expect.any(String),
-              billingaddress: expect.toBeNullOrType(String),
-              billingcity: expect.toBeNullOrType(String),
-              billingstate: expect.toBeNullOrType(String),
-              billingunit: expect.toBeNullOrType(String),
-              billingzip: expect.toBeNullOrType(String),
-              contactaddress: expect.toBeNullOrType(String),
-              contactcity: expect.toBeNullOrType(String),
-              contactstate: expect.toBeNullOrType(String),
-              contactunit: expect.toBeNullOrType(String),
-              contactzip: expect.toBeNullOrType(String),
-              contactphone: expect.toBeNullOrType(String),
-              promocode: expect.toBeNullOrType(String),
-              samebillingaddress: expect.toBeNullOrType(Boolean),
+              billingaddress: expect.toBeNullOrType(typeof 'String'),
+              billingcity: expect.toBeNullOrType(typeof 'String'),
+              billingstate: expect.toBeNullOrType(typeof 'String'),
+              billingunit: expect.toBeNullOrType(typeof 'String'),
+              billingzip: expect.toBeNullOrType(typeof 'String'),
+              contactaddress: expect.toBeNullOrType(typeof 'String'),
+              contactcity: expect.toBeNullOrType(typeof 'String'),
+              contactstate: expect.toBeNullOrType(typeof 'String'),
+              contactunit: expect.toBeNullOrType(typeof 'String'),
+              contactzip: expect.toBeNullOrType(typeof 'String'),
+              contactphone: expect.toBeNullOrType(typeof 'String'),
+              promocode: expect.toBeNullOrType(typeof 'String'),
+              samebillingaddress: expect.toBeNullOrType(typeof true),
               startdate: expect.any(String),
               subscriber: expect.any(String),
-              enddate: expect.toBeNullOrType(String),
+              enddate: expect.toBeNullOrType(typeof 'String'),
             }),
           ]),
         );

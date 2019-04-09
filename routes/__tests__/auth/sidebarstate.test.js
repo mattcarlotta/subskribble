@@ -1,7 +1,4 @@
-const {
-  badCredentials,
-  missingSidebarState,
-} = require('../../../shared/authErrors');
+const { badCredentials, missingSidebarState } = require('authErrors');
 
 const setSidebarState = (cookie, state) => app()
   .put(`/api/save-sidebar-state?collapseSideNav=${state}`)

@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-const db = require('../../database/db');
-const { findUserByToken, updateUserPassword } = require('../../database/query');
-const { invalidToken, notUniquePassword } = require('../../shared/authErrors');
+const db = require('db');
+const { findUserByToken, updateUserPassword } = require('queries');
+const { invalidToken, notUniquePassword } = require('authErrors');
 
 module.exports = passport.use(
   'reset-password',

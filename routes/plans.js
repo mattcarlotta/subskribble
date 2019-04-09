@@ -8,8 +8,8 @@ const {
   updateOne,
   updateStatus,
   selectOne,
-} = require('../controllers/plans');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/plans');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.post('/api/plans/create', requireAuth, create);

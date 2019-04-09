@@ -1,6 +1,6 @@
-const { getTokenByEmail } = require('../../../database/query');
-const { createRandomToken } = require('../../../shared/helpers');
-const { invalidToken, missingToken } = require('../../../shared/authErrors');
+const { getTokenByEmail } = require('queries');
+const { createRandomToken } = require('helpers');
+const { invalidToken, missingToken } = require('authErrors');
 const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
 
 const newSignupEmail = 'verification@example.com';

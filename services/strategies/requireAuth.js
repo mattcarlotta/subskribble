@@ -1,5 +1,5 @@
 const isEmpty = require('lodash/isEmpty');
-const { badCredentials } = require('../../shared/authErrors');
+const { badCredentials } = require('authErrors');
 
 module.exports = (req, res, next) => {
   if (isEmpty(req.session) || !req.session.id) {

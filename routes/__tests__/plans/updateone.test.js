@@ -1,6 +1,6 @@
-const { selectPlanByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingUpdateParams } = require('../../../shared/errors');
+const { selectPlanByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingUpdateParams } = require('errors');
 
 describe('Edit A Plan', () => {
   let cookie;

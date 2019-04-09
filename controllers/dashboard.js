@@ -1,6 +1,6 @@
-const db = require('../database/db');
-const { getAllDashboardDetails } = require('../database/query');
-const { beginofMonth, endofMonth, sendError } = require('../shared/helpers');
+const db = require('db');
+const { getAllDashboardDetails } = require('queries');
+const { beginofMonth, endofMonth, sendError } = require('helpers');
 
 module.exports = {
   // GETS ALL DASHBOARD DATA

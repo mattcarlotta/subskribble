@@ -5,8 +5,8 @@ const {
   fetchCounts,
   fetchRecords,
   updateStatus,
-} = require('../controllers/subscribers');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/subscribers');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.post('/api/subscribers/signup', requireAuth, create);

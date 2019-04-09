@@ -1,13 +1,13 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-const db = require('../../database/db');
-const { findUserByEmail, getUserDetails } = require('../../database/query');
+const db = require('db');
+const { findUserByEmail, getUserDetails } = require('queries');
 const {
   alreadyLoggedIn,
   badCredentials,
   emailConfirmationReq,
-} = require('../../shared/authErrors');
+} = require('authErrors');
 
 module.exports = passport.use(
   'local-login',

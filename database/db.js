@@ -4,7 +4,7 @@ const monitor = require('pg-monitor');
 const initOptions = { promiseLib: promise }; // Database options
 const pgp = require('pg-promise')(initOptions); // initialize pg-promise w/options
 
-const config = require('../env');
+const config = require('env');
 
 const env = process.env.NODE_ENV;
 // Database connection logger

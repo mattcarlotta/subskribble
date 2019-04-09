@@ -5,8 +5,8 @@ const {
   fetchOne,
   fetchRecords,
   refundOne,
-} = require('../controllers/transactions');
-const requireAuth = require('../services/strategies/requireAuth');
+} = require('controllers/transactions');
+const requireAuth = require('strategies/requireAuth');
 
 module.exports = (app) => {
   app.delete('/api/transactions/delete/:id', requireAuth, deleteOne);

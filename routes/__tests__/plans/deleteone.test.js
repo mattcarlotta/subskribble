@@ -1,6 +1,6 @@
-const { selectPlanByKey } = require('../../../database/query');
-const { badCredentials } = require('../../../shared/authErrors');
-const { missingDeletionParams } = require('../../../shared/errors');
+const { selectPlanByKey } = require('queries');
+const { badCredentials } = require('authErrors');
+const { missingDeletionParams } = require('errors');
 
 describe('Delete A Plan', () => {
   let cookie;

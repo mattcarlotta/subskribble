@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const config = require('../env');
+const config = require('env');
 
 module.exports = (app) => {
   const env = process.env.NODE_ENV;
