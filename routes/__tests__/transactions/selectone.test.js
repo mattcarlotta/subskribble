@@ -1,6 +1,6 @@
-const { selectTransactionByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingQueryParams, unableToLocate } = require('errors');
+import { selectTransactionByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingQueryParams, unableToLocate } from 'errors';
 
 describe('Select A transaction', () => {
   let cookie;

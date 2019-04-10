@@ -1,7 +1,7 @@
-const { badCredentials, invalidPassword } = require('authErrors');
-const { missingDeletionParams } = require('errors');
-const { removedAccountSuccess } = require('authSuccess');
-const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
+import { badCredentials, invalidPassword } from 'authErrors';
+import { missingDeletionParams } from 'errors';
+import { removedAccountSuccess } from 'authSuccess';
+import signupNewUser from '../../__mocks__/auth.mocks';
 
 const newSignupEmail = 'deleteduser@test.com';
 const newSignupPassword = 'password123';

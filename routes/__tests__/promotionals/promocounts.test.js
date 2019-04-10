@@ -1,4 +1,4 @@
-const { badCredentials } = require('authErrors');
+import { badCredentials } from 'authErrors';
 
 describe('Promotional Counts', () => {
   let cookie;

@@ -1,6 +1,6 @@
-const { getMessageByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingDeletionParams } = require('errors');
+import { getMessageByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingDeletionParams } from 'errors';
 
 describe('Delete A Message', () => {
   let cookie;

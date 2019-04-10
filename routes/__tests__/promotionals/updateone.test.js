@@ -1,6 +1,6 @@
-const { selectPromotionCodeByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams } = require('errors');
+import { selectPromotionCodeByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams } from 'errors';
 
 describe('Edit A Promotional', () => {
   let cookie;

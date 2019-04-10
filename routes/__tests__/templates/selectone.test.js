@@ -1,6 +1,6 @@
-const { selectTemplateByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingSelectParams, unableToLocate } = require('errors');
+import { selectTemplateByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingSelectParams, unableToLocate } from 'errors';
 
 describe('Select A Template', () => {
   let cookie;

@@ -1,7 +1,7 @@
-const { getTokenByEmail } = require('queries');
-const { createRandomToken } = require('helpers');
-const { invalidToken, missingToken } = require('authErrors');
-const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
+import { getTokenByEmail } from 'queries';
+import { createRandomToken } from 'helpers';
+import { invalidToken, missingToken } from 'authErrors';
+import signupNewUser from '../../__mocks__/auth.mocks';
 
 const newSignupEmail = 'verification@example.com';
 const newCompany = 'Verification Corp';

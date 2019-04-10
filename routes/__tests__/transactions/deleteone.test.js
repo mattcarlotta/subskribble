@@ -1,6 +1,6 @@
-const { selectTransactionByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingDeletionParams } = require('errors');
+import { selectTransactionByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingDeletionParams } from 'errors';
 
 describe('Delete A transaction', () => {
   let cookie;

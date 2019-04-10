@@ -1,12 +1,12 @@
-const mailer = require('@sendgrid/mail');
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams } = require('errors');
-const {
+import mailer from '@sendgrid/mail';
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams } from 'errors';
+import {
   passwordResetSuccess,
   updatedAccount,
   updatedAccountDetails,
-} = require('authSuccess');
-const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
+} from 'authSuccess';
+import signupNewUser from '../../__mocks__/auth.mocks';
 
 const newSignupEmail = 'updateaccount@test.com';
 const newSignupPassword = 'password123';

@@ -1,13 +1,13 @@
-const { getTokenByEmail } = require('queries');
-const { createRandomToken } = require('helpers');
-const {
+import { getTokenByEmail } from 'queries';
+import { createRandomToken } from 'helpers';
+import {
   invalidPassword,
   invalidToken,
   missingToken,
   notUniquePassword,
-} = require('authErrors');
-const { passwordResetSuccess } = require('authSuccess');
-const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
+} from 'authErrors';
+import { passwordResetSuccess } from 'authSuccess';
+import signupNewUser from '../../__mocks__/auth.mocks';
 
 const newSignupEmail = 'newuser@test.com';
 const newCompany = 'New User Corp';

@@ -1,6 +1,6 @@
-const { selectPlanByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingDeletionParams } = require('errors');
+import { selectPlanByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingDeletionParams } from 'errors';
 
 describe('Delete A Plan', () => {
   let cookie;

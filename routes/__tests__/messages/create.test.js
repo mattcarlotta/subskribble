@@ -1,6 +1,6 @@
-const mailer = require('@sendgrid/mail');
-const { badCredentials } = require('authErrors');
-const { missingCreationParams, unableToLocate } = require('errors');
+import mailer from '@sendgrid/mail';
+import { badCredentials } from 'authErrors';
+import { missingCreationParams, unableToLocate } from 'errors';
 
 describe('Create Message', () => {
   let cookie;

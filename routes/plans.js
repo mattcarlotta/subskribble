@@ -1,4 +1,4 @@
-const {
+import {
   create,
   deleteOne,
   fetchAllActiveRecords,
@@ -8,10 +8,10 @@ const {
   updateOne,
   updateStatus,
   selectOne,
-} = require('controllers/plans');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/plans';
+import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.post('/api/plans/create', requireAuth, create);
   app.get('/api/plans/plan?', requireAuth, selectOne);
   app.delete('/api/plans/delete/:id', requireAuth, deleteOne);

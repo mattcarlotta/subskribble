@@ -1,4 +1,4 @@
-const { badCredentials } = require('authErrors');
+import { badCredentials } from 'authErrors';
 
 describe('Sign In', () => {
   it('handles invalid sign in requests', async () => {

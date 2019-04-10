@@ -1,11 +1,11 @@
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const db = require('db');
-const { findUserByToken, updateUserPassword } = require('queries');
-const { invalidToken, notUniquePassword } = require('authErrors');
+import bcrypt from 'bcrypt';
+import { Strategy as LocalStrategy } from 'passport-local';
+import passport from 'passport';
+import db from 'db';
+import { findUserByToken, updateUserPassword } from 'queries';
+import { invalidToken, notUniquePassword } from 'authErrors';
 
-module.exports = passport.use(
+export default () => passport.use(
   'reset-password',
   new LocalStrategy(
     {
@@ -32,7 +32,10 @@ module.exports = passport.use(
           // hash password before attempting to create the user
           const newPassword = await bcrypt.hash(password, 12);
           // update user's password
-          await dbtask.none(updateUserPassword, [existingUser.id, newPassword]);
+          await dbtask.none(updateUserPassword, [
+            existingUser.id,
+            newPassword,
+          ]);
 
           return done(null, existingUser.email);
         });

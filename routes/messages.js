@@ -1,13 +1,13 @@
-const {
+import {
   create,
   index,
   deleteOne,
   fetchCounts,
   fetchRecords,
-} = require('controllers/messages');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/messages';
+import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.post('/api/messages/create', requireAuth, create);
   app.get('/api/messages', requireAuth, index);
   app.get('/api/messagecounts', requireAuth, fetchCounts);

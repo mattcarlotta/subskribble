@@ -1,4 +1,4 @@
-const { badCredentials } = require('authErrors');
+import { badCredentials } from 'authErrors';
 
 describe('Notification Index Records', () => {
   let cookie;

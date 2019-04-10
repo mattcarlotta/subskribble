@@ -1,6 +1,6 @@
-const { getNotifcationByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingDeletionParams } = require('errors');
+import { getNotifcationByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingDeletionParams } from 'errors';
 
 describe('Delete Notifications', () => {
   let cookie;

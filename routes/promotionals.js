@@ -1,4 +1,4 @@
-const {
+import {
   apply,
   create,
   index,
@@ -8,8 +8,8 @@ const {
   updateOne,
   updateStatus,
   selectOne,
-} = require('controllers/promotionals');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/promotionals';
+import { requireAuth } from 'strategies';
 
 module.exports = (app) => {
   app.get('/api/promotionals/apply-promotion?', requireAuth, apply);

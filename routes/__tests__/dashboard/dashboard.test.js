@@ -1,4 +1,4 @@
-const { badCredentials } = require('authErrors');
+import { badCredentials } from 'authErrors';
 
 describe('Auth Routes and Controllers', () => {
   it('should handle invalid dashboard requests', async () => {

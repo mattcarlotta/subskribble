@@ -1,6 +1,6 @@
-const { selectTemplateByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams } = require('errors');
+import { selectTemplateByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams } from 'errors';
 
 describe('Update A Template Status', () => {
   let cookie;

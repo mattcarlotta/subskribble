@@ -1,12 +1,18 @@
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
-const cors = require('cors');
-const morgan = require('morgan');
-const passport = require('passport');
-const mailer = require('@sendgrid/mail');
-const strategies = require('strategies');
-const config = require('env');
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import cookieSession from 'cookie-session';
+import cors from 'cors';
+import morgan from 'morgan';
+import passport from 'passport';
+import mailer from '@sendgrid/mail';
+import {
+  localLogin, localSignup, resetPassword, resetToken,
+} from 'strategies';
+// import localLogin from "strategies/localLogin";
+// import localSignup from "strategies/localSignup";
+// import resetPassword from "strategies/resetPassword";
+// import resetToken from "strategies/resetToken";
+import config from 'env';
 
 const env = process.env.NODE_ENV;
 const inTesting = env === 'test';
@@ -42,7 +48,14 @@ if (!inTesting) {
 /* APP MIDDLEWARE */
 //= ===========================================================//
 module.exports = app => {
-  strategies();
+  // strategies();
+
+  // passport strategies
+  localLogin();
+  localSignup();
+  resetPassword();
+  resetToken();
+
   mailer.setApiKey(config[env].sendgridAPIKey);
   app.use(
     cors({

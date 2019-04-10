@@ -1,7 +1,7 @@
-const mailer = require('@sendgrid/mail');
-const { missingEmailCreds } = require('authErrors');
-const { passwordResetToken } = require('authSuccess');
-const { signupNewUser } = require('../../__mocks__/auth.mocks.js');
+import mailer from '@sendgrid/mail';
+import { missingEmailCreds } from 'authErrors';
+import { passwordResetToken } from 'authSuccess';
+import signupNewUser from '../../__mocks__/auth.mocks';
 
 const newSignupEmail = 'reset@example.com';
 const newCompany = 'Reset Token Corp';

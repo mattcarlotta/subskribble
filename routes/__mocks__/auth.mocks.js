@@ -1,9 +1,9 @@
 /* global app */
-const db = require('db');
-const { thanksForReg } = require('authSuccess');
-const { verifyEmail } = require('queries');
+import db from 'db';
+import { thanksForReg } from 'authSuccess';
+import { verifyEmail } from 'queries';
 
-const signupNewUser = (email, company, done) => db.task('setup-signup', async (dbtask) => {
+export default (email, company, done) => db.task('setup-signup', async (dbtask) => {
   await app()
     .post('/api/signup')
     .send({
@@ -22,7 +22,3 @@ const signupNewUser = (email, company, done) => db.task('setup-signup', async (d
 
   done();
 });
-
-module.exports = {
-  signupNewUser,
-};

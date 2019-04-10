@@ -1,6 +1,6 @@
-const { selectSubscriberByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams } = require('errors');
+import { selectSubscriberByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams } from 'errors';
 
 describe('Update A subscriber Status', () => {
   let cookie;

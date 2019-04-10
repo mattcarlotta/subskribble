@@ -1,6 +1,6 @@
-const { selectTemplateByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingDeletionParams } = require('errors');
+import { selectTemplateByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingDeletionParams } from 'errors';
 
 describe('Delete A Template', () => {
   let cookie;

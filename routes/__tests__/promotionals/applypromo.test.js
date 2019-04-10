@@ -1,5 +1,5 @@
-const { badCredentials } = require('authErrors');
-const { invalidPromo, missingUpdateParams } = require('errors');
+import { badCredentials } from 'authErrors';
+import { invalidPromo, missingUpdateParams } from 'errors';
 
 describe('Apply Promotional To Plan', () => {
   let cookie;

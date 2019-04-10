@@ -1,5 +1,5 @@
-const { badCredentials } = require('authErrors');
-const { itemAlreadyExists, missingCreationParams } = require('errors');
+import { badCredentials } from 'authErrors';
+import { itemAlreadyExists, missingCreationParams } from 'errors';
 
 describe('Create Promotional', () => {
   let cookie;

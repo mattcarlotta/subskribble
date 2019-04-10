@@ -1,9 +1,5 @@
-const { badCredentials } = require('authErrors');
-const {
-  duplicateSub,
-  missingCreationParams,
-  unableToLocate,
-} = require('../../../shared/errors');
+import { badCredentials } from 'authErrors';
+import { duplicateSub, missingCreationParams, unableToLocate } from 'errors';
 
 const newsubscriber = {
   billingAddress: 'Test Address',

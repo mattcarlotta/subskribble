@@ -1,5 +1,5 @@
-const { badCredentials } = require('authErrors');
-const { itemAlreadyExists, missingCreationParams } = require('errors');
+import { badCredentials } from 'authErrors';
+import { itemAlreadyExists, missingCreationParams } from 'errors';
 
 const newtemplate = {
   fromsender: 'betatester@subskribble.com',

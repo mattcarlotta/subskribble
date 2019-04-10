@@ -1,5 +1,5 @@
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams, unableToLocate } = require('errors');
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams, unableToLocate } from 'errors';
 
 const refund = {
   amount: 29.99,

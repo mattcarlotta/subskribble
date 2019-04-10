@@ -1,5 +1,5 @@
-const { badCredentials } = require('authErrors');
-const { missingQueryParams } = require('errors');
+import { badCredentials } from 'authErrors';
+import { missingQueryParams } from 'errors';
 
 describe('Active/Inactive Subscriber Records', () => {
   let cookie;

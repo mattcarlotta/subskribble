@@ -1,4 +1,4 @@
-const {
+import {
   create,
   index,
   deleteOne,
@@ -8,10 +8,10 @@ const {
   selectOne,
   updateOne,
   updateStatus,
-} = require('controllers/templates');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/templates';
+import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.post('/api/templates/create', requireAuth, create);
   app.get('/api/templates/template?', requireAuth, selectOne);
   app.get('/api/templates', requireAuth, index);

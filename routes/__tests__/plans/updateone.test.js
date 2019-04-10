@@ -1,6 +1,6 @@
-const { selectPlanByKey } = require('queries');
-const { badCredentials } = require('authErrors');
-const { missingUpdateParams } = require('errors');
+import { selectPlanByKey } from 'queries';
+import { badCredentials } from 'authErrors';
+import { missingUpdateParams } from 'errors';
 
 describe('Edit A Plan', () => {
   let cookie;

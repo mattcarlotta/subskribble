@@ -1,15 +1,15 @@
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const db = require('db');
-const { findUserByEmail, getUserDetails } = require('queries');
-const {
+import bcrypt from 'bcrypt';
+import { Strategy as LocalStrategy } from 'passport-local';
+import passport from 'passport';
+import db from 'db';
+import { findUserByEmail, getUserDetails } from 'queries';
+import {
   alreadyLoggedIn,
   badCredentials,
   emailConfirmationReq,
-} = require('authErrors');
+} from 'authErrors';
 
-module.exports = passport.use(
+export default () => passport.use(
   'local-login',
   new LocalStrategy(
     {
@@ -28,7 +28,9 @@ module.exports = passport.use(
           if (id) return done(alreadyLoggedIn, false);
 
           // check to see if the user already exists
-          const existingUser = await dbtask.oneOrNone(findUserByEmail, [email]);
+          const existingUser = await dbtask.oneOrNone(findUserByEmail, [
+            email,
+          ]);
           if (!existingUser) return done(badCredentials, false);
           if (!existingUser.verified) return done(emailConfirmationReq, false);
 
