@@ -7,7 +7,7 @@ import db from 'db';
 import { changedEmail } from 'emailTemplates';
 import config from 'env';
 
-const {
+import {
   deleteUserAccount,
   getAvatarToken,
   getCurrentUserDetails,
@@ -22,7 +22,8 @@ const {
   updateUserPassword,
   userFeedback,
   verifyEmail,
-} = require('queries');
+} from 'queries';
+
 const {
   badCredentials,
   companyAlreadyExists,

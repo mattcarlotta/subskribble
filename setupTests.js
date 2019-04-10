@@ -1,3 +1,7 @@
+import db from 'db';
+import getCookie from 'utils/getCookie';
+import app from 'utils/setup';
+
 jest.mock('@sendgrid/mail');
 
 expect.extend({
@@ -7,6 +11,6 @@ expect.extend({
   }),
 });
 
-global.getCookie = require('./utils/getCookie');
-global.db = require('./database/db');
-global.app = require('./utils/setup');
+global.getCookie = getCookie;
+global.db = db;
+global.app = app;

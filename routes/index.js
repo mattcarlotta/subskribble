@@ -20,7 +20,7 @@ export { default as templateRoutes } from "./templates";
 export { default as transactionRoutes } from "./transactions";
 */
 
-const routes = (app) => {
+export default (app) => {
   authRoutes(app);
   dashboardRoutes(app);
   messageRoutes(app);
@@ -31,5 +31,17 @@ const routes = (app) => {
   templateRoutes(app);
   transactionRoutes(app);
 };
+//
+// export default routes;
 
-export default routes;
+// module.exports = app => {
+//   authRoutes(app);
+//   dashboardRoutes(app);
+//   messageRoutes(app);
+//   notifcationRoutes(app);
+//   planRoutes(app);
+//   promotionalRoutes(app);
+//   subcriberRoutes(app);
+//   templateRoutes(app);
+//   transactionRoutes(app);
+// };

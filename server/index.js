@@ -1,8 +1,8 @@
-import path from 'path';
-import express from 'express';
-import config from 'env';
+const path = require('path');
+const express = require('express');
+const config = require('env');
 
-export default (app) => {
+module.exports = (app) => {
   const env = process.env.NODE_ENV;
   //= ===========================================================//
   /* PRODUCTION CONFIGS */

@@ -8,10 +8,6 @@ import mailer from '@sendgrid/mail';
 import {
   localLogin, localSignup, resetPassword, resetToken,
 } from 'strategies';
-// import localLogin from "strategies/localLogin";
-// import localSignup from "strategies/localSignup";
-// import resetPassword from "strategies/resetPassword";
-// import resetToken from "strategies/resetToken";
 import config from 'env';
 
 const env = process.env.NODE_ENV;
@@ -47,7 +43,7 @@ if (!inTesting) {
 //= ===========================================================//
 /* APP MIDDLEWARE */
 //= ===========================================================//
-module.exports = app => {
+export default app => {
   // strategies();
 
   // passport strategies
