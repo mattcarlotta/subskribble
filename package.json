@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --watchAll",
+    "test": "NODE_ENV=test jest --config ./jest.json --watchAll",
     "initialize": "npm install && cd client && npm install && cd ..",
     "start": "NODE_ENV=production node app.js",
     "server": "NODE_ENV=development nodemon --max_old_space_size=4096 app.js",
@@ -23,7 +23,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "jest /",
+      "jest --config ./jest.json",
       "git add"
     ]
   },
@@ -31,27 +31,6 @@
     "ignore": [
       "client"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "verbose": false,
-    "modulePaths": [
-      "<rootDir>",
-      "node_modules"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/client/",
-      "<rootDir>/node_modules/"
-    ],
-    "globalSetup": "<rootDir>/utils/globalSetup.js",
-    "globalTeardown": "<rootDir>/utils/globalTeardown.js"
   },
   "author": "",
   "license": "ISC",
@@ -81,6 +60,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
     "babel-plugin-module-resolver": "^3.2.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",

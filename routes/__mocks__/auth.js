@@ -1,4 +1,4 @@
-/* global app */
+import app from 'utils/setup';
 import db from 'db';
 import { thanksForReg } from 'authSuccess';
 import { verifyEmail } from 'queries';

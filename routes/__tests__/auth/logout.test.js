@@ -1,3 +1,5 @@
+import app from 'utils/setup';
+
 describe('Log out', () => {
   it('handles log out session requests', async () => {
     await app()

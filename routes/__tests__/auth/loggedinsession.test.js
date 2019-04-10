@@ -1,3 +1,6 @@
+import app from 'utils/setup';
+import getCookie from 'utils/getCookie';
+
 describe('Logged In', () => {
   it('handles invalid/expired logged in session requests', async () => {
     await app()

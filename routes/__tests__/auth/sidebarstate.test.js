@@ -1,3 +1,5 @@
+import app from 'utils/setup';
+import getCookie from 'utils/getCookie';
 import { badCredentials, missingSidebarState } from 'authErrors';
 
 const setSidebarState = (cookie, state) => app()

@@ -14,7 +14,7 @@ const getAll = async (req, res, done) => {
       endMonth,
     ]);
 
-    res.status(201).send(...dashboard);
+    return res.status(201).send(...dashboard);
   } catch (err) {
     return sendError(err, res, done);
   }

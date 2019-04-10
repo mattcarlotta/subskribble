@@ -1,10 +1,11 @@
+import app from 'utils/setup';
 import mailer from '@sendgrid/mail';
 import {
   companyAlreadyExists,
   emailAlreadyTaken,
   missingCredentials,
 } from 'authErrors';
-import signupNewUser from '../../__mocks__/auth.mocks';
+import signupNewUser from '../../__mocks__/auth';
 
 const newSignupEmail = 'signup@test.com';
 const newCompany = 'New Signup User';

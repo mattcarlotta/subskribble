@@ -1,3 +1,5 @@
+import db from 'db';
+import app from 'utils/setup';
 import { getTokenByEmail } from 'queries';
 import { createRandomToken } from 'helpers';
 import {
@@ -7,7 +9,7 @@ import {
   notUniquePassword,
 } from 'authErrors';
 import { passwordResetSuccess } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth.mocks';
+import signupNewUser from '../../__mocks__/auth';
 
 const newSignupEmail = 'newuser@test.com';
 const newCompany = 'New User Corp';

@@ -1,7 +1,9 @@
+import app from 'utils/setup';
+import getCookie from 'utils/getCookie';
 import { badCredentials, invalidPassword } from 'authErrors';
 import { missingDeletionParams } from 'errors';
 import { removedAccountSuccess } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth.mocks';
+import signupNewUser from '../../__mocks__/auth';
 
 const newSignupEmail = 'deleteduser@test.com';
 const newSignupPassword = 'password123';

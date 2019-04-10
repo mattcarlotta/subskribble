@@ -1,3 +1,4 @@
+import app from 'utils/setup';
 import { badCredentials } from 'authErrors';
 
 describe('Sign In', () => {

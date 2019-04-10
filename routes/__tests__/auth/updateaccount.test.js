@@ -1,3 +1,5 @@
+import app from 'utils/setup';
+import getCookie from 'utils/getCookie';
 import mailer from '@sendgrid/mail';
 import { badCredentials } from 'authErrors';
 import { missingUpdateParams } from 'errors';
@@ -6,7 +8,7 @@ import {
   updatedAccount,
   updatedAccountDetails,
 } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth.mocks';
+import signupNewUser from '../../__mocks__/auth';
 
 const newSignupEmail = 'updateaccount@test.com';
 const newSignupPassword = 'password123';
