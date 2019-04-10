@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const config = require('env');
 
-module.exports = (app) => {
+export default (app) => {
   const env = process.env.NODE_ENV;
   //= ===========================================================//
   /* PRODUCTION CONFIGS */

@@ -24,29 +24,49 @@ const tokenGenerator = (str, tlen) => {
   return token;
 };
 
-module.exports = {
-  beginofMonth: () => moment().startOf('month'),
-  convertDateToISO: date => moment(date)
-    .utcOffset(-7)
-    .toISOString(true),
-  createRandomText: () => loremipsum(),
-  createRandomToken: () => tokenGenerator(
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$/.',
-    64,
-  ),
-  createUniqueTemplateName: name => name
-    .trim()
-    .toLowerCase()
-    .replace(/[^\w\s]/gi, '')
-    .replace(/ /g, '-'),
-  currentDate: () => moment()
-    .utcOffset(-7)
-    .toISOString(true),
-  endofMonth: () => moment().endOf('month'),
-  parseStringToFloat: str => parseFloat(str),
-  parseStringToNum: str => parseInt(str, 10),
-  sendError: (err, res, done) => {
-    return res.status(400).json({ err: err.toString() });
-    done(); /* eslint-disable-line no-unreachable */
-  },
+const beginofMonth = () => moment().startOf('month');
+
+const convertDateToISO = date => moment(date)
+  .utcOffset(-7)
+  .toISOString(true);
+
+const createRandomText = () => loremipsum();
+
+const createRandomToken = () => tokenGenerator(
+  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$/.',
+  64,
+);
+
+const createUniqueTemplateName = name => name
+  .trim()
+  .toLowerCase()
+  .replace(/[^\w\s]/gi, '')
+  .replace(/ /g, '-');
+
+const currentDate = () => moment()
+  .utcOffset(-7)
+  .toISOString(true);
+
+const endofMonth = () => moment().endOf('month');
+
+const parseStringToFloat = str => parseFloat(str);
+
+const parseStringToNum = str => parseInt(str, 10);
+
+const sendError = (err, res, done) => {
+  return res.status(400).json({ err: err.toString() });
+  done(); /* eslint-disable-line no-unreachable */
+};
+
+export {
+  beginofMonth,
+  convertDateToISO,
+  createRandomText,
+  createRandomToken,
+  createUniqueTemplateName,
+  currentDate,
+  endofMonth,
+  parseStringToFloat,
+  parseStringToNum,
+  sendError,
 };

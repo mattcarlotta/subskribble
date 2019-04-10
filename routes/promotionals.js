@@ -11,7 +11,7 @@ import {
 } from 'controllers/promotionals';
 import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.get('/api/promotionals/apply-promotion?', requireAuth, apply);
   app.post('/api/promotionals/create', requireAuth, create);
   app.get('/api/promotionals/promotional?', requireAuth, selectOne);

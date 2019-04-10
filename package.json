@@ -11,10 +11,10 @@
     "client": "npm run start --prefix client",
     "lint-front": "npm run pre-commit --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seed": "NODE_ENV=development SEED=true node ./utils/seedDB.js",
-    "seed:test": "NODE_ENV=test SEED=true node ./utils/seedDB.js",
-    "teardown": "NODE_ENV=development TEARDOWN=true node ./utils/teardownDB.js",
-    "teardown:test": "NODE_ENV=test TEARDOWN=true node ./utils/teardownDB.js",
+    "seed": "NODE_ENV=development SEED=true node ./utils/globalSetup.js",
+    "seed:test": "NODE_ENV=test SEED=true node ./utils/globalSetup.js",
+    "teardown": "NODE_ENV=development TEARDOWN=true node ./utils/globalTeardown.js",
+    "teardown:test": "NODE_ENV=test TEARDOWN=true node ./utils/globalTeardown.js",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
     "lint-back": "lint-staged",
     "test:front": "npm run test --prefix client",
@@ -22,8 +22,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --double-quote",
       "eslint --fix",
+      "jest /",
       "git add"
     ]
   },
@@ -50,8 +50,8 @@
       "<rootDir>/client/",
       "<rootDir>/node_modules/"
     ],
-    "globalSetup": "<rootDir>/utils/seedDB.js",
-    "globalTeardown": "<rootDir>/utils/teardownDB.js"
+    "globalSetup": "<rootDir>/utils/globalSetup.js",
+    "globalTeardown": "<rootDir>/utils/globalTeardown.js"
   },
   "author": "",
   "license": "ISC",

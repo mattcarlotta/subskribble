@@ -1,6 +1,6 @@
 import getAll from 'controllers/dashboard';
 import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.get('/api/dashboard', requireAuth, getAll);
 };

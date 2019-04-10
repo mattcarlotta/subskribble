@@ -1,9 +1,9 @@
 /* eslint-disable */
-const db = require("../database/db");
+import db from "db";
 
 const { TEARDOWN } = process.env;
 
-const tearDownDB = async () => {
+const teardownDB = async () => {
   await db.task("teardown-db", async dbtask => {
     try {
       await dbtask.none(`
@@ -34,7 +34,7 @@ const tearDownDB = async () => {
   });
 };
 
-if (TEARDOWN) tearDownDB();
+if (TEARDOWN) teardownDB();
 
-module.exports = tearDownDB;
+export default teardownDB;
 /* eslint-enable */
