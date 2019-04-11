@@ -27,7 +27,7 @@ const badPassword = {
   user: 'betatester@subskribble.com',
 };
 
-const deleteProps = {
+const deleteAccountProps = {
   company: 'Subskribble',
   reason: '',
   password: 'password123',
@@ -58,7 +58,7 @@ describe('Delete Account Controller', () => {
   it('handles invalid user id', async () => {
     const req = mockRequest(
       { ...user, id: '111b1cbe-1bb1-11e1-1111-11e1a11111c1' },
-      deleteProps,
+      deleteAccountProps,
     );
     const res = mockResponse();
 
@@ -81,7 +81,7 @@ describe('Delete Account Controller', () => {
   });
 
   it('handles valid delete account requests', async () => {
-    const req = mockRequest(user, deleteProps);
+    const req = mockRequest(user, deleteAccountProps);
     const res = mockResponse();
 
     await deleteAccount(req, res);
