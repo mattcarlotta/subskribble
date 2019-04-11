@@ -1,14 +1,8 @@
-import db from 'db';
-import { findUserByEmail } from 'queries';
 import { deleteAccount } from 'controllers/auth';
 import { missingDeletionParams } from 'errors';
 import { invalidPassword, unableLocatePass } from 'authErrors';
 import { removedAccountSuccess } from 'authSuccess';
-import {
-  mockRequest,
-  mockResponse,
-  signupNewUser,
-} from '../../__mocks__/helpers';
+import { mockRequest, mockResponse, signupUser } from '../../__mocks__/helpers';
 
 const newSignupEmail = 'deleteduser@test.com';
 const newCompany = 'Delete Handlers LLC';
@@ -36,15 +30,11 @@ const deleteAccountProps = {
 
 describe('Delete Account Controller', () => {
   let user;
-  beforeEach(async () => {
-    user = await db.one(findUserByEmail, [newSignupEmail]);
+  beforeAll(async () => {
+    user = await signupUser(newSignupEmail, newCompany);
   });
 
-  beforeAll(async (done) => {
-    await signupNewUser(newSignupEmail, newCompany, done);
-  });
-
-  it('handles empty request calls', async () => {
+  it('handles empty body requests', async () => {
     const req = mockRequest(null, emptybody);
     const res = mockResponse();
 
@@ -55,7 +45,7 @@ describe('Delete Account Controller', () => {
     });
   });
 
-  it('handles invalid user id', async () => {
+  it('handles invalid user id requests', async () => {
     const req = mockRequest(
       { ...user, id: '111b1cbe-1bb1-11e1-1111-11e1a11111c1' },
       deleteAccountProps,
@@ -69,7 +59,7 @@ describe('Delete Account Controller', () => {
     });
   });
 
-  it('handles invalid user passwords', async () => {
+  it('handles invalid user passwords requests', async () => {
     const req = mockRequest(user, badPassword);
     const res = mockResponse();
 

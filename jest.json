@@ -1,6 +1,7 @@
 {
   "testEnvironment": "node",
   "verbose": false,
+  "clearMocks": true,
   "modulePaths": ["<rootDir>", "node_modules"],
   "setupFilesAfterEnv": ["<rootDir>/setupTests.js"],
   "transform": {

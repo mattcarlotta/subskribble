@@ -1,48 +1,21 @@
 import app from 'utils/setup';
-import mailer from '@sendgrid/mail';
-import { missingEmailCreds } from 'authErrors';
-import { passwordResetToken } from 'authSuccess';
-import signupNewUser from '../../__mocks__/helpers';
+import { resetToken } from 'controllers/auth';
 
-const newSignupEmail = 'reset@example.com';
-const newCompany = 'Reset Token Corp';
+jest.mock('../../../controllers/auth', () => ({
+  ...require.requireActual('../../../controllers/auth'),
+  resetToken: jest.fn((req, res, done) => done()),
+}));
 
-describe('Reset Token', () => {
-  beforeAll(async (done) => {
-    await signupNewUser(newSignupEmail, newCompany, done);
+describe('Reset Token Route', () => {
+  afterAll(() => {
+    resetToken.mockRestore();
   });
 
-  afterAll(async () => {
-    jest.clearAllMocks();
-  });
-
-  it('handles invalid reset token requests', async () => {
-    // missing email creds
+  it('routes requests to the resetToken controller', async () => {
     await app()
       .put('/api/reset-token')
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingEmailCreds);
-      });
-
-    // invalid email creds
-    await app()
-      .put('/api/reset-token')
-      .send({ email: 'test@test.com', password: 'reset-token' })
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingEmailCreds);
-      });
-  });
-
-  it('handles valid reset token requests', async () => {
-    await app()
-      .put('/api/reset-token')
-      .send({ email: newSignupEmail, password: 'reset-token' })
-      .then((res) => {
-        expect(res.statusCode).toEqual(201);
-        expect(res.body).toEqual(passwordResetToken(newSignupEmail));
-        expect(mailer.send).toHaveBeenCalled();
+      .then(() => {
+        expect(resetToken).toHaveBeenCalledTimes(1);
       });
   });
 });

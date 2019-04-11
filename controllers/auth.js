@@ -3,10 +3,8 @@ import passport from 'passport';
 import isEmpty from 'lodash/isEmpty';
 import mailer from '@sendgrid/mail';
 import db from 'db';
-
 import { changedEmail } from 'emailTemplates';
 import config from 'env';
-
 import {
   deleteUserAccount,
   getAvatarToken,
@@ -23,7 +21,6 @@ import {
   userFeedback,
   verifyEmail,
 } from 'queries';
-
 import {
   badCredentials,
   companyAlreadyExists,
@@ -194,6 +191,9 @@ const updateAccount = async (req, res, done) => {
 
   const token = createRandomToken();
 
+  const user = await db.oneOrNone(getUserPassword, [req.session.id]);
+  if (!user) return sendError(unableLocatePass, res, done);
+
   try {
     await db.task('update-account', async (dbtask) => {
       const {
@@ -202,6 +202,12 @@ const updateAccount = async (req, res, done) => {
         firstname: currentFirstName,
         lastname: currentLastName,
       } = await dbtask.one(getCurrentUserDetails, [req.session.id]);
+
+      const validPassword = await bcrypt.compare(
+        suppliedPassword,
+        user.password,
+      );
+      if (!validPassword) return sendError(invalidPassword, res, done);
 
       if (currentCompany !== updatedCompany) {
         const existingCompany = await dbtask.oneOrNone(findCompany, [
@@ -228,16 +234,7 @@ const updateAccount = async (req, res, done) => {
         req.session.lastname = updatedLastName;
       }
 
-      if (suppliedPassword && updatedPassword) {
-        const user = await dbtask.oneOrNone(getUserPassword, [req.session.id]);
-        if (!user) return sendError(unableLocatePass, res, done);
-
-        const validPassword = await bcrypt.compare(
-          suppliedPassword,
-          user.password,
-        );
-        if (!validPassword) return sendError(invalidPassword, res, done);
-
+      if (updatedPassword) {
         const isNotUniquePassword = await bcrypt.compare(
           updatedPassword,
           user.password,
@@ -278,7 +275,7 @@ const updateAccount = async (req, res, done) => {
       } else {
         res.status(201).json({
           user: !updatedPassword ? { ...req.session } : '',
-          fetchnotifications: true,
+          fetchnotifications: !updatedPassword,
           message: !updatedPassword
             ? updatedAccountDetails
             : passwordResetSuccess(updatedEmail),

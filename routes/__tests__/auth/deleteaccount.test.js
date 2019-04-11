@@ -9,7 +9,7 @@ jest.mock('../../../controllers/auth', () => ({
 
 jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
 
-describe('Delete Account', () => {
+describe('Delete Account Route', () => {
   afterEach(() => {
     requireAuth.mockClear();
     deleteAccount.mockClear();
@@ -24,15 +24,15 @@ describe('Delete Account', () => {
     await app()
       .delete('/api/delete-account')
       .then(() => {
-        expect(requireAuth).toHaveBeenCalled();
+        expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the correct controller', async () => {
+  it('routes authenticated requests to the deleteaccount controller', async () => {
     await app()
       .delete('/api/delete-account')
       .then(() => {
-        expect(deleteAccount).toHaveBeenCalled();
+        expect(deleteAccount).toHaveBeenCalledTimes(1);
       });
   });
 });
