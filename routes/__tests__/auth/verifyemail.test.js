@@ -3,7 +3,7 @@ import app from 'utils/setup';
 import { getTokenByEmail } from 'queries';
 import { createRandomToken } from 'helpers';
 import { invalidToken, missingToken } from 'authErrors';
-import signupNewUser from '../../__mocks__/auth';
+import signupNewUser from '../../__mocks__/helpers';
 
 const newSignupEmail = 'verification@example.com';
 const newCompany = 'Verification Corp';

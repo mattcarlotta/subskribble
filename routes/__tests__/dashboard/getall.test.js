@@ -1,5 +1,4 @@
 import app from 'utils/setup';
-import getCookie from 'utils/getCookie';
 import getAll from 'controllers/dashboard';
 import { requireAuth } from 'strategies';
 
@@ -8,16 +7,17 @@ jest.mock('../../../controllers/dashboard', () => jest.fn((req, res, done) => do
 jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
 
 describe('Dashboard Data Route', () => {
-  let cookie;
-  beforeAll(async () => {
-    cookie = await getCookie();
-  });
-
   afterEach(() => {
-    jest.restoreAllMocks();
+    requireAuth.mockClear();
+    getAll.mockClear();
   });
 
-  it('should route initial requests to authentication middleware', async () => {
+  afterAll(() => {
+    requireAuth.mockRestore();
+    getAll.mockRestore();
+  });
+
+  it('routes initial requests to authentication middleware', async () => {
     await app()
       .get('/api/dashboard')
       .then(() => {
@@ -25,11 +25,9 @@ describe('Dashboard Data Route', () => {
       });
   });
 
-  it('should route authenticated requests to the correct controller', async () => {
-    jest.unmock('../../../services/strategies/requireAuth');
+  it('routes authenticated requests to the correct controller', async () => {
     await app()
       .get('/api/dashboard')
-      .set('Cookie', cookie)
       .then(() => {
         expect(getAll).toHaveBeenCalled();
       });

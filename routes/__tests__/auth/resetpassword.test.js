@@ -9,7 +9,7 @@ import {
   notUniquePassword,
 } from 'authErrors';
 import { passwordResetSuccess } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth';
+import signupNewUser from '../../__mocks__/helpers';
 
 const newSignupEmail = 'newuser@test.com';
 const newCompany = 'New User Corp';

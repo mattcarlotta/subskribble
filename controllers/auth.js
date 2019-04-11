@@ -24,7 +24,7 @@ import {
   verifyEmail,
 } from 'queries';
 
-const {
+import {
   badCredentials,
   companyAlreadyExists,
   emailAlreadyTaken,
@@ -37,17 +37,17 @@ const {
   notUniquePassword,
   unableLocatePass,
   unableToRemove,
-} = require('authErrors');
-const {
+} from 'authErrors';
+import {
   passwordResetSuccess,
   passwordResetToken,
   removedAccountSuccess,
   thanksForReg,
   updatedAccount,
   updatedAccountDetails,
-} = require('authSuccess');
-const { sendError, createRandomToken } = require('helpers');
-const { missingDeletionParams, missingUpdateParams } = require('errors');
+} from 'authSuccess';
+import { sendError, createRandomToken } from 'helpers';
+import { missingDeletionParams, missingUpdateParams } from 'errors';
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];

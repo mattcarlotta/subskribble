@@ -1,67 +1,38 @@
 import app from 'utils/setup';
-import getCookie from 'utils/getCookie';
-import { badCredentials, invalidPassword } from 'authErrors';
-import { missingDeletionParams } from 'errors';
-import { removedAccountSuccess } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth';
+import { deleteAccount } from 'controllers/auth';
+import { requireAuth } from 'strategies';
 
-const newSignupEmail = 'deleteduser@test.com';
-const newSignupPassword = 'password123';
-const newCompany = 'Delete Handlers LLC';
+jest.mock('../../../controllers/auth', () => ({
+  ...require.requireActual('../../../controllers/auth'),
+  deleteAccount: jest.fn((req, res, done) => done()),
+}));
+
+jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
 
 describe('Delete Account', () => {
-  beforeAll(async (done) => {
-    await signupNewUser(newSignupEmail, newCompany, done);
+  afterEach(() => {
+    requireAuth.mockClear();
+    deleteAccount.mockClear();
   });
 
-  it('handles invalid delete account requests', async () => {
-    // not logged in
+  afterAll(() => {
+    requireAuth.mockRestore();
+    deleteAccount.mockRestore();
+  });
+
+  it('routes initial requests to authentication middleware', async () => {
     await app()
       .delete('/api/delete-account')
-      .then((res) => {
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.err).toEqual(badCredentials);
-      });
-
-    const cookie = await getCookie(newSignupEmail, newSignupPassword);
-
-    // logged in but missing params
-    await app()
-      .delete('/api/delete-account')
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingDeletionParams);
-      });
-
-    // invalid supplied password
-    await app()
-      .delete('/api/delete-account')
-      .send({
-        company: 'Test',
-        user: 'betatester@subskribble.com',
-        password: 'invalidpassword',
-      })
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(invalidPassword);
+      .then(() => {
+        expect(requireAuth).toHaveBeenCalled();
       });
   });
 
-  it('handles valid delete account requests', async () => {
-    const cookie = await getCookie(newSignupEmail, newSignupPassword);
+  it('routes authenticated requests to the correct controller', async () => {
     await app()
       .delete('/api/delete-account')
-      .send({
-        company: newCompany,
-        user: newSignupEmail,
-        password: newSignupPassword,
-      })
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(202);
-        expect(res.body.message).toEqual(removedAccountSuccess);
+      .then(() => {
+        expect(deleteAccount).toHaveBeenCalled();
       });
   });
 });

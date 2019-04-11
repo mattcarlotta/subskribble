@@ -8,7 +8,7 @@ import {
   updatedAccount,
   updatedAccountDetails,
 } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth';
+import signupNewUser from '../../__mocks__/helpers';
 
 const newSignupEmail = 'updateaccount@test.com';
 const newSignupPassword = 'password123';

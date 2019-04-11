@@ -1,7 +1,7 @@
 import db from 'db';
 import { selectUserByKey } from 'queries';
 import getAll from 'controllers/dashboard';
-import { mockRequest, mockResponse } from '../../__mocks__/exp';
+import { mockRequest, mockResponse } from '../../__mocks__/helpers';
 
 describe('Dashboard Data Controller', () => {
   it('handles invalid req calls', async () => {

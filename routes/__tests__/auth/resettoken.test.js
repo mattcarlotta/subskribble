@@ -2,7 +2,7 @@ import app from 'utils/setup';
 import mailer from '@sendgrid/mail';
 import { missingEmailCreds } from 'authErrors';
 import { passwordResetToken } from 'authSuccess';
-import signupNewUser from '../../__mocks__/auth';
+import signupNewUser from '../../__mocks__/helpers';
 
 const newSignupEmail = 'reset@example.com';
 const newCompany = 'Reset Token Corp';

@@ -5,7 +5,7 @@ import {
   emailAlreadyTaken,
   missingCredentials,
 } from 'authErrors';
-import signupNewUser from '../../__mocks__/auth';
+import signupNewUser from '../../__mocks__/helpers';
 
 const newSignupEmail = 'signup@test.com';
 const newCompany = 'New Signup User';
