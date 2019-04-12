@@ -1,30 +1,33 @@
 import app from 'utils/setup';
-import getCookie from 'utils/getCookie';
-import { badCredentials } from 'authErrors';
+import { fetchCounts } from 'controllers/messages';
+import { requireAuth } from 'strategies';
 
-describe('Message Counts', () => {
-  let cookie;
-  beforeAll(async () => {
-    cookie = await getCookie();
+jest.mock('controllers/messages', () => ({
+  ...require.requireActual('controllers/messages'),
+  fetchCounts: jest.fn((req, res, done) => done()),
+}));
+
+jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+
+describe('Message Fetch Counts Route', () => {
+  afterEach(() => {
+    requireAuth.mockClear();
+    fetchCounts.mockClear();
   });
 
-  it('should handle invalid message counts requests', async () => {
-    // not logged in
+  it('routes initial requests to authentication middleware', async () => {
     await app()
       .get('/api/messagecounts')
-      .then((res) => {
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.err).toEqual(badCredentials);
+      .then(() => {
+        expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('should handle valid message counts requests', async () => {
+  it('routes authenticated requests to the fetch counts controller', async () => {
     await app()
       .get('/api/messagecounts')
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(201);
-        expect(res.body.messagecounts).toEqual(expect.any(Number));
+      .then(() => {
+        expect(fetchCounts).toHaveBeenCalledTimes(1);
       });
   });
 });

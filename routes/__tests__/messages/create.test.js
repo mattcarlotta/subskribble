@@ -1,57 +1,33 @@
 import app from 'utils/setup';
-import getCookie from 'utils/getCookie';
-import mailer from '@sendgrid/mail';
-import { badCredentials } from 'authErrors';
-import { missingCreationParams, unableToLocate } from 'errors';
+import { create } from 'controllers/messages';
+import { requireAuth } from 'strategies';
 
-describe('Create Message', () => {
-  let cookie;
-  beforeAll(async () => {
-    cookie = await getCookie();
+jest.mock('controllers/messages', () => ({
+  ...require.requireActual('controllers/messages'),
+  create: jest.fn((req, res, done) => done()),
+}));
+
+jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+
+describe('Create Message Route', () => {
+  afterEach(() => {
+    requireAuth.mockClear();
+    create.mockClear();
   });
 
-  afterAll(async () => {
-    jest.clearAllMocks();
-  });
-
-  it('should handle invalid create message requests', async () => {
-    // not logged in
+  it('routes initial requests to authentication middleware', async () => {
     await app()
       .post('/api/messages/create')
-      .then((res) => {
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.err).toEqual(badCredentials);
-      });
-
-    // logged in but missing create params
-    await app()
-      .post('/api/messages/create')
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingCreationParams);
-      });
-
-    // invalid template
-    await app()
-      .post('/api/messages/create')
-      .send({ template: 'Bad Template' })
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(unableToLocate('template'));
+      .then(() => {
+        expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('should handle valid create message requests', async () => {
-    // invalid template
+  it('routes authenticated requests to the create controller', async () => {
     await app()
       .post('/api/messages/create')
-      .send({ template: 'Partners Template' })
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(201);
-        expect(mailer.sendMultiple).toHaveBeenCalled();
+      .then(() => {
+        expect(create).toHaveBeenCalledTimes(1);
       });
   });
 });
