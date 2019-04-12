@@ -3,16 +3,15 @@ import { login } from 'controllers/auth';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  login: jest.fn((req, res, done) => done()),
+  login: jest.fn(),
 }));
 
 describe('Login Route', () => {
-  it('routes requests to the login controller', async () => {
-    await app()
+  it('routes requests to the login controller', () => {
+    app()
       .post('/api/signin')
       .then(() => {
         expect(login).toHaveBeenCalledTimes(1);
       });
-    login.mockRestore();
   });
 });

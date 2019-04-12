@@ -4,16 +4,12 @@ import { createRandomToken } from 'helpers';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  resetPassword: jest.fn((req, res, done) => done()),
+  resetPassword: jest.fn(),
 }));
 
 describe('Reset Password Route', () => {
-  afterAll(() => {
-    resetPassword.mockRestore();
-  });
-
-  it('routes requests to the resetPassword controller', async () => {
-    await app()
+  it('routes requests to the resetPassword controller', () => {
+    app()
       .put(`/api/reset-password/verify?token=${createRandomToken()}`)
       .then(() => {
         expect(resetPassword).toHaveBeenCalledTimes(1);

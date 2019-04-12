@@ -4,10 +4,10 @@ import { requireAuth } from 'strategies';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  saveSidebarState: jest.fn((req, res, done) => done()),
+  saveSidebarState: jest.fn(),
 }));
 
-jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock('../../../services/strategies/requireAuth', () => jest.fn());
 
 describe('Save SideBar State Route', () => {
   afterEach(() => {
@@ -15,21 +15,16 @@ describe('Save SideBar State Route', () => {
     saveSidebarState.mockClear();
   });
 
-  afterAll(() => {
-    requireAuth.mockRestore();
-    saveSidebarState.mockRestore();
-  });
-
-  it('routes initial requests to authentication middleware', async () => {
-    await app()
+  it('routes initial requests to authentication middleware', () => {
+    app()
       .put('/api/save-sidebar-state?collapseSideNav=true')
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the saveSidebarState controller', async () => {
-    await app()
+  it('routes authenticated requests to the saveSidebarState controller', () => {
+    app()
       .put('/api/save-sidebar-state?collapseSideNav=true')
       .then(() => {
         expect(saveSidebarState).toHaveBeenCalledTimes(1);

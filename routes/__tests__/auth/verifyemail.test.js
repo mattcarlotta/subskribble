@@ -4,16 +4,15 @@ import { verifyAccount } from 'controllers/auth';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  verifyAccount: jest.fn((req, res, done) => done()),
+  verifyAccount: jest.fn(),
 }));
 
 describe('Update Account Route', () => {
-  it('routes requests to the verifyAccount controller', async () => {
-    await app()
+  it('routes requests to the verifyAccount controller', () => {
+    app()
       .put(`/api/email/verify?token=${createRandomToken()}`)
       .then(() => {
         expect(verifyAccount).toHaveBeenCalledTimes(1);
       });
-    verifyAccount.mockRestore();
   });
 });

@@ -2,9 +2,9 @@ import app from 'utils/setup';
 import getAll from 'controllers/dashboard';
 import { requireAuth } from 'strategies';
 
-jest.mock('../../../controllers/dashboard', () => jest.fn((req, res, done) => done()));
+jest.mock('../../../controllers/dashboard', () => jest.fn());
 
-jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock('../../../services/strategies/requireAuth', () => jest.fn());
 
 describe('Dashboard Data Route', () => {
   afterEach(() => {
@@ -12,21 +12,16 @@ describe('Dashboard Data Route', () => {
     getAll.mockClear();
   });
 
-  afterAll(() => {
-    requireAuth.mockRestore();
-    getAll.mockRestore();
-  });
-
-  it('routes initial requests to authentication middleware', async () => {
-    await app()
+  it('routes initial requests to authentication middleware', () => {
+    app()
       .get('/api/dashboard')
       .then(() => {
         expect(requireAuth).toHaveBeenCalled();
       });
   });
 
-  it('routes authenticated requests to the correct controller', async () => {
-    await app()
+  it('routes authenticated requests to the correct controller', () => {
+    app()
       .get('/api/dashboard')
       .then(() => {
         expect(getAll).toHaveBeenCalled();

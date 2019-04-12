@@ -4,10 +4,10 @@ import { requireAuth } from 'strategies';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  deleteAccount: jest.fn((req, res, done) => done()),
+  deleteAccount: jest.fn(),
 }));
 
-jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock('../../../services/strategies/requireAuth', () => jest.fn());
 
 describe('Delete Account Route', () => {
   afterEach(() => {
@@ -15,21 +15,16 @@ describe('Delete Account Route', () => {
     deleteAccount.mockClear();
   });
 
-  afterAll(() => {
-    requireAuth.mockRestore();
-    deleteAccount.mockRestore();
-  });
-
-  it('routes initial requests to authentication middleware', async () => {
-    await app()
+  it('routes initial requests to authentication middleware', () => {
+    app()
       .delete('/api/delete-account')
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the deleteaccount controller', async () => {
-    await app()
+  it('routes authenticated requests to the deleteaccount controller', () => {
+    app()
       .delete('/api/delete-account')
       .then(() => {
         expect(deleteAccount).toHaveBeenCalledTimes(1);

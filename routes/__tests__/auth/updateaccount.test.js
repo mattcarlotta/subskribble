@@ -4,10 +4,10 @@ import { requireAuth } from 'strategies';
 
 jest.mock('../../../controllers/auth', () => ({
   ...require.requireActual('../../../controllers/auth'),
-  updateAccount: jest.fn((req, res, done) => done()),
+  updateAccount: jest.fn(),
 }));
 
-jest.mock('../../../services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock('../../../services/strategies/requireAuth', () => jest.fn());
 
 describe('Update Account Route', () => {
   afterEach(() => {
@@ -15,21 +15,16 @@ describe('Update Account Route', () => {
     updateAccount.mockClear();
   });
 
-  afterAll(() => {
-    requireAuth.mockRestore();
-    updateAccount.mockRestore();
-  });
-
-  it('routes initial requests to authentication middleware', async () => {
-    await app()
+  it('routes initial requests to authentication middleware', () => {
+    app()
       .put('/api/update-account')
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the updateAccount controller', async () => {
-    await app()
+  it('routes authenticated requests to the updateAccount controller', () => {
+    app()
       .put('/api/update-account')
       .then(() => {
         expect(updateAccount).toHaveBeenCalledTimes(1);
