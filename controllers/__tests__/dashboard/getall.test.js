@@ -1,15 +1,19 @@
-import getAll from 'controllers/dashboard';
-import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
+import getAll from "controllers/dashboard";
+import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe('Dashboard Data Controller', () => {
+describe("Dashboard Data Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
   });
 
-  it('handles invalid req calls', async () => {
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
+  it("handles invalid req calls", async () => {
     const req = mockRequest();
-    const res = mockResponse();
 
     await getAll(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -18,9 +22,8 @@ describe('Dashboard Data Controller', () => {
     });
   });
 
-  it('retrieves any dashboard data', async () => {
+  it("retrieves any dashboard data", async () => {
     const req = mockRequest(user);
-    const res = mockResponse();
 
     await getAll(req, res);
     expect(res.status).toHaveBeenCalledWith(201);

@@ -10,9 +10,7 @@
     "max-len": 0,
     "no-unused-expressions": 0,
     "valid-typeof": 0,
-    "rules": {
-      "quotes": [2, "double", { "avoidEscape": true }]
-    }
+    "quotes": [2, "double", { "avoidEscape": true }]
   },
   "settings": {
     "import/resolver": {

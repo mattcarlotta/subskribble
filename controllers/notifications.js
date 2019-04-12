@@ -1,12 +1,12 @@
-import db from 'db';
+import db from "db";
 import {
   deleteAllNotifications,
   deleteOneNotification,
   getSomeNotifications,
   setReadNotifications,
-} from 'queries';
-import { missingDeletionParams } from 'errors';
-import { sendError } from 'helpers';
+} from "queries";
+import { missingDeletionParams } from "errors";
+import { sendError } from "helpers";
 
 // COLLECTS/SENDS ALL NOTIFICATIONS FOR USER
 const index = async (req, res, done) => {
@@ -34,10 +34,10 @@ const updateAll = async (req, res, done) => {
 const deleteOne = async (req, res, done) => {
   const { id } = req.query;
 
-  if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
 
   try {
-    await db.result(deleteOneNotification, [req.session.id, req.query.id]);
+    await db.result(deleteOneNotification, [req.session.id, id]);
 
     res.status(201).send(null);
   } catch (err) {
