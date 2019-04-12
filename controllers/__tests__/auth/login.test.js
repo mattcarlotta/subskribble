@@ -12,9 +12,13 @@ describe('Login Session Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles invalid loggedin session requests', async () => {
     const req = mockRequest(null, { email: '', password: '' });
-    const res = mockResponse();
 
     await login(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -30,7 +34,7 @@ describe('Login Session Controller', () => {
       email: newSignupEmail,
       password: 'password123',
     });
-    const res = mockResponse();
+
     await login(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -47,7 +51,7 @@ describe('Login Session Controller', () => {
       email: newSignupEmail,
       password: 'password123',
     });
-    const res = mockResponse();
+
     await login(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(201);

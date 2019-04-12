@@ -1,9 +1,12 @@
-import db from 'db';
-import { selectUserByKey } from 'queries';
 import getAll from 'controllers/dashboard';
-import { mockRequest, mockResponse } from '../../__mocks__/helpers';
+import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
 
 describe('Dashboard Data Controller', () => {
+  let user;
+  beforeAll(async () => {
+    user = await loginUser();
+  });
+
   it('handles invalid req calls', async () => {
     const req = mockRequest();
     const res = mockResponse();
@@ -16,7 +19,6 @@ describe('Dashboard Data Controller', () => {
   });
 
   it('retrieves any dashboard data', async () => {
-    const user = await db.one(selectUserByKey, [1]);
     const req = mockRequest(user);
     const res = mockResponse();
 

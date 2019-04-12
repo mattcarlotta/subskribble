@@ -11,9 +11,13 @@ describe('Logged In Session Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles invalid loggedin session requests', async () => {
     const req = mockRequest(null);
-    const res = mockResponse();
 
     await loggedin(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -24,7 +28,6 @@ describe('Logged In Session Controller', () => {
 
   it('handles valid loggedin session requests', async () => {
     const req = mockRequest(user);
-    const res = mockResponse();
 
     await loggedin(req, res);
     expect(res.status).toHaveBeenCalledWith(201);

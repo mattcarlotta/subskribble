@@ -97,6 +97,7 @@ const messageQueries = {
   getMessageCount: 'SELECT count(*) FROM messages WHERE userid=$1',
   getSomeMessages:
     'SELECT * FROM messages WHERE userid=$1 ORDER BY key DESC LIMIT $2 OFFSET $3',
+  selectMessageByKey: 'SELECT id FROM messages WHERE key=$1',
 };
 
 const notificationQueries = {

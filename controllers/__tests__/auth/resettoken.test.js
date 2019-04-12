@@ -5,9 +5,13 @@ import { passwordResetToken } from 'authSuccess';
 import { mockRequest, mockResponse } from '../../__mocks__/helpers';
 
 describe('Reset Token Controller', () => {
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles missing email requests', async () => {
     const req = mockRequest(null, { email: '' });
-    const res = mockResponse();
 
     await resetToken(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -20,7 +24,6 @@ describe('Reset Token Controller', () => {
     passport.authenticate = jest.fn((strategy, callback) => () => callback('Invalid email.', ''));
 
     const req = mockRequest(null, { email: 'resettoken@test.com' });
-    const res = mockResponse();
     await resetToken(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -37,7 +40,7 @@ describe('Reset Token Controller', () => {
       email: 'resettoken@test.com',
       password: 'fakepassword',
     });
-    const res = mockResponse();
+
     await resetToken(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(201);

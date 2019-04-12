@@ -5,9 +5,13 @@ import { passwordResetSuccess } from 'authSuccess';
 import { mockRequest, mockResponse } from '../../__mocks__/helpers';
 
 describe('Reset Password Controller', () => {
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles missing token requests', async () => {
     const req = mockRequest(null, null, { token: '' });
-    const res = mockResponse();
 
     await resetPassword(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -22,7 +26,6 @@ describe('Reset Password Controller', () => {
       { email: '', password: '' },
       { token: '123' },
     );
-    const res = mockResponse();
 
     await resetPassword(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -39,7 +42,7 @@ describe('Reset Password Controller', () => {
       { email: 'resetpassword@test.com', password: 'password123' },
       { token: '123' },
     );
-    const res = mockResponse();
+
     await resetPassword(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -57,7 +60,7 @@ describe('Reset Password Controller', () => {
       { email: 'resetpassword@test.com', password: 'password123' },
       { token: '123' },
     );
-    const res = mockResponse();
+
     await resetPassword(req, res);
     expect(passport.authenticate).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(201);

@@ -3,6 +3,8 @@ import db from 'db';
 import { thanksForReg } from 'authSuccess';
 import { findUserByEmail, verifyEmail } from 'queries';
 
+const loginUser = () => db.one(findUserByEmail, ['betatester@subskribble.com']);
+
 const signupUser = async (email, company) => {
   await db.task('setup-signup', async (dbtask) => {
     await app()
@@ -26,31 +28,11 @@ const signupUser = async (email, company) => {
   return user;
 };
 
-const signupNewUser = async (email, company, done) => {
-  db.task('setup-signup', async (dbtask) => {
-    await app()
-      .post('/api/signup')
-      .send({
-        email,
-        company,
-        password: 'password123',
-        firstName: 'Test',
-        lastName: 'Signup',
-      })
-      .then((res) => {
-        expect(res.statusCode).toEqual(201);
-        expect(res.body).toEqual(thanksForReg(email, 'Test', 'Signup'));
-      });
-
-    await dbtask.none(verifyEmail, [email]);
-    done();
-  });
-};
-
-const mockRequest = (session, body, query) => ({
+const mockRequest = (session, body, query, params) => ({
   session,
   body,
   query,
+  params,
 });
 
 const mockResponse = () => {
@@ -63,5 +45,5 @@ const mockResponse = () => {
 };
 
 export {
-  mockRequest, mockResponse, signupUser, signupNewUser,
+  loginUser, mockRequest, mockResponse, signupUser,
 };

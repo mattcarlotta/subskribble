@@ -12,9 +12,13 @@ describe('Email Verification Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles missing email token verification requests', async () => {
     const req = mockRequest(null, null, { token: '' });
-    const res = mockResponse();
 
     await verifyAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -25,7 +29,6 @@ describe('Email Verification Controller', () => {
 
   it('handles invalid email token verification requests', async () => {
     const req = mockRequest(null, null, { token: `${createRandomToken}` });
-    const res = mockResponse();
 
     await verifyAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -36,7 +39,6 @@ describe('Email Verification Controller', () => {
 
   it('handles valid email token verification requests', async () => {
     const req = mockRequest(null, null, { token: user.token });
-    const res = mockResponse();
 
     await verifyAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(201);

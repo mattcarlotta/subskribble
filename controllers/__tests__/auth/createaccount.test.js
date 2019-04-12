@@ -29,9 +29,13 @@ const newAccount = {
 };
 
 describe('Create Account Controller', () => {
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles empty body requests', async () => {
     const req = mockRequest(null, emptybody);
-    const res = mockResponse();
 
     await create(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -44,7 +48,6 @@ describe('Create Account Controller', () => {
     passport.authenticate = jest.fn((strategy, callback) => () => callback('That account already exists.'));
 
     const req = mockRequest(null, accountAlreadyExists);
-    const res = mockResponse();
 
     await create(req, res);
 
@@ -61,7 +64,6 @@ describe('Create Account Controller', () => {
     passport.authenticate = jest.fn((strategy, callback) => () => callback(''));
 
     const req = mockRequest(null, newAccount);
-    const res = mockResponse();
 
     await create(req, res);
 

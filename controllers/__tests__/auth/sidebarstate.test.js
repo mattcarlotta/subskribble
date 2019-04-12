@@ -11,9 +11,13 @@ describe('Sidebar State Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles empty query requests', async () => {
     const req = mockRequest(null, null, { collapseSideNav: '' });
-    const res = mockResponse();
 
     await saveSidebarState(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -24,7 +28,6 @@ describe('Sidebar State Controller', () => {
 
   it('handles valid requests to update sidebar state', async () => {
     const req = mockRequest({ ...user }, null, { collapseSideNav: true });
-    const res = mockResponse();
 
     await saveSidebarState(req, res);
     expect(res.status).toHaveBeenCalledWith(201);

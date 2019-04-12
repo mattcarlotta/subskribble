@@ -34,9 +34,13 @@ describe('Delete Account Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles empty body requests', async () => {
     const req = mockRequest(null, emptybody);
-    const res = mockResponse();
 
     await deleteAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -50,7 +54,6 @@ describe('Delete Account Controller', () => {
       { ...user, id: '111b1cbe-1bb1-11e1-1111-11e1a11111c1' },
       deleteAccountProps,
     );
-    const res = mockResponse();
 
     await deleteAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -61,7 +64,6 @@ describe('Delete Account Controller', () => {
 
   it('handles invalid user passwords requests', async () => {
     const req = mockRequest(user, badPassword);
-    const res = mockResponse();
 
     await deleteAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -72,7 +74,6 @@ describe('Delete Account Controller', () => {
 
   it('handles valid delete account requests', async () => {
     const req = mockRequest(user, deleteAccountProps);
-    const res = mockResponse();
 
     await deleteAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(202);

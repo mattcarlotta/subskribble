@@ -76,9 +76,13 @@ describe('Update Account Controller', () => {
     user = await signupUser(newSignupEmail, newCompany);
   });
 
+  let res;
+  beforeEach(() => {
+    res = mockResponse();
+  });
+
   it('handles empty body requests', async () => {
     const req = mockRequest(null, emptybody);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -92,7 +96,6 @@ describe('Update Account Controller', () => {
       { id: '008b2cbe-5bb6-11e9-8d9f-9fe6a40024c0' },
       newAccount,
     );
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -103,7 +106,6 @@ describe('Update Account Controller', () => {
 
   it('handles invalid requests to update a company name to a name that already exists', async () => {
     const req = mockRequest(user, companyExists);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -114,7 +116,6 @@ describe('Update Account Controller', () => {
 
   it('handles invalid requests to update an account with an invalid password', async () => {
     const req = mockRequest(user, invalidAccountPassword);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -125,7 +126,6 @@ describe('Update Account Controller', () => {
 
   it('handles invalid requests to update an account with the same password', async () => {
     const req = mockRequest(user, sameAccountPassword);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -136,7 +136,6 @@ describe('Update Account Controller', () => {
 
   it('handles valid requests to update non-essential account info', async () => {
     const req = mockRequest(user, newAccountInfo);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
@@ -149,7 +148,6 @@ describe('Update Account Controller', () => {
 
   it('handles valid requests to update the account password', async () => {
     const req = mockRequest(user, updateAccountPassword);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
@@ -162,7 +160,6 @@ describe('Update Account Controller', () => {
 
   it('handles valid requests to update the account email', async () => {
     const req = mockRequest(user, newEmailAccount);
-    const res = mockResponse();
 
     await updateAccount(req, res);
     expect(mailer.send).toHaveBeenCalled();
