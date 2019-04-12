@@ -1,7 +1,7 @@
-import { fetchCounts } from 'controllers/messages';
-import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
+import { fetchCounts } from "controllers/messages";
+import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe('FetchCounts Message Controller', () => {
+describe("FetchCounts Message Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -12,7 +12,7 @@ describe('FetchCounts Message Controller', () => {
     res = mockResponse();
   });
 
-  it('handles valid fetch count requests', async () => {
+  it("handles valid fetch count requests", async () => {
     const req = mockRequest(user);
 
     await fetchCounts(req, res);

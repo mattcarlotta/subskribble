@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { index } from 'controllers/subscribers';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { index } from "controllers/subscribers";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/subscribers', () => ({
-  ...require.requireActual('controllers/subscribers'),
+jest.mock("controllers/subscribers", () => ({
+  ...require.requireActual("controllers/subscribers"),
   index: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch Subscribers Index Route', () => {
+describe("Fetch Subscribers Index Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     index.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/subscribers')
+      .get("/api/subscribers")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the index controller', async () => {
+  it("routes authenticated requests to the index controller", async () => {
     await app()
-      .get('/api/subscribers')
+      .get("/api/subscribers")
       .then(() => {
         expect(index).toHaveBeenCalledTimes(1);
       });

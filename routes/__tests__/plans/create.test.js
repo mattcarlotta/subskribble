@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { create } from 'controllers/plans';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { create } from "controllers/plans";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/plans', () => ({
-  ...require.requireActual('controllers/plans'),
+jest.mock("controllers/plans", () => ({
+  ...require.requireActual("controllers/plans"),
   create: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Create A Plan Route', () => {
+describe("Create A Plan Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     create.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .post('/api/plans/create')
+      .post("/api/plans/create")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the create controller', async () => {
+  it("routes authenticated requests to the create controller", async () => {
     await app()
-      .post('/api/plans/create')
+      .post("/api/plans/create")
       .then(() => {
         expect(create).toHaveBeenCalledTimes(1);
       });

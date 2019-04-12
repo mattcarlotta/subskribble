@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { selectOne } from 'controllers/templates';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { selectOne } from "controllers/templates";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/templates', () => ({
-  ...require.requireActual('controllers/templates'),
+jest.mock("controllers/templates", () => ({
+  ...require.requireActual("controllers/templates"),
   selectOne: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Select A Template Route', () => {
+describe("Select A Template Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     selectOne.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/templates/template?id=null')
+      .get("/api/templates/template?id=null")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the selectOne controller', async () => {
+  it("routes authenticated requests to the selectOne controller", async () => {
     await app()
-      .get('/api/templates/template?id=null')
+      .get("/api/templates/template?id=null")
       .then(() => {
         expect(selectOne).toHaveBeenCalledTimes(1);
       });

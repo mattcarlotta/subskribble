@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { index } from 'controllers/messages';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { index } from "controllers/messages";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/messages', () => ({
-  ...require.requireActual('controllers/messages'),
+jest.mock("controllers/messages", () => ({
+  ...require.requireActual("controllers/messages"),
   index: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Index Message Route', () => {
+describe("Index Message Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     index.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/messages')
+      .get("/api/messages")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the index controller', async () => {
+  it("routes authenticated requests to the index controller", async () => {
     await app()
-      .get('/api/messages')
+      .get("/api/messages")
       .then(() => {
         expect(index).toHaveBeenCalledTimes(1);
       });

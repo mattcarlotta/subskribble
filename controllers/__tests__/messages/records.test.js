@@ -1,8 +1,8 @@
-import { fetchRecords } from 'controllers/messages';
-import { missingQueryParams } from 'errors';
-import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
+import { fetchRecords } from "controllers/messages";
+import { missingQueryParams } from "errors";
+import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe('Index Message Controller', () => {
+describe("Index Message Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -13,8 +13,8 @@ describe('Index Message Controller', () => {
     res = mockResponse();
   });
 
-  it('handles missing query params requests', async () => {
-    const req = mockRequest(null, null, { page: '', limit: '' });
+  it("handles missing query params requests", async () => {
+    const req = mockRequest(null, null, { page: "", limit: "" });
 
     await fetchRecords(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -23,8 +23,8 @@ describe('Index Message Controller', () => {
     });
   });
 
-  it('handles valid fetch count requests', async () => {
-    const req = mockRequest(user, null, { page: '0', limit: '10' });
+  it("handles valid fetch count requests", async () => {
+    const req = mockRequest(user, null, { page: "0", limit: "10" });
 
     await fetchRecords(req, res);
     expect(res.status).toHaveBeenCalledWith(201);

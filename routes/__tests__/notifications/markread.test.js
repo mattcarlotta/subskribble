@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { updateAll } from 'controllers/notifications';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { updateAll } from "controllers/notifications";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/notifications', () => ({
-  ...require.requireActual('controllers/notifications'),
+jest.mock("controllers/notifications", () => ({
+  ...require.requireActual("controllers/notifications"),
   updateAll: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Notification Mark All As Read Route', () => {
+describe("Notification Mark All As Read Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     updateAll.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .put('/api/notification/markasread')
+      .put("/api/notification/markasread")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the updateAll controller', async () => {
+  it("routes authenticated requests to the updateAll controller", async () => {
     await app()
-      .put('/api/notification/markasread')
+      .put("/api/notification/markasread")
       .then(() => {
         expect(updateAll).toHaveBeenCalledTimes(1);
       });

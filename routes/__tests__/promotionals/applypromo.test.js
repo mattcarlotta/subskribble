@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { apply } from 'controllers/promotionals';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { apply } from "controllers/promotionals";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/promotionals', () => ({
-  ...require.requireActual('controllers/promotionals'),
+jest.mock("controllers/promotionals", () => ({
+  ...require.requireActual("controllers/promotionals"),
   apply: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Apply A Promotional Route', () => {
+describe("Apply A Promotional Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     apply.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/promotionals/apply-promotion?')
+      .get("/api/promotionals/apply-promotion?")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the apply controller', async () => {
+  it("routes authenticated requests to the apply controller", async () => {
     await app()
-      .get('/api/promotionals/apply-promotion?')
+      .get("/api/promotionals/apply-promotion?")
       .then(() => {
         expect(apply).toHaveBeenCalledTimes(1);
       });

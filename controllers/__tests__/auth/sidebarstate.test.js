@@ -1,11 +1,11 @@
-import { saveSidebarState } from 'controllers/auth';
-import { missingSidebarState } from 'authErrors';
-import { mockRequest, mockResponse, signupUser } from '../../__mocks__/helpers';
+import { saveSidebarState } from "controllers/auth";
+import { missingSidebarState } from "authErrors";
+import { mockRequest, mockResponse, signupUser } from "../../__mocks__/helpers";
 
-const newSignupEmail = 'sidebar@test.com';
-const newCompany = 'Sidebar Handlers LLC';
+const newSignupEmail = "sidebar@test.com";
+const newCompany = "Sidebar Handlers LLC";
 
-describe('Sidebar State Controller', () => {
+describe("Sidebar State Controller", () => {
   let user;
   beforeAll(async () => {
     user = await signupUser(newSignupEmail, newCompany);
@@ -16,8 +16,8 @@ describe('Sidebar State Controller', () => {
     res = mockResponse();
   });
 
-  it('handles empty query requests', async () => {
-    const req = mockRequest(null, null, { collapseSideNav: '' });
+  it("handles empty query requests", async () => {
+    const req = mockRequest(null, null, { collapseSideNav: "" });
 
     await saveSidebarState(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -26,7 +26,7 @@ describe('Sidebar State Controller', () => {
     });
   });
 
-  it('handles valid requests to update sidebar state', async () => {
+  it("handles valid requests to update sidebar state", async () => {
     const req = mockRequest({ ...user }, null, { collapseSideNav: true });
 
     await saveSidebarState(req, res);

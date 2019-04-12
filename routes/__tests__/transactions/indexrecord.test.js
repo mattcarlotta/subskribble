@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { index } from 'controllers/transactions';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { index } from "controllers/transactions";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/transactions', () => ({
-  ...require.requireActual('controllers/transactions'),
+jest.mock("controllers/transactions", () => ({
+  ...require.requireActual("controllers/transactions"),
   index: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch Transactions Index Records Route', () => {
+describe("Fetch Transactions Index Records Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     index.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/transactions')
+      .get("/api/transactions")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the index controller', async () => {
+  it("routes authenticated requests to the index controller", async () => {
     await app()
-      .get('/api/transactions')
+      .get("/api/transactions")
       .then(() => {
         expect(index).toHaveBeenCalledTimes(1);
       });

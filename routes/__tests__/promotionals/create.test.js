@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { create } from 'controllers/promotionals';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { create } from "controllers/promotionals";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/promotionals', () => ({
-  ...require.requireActual('controllers/promotionals'),
+jest.mock("controllers/promotionals", () => ({
+  ...require.requireActual("controllers/promotionals"),
   create: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Create A Promotional Route', () => {
+describe("Create A Promotional Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     create.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .post('/api/promotionals/create')
+      .post("/api/promotionals/create")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the create controller', async () => {
+  it("routes authenticated requests to the create controller", async () => {
     await app()
-      .post('/api/promotionals/create')
+      .post("/api/promotionals/create")
       .then(() => {
         expect(create).toHaveBeenCalledTimes(1);
       });

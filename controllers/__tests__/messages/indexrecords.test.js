@@ -1,7 +1,7 @@
-import { index } from 'controllers/messages';
-import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
+import { index } from "controllers/messages";
+import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe('Index Message Controller', () => {
+describe("Index Message Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -12,7 +12,7 @@ describe('Index Message Controller', () => {
     res = mockResponse();
   });
 
-  it('handles valid fetch count requests', async () => {
+  it("handles valid fetch count requests", async () => {
     const req = mockRequest(user);
 
     await index(req, res);

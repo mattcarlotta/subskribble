@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { fetchCounts } from 'controllers/transactions';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { fetchCounts } from "controllers/transactions";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/transactions', () => ({
-  ...require.requireActual('controllers/transactions'),
+jest.mock("controllers/transactions", () => ({
+  ...require.requireActual("controllers/transactions"),
   fetchCounts: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch Transactions Counts Route', () => {
+describe("Fetch Transactions Counts Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     fetchCounts.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/transactioncounts')
+      .get("/api/transactioncounts")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the fetchCounts controller', async () => {
+  it("routes authenticated requests to the fetchCounts controller", async () => {
     await app()
-      .get('/api/transactioncounts')
+      .get("/api/transactioncounts")
       .then(() => {
         expect(fetchCounts).toHaveBeenCalledTimes(1);
       });

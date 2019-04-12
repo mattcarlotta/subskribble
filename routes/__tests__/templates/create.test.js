@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { create } from 'controllers/templates';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { create } from "controllers/templates";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/templates', () => ({
-  ...require.requireActual('controllers/templates'),
+jest.mock("controllers/templates", () => ({
+  ...require.requireActual("controllers/templates"),
   create: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Create A Template Route', () => {
+describe("Create A Template Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     create.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .post('/api/templates/create')
+      .post("/api/templates/create")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the create controller', async () => {
+  it("routes authenticated requests to the create controller", async () => {
     await app()
-      .post('/api/templates/create')
+      .post("/api/templates/create")
       .then(() => {
         expect(create).toHaveBeenCalledTimes(1);
       });

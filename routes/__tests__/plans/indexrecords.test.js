@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { index } from 'controllers/plans';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { index } from "controllers/plans";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/plans', () => ({
-  ...require.requireActual('controllers/plans'),
+jest.mock("controllers/plans", () => ({
+  ...require.requireActual("controllers/plans"),
   index: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch Index Plans Route', () => {
+describe("Fetch Index Plans Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     index.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/plans')
+      .get("/api/plans")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the index controller', async () => {
+  it("routes authenticated requests to the index controller", async () => {
     await app()
-      .get('/api/plans')
+      .get("/api/plans")
       .then(() => {
         expect(index).toHaveBeenCalledTimes(1);
       });

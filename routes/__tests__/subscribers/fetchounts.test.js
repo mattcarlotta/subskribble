@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { fetchCounts } from 'controllers/subscribers';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { fetchCounts } from "controllers/subscribers";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/subscribers', () => ({
-  ...require.requireActual('controllers/subscribers'),
+jest.mock("controllers/subscribers", () => ({
+  ...require.requireActual("controllers/subscribers"),
   fetchCounts: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch Subscribers Counts Route', () => {
+describe("Fetch Subscribers Counts Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     fetchCounts.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/subscribercounts')
+      .get("/api/subscribercounts")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the fetchCounts controller', async () => {
+  it("routes authenticated requests to the fetchCounts controller", async () => {
     await app()
-      .get('/api/subscribercounts')
+      .get("/api/subscribercounts")
       .then(() => {
         expect(fetchCounts).toHaveBeenCalledTimes(1);
       });

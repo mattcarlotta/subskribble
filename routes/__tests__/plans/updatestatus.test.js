@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { updateStatus } from 'controllers/plans';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { updateStatus } from "controllers/plans";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/plans', () => ({
-  ...require.requireActual('controllers/plans'),
+jest.mock("controllers/plans", () => ({
+  ...require.requireActual("controllers/plans"),
   updateStatus: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Update A Plan Status Route', () => {
+describe("Update A Plan Status Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     updateStatus.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .put('/api/plans/update/null')
+      .put("/api/plans/update/null")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the updateStatus controller', async () => {
+  it("routes authenticated requests to the updateStatus controller", async () => {
     await app()
-      .put('/api/plans/update/null')
+      .put("/api/plans/update/null")
       .then(() => {
         expect(updateStatus).toHaveBeenCalledTimes(1);
       });

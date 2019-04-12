@@ -1,11 +1,11 @@
-import { loggedin } from 'controllers/auth';
-import { badCredentials } from 'authErrors';
-import { mockRequest, mockResponse, signupUser } from '../../__mocks__/helpers';
+import { loggedin } from "controllers/auth";
+import { badCredentials } from "authErrors";
+import { mockRequest, mockResponse, signupUser } from "../../__mocks__/helpers";
 
-const newSignupEmail = 'loggedinuser@test.com';
-const newCompany = 'LoggedIn Handlers LLC';
+const newSignupEmail = "loggedinuser@test.com";
+const newCompany = "LoggedIn Handlers LLC";
 
-describe('Logged In Session Controller', () => {
+describe("Logged In Session Controller", () => {
   let user;
   beforeAll(async () => {
     user = await signupUser(newSignupEmail, newCompany);
@@ -16,7 +16,7 @@ describe('Logged In Session Controller', () => {
     res = mockResponse();
   });
 
-  it('handles invalid loggedin session requests', async () => {
+  it("handles invalid loggedin session requests", async () => {
     const req = mockRequest(null);
 
     await loggedin(req, res);
@@ -26,7 +26,7 @@ describe('Logged In Session Controller', () => {
     });
   });
 
-  it('handles valid loggedin session requests', async () => {
+  it("handles valid loggedin session requests", async () => {
     const req = mockRequest(user);
 
     await loggedin(req, res);

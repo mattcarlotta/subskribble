@@ -1,10 +1,10 @@
-import bcrypt from 'bcrypt';
-import passport from 'passport';
-import isEmpty from 'lodash/isEmpty';
-import mailer from '@sendgrid/mail';
-import db from 'db';
-import { changedEmail } from 'emailTemplates';
-import config from 'env';
+import bcrypt from "bcrypt";
+import passport from "passport";
+import isEmpty from "lodash/isEmpty";
+import mailer from "@sendgrid/mail";
+import db from "db";
+import { changedEmail } from "emailTemplates";
+import config from "env";
 import {
   deleteUserAccount,
   getAvatarToken,
@@ -20,7 +20,7 @@ import {
   updateUserPassword,
   userFeedback,
   verifyEmail,
-} from 'queries';
+} from "queries";
 import {
   badCredentials,
   companyAlreadyExists,
@@ -34,7 +34,7 @@ import {
   notUniquePassword,
   unableLocatePass,
   unableToRemove,
-} from 'authErrors';
+} from "authErrors";
 import {
   passwordResetSuccess,
   passwordResetToken,
@@ -42,9 +42,9 @@ import {
   thanksForReg,
   updatedAccount,
   updatedAccountDetails,
-} from 'authSuccess';
-import { sendError, createRandomToken } from 'helpers';
-import { missingDeletionParams, missingUpdateParams } from 'errors';
+} from "authSuccess";
+import { sendError, createRandomToken } from "helpers";
+import { missingDeletionParams, missingUpdateParams } from "errors";
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];
@@ -59,7 +59,7 @@ const create = (req, res, done) => {
     return sendError(missingCredentials, res, done);
   }
 
-  passport.authenticate('local-signup', err => (err
+  passport.authenticate("local-signup", err => (err
     ? sendError(err, res, done)
     : res
       .status(201)
@@ -78,7 +78,7 @@ const deleteAccount = async (req, res, done) => {
   }
 
   try {
-    await db.task('delete-account', async (dbtask) => {
+    await db.task("delete-account", async (dbtask) => {
       const user = await dbtask.oneOrNone(getUserPassword, [req.session.id]);
       if (!user) return sendError(unableLocatePass, res, done);
 
@@ -111,7 +111,7 @@ const login = (req, res, done) => {
   const { email, password } = req.body;
   if (!email || !password) return sendError(badCredentials, res, done);
 
-  passport.authenticate('local-login', err => (err || !req.session || isEmpty(req.session)
+  passport.authenticate("local-login", err => (err || !req.session || isEmpty(req.session)
     ? sendError(err || badCredentials, res, done)
     : res.status(201).json({ ...req.session })))(req, res, done);
 };
@@ -125,9 +125,9 @@ const loggedin = (req, res, done) => (!req.session || isEmpty(req.session)
 const logout = (req, res) => {
   req.session = null;
   res
-    .clearCookie('Authorization', { path: '/' })
+    .clearCookie("Authorization", { path: "/" })
     .status(200)
-    .send('Cookie deleted.');
+    .send("Cookie deleted.");
 };
 
 // ALLOWS A USER TO UPDATE THEIR PASSWORD WITH A TOKEN
@@ -138,8 +138,8 @@ const resetPassword = (req, res, done) => {
   const { email, password } = req.body;
   if (!email || !password) return sendError(invalidPassword, res, done);
 
-  passport.authenticate('reset-password', (err, existingEmail) => (err || !existingEmail
-    ? sendError(err || 'No user found!', res, done)
+  passport.authenticate("reset-password", (err, existingEmail) => (err || !existingEmail
+    ? sendError(err || "No user found!", res, done)
     : res.status(201).json({ message: passwordResetSuccess(existingEmail) })))(req, res, done);
 };
 
@@ -148,8 +148,8 @@ const resetToken = (req, res, done) => {
   const { email } = req.body;
   if (!email) return sendError(missingEmailCreds, res, done);
 
-  passport.authenticate('reset-token', (err, existingEmail) => (err || !existingEmail
-    ? sendError(err || 'No user found!', res, done)
+  passport.authenticate("reset-token", (err, existingEmail) => (err || !existingEmail
+    ? sendError(err || "No user found!", res, done)
     : res.status(201).json(passwordResetToken(email))))(req, res, done);
 };
 
@@ -195,7 +195,7 @@ const updateAccount = async (req, res, done) => {
   if (!user) return sendError(unableLocatePass, res, done);
 
   try {
-    await db.task('update-account', async (dbtask) => {
+    await db.task("update-account", async (dbtask) => {
       const {
         email: currentEmail,
         company: currentCompany,
@@ -259,8 +259,8 @@ const updateAccount = async (req, res, done) => {
 
         const msg = {
           to: `${updatedEmail}`,
-          from: 'helpdesk@subskribble.com',
-          subject: 'Please verify your email address',
+          from: "helpdesk@subskribble.com",
+          subject: "Please verify your email address",
           html: changedEmail(
             portal,
             req.session.firstname,
@@ -274,7 +274,7 @@ const updateAccount = async (req, res, done) => {
         res.status(201).json({ message: updatedAccount });
       } else {
         res.status(201).json({
-          user: !updatedPassword ? { ...req.session } : '',
+          user: !updatedPassword ? { ...req.session } : "",
           fetchnotifications: !updatedPassword,
           message: !updatedPassword
             ? updatedAccountDetails
@@ -293,7 +293,7 @@ const verifyAccount = async (req, res, done) => {
   if (!token) return sendError(missingToken, res, done);
 
   try {
-    await db.task('verify-email', async (dbtask) => {
+    await db.task("verify-email", async (dbtask) => {
       const existingUser = await dbtask.oneOrNone(findUserByToken, [token]);
       if (!existingUser) {
         return sendError(invalidToken, res, done);

@@ -1,16 +1,16 @@
-import mailer from '@sendgrid/mail';
-import { create } from 'controllers/messages';
-import { missingCreationParams, unableToLocate } from 'errors';
-import { loginUser, mockRequest, mockResponse } from '../../__mocks__/helpers';
+import mailer from "@sendgrid/mail";
+import { create } from "controllers/messages";
+import { missingCreationParams, unableToLocate } from "errors";
+import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe('Create Message Controller', () => {
+describe("Create Message Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
   });
 
-  it('handles empty body requests', async () => {
-    const req = mockRequest(null, { template: '' });
+  it("handles empty body requests", async () => {
+    const req = mockRequest(null, { template: "" });
     const res = mockResponse();
 
     await create(req, res);
@@ -20,22 +20,22 @@ describe('Create Message Controller', () => {
     });
   });
 
-  it('handles invalid message requests', async () => {
+  it("handles invalid message requests", async () => {
     const req = mockRequest(user, {
-      template: 'Bad Template',
+      template: "Bad Template",
     });
     const res = mockResponse();
 
     await create(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: unableToLocate('template'),
+      err: unableToLocate("template"),
     });
   });
 
-  it('handles valid message requests', async () => {
+  it("handles valid message requests", async () => {
     const req = mockRequest(user, {
-      template: 'Partners Template',
+      template: "Partners Template",
     });
     const res = mockResponse();
 

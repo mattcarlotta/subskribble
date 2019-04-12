@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { index } from 'controllers/notifications';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { index } from "controllers/notifications";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/notifications', () => ({
-  ...require.requireActual('controllers/notifications'),
+jest.mock("controllers/notifications", () => ({
+  ...require.requireActual("controllers/notifications"),
   index: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Notification Index Route', () => {
+describe("Notification Index Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     index.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/notifications')
+      .get("/api/notifications")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the index controller', async () => {
+  it("routes authenticated requests to the index controller", async () => {
     await app()
-      .get('/api/notifications')
+      .get("/api/notifications")
       .then(() => {
         expect(index).toHaveBeenCalledTimes(1);
       });

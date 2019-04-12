@@ -1,15 +1,15 @@
-import app from 'utils/setup';
-import { logout } from 'controllers/auth';
+import app from "utils/setup";
+import { logout } from "controllers/auth";
 
-jest.mock('controllers/auth', () => ({
-  ...require.requireActual('controllers/auth'),
+jest.mock("controllers/auth", () => ({
+  ...require.requireActual("controllers/auth"),
   logout: jest.fn((req, res, done) => done()),
 }));
 
-describe('Logout Session Route', () => {
-  it('routes authenticated requests to the logout controller', async () => {
+describe("Logout Session Route", () => {
+  it("routes authenticated requests to the logout controller", async () => {
     await app()
-      .post('/api/logout')
+      .post("/api/logout")
       .then(() => {
         expect(logout).toHaveBeenCalledTimes(1);
       });

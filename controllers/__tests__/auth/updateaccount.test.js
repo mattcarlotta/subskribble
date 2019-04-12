@@ -1,52 +1,52 @@
-import mailer from '@sendgrid/mail';
-import { updateAccount } from 'controllers/auth';
+import mailer from "@sendgrid/mail";
+import { updateAccount } from "controllers/auth";
 import {
   companyAlreadyExists,
   invalidPassword,
   notUniquePassword,
   unableLocatePass,
-} from 'authErrors';
+} from "authErrors";
 import {
   passwordResetSuccess,
   updatedAccount,
   updatedAccountDetails,
-} from 'authSuccess';
-import { missingUpdateParams } from 'errors';
-import { mockRequest, mockResponse, signupUser } from '../../__mocks__/helpers';
+} from "authSuccess";
+import { missingUpdateParams } from "errors";
+import { mockRequest, mockResponse, signupUser } from "../../__mocks__/helpers";
 
-const newSignupEmail = 'updateaccount@test.com';
-const newSignupPassword = 'password123';
-const newCompany = 'New Company LLC';
+const newSignupEmail = "updateaccount@test.com";
+const newSignupPassword = "password123";
+const newCompany = "New Company LLC";
 
 const emptybody = {
-  email: '',
-  password: '',
-  firstName: '',
-  lastName: '',
-  company: '',
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  company: "",
 };
 
 const newAccount = {
   email: newSignupEmail,
   currentPassword: newSignupPassword,
-  firstName: 'New',
-  lastName: 'Account',
+  firstName: "New",
+  lastName: "Account",
   company: newCompany,
 };
 
 const companyExists = {
   ...newAccount,
-  company: 'Subskribble',
+  company: "Subskribble",
 };
 
 const invalidAccountPassword = {
   ...newAccount,
-  currentPassword: 'invalid',
+  currentPassword: "invalid",
 };
 
 const sameAccountPassword = {
   ...newAccount,
-  updatedPassword: 'password123',
+  updatedPassword: "password123",
 };
 
 // /
@@ -54,23 +54,23 @@ const sameAccountPassword = {
 const newAccountInfo = {
   email: newSignupEmail,
   currentPassword: newSignupPassword,
-  firstName: 'Beta',
-  lastName: 'Tester',
-  company: 'New Account LLC',
+  firstName: "Beta",
+  lastName: "Tester",
+  company: "New Account LLC",
 };
 
 const updateAccountPassword = {
   ...newAccountInfo,
-  updatedPassword: '123password',
+  updatedPassword: "123password",
 };
 
 const newEmailAccount = {
   ...newAccountInfo,
-  email: 'newaccountemail@test.com',
-  currentPassword: '123password',
+  email: "newaccountemail@test.com",
+  currentPassword: "123password",
 };
 
-describe('Update Account Controller', () => {
+describe("Update Account Controller", () => {
   let user;
   beforeAll(async () => {
     user = await signupUser(newSignupEmail, newCompany);
@@ -81,7 +81,7 @@ describe('Update Account Controller', () => {
     res = mockResponse();
   });
 
-  it('handles empty body requests', async () => {
+  it("handles empty body requests", async () => {
     const req = mockRequest(null, emptybody);
 
     await updateAccount(req, res);
@@ -91,9 +91,9 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles invalid session id with a body request', async () => {
+  it("handles invalid session id with a body request", async () => {
     const req = mockRequest(
-      { id: '008b2cbe-5bb6-11e9-8d9f-9fe6a40024c0' },
+      { id: "008b2cbe-5bb6-11e9-8d9f-9fe6a40024c0" },
       newAccount,
     );
 
@@ -104,7 +104,7 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles invalid requests to update a company name to a name that already exists', async () => {
+  it("handles invalid requests to update a company name to a name that already exists", async () => {
     const req = mockRequest(user, companyExists);
 
     await updateAccount(req, res);
@@ -114,7 +114,7 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles invalid requests to update an account with an invalid password', async () => {
+  it("handles invalid requests to update an account with an invalid password", async () => {
     const req = mockRequest(user, invalidAccountPassword);
 
     await updateAccount(req, res);
@@ -124,7 +124,7 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles invalid requests to update an account with the same password', async () => {
+  it("handles invalid requests to update an account with the same password", async () => {
     const req = mockRequest(user, sameAccountPassword);
 
     await updateAccount(req, res);
@@ -134,7 +134,7 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles valid requests to update non-essential account info', async () => {
+  it("handles valid requests to update non-essential account info", async () => {
     const req = mockRequest(user, newAccountInfo);
 
     await updateAccount(req, res);
@@ -146,19 +146,19 @@ describe('Update Account Controller', () => {
     });
   });
 
-  it('handles valid requests to update the account password', async () => {
+  it("handles valid requests to update the account password", async () => {
     const req = mockRequest(user, updateAccountPassword);
 
     await updateAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      user: '',
+      user: "",
       fetchnotifications: false,
       message: passwordResetSuccess(updateAccountPassword.email),
     });
   });
 
-  it('handles valid requests to update the account email', async () => {
+  it("handles valid requests to update the account email", async () => {
     const req = mockRequest(user, newEmailAccount);
 
     await updateAccount(req, res);

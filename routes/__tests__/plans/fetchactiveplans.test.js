@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { fetchAllActiveRecords } from 'controllers/plans';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { fetchAllActiveRecords } from "controllers/plans";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/plans', () => ({
-  ...require.requireActual('controllers/plans'),
+jest.mock("controllers/plans", () => ({
+  ...require.requireActual("controllers/plans"),
   fetchAllActiveRecords: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Fetch All Active Plans Route', () => {
+describe("Fetch All Active Plans Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     fetchAllActiveRecords.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/plans/only-active')
+      .get("/api/plans/only-active")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the fetchAllActiveRecords controller', async () => {
+  it("routes authenticated requests to the fetchAllActiveRecords controller", async () => {
     await app()
-      .get('/api/plans/only-active')
+      .get("/api/plans/only-active")
       .then(() => {
         expect(fetchAllActiveRecords).toHaveBeenCalledTimes(1);
       });

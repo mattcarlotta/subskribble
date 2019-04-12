@@ -1,31 +1,31 @@
-import app from 'utils/setup';
-import { fetchOne } from 'controllers/transactions';
-import { requireAuth } from 'strategies';
+import app from "utils/setup";
+import { fetchOne } from "controllers/transactions";
+import { requireAuth } from "strategies";
 
-jest.mock('controllers/transactions', () => ({
-  ...require.requireActual('controllers/transactions'),
+jest.mock("controllers/transactions", () => ({
+  ...require.requireActual("controllers/transactions"),
   fetchOne: jest.fn((req, res, done) => done()),
 }));
 
-jest.mock('services/strategies/requireAuth', () => jest.fn((req, res, done) => done()));
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
 
-describe('Select A Transaction Route', () => {
+describe("Select A Transaction Route", () => {
   afterEach(() => {
     requireAuth.mockClear();
     fetchOne.mockClear();
   });
 
-  it('routes initial requests to authentication middleware', async () => {
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .get('/api/transaction/record?id=null')
+      .get("/api/transaction/record?id=null")
       .then(() => {
         expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('routes authenticated requests to the fetchOne controller', async () => {
+  it("routes authenticated requests to the fetchOne controller", async () => {
     await app()
-      .get('/api/transaction/record?id=null')
+      .get("/api/transaction/record?id=null")
       .then(() => {
         expect(fetchOne).toHaveBeenCalledTimes(1);
       });

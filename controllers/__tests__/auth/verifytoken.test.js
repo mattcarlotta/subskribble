@@ -1,12 +1,12 @@
-import { verifyAccount } from 'controllers/auth';
-import { missingToken, invalidToken } from 'authErrors';
-import { createRandomToken } from 'helpers';
-import { mockRequest, mockResponse, signupUser } from '../../__mocks__/helpers';
+import { verifyAccount } from "controllers/auth";
+import { missingToken, invalidToken } from "authErrors";
+import { createRandomToken } from "helpers";
+import { mockRequest, mockResponse, signupUser } from "../../__mocks__/helpers";
 
-const newSignupEmail = 'verification@example.com';
-const newCompany = 'Verification Corp';
+const newSignupEmail = "verification@example.com";
+const newCompany = "Verification Corp";
 
-describe('Email Verification Controller', () => {
+describe("Email Verification Controller", () => {
   let user;
   beforeAll(async () => {
     user = await signupUser(newSignupEmail, newCompany);
@@ -17,8 +17,8 @@ describe('Email Verification Controller', () => {
     res = mockResponse();
   });
 
-  it('handles missing email token verification requests', async () => {
-    const req = mockRequest(null, null, { token: '' });
+  it("handles missing email token verification requests", async () => {
+    const req = mockRequest(null, null, { token: "" });
 
     await verifyAccount(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -27,7 +27,7 @@ describe('Email Verification Controller', () => {
     });
   });
 
-  it('handles invalid email token verification requests', async () => {
+  it("handles invalid email token verification requests", async () => {
     const req = mockRequest(null, null, { token: `${createRandomToken}` });
 
     await verifyAccount(req, res);
@@ -37,7 +37,7 @@ describe('Email Verification Controller', () => {
     });
   });
 
-  it('handles valid email token verification requests', async () => {
+  it("handles valid email token verification requests", async () => {
     const req = mockRequest(null, null, { token: user.token });
 
     await verifyAccount(req, res);
