@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
-import db from 'db';
+import isEmpty from "lodash/isEmpty";
+import db from "db";
 import {
   createNotification,
   createTemplate,
@@ -12,13 +12,13 @@ import {
   updateTemplate,
   updateTemplateStatus,
   selectTemplate,
-} from 'queries';
+} from "queries";
 import {
   createUniqueTemplateName,
   currentDate,
   parseStringToNum,
   sendError,
-} from 'helpers';
+} from "helpers";
 import {
   createPlanFirst,
   createTemplateFirst,
@@ -29,7 +29,7 @@ import {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} from 'errors';
+} from "errors";
 
 // CREATES TEMPLATES RECORD
 const create = async (req, res, done) => {
@@ -42,12 +42,12 @@ const create = async (req, res, done) => {
   const date = currentDate();
 
   try {
-    await db.task('create-template', async (dbtask) => {
+    await db.task("create-template", async (dbtask) => {
       const templateExists = await dbtask.oneOrNone(selectTemplate, [
         req.session.id,
         uniquetemplatename,
       ]);
-      if (templateExists) return sendError(itemAlreadyExists('template'), res, done);
+      if (templateExists) return sendError(itemAlreadyExists("template"), res, done);
 
       await dbtask.none(createTemplate, [
         req.session.id,
@@ -61,9 +61,9 @@ const create = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'view_module',
+        "view_module",
         `A new template: ${templatename}, has been added to the following ${
-          plans.length > 1 ? 'plans' : 'plan'
+          plans.length > 1 ? "plans" : "plan"
         }: ${plans}.`,
         date,
       ]);
@@ -79,16 +79,22 @@ const create = async (req, res, done) => {
 const deleteOne = async (req, res, done) => {
   const { id } = req.params;
 
-  if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
   const date = currentDate();
 
   try {
-    await db.task('delete-template', async (dbtask) => {
+    await db.task("delete-template", async (dbtask) => {
+      const templateExists = await dbtask.oneOrNone(findTemplateById, [
+        req.session.id,
+        id,
+      ]);
+      if (!templateExists) return sendError(unableToLocate("template"), res, done);
+
       const name = await dbtask.result(deleteOneTemplate, [req.session.id, id]);
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'view_module',
+        "view_module",
         `The following template: ${
           name.rows[0].templatename
         }, has been deleted.`,
@@ -128,7 +134,7 @@ const fetchRecords = async (req, res, done) => {
 
   limit = parseStringToNum(limit);
   const offset = parseStringToNum(page) * limit;
-  const status = table === 'activetemplates' ? ['active'] : ['inactive', 'suspended'];
+  const status = table === "activetemplates" ? ["active"] : ["inactive", "suspended"];
 
   try {
     let activetemplates;
@@ -137,7 +143,7 @@ const fetchRecords = async (req, res, done) => {
       getSomeTemplates(req.session.id, limit, offset, status),
     );
 
-    if (table === 'activetemplates') {
+    if (table === "activetemplates") {
       activetemplates = templates;
     } else {
       inactivetemplates = templates;
@@ -166,12 +172,12 @@ const fetchCounts = async (req, res, done) => {
 // SENDS FIRST 10 RECORDS
 const index = async (req, res, done) => {
   try {
-    await db.task('fetch-subscriber-index', async (dbtask) => {
+    await db.task("fetch-subscriber-index", async (dbtask) => {
       const activetemplates = await dbtask.any(
-        getSomeTemplates(req.session.id, 10, 0, ['active']),
+        getSomeTemplates(req.session.id, 10, 0, ["active"]),
       );
       const inactivetemplates = await dbtask.any(
-        getSomeTemplates(req.session.id, 10, 0, ['suspended']),
+        getSomeTemplates(req.session.id, 10, 0, ["suspended"]),
       );
 
       res.status(201).json({ activetemplates, inactivetemplates });
@@ -195,14 +201,20 @@ const updateOne = async (req, res, done) => {
     || !subject
     || !templatename
     || !id
-    || id === 'null'
+    || id === "null"
   ) return sendError(missingUpdateParams, res, done);
 
   const uniquetemplatename = createUniqueTemplateName(templatename);
   const date = currentDate();
 
   try {
-    await db.task('update-template-record', async (dbtask) => {
+    await db.task("update-template-record", async (dbtask) => {
+      const templateExists = await dbtask.oneOrNone(findTemplateById, [
+        req.session.id,
+        id,
+      ]);
+      if (!templateExists) return sendError(unableToLocate("template"), res, done);
+
       const template = await dbtask.one(updateTemplate, [
         req.session.id,
         id,
@@ -216,7 +228,7 @@ const updateOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'view_module',
+        "view_module",
         `The following template: ${
           template.templatename
         }, has been successfully edited and updated.`,
@@ -235,28 +247,34 @@ const updateStatus = async (req, res, done) => {
   const { id } = req.params;
   const { updateType, statusType } = req.body;
 
-  if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+  if (!updateType || !statusType || !id || id === "null") return sendError(missingUpdateParams, res, done);
 
   const date = currentDate();
 
   try {
-    await db.task('update-template-status', async (dbtask) => {
+    await db.task("update-template-status", async (dbtask) => {
+      const templateExists = await dbtask.oneOrNone(findTemplateById, [
+        req.session.id,
+        id,
+      ]);
+      if (!templateExists) return sendError(unableToLocate("template"), res, done);
+
       const template = await dbtask.one(updateTemplateStatus, [
         req.session.id,
         id,
         statusType,
       ]);
 
-      const message = updateType === 'suspended'
-        ? 'deactivated and is no longer valid for'
-        : 'reactivated and is now valid for';
+      const message = updateType === "suspended"
+        ? "deactivated and is no longer valid for"
+        : "reactivated and is now valid for";
       await dbtask.none(createNotification, [
         req.session.id,
-        'view_module',
+        "view_module",
         `The following template: ${
           template.templatename
         }, has been ${message} the following ${
-          template.plans.length > 1 ? 'plans' : 'plan'
+          template.plans.length > 1 ? "plans" : "plan"
         }: ${template.plans}.`,
         date,
       ]);
@@ -271,11 +289,11 @@ const updateStatus = async (req, res, done) => {
 // SELECTS A SINGLE RECORD
 const selectOne = async (req, res, done) => {
   const { id } = req.query;
-  if (!id || id === 'null') return sendError(missingSelectParams, res, done);
+  if (!id || id === "null") return sendError(missingSelectParams, res, done);
 
   try {
     const template = await db.oneOrNone(findTemplateById, [req.session.id, id]);
-    if (!template) return sendError(unableToLocate('template'), res, done);
+    if (!template) return sendError(unableToLocate("template"), res, done);
 
     res.status(201).json({ ...template });
   } catch (err) {

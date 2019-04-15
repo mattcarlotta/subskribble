@@ -5,12 +5,12 @@ import {
   createPlan,
   deleteOnePlan,
   findPlanById,
+  findPlanByName,
   getAllActivePlans,
   getAllPlans,
   getPlanCount,
   updatePlan,
   updatePlanStatus,
-  selectPlan,
 } from "queries";
 import { currentDate, parseStringToNum, sendError } from "helpers";
 import {
@@ -41,11 +41,11 @@ const create = async (req, res, done) => {
 
   try {
     await db.task("create-plan", async (dbtask) => {
-      const planExists = await dbtask.oneOrNone(selectPlan, [
+      const planExists = await dbtask.oneOrNone(findPlanByName, [
         req.session.id,
         planname,
       ]);
-      if (planExists) return sendError(itemAlreadyExists("plan"), res, done);
+      if (!isEmpty(planExists)) return sendError(itemAlreadyExists("plan"), res, done);
 
       await dbtask.result(createPlan, [
         req.session.id,

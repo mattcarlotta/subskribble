@@ -180,6 +180,7 @@ const subQueries = {
   getSubscriberCount:
     "SELECT count(*) filter (WHERE status = 'active' AND userid=$1) AS active, count(*) filter (where status in ('inactive', 'suspended') and userid=$1) as inactive FROM subscribers;",
   getSubscriberId: "SELECT id FROM subscribers WHERE userid=$1 AND email=$2",
+  findSubscriberById: "SELECT id FROM subscribers WHERE userid=$1 AND id=$2",
   selectSubscriberByKey: "SELECT * FROM subscribers WHERE key=$1",
   updateOneSubscriber:
     "UPDATE subscribers SET status=$3, enddate=$4 WHERE userid=$1 AND id=$2 RETURNING subscriber,planName",

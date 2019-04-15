@@ -1,30 +1,32 @@
-import { create } from "controllers/plans";
+import { create } from "controllers/templates";
 import { missingCreationParams, itemAlreadyExists } from "errors";
 import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
 const emptybody = {
-  amount: "",
-  billevery: "",
-  planname: "",
-  description: "",
-  setupfee: "",
+  fromsender: "",
+  plans: [],
+  message: "",
+  subject: "",
+  templatename: "",
 };
 
-const planExists = {
-  amount: 9.99,
-  billevery: "Monthly",
-  planname: "Carlotta Switch",
-  description: "Test",
+const templateExists = {
+  fromsender: "betatester@subskribble.com",
+  plans: ["Carlotta Corp"],
+  message: "<span>Hello</span>",
+  subject: "Test",
+  templatename: "Employee Template",
 };
 
-const newPlan = {
-  amount: 9.99,
-  billevery: "Monthly",
-  planname: "New Awesome Plan",
-  description: "Test",
+const newTemplate = {
+  fromsender: "betatester@subskribble.com",
+  plans: ["Carlotta Prime"],
+  message: "<span>Test</span>",
+  subject: "Test",
+  templatename: "New Test Template",
 };
 
-describe("Create A Plan Controller", () => {
+describe("Create A Template Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -41,19 +43,19 @@ describe("Create A Plan Controller", () => {
     });
   });
 
-  it("handles plan already exists requests", async () => {
-    const req = mockRequest(user, planExists);
+  it("handles template already exists requests", async () => {
+    const req = mockRequest(user, templateExists);
     const res = mockResponse();
 
     await create(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: itemAlreadyExists("plan"),
+      err: itemAlreadyExists("template"),
     });
   });
 
-  it("handles valid new plan requests", async () => {
-    const req = mockRequest(user, newPlan);
+  it("handles valid new template requests", async () => {
+    const req = mockRequest(user, newTemplate);
     const res = mockResponse();
 
     await create(req, res);

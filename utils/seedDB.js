@@ -52,7 +52,7 @@ const planTableOptions = `(
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR DEFAULT 'active',
-    planName VARCHAR NOT NULL,
+    planName VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     amount DECIMAL(12,2) NOT NULL,
     setupFee DECIMAL(12,2),

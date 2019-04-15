@@ -1,4 +1,5 @@
-import db from 'db';
+import isEmpty from "lodash/isEmpty";
+import db from "db";
 import {
   createNotification,
   createTransaction,
@@ -6,18 +7,19 @@ import {
   deleteOneSubcriber,
   findPlanByName,
   findSubscriberByEmail,
+  findSubscriberById,
   getSomeSubcribers,
   getSubscriberCount,
   selectPromotionDetails,
   updateOneSubscriber,
   updatePromotionUsage,
-} from 'queries';
+} from "queries";
 import {
   currentDate,
   parseStringToFloat,
   parseStringToNum,
   sendError,
-} from 'helpers';
+} from "helpers";
 import {
   duplicateSub,
   invalidPromo,
@@ -27,7 +29,7 @@ import {
   missingQueryParams,
   missingUpdateParams,
   unableToLocate,
-} from 'errors';
+} from "errors";
 
 // CREATES SUBSCRIBER RECORD
 const create = async (req, res, done) => {
@@ -68,15 +70,7 @@ const create = async (req, res, done) => {
   const date = currentDate();
 
   try {
-    await db.task('create-subscriber', async (dbtask) => {
-      const plan = await dbtask.oneOrNone(findPlanByName, [
-        req.session.id,
-        selectedPlan,
-      ]);
-      if (!plan) return sendError(unableToLocate('plan'), res, done);
-      const { amount } = plan;
-      let price = parseStringToFloat(amount);
-
+    await db.task("create-subscriber", async (dbtask) => {
       const existingUser = await dbtask.oneOrNone(findSubscriberByEmail, [
         contactEmail,
         selectedPlan,
@@ -88,6 +82,15 @@ const create = async (req, res, done) => {
           done,
         );
       }
+      const plan = await dbtask.oneOrNone(findPlanByName, [
+        req.session.id,
+        selectedPlan,
+      ]);
+      isEmpty;
+      if (isEmpty(plan)) return sendError(unableToLocate("plan"), res, done);
+
+      const { amount } = plan;
+      let price = parseStringToFloat(amount);
 
       if (promoCode) {
         const promotional = await dbtask.oneOrNone(selectPromotionDetails, [
@@ -104,7 +107,7 @@ const create = async (req, res, done) => {
           if (totalusage === maxusage) return sendError(maxPromoUsage, res, done);
 
           const discount = parseStringToFloat(promotional.amount);
-          price = promotional.discounttype === '%'
+          price = promotional.discounttype === "%"
             ? price - price * (discount / 100)
             : price - discount;
           if (price < 0) return sendError(invalidPromo, res, done);
@@ -122,11 +125,11 @@ const create = async (req, res, done) => {
 
       await dbtask.none(createTransaction, [
         req.session.id,
-        'paid',
+        "paid",
         selectedPlan,
         contactEmail,
         subscriber,
-        'Stripe',
+        "Stripe",
         chargeAmount,
         date,
       ]);
@@ -155,14 +158,14 @@ const create = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'people_outline',
+        "people_outline",
         `${subscriber} has been added to the '${selectedPlan}' plan.`,
         date,
       ]);
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'payment',
+        "payment",
         `${subscriber} has been charged $${chargeAmount} for their '${selectedPlan}' membership!`,
         date,
       ]);
@@ -178,11 +181,17 @@ const create = async (req, res, done) => {
 const deleteOne = async (req, res, done) => {
   const { planname, subscriberid } = req.query;
 
-  if (!planname || !subscriberid || subscriberid === 'null') return sendError(missingDeletionParams, res, done);
+  if (!planname || !subscriberid || subscriberid === "null") return sendError(missingDeletionParams, res, done);
   const date = currentDate();
 
   try {
-    await db.task('delete-subscriber', async (dbtask) => {
+    await db.task("delete-subscriber", async (dbtask) => {
+      const existingSub = await dbtask.oneOrNone(findSubscriberById, [
+        req.session.id,
+        subscriberid,
+      ]);
+      if (!existingSub) return sendError(unableToLocate("subscriber"), res, done);
+
       const name = await dbtask.result(deleteOneSubcriber, [
         req.session.id,
         subscriberid,
@@ -191,7 +200,7 @@ const deleteOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'people_outline',
+        "people_outline",
         `${name.rows[0].subscriber} has been removed from the '${
           name.rows[0].planname
         }' plan.`,
@@ -214,7 +223,7 @@ const fetchRecords = async (req, res, done) => {
 
   limit = parseStringToNum(limit);
   const offset = parseStringToNum(page) * limit;
-  const status = table === 'activesubscribers' ? ['active'] : ['inactive', 'suspended'];
+  const status = table === "activesubscribers" ? ["active"] : ["inactive", "suspended"];
 
   try {
     let activesubscribers;
@@ -223,7 +232,7 @@ const fetchRecords = async (req, res, done) => {
       getSomeSubcribers(req.session.id, limit, offset, status),
     );
 
-    table === 'activesubscribers'
+    table === "activesubscribers"
       ? (activesubscribers = subscribers)
       : (inactivesubscribers = subscribers);
 
@@ -250,12 +259,12 @@ const fetchCounts = async (req, res, done) => {
 // SENDS FIRST 10 RECORDS
 const index = async (req, res, done) => {
   try {
-    await db.task('fetch-subscriber-index', async (dbtask) => {
+    await db.task("fetch-subscriber-index", async (dbtask) => {
       const activesubscribers = await dbtask.any(
-        getSomeSubcribers(req.session.id, 10, 0, ['active']),
+        getSomeSubcribers(req.session.id, 10, 0, ["active"]),
       );
       const inactivesubscribers = await dbtask.any(
-        getSomeSubcribers(req.session.id, 10, 0, ['inactive', 'suspended']),
+        getSomeSubcribers(req.session.id, 10, 0, ["inactive", "suspended"]),
       );
 
       res.status(201).json({ activesubscribers, inactivesubscribers });
@@ -270,13 +279,19 @@ const updateStatus = async (req, res, done) => {
   const { id } = req.params;
   const { updateType, statusType } = req.body;
 
-  if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+  if (!updateType || !statusType || !id || id === "null") return sendError(missingUpdateParams, res, done);
 
   const date = currentDate();
-  const endDate = updateType === 'suspended' ? date : null;
+  const endDate = updateType === "suspended" ? date : null;
 
   try {
-    await db.task('update-subscriber-status', async (dbtask) => {
+    await db.task("update-subscriber-status", async (dbtask) => {
+      const existingSub = await dbtask.oneOrNone(findSubscriberById, [
+        req.session.id,
+        id,
+      ]);
+      if (!existingSub) return sendError(unableToLocate("subscriber"), res, done);
+
       const name = await dbtask.one(updateOneSubscriber, [
         req.session.id,
         req.params.id,
@@ -284,13 +299,13 @@ const updateStatus = async (req, res, done) => {
         endDate,
       ]);
 
-      const message = updateType === 'suspended'
-        ? 'suspended from'
-        : 'reactivated and added to';
+      const message = updateType === "suspended"
+        ? "suspended from"
+        : "reactivated and added to";
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'people_outline',
+        "people_outline",
         `${name.subscriber} has been ${message} the following plan: ${
           name.planname
         }.`,

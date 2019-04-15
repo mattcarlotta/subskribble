@@ -1,4 +1,4 @@
-import { fetchRecords } from "controllers/promotionals";
+import { fetchRecords } from "controllers/templates";
 import { missingQueryParams } from "errors";
 import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
@@ -8,7 +8,7 @@ const emptyquery = {
   limit: "",
 };
 
-describe("Fetch Records Promotionals Controller", () => {
+describe("Fetch Records Templates Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -27,7 +27,7 @@ describe("Fetch Records Promotionals Controller", () => {
 
   it("handles valid fetch records requests", async () => {
     const req = mockRequest(user, null, {
-      table: "activepromotionals",
+      table: "activetemplates",
       page: "0",
       limit: "10",
     });
@@ -36,20 +36,17 @@ describe("Fetch Records Promotionals Controller", () => {
     await fetchRecords(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      activepromos: expect.arrayContaining([
+      activetemplates: expect.arrayContaining([
         expect.objectContaining({
-          amount: expect.any(Number),
-          discounttype: expect.any(String),
-          enddate: expect.any(Date),
           id: expect.any(String),
           key: expect.any(Number),
-          maxusage: expect.any(Number),
-          plans: expect.arrayContaining([expect.any(String)]),
-          promocode: expect.any(String),
-          startdate: expect.any(Date),
-          status: expect.any(String),
-          totalusage: expect.any(Number),
           userid: expect.any(String),
+          status: expect.any(String),
+          plans: expect.arrayContaining([expect.any(String)]),
+          subject: expect.any(String),
+          templatename: expect.any(String),
+          uniquetemplatename: expect.any(String),
+          message: expect.any(String),
         }),
       ]),
     });
