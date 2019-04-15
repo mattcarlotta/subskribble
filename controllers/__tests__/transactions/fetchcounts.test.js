@@ -1,7 +1,7 @@
-import { fetchCounts } from "controllers/plans";
+import { fetchCounts } from "controllers/transactions";
 import { loginUser, mockRequest, mockResponse } from "../../__mocks__/helpers";
 
-describe("Fetch Plan Counts Controller", () => {
+describe("Fetch Transaction Counts Controller", () => {
   let user;
   beforeAll(async () => {
     user = await loginUser();
@@ -14,8 +14,8 @@ describe("Fetch Plan Counts Controller", () => {
     await fetchCounts(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      activeplancount: expect.any(Number),
-      inactiveplancount: expect.any(Number),
+      chargecount: expect.any(Number),
+      refundcount: expect.any(Number),
     });
   });
 });

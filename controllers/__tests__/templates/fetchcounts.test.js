@@ -7,7 +7,7 @@ describe("Fetch Template Counts Controller", () => {
     user = await loginUser();
   });
 
-  it("handles valid fetch counts requets", async () => {
+  it("handles valid fetch counts requests", async () => {
     const req = mockRequest(user);
     const res = mockResponse();
 

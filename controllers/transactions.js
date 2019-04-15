@@ -1,32 +1,38 @@
-import db from 'db';
+import db from "db";
 import {
   createNotification,
   deleteOneTransactaction,
   getSomeTransactactions,
   getTransactionCount,
-  getSubscriberId,
+  getSubscriberDetailsByEmail,
   refundTransaction,
   selectTransactionById,
   updateSubscriberCredits,
-} from 'queries';
-import { currentDate, parseStringToNum, sendError } from 'helpers';
+} from "queries";
+import { currentDate, parseStringToNum, sendError } from "helpers";
 import {
   missingDeletionParams,
   missingQueryParams,
   missingUpdateParams,
   unableToLocate,
-} from 'errors';
+} from "errors";
 
 // DELETES REQURESTED RECORD
 const deleteOne = async (req, res, done) => {
   const { id } = req.params;
 
-  if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
 
   const date = currentDate();
 
   try {
-    await db.task('delete-transaction', async (dbtask) => {
+    await db.task("delete-transaction", async (dbtask) => {
+      const transactionExists = await dbtask.oneOrNone(selectTransactionById, [
+        req.session.id,
+        id,
+      ]);
+      if (!transactionExists) return sendError(unableToLocate("transaction"), res, done);
+
       const name = await dbtask.result(deleteOneTransactaction, [
         req.session.id,
         id,
@@ -34,7 +40,7 @@ const deleteOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'payment',
+        "payment",
         `The following invoice: ${name.rows[0].invoice}, has been deleted.`,
         date,
       ]);
@@ -68,14 +74,14 @@ const fetchCounts = async (req, res, done) => {
 const fetchOne = async (req, res, done) => {
   const { id } = req.query;
 
-  if (!id || id === 'null') return sendError(missingQueryParams, res, done);
+  if (!id || id === "null") return sendError(missingQueryParams, res, done);
 
   try {
     const transaction = await db.oneOrNone(selectTransactionById, [
       req.session.id,
       id,
     ]);
-    if (!transaction) return sendError(unableToLocate('transaction'), res, done);
+    if (!transaction) return sendError(unableToLocate("transaction"), res, done);
 
     res.status(201).json({ ...transaction });
   } catch (err) {
@@ -92,7 +98,7 @@ const fetchRecords = async (req, res, done) => {
 
   limit = parseStringToNum(limit);
   const offset = parseStringToNum(page) * limit;
-  const status = table === 'charges' ? ['paid', 'due'] : ['refund', 'credit'];
+  const status = table === "charges" ? ["paid", "due"] : ["refund", "credit"];
 
   try {
     let chargetransactions;
@@ -101,7 +107,7 @@ const fetchRecords = async (req, res, done) => {
       getSomeTransactactions(req.session.id, limit, offset, status),
     );
 
-    if (table === 'charges') {
+    if (table === "charges") {
       chargetransactions = charges;
     } else {
       refundtransactions = charges;
@@ -116,12 +122,12 @@ const fetchRecords = async (req, res, done) => {
 // SENDS FIRST 10 RECORDS
 const index = async (req, res, done) => {
   try {
-    await db.task('fetch-transactions-index', async (dbtask) => {
+    await db.task("fetch-transactions-index", async (dbtask) => {
       const chargetransactions = await dbtask.any(
-        getSomeTransactactions(req.session.id, 10, 0, ['paid', 'due']),
+        getSomeTransactactions(req.session.id, 10, 0, ["paid", "due"]),
       );
       const refundtransactions = await dbtask.any(
-        getSomeTransactactions(req.session.id, 10, 0, ['refund', 'credit']),
+        getSomeTransactactions(req.session.id, 10, 0, ["refund", "credit"]),
       );
 
       res.status(201).json({ chargetransactions, refundtransactions });
@@ -154,7 +160,7 @@ const refundOne = async (req, res, done) => {
   const date = currentDate();
 
   try {
-    await db.task('refund-transaction', async (dbtask) => {
+    await db.task("refund-transaction", async (dbtask) => {
       await dbtask.none(refundTransaction, [
         req.session.id,
         transactiontype,
@@ -166,23 +172,25 @@ const refundOne = async (req, res, done) => {
         date,
       ]);
 
-      if (transactiontype === 'credit') {
-        const user = await dbtask.oneOrNone(getSubscriberId, [
+      if (transactiontype === "credit") {
+        const user = await dbtask.oneOrNone(getSubscriberDetailsByEmail, [
           req.session.id,
           email,
         ]);
-        if (!user) return sendError(unableToLocate('subscriber'), res, done);
+        if (!user) return sendError(unableToLocate("subscriber"), res, done);
+
+        const updatedCredits = parseFloat(user.credits) + parseFloat(amount);
 
         await dbtask.none(updateSubscriberCredits, [
           req.session.id,
           user.id,
-          amount,
+          updatedCredits,
         ]);
       }
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'payment',
+        "payment",
         `The following subscriber: ${subscriber}, has been ${transactiontype}ed the following amount: $${amount}`,
         date,
       ]);
