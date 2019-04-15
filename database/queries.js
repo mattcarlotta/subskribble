@@ -118,7 +118,7 @@ const notificationQueries = {
 
 const planQueries = {
   createPlan:
-    "INSERT INTO plans(userid, amount, billEvery, planName, description, setupFee, startDate) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7)",
+    "INSERT INTO plans(userid, amount, billEvery, planName, description, setupFee, trialPeriod, startDate) VALUES((SELECT id FROM users WHERE id=$1), $2, $3, $4, $5, $6, $7, $8)",
   deletePlanByName:
     "DELETE FROM plans WHERE userid=$1 AND planName=$2 RETURNING *",
   deleteOnePlan: "DELETE FROM plans WHERE userid=$1 AND id=$2 RETURNING *",

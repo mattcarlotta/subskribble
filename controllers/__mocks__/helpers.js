@@ -1,31 +1,30 @@
-import app from 'utils/setup';
-import db from 'db';
-import { thanksForReg } from 'authSuccess';
-import { findUserByEmail, verifyEmail } from 'queries';
+import app from "utils/setup";
+import db from "db";
+import { thanksForReg } from "authSuccess";
+import { findUserByEmail, verifyEmail } from "queries";
 
-const loginUser = () => db.one(findUserByEmail, ['betatester@subskribble.com']);
+const loginUser = () => db.one(findUserByEmail, ["betatester@subskribble.com"]);
 
 const signupUser = async (email, company) => {
-  await db.task('setup-signup', async (dbtask) => {
+  await db.task("setup-signup", async (dbtask) => {
     await app()
-      .post('/api/signup')
+      .post("/api/signup")
       .send({
         email,
         company,
-        password: 'password123',
-        firstName: 'Test',
-        lastName: 'Signup',
+        password: "password123",
+        firstName: "Test",
+        lastName: "Signup",
       })
       .then((res) => {
         expect(res.statusCode).toEqual(201);
-        expect(res.body).toEqual(thanksForReg(email, 'Test', 'Signup'));
+        expect(res.body).toEqual(thanksForReg(email, "Test", "Signup"));
       });
 
     await dbtask.none(verifyEmail, [email]);
   });
 
-  const user = await db.one(findUserByEmail, [email]);
-  return user;
+  return db.one(findUserByEmail, [email]);
 };
 
 const mockRequest = (session, body, query, params) => ({

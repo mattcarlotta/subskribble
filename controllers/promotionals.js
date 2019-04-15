@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
-import db from 'db';
+import isEmpty from "lodash/isEmpty";
+import db from "db";
 import {
   createNotification,
   createPromotion,
@@ -11,13 +11,13 @@ import {
   updatePromotionStatus,
   selectPromotionCode,
   selectPromotionDetails,
-} from 'queries';
+} from "queries";
 import {
   currentDate,
   convertDateToISO,
   parseStringToNum,
   sendError,
-} from 'helpers';
+} from "helpers";
 import {
   invalidPromo,
   itemAlreadyExists,
@@ -27,13 +27,13 @@ import {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} from 'errors';
+} from "errors";
 
 // LOOKS UP PROMOCODE PER CLIENT-SIDE REQUEST
 const apply = async (req, res, done) => {
   const { promocode, plan } = req.query;
 
-  if (!promocode || !plan) return sendError(missingUpdateParams, res, done);
+  if (!promocode || !plan) return sendError(missingSelectParams, res, done);
   const date = currentDate();
 
   try {
@@ -78,12 +78,12 @@ const create = async (req, res, done) => {
   const date = currentDate();
 
   try {
-    await db.task('create-promo', async (dbtask) => {
+    await db.task("create-promo", async (dbtask) => {
       const promoExists = await dbtask.oneOrNone(selectPromotionCode, [
         req.session.id,
         promocode,
       ]);
-      if (promoExists) return sendError(itemAlreadyExists('promotional'), res, done);
+      if (promoExists) return sendError(itemAlreadyExists("promotional"), res, done);
 
       await dbtask.none(createPromotion, [
         req.session.id,
@@ -98,9 +98,9 @@ const create = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'new_releases',
+        "new_releases",
         `A new promotional: ${promocode}, has been added to the following ${
-          plans.length > 1 ? 'plans' : 'plan'
+          plans.length > 1 ? "plans" : "plan"
         }: ${plans}.`,
         date,
       ]);
@@ -115,11 +115,17 @@ const create = async (req, res, done) => {
 // DELETES REQURESTED RECORD
 const deleteOne = async (req, res, done) => {
   const { id } = req.params;
-  if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
   const date = currentDate();
 
   try {
-    await db.task('delete-promo', async (dbtask) => {
+    await db.task("delete-promo", async (dbtask) => {
+      const promoExists = await dbtask.oneOrNone(findPromoById, [
+        req.session.id,
+        id,
+      ]);
+      if (!promoExists) return sendError(unableToLocate("promotional"), res, done);
+
       const name = await dbtask.result(deleteOnePromotion, [
         req.session.id,
         id,
@@ -127,7 +133,7 @@ const deleteOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'new_releases',
+        "new_releases",
         `The following promotional: ${
           name.rows[0].promocode
         }, has been deleted.`,
@@ -150,7 +156,7 @@ const fetchRecords = async (req, res, done) => {
 
   limit = parseStringToNum(limit);
   const offset = parseStringToNum(page) * limit;
-  const status = table === 'activepromotionals' ? 'active' : 'suspended';
+  const status = table === "activepromotionals" ? "active" : "suspended";
 
   try {
     let activepromos;
@@ -159,7 +165,7 @@ const fetchRecords = async (req, res, done) => {
       getAllPromotions(req.session.id, limit, offset, status),
     );
 
-    if (table === 'activepromotionals') {
+    if (table === "activepromotionals") {
       activepromos = promos;
     } else {
       inactivepromos = promos;
@@ -175,7 +181,7 @@ const fetchRecords = async (req, res, done) => {
 const fetchCounts = async (req, res, done) => {
   try {
     const promos = await db.any(getPromotionCount, [req.session.id]);
-    if (isEmpty(promos)) return sendError('Unable to fetch promotional counts', res, done);
+    if (isEmpty(promos)) return sendError("Unable to fetch promotional counts", res, done);
 
     res.status(201).json({
       activepromocount: parseStringToNum(promos[0].active),
@@ -189,12 +195,12 @@ const fetchCounts = async (req, res, done) => {
 // SENDS FIRST 10 RECORDS
 const index = async (req, res, done) => {
   try {
-    await db.task('fetch-index-promos', async (dbtask) => {
+    await db.task("fetch-index-promos", async (dbtask) => {
       const activepromos = await dbtask.any(
-        getAllPromotions(req.session.id, 10, 0, 'active'),
+        getAllPromotions(req.session.id, 10, 0, "active"),
       );
       const inactivepromos = await dbtask.any(
-        getAllPromotions(req.session.id, 10, 0, 'suspended'),
+        getAllPromotions(req.session.id, 10, 0, "suspended"),
       );
 
       res.status(201).json({ activepromos, inactivepromos });
@@ -226,7 +232,7 @@ const updateOne = async (req, res, done) => {
     || isEmpty(plans)
     || !startdate
     || !id
-    || id === 'null'
+    || id === "null"
   ) return sendError(missingUpdateParams, res, done);
 
   const allowedUsage = maxusage ? parseStringToNum(maxusage) : 2147483647;
@@ -235,7 +241,13 @@ const updateOne = async (req, res, done) => {
   const date = currentDate();
 
   try {
-    await db.task('update-promo-record', async (dbtask) => {
+    await db.task("update-promo-record", async (dbtask) => {
+      const promoExists = await dbtask.oneOrNone(findPromoById, [
+        req.session.id,
+        id,
+      ]);
+      if (!promoExists) return sendError(unableToLocate("promotional"), res, done);
+
       await dbtask.none(updatePromotion, [
         req.session.id,
         id,
@@ -250,7 +262,7 @@ const updateOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'new_releases',
+        "new_releases",
         `The following promotional: ${promocode}, has been successfully edited and updated.`,
         date,
       ]);
@@ -267,28 +279,34 @@ const updateStatus = async (req, res, done) => {
   const { id } = req.params;
   const { updateType, statusType } = req.body;
 
-  if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+  if (!updateType || !statusType || !id || id === "null") return sendError(missingUpdateParams, res, done);
 
   const date = currentDate();
 
   try {
-    await db.task('update-promo-status', async (dbtask) => {
+    await db.task("update-promo-status", async (dbtask) => {
+      const promoExists = await dbtask.oneOrNone(findPromoById, [
+        req.session.id,
+        id,
+      ]);
+      if (!promoExists) return sendError(unableToLocate("promotional"), res, done);
+
       const name = await dbtask.one(updatePromotionStatus, [
         req.session.id,
         id,
         statusType,
       ]);
 
-      const message = updateType === 'suspended'
-        ? 'deactivated and is no longer valid for'
-        : 'reactivated and is now valid for';
+      const message = updateType === "suspended"
+        ? "deactivated and is no longer valid for"
+        : "reactivated and is now valid for";
       await dbtask.none(createNotification, [
         req.session.id,
-        'new_releases',
+        "new_releases",
         `The following promotional: ${
           name.promocode
         }, has been ${message} the following ${
-          name.plans.length > 1 ? 'plans' : 'plan'
+          name.plans.length > 1 ? "plans" : "plan"
         }: ${name.plans}.`,
         date,
       ]);
@@ -303,11 +321,11 @@ const updateStatus = async (req, res, done) => {
 // SELECTS A SINGLE RECORD
 const selectOne = async (req, res, done) => {
   const { id } = req.query;
-  if (!id || id === 'null') return sendError(missingSelectParams, res, done);
+  if (!id || id === "null") return sendError(missingSelectParams, res, done);
 
   try {
     const promotional = await db.oneOrNone(findPromoById, [req.session.id, id]);
-    if (!promotional) return sendError(unableToLocate('promotional'), res, done);
+    if (!promotional) return sendError(unableToLocate("promotional"), res, done);
 
     res.status(201).json({ ...promotional });
   } catch (err) {

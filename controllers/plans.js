@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
-import db from 'db';
+import isEmpty from "lodash/isEmpty";
+import db from "db";
 import {
   createNotification,
   createPlan,
@@ -11,8 +11,8 @@ import {
   updatePlan,
   updatePlanStatus,
   selectPlan,
-} from 'queries';
-import { currentDate, parseStringToNum, sendError } from 'helpers';
+} from "queries";
+import { currentDate, parseStringToNum, sendError } from "helpers";
 import {
   createPlanFirst,
   itemAlreadyExists,
@@ -22,24 +22,30 @@ import {
   missingSelectParams,
   missingUpdateParams,
   unableToLocate,
-} from 'errors';
+} from "errors";
 
 // CREATES A PLAN PER CLIENT-SIDE REQUEST
 const create = async (req, res, done) => {
   const {
-    amount, billevery, planname, description, setupfee,
+    amount,
+    billevery,
+    planname,
+    description,
+    setupfee,
+    trialperiod,
   } = req.body;
+
   if (!amount || !billevery || !planname || !description) return sendError(missingCreationParams, res, done);
 
   const date = currentDate();
 
   try {
-    await db.task('create-plan', async (dbtask) => {
+    await db.task("create-plan", async (dbtask) => {
       const planExists = await dbtask.oneOrNone(selectPlan, [
         req.session.id,
         planname,
       ]);
-      if (planExists) return sendError(itemAlreadyExists('plan'), res, done);
+      if (planExists) return sendError(itemAlreadyExists("plan"), res, done);
 
       await dbtask.result(createPlan, [
         req.session.id,
@@ -48,12 +54,13 @@ const create = async (req, res, done) => {
         planname,
         description,
         setupfee,
+        trialperiod,
         date,
       ]);
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'content_paste',
+        "content_paste",
         `A new plan: ${planname}, billed at $${amount}/${billevery}, has been created.`,
         date,
       ]);
@@ -68,16 +75,22 @@ const create = async (req, res, done) => {
 // DELETES REQURESTED RECORD
 const deleteOne = async (req, res, done) => {
   const { id } = req.params;
-  if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
   const date = currentDate();
 
   try {
-    await db.task('delete-plan', async (dbtask) => {
+    await db.task("delete-plan", async (dbtask) => {
+      const planExists = await dbtask.oneOrNone(findPlanById, [
+        req.session.id,
+        id,
+      ]);
+      if (!planExists) return sendError(unableToLocate("plan"), res, done);
+
       const name = await dbtask.result(deleteOnePlan, [req.session.id, id]);
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'content_paste',
+        "content_paste",
         `The following plan: ${name.rows[0].planname}, has been deleted.`,
         date,
       ]);
@@ -109,7 +122,7 @@ const fetchRecords = async (req, res, done) => {
 
   limit = parseStringToNum(limit);
   const offset = parseStringToNum(page) * limit;
-  const status = table === 'activeplans' ? 'active' : 'suspended';
+  const status = table === "activeplans" ? "active" : "suspended";
 
   try {
     let activeplans;
@@ -118,7 +131,7 @@ const fetchRecords = async (req, res, done) => {
       getAllPlans(req.session.id, limit, offset, status),
     );
 
-    if (table === 'activeplans') {
+    if (table === "activeplans") {
       activeplans = plans;
     } else {
       inactiveplans = plans;
@@ -134,7 +147,6 @@ const fetchRecords = async (req, res, done) => {
 const fetchCounts = async (req, res, done) => {
   try {
     const plans = await db.any(getPlanCount, [req.session.id]);
-    if (isEmpty(plans)) return sendError('Unable to fetch plan counts', res, done);
 
     res.status(201).json({
       activeplancount: parseStringToNum(plans[0].active),
@@ -148,12 +160,12 @@ const fetchCounts = async (req, res, done) => {
 // SENDS FIRST 10 RECORDS
 const index = async (req, res, done) => {
   try {
-    await db.task('fetch-index-plans', async (dbtask) => {
+    await db.task("fetch-index-plans", async (dbtask) => {
       const activeplans = await dbtask.any(
-        getAllPlans(req.session.id, 10, 0, 'active'),
+        getAllPlans(req.session.id, 10, 0, "active"),
       );
       const inactiveplans = await dbtask.any(
-        getAllPlans(req.session.id, 10, 0, 'suspended'),
+        getAllPlans(req.session.id, 10, 0, "suspended"),
       );
 
       res.status(201).json({ activeplans, inactiveplans });
@@ -177,15 +189,21 @@ const updateOne = async (req, res, done) => {
     || !planname
     || !description
     || !id
-    || id === 'null'
+    || id === "null"
   ) return sendError(missingUpdateParams, res, done);
 
-  trialperiod = trialperiod === '(none)' ? undefined : trialperiod;
-  setupfee = setupfee === '' ? undefined : setupfee;
+  trialperiod = trialperiod === "(none)" ? undefined : trialperiod;
+  setupfee = setupfee === "" ? undefined : setupfee;
   const date = currentDate();
 
   try {
-    await db.task('update-plan-record', async (dbtask) => {
+    await db.task("update-plan-record", async (dbtask) => {
+      const planExists = await dbtask.oneOrNone(findPlanById, [
+        req.session.id,
+        id,
+      ]);
+      if (!planExists) return sendError(unableToLocate("plan"), res, done);
+
       await dbtask.none(updatePlan, [
         req.session.id,
         id,
@@ -199,7 +217,7 @@ const updateOne = async (req, res, done) => {
 
       await dbtask.none(createNotification, [
         req.session.id,
-        'content_paste',
+        "content_paste",
         `The following plan: ${planname}, has been successfully edited and updated.`,
         date,
       ]);
@@ -216,22 +234,28 @@ const updateStatus = async (req, res, done) => {
   const { id } = req.params;
   const { updateType, statusType } = req.body;
 
-  if (!updateType || !statusType || !id || id === 'null') return sendError(missingUpdateParams, res, done);
+  if (!updateType || !statusType || !id || id === "null") return sendError(missingUpdateParams, res, done);
 
   const date = currentDate();
 
   try {
-    await db.task('update-plan-status', async (dbtask) => {
+    await db.task("update-plan-status", async (dbtask) => {
+      const planExists = await dbtask.oneOrNone(findPlanById, [
+        req.session.id,
+        id,
+      ]);
+      if (!planExists) return sendError(unableToLocate("plan"), res, done);
+
       const name = await dbtask.one(updatePlanStatus, [
         req.session.id,
         id,
         statusType,
       ]);
 
-      const message = updateType === 'activated' ? 'reactivated' : 'suspended';
+      const message = updateType === "activated" ? "reactivated" : "suspended";
       await dbtask.none(createNotification, [
         req.session.id,
-        'content_paste',
+        "content_paste",
         `The following plan: ${name.planname}, has been ${message}.`,
         date,
       ]);
@@ -246,11 +270,11 @@ const updateStatus = async (req, res, done) => {
 // SELECTS A SINGLE RECORD
 const selectOne = async (req, res, done) => {
   const { id } = req.query;
-  if (!id || id === 'null') return sendError(missingSelectParams, res, done);
+  if (!id || id === "null") return sendError(missingSelectParams, res, done);
 
   try {
     const plan = await db.oneOrNone(findPlanById, [req.session.id, id]);
-    if (!plan) return sendError(unableToLocate('plan'), res, done);
+    if (!plan) return sendError(unableToLocate("plan"), res, done);
 
     res.status(201).json({ ...plan });
   } catch (err) {
