@@ -1,6 +1,6 @@
-const app = require('./setup');
+import app from './setup';
 
-module.exports = async (
+export default async (
   suppliedEmail = 'betatester@subskribble.com',
   suppliedPassword = 'password123',
 ) => {

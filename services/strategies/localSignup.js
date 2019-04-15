@@ -1,18 +1,18 @@
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const mailer = require('@sendgrid/mail');
-const db = require('db');
-const { createNewUser, findCompany, findUserByEmail } = require('queries');
-const { createRandomToken, currentDate } = require('helpers');
-const { companyAlreadyExists, emailAlreadyTaken } = require('authErrors');
-const newUser = require('emailTemplates/newUser');
-const config = require('env');
+import bcrypt from 'bcrypt';
+import { Strategy as LocalStrategy } from 'passport-local';
+import passport from 'passport';
+import mailer from '@sendgrid/mail';
+import db from 'db';
+import { createNewUser, findCompany, findUserByEmail } from 'queries';
+import { createRandomToken, currentDate } from 'helpers';
+import { companyAlreadyExists, emailAlreadyTaken } from 'authErrors';
+import newUser from 'emailTemplates/newUser';
+import config from 'env';
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];
 
-module.exports = passport.use(
+export default () => passport.use(
   'local-signup',
   new LocalStrategy(
     {
@@ -28,7 +28,9 @@ module.exports = passport.use(
       // check to see if the email is already in use
       try {
         await db.task('local-signup', async (dbtask) => {
-          const existingUser = await dbtask.oneOrNone(findUserByEmail, [email]);
+          const existingUser = await dbtask.oneOrNone(findUserByEmail, [
+            email,
+          ]);
           if (existingUser) return done(emailAlreadyTaken, false);
 
           const existingCompany = await dbtask.oneOrNone(findCompany, [

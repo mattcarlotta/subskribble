@@ -1,14 +1,14 @@
-const {
+import {
   create,
   index,
   deleteOne,
   fetchCounts,
   fetchRecords,
   updateStatus,
-} = require('controllers/subscribers');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/subscribers';
+import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.post('/api/subscribers/signup', requireAuth, create);
   app.get('/api/subscribers', requireAuth, index);
   app.get('/api/subscribercounts', requireAuth, fetchCounts);

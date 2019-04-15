@@ -1,10 +1,17 @@
-describe('Log out', () => {
-  it('handles log out session requests', async () => {
+import app from "utils/setup";
+import { logout } from "controllers/auth";
+
+jest.mock("controllers/auth", () => ({
+  ...require.requireActual("controllers/auth"),
+  logout: jest.fn((req, res, done) => done()),
+}));
+
+describe("Logout Session Route", () => {
+  it("routes authenticated requests to the logout controller", async () => {
     await app()
-      .post('/api/logout')
-      .expect(200)
-      .then((res) => {
-        expect(res.text).toBe('Cookie deleted.');
+      .post("/api/logout")
+      .then(() => {
+        expect(logout).toHaveBeenCalledTimes(1);
       });
   });
 });

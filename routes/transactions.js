@@ -1,14 +1,14 @@
-const {
+import {
   index,
   deleteOne,
   fetchCounts,
   fetchOne,
   fetchRecords,
   refundOne,
-} = require('controllers/transactions');
-const requireAuth = require('strategies/requireAuth');
+} from 'controllers/transactions';
+import { requireAuth } from 'strategies';
 
-module.exports = (app) => {
+export default (app) => {
   app.delete('/api/transactions/delete/:id', requireAuth, deleteOne);
   app.get('/api/transaction/record?', requireAuth, fetchOne);
   app.get('/api/transactioncounts', requireAuth, fetchCounts);

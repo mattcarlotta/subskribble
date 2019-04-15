@@ -1,43 +1,33 @@
-const { badCredentials, missingSidebarState } = require('authErrors');
+import app from "utils/setup";
+import { saveSidebarState } from "controllers/auth";
+import { requireAuth } from "strategies";
 
-const setSidebarState = (cookie, state) => app()
-  .put(`/api/save-sidebar-state?collapseSideNav=${state}`)
-  .set('Cookie', cookie)
-  .then((res) => {
-    expect(res.statusCode).toEqual(201);
-    expect(res.body.collapseSideNav).toBe(state);
+jest.mock("controllers/auth", () => ({
+  ...require.requireActual("controllers/auth"),
+  saveSidebarState: jest.fn((req, res, done) => done()),
+}));
+
+jest.mock("services/strategies/requireAuth", () => jest.fn((req, res, done) => done()));
+
+describe("Save SideBar State Route", () => {
+  afterEach(() => {
+    requireAuth.mockClear();
+    saveSidebarState.mockClear();
   });
 
-describe('Sidebar State', () => {
-  let cookie;
-  beforeAll(async () => {
-    cookie = await getCookie();
-  });
-
-  afterAll(async () => {
-    await setSidebarState(cookie, false);
-  });
-
-  it('handles invalid sidebar save state requests', async () => {
-    // not logged in
+  it("routes initial requests to authentication middleware", async () => {
     await app()
-      .put('/api/save-sidebar-state?')
-      .then((res) => {
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.err).toEqual(badCredentials);
-      });
-
-    // missing state query
-    await app()
-      .put('/api/save-sidebar-state?')
-      .set('Cookie', cookie)
-      .then((res) => {
-        expect(res.statusCode).toEqual(400);
-        expect(res.body.err).toEqual(missingSidebarState);
+      .put("/api/save-sidebar-state?collapseSideNav=true")
+      .then(() => {
+        expect(requireAuth).toHaveBeenCalledTimes(1);
       });
   });
 
-  it('handles valid sidebar save state requests', async () => {
-    await setSidebarState(cookie, true);
+  it("routes authenticated requests to the saveSidebarState controller", async () => {
+    await app()
+      .put("/api/save-sidebar-state?collapseSideNav=true")
+      .then(() => {
+        expect(saveSidebarState).toHaveBeenCalledTimes(1);
+      });
   });
 });

@@ -1,56 +1,61 @@
-const db = require('db');
-const {
+import db from "db";
+import {
   deleteAllNotifications,
   deleteOneNotification,
   getSomeNotifications,
   setReadNotifications,
-} = require('queries');
-const { missingDeletionParams } = require('errors');
-const { sendError } = require('helpers');
+} from "queries";
+import { missingDeletionParams } from "errors";
+import { sendError } from "helpers";
 
-module.exports = {
-  // COLLECTS/SENDS ALL NOTIFICATIONS FOR USER
-  index: async (req, res, done) => {
-    try {
-      const noteList = await db.any(getSomeNotifications, [req.session.id]);
+// COLLECTS/SENDS ALL NOTIFICATIONS FOR USER
+const index = async (req, res, done) => {
+  try {
+    const noteList = await db.any(getSomeNotifications, [req.session.id]);
 
-      res.status(201).send(...noteList);
-    } catch (err) {
-      return sendError(err, res, done);
-    }
-  },
-  // UPDATES ALL NOTIFICATIONS AS READ FOR USER
-  updateAll: async (req, res, done) => {
-    try {
-      await db.oneOrNone(setReadNotifications, [req.session.id]);
+    res.status(201).send(...noteList);
+  } catch (err) {
+    return sendError(err, res, done);
+  }
+};
 
-      res.status(201).send(null);
-    } catch (err) {
-      return sendError(err, res, done);
-    }
-  },
-  // DELETES ONE NOTIFICATION
-  deleteOne: async (req, res, done) => {
-    const { id } = req.query;
+// UPDATES ALL NOTIFICATIONS AS READ FOR USER
+const updateAll = async (req, res, done) => {
+  try {
+    await db.oneOrNone(setReadNotifications, [req.session.id]);
 
-    if (!id || id === 'null') return sendError(missingDeletionParams, res, done);
+    res.status(201).send(null);
+  } catch (err) {
+    return sendError(err, res, done);
+  }
+};
 
-    try {
-      await db.result(deleteOneNotification, [req.session.id, req.query.id]);
+// DELETES ONE NOTIFICATION
+const deleteOne = async (req, res, done) => {
+  const { id } = req.query;
 
-      res.status(201).send(null);
-    } catch (err) {
-      return sendError(err, res, done);
-    }
-  },
-  // DELETES ALL NOTIFICATIONS
-  deleteAll: async (req, res, done) => {
-    try {
-      await db.result(deleteAllNotifications, [req.session.id]);
+  if (!id || id === "null") return sendError(missingDeletionParams, res, done);
 
-      res.status(201).send(null);
-    } catch (err) {
-      return sendError(err, res, done);
-    }
-  },
+  try {
+    await db.result(deleteOneNotification, [req.session.id, id]);
+
+    res.status(201).send(null);
+  } catch (err) {
+    return sendError(err, res, done);
+  }
+};
+
+// DELETES ALL NOTIFICATIONS
+const deleteAll = async (req, res, done) => {
+  try {
+    await db.result(deleteAllNotifications, [req.session.id]);
+
+    res.status(201).send(null);
+  } catch (err) {
+    return sendError(err, res, done);
+  }
+};
+
+export {
+  index, updateAll, deleteOne, deleteAll,
 };

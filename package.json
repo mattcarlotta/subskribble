@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --watchAll",
+    "test": "NODE_ENV=test WATCHING=true jest --config ./jest.json --watchAll",
     "initialize": "npm install && cd client && npm install && cd ..",
     "start": "NODE_ENV=production node app.js",
     "server": "NODE_ENV=development nodemon --max_old_space_size=4096 app.js",
@@ -11,10 +11,10 @@
     "client": "npm run start --prefix client",
     "lint-front": "npm run pre-commit --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seed": "NODE_ENV=development SEED=true node ./utils/seedDB.js",
-    "seed:test": "NODE_ENV=test SEED=true node ./utils/seedDB.js",
-    "teardown": "NODE_ENV=development TEARDOWN=true node ./utils/teardownDB.js",
-    "teardown:test": "NODE_ENV=test TEARDOWN=true node ./utils/teardownDB.js",
+    "seed": "NODE_ENV=development SEED=true node ./utils/globalSetup.js",
+    "seed:test": "NODE_ENV=test SEED=true node ./utils/globalSetup.js",
+    "teardown": "NODE_ENV=development TEARDOWN=true node ./utils/globalTeardown.js",
+    "teardown:test": "NODE_ENV=test TEARDOWN=true node ./utils/globalTeardown.js",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
     "lint-back": "lint-staged",
     "test:front": "npm run test --prefix client",
@@ -22,8 +22,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --double-quote",
       "eslint --fix",
+      "cross-env NODE_ENV=test jest --config ./jest.json --findRelatedTests",
       "git add"
     ]
   },
@@ -32,33 +32,11 @@
       "client"
     ]
   },
-  "jest": {
-    "testEnvironment": "node",
-    "verbose": false,
-    "modulePaths": [
-      "<rootDir>",
-      "node_modules"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/client/",
-      "<rootDir>/node_modules/"
-    ],
-    "globalSetup": "<rootDir>/utils/seedDB.js",
-    "globalTeardown": "<rootDir>/utils/teardownDB.js"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/register": "^7.4.0",
     "@sendgrid/mail": "^6.2.1",
-    "babel-plugin-module-resolver": "^3.2.0",
     "bcrypt": "^3.0.4",
     "bluebird": "^3.5.3",
     "body-parser": "^1.15.2",
@@ -80,6 +58,11 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-babel-module": "^5.0.1",

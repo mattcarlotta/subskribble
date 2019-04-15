@@ -1,17 +1,17 @@
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const mailer = require('@sendgrid/mail');
-const db = require('db');
-const { findUserByEmail, resetToken } = require('queries');
-const { createRandomToken } = require('helpers');
-const { missingEmailCreds } = require('authErrors');
-const newToken = require('emailTemplates/newToken');
-const config = require('env');
+import { Strategy as LocalStrategy } from 'passport-local';
+import passport from 'passport';
+import mailer from '@sendgrid/mail';
+import db from 'db';
+import { findUserByEmail, resetToken } from 'queries';
+import { createRandomToken } from 'helpers';
+import { missingEmailCreds } from 'authErrors';
+import newToken from 'emailTemplates/newToken';
+import config from 'env';
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];
 
-module.exports = passport.use(
+export default () => passport.use(
   'reset-token',
   new LocalStrategy(
     {
@@ -21,7 +21,9 @@ module.exports = passport.use(
       try {
         await db.task('reset-token', async (dbtask) => {
           // check to see if email exists in the db
-          const existingUser = await dbtask.oneOrNone(findUserByEmail, [email]);
+          const existingUser = await dbtask.oneOrNone(findUserByEmail, [
+            email,
+          ]);
           if (!existingUser) return done(missingEmailCreds, false);
 
           // create a new token for email reset

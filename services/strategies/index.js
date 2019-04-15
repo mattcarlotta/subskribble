@@ -1,6 +1,6 @@
-module.exports = () => {
-  require('./localLogin.js');
-  require('./localSignup.js');
-  require('./resetPassword.js');
-  require('./resetToken.js');
-};
+export { default as localLogin } from './localLogin';
+export { default as localSignup } from './localSignup';
+export { default as requireAuth } from './requireAuth';
+export { default as requireRelogin } from './requireRelogin';
+export { default as resetPassword } from './resetPassword';
+export { default as resetToken } from './resetToken';

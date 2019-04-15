@@ -1,19 +1,14 @@
 /* eslint-disable */
-require("@babel/register");
-const bcrypt = require("bcrypt");
-const moment = require("moment");
-const db = require("../database/db");
-const {
+import bcrypt from "bcrypt";
+import moment from "moment";
+import db from "db";
+import {
   createNewUser,
   findUserByEmail,
   setUserAsAdmin,
   verifyEmail
-} = require("../database/queries");
-const {
-  currentDate,
-  createRandomText,
-  createRandomToken
-} = require("../shared/helpers");
+} from "queries";
+import { currentDate, createRandomText, createRandomToken } from "helpers";
 
 const fakeText = () => createRandomText();
 const selectUserid = id => `(SELECT id FROM users WHERE id='${id}')`;
@@ -57,7 +52,7 @@ const planTableOptions = `(
     key SERIAL PRIMARY KEY,
     userid UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR DEFAULT 'active',
-    planName VARCHAR NOT NULL,
+    planName VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     amount DECIMAL(12,2) NOT NULL,
     setupFee DECIMAL(12,2),
@@ -644,6 +639,6 @@ const seedDB = async () => {
 
 if (SEED) seedDB();
 
-module.exports = seedDB;
+export default seedDB;
 
 /* eslint-enable */

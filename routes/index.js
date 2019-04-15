@@ -1,14 +1,14 @@
-const authRoutes = require('./auth');
-const dashboardRoutes = require('./dashboard');
-const messageRoutes = require('./messages');
-const notifcationRoutes = require('./notifications');
-const planRoutes = require('./plans');
-const promotionalRoutes = require('./promotionals');
-const subcriberRoutes = require('./subscribers');
-const templateRoutes = require('./templates');
-const transactionRoutes = require('./transactions');
+import authRoutes from './auth';
+import dashboardRoutes from './dashboard';
+import messageRoutes from './messages';
+import notifcationRoutes from './notifications';
+import planRoutes from './plans';
+import promotionalRoutes from './promotionals';
+import subcriberRoutes from './subscribers';
+import templateRoutes from './templates';
+import transactionRoutes from './transactions';
 
-module.exports = (app) => {
+export default (app) => {
   authRoutes(app);
   dashboardRoutes(app);
   messageRoutes(app);
