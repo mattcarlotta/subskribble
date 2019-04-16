@@ -1,31 +1,31 @@
-import bcrypt from 'bcrypt';
-import { Strategy as LocalStrategy } from 'passport-local';
-import passport from 'passport';
-import db from 'db';
-import { findUserByEmail, getUserDetails } from 'queries';
+import isEmpty from "lodash/isEmpty";
+import bcrypt from "bcrypt";
+import { Strategy as LocalStrategy } from "passport-local";
+import passport from "passport";
+import db from "db";
+import { findUserByEmail, getUserDetails } from "queries";
 import {
   alreadyLoggedIn,
   badCredentials,
   emailConfirmationReq,
-} from 'authErrors';
+} from "authErrors";
 
 export default () => passport.use(
-  'local-login',
+  "local-login",
   new LocalStrategy(
     {
       // override username with email
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
       // if (!email || !password) return done(badCredentials, false);
 
       try {
-        await db.task('local-login', async (dbtask) => {
+        await db.task("local-login", async (dbtask) => {
           // check to see if user is logged in from another session
-          const { id } = req.session;
-          if (id) return done(alreadyLoggedIn, false);
+          if (!isEmpty(req.session)) return done(alreadyLoggedIn, false);
 
           // check to see if the user already exists
           const existingUser = await dbtask.oneOrNone(findUserByEmail, [

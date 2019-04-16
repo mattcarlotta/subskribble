@@ -1,17 +1,17 @@
-const promise = require('bluebird');
-const monitor = require('pg-monitor');
+import promise from "bluebird";
+import monitor from "pg-monitor";
+import pgPromise from "pg-promise";
+import config from "env";
 
 const initOptions = { promiseLib: promise }; // Database options
-const pgp = require('pg-promise')(initOptions); // initialize pg-promise w/options
-
-const config = require('../env');
+const pgp = pgPromise(initOptions); // initialize pg-promise w/options
 
 const env = process.env.NODE_ENV;
 // Database connection logger
-if (env === 'development') {
-  monitor.attach(initOptions, ['query', 'error']);
+if (env === "development") {
+  monitor.attach(initOptions, ["query", "error"]);
 } else {
-  monitor.attach(initOptions, ['error']);
+  monitor.attach(initOptions, ["error"]);
 }
 
 export default pgp({

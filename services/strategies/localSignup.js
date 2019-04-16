@@ -1,33 +1,37 @@
-import bcrypt from 'bcrypt';
-import { Strategy as LocalStrategy } from 'passport-local';
-import passport from 'passport';
-import mailer from '@sendgrid/mail';
-import db from 'db';
-import { createNewUser, findCompany, findUserByEmail } from 'queries';
-import { createRandomToken, currentDate } from 'helpers';
-import { companyAlreadyExists, emailAlreadyTaken } from 'authErrors';
-import newUser from 'emailTemplates/newUser';
-import config from 'env';
+import bcrypt from "bcrypt";
+import { Strategy as LocalStrategy } from "passport-local";
+import passport from "passport";
+import mailer from "@sendgrid/mail";
+import db from "db";
+import { createNewUser, findCompany, findUserByEmail } from "queries";
+import { createRandomToken, currentDate } from "helpers";
+import { companyAlreadyExists, emailAlreadyTaken } from "authErrors";
+import { missingCreationParams } from "errors";
+import newUser from "emailTemplates/newUser";
+import config from "env";
 
 const env = process.env.NODE_ENV;
 const { portal } = config[env];
 
 export default () => passport.use(
-  'local-signup',
+  "local-signup",
   new LocalStrategy(
     {
       // override username with email
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
       passReqToCallback: true, // allows us to send request to the callback
     },
     async (req, email, password, done) => {
       const { firstName, lastName, company } = req.body;
+
+      if ((!firstName, !lastName, !company)) return done(missingCreationParams, done);
+
       const token = createRandomToken(); // a token used for email verification
 
       // check to see if the email is already in use
       try {
-        await db.task('local-signup', async (dbtask) => {
+        await db.task("local-signup", async (dbtask) => {
           const existingUser = await dbtask.oneOrNone(findUserByEmail, [
             email,
           ]);
@@ -54,8 +58,8 @@ export default () => passport.use(
           // creates an email template for a new user signup
           const msg = {
             to: `${email}`,
-            from: 'helpdesk@subskribble.com',
-            subject: 'Please verify your email address',
+            from: "helpdesk@subskribble.com",
+            subject: "Please verify your email address",
             html: newUser(portal, firstName, lastName, token),
           };
 

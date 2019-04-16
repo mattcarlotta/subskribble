@@ -1,17 +1,18 @@
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import cookieSession from 'cookie-session';
-import cors from 'cors';
-import morgan from 'morgan';
-import passport from 'passport';
-import mailer from '@sendgrid/mail';
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import cookieSession from "cookie-session";
+import cors from "cors";
+import morgan from "morgan";
+import passport from "passport";
+import mailer from "@sendgrid/mail";
 import {
   localLogin, localSignup, resetPassword, resetToken,
-} from 'strategies';
-import config from 'env';
+} from "strategies";
+import config from "env";
 
 const env = process.env.NODE_ENV;
-const inTesting = env === 'test';
+const inTesting = env === "test";
+
 /* eslint-disable */
 if (!inTesting) {
   const currentENV = () => {
@@ -39,13 +40,11 @@ if (!inTesting) {
     );
   }
 }
-/* eslint enable */
+/* eslint-enable */
 //= ===========================================================//
 /* APP MIDDLEWARE */
 //= ===========================================================//
-export default app => {
-  // strategies();
-
+export default (app) => {
   // passport strategies
   localLogin();
   localSignup();
@@ -56,8 +55,8 @@ export default app => {
   app.use(
     cors({
       credentials: true,
-      origin: config[env].portal
-    })
+      origin: config[env].portal,
+    }),
   ); // allows receiving of cookies from front-end
   if (!inTesting) app.use(morgan("tiny")); // logging framework
   app.use(bodyParser.json()); // parses header requests (req.body)
@@ -68,8 +67,8 @@ export default app => {
       // sets up a cookie session as req.session ==> set in passport local login strategy
       name: "Authorization",
       maxAge: 30 * 24 * 60 * 60 * 1000, // expire after 30 days, 30days/24hr/60m/60s/1000ms
-      keys: [config[env].cookieKey] // unique cookie key to encrypt/decrypt
-    })
+      keys: [config[env].cookieKey], // unique cookie key to encrypt/decrypt
+    }),
   );
   app.use(passport.initialize()); // initialize passport routes to accept req/res/next
   app.set("json spaces", 2); // sets JSON spaces for clarity

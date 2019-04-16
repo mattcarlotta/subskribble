@@ -1,24 +1,27 @@
-import bcrypt from 'bcrypt';
-import { Strategy as LocalStrategy } from 'passport-local';
-import passport from 'passport';
-import db from 'db';
-import { findUserByToken, updateUserPassword } from 'queries';
-import { invalidToken, notUniquePassword } from 'authErrors';
+import bcrypt from "bcrypt";
+import { Strategy as LocalStrategy } from "passport-local";
+import passport from "passport";
+import db from "db";
+import { findUserByToken, updateUserPassword } from "queries";
+import { invalidToken, missingToken, notUniquePassword } from "authErrors";
 
 export default () => passport.use(
-  'reset-password',
+  "reset-password",
   new LocalStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: "email",
+      passwordField: "password",
       passReqToCallback: true, // allows us to send request to the callback
     },
     async (req, email, password, done) => {
+      const { token } = req.query;
+      if (!token) return done(missingToken, false);
+
       try {
-        await db.task('reset-password', async (dbtask) => {
+        await db.task("reset-password", async (dbtask) => {
           // check to see if email exists in the db
           const existingUser = await dbtask.oneOrNone(findUserByToken, [
-            req.query.token,
+            token,
           ]);
           if (!existingUser) return done(invalidToken, false);
 
